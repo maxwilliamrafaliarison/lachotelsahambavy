@@ -2,22 +2,23 @@
 
 import { useState, useEffect, useCallback } from "react";
 
+const basePath = "/lachotelsahambavy";
 const slides = [
   {
-    image: "https://www.lachotel.com/wp-content/uploads/piscine-4-605x465.jpg",
-    alt: "Piscine en ardoise du Lac Hôtel Sahambavy avec vue sur le lac",
+    image: `${basePath}/images/hero/hero-pilotis.jpg`,
+    alt: "Allée en pierre vers les bungalows sur pilotis du Lac Hôtel Sahambavy",
   },
   {
-    image: "https://www.lachotel.com/wp-content/uploads/lachotel-terrasse-605x465.jpg",
-    alt: "Terrasse des bungalows sur pilotis au coucher du soleil",
+    image: `${basePath}/images/hero/hero-lake.jpg`,
+    alt: "Vue panoramique des bungalows sur le lac Sahambavy",
   },
   {
-    image: "https://www.lachotel.com/wp-content/uploads/lac-hotel-slide_home-2-605x465.jpg",
-    alt: "Vue panoramique du lac Sahambavy depuis le Lac Hôtel",
+    image: `${basePath}/images/hero/hero-sunset.jpg`,
+    alt: "Coucher de soleil sur le lac depuis le Lac Hôtel",
   },
   {
-    image: "https://www.lachotel.com/wp-content/uploads/ramasseur-de-the-605x465.jpg",
-    alt: "Cueilleuses de thé dans la plantation de Sahambavy",
+    image: `${basePath}/images/hero/hero-garden.jpg`,
+    alt: "Jardins et bungalows du Lac Hôtel Sahambavy",
   },
 ];
 

@@ -24,7 +24,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
               <div className="room-card h-full flex flex-col">
                 <div className={`relative overflow-hidden ${room.featured ? "h-72" : "h-56"}`}>
                   <img
-                    src={room.images[0] || "https://www.lachotel.com/wp-content/uploads/lachotel-terrasse-605x465.jpg"}
+                    src={room.images[0] ? `${basePath}${room.images[0]}` : `${basePath}/images/hero/hero-pilotis.jpg`}
                     alt={room.name[locale]}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                     loading="lazy"

@@ -32,7 +32,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <PageHero
         title={dict.rooms.title}
         subtitle={dict.rooms.subtitle}
-        image="https://www.lachotel.com/wp-content/uploads/pilotis-header.jpg"
+        image="/lachotelsahambavy/images/rooms/pilotis-01.jpg"
       />
 
       {/* Rate summary table */}

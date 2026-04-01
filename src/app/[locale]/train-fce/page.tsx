@@ -39,7 +39,7 @@ export default async function TrainFCEPage({ params }: { params: Promise<{ local
       <PageHero
         title={dict.train.heroTitle}
         subtitle={dict.train.heroSubtitle}
-        image="https://www.lachotel.com/wp-content/uploads/FCE-train-11-605x465.jpg"
+        image="/lachotelsahambavy/images/train/train-hotel.jpg"
       />
 
       {/* Introduction */}

@@ -1,11 +1,12 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 
+const basePath = "/lachotelsahambavy";
 const offers = [
-  { icon: "🍽", key: "restaurant", image: "https://www.lachotel.com/wp-content/uploads/Restaurant_03-605x465.jpg" },
-  { icon: "🏊", key: "pool", image: "https://www.lachotel.com/wp-content/uploads/piscine-4-605x465.jpg" },
-  { icon: "🚶", key: "lake", image: "https://www.lachotel.com/wp-content/uploads/lac-hotel-slide_home-2-605x465.jpg" },
-  { icon: "💆", key: "massage", image: "https://www.lachotel.com/wp-content/uploads/25311141_1541685912593027_4-605x465.jpg" },
+  { icon: "🍽", key: "restaurant", image: `${basePath}/images/restaurant/restaurant-01.jpg` },
+  { icon: "🏊", key: "pool", image: `${basePath}/images/hotel/hotel-facade.jpg` },
+  { icon: "🚶", key: "lake", image: `${basePath}/images/hero/hero-lake.jpg` },
+  { icon: "💆", key: "massage", image: `${basePath}/images/activities/massage.jpg` },
 ];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

@@ -27,7 +27,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
       <PageHero
         title={dict.contact.heroTitle}
         subtitle={dict.contact.heroSubtitle}
-        image="https://www.lachotel.com/wp-content/uploads/vue-lac-hotel.jpg"
+        image="/lachotelsahambavy/images/hero/hero-lake-sunset.jpg"
       />
 
       {/* Contact info cards */}

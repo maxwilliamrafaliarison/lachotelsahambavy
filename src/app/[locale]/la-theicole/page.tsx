@@ -39,7 +39,7 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
       <PageHero
         title={dict.theicole.heroTitle}
         subtitle={dict.theicole.heroSubtitle}
-        image="https://www.lachotel.com/wp-content/uploads/ramasseur-de-the-605x465.jpg"
+        image="/lachotelsahambavy/images/tea/plantation.jpg"
       />
 
       {/* History Timeline */}

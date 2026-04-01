@@ -246,7 +246,9 @@ export const rooms: Room[] = [
       { icon: "🌳", label: { fr: "Dans les arbres", en: "In the trees", es: "En los árboles" } },
       { icon: "👶", label: { fr: "Pour enfants", en: "For kids", es: "Para niños" } },
     ],
-    images: [],
+    images: [
+      "/images/hotel/hotel-bungalows.jpg",
+    ],
   },
 ];
 

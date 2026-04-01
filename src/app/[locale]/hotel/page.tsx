@@ -37,7 +37,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       <PageHero
         title={dict.hotel.heroTitle}
         subtitle={dict.hotel.heroSubtitle}
-        image="https://www.lachotel.com/wp-content/uploads/lac-hotel-slide_home-2-605x465.jpg"
+        image="/lachotelsahambavy/images/hotel/hotel-facade.jpg"
       />
 
       {/* History Section */}

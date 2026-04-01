@@ -14,20 +14,20 @@ export default function RestaurantTeaser({ dict, locale }: { dict: any; locale: 
           <ScrollReveal>
             <div className="grid grid-cols-2 gap-4">
               <img
-                src="https://www.lachotel.com/wp-content/uploads/Restaurant_03-605x465.jpg"
+                src={`${basePath}/images/restaurant/restaurant-01.jpg`}
                 alt="Restaurant panoramique du Lac Hôtel"
                 className="rounded-xl w-full h-64 object-cover col-span-2"
                 loading="lazy"
               />
               <img
-                src="https://www.lachotel.com/wp-content/uploads/pizza-piscine-605x465.jpg"
-                alt="Plats du restaurant en bord de piscine"
+                src={`${basePath}/images/restaurant/restaurant-02.jpg`}
+                alt="Cheminée du restaurant"
                 className="rounded-xl w-full h-40 object-cover"
                 loading="lazy"
               />
               <img
-                src="https://www.lachotel.com/wp-content/uploads/vanille-lachotel.jpg"
-                alt="Produits locaux du restaurant"
+                src={`${basePath}/images/rooms/superior-02.jpg`}
+                alt="Chambre avec vue lac au coucher du soleil"
                 className="rounded-xl w-full h-40 object-cover"
                 loading="lazy"
               />

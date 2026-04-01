@@ -9,7 +9,6 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { use } from "react";
 
 const basePath = "/lachotelsahambavy";
-const CDN = "https://www.lachotel.com/wp-content/uploads/";
 
 type Category = "all" | "rooms" | "restaurant" | "nature" | "theicole" | "train";
 
@@ -20,15 +19,16 @@ interface Photo {
 }
 
 const photos: Photo[] = [
-  { src: `${CDN}lachotel-terrasse-605x465.jpg`, alt: "Terrasse lac hotel", category: "rooms" },
-  { src: `${CDN}piscine-4-605x465.jpg`, alt: "Piscine", category: "rooms" },
-  { src: `${CDN}Restaurant_03-605x465.jpg`, alt: "Restaurant", category: "restaurant" },
-  { src: `${CDN}pizza-piscine-605x465.jpg`, alt: "Pizza piscine", category: "restaurant" },
-  { src: `${CDN}vanille-lachotel.jpg`, alt: "Vanille", category: "restaurant" },
-  { src: `${CDN}vue-lac-hotel.jpg`, alt: "Vue lac", category: "nature" },
-  { src: `${CDN}lac-hotel-slide_home-2-605x465.jpg`, alt: "Lac hotel panorama", category: "nature" },
-  { src: `${CDN}ramasseur-de-the-605x465.jpg`, alt: "Ramasseur de the", category: "theicole" },
-  { src: `${CDN}FCE-train-11-605x465.jpg`, alt: "Train FCE", category: "train" },
+  { src: `${basePath}/images/gallery/gallery-01.jpg`, alt: "Allée pilotis Lac Hôtel", category: "rooms" },
+  { src: `${basePath}/images/gallery/gallery-02.jpg`, alt: "Chambre lit baldaquin", category: "rooms" },
+  { src: `${basePath}/images/gallery/gallery-07.jpg`, alt: "Chambre coucher de soleil", category: "rooms" },
+  { src: `${basePath}/images/gallery/gallery-09.jpg`, alt: "Restaurant cheminée", category: "restaurant" },
+  { src: `${basePath}/images/gallery/gallery-05.jpg`, alt: "Façade hôtel et terrasse", category: "restaurant" },
+  { src: `${basePath}/images/gallery/gallery-03.jpg`, alt: "Vue lac bungalows", category: "nature" },
+  { src: `${basePath}/images/gallery/gallery-08.jpg`, alt: "Coucher de soleil sur le lac", category: "nature" },
+  { src: `${basePath}/images/gallery/gallery-06.jpg`, alt: "Activité kayak sur le lac", category: "nature" },
+  { src: `${basePath}/images/gallery/gallery-04.jpg`, alt: "Jardins et plantation de thé", category: "theicole" },
+  { src: `${basePath}/images/gallery/gallery-10.jpg`, alt: "Bâtiment principal et jardins", category: "train" },
 ];
 
 export default function GalleryPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -61,7 +61,7 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
       <PageHero
         title={dict.gallery.heroTitle}
         subtitle={dict.gallery.heroSubtitle}
-        image={`${CDN}vue-lac-hotel.jpg`}
+        image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
       />
 
       <section className="py-24 bg-white">

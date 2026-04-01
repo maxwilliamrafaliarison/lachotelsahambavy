@@ -10,12 +10,12 @@ export default function Destinations({ dict, locale }: { dict: any; locale: Loca
     {
       key: "train",
       href: `${basePath}/${locale}/train-fce/`,
-      image: "https://www.lachotel.com/wp-content/uploads/FCE-train-11-605x465.jpg",
+      image: `${basePath}/images/train/train-hotel.jpg`,
     },
     {
       key: "plantation",
       href: `${basePath}/${locale}/la-theicole/`,
-      image: "https://www.lachotel.com/wp-content/uploads/ramasseur-de-the-605x465.jpg",
+      image: `${basePath}/images/tea/plantation.jpg`,
     },
   ];
 

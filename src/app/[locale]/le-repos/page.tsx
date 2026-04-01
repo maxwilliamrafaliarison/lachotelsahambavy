@@ -38,7 +38,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
       <PageHero
         title={dict.repos.heroTitle}
         subtitle={dict.repos.heroSubtitle}
-        image="https://www.lachotel.com/wp-content/uploads/lac-hotel-slide_home-2-605x465.jpg"
+        image="/lachotelsahambavy/images/hero/hero-twilight.jpg"
       />
 
       {/* Teaser Section */}

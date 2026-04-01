@@ -40,21 +40,21 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <img
-                  src="https://www.lachotel.com/wp-content/uploads/vue-lac-hotel.jpg"
+                  src={`${basePath}/images/hero/hero-lake-sunset.jpg`}
                   alt="Vue du lac depuis le Lac Hôtel Sahambavy"
                   className="rounded-xl w-full h-48 object-cover"
                   loading="lazy"
                 />
                 <img
-                  src="https://www.lachotel.com/wp-content/uploads/piscine-4-605x465.jpg"
-                  alt="Piscine du Lac Hôtel"
+                  src={`${basePath}/images/hotel/hotel-gardens.jpg`}
+                  alt="Jardins du Lac Hôtel"
                   className="rounded-xl w-full h-64 object-cover"
                   loading="lazy"
                 />
               </div>
               <div className="pt-8">
                 <img
-                  src="https://www.lachotel.com/wp-content/uploads/lachotel-terrasse-605x465.jpg"
+                  src={`${basePath}/images/hero/hero-pilotis.jpg`}
                   alt="Bungalows sur pilotis du Lac Hôtel Sahambavy"
                   className="rounded-xl w-full h-80 object-cover"
                   loading="lazy"

@@ -71,7 +71,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       <PageHero
         title={dict.restaurantSection.heroTitle}
         subtitle={dict.restaurantSection.heroSubtitle}
-        image="https://www.lachotel.com/wp-content/uploads/restaurant-lac-hotel.jpg"
+        image="/lachotelsahambavy/images/restaurant/restaurant-01.jpg"
       />
 
       {/* Philosophy strip */}
@@ -99,7 +99,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             <ScrollReveal>
               <div className="rounded-xl overflow-hidden shadow-lg aspect-[4/3]">
                 <img
-                  src="https://www.lachotel.com/wp-content/uploads/cuisine-lac-hotel.jpg"
+                  src="/lachotelsahambavy/images/restaurant/restaurant-02.jpg"
                   alt={dict.restaurantSection.heroTitle}
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -143,7 +143,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       <section className="relative h-[50vh] min-h-[350px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(https://www.lachotel.com/wp-content/uploads/terrasse-restaurant.jpg)" }}
+          style={{ backgroundImage: "url(/lachotelsahambavy/images/hero/hero-twilight.jpg)" }}
         />
         <div className="absolute inset-0 bg-black/30" />
       </section>
@@ -179,7 +179,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(https://www.lachotel.com/wp-content/uploads/vue-lac-hotel.jpg)" }}
+          style={{ backgroundImage: "url(/lachotelsahambavy/images/hero/hero-lake-sunset.jpg)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         <div className="relative z-10 flex items-end justify-center h-full pb-12 px-4">
