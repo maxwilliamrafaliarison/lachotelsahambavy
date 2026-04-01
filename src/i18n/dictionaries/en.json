@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "title": "Lac Hôtel Sahambavy — Luxury Eco-Lodge on the Lake | Madagascar",
+    "description": "Charming eco-lodge in Fianarantsoa, Madagascar. Overwater bungalows, panoramic restaurant, tea plantation. Book your stay at Lac Hôtel Sahambavy."
+  },
+  "nav": {
+    "home": "Home",
+    "hotel": "The Hotel",
+    "rooms": "Accommodation",
+    "restaurant": "Restaurant",
+    "theicole": "Tea Plantation",
+    "train": "FCE Train",
+    "repos": "Le Repos",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "book": "Book Now"
+  },
+  "hero": {
+    "eyebrow": "Sahambavy · Madagascar",
+    "title": "A refuge",
+    "titleEm": "on the lakeside",
+    "subtitle": "Madagascar's only tea plantation, overwater bungalows, and pristine nature awaiting you.",
+    "cta1": "Discover our rooms",
+    "cta2": "Book now"
+  },
+  "promo": {
+    "prefix": "Special offer:",
+    "text": "50% off the 2nd night",
+    "suffix": "for any booking of 2 consecutive nights"
+  },
+  "welcome": {
+    "label": "Welcome to Lac Hôtel",
+    "title": "An exceptional eco-lodge facing Lake Sahambavy",
+    "subtitle": "The Natural Choice — Sahambavy · Fianarantsoa · Madagascar",
+    "p1": "An essential stop on your journey, halfway between the North and South of Madagascar, Lac Hôtel is beautifully situated on the shores of Lake Sahambavy, nestled at the foot of the hill where the island's only tea plantation (520 hectares) stretches as far as the eye can see.",
+    "p2": "Lac Hôtel offers the comfort of rooms in charming, typical bungalows — some on stilts — scattered throughout a lush tropical garden. You will be charmed by its gardens, tranquility, and attentive staff.",
+    "stat1": "rooms & villas",
+    "stat2": "tea plantation",
+    "stat3": "of hospitality",
+    "cta": "View accommodation"
+  },
+  "rooms": {
+    "label": "Accommodation · 2026 Rates",
+    "title": "Our rooms & villas",
+    "subtitle": "From standard bungalow to overwater experience — 45 units for every journey",
+    "from": "from",
+    "night": "/ night",
+    "viewAll": "All accommodation",
+    "book": "Book",
+    "units": "units",
+    "features": "Amenities",
+    "rateTO": "TO Rate (AGV excl.)",
+    "ratePublic": "Public Rate",
+    "extraBed": "Extra bed +30,000 AR",
+    "camping": "Camping — Private Annex",
+    "campingDesc": "1 hectare of private grounds · Security · Shared toilets and showers (camping equipment not provided)",
+    "tableTitle": "Rate summary"
+  },
+  "philosophy": {
+    "label": "Our philosophy",
+    "title": "The Natural Choice",
+    "p1": "Our philosophy is to promote rural economic development through local labor and agriculture. All our products — ice cream, cheese, bread, vegetables, yogurt — are homemade and grown on-site.",
+    "p2": "Respecting ecology and rural economic development, our menu features only local Sahambavy products.",
+    "pillar1": "Eco-responsible",
+    "pillar1Desc": "Organic products grown on-site in our 2-hectare vegetable garden.",
+    "pillar2": "Local craftsmanship",
+    "pillar2Desc": "Rooms decorated by Malagasy artisans with natural materials.",
+    "pillar3": "Rural economy",
+    "pillar3Desc": "Local jobs, partnership with the tea cooperative and FCE train.",
+    "pillar4": "Biodiversity",
+    "pillar4Desc": "Primary forest preservation project in the Ranomafana–Andringintra corridor."
+  },
+  "offers": {
+    "label": "Our offers",
+    "title": "Discover our experiences",
+    "restaurant": "Restaurant",
+    "restaurantDesc": "Malagasy & European cuisine. Menu €14 · Breakfast €8. Garden & homemade products.",
+    "pool": "Swimming Pool",
+    "poolDesc": "Saltwater slate pool. Sun loungers, view of bungalows and lake.",
+    "lake": "Lake Walk",
+    "lakeDesc": "8 km marked and secured trail around the lake. Nature at your fingertips.",
+    "massage": "Massage & Wellness",
+    "massageDesc": "Relaxing massage, back massage, foot massage. Everything to help you unwind."
+  },
+  "restaurantSection": {
+    "label": "Gastronomy",
+    "title": "Awaken your taste buds",
+    "subtitle": "Malagasy & international cuisine, local produce",
+    "p1": "Enjoy our dishes in our panoramic restaurant or on our shaded terraces by the lake. All our dishes are prepared with quality fresh organic produce.",
+    "specialties": [
+      "Wild duck hunted by founder Kim",
+      "Lake tilapia with ginger sauce",
+      "Sahambavy green tea sorbet",
+      "Ice cream, cheese, bread, yogurt — all homemade"
+    ],
+    "breakfast": "Breakfast",
+    "menu": "Daily menu",
+    "picnic": "Picnic",
+    "cta": "View restaurant",
+    "heroTitle": "Restaurant & Bar",
+    "heroSubtitle": "Malagasy & international cuisine, organic garden produce",
+    "philosophyLocal": "Local & Organic",
+    "philosophyLocalDesc": "Fruits, vegetables and herbs from our 2-hectare garden",
+    "philosophyLac": "From the Lake",
+    "philosophyLacDesc": "Fresh tilapia from Lake Sahambavy and wild duck",
+    "philosophyMaison": "Homemade",
+    "philosophyMaisonDesc": "Ice cream, cheese, bread, yogurt, jam all made in-house"
+  },
+  "activities": {
+    "label": "Activities & Leisure",
+    "title": "Your experiences at Lac Hôtel",
+    "subtitle": "From the hotel — included or on request",
+    "all": "View all",
+    "nature": "Nature",
+    "sport": "Sport",
+    "decouverte": "Discovery",
+    "bienetre": "Wellness",
+    "included": "Included",
+    "onRequest": "On request"
+  },
+  "destinations": {
+    "train": {
+      "label": "Railway adventure",
+      "title": "FCE Train — The last corridor train",
+      "desc": "Fianarantsoa → Manakara, 8-12h through primary forests, cliffs and remote villages. Micheline, Draisine or Classic Train — we handle your booking.",
+      "cta": "Discover the FCE train"
+    },
+    "plantation": {
+      "label": "Eco-tourism",
+      "title": "Tea Plantation — La Théicole",
+      "desc": "Madagascar's only tea plantation (520 hectares). Factory tour, walk through tea rows, tasting. 10 min from the hotel.",
+      "cta": "Visit the plantation"
+    }
+  },
+  "testimonials": {
+    "label": "Guest reviews",
+    "title": "What they say about us"
+  },
+  "contact": {
+    "label": "Contact & Booking",
+    "title": "Book your stay",
+    "subtitle": "We reply within 24h · Zero commission · Payment on arrival",
+    "reservations": "Reservations",
+    "whatsapp": "WhatsApp / Phone",
+    "address": "Address",
+    "access": "Access",
+    "accessDetail": "2 min from station · 45 min from Fianarantsoa",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone / WhatsApp",
+      "checkin": "Check-in date",
+      "checkout": "Check-out date",
+      "guests": "Number of guests",
+      "room": "Preferred accommodation",
+      "pension": "Meal plan",
+      "pensionOptions": ["Room only", "Room + Breakfast (€8)", "Half board (€22)", "Full board (€36)"],
+      "transfer": "Transfer from Fianarantsoa?",
+      "transferOptions": ["No thanks", "Yes — Private 4×4 transfer (120,000 AR one way)", "Yes — From Ambalakely (110,000 AR)"],
+      "message": "Message / Special requests",
+      "submit": "Send request",
+      "sending": "Sending..."
+    },
+    "offerReminder": "2 nights = 50% off the 2nd",
+    "offerReminderDetail": "For any booking of 2 consecutive nights, the hotel offers 50% off the 2nd night.",
+    "cancellation": "Cancellation policy 2026",
+    "cancellationRules": [
+      "60 to 15 days before: 20% fee",
+      "15 to 5 days before: 70% fee",
+      "3 days to arrival day: 100%",
+      "No-show / early departure: 100%"
+    ],
+    "heroTitle": "Plan your stay",
+    "heroSubtitle": "We reply within 24h · Zero commission · Payment on arrival",
+    "mapTitle": "Find us"
+  },
+  "hotel": {
+    "heroTitle": "The Hotel",
+    "heroSubtitle": "A sanctuary in the heart of tea plantations",
+    "historyLabel": "Our story",
+    "historyTitle": "A dream born by the lake",
+    "historyP1": "It was on the shores of Lake Sahambavy, in the Highlands of Madagascar, that Kim and Olga Leong laid the first stones of a dream: to create an exceptional place where nature and hospitality are one.",
+    "historyP2": "Today, their daughter Maggie and her husband Sergi Formentin carry on this vision with passion. They have modernized the hotel while preserving its soul — that of an authentic refuge, rooted in Betsileo culture and committed to responsible tourism.",
+    "philosophyLabel": "Our philosophy",
+    "philosophyTitle": "The Natural Choice",
+    "philosophyP1": "Our philosophy is to promote rural economic development through local labor and agriculture. All our products — ice cream, cheese, bread, vegetables, yogurt — are homemade and grown on-site.",
+    "philosophyP2": "In a 2-hectare garden, we organically grow most of what you will taste at our table. Salads are washed with permanganate, bread is kneaded every morning, and our green tea sorbet has become a signature.",
+    "ecoLabel": "Eco-responsible commitment",
+    "ecoTitle": "For Madagascar, by Madagascar",
+    "ecoP1": "Lac Hôtel is committed to preserving the primary forest in the Ranomafana–Andringintra corridor. We participate in reforestation, local economic development and the protection of endemic biodiversity.",
+    "ecoItems": [
+      "Organic products grown on-site",
+      "Local jobs — 100% Malagasy staff",
+      "Partnership with SIDEXAM tea cooperative",
+      "Artisan decoration by Betsileo craftspeople",
+      "Primary forest preservation project"
+    ]
+  },
+  "theicole": {
+    "heroTitle": "The Sahambavy Tea Estate",
+    "heroSubtitle": "Madagascar's only tea plantation",
+    "historyLabel": "Plantation history",
+    "historyTitle": "520 hectares of tea, a unique story",
+    "historyTimeline": [
+      { "year": "1969", "text": "Arrival of the French Institute of Coffee and Cocoa — beginning of scientific research on tea varieties cultivable in Madagascar." },
+      { "year": "1970", "text": "The European Development Fund finances the plantation's expansion." },
+      { "year": "1973", "text": "The company becomes a state enterprise (socialist period) under the name SOTEMAD." },
+      { "year": "1996", "text": "Return to the private sector — Mauritian investors acquire 2/3 of the capital. Current name: SIDEXAM Sahambavy." },
+      { "year": "Now", "text": "520 hectares — Madagascar's only tea plantation. Green tea development and organic tea project." }
+    ],
+    "excursionLabel": "The excursion",
+    "excursionTitle": "Plantation & Factory Visit",
+    "excursionInfo": {
+      "duration": "Half day",
+      "travel": "10 min from Lac Hôtel",
+      "elevation": "None",
+      "difficulty": "Easy — accessible to all",
+      "walking": "1 to 3 hours in the plantation"
+    },
+    "excursionSteps": [
+      "Welcome by a plantation guide",
+      "Factory tour: discover the tea production stages",
+      "Tasting of different tea qualities",
+      "Walk through the vast plantation, meet the tea pickers"
+    ],
+    "shopLabel": "The Lac Hôtel Shop",
+    "shopTitle": "Our tea products",
+    "shopItems": [
+      { "name": "Natural organic green tea soaps", "desc": "Made on-site" },
+      { "name": "Sahambavy green tea", "desc": "Loose and in bags" }
+    ],
+    "shopCta": "Discover our shop",
+    "bookLabel": "Book a visit",
+    "bookTitle": "Plan your excursion"
+  },
+  "train": {
+    "heroTitle": "FCE Train",
+    "heroSubtitle": "Madagascar's last corridor train",
+    "introLabel": "Railway adventure",
+    "introTitle": "Fianarantsoa — East Coast",
+    "introP1": "The FCE train (Fianarantsoa–East Coast) is the last passenger train still in service in Madagascar. This mythical line connects Fianarantsoa to Manakara, crossing 162 km of tropical forests, vertiginous cliffs and remote villages accessible only by rail.",
+    "introP2": "Lac Hôtel Sahambavy is located just 2 minutes walk from Sahambavy station — the ideal starting point for this unique railway adventure.",
+    "optionsLabel": "Our options",
+    "optionsTitle": "Three ways to experience the rails",
+    "options": [
+      { "name": "Micheline", "desc": "The historic railcar, classic comfort. Ideal for the full Fianarantsoa–Manakara journey." },
+      { "name": "Private Draisine", "desc": "Exclusive rental for 12 to 19 passengers. The most immersive Malagasy rail experience." },
+      { "name": "Classic Train", "desc": "The popular train, a total immersion in daily Malagasy life." }
+    ],
+    "infoLabel": "Practical information",
+    "infoTitle": "Prepare your journey",
+    "infoItems": {
+      "route": "Fianarantsoa → Sahambavy → Manakara",
+      "distance": "162 km",
+      "duration": "8 to 12 hours",
+      "altitude": "From 1,100m to sea level",
+      "station": "Sahambavy station (2 min walk from Lac Hôtel)",
+      "booking": "Booking via Lac Hôtel"
+    },
+    "ctaTitle": "The hotel takes care of everything",
+    "ctaP": "Lac Hôtel Sahambavy organizes your train journey. Contact us to book your seat — Micheline, Draisine or Classic Train.",
+    "cta": "Book via the hotel"
+  },
+  "repos": {
+    "heroTitle": "Le Repos",
+    "heroSubtitle": "A new chapter is being written by the lake…",
+    "teaserTitle": "Soon, a new haven of serenity",
+    "teaserP": "Le Repos — soon, a new haven of serenity in the heart of Sahambavy. The art of relaxation elevated, between lake and tea plantations.",
+    "comingSoon": "Opening soon",
+    "signupTitle": "Preview registration",
+    "signupP": "Be the first to know about Le Repos opening. Leave us your details.",
+    "signupName": "Your name",
+    "signupEmail": "Your email",
+    "signupSubmit": "Sign up",
+    "whatsappCta": "Questions? Contact us"
+  },
+  "gallery": {
+    "heroTitle": "Gallery",
+    "heroSubtitle": "Discover Lac Hôtel in pictures",
+    "all": "All",
+    "rooms": "Accommodation",
+    "restaurant": "Restaurant",
+    "nature": "Nature & Lake",
+    "theicole": "Tea Plantation",
+    "train": "FCE Train"
+  },
+  "footer": {
+    "brand": "Lac Hôtel Sahambavy",
+    "tagline": "Charming eco-lodge on Lake Sahambavy, in the heart of Madagascar's only tea plantation.",
+    "pages": "Pages",
+    "rooms": "Our rooms",
+    "contactTitle": "Contact",
+    "legal": "Legal notice",
+    "privacy": "Privacy",
+    "copyright": "Lac Hôtel Sahambavy. All rights reserved."
+  },
+  "cookie": {
+    "text": "This site uses cookies to improve your experience.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "whatsappMessage": "Hello, I would like information about Lac Hôtel Sahambavy"
+}

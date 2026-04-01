@@ -1,0 +1,153 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import type { Locale } from "@/lib/utils";
+import { navigation, siteConfig } from "@/data/site";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const basePath = "/lachotelsahambavy";
+  const localeLinks = [
+    { code: "fr" as const, flag: "🇫🇷" },
+    { code: "en" as const, flag: "🇬🇧" },
+    { code: "es" as const, flag: "🇪🇸" },
+  ];
+
+  return (
+    <nav className={`navbar ${scrolled ? "navbar--scrolled" : "navbar--transparent"}`}>
+      {/* Top bar */}
+      <div className={`hidden md:block text-xs py-2 px-4 transition-colors ${scrolled ? "bg-brown-deep text-cream" : "bg-black/30 text-white"}`}>
+        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <a href={`mailto:${siteConfig.email}`} className="hover:text-gold transition-colors">
+              {siteConfig.email}
+            </a>
+            <span>|</span>
+            <a href={`tel:${siteConfig.whatsapp}`} className="hover:text-gold transition-colors">
+              {siteConfig.phone}
+            </a>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-2">
+              {localeLinks.map((l) => (
+                <Link
+                  key={l.code}
+                  href={`${basePath}/${l.code}/`}
+                  className={`text-base hover:scale-110 transition-transform ${locale === l.code ? "opacity-100" : "opacity-60"}`}
+                >
+                  {l.flag}
+                </Link>
+              ))}
+            </div>
+            <span>|</span>
+            <div className="flex gap-3">
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="Facebook">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="Instagram">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main nav */}
+      <div className={`py-3 px-4 transition-all ${scrolled ? "" : ""}`}>
+        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+          {/* Logo */}
+          <Link href={`${basePath}/${locale}/`} className="flex items-center gap-2">
+            <span className={`font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight ${scrolled ? "text-brown-deep" : "text-white"}`}>
+              Lac Hôtel
+            </span>
+          </Link>
+
+          {/* Desktop menu */}
+          <div className="hidden lg:flex items-center gap-6">
+            {navigation.filter((n) => n.href !== "/").map((item) => (
+              <Link
+                key={item.href}
+                href={`${basePath}/${locale}${item.href}/`}
+                className={`text-xs font-medium uppercase tracking-wider transition-colors hover:text-gold ${scrolled ? "text-text-body" : "text-white"}`}
+              >
+                {item.label[locale]}
+              </Link>
+            ))}
+            <Link
+              href={`${basePath}/${locale}/contact/`}
+              className="btn--cta btn"
+            >
+              {dict.nav.book}
+            </Link>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden flex flex-col gap-1.5 p-2"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+          >
+            <span className={`block w-6 h-0.5 transition-all ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 transition-all ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-6 h-0.5 transition-all ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu overlay */}
+      {menuOpen && (
+        <div className="lg:hidden fixed inset-0 top-0 bg-white z-[999] overflow-y-auto">
+          <div className="flex justify-between items-center p-4 border-b border-border">
+            <span className="font-[family-name:var(--font-heading)] text-xl font-bold text-brown-deep">
+              Lac Hôtel
+            </span>
+            <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl text-brown-deep">
+              ✕
+            </button>
+          </div>
+          <div className="flex flex-col p-6 gap-4">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={`${basePath}/${locale}${item.href === "/" ? "" : item.href}/`}
+                className="text-lg font-medium text-text-body hover:text-gold transition-colors py-2 border-b border-border"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label[locale]}
+              </Link>
+            ))}
+            <div className="flex gap-3 pt-4">
+              {localeLinks.map((l) => (
+                <Link
+                  key={l.code}
+                  href={`${basePath}/${l.code}/`}
+                  className={`text-2xl ${locale === l.code ? "opacity-100" : "opacity-50"}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {l.flag}
+                </Link>
+              ))}
+            </div>
+            <Link
+              href={`${basePath}/${locale}/contact/`}
+              className="btn btn--primary mt-4 text-center"
+              onClick={() => setMenuOpen(false)}
+            >
+              {dict.nav.book}
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}

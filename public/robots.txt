@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maxwilliamrafaliarison.github.io/lachotelsahambavy/sitemap.xml

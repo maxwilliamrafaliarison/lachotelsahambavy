@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "title": "Lac Hôtel Sahambavy — Éco-lodge de luxe sur le lac | Madagascar",
+    "description": "Éco-lodge de charme à Fianarantsoa, Madagascar. Bungalows sur pilotis, restaurant panoramique, plantation de thé. Réservez votre séjour au Lac Hôtel Sahambavy."
+  },
+  "nav": {
+    "home": "Accueil",
+    "hotel": "L'Hôtel",
+    "rooms": "Hébergements",
+    "restaurant": "Restaurant",
+    "theicole": "La Théicole",
+    "train": "Train FCE",
+    "repos": "Le Repos",
+    "gallery": "Galerie",
+    "contact": "Contact",
+    "book": "Réserver"
+  },
+  "hero": {
+    "eyebrow": "Sahambavy · Madagascar",
+    "title": "Un refuge",
+    "titleEm": "au bord du lac",
+    "subtitle": "L'unique plantation de thé de Madagascar, des pilotis sur l'eau, et une nature préservée qui vous attend.",
+    "cta1": "Découvrir nos chambres",
+    "cta2": "Réserver maintenant"
+  },
+  "promo": {
+    "prefix": "Offre spéciale :",
+    "text": "50% sur la 2ème nuitée",
+    "suffix": "pour toute réservation de 2 nuits consécutives"
+  },
+  "welcome": {
+    "label": "Bienvenue au Lac Hôtel",
+    "title": "Un éco-lodge d'exception face au lac Sahambavy",
+    "subtitle": "The Natural Choice — Sahambavy · Fianarantsoa · Madagascar",
+    "p1": "Étape essentielle de votre voyage, à mi-chemin entre le Nord et le Sud de Madagascar, le Lac Hôtel est magnifiquement situé en bordure du Lac Sahambavy et blotti au pied de la colline où s'étale à perte de vue l'unique plantation de thé de l'île (520 hectares).",
+    "p2": "Le Lac hôtel vous offre le confort de ses chambres installées dans de charmants et typiques bungalows — dont certains sur pilotis — disséminés dans un jardin tropical luxuriant. Vous serez séduit par ses jardins, son calme, et un personnel à votre écoute.",
+    "stat1": "chambres & villas",
+    "stat2": "plantation de thé",
+    "stat3": "d'hospitalité",
+    "cta": "Voir les hébergements"
+  },
+  "rooms": {
+    "label": "Hébergements · Tarifs 2026",
+    "title": "Nos chambres & villas",
+    "subtitle": "Du bungalow standard à l'expérience sur l'eau — 45 logements pour tous les voyages",
+    "from": "à partir de",
+    "night": "/ nuit",
+    "viewAll": "Tous les hébergements",
+    "book": "Réserver",
+    "units": "unités",
+    "features": "Équipements",
+    "rateTO": "Tarif TO (AGV HT)",
+    "ratePublic": "Tarif Public",
+    "extraBed": "Lit suppl. +30 000 AR",
+    "camping": "Camping — Annexe privée",
+    "campingDesc": "1 hectare de terrain privatif à votre disposition · Sécurité · Toilettes et douches communes (matériel camping à votre charge)",
+    "tableTitle": "Tableau récapitulatif"
+  },
+  "philosophy": {
+    "label": "Notre philosophie",
+    "title": "The Natural Choice",
+    "p1": "Notre philosophie est de promouvoir le développement de l'économie rurale à travers la main-d'œuvre locale et l'agriculture. Tous nos produits — glace, fromage, pain, légumes, yaourt — sont faits maison et cultivés sur place.",
+    "p2": "Dans le respect de l'écologie et du développement de l'économie rurale, notre carte vous propose uniquement les produits locaux de Sahambavy.",
+    "pillar1": "Éco-responsable",
+    "pillar1Desc": "Produits biologiques, cultivés sur place dans notre potager de 2 hectares.",
+    "pillar2": "Artisanat local",
+    "pillar2Desc": "Chambres décorées par des artisans malgaches avec des matériaux naturels.",
+    "pillar3": "Économie rurale",
+    "pillar3Desc": "Emplois locaux, partenariat avec la coopérative de thé et le train FCE.",
+    "pillar4": "Biodiversité",
+    "pillar4Desc": "Projet de préservation de la forêt primaire corridor Ranomafana–Andringintra."
+  },
+  "offers": {
+    "label": "Nos offres",
+    "title": "Découvrez nos expériences",
+    "restaurant": "Restaurant",
+    "restaurantDesc": "Cuisine malgache et européenne. Menu 14€ · Petit-déjeuner 8€. Produits du jardin et faits maison.",
+    "pool": "Piscine",
+    "poolDesc": "Piscine en ardoise en eau salée. Transats, vue sur les bungalows et le lac.",
+    "lake": "Tour du Lac",
+    "lakeDesc": "Piste de 8 km balisée et sécurisée autour du lac. La nature à votre portée.",
+    "massage": "Massage & Bien-être",
+    "massageDesc": "Massage relaxant, massage de dos, massage des pieds. Tout pour vous détendre."
+  },
+  "restaurantSection": {
+    "label": "Gastronomie",
+    "title": "Éveillez vos papilles",
+    "subtitle": "Cuisine malgache & internationale, produits du terroir",
+    "p1": "Dégustez nos plats au sein de notre restaurant panoramique ou sur nos terrasses ombragées en bordure du lac. Tous nos plats sont préparés à partir de produits frais biologiques de qualité.",
+    "specialties": [
+      "Canard sauvage chassé par le fondateur Kim",
+      "Tilapia du lac à la sauce gingembre",
+      "Sorbet au thé vert de Sahambavy",
+      "Glace, fromage, pain, yaourt — faits maison"
+    ],
+    "breakfast": "Petit-déjeuner",
+    "menu": "Menu du jour",
+    "picnic": "Pique-nique",
+    "cta": "Voir le restaurant",
+    "heroTitle": "Restaurant & Bar",
+    "heroSubtitle": "Cuisine malgache & internationale, produits bio du potager",
+    "philosophyLocal": "Local et Bio",
+    "philosophyLocalDesc": "Fruits, légumes et herbes aromatiques du potager de 2 hectares",
+    "philosophyLac": "Du Lac",
+    "philosophyLacDesc": "Tilapia frais du lac Sahambavy et canard sauvage",
+    "philosophyMaison": "Fait maison",
+    "philosophyMaisonDesc": "Glace, fromage, pain, yaourt, confiture produits à la cuisine"
+  },
+  "activities": {
+    "label": "Activités & Loisirs",
+    "title": "Vos expériences au Lac Hôtel",
+    "subtitle": "À partir de l'hôtel — inclus ou sur réservation",
+    "all": "Tout voir",
+    "nature": "Nature",
+    "sport": "Sport",
+    "decouverte": "Découverte",
+    "bienetre": "Bien-être",
+    "included": "Inclus",
+    "onRequest": "Sur rés."
+  },
+  "destinations": {
+    "train": {
+      "label": "Aventure ferroviaire",
+      "title": "Train FCE — Le dernier train corridor",
+      "desc": "Fianarantsoa → Manakara, 8 à 12h de forêts primaires, falaises et villages enclavés. Micheline, Draisine ou Train classique — on s'occupe de votre réservation.",
+      "cta": "Découvrir le train FCE"
+    },
+    "plantation": {
+      "label": "Éco-tourisme",
+      "title": "Plantation de Thé — La Théicole",
+      "desc": "L'unique plantation de thé de Madagascar (520 hectares). Visite de l'usine, promenade dans les rangées de thé, dégustation. À 10 min de l'hôtel.",
+      "cta": "Visiter la plantation"
+    }
+  },
+  "testimonials": {
+    "label": "Avis clients",
+    "title": "Ce qu'ils en disent"
+  },
+  "contact": {
+    "label": "Contact & Réservation",
+    "title": "Réservez votre séjour",
+    "subtitle": "Nous vous répondons sous 24h · Zéro commission · Paiement à l'arrivée",
+    "reservations": "Réservations",
+    "whatsapp": "WhatsApp / Téléphone",
+    "address": "Adresse",
+    "access": "Accès",
+    "accessDetail": "2 min de la gare · 45 min de Fianarantsoa",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse email",
+      "phone": "Téléphone / WhatsApp",
+      "checkin": "Date d'arrivée",
+      "checkout": "Date de départ",
+      "guests": "Nombre de personnes",
+      "room": "Hébergement souhaité",
+      "pension": "Pension souhaitée",
+      "pensionOptions": ["Logement seul", "Logement + Petit-déjeuner (8€)", "Demi-pension (22€)", "Pension complète (36€)"],
+      "transfer": "Transfert depuis Fianarantsoa ?",
+      "transferOptions": ["Non merci", "Oui — Transfert privé 4×4 (120 000 AR aller simple)", "Oui — Depuis Ambalakely (110 000 AR)"],
+      "message": "Message / Demandes spéciales",
+      "submit": "Envoyer la demande",
+      "sending": "Envoi en cours..."
+    },
+    "offerReminder": "Offre 2 nuits = 50% sur la 2ème",
+    "offerReminderDetail": "Pour toute réservation de 2 nuits consécutives, l'hôtel vous offre 50% de réduction sur la 2ème nuitée.",
+    "cancellation": "Conditions d'annulation 2026",
+    "cancellationRules": [
+      "60 à 15 jours avant : 20% de frais",
+      "15 à 5 jours avant : 70% de frais",
+      "3 jours à jour d'arrivée : 100%",
+      "No-show / départ anticipé : 100%"
+    ],
+    "heroTitle": "Planifiez votre séjour",
+    "heroSubtitle": "Nous vous répondons sous 24h · Zéro commission · Paiement à l'arrivée",
+    "mapTitle": "Nous trouver"
+  },
+  "hotel": {
+    "heroTitle": "L'Hôtel",
+    "heroSubtitle": "Un sanctuaire au cœur des plantations de thé",
+    "historyLabel": "Notre histoire",
+    "historyTitle": "Un rêve né au bord du lac",
+    "historyP1": "C'est au bord du Lac Sahambavy, dans les Hautes Terres de Madagascar, que Kim et Olga Leong ont posé les premières pierres d'un rêve : créer un lieu d'exception où la nature et l'hospitalité ne font qu'un.",
+    "historyP2": "Aujourd'hui, leur fille Maggie et son mari Sergi Formentin perpétuent cette vision avec passion. Ils ont su moderniser l'hôtel tout en préservant son âme — celle d'un refuge authentique, ancré dans la culture Betsileo et tourné vers un tourisme responsable.",
+    "philosophyLabel": "Notre philosophie",
+    "philosophyTitle": "The Natural Choice",
+    "philosophyP1": "Notre philosophie est de promouvoir le développement de l'économie rurale à travers la main-d'œuvre locale et l'agriculture. Tous nos produits — glace, fromage, pain, légumes, yaourt — sont faits maison et cultivés sur place.",
+    "philosophyP2": "Dans un potager de 2 hectares, nous cultivons bio l'essentiel de ce que vous dégusterez à notre table. Les salades sont lavées au permanganate, le pain est pétri chaque matin, et notre sorbet au thé vert est devenu une signature.",
+    "ecoLabel": "Engagement éco-responsable",
+    "ecoTitle": "Pour Madagascar, par Madagascar",
+    "ecoP1": "Le Lac Hôtel s'engage pour la préservation de la forêt primaire dans le corridor Ranomafana–Andringintra. Nous participons à la reforestation, au développement de l'économie locale et à la protection de la biodiversité endémique.",
+    "ecoItems": [
+      "Produits bio cultivés sur place",
+      "Emplois locaux — personnel 100% malgache",
+      "Partenariat avec la coopérative de thé SIDEXAM",
+      "Décoration artisanale par des artisans Betsileo",
+      "Projet de préservation de la forêt primaire"
+    ]
+  },
+  "theicole": {
+    "heroTitle": "La Théicole de Sahambavy",
+    "heroSubtitle": "L'unique plantation de thé de Madagascar",
+    "historyLabel": "L'histoire de la plantation",
+    "historyTitle": "520 hectares de thé, une histoire unique",
+    "historyTimeline": [
+      { "year": "1969", "text": "Arrivée de l'Institut Français de Café et Cacao — début de la recherche scientifique sur les qualités de thé cultivables à Madagascar." },
+      { "year": "1970", "text": "Le Fonds Européen pour le Développement finance l'extension de la plantation." },
+      { "year": "1973", "text": "L'entreprise devient une société d'État (période socialiste) sous le nom de SOTEMAD (Société Théicole de Madagascar)." },
+      { "year": "1996", "text": "Retour au secteur privé — des investisseurs mauriciens acquièrent les 2/3 du capital. Nom actuel : SIDEXAM Sahambavy." },
+      { "year": "Auj.", "text": "520 hectares — l'unique plantation de thé de Madagascar. Développement du thé vert et projet de thé biologique." }
+    ],
+    "excursionLabel": "L'excursion",
+    "excursionTitle": "Visite de la Plantation & de l'Usine",
+    "excursionInfo": {
+      "duration": "½ journée",
+      "travel": "10 min depuis le Lac Hôtel",
+      "elevation": "Nul",
+      "difficulty": "Facile — accessible à tous",
+      "walking": "1 à 3 heures dans la plantation"
+    },
+    "excursionSteps": [
+      "Accueil par un guide de la plantation",
+      "Visite de l'usine : découverte des étapes de production du thé",
+      "Dégustation des différentes qualités de thé produits",
+      "Promenade à travers l'immense plantation, rencontre avec les cueilleuses"
+    ],
+    "shopLabel": "La Boutique du Lac Hôtel",
+    "shopTitle": "Nos produits du thé",
+    "shopItems": [
+      { "name": "Savons naturels bio au thé vert", "desc": "Fabriqués sur place" },
+      { "name": "Thé vert de Sahambavy", "desc": "En vrac et en sachets" }
+    ],
+    "shopCta": "Découvrir notre boutique",
+    "bookLabel": "Réserver une visite",
+    "bookTitle": "Planifiez votre excursion"
+  },
+  "train": {
+    "heroTitle": "Train FCE",
+    "heroSubtitle": "Le dernier train corridor de Madagascar",
+    "introLabel": "Aventure ferroviaire",
+    "introTitle": "Fianarantsoa — Côte Est",
+    "introP1": "Le train FCE (Fianarantsoa–Côte Est) est le dernier train de voyageurs encore en service à Madagascar. Cette ligne mythique relie Fianarantsoa à Manakara, traversant 162 km de forêts tropicales, de falaises vertigineuses et de villages enclavés accessibles uniquement par le rail.",
+    "introP2": "Le Lac Hôtel Sahambavy est situé à seulement 2 minutes à pied de la gare de Sahambavy — le point de départ idéal pour cette aventure ferroviaire unique.",
+    "optionsLabel": "Nos options",
+    "optionsTitle": "Trois façons de vivre le rail",
+    "options": [
+      { "name": "Micheline", "desc": "L'autorail historique, confort classique. Idéal pour le voyage complet Fianarantsoa–Manakara." },
+      { "name": "Draisine privée", "desc": "Location exclusive pour 12 à 19 passagers. L'expérience la plus immersive du rail malgache." },
+      { "name": "Train classique", "desc": "Le train populaire, une immersion totale dans la vie quotidienne malgache." }
+    ],
+    "infoLabel": "Informations pratiques",
+    "infoTitle": "Préparez votre voyage",
+    "infoItems": {
+      "route": "Fianarantsoa → Sahambavy → Manakara",
+      "distance": "162 km",
+      "duration": "8 à 12 heures",
+      "altitude": "De 1 100m à 0m (niveau de la mer)",
+      "station": "Gare de Sahambavy (2 min à pied du Lac Hôtel)",
+      "booking": "Réservation via le Lac Hôtel"
+    },
+    "ctaTitle": "L'hôtel s'occupe de tout",
+    "ctaP": "Le Lac Hôtel Sahambavy organise votre voyage en train. Contactez-nous pour réserver votre place — Micheline, Draisine ou Train classique.",
+    "cta": "Réserver via l'hôtel"
+  },
+  "repos": {
+    "heroTitle": "Le Repos",
+    "heroSubtitle": "Un nouveau chapitre s'écrit au bord du lac…",
+    "teaserTitle": "Bientôt, un nouvel écrin de sérénité",
+    "teaserP": "Le Repos — bientôt, un nouvel écrin de sérénité au cœur de Sahambavy. L'art du farniente sublimé, entre lac et plantations de thé.",
+    "comingSoon": "Ouverture prochaine",
+    "signupTitle": "Inscription avant-première",
+    "signupP": "Soyez les premiers informés de l'ouverture du Repos. Laissez-nous vos coordonnées.",
+    "signupName": "Votre nom",
+    "signupEmail": "Votre email",
+    "signupSubmit": "S'inscrire",
+    "whatsappCta": "Des questions ? Contactez-nous"
+  },
+  "gallery": {
+    "heroTitle": "Galerie",
+    "heroSubtitle": "Découvrez le Lac Hôtel en images",
+    "all": "Tout",
+    "rooms": "Hébergements",
+    "restaurant": "Restaurant",
+    "nature": "Nature & Lac",
+    "theicole": "La Théicole",
+    "train": "Train FCE"
+  },
+  "footer": {
+    "brand": "Lac Hôtel Sahambavy",
+    "tagline": "Éco-lodge de charme sur le lac Sahambavy, au cœur de l'unique plantation de thé de Madagascar.",
+    "pages": "Pages",
+    "rooms": "Nos chambres",
+    "contactTitle": "Contact",
+    "legal": "Mentions légales",
+    "privacy": "Confidentialité",
+    "copyright": "Lac Hôtel Sahambavy. Tous droits réservés."
+  },
+  "cookie": {
+    "text": "Ce site utilise des cookies pour améliorer votre expérience.",
+    "accept": "Accepter",
+    "decline": "Refuser"
+  },
+  "whatsappMessage": "Bonjour, je souhaite des informations sur le Lac Hôtel Sahambavy"
+}
