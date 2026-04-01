@@ -54,7 +54,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
                       </span>
                       <span className="text-sm text-text-muted">{dict.rooms.night}</span>
                     </div>
-                    <Link href={`${basePath}/${locale}/hebergements/`} className="btn btn--primary text-xs py-2 px-4">
+                    <Link href={`/${locale}/hebergements/`} className="btn btn--primary text-xs py-2 px-4">
                       {dict.rooms.book}
                     </Link>
                   </div>
@@ -65,7 +65,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
         </div>
 
         <div className="text-center mt-12">
-          <Link href={`${basePath}/${locale}/hebergements/`} className="btn btn--outline">
+          <Link href={`/${locale}/hebergements/`} className="btn btn--outline">
             {dict.rooms.viewAll}
           </Link>
         </div>

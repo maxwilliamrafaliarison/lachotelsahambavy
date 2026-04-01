@@ -198,7 +198,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             <h2 className="mb-4">{dict.contact.title}</h2>
             <p className="text-text-muted mb-8">{dict.contact.subtitle}</p>
             <Link
-              href={`${basePath}/${locale}/contact`}
+              href={`/${locale}/contact/`}
               className="inline-block bg-gold text-white px-10 py-4 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-lg"
             >
               {dict.rooms.book}

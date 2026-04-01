@@ -66,7 +66,7 @@ export default function RestaurantTeaser({ dict, locale }: { dict: any; locale: 
               ))}
             </div>
 
-            <Link href={`${basePath}/${locale}/restaurant/`} className="btn btn--outline">
+            <Link href={`/${locale}/restaurant/`} className="btn btn--outline">
               {dict.restaurantSection.cta}
             </Link>
           </ScrollReveal>

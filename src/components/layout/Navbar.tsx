@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 
+const basePath = "/lachotelsahambavy";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
   const [scrolled, setScrolled] = useState(false);
@@ -18,7 +20,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const basePath = "/lachotelsahambavy";
   const localeLinks = [
     { code: "fr" as const, flag: "🇫🇷" },
     { code: "en" as const, flag: "🇬🇧" },
@@ -49,7 +50,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               {localeLinks.map((l) => (
                 <Link
                   key={l.code}
-                  href={`${basePath}/${l.code}/`}
+                  href={`/${l.code}/`}
                   className={`text-base hover:scale-110 transition-transform ${locale === l.code ? "opacity-100" : "opacity-60"}`}
                 >
                   {l.flag}
@@ -73,7 +74,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       <div className="py-3 px-4">
         <div className="max-w-[1200px] mx-auto flex justify-between items-center">
           {/* Logo */}
-          <Link href={`${basePath}/${locale}/`} className="flex items-center gap-2">
+          <Link href={`/${locale}/`} className="flex items-center gap-2">
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
@@ -86,14 +87,14 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             {navigation.filter((n) => n.href !== "/").map((item) => (
               <Link
                 key={item.href}
-                href={`${basePath}/${locale}${item.href}/`}
+                href={`/${locale}${item.href}/`}
                 className={`text-xs font-medium uppercase tracking-wider transition-colors hover:text-gold ${scrolled ? "text-text-body" : "text-white"}`}
               >
                 {item.label[locale]}
               </Link>
             ))}
             <Link
-              href={`${basePath}/${locale}/contact/`}
+              href={`/${locale}/contact/`}
               className="btn--cta btn"
             >
               {dict.nav.book}
@@ -130,7 +131,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             {navigation.map((item) => (
               <button
                 key={item.href}
-                onClick={() => handleNav(`${basePath}/${locale}${item.href === "/" ? "" : item.href}/`)}
+                onClick={() => handleNav(`/${locale}${item.href === "/" ? "" : item.href}/`)}
                 className="text-lg font-medium text-text-body hover:text-gold transition-colors py-2 border-b border-border text-left"
               >
                 {item.label[locale]}
@@ -140,7 +141,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               {localeLinks.map((l) => (
                 <Link
                   key={l.code}
-                  href={`${basePath}/${l.code}/`}
+                  href={`/${l.code}/`}
                   className={`text-2xl ${locale === l.code ? "opacity-100" : "opacity-50"}`}
                   onClick={() => setMenuOpen(false)}
                 >
@@ -149,7 +150,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               ))}
             </div>
             <button
-              onClick={() => handleNav(`${basePath}/${locale}/contact/`)}
+              onClick={() => handleNav(`/${locale}/contact/`)}
               className="btn btn--primary mt-4 text-center"
             >
               {dict.nav.book}

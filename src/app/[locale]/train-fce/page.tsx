@@ -99,7 +99,7 @@ export default async function TrainFCEPage({ params }: { params: Promise<{ local
             <p className="text-cream/70 text-lg font-[family-name:var(--font-sub)] mb-10 leading-relaxed">
               {dict.train.ctaP}
             </p>
-            <Link href={`${basePath}/${locale}/contact/`} className="btn btn--primary bg-cream text-brown-deep border-cream hover:bg-white">
+            <Link href={`/${locale}/contact/`} className="btn btn--primary bg-cream text-brown-deep border-cream hover:bg-white">
               {dict.train.cta}
             </Link>
           </ScrollReveal>

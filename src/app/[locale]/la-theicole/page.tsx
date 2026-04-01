@@ -120,7 +120,7 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link href={`${basePath}/${locale}/contact/`} className="btn btn--outline">
+            <Link href={`/${locale}/contact/`} className="btn btn--outline">
               {dict.theicole.shopCta}
             </Link>
           </div>

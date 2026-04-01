@@ -299,5 +299,27 @@
     "accept": "Accepter",
     "decline": "Refuser"
   },
-  "whatsappMessage": "Bonjour, je souhaite des informations sur le Lac Hôtel Sahambavy"
+  "whatsappMessage": "Bonjour, je souhaite des informations sur le Lac Hôtel Sahambavy",
+  "bookingBar": {
+    "checkin": "Arrivée",
+    "checkout": "Départ",
+    "rooms": "Chambres",
+    "guests": "Voyageurs",
+    "room": "chambre",
+    "roomPlural": "chambres",
+    "adult": "adulte",
+    "adultPlural": "adultes",
+    "child": "enfant",
+    "childPlural": "enfants",
+    "adults": "Adultes",
+    "children": "Enfants (0-12 ans)",
+    "addRoom": "Ajouter une chambre",
+    "removeRoom": "Retirer",
+    "rate": "Tarifs spéciaux",
+    "rateStandard": "Tarif standard",
+    "rateTo": "Tarif Tour-Opérateur",
+    "ratePromo": "Offre 2 nuits",
+    "submit": "Réserver",
+    "selectDate": "Sélectionner"
+  }
 }

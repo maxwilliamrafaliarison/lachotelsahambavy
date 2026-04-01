@@ -10,6 +10,7 @@ import RestaurantTeaser from "@/components/home/RestaurantTeaser";
 import Destinations from "@/components/home/Destinations";
 import Testimonials from "@/components/home/Testimonials";
 import ContactSection from "@/components/home/ContactSection";
+import BookingBar from "@/components/home/BookingBar";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -38,6 +39,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <HeroSlider dict={dict} />
+      <BookingBar dict={dict} />
       <PromoBanner dict={dict} />
       <Welcome dict={dict} locale={locale as Locale} />
       <RoomsGrid dict={dict} locale={locale as Locale} />

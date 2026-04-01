@@ -42,7 +42,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={`${basePath}/${locale}${item.href === "/" ? "" : item.href}/`}
+                    href={`/${locale}${item.href === "/" ? "" : item.href}/`}
                     className="text-sm hover:text-gold transition-colors"
                   >
                     {item.label[locale]}

@@ -30,7 +30,7 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
               <StatCounter value={20} suffix=" ans" label={dict.welcome.stat3} />
             </div>
 
-            <Link href={`${basePath}/${locale}/hebergements/`} className="btn btn--outline">
+            <Link href={`/${locale}/hebergements/`} className="btn btn--outline">
               {dict.welcome.cta}
             </Link>
           </ScrollReveal>

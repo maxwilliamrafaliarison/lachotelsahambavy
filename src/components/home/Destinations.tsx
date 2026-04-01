@@ -9,12 +9,12 @@ export default function Destinations({ dict, locale }: { dict: any; locale: Loca
   const items = [
     {
       key: "train",
-      href: `${basePath}/${locale}/train-fce/`,
+      href: `/${locale}/train-fce/`,
       image: `${basePath}/images/train/train-hotel.jpg`,
     },
     {
       key: "plantation",
-      href: `${basePath}/${locale}/la-theicole/`,
+      href: `/${locale}/la-theicole/`,
       image: `${basePath}/images/tea/plantation.jpg`,
     },
   ];

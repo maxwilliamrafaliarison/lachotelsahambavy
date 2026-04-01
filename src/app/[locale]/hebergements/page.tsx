@@ -169,7 +169,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                       {room.priceAR.toLocaleString("fr-FR")} Ariary {dict.rooms.night}
                     </div>
                     <Link
-                      href={`${basePath}/${locale}/contact`}
+                      href={`/${locale}/contact/`}
                       className="block w-full text-center bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-md"
                     >
                       {dict.rooms.book}
@@ -246,7 +246,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             <h2 className="mb-4">{dict.contact.title}</h2>
             <p className="text-text-muted mb-8">{dict.contact.subtitle}</p>
             <Link
-              href={`${basePath}/${locale}/contact`}
+              href={`/${locale}/contact/`}
               className="inline-block bg-gold text-white px-10 py-4 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-lg"
             >
               {dict.rooms.book}
