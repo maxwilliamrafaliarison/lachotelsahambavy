@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 
@@ -9,6 +10,7 @@ import { navigation, siteConfig } from "@/data/site";
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -22,6 +24,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
     { code: "en" as const, flag: "🇬🇧" },
     { code: "es" as const, flag: "🇪🇸" },
   ];
+
+  function handleNav(href: string) {
+    setMenuOpen(false);
+    router.push(href);
+  }
 
   return (
     <nav className={`navbar ${scrolled ? "navbar--scrolled" : "navbar--transparent"}`}>
@@ -63,13 +70,15 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       </div>
 
       {/* Main nav */}
-      <div className={`py-3 px-4 transition-all ${scrolled ? "" : ""}`}>
+      <div className="py-3 px-4">
         <div className="max-w-[1200px] mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href={`${basePath}/${locale}/`} className="flex items-center gap-2">
-            <span className={`font-[family-name:var(--font-heading)] text-xl font-bold tracking-tight ${scrolled ? "text-brown-deep" : "text-white"}`}>
-              Lac Hôtel
-            </span>
+            <img
+              src={`${basePath}/images/logo/logo-white.png`}
+              alt="Lac Hôtel Sahambavy"
+              className={`h-10 w-auto transition-all ${scrolled ? "brightness-0" : ""}`}
+            />
           </Link>
 
           {/* Desktop menu */}
@@ -108,23 +117,24 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       {menuOpen && (
         <div className="lg:hidden fixed inset-0 top-0 bg-white z-[999] overflow-y-auto">
           <div className="flex justify-between items-center p-4 border-b border-border">
-            <span className="font-[family-name:var(--font-heading)] text-xl font-bold text-brown-deep">
-              Lac Hôtel
-            </span>
+            <img
+              src={`${basePath}/images/logo/logo-white.png`}
+              alt="Lac Hôtel Sahambavy"
+              className="h-10 w-auto brightness-0"
+            />
             <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl text-brown-deep">
               ✕
             </button>
           </div>
           <div className="flex flex-col p-6 gap-4">
             {navigation.map((item) => (
-              <Link
+              <button
                 key={item.href}
-                href={`${basePath}/${locale}${item.href === "/" ? "" : item.href}/`}
-                className="text-lg font-medium text-text-body hover:text-gold transition-colors py-2 border-b border-border"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => handleNav(`${basePath}/${locale}${item.href === "/" ? "" : item.href}/`)}
+                className="text-lg font-medium text-text-body hover:text-gold transition-colors py-2 border-b border-border text-left"
               >
                 {item.label[locale]}
-              </Link>
+              </button>
             ))}
             <div className="flex gap-3 pt-4">
               {localeLinks.map((l) => (
@@ -138,13 +148,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 </Link>
               ))}
             </div>
-            <Link
-              href={`${basePath}/${locale}/contact/`}
+            <button
+              onClick={() => handleNav(`${basePath}/${locale}/contact/`)}
               className="btn btn--primary mt-4 text-center"
-              onClick={() => setMenuOpen(false)}
             >
               {dict.nav.book}
-            </Link>
+            </button>
           </div>
         </div>
       )}

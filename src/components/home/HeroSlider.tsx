@@ -55,22 +55,22 @@ export default function HeroSlider({ dict }: { dict: any }) {
       ))}
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
-        <span className="section-label !text-gold mb-6">{dict.hero.eyebrow}</span>
-        <h1 className="text-white mb-4">
+        <span className="section-label !text-cream mb-6 drop-shadow-lg">{dict.hero.eyebrow}</span>
+        <h1 className="text-white mb-4 drop-shadow-xl" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}>
           {dict.hero.title}
           <br />
           <em className="font-[family-name:var(--font-sub)] font-normal">{dict.hero.titleEm}</em>
         </h1>
-        <p className="max-w-xl text-lg text-white/80 mb-8 font-[family-name:var(--font-sub)]">
+        <p className="max-w-xl text-lg text-white mb-8 font-[family-name:var(--font-sub)] drop-shadow-lg">
           {dict.hero.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <a href="#rooms" className="btn btn--primary">{dict.hero.cta1}</a>
-          <a href="#contact" className="btn btn--outline-white">{dict.hero.cta2}</a>
+          <a href="#rooms" className="btn btn--primary" onClick={(e) => { e.preventDefault(); document.getElementById("rooms")?.scrollIntoView({ behavior: "smooth" }); }}>{dict.hero.cta1}</a>
+          <a href="#contact" className="btn btn--outline-white" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>{dict.hero.cta2}</a>
         </div>
       </div>
 

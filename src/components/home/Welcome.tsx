@@ -17,7 +17,7 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
           <ScrollReveal>
             <span className="section-label">{dict.welcome.label}</span>
             <h2 className="mb-4">{dict.welcome.title}</h2>
-            <p className="text-sm text-gold font-[family-name:var(--font-sub)] italic mb-6">
+            <p className="text-sm text-brown-deep/80 font-[family-name:var(--font-sub)] italic mb-6">
               {dict.welcome.subtitle}
             </p>
             <p className="text-text-body mb-4 leading-relaxed">{dict.welcome.p1}</p>

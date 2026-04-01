@@ -328,35 +328,36 @@ h4 { font-size: 1.2rem; }
   justify-content: center;
 }
 
+/* ===== LIQUID GLASS (Apple style) ===== */
+
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.liquid-glass:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
 /* ===== PROMO BANNER ===== */
 
-.promo-banner {
-  background: var(--color-brown-deep);
-  color: var(--color-cream);
-  text-align: center;
-  padding: 1rem;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-}
+/* (now inline in PromoBanner.tsx) */
 
-/* ===== PHILOSOPHY DARK SECTION ===== */
+/* ===== PHILOSOPHY SECTION ===== */
 
-.philosophy-section {
-  background: var(--color-brown-deep);
-  color: var(--color-cream);
-  position: relative;
-  overflow: hidden;
-}
-
-.philosophy-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.12;
-}
+/* (now uses liquid-glass cards on cream bg) */
 
 /* ===== COOKIE NOTICE ===== */
 

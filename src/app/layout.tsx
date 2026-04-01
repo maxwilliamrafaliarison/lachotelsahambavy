@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   title: "Lac Hôtel Sahambavy — Éco-lodge de luxe sur le lac | Madagascar",
   description:
     "Éco-lodge de charme à Fianarantsoa, Madagascar. Bungalows sur pilotis, restaurant panoramique, plantation de thé.",
+  icons: {
+    icon: "/lachotelsahambavy/favicon.png",
+    apple: "/lachotelsahambavy/apple-icon.png",
+  },
   openGraph: {
     type: "website",
     siteName: "Lac Hôtel Sahambavy",
