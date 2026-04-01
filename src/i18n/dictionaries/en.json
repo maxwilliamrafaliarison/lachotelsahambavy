@@ -158,17 +158,26 @@
       "transfer": "Transfer from Fianarantsoa?",
       "transferOptions": ["No thanks", "Yes — Private 4×4 transfer (120,000 AR one way)", "Yes — From Ambalakely (110,000 AR)"],
       "message": "Message / Special requests",
-      "submit": "Send request",
-      "sending": "Sending..."
+      "nationality": "Nationality / Country of residence",
+      "arrivalTime": "Estimated arrival time",
+      "submit": "Send booking request",
+      "sending": "Sending...",
+      "gdprConsent": "I consent to my personal data being processed for the purpose of this booking request, in accordance with the GDPR. My data will not be shared with third parties.",
+      "termsConsent": "I have read and accept the booking and cancellation conditions below.",
+      "required": "Required fields"
     },
     "offerReminder": "2 nights = 50% off the 2nd",
     "offerReminderDetail": "For any booking of 2 consecutive nights, the hotel offers 50% off the 2nd night.",
-    "cancellation": "Cancellation policy 2026",
+    "cancellation": "Booking & cancellation policy",
     "cancellationRules": [
-      "60 to 15 days before: 20% fee",
-      "15 to 5 days before: 70% fee",
-      "3 days to arrival day: 100%",
-      "No-show / early departure: 100%"
+      "Booking is confirmed upon receipt of a confirmation email from the hotel.",
+      "Payment is made upon arrival, in cash (Ariary, Euros) or by prior bank transfer.",
+      "Cancellation 60 to 15 days before arrival: 20% of total amount will be charged.",
+      "Cancellation 15 to 5 days before arrival: 70% of total amount will be charged.",
+      "Cancellation less than 3 days before arrival: 100% of total amount will be charged.",
+      "No-show or early departure: 100% of total amount will be charged.",
+      "Date changes are subject to availability and must be communicated by email.",
+      "Check-in from 2:00 PM — Check-out before 11:00 AM."
     ],
     "heroTitle": "Plan your stay",
     "heroSubtitle": "We reply within 24h · Zero commission · Payment on arrival",

@@ -158,17 +158,26 @@
       "transfer": "Transfert depuis Fianarantsoa ?",
       "transferOptions": ["Non merci", "Oui — Transfert privé 4×4 (120 000 AR aller simple)", "Oui — Depuis Ambalakely (110 000 AR)"],
       "message": "Message / Demandes spéciales",
-      "submit": "Envoyer la demande",
-      "sending": "Envoi en cours..."
+      "nationality": "Nationalité / Pays de résidence",
+      "arrivalTime": "Heure d'arrivée estimée",
+      "submit": "Envoyer la demande de réservation",
+      "sending": "Envoi en cours...",
+      "gdprConsent": "J'accepte que mes données personnelles soient traitées pour le traitement de ma demande de réservation, conformément au RGPD. Mes données ne seront pas transmises à des tiers.",
+      "termsConsent": "J'ai lu et j'accepte les conditions de réservation et d'annulation ci-dessous.",
+      "required": "Champs obligatoires"
     },
     "offerReminder": "Offre 2 nuits = 50% sur la 2ème",
     "offerReminderDetail": "Pour toute réservation de 2 nuits consécutives, l'hôtel vous offre 50% de réduction sur la 2ème nuitée.",
-    "cancellation": "Conditions d'annulation 2026",
+    "cancellation": "Conditions de réservation et d'annulation",
     "cancellationRules": [
-      "60 à 15 jours avant : 20% de frais",
-      "15 à 5 jours avant : 70% de frais",
-      "3 jours à jour d'arrivée : 100%",
-      "No-show / départ anticipé : 100%"
+      "La réservation est confirmée après réception d'un email de confirmation de l'hôtel.",
+      "Le paiement s'effectue à l'arrivée, en espèces (Ariary, Euros) ou par virement bancaire préalable.",
+      "Annulation 60 à 15 jours avant l'arrivée : 20% du montant total sera facturé.",
+      "Annulation 15 à 5 jours avant l'arrivée : 70% du montant total sera facturé.",
+      "Annulation moins de 3 jours avant l'arrivée : 100% du montant total sera facturé.",
+      "Non-présentation (no-show) ou départ anticipé : 100% du montant total sera facturé.",
+      "Toute modification de dates est soumise à disponibilité et doit être communiquée par email.",
+      "Check-in à partir de 14h00 — Check-out avant 11h00."
     ],
     "heroTitle": "Planifiez votre séjour",
     "heroSubtitle": "Nous vous répondons sous 24h · Zéro commission · Paiement à l'arrivée",

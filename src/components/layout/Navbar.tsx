@@ -78,7 +78,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
-              className={`h-10 w-auto transition-all ${scrolled ? "brightness-0" : ""}`}
+              className={`h-16 md:h-20 w-auto transition-all ${scrolled ? "brightness-0" : ""}`}
             />
           </Link>
 
@@ -121,7 +121,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
-              className="h-10 w-auto brightness-0"
+              className="h-16 w-auto brightness-0"
             />
             <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl text-brown-deep">
               ✕

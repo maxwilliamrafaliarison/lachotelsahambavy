@@ -158,17 +158,26 @@
       "transfer": "¿Traslado desde Fianarantsoa?",
       "transferOptions": ["No, gracias", "Sí — Traslado privado 4×4 (120 000 AR ida)", "Sí — Desde Ambalakely (110 000 AR)"],
       "message": "Mensaje / Solicitudes especiales",
-      "submit": "Enviar solicitud",
-      "sending": "Enviando..."
+      "nationality": "Nacionalidad / País de residencia",
+      "arrivalTime": "Hora estimada de llegada",
+      "submit": "Enviar solicitud de reserva",
+      "sending": "Enviando...",
+      "gdprConsent": "Acepto que mis datos personales sean tratados para el procesamiento de mi solicitud de reserva, conforme al RGPD. Mis datos no serán compartidos con terceros.",
+      "termsConsent": "He leído y acepto las condiciones de reserva y cancelación que se indican a continuación.",
+      "required": "Campos obligatorios"
     },
     "offerReminder": "2 noches = 50% en la 2ª",
     "offerReminderDetail": "Para cualquier reserva de 2 noches consecutivas, el hotel ofrece 50% de descuento en la 2ª noche.",
-    "cancellation": "Política de cancelación 2026",
+    "cancellation": "Condiciones de reserva y cancelación",
     "cancellationRules": [
-      "60 a 15 días antes: 20% de gastos",
-      "15 a 5 días antes: 70% de gastos",
-      "3 días al día de llegada: 100%",
-      "No-show / salida anticipada: 100%"
+      "La reserva se confirma tras la recepción de un correo electrónico de confirmación del hotel.",
+      "El pago se realiza a la llegada, en efectivo (Ariary, Euros) o por transferencia bancaria previa.",
+      "Cancelación de 60 a 15 días antes de la llegada: se cobrará el 20% del importe total.",
+      "Cancelación de 15 a 5 días antes de la llegada: se cobrará el 70% del importe total.",
+      "Cancelación menos de 3 días antes de la llegada: se cobrará el 100% del importe total.",
+      "No presentación (no-show) o salida anticipada: se cobrará el 100% del importe total.",
+      "Los cambios de fechas están sujetos a disponibilidad y deben comunicarse por correo electrónico.",
+      "Check-in a partir de las 14:00 — Check-out antes de las 11:00."
     ],
     "heroTitle": "Planifique su estancia",
     "heroSubtitle": "Respondemos en 24h · Sin comisión · Pago a la llegada",
