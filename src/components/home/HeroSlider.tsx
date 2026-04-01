@@ -54,18 +54,24 @@ export default function HeroSlider({ dict }: { dict: any }) {
         </div>
       ))}
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80" />
+      {/* Gradient overlay — strong for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/50 to-black/80" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
         <span className="section-label !text-cream mb-6 drop-shadow-lg">{dict.hero.eyebrow}</span>
-        <h1 className="text-white mb-4 drop-shadow-xl" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}>
+        <h1
+          className="text-white mb-4"
+          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8), 0 4px 32px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.4)" }}
+        >
           {dict.hero.title}
           <br />
           <em className="font-[family-name:var(--font-sub)] font-normal">{dict.hero.titleEm}</em>
         </h1>
-        <p className="max-w-xl text-lg text-white mb-8 font-[family-name:var(--font-sub)] drop-shadow-lg">
+        <p
+          className="max-w-xl text-lg text-white mb-8 font-[family-name:var(--font-sub)]"
+          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5)" }}
+        >
           {dict.hero.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
