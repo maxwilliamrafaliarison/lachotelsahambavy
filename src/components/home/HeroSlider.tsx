@@ -61,8 +61,8 @@ export default function HeroSlider({ dict }: { dict: any }) {
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
         <span className="section-label !text-cream mb-6 drop-shadow-lg">{dict.hero.eyebrow}</span>
         <h1
-          className="text-white mb-4"
-          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8), 0 4px 32px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.4)" }}
+          className="mb-4"
+          style={{ color: "#FFFFFF", textShadow: "0 2px 8px rgba(0,0,0,0.8), 0 4px 32px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.4)" }}
         >
           {dict.hero.title}
           <br />
