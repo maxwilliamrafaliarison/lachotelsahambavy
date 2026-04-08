@@ -10,7 +10,7 @@ import { use } from "react";
 
 const basePath = getBasePath();
 
-type Category = "all" | "rooms" | "restaurant" | "nature" | "theicole" | "train";
+type Category = "all" | "rooms" | "restaurant" | "nature" | "plantation" | "train" | "repos" | "equipe";
 
 interface Photo {
   src: string;
@@ -27,7 +27,7 @@ const photos: Photo[] = [
   { src: `${basePath}/images/gallery/gallery-03.jpg`, alt: "Vue lac bungalows", category: "nature" },
   { src: `${basePath}/images/gallery/gallery-08.jpg`, alt: "Coucher de soleil sur le lac", category: "nature" },
   { src: `${basePath}/images/gallery/gallery-06.jpg`, alt: "Activité kayak sur le lac", category: "nature" },
-  { src: `${basePath}/images/gallery/gallery-04.jpg`, alt: "Jardins et plantation de thé", category: "theicole" },
+  { src: `${basePath}/images/gallery/gallery-04.jpg`, alt: "Jardins et plantation de thé", category: "plantation" },
   { src: `${basePath}/images/gallery/gallery-10.jpg`, alt: "Bâtiment principal et jardins", category: "train" },
 ];
 
@@ -48,7 +48,7 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
     { key: "rooms", label: dict.gallery.rooms },
     { key: "restaurant", label: dict.gallery.restaurant },
     { key: "nature", label: dict.gallery.nature },
-    { key: "theicole", label: dict.gallery.theicole },
+    { key: "plantation", label: dict.gallery.plantation },
     { key: "train", label: dict.gallery.train },
   ];
 

@@ -48,19 +48,16 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
     {
       icon: "\u2615",
       label: dict.restaurantSection.breakfast,
-      priceEUR: extras.breakfast.priceEUR,
       priceAR: extras.breakfast.priceAR,
     },
     {
       icon: "\uD83C\uDF7D",
       label: dict.restaurantSection.menu,
-      priceEUR: extras.menu.priceEUR,
       priceAR: extras.menu.priceAR,
     },
     {
       icon: "\uD83E\uDDFA",
       label: dict.restaurantSection.picnic,
-      priceEUR: extras.picnic.priceEUR,
       priceAR: extras.picnic.priceAR,
     },
   ];
@@ -163,9 +160,6 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
                   <span className="text-3xl block mb-3">{item.icon}</span>
                   <h4 className="text-text-dark font-semibold mb-3">{item.label}</h4>
                   <div className="text-3xl font-bold text-gold mb-1">
-                    {item.priceEUR}&euro;
-                  </div>
-                  <div className="text-sm text-text-muted">
                     {item.priceAR.toLocaleString("fr-FR")} AR
                   </div>
                 </div>

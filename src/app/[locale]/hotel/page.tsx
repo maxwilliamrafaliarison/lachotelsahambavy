@@ -52,6 +52,8 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             <div className="space-y-6 text-text-muted leading-relaxed">
               <p>{dict.hotel.historyP1}</p>
               <p>{dict.hotel.historyP2}</p>
+              {dict.hotel.historyP3 && <p>{dict.hotel.historyP3}</p>}
+              {dict.hotel.historyP4 && <p className="font-medium text-brown-deep italic">{dict.hotel.historyP4}</p>}
             </div>
           </ScrollReveal>
         </div>

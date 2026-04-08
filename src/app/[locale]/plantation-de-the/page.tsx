@@ -17,42 +17,55 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.theicole.heroTitle} — ${siteConfig.name}`,
-    description: dict.theicole.heroSubtitle,
+    title: `${dict.plantation.heroTitle} — ${siteConfig.name}`,
+    description: dict.plantation.heroSubtitle,
   };
 }
 
-export default async function TheicolePage({ params }: { params: Promise<{ locale: string }> }) {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export default async function PlantationPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
 
   const excursionInfoItems = [
-    { icon: "⏱", label: locale === "fr" ? "Durée" : locale === "en" ? "Duration" : "Duración", value: dict.theicole.excursionInfo.duration },
-    { icon: "🚗", label: locale === "fr" ? "Trajet" : locale === "en" ? "Travel" : "Trayecto", value: dict.theicole.excursionInfo.travel },
-    { icon: "📐", label: locale === "fr" ? "Dénivelé" : locale === "en" ? "Elevation" : "Desnivel", value: dict.theicole.excursionInfo.elevation },
-    { icon: "🟢", label: locale === "fr" ? "Difficulté" : locale === "en" ? "Difficulty" : "Dificultad", value: dict.theicole.excursionInfo.difficulty },
-    { icon: "🥾", label: locale === "fr" ? "Marche" : locale === "en" ? "Walking" : "Caminata", value: dict.theicole.excursionInfo.walking },
+    { icon: "⏱", label: locale === "fr" ? "Durée" : locale === "en" ? "Duration" : "Duración", value: dict.plantation.excursionInfo.duration },
+    { icon: "📋", label: locale === "fr" ? "Réservation" : locale === "en" ? "Booking" : "Reserva", value: dict.plantation.excursionInfo.travel },
+    { icon: "📐", label: locale === "fr" ? "Dénivelé" : locale === "en" ? "Elevation" : "Desnivel", value: dict.plantation.excursionInfo.elevation },
+    { icon: "🟢", label: locale === "fr" ? "Difficulté" : locale === "en" ? "Difficulty" : "Dificultad", value: dict.plantation.excursionInfo.difficulty },
+    { icon: "🥾", label: locale === "fr" ? "Marche" : locale === "en" ? "Walking" : "Caminata", value: dict.plantation.excursionInfo.walking },
   ];
 
   return (
     <>
       <PageHero
-        title={dict.theicole.heroTitle}
-        subtitle={dict.theicole.heroSubtitle}
+        title={dict.plantation.heroTitle}
+        subtitle={dict.plantation.heroSubtitle}
         image={`${basePath}/images/tea/plantation.jpg`}
       />
 
-      {/* History Timeline */}
+      {/* History - Legend & Madagascar */}
       <section className="py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
+        <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader
-            label={dict.theicole.historyLabel}
-            title={dict.theicole.historyTitle}
+            label={dict.plantation.historyLabel}
+            title={dict.plantation.historyTitle}
           />
+          <ScrollReveal>
+            <div className="space-y-6 text-text-muted leading-relaxed">
+              <p>{dict.plantation.historyIntro}</p>
+              <p>{dict.plantation.historyMadagascar}</p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-24 bg-cream">
+        <div className="max-w-[1200px] mx-auto px-4">
           <div className="relative">
             <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-brown-deep/20 hidden md:block" />
             <div className="space-y-12 md:space-y-0">
-              {(dict.theicole.historyTimeline as { year: string; text: string }[]).map((item, i) => (
+              {(dict.plantation.historyTimeline as { year: string; text: string }[]).map((item: any, i: number) => (
                 <ScrollReveal key={item.year} delay={i * 100}>
                   <div className={`md:flex items-center gap-8 md:mb-16 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
                     <div className={`md:w-5/12 ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
@@ -72,11 +85,11 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
       </section>
 
       {/* Excursion Info */}
-      <section className="py-24 bg-cream">
+      <section className="py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
-          <SectionHeader label={dict.theicole.excursionLabel} title={dict.theicole.excursionTitle} />
+          <SectionHeader label={dict.plantation.excursionLabel} title={dict.plantation.excursionTitle} />
           <ScrollReveal>
-            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 max-w-3xl mx-auto">
+            <div className="bg-cream rounded-2xl shadow-lg p-8 md:p-12 max-w-3xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
                 {excursionInfoItems.map((info) => (
                   <div key={info.label} className="text-center">
@@ -87,10 +100,9 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
                 ))}
               </div>
 
-              {/* Steps */}
               <h3 className="text-xl mb-6 text-center">{locale === "fr" ? "Déroulé de la visite" : locale === "en" ? "Visit itinerary" : "Itinerario de la visita"}</h3>
               <div className="space-y-4">
-                {(dict.theicole.excursionSteps as string[]).map((step, i) => (
+                {(dict.plantation.excursionSteps as string[]).map((step: string, i: number) => (
                   <div key={i} className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-brown-deep text-cream flex items-center justify-center text-sm font-bold shrink-0">
                       {i + 1}
@@ -104,14 +116,19 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
         </div>
       </section>
 
-      {/* Shop */}
-      <section className="py-24 bg-white">
+      {/* Boutique - Mami Bio Shop */}
+      <section className="py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
-          <SectionHeader label={dict.theicole.shopLabel} title={dict.theicole.shopTitle} />
-          <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-            {(dict.theicole.shopItems as { name: string; desc: string }[]).map((item, i) => (
+          <SectionHeader label={dict.plantation.shopLabel} title={dict.plantation.shopTitle} />
+          <ScrollReveal>
+            <p className="text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-10">
+              {dict.plantation.shopIntro}
+            </p>
+          </ScrollReveal>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+            {(dict.plantation.shopItems as { name: string; desc: string }[]).map((item: any, i: number) => (
               <ScrollReveal key={item.name} delay={i * 100}>
-                <div className="bg-cream rounded-2xl p-6 text-center">
+                <div className="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
                   <span className="text-3xl mb-3 block">🍃</span>
                   <h3 className="text-lg mb-2">{item.name}</h3>
                   <p className="text-sm text-text-muted">{item.desc}</p>
@@ -119,9 +136,15 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
               </ScrollReveal>
             ))}
           </div>
+          <ScrollReveal>
+            <div className="bg-white rounded-2xl p-8 max-w-2xl mx-auto">
+              <h3 className="text-lg mb-4 text-center">{locale === "fr" ? "Savons artisanaux 100 % naturels" : locale === "en" ? "100% Natural Handmade Soaps" : "Jabones artesanales 100 % naturales"}</h3>
+              <p className="text-text-muted text-sm leading-relaxed text-center">{dict.plantation.shopSoap}</p>
+            </div>
+          </ScrollReveal>
           <div className="text-center mt-8">
             <Link href={`/${locale}/contact/`} className="btn btn--outline">
-              {dict.theicole.shopCta}
+              {dict.plantation.shopCta}
             </Link>
           </div>
         </div>
@@ -130,7 +153,7 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
       {/* Booking Form */}
       <section className="py-24 bg-brown-deep text-white">
         <div className="max-w-[800px] mx-auto px-4">
-          <SectionHeader light label={dict.theicole.bookLabel} title={dict.theicole.bookTitle} />
+          <SectionHeader light label={dict.plantation.bookLabel} title={dict.plantation.bookTitle} />
           <TheicoleBookingForm dict={dict} />
         </div>
       </section>

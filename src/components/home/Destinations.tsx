@@ -14,7 +14,7 @@ export default function Destinations({ dict, locale }: { dict: any; locale: Loca
     },
     {
       key: "plantation",
-      href: `/${locale}/la-theicole/`,
+      href: `/${locale}/plantation-de-the/`,
       image: `${basePath}/images/tea/plantation.jpg`,
     },
   ];

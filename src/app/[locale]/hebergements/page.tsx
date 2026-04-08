@@ -91,9 +91,10 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           </ScrollReveal>
 
           <ScrollReveal delay={100}>
-            <p className="text-center text-xs text-text-muted mt-4">
-              {dict.rooms.extraBed}
-            </p>
+            <div className="text-center text-xs text-text-muted mt-4 space-y-1">
+              <p>{dict.rooms.extraBed}</p>
+              <p>{dict.rooms.taxeSejour}</p>
+            </div>
           </ScrollReveal>
         </div>
       </section>
@@ -207,9 +208,6 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                     <span className="text-3xl block mb-3">{icon}</span>
                     <h4 className="text-white font-semibold mb-2">{extra.label[loc]}</h4>
                     <div className="text-gold text-xl font-bold">
-                      {"priceEUR" in extra && extra.priceEUR ? `${extra.priceEUR}\u20AC` : ""}
-                    </div>
-                    <div className="text-cream/50 text-sm mt-1">
                       {extra.priceAR.toLocaleString("fr-FR")} AR
                     </div>
                   </div>
