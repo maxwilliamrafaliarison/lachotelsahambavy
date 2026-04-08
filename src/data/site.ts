@@ -35,13 +35,8 @@ export const siteConfig = {
 export const navigation = [
   { href: "/", label: { fr: "Accueil", en: "Home", es: "Inicio" } },
   { href: "/hotel", label: { fr: "L'Hôtel", en: "The Hotel", es: "El Hotel" } },
-  { href: "/hebergements", label: { fr: "Hébergements", en: "Accommodation", es: "Alojamientos" } },
-  { href: "/restaurant", label: { fr: "Restaurant", en: "Restaurant", es: "Restaurante" } },
-  { href: "/plantation-de-the", label: { fr: "Plantation de Thé", en: "Tea Plantation", es: "Plantación de Té" } },
-  { href: "/train-fce", label: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" } },
-  { href: "/activites", label: { fr: "Activités", en: "Activities", es: "Actividades" } },
-  { href: "/le-repos", label: { fr: "Le Repos", en: "Le Repos", es: "Le Repos" } },
-  { href: "/notre-equipe", label: { fr: "Notre Équipe", en: "Our Team", es: "Nuestro Equipo" } },
+  { href: "/hebergements", label: { fr: "Séjourner", en: "Stay", es: "Alojarse" } },
+  { href: "/experiences", label: { fr: "Expériences", en: "Experiences", es: "Experiencias" } },
   { href: "/galerie", label: { fr: "Galerie", en: "Gallery", es: "Galería" } },
-  { href: "/contact", label: { fr: "Contact", en: "Contact", es: "Contacto" } },
+  { href: "/contact", label: { fr: "Réserver", en: "Book", es: "Reservar" } },
 ];

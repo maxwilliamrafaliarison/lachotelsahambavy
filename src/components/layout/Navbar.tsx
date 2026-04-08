@@ -33,69 +33,53 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
 
   return (
     <nav className={`navbar ${scrolled ? "navbar--scrolled" : "navbar--transparent"}`}>
-      {/* Top bar */}
-      <div className={`hidden md:block text-xs py-2 px-4 transition-colors ${scrolled ? "bg-brown-deep text-cream" : "bg-black/30 text-white"}`}>
-        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <a href={`mailto:${siteConfig.email}`} className="hover:text-gold transition-colors">
-              {siteConfig.email}
-            </a>
-            <span>|</span>
-            <a href={`tel:${siteConfig.whatsapp}`} className="hover:text-gold transition-colors">
-              {siteConfig.phone}
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex gap-2">
-              {localeLinks.map((l) => (
-                <Link
-                  key={l.code}
-                  href={`/${l.code}/`}
-                  className={`text-base hover:scale-110 transition-transform ${locale === l.code ? "opacity-100" : "opacity-60"}`}
-                >
-                  {l.flag}
-                </Link>
-              ))}
-            </div>
-            <span>|</span>
-            <div className="flex gap-3">
-              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="Facebook">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors" aria-label="Instagram">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main nav */}
-      <div className="py-3 px-4">
-        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+      <div className="py-4 px-6">
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href={`/${locale}/`} className="flex items-center gap-2">
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
-              className={`h-28 md:h-36 w-auto transition-all ${scrolled ? "brightness-0 h-16 md:h-20" : ""}`}
+              className={`h-16 md:h-20 w-auto transition-all duration-500 ${scrolled ? "brightness-0 h-10 md:h-12" : ""}`}
             />
           </Link>
 
-          {/* Desktop menu */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navigation.filter((n) => n.href !== "/").map((item) => (
+          {/* Desktop menu — minimal */}
+          <div className="hidden lg:flex items-center gap-10">
+            {navigation.filter((n) => n.href !== "/" && n.href !== "/contact").map((item) => (
               <Link
                 key={item.href}
                 href={`/${locale}${item.href}/`}
-                className={`text-xs font-medium uppercase tracking-wider transition-colors hover:text-gold ${scrolled ? "text-text-body" : "text-white"}`}
+                className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:text-gold ${
+                  scrolled ? "text-text-body" : "text-white/90"
+                }`}
               >
                 {item.label[locale]}
               </Link>
             ))}
+
+            {/* Locale switcher */}
+            <div className="flex gap-1.5 ml-2">
+              {localeLinks.map((l) => (
+                <Link
+                  key={l.code}
+                  href={`/${l.code}/`}
+                  className={`text-sm transition-all ${locale === l.code ? "opacity-100 scale-110" : "opacity-40 hover:opacity-70"}`}
+                >
+                  {l.flag}
+                </Link>
+              ))}
+            </div>
+
+            {/* Book CTA */}
             <Link
               href={`/${locale}/contact/`}
-              className="btn--cta btn"
+              className={`text-[0.7rem] font-semibold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full transition-all duration-300 ${
+                scrolled
+                  ? "bg-gold text-white hover:bg-brown-deep"
+                  : "bg-white/15 backdrop-blur-md text-white border border-white/30 hover:bg-white/25"
+              }`}
             >
               {dict.nav.book}
             </Link>
@@ -107,42 +91,44 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >
-            <span className={`block w-6 h-0.5 transition-all ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 transition-all ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 transition-all ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu — glass overlay */}
       {menuOpen && (
-        <div className="lg:hidden fixed inset-0 top-0 bg-white z-[999] overflow-y-auto">
-          <div className="flex justify-between items-center p-4 border-b border-border">
+        <div className="lg:hidden fixed inset-0 top-0 z-[999] overflow-y-auto"
+          style={{ background: "rgba(248, 245, 240, 0.92)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)" }}
+        >
+          <div className="flex justify-between items-center p-6">
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
-              className="h-20 w-auto brightness-0"
+              className="h-14 w-auto brightness-0"
             />
             <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl text-brown-deep">
               ✕
             </button>
           </div>
-          <div className="flex flex-col p-6 gap-4">
+          <div className="flex flex-col px-8 py-6 gap-1">
             {navigation.map((item) => (
               <button
                 key={item.href}
                 onClick={() => handleNav(`/${locale}${item.href === "/" ? "" : item.href}/`)}
-                className="text-lg font-medium text-text-body hover:text-gold transition-colors py-2 border-b border-border text-left"
+                className="text-2xl font-[family-name:var(--font-heading)] font-medium text-brown-deep hover:text-gold transition-colors py-4 text-left"
               >
                 {item.label[locale]}
               </button>
             ))}
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-4 pt-6 mt-4 border-t border-brown-deep/10">
               {localeLinks.map((l) => (
                 <Link
                   key={l.code}
                   href={`/${l.code}/`}
-                  className={`text-2xl ${locale === l.code ? "opacity-100" : "opacity-50"}`}
+                  className={`text-2xl ${locale === l.code ? "opacity-100" : "opacity-40"}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {l.flag}
@@ -151,10 +137,16 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             </div>
             <button
               onClick={() => handleNav(`/${locale}/contact/`)}
-              className="btn btn--primary mt-4 text-center"
+              className="btn btn--primary mt-6 text-center"
             >
               {dict.nav.book}
             </button>
+
+            {/* Contact info in mobile menu */}
+            <div className="mt-8 pt-6 border-t border-brown-deep/10 space-y-2 text-sm text-text-muted">
+              <a href={`mailto:${siteConfig.email}`} className="block hover:text-gold">{siteConfig.email}</a>
+              <a href={`tel:${siteConfig.whatsapp}`} className="block hover:text-gold">{siteConfig.phone}</a>
+            </div>
           </div>
         </div>
       )}

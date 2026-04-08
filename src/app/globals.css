@@ -36,7 +36,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--color-text-body);
-  background: var(--color-white);
+  background: var(--color-cream);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -76,6 +76,11 @@ h4 { font-size: 1.2rem; }
   30% { transform: scaleY(1); transform-origin: top; opacity: 1; }
   60% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .animate-kenburns {
@@ -147,7 +152,7 @@ h4 { font-size: 1.2rem; }
   margin: 1.25rem auto 0;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR — LIQUID GLASS ===== */
 
 .navbar {
   position: fixed;
@@ -155,7 +160,7 @@ h4 { font-size: 1.2rem; }
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: background 0.4s ease, box-shadow 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navbar--transparent {
@@ -163,8 +168,13 @@ h4 { font-size: 1.2rem; }
 }
 
 .navbar--scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* ===== BUTTONS ===== */
@@ -175,12 +185,12 @@ h4 { font-size: 1.2rem; }
   justify-content: center;
   gap: 0.5rem;
   padding: 14px 32px;
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  border-radius: 4px;
+  border-radius: 50px;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   text-decoration: none;
@@ -211,12 +221,13 @@ h4 { font-size: 1.2rem; }
 .btn--outline-white {
   background: transparent;
   color: var(--color-white);
-  border: 1.5px solid var(--color-white);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
 }
 
 .btn--outline-white:hover {
-  background: var(--color-white);
-  color: var(--color-brown-deep);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .btn--cta {
@@ -224,6 +235,7 @@ h4 { font-size: 1.2rem; }
   color: var(--color-white);
   border: 1.5px solid var(--color-gold);
   padding: 10px 24px;
+  border-radius: 50px;
 }
 
 .btn--cta:hover {
@@ -231,37 +243,142 @@ h4 { font-size: 1.2rem; }
   border-color: var(--color-gold-light);
 }
 
+.btn--glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+}
+
+.btn--glass:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ===== LIQUID GLASS ===== */
+
+.glass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glass:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.glass-dark {
+  background: rgba(44, 24, 16, 0.6);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Legacy support */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.liquid-glass:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
 /* ===== ROOM CARD ===== */
 
 .room-card {
-  background: var(--color-white);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
   overflow: hidden;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .room-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
 /* ===== ACTIVITY CARD ===== */
 
 .activity-card {
-  background: var(--color-white);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1.25rem;
   padding: 2rem;
   text-align: center;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   transition: all 0.3s ease;
 }
 
 .activity-card:hover {
-  background: var(--color-brown-deep);
+  background: rgba(44, 24, 16, 0.85);
+  backdrop-filter: blur(20px);
   color: var(--color-gold-light);
-  border-color: var(--color-brown-deep);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 .activity-card:hover h3,
@@ -322,42 +439,12 @@ h4 { font-size: 1.2rem; }
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(20px);
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-/* ===== LIQUID GLASS (Apple style) ===== */
-
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 1.25rem;
-  box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.liquid-glass:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
-}
-
-/* ===== PROMO BANNER ===== */
-
-/* (now inline in PromoBanner.tsx) */
-
-/* ===== PHILOSOPHY SECTION ===== */
-
-/* (now uses liquid-glass cards on cream bg) */
 
 /* ===== COOKIE NOTICE ===== */
 
@@ -367,7 +454,10 @@ h4 { font-size: 1.2rem; }
   left: 0;
   right: 0;
   z-index: 1500;
-  background: var(--color-brown-deep);
+  background: rgba(44, 24, 16, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--color-cream);
   padding: 1rem 2rem;
   transform: translateY(100%);
@@ -389,12 +479,14 @@ h4 { font-size: 1.2rem; }
 .booking-bar__inner {
   display: flex;
   align-items: stretch;
-  background: white;
-  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
   box-shadow:
-    0 12px 48px rgba(0, 0, 0, 0.14),
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(44, 24, 16, 0.04);
+    0 12px 48px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   overflow: visible;
 }
 
@@ -407,11 +499,11 @@ h4 { font-size: 1.2rem; }
 }
 
 .booking-bar__field:first-child {
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 1.25rem 0 0 1.25rem;
 }
 
 .booking-bar__field:hover {
-  background: var(--color-cream);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .booking-bar__label {
@@ -451,7 +543,7 @@ h4 { font-size: 1.2rem; }
 .booking-bar__divider {
   width: 1px;
   background: var(--color-brown-deep);
-  opacity: 0.08;
+  opacity: 0.06;
   align-self: stretch;
   margin: 0.875rem 0;
 }
@@ -462,9 +554,12 @@ h4 { font-size: 1.2rem; }
   left: 50%;
   transform: translateX(-50%);
   min-width: 100%;
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0,0,0,0.04);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   z-index: 50;
   animation: bookingDropIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -509,7 +604,7 @@ h4 { font-size: 1.2rem; }
 
 .booking-bar__stepper:hover:not(:disabled) {
   opacity: 1;
-  background: var(--color-cream);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .booking-bar__stepper:disabled {
@@ -529,7 +624,7 @@ h4 { font-size: 1.2rem; }
   text-transform: uppercase;
   letter-spacing: 0.12em;
   border: none;
-  border-radius: 0 1rem 1rem 0;
+  border-radius: 0 1.25rem 1.25rem 0;
   cursor: pointer;
   transition: all 0.25s;
   white-space: nowrap;
@@ -570,11 +665,11 @@ h4 { font-size: 1.2rem; }
 
   .booking-bar__inner {
     flex-direction: column;
-    border-radius: 1rem;
+    border-radius: 1.25rem;
   }
 
   .booking-bar__field:first-child {
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 1.25rem 1.25rem 0 0;
   }
 
   .booking-bar__divider {
@@ -584,7 +679,7 @@ h4 { font-size: 1.2rem; }
   }
 
   .booking-bar__submit {
-    border-radius: 0 0 1rem 1rem;
+    border-radius: 0 0 1.25rem 1.25rem;
     padding: 1.125rem;
   }
 
