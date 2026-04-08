@@ -7,7 +7,7 @@ import RoomsGrid from "@/components/home/RoomsGrid";
 import Philosophy from "@/components/home/Philosophy";
 import Offers from "@/components/home/Offers";
 import RestaurantTeaser from "@/components/home/RestaurantTeaser";
-// Destinations removed — content merged into /experiences/
+import DestinationsTeaser from "@/components/home/DestinationsTeaser";
 import Testimonials from "@/components/home/Testimonials";
 import ContactSection from "@/components/home/ContactSection";
 import BookingBar from "@/components/home/BookingBar";
@@ -39,16 +39,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <HeroSlider dict={dict} />
-      <BookingBar dict={dict} />
       <PromoBanner dict={dict} />
       <Welcome dict={dict} locale={locale as Locale} />
       <RoomsGrid dict={dict} locale={locale as Locale} />
+      <DestinationsTeaser dict={dict} locale={locale as Locale} />
       <Philosophy dict={dict} />
       <Offers dict={dict} />
       <RestaurantTeaser dict={dict} locale={locale as Locale} />
       {/* Destinations merged into /experiences/ */}
       <Testimonials dict={dict} locale={locale as Locale} />
       <ContactSection dict={dict} />
+      <BookingBar dict={dict} />
     </>
   );
 }

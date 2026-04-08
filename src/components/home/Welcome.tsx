@@ -10,64 +10,103 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
   const basePath = getBasePath();
 
   return (
-    <section id="welcome" className="py-24 bg-white">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Text */}
+    <section id="welcome" className="py-32 md:py-40">
+      <div className="max-w-[1300px] mx-auto px-6">
+        {/* Top: editorial intro */}
+        <div className="max-w-3xl mx-auto text-center mb-20 md:mb-28">
           <ScrollReveal>
             <span className="section-label">{dict.welcome.label}</span>
-            <h2 className="mb-4">{dict.welcome.title}</h2>
-            <p className="text-sm text-brown-deep/80 font-[family-name:var(--font-sub)] italic mb-6">
+            <h2 className="mb-6">{dict.welcome.title}</h2>
+            <p className="text-gold font-[family-name:var(--font-sub)] italic text-lg mb-8">
               {dict.welcome.subtitle}
             </p>
-            <p className="text-text-body mb-4 leading-relaxed">{dict.welcome.p1}</p>
-            <p className="text-text-body mb-8 leading-relaxed">{dict.welcome.p2}</p>
+            <p className="text-text-body leading-[1.9] text-base max-w-2xl mx-auto">
+              {dict.welcome.p1}
+            </p>
+          </ScrollReveal>
+        </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <StatCounter value={45} suffix="+" label={dict.welcome.stat1} />
-              <StatCounter value={520} suffix=" ha" label={dict.welcome.stat2} />
-              <StatCounter value={20} suffix=" ans" label={dict.welcome.stat3} />
+        {/* Middle: immersive image + stats */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20">
+          {/* Main image */}
+          <ScrollReveal className="lg:col-span-7">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+              <img
+                src={`${basePath}/images/hero/hero-pilotis.jpg`}
+                alt="Bungalows sur pilotis du Lac Hotel Sahambavy"
+                className="w-full aspect-[4/3] object-cover transition-transform duration-[1.2s] group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Floating badge */}
+              <div className="absolute bottom-6 left-6 glass-card px-5 py-4 flex items-center gap-3">
+                <div className="text-gold font-bold text-xl font-[family-name:var(--font-heading)]">4.5</div>
+                <div>
+                  <div className="flex text-gold text-xs gap-0.5">
+                    {"★★★★★".split("").map((s, i) => (
+                      <span key={i}>{s}</span>
+                    ))}
+                  </div>
+                  <div className="text-[0.6rem] text-text-muted uppercase tracking-wider mt-0.5">TripAdvisor</div>
+                </div>
+              </div>
             </div>
-
-            <Link href={`/${locale}/hebergements/`} className="btn btn--outline">
-              {dict.welcome.cta}
-            </Link>
           </ScrollReveal>
 
-          {/* Image collage */}
-          <ScrollReveal delay={200} className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <img
-                  src={`${basePath}/images/hero/hero-lake-sunset.jpg`}
-                  alt="Vue du lac depuis le Lac Hôtel Sahambavy"
-                  className="rounded-xl w-full h-48 object-cover"
-                  loading="lazy"
-                />
-                <img
-                  src={`${basePath}/images/hotel/hotel-gardens.jpg`}
-                  alt="Jardins du Lac Hôtel"
-                  className="rounded-xl w-full h-64 object-cover"
-                  loading="lazy"
-                />
+          {/* Side: paragraph + stats */}
+          <div className="lg:col-span-5 space-y-10">
+            <ScrollReveal delay={200}>
+              <p className="text-text-body leading-[1.9] text-base">
+                {dict.welcome.p2}
+              </p>
+            </ScrollReveal>
+
+            {/* Stats — elegant minimal */}
+            <ScrollReveal delay={300}>
+              <div className="grid grid-cols-3 gap-6">
+                <StatCounter value={50} suffix="+" label={dict.welcome.stat1} />
+                <StatCounter value={520} suffix=" ha" label={dict.welcome.stat2} />
+                <StatCounter value={28} suffix=" ans" label={dict.welcome.stat3} />
               </div>
-              <div className="pt-8">
-                <img
-                  src={`${basePath}/images/hero/hero-pilotis.jpg`}
-                  alt="Bungalows sur pilotis du Lac Hôtel Sahambavy"
-                  className="rounded-xl w-full h-80 object-cover"
-                  loading="lazy"
-                />
-              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={400}>
+              <Link href={`/${locale}/hotel/`} className="btn btn--outline">
+                {dict.welcome.cta}
+              </Link>
+            </ScrollReveal>
+          </div>
+        </div>
+
+        {/* Bottom: 3-image mosaic */}
+        <div className="grid grid-cols-3 gap-4 md:gap-6">
+          <ScrollReveal className="col-span-1">
+            <div className="rounded-2xl overflow-hidden">
+              <img
+                src={`${basePath}/images/hero/hero-lake-sunset.jpg`}
+                alt="Coucher de soleil sur le lac"
+                className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
             </div>
-            {/* TripAdvisor badge */}
-            <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-4 flex items-center gap-3">
-              <div className="text-green-tea font-bold text-2xl">4.5</div>
-              <div>
-                <div className="flex text-gold text-sm">★★★★★</div>
-                <div className="text-xs text-text-muted">TripAdvisor</div>
-              </div>
+          </ScrollReveal>
+          <ScrollReveal delay={100} className="col-span-1">
+            <div className="rounded-2xl overflow-hidden">
+              <img
+                src={`${basePath}/images/hotel/hotel-gardens.jpg`}
+                alt="Jardins du Lac Hotel"
+                className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={200} className="col-span-1">
+            <div className="rounded-2xl overflow-hidden">
+              <img
+                src={`${basePath}/images/rooms/superior-02.jpg`}
+                alt="Suite avec vue sur le lac"
+                className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
             </div>
           </ScrollReveal>
         </div>
@@ -88,14 +127,13 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
       ([entry]) => {
         if (entry.isIntersecting && !counted.current) {
           counted.current = true;
-          let start = 0;
           const duration = 2000;
           const startTime = performance.now();
 
           const animate = (now: number) => {
             const progress = Math.min((now - startTime) / duration, 1);
-            start = Math.floor(progress * value);
-            el.textContent = `${start}${suffix}`;
+            const current = Math.floor(progress * value);
+            el.textContent = `${current}${suffix}`;
             if (progress < 1) requestAnimationFrame(animate);
           };
           requestAnimationFrame(animate);
@@ -109,11 +147,14 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
   }, [value, suffix]);
 
   return (
-    <div className="text-center">
-      <div ref={ref} className="font-[family-name:var(--font-heading)] text-3xl text-brown-brand font-bold">
+    <div className="text-center py-4">
+      <div
+        ref={ref}
+        className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl text-brown-deep font-bold leading-none"
+      >
         0{suffix}
       </div>
-      <div className="text-xs text-text-muted mt-1 uppercase tracking-wider">{label}</div>
+      <div className="text-[0.6rem] text-text-muted mt-3 uppercase tracking-[0.2em]">{label}</div>
     </div>
   );
 }

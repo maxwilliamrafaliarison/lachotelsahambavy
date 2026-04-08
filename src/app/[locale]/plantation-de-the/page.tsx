@@ -40,7 +40,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       <PageHero
         title={dict.plantation.heroTitle}
         subtitle={dict.plantation.heroSubtitle}
-        image={`${basePath}/images/tea/plantation.jpg`}
+        image={`${basePath}/images/tea/plantation-drone-overhead.jpg`}
       />
 
       {/* History - Legend & Madagascar */}

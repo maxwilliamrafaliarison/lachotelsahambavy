@@ -1,84 +1,93 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { getBasePath } from "@/lib/utils";
+
+const basePath = getBasePath();
 
 const pillars = [
-  {
-    key: "pillar1",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 256 256" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M128 232c0-96 88-120 88-176a88 88 0 00-176 0c0 56 88 80 88 176z" />
-        <path d="M128 128c24-24 40-56 40-72" />
-        <path d="M128 128c-24-24-40-56-40-72" />
-        <line x1="128" y1="128" x2="128" y2="232" />
-      </svg>
-    ),
-  },
-  {
-    key: "pillar2",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 256 256" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M128 80c24 0 40 16 40 48s-16 48-40 48" />
-        <path d="M128 80c-24 0-40 16-40 48s16 48 40 48" />
-        <path d="M88 168l-48 48" />
-        <path d="M168 168l48 48" />
-        <path d="M128 176v40" />
-        <circle cx="128" cy="52" r="20" />
-      </svg>
-    ),
-  },
-  {
-    key: "pillar3",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 256 256" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="48" y="80" width="72" height="128" rx="4" />
-        <rect x="136" y="48" width="72" height="160" rx="4" />
-        <line x1="48" y1="208" x2="208" y2="208" />
-        <polyline points="60 80 84 56 108 80" />
-        <polyline points="148 48 172 24 196 48" />
-      </svg>
-    ),
-  },
-  {
-    key: "pillar4",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 256 256" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M128 24c-48 32-80 80-80 128 0 48 32 80 80 80s80-32 80-80c0-48-32-96-80-128z" />
-        <path d="M128 72c16 24 32 56 32 80s-16 40-32 40-32-16-32-40 16-56 32-80z" />
-        <circle cx="128" cy="168" r="12" />
-      </svg>
-    ),
-  },
+  { key: "pillar1", icon: "leaf" },
+  { key: "pillar2", icon: "people" },
+  { key: "pillar3", icon: "house" },
+  { key: "pillar4", icon: "water" },
 ];
+
+function PillarIcon({ type }: { type: string }) {
+  const cls = "w-8 h-8 text-gold";
+  switch (type) {
+    case "leaf":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M11 20A7 7 0 019.8 6.9C15.5 4.9 17 3.5 17 3.5s-1.5 5.5 0 10.5c-1-1-2.5-1.5-4-1.5" />
+          <path d="M6 21c1-3 3.5-6 7-8" />
+        </svg>
+      );
+    case "people":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+        </svg>
+      );
+    case "house":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+      );
+    case "water":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Philosophy({ dict }: { dict: any }) {
   return (
-    <section className="py-24 bg-cream">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <SectionHeader
-          label={dict.philosophy.label}
-          title={dict.philosophy.title}
-        />
+    <section className="relative py-32 md:py-40 overflow-hidden">
+      {/* Background image with overlay */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: `url(${basePath}/images/hotel/hotel-gardens.jpg)` }}
+      />
+      <div className="absolute inset-0 bg-cream/90 backdrop-blur-sm" />
 
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <p className="text-text-body mb-4 leading-relaxed">{dict.philosophy.p1}</p>
-          <p className="text-text-muted text-sm leading-relaxed">{dict.philosophy.p2}</p>
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6">
+        {/* Header */}
+        <div className="max-w-2xl mx-auto text-center mb-8">
+          <ScrollReveal>
+            <span className="section-label">{dict.philosophy.label}</span>
+            <h2 className="mb-6">{dict.philosophy.title}</h2>
+            <div className="section-divider" />
+          </ScrollReveal>
         </div>
 
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <ScrollReveal delay={100}>
+            <p className="text-text-body leading-[1.9] text-base mb-4">{dict.philosophy.p1}</p>
+            <p className="text-text-muted text-sm leading-relaxed">{dict.philosophy.p2}</p>
+          </ScrollReveal>
+        </div>
+
+        {/* Pillars — glass cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {pillars.map((pillar, i) => (
             <ScrollReveal key={pillar.key} delay={i * 100}>
-              <div className="liquid-glass relative overflow-hidden h-full flex flex-col items-center text-center p-8 min-h-[240px]">
-                {/* Filigrane icon - large, in corner */}
-                <div className="absolute -bottom-4 -right-4 text-brown-deep/[0.06] pointer-events-none">
-                  {pillar.icon}
+              <div className="glass-card p-8 h-full flex flex-col items-center text-center">
+                <div className="mb-5">
+                  <PillarIcon type={pillar.icon} />
                 </div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center flex-1">
-                  <h3 className="text-lg font-semibold text-brown-deep mb-3">{dict.philosophy[pillar.key]}</h3>
-                  <p className="text-sm text-text-muted leading-relaxed">{dict.philosophy[`${pillar.key}Desc`]}</p>
-                </div>
+                <h3 className="text-base font-semibold text-brown-deep mb-3">
+                  {dict.philosophy[pillar.key]}
+                </h3>
+                <p className="text-sm text-text-muted leading-relaxed">
+                  {dict.philosophy[`${pillar.key}Desc`]}
+                </p>
               </div>
             </ScrollReveal>
           ))}

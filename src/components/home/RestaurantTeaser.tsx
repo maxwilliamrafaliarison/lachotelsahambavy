@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { type Locale, getBasePath } from "@/lib/utils";
@@ -7,68 +9,73 @@ export default function RestaurantTeaser({ dict, locale }: { dict: any; locale: 
   const basePath = getBasePath();
 
   return (
-    <section className="py-24 bg-cream">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Images */}
+    <section className="py-32 md:py-40 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Image composition */}
           <ScrollReveal>
-            <div className="grid grid-cols-2 gap-4">
-              <img
-                src={`${basePath}/images/restaurant/restaurant-01.jpg`}
-                alt="Restaurant panoramique du Lac Hôtel"
-                className="rounded-xl w-full h-64 object-cover col-span-2"
-                loading="lazy"
-              />
-              <img
-                src={`${basePath}/images/restaurant/restaurant-02.jpg`}
-                alt="Cheminée du restaurant"
-                className="rounded-xl w-full h-40 object-cover"
-                loading="lazy"
-              />
-              <img
-                src={`${basePath}/images/rooms/superior-02.jpg`}
-                alt="Chambre avec vue lac au coucher du soleil"
-                className="rounded-xl w-full h-40 object-cover"
-                loading="lazy"
-              />
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={`${basePath}/images/restaurant/restaurant-01.jpg`}
+                  alt="Restaurant panoramique du Lac Hotel"
+                  className="w-full aspect-[4/3] object-cover"
+                  loading="lazy"
+                />
+              </div>
+              {/* Overlapping smaller image */}
+              <div className="absolute -bottom-8 -right-4 md:-right-8 w-[45%] rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                <img
+                  src={`${basePath}/images/restaurant/restaurant-02.jpg`}
+                  alt="Ambiance cheminee du restaurant"
+                  className="w-full aspect-square object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </ScrollReveal>
 
-          {/* Text */}
+          {/* Text content */}
           <ScrollReveal delay={200}>
-            <span className="section-label">{dict.restaurantSection.label}</span>
-            <h2 className="mb-2">{dict.restaurantSection.title}</h2>
-            <p className="text-gold font-[family-name:var(--font-sub)] italic mb-6">
-              {dict.restaurantSection.subtitle}
-            </p>
-            <p className="text-text-body mb-6 leading-relaxed">{dict.restaurantSection.p1}</p>
+            <div className="lg:pl-4">
+              <span className="section-label">{dict.restaurantSection.label}</span>
+              <h2 className="mb-3">{dict.restaurantSection.title}</h2>
+              <p className="text-gold font-[family-name:var(--font-sub)] italic text-lg mb-8">
+                {dict.restaurantSection.subtitle}
+              </p>
+              <p className="text-text-body leading-[1.9] mb-8">{dict.restaurantSection.p1}</p>
 
-            <ul className="space-y-2 mb-8">
-              {dict.restaurantSection.specialties.map((s: string, i: number) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-text-body">
-                  <span className="text-gold mt-0.5">✦</span>
-                  {s}
-                </li>
-              ))}
-            </ul>
+              {/* Specialties — elegant list */}
+              <ul className="space-y-3 mb-10">
+                {dict.restaurantSection.specialties.map((s: string, i: number) => (
+                  <li key={i} className="flex items-start gap-3 text-text-body">
+                    <span className="text-gold mt-1 text-xs">&#9670;</span>
+                    <span className="text-sm leading-relaxed">{s}</span>
+                  </li>
+                ))}
+              </ul>
 
-            {/* Prices */}
-            <div className="flex gap-6 mb-8">
-              {[
-                { price: "€8", label: dict.restaurantSection.breakfast },
-                { price: "€14", label: dict.restaurantSection.menu },
-                { price: "€8", label: dict.restaurantSection.picnic },
-              ].map((item) => (
-                <div key={item.label} className="text-center">
-                  <div className="font-[family-name:var(--font-heading)] text-2xl text-brown-brand">{item.price}</div>
-                  <div className="text-xs text-text-muted uppercase tracking-wider">{item.label}</div>
-                </div>
-              ))}
+              {/* Prices — glass cards */}
+              <div className="flex gap-4 mb-10">
+                {[
+                  { price: "40 000 Ar", label: dict.restaurantSection.breakfast },
+                  { price: "70 000 Ar", label: dict.restaurantSection.menu },
+                ].map((item) => (
+                  <div key={item.label} className="glass-card px-6 py-4 text-center flex-1">
+                    <div className="font-[family-name:var(--font-heading)] text-xl text-brown-deep font-bold">
+                      {item.price}
+                    </div>
+                    <div className="text-[0.6rem] text-text-muted uppercase tracking-[0.15em] mt-1">
+                      {item.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href={`/${locale}/experiences/#restaurant`} className="btn btn--outline">
+                {dict.restaurantSection.cta}
+              </Link>
             </div>
-
-            <Link href={`/${locale}/restaurant/`} className="btn btn--outline">
-              {dict.restaurantSection.cta}
-            </Link>
           </ScrollReveal>
         </div>
       </div>

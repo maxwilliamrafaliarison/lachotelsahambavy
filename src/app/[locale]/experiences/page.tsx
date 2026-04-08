@@ -85,8 +85,8 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
             <ScrollReveal delay={200} className="md:order-2">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src={`${basePath}/images/tea/plantation.jpg`}
-                  alt="Plantation de thé Sahambavy"
+                  src={`${basePath}/images/tea/plantation-drone-overhead.jpg`}
+                  alt="Vue aérienne de la plantation de thé Sahambavy"
                   className="w-full aspect-[4/3] object-cover"
                   loading="lazy"
                 />

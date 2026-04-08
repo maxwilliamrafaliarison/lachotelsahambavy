@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
@@ -21,11 +21,16 @@ const slides = [
     image: `${basePath}/images/hero/hero-garden.jpg`,
     alt: "Jardins et bungalows du Lac Hôtel Sahambavy",
   },
+  {
+    image: `${basePath}/images/hero/hero-drone-sunrise.jpg`,
+    alt: "Vue aérienne du Lac Hôtel au lever du soleil",
+  },
 ];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function HeroSlider({ dict }: { dict: any }) {
   const [current, setCurrent] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const goTo = useCallback((index: number) => {
     setCurrent(index);
@@ -34,72 +39,126 @@ export default function HeroSlider({ dict }: { dict: any }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5500);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
+  // Parallax on scroll
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        el.style.transform = `translateY(${y * 0.25}px)`;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
-      {/* Slides */}
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className={`hero-slide ${i === current ? "active" : ""}`}
-        >
+    <section className="relative w-full h-screen min-h-[700px] overflow-hidden">
+      {/* Slides with parallax container */}
+      <div ref={containerRef} className="absolute inset-0 will-change-transform">
+        {slides.map((slide, i) => (
           <div
-            className="absolute inset-0 bg-cover bg-center animate-kenburns"
-            style={{ backgroundImage: `url(${slide.image})` }}
-            role="img"
-            aria-label={slide.alt}
-          />
-        </div>
-      ))}
-
-      {/* Gradient overlay — strong for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/50 to-black/80" />
-
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
-        <span className="section-label !text-cream mb-6 drop-shadow-lg">{dict.hero.eyebrow}</span>
-        <h1
-          className="mb-4"
-          style={{ color: "#FFFFFF", textShadow: "0 2px 8px rgba(0,0,0,0.8), 0 4px 32px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.4)" }}
-        >
-          {dict.hero.title}
-          <br />
-          <em className="font-[family-name:var(--font-sub)] font-normal">{dict.hero.titleEm}</em>
-        </h1>
-        <p
-          className="max-w-xl text-lg text-white mb-8 font-[family-name:var(--font-sub)]"
-          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5)" }}
-        >
-          {dict.hero.subtitle}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a href="#rooms" className="btn btn--primary" onClick={(e) => { e.preventDefault(); document.getElementById("rooms")?.scrollIntoView({ behavior: "smooth" }); }}>{dict.hero.cta1}</a>
-          <a href="#contact" className="btn btn--outline-white" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>{dict.hero.cta2}</a>
-        </div>
-      </div>
-
-      {/* Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-        {slides.map((_, i) => (
-          <button
             key={i}
-            className={`hero-dot ${i === current ? "active" : ""}`}
-            onClick={() => goTo(i)}
-            aria-label={`Slide ${i + 1}`}
-          />
+            className={`hero-slide ${i === current ? "active" : ""}`}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center animate-kenburns"
+              style={{ backgroundImage: `url(${slide.image})` }}
+              role="img"
+              aria-label={slide.alt}
+            />
+          </div>
         ))}
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10">
-        <a href="#welcome" className="flex flex-col items-center text-white/60 hover:text-white transition-colors">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
-        </a>
+      {/* Minimal cinematic overlay — very subtle, mostly bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+
+      {/* Content — bottom-left aligned like luxury hotels */}
+      <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-12 lg:px-20 pb-32 md:pb-40">
+        <div className="max-w-2xl">
+          <span className="inline-block text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-gold mb-6">
+            {dict.hero.eyebrow}
+          </span>
+          <h1
+            className="mb-6 leading-[1.05]"
+            style={{
+              color: "#FFFFFF",
+              textShadow: "0 2px 40px rgba(0,0,0,0.3)",
+            }}
+          >
+            {dict.hero.title}
+            <br />
+            <em className="font-[family-name:var(--font-sub)] font-normal text-white/90">
+              {dict.hero.titleEm}
+            </em>
+          </h1>
+          <p
+            className="max-w-lg text-base md:text-lg text-white/80 mb-10 font-[family-name:var(--font-sub)] leading-relaxed"
+            style={{ textShadow: "0 1px 12px rgba(0,0,0,0.3)" }}
+          >
+            {dict.hero.subtitle}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#rooms"
+              className="btn btn--primary"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("rooms")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              {dict.hero.cta1}
+            </a>
+            <a
+              href="#contact"
+              className="btn btn--glass"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              {dict.hero.cta2}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Slide indicators — minimal line style */}
+      <div className="absolute bottom-12 left-6 md:left-12 lg:left-20 z-10 flex items-center gap-3">
+        <span className="text-[0.6rem] text-white/50 font-mono tabular-nums">
+          {String(current + 1).padStart(2, "0")}
+        </span>
+        <div className="flex gap-1.5">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              className={`h-[2px] rounded-full transition-all duration-500 ${
+                i === current ? "w-8 bg-gold" : "w-4 bg-white/30 hover:bg-white/50"
+              }`}
+              onClick={() => goTo(i)}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+        <span className="text-[0.6rem] text-white/30 font-mono tabular-nums">
+          {String(slides.length).padStart(2, "0")}
+        </span>
+      </div>
+
+      {/* Scroll indicator — elegant line */}
+      <div className="absolute bottom-12 right-6 md:right-12 lg:right-20 z-10 flex flex-col items-center gap-3">
+        <span className="text-[0.55rem] uppercase tracking-[0.2em] text-white/40 [writing-mode:vertical-lr]">
+          Scroll
+        </span>
+        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+          <div className="absolute inset-x-0 h-full bg-gold animate-scrollLine" />
+        </div>
       </div>
     </section>
   );

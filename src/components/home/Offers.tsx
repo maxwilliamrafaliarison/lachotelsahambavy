@@ -1,40 +1,50 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
 import { getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
 const offers = [
-  { icon: "🍽", key: "restaurant", image: `${basePath}/images/restaurant/restaurant-01.jpg` },
-  { icon: "🏊", key: "pool", image: `${basePath}/images/hotel/hotel-facade.jpg` },
-  { icon: "🚶", key: "lake", image: `${basePath}/images/hero/hero-lake.jpg` },
-  { icon: "💆", key: "massage", image: `${basePath}/images/activities/massage.jpg` },
+  { key: "restaurant", image: `${basePath}/images/restaurant/restaurant-01.jpg` },
+  { key: "pool", image: `${basePath}/images/pool/pool-night.jpg` },
+  { key: "lake", image: `${basePath}/images/hero/hero-lake.jpg` },
+  { key: "massage", image: `${basePath}/images/activities/massage.jpg` },
 ];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Offers({ dict }: { dict: any }) {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <SectionHeader
-          label={dict.offers.label}
-          title={dict.offers.title}
-        />
+    <section className="py-32 md:py-40 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6">
+        {/* Header */}
+        <div className="max-w-2xl mx-auto text-center mb-20">
+          <ScrollReveal>
+            <span className="section-label">{dict.offers.label}</span>
+            <h2>{dict.offers.title}</h2>
+            <div className="section-divider" />
+          </ScrollReveal>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Grid — 2x2 on desktop, cinematic hover */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {offers.map((offer, i) => (
-            <ScrollReveal key={offer.key} delay={i * 100}>
-              <div className="group relative rounded-xl overflow-hidden h-72">
+            <ScrollReveal key={offer.key} delay={i * 120}>
+              <div className="group relative rounded-2xl overflow-hidden aspect-[16/10] cursor-pointer">
                 <img
                   src={offer.image}
                   alt={dict.offers[offer.key]}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-[1.2s] group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <div className="text-2xl mb-2">{offer.icon}</div>
-                  <h3 className="text-lg text-white mb-1">{dict.offers[offer.key]}</h3>
-                  <p className="text-sm text-white/70">{dict.offers[`${offer.key}Desc`]}</p>
+                {/* Gradient overlay — subtle, stronger on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity duration-500" />
+
+                {/* Content — bottom aligned */}
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <h3 className="text-xl md:text-2xl text-white mb-2 transition-transform duration-500 group-hover:translate-y-[-4px]">
+                    {dict.offers[offer.key]}
+                  </h3>
+                  <p className="text-sm text-white/70 leading-relaxed max-w-sm opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                    {dict.offers[`${offer.key}Desc`]}
+                  </p>
                 </div>
               </div>
             </ScrollReveal>
