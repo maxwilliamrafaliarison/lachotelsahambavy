@@ -1,7 +1,8 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { getBasePath } from "@/lib/utils";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 const offers = [
   { icon: "🍽", key: "restaurant", image: `${basePath}/images/restaurant/restaurant-01.jpg` },
   { icon: "🏊", key: "pool", image: `${basePath}/images/hotel/hotel-facade.jpg` },

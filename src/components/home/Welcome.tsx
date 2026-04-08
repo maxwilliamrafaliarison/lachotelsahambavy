@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import type { Locale } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Welcome({ dict, locale }: { dict: any; locale: Locale }) {
-  const basePath = "/lachotelsahambavy";
+  const basePath = getBasePath();
 
   return (
     <section id="welcome" className="py-24 bg-white">

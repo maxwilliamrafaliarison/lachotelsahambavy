@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState, useRef, type FormEvent } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
-import { type Locale } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -28,7 +28,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
       <PageHero
         title={dict.contact.heroTitle}
         subtitle={dict.contact.heroSubtitle}
-        image="/lachotelsahambavy/images/hero/hero-lake-sunset.jpg"
+        image={`${getBasePath()}/images/hero/hero-lake-sunset.jpg`}
       />
 
       {/* Contact info cards */}

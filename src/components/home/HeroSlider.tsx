@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { getBasePath } from "@/lib/utils";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 const slides = [
   {
     image: `${basePath}/images/hero/hero-pilotis.jpg`,

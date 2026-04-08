@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Lac Hôtel Sahambavy",
-  url: "https://maxwilliamrafaliarison.github.io/lachotelsahambavy",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://lachotel.com",
   email: "booking@lachotel.com",
   emailSecondary: "lachotelsahambavy@gmail.com",
   phone: "(+261) 034 99 161 76",

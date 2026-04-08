@@ -22,13 +22,13 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maxwilliamrafaliarison.github.io/lachotelsahambavy"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://lachotel.com"),
   title: "Lac Hôtel Sahambavy — Éco-lodge de luxe sur le lac | Madagascar",
   description:
     "Éco-lodge de charme à Fianarantsoa, Madagascar. Bungalows sur pilotis, restaurant panoramique, plantation de thé.",
   icons: {
-    icon: "/lachotelsahambavy/favicon.png",
-    apple: "/lachotelsahambavy/apple-icon.png",
+    icon: "/favicon.png",
+    apple: "/apple-icon.png",
   },
   openGraph: {
     type: "website",

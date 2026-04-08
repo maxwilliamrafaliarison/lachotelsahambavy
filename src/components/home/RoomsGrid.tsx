@@ -2,11 +2,11 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { rooms } from "@/data/rooms";
-import type { Locale } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale }) {
-  const basePath = "/lachotelsahambavy";
+  const basePath = getBasePath();
   const displayRooms = rooms.filter((r) => r.priceEUR);
 
   return (

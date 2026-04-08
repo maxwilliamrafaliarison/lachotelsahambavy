@@ -1,11 +1,11 @@
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/data/site";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -37,7 +37,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       <PageHero
         title={dict.hotel.heroTitle}
         subtitle={dict.hotel.heroSubtitle}
-        image="/lachotelsahambavy/images/hotel/hotel-facade.jpg"
+        image={`${basePath}/images/hotel/hotel-facade.jpg`}
       />
 
       {/* History Section */}

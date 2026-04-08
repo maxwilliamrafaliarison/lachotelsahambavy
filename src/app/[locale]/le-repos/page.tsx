@@ -1,12 +1,12 @@
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/data/site";
 import LeReposSignupForm from "./LeReposSignupForm";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -38,7 +38,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
       <PageHero
         title={dict.repos.heroTitle}
         subtitle={dict.repos.heroSubtitle}
-        image="/lachotelsahambavy/images/hero/hero-twilight.jpg"
+        image={`${basePath}/images/hero/hero-twilight.jpg`}
       />
 
       {/* Teaser Section */}

@@ -1,5 +1,5 @@
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import HeroSlider from "@/components/home/HeroSlider";
 import PromoBanner from "@/components/home/PromoBanner";
 import Welcome from "@/components/home/Welcome";
@@ -24,9 +24,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: dict.meta.description,
     alternates: {
       languages: {
-        fr: "/lachotelsahambavy/fr/",
-        en: "/lachotelsahambavy/en/",
-        es: "/lachotelsahambavy/es/",
+        fr: `${getBasePath()}/fr/`,
+        en: `${getBasePath()}/en/`,
+        es: `${getBasePath()}/es/`,
       },
     },
   };

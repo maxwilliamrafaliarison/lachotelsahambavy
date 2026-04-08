@@ -1,12 +1,12 @@
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { extras } from "@/data/rooms";
 import Link from "next/link";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -71,7 +71,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       <PageHero
         title={dict.restaurantSection.heroTitle}
         subtitle={dict.restaurantSection.heroSubtitle}
-        image="/lachotelsahambavy/images/restaurant/restaurant-01.jpg"
+        image={`${basePath}/images/restaurant/restaurant-01.jpg`}
       />
 
       {/* Philosophy strip */}
@@ -99,7 +99,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             <ScrollReveal>
               <div className="rounded-xl overflow-hidden shadow-lg aspect-[4/3]">
                 <img
-                  src="/lachotelsahambavy/images/restaurant/restaurant-02.jpg"
+                  src={`${basePath}/images/restaurant/restaurant-02.jpg`}
                   alt={dict.restaurantSection.heroTitle}
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -143,7 +143,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       <section className="relative h-[50vh] min-h-[350px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/lachotelsahambavy/images/hero/hero-twilight.jpg)" }}
+          style={{ backgroundImage: `url(${basePath}/images/hero/hero-twilight.jpg)` }}
         />
         <div className="absolute inset-0 bg-black/30" />
       </section>
@@ -179,7 +179,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/lachotelsahambavy/images/hero/hero-lake-sunset.jpg)" }}
+          style={{ backgroundImage: `url(${basePath}/images/hero/hero-lake-sunset.jpg)` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         <div className="relative z-10 flex items-end justify-center h-full pb-12 px-4">

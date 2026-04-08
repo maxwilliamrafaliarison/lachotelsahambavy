@@ -1,11 +1,11 @@
 import Link from "next/link";
-import type { Locale } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 import { rooms } from "@/data/rooms";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Footer({ locale, dict }: { locale: Locale; dict: any }) {
-  const basePath = "/lachotelsahambavy";
+  const basePath = getBasePath();
   const year = new Date().getFullYear();
 
   return (

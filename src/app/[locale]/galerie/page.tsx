@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { use } from "react";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 type Category = "all" | "rooms" | "restaurant" | "nature" | "theicole" | "train";
 

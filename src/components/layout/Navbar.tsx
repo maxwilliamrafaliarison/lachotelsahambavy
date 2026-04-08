@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import type { Locale } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {

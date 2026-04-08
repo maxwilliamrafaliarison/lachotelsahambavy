@@ -1,10 +1,10 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import type { Locale } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function RestaurantTeaser({ dict, locale }: { dict: any; locale: Locale }) {
-  const basePath = "/lachotelsahambavy";
+  const basePath = getBasePath();
 
   return (
     <section className="py-24 bg-cream">

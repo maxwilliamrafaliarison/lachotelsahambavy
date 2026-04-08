@@ -1,5 +1,5 @@
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import TheicoleBookingForm from "./TheicoleBookingForm";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -39,7 +39,7 @@ export default async function TheicolePage({ params }: { params: Promise<{ local
       <PageHero
         title={dict.theicole.heroTitle}
         subtitle={dict.theicole.heroSubtitle}
-        image="/lachotelsahambavy/images/tea/plantation.jpg"
+        image={`${basePath}/images/tea/plantation.jpg`}
       />
 
       {/* History Timeline */}

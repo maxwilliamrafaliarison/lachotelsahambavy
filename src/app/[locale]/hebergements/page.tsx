@@ -1,12 +1,12 @@
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { rooms, extras } from "@/data/rooms";
 import Link from "next/link";
 
-const basePath = "/lachotelsahambavy";
+const basePath = getBasePath();
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -32,7 +32,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <PageHero
         title={dict.rooms.title}
         subtitle={dict.rooms.subtitle}
-        image="/lachotelsahambavy/images/rooms/pilotis-01.jpg"
+        image={`${basePath}/images/rooms/pilotis-01.jpg`}
       />
 
       {/* Rate summary table */}
