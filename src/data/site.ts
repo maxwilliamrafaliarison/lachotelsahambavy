@@ -21,9 +21,9 @@ export const siteConfig = {
     nif: "3000204565",
   },
   ratings: {
-    booking: { score: 9.0, total: 33, label: "Fabuleux" },
+    booking: { score: 9.0, total: 34, label: "Fabuleux" },
     google: { score: 4.6, total: 157 },
-    tripadvisor: { score: 4.5, total: 137 },
+    tripadvisor: { score: 4.5, total: 229 },
   },
   specialOffer: {
     fr: "50 % sur la 2ᵉ nuitée pour toute réservation de 2 nuits consécutives",
