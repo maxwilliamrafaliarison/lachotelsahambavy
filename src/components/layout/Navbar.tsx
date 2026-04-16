@@ -113,7 +113,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               alt="Lac Hôtel Sahambavy — The natural choice"
               className={`w-auto transition-all duration-500 ${
                 heroBrandMode
-                  ? "h-20 md:h-28 lg:h-32"
+                  ? "h-28 md:h-36 lg:h-40"
                   : darkText
                   ? "h-11 md:h-14"
                   : "h-16 md:h-20"
