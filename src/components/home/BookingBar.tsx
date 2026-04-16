@@ -128,7 +128,15 @@ export default function BookingBar({ dict }: { dict: any }) {
   const [rooms, setRooms] = useState<RoomConfig[]>([{ adults: 2, children: 0 }]);
   const [rate, setRate] = useState("standard");
   const [visible, setVisible] = useState(false);
-  const [minimized, setMinimized] = useState(false);
+  // Below `lg` (1024 px) default to minimized — the expanded 4-field bar
+  // eats ~50 % of a phone viewport otherwise. Desktop keeps it expanded.
+  // Safe to read `window` in the lazy initializer: the component returns
+  // `null` while `visible=false`, so server and first client render both
+  // emit nothing and hydration never sees the `minimized` state.
+  const [minimized, setMinimized] = useState(
+    () => typeof window !== "undefined" && window.innerWidth < 1024
+  );
+  const userToggledRef = useRef(false);
 
   const [openPanel, setOpenPanel] = useState<"checkin" | "checkout" | "guests" | "rate" | null>(null);
 
@@ -203,7 +211,10 @@ export default function BookingBar({ dict }: { dict: any }) {
   }
 
   function togglePanel(panel: "checkin" | "checkout" | "guests" | "rate") {
-    if (minimized) setMinimized(false);
+    if (minimized) {
+      userToggledRef.current = true;
+      setMinimized(false);
+    }
     setOpenPanel(prev => prev === panel ? null : panel);
   }
 
@@ -229,7 +240,11 @@ export default function BookingBar({ dict }: { dict: any }) {
       {/* Minimize/expand toggle */}
       <button
         type="button"
-        onClick={() => { setMinimized(!minimized); setOpenPanel(null); }}
+        onClick={() => {
+          userToggledRef.current = true;
+          setMinimized(!minimized);
+          setOpenPanel(null);
+        }}
         className="booking-bar-fixed__toggle"
         aria-label={minimized ? "Ouvrir" : "Réduire"}
       >
