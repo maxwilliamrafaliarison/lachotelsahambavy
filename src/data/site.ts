@@ -14,9 +14,9 @@ export const siteConfig = {
     tripadvisor:
       "https://www.tripadvisor.fr/Hotel_Review-g298271-d649892-Reviews-Lac_Hotel-Fianarantsoa_Fianarantsoa_Province.html",
     google: "https://maps.app.goo.gl/SoYLD9ifu8fVcgrt7",
-    // TODO: remplacer par l'URL exacte de la fiche Booking.com une fois confirmée.
-    booking:
-      "https://www.booking.com/searchresults.html?ss=Lac+H%C3%B4tel+Sahambavy",
+    // URL canonique (langue-neutre) — Booking.com négocie automatiquement la
+    // locale du visiteur (fr / en / es …). Confirmée en recherche Google.
+    booking: "https://www.booking.com/hotel/mg/lac-sahambavy.html",
   },
   legal: {
     rcs: "2004-B-013",
