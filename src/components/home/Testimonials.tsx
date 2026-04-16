@@ -56,11 +56,6 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
   const currentSource = sources[activeSource];
   const reviewCount = currentSource.reviews.length;
 
-  // Reset index quand on change d'onglet.
-  useEffect(() => {
-    setActiveReview(0);
-  }, [activeSource]);
-
   // Auto-rotation.
   useEffect(() => {
     if (isPaused) return;
@@ -122,7 +117,11 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
               <button
                 key={source.id}
                 onClick={() => {
+                  // Reset review + switch source in a single batch — évite
+                  // l'effet (interdit par react-hooks/set-state-in-effect en React 19)
+                  // et garantit qu'on n'affiche jamais un index hors-borne.
                   setActiveSource(i);
+                  setActiveReview(0);
                   pauseThenResume();
                 }}
                 className={`flex flex-col items-center gap-2 transition-all duration-300 group ${
