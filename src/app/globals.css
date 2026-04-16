@@ -189,7 +189,10 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  border-radius: 50px;
+  /* 50 px pills feel WordPress/SaaS. Luxury hotel buttons are typically
+     square or hair-rounded — 2 px reads as a cut edge, not a chip.
+     Cf. Aman, La Mamounia, Rosewood press ratecards. */
+  border-radius: 2px;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   text-decoration: none;
@@ -234,7 +237,7 @@ body {
   color: var(--color-white);
   border: 1.5px solid var(--color-gold);
   padding: 10px 24px;
-  border-radius: 50px;
+  /* inherits border-radius from .btn */
 }
 
 .btn--cta:hover {
@@ -248,7 +251,7 @@ body {
   -webkit-backdrop-filter: blur(12px) saturate(150%);
   color: var(--color-white);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 50px;
+  /* inherits border-radius from .btn */
 }
 
 .btn--glass:hover {
@@ -256,89 +259,89 @@ body {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* ===== LIQUID GLASS ===== */
-
-.glass {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 1.5rem;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+/* Minimal CTA — text + hairline underline + arrow qui glisse à droite.
+   Pattern éditorial classique (Rosewood, Belmond, Le Bristol). À adopter
+   en lieu et place des btn--outline quand on veut de la discrétion. */
+.btn--minimal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 4px 0;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-brown-deep);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
-.glass:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+.btn--minimal::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.glass-subtle {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 1.25rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+.btn--minimal:hover {
+  color: var(--color-gold);
 }
 
-.glass-dark {
-  background: rgba(44, 24, 16, 0.6);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.5rem;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+.btn--minimal:hover::after {
+  transform: translateX(4px);
 }
+
+.btn--minimal--light {
+  color: var(--color-white);
+}
+
+.btn--minimal--light:hover {
+  color: var(--color-gold-light);
+}
+
+/* ===== CARDS =====
+ *
+ * L'ancienne famille `.glass*` comportait 6 variantes (`.glass`, `.glass-
+ * subtle`, `.glass-dark`, `.glass-card`, `.liquid-glass` + `.btn--glass`)
+ * qui partageaient le même effet frosted-glass iOS 16. C'est beau sur un
+ * fond photo (d'où le maintien de `.btn--glass` sur le hero), mais empilé
+ * sur des sections plates (cream / blanc / brown-deep) c'est du bruit :
+ * `backdrop-filter` sur un fond uni = coût GPU pour un rendu visuellement
+ * identique à `background: white`.
+ *
+ * PR C garde les deux *noms* de classe (`.glass-card` et `.glass-dark`)
+ * pour ne pas casser les 12 call-sites, mais leur implémentation devient
+ * une carte éditoriale plate, dans la lignée de Aman / Belmond / Rosewood
+ * (white on cream, hairline shadow, coins juste arrondis).
+ *
+ * Les variantes orphelines (`.glass`, `.glass-subtle`, `.liquid-glass`)
+ * sont supprimées — elles n'étaient appelées nulle part.
+ */
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 1.25rem;
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-/* Legacy support */
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 1.25rem;
-  box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.liquid-glass:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.glass-dark {
+  background: var(--color-brown-deep);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  color: var(--color-white);
 }
 
 /* ===== ROOM CARD ===== */
