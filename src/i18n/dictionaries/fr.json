@@ -46,6 +46,20 @@
     "stat3Value": "28 ans",
     "cta": "Voir les hébergements"
   },
+  "ourHouse": {
+    "label": "Notre maison",
+    "title": "Une histoire de famille, devenue lieu d'accueil",
+    "paragraph": "En 1998, Kim et Olga Leong achètent un terrain au bord du lac Sahambavy pour y bâtir une simple cabane de retraite. Olga en fait, peu à peu, un jardin d'Éden. Les voyageurs du train, intrigués, s'arrêtent en croyant trouver un gîte d'étape — ainsi naît l'idée d'un hôtel. Vingt-huit ans plus tard, leur fille Maggie est revenue du Canada avec Sergi, son mari ; ensemble, ils ont fait du domaine ce qu'il est aujourd'hui : une cinquantaine de bungalows blottis au cœur d'une nature préservée, et une équipe de plus de cinquante villageois pour qui chaque hôte est un voisin.",
+    "quote": "« Et la petite histoire n'est pas terminée. »",
+    "signature": "— La famille Leong",
+    "captions": {
+      "garden": "Le jardin",
+      "welcome": "L'accueil",
+      "craft": "Les artisans",
+      "rooms": "Les bungalows"
+    },
+    "ctaLabel": "Rencontrer l'équipe"
+  },
   "rooms": {
     "label": "Hébergements · Tarifs 2026",
     "title": "Nos chambres & bungalows",
