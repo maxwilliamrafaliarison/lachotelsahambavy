@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type Locale, getBasePath } from "@/lib/utils";
@@ -8,17 +8,49 @@ import { navigation, siteConfig } from "@/data/site";
 
 const basePath = getBasePath();
 
+/**
+ * Plages de scroll :
+ *  - 0 → SCROLL_START : navbar 100 % transparente, logo blanc, texte clair.
+ *  - SCROLL_START → SCROLL_END : opacité/flou augmentent progressivement.
+ *  - > SCROLL_END : état "scrolled" complet (glass blanc, logo brun).
+ *
+ * Le seuil visuel (couleur de texte / logo) bascule à SCROLL_THRESHOLD,
+ * légèrement plus tôt pour éviter d'avoir du texte blanc illisible sur fond
+ * devenu trop laiteux.
+ */
+const SCROLL_START = 20;
+const SCROLL_END = 180;
+const SCROLL_THRESHOLD = 110;
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
-  const [scrolled, setScrolled] = useState(false);
+  const [ratio, setRatio] = useState(0);
+  const [topbarHidden, setTopbarHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const rafRef = useRef<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const r = Math.max(0, Math.min((y - SCROLL_START) / (SCROLL_END - SCROLL_START), 1));
+        setRatio(r);
+        setTopbarHidden(y > 60);
+        rafRef.current = null;
+      });
+    };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
+
+  const scrolled = ratio >= 1;
+  const darkText = ratio > SCROLL_THRESHOLD / SCROLL_END;
 
   const localeLinks = [
     { code: "fr" as const, flag: "🇫🇷" },
@@ -31,8 +63,24 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
     router.push(href);
   }
 
+  // Progressive glass — eases cubically for a more natural feel
+  const eased = ratio * ratio * (3 - 2 * ratio);
+  const navStyle = {
+    top: topbarHidden ? 0 : 36,
+    background: `rgba(255, 255, 255, ${0.6 * eased})`,
+    backdropFilter: eased > 0.02 ? `blur(${24 * eased}px) saturate(${100 + 80 * eased}%)` : "none",
+    WebkitBackdropFilter: eased > 0.02 ? `blur(${24 * eased}px) saturate(${100 + 80 * eased}%)` : "none",
+    borderBottom: `1px solid rgba(255, 255, 255, ${0.3 * eased})`,
+    boxShadow:
+      eased > 0.05
+        ? `0 4px 30px rgba(0, 0, 0, ${0.06 * eased}), inset 0 1px 0 rgba(255, 255, 255, ${0.5 * eased})`
+        : "none",
+    transition:
+      "top 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s linear, backdrop-filter 0.15s linear, -webkit-backdrop-filter 0.15s linear, border-color 0.15s linear, box-shadow 0.15s linear",
+  } as React.CSSProperties;
+
   return (
-    <nav className={`navbar ${scrolled ? "navbar--scrolled" : "navbar--transparent"}`}>
+    <nav className="fixed left-0 right-0 z-[1000]" style={navStyle}>
       {/* Main nav */}
       <div className="py-4 px-6">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
@@ -41,23 +89,27 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
-              className={`h-16 md:h-20 w-auto transition-all duration-500 ${scrolled ? "brightness-0 h-10 md:h-12" : ""}`}
+              className={`w-auto transition-all duration-500 ${
+                darkText ? "brightness-0 h-10 md:h-12" : "h-16 md:h-20"
+              }`}
             />
           </Link>
 
           {/* Desktop menu — minimal */}
           <div className="hidden lg:flex items-center gap-10">
-            {navigation.filter((n) => n.href !== "/" && n.href !== "/contact").map((item) => (
-              <Link
-                key={item.href}
-                href={`/${locale}${item.href}/`}
-                className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:text-gold ${
-                  scrolled ? "text-text-body" : "text-white/90"
-                }`}
-              >
-                {item.label[locale]}
-              </Link>
-            ))}
+            {navigation
+              .filter((n) => n.href !== "/" && n.href !== "/contact")
+              .map((item) => (
+                <Link
+                  key={item.href}
+                  href={`/${locale}${item.href}/`}
+                  className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${
+                    darkText ? "text-text-body" : "text-white/90"
+                  }`}
+                >
+                  {item.label[locale]}
+                </Link>
+              ))}
 
             {/* Locale switcher */}
             <div className="flex gap-1.5 ml-2">
@@ -65,7 +117,9 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 <Link
                   key={l.code}
                   href={`/${l.code}/`}
-                  className={`text-sm transition-all ${locale === l.code ? "opacity-100 scale-110" : "opacity-40 hover:opacity-70"}`}
+                  className={`text-sm transition-all ${
+                    locale === l.code ? "opacity-100 scale-110" : "opacity-40 hover:opacity-70"
+                  }`}
                 >
                   {l.flag}
                 </Link>
@@ -91,17 +145,34 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >
-            <span className={`block w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-brown-deep" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span
+              className={`block w-6 h-0.5 transition-all duration-300 ${
+                darkText ? "bg-brown-deep" : "bg-white"
+              } ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+            />
+            <span
+              className={`block w-6 h-0.5 transition-all duration-300 ${
+                darkText ? "bg-brown-deep" : "bg-white"
+              } ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block w-6 h-0.5 transition-all duration-300 ${
+                darkText ? "bg-brown-deep" : "bg-white"
+              } ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu — glass overlay */}
+      {/* Mobile menu — glass overlay (covers TopBar too) */}
       {menuOpen && (
-        <div className="lg:hidden fixed inset-0 top-0 z-[999] overflow-y-auto"
-          style={{ background: "rgba(248, 245, 240, 0.92)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)" }}
+        <div
+          className="lg:hidden fixed inset-0 top-0 z-[1200] overflow-y-auto"
+          style={{
+            background: "rgba(248, 245, 240, 0.92)",
+            backdropFilter: "blur(30px)",
+            WebkitBackdropFilter: "blur(30px)",
+          }}
         >
           <div className="flex justify-between items-center p-6">
             <img
@@ -109,7 +180,10 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               alt="Lac Hôtel Sahambavy"
               className="h-14 w-auto brightness-0"
             />
-            <button onClick={() => setMenuOpen(false)} className="p-2 text-2xl text-brown-deep">
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="p-2 text-2xl text-brown-deep"
+            >
               ✕
             </button>
           </div>
@@ -117,7 +191,9 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             {navigation.map((item) => (
               <button
                 key={item.href}
-                onClick={() => handleNav(`/${locale}${item.href === "/" ? "" : item.href}/`)}
+                onClick={() =>
+                  handleNav(`/${locale}${item.href === "/" ? "" : item.href}/`)
+                }
                 className="text-2xl font-[family-name:var(--font-heading)] font-medium text-brown-deep hover:text-gold transition-colors py-4 text-left"
               >
                 {item.label[locale]}
@@ -144,8 +220,18 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
 
             {/* Contact info in mobile menu */}
             <div className="mt-8 pt-6 border-t border-brown-deep/10 space-y-2 text-sm text-text-muted">
-              <a href={`mailto:${siteConfig.email}`} className="block hover:text-gold">{siteConfig.email}</a>
-              <a href={`tel:${siteConfig.whatsapp}`} className="block hover:text-gold">{siteConfig.phone}</a>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="block hover:text-gold"
+              >
+                {siteConfig.email}
+              </a>
+              <a
+                href={`tel:${siteConfig.whatsapp}`}
+                className="block hover:text-gold"
+              >
+                {siteConfig.phone}
+              </a>
             </div>
           </div>
         </div>
