@@ -11,7 +11,7 @@ export interface Activity {
 export const activities: Activity[] = [
   {
     id: "tour-du-lac",
-    icon: "🚶",
+    icon: "walk",
     name: { fr: "Tour du Lac", en: "Lake Walk", es: "Paseo del Lago" },
     category: "nature",
     description: {
@@ -24,7 +24,7 @@ export const activities: Activity[] = [
   },
   {
     id: "plantation-the",
-    icon: "🍃",
+    icon: "leaf",
     name: { fr: "Plantation de Thé", en: "Tea Plantation", es: "Plantación de Té" },
     category: "decouverte",
     description: {
@@ -37,7 +37,7 @@ export const activities: Activity[] = [
   },
   {
     id: "pedalos",
-    icon: "🚣",
+    icon: "boat",
     name: { fr: "Pédalos & Canoë", en: "Pedalos & Canoe", es: "Pedalos y Canoa" },
     category: "sport",
     description: {
@@ -50,7 +50,7 @@ export const activities: Activity[] = [
   },
   {
     id: "massage",
-    icon: "💆",
+    icon: "wellness",
     name: { fr: "Massage", en: "Massage", es: "Masaje" },
     category: "bienetre",
     description: {
@@ -63,7 +63,7 @@ export const activities: Activity[] = [
   },
   {
     id: "tennis",
-    icon: "🎾",
+    icon: "tennis",
     name: { fr: "Tennis & Sports", en: "Tennis & Sports", es: "Tenis y Deportes" },
     category: "sport",
     description: {
@@ -76,7 +76,7 @@ export const activities: Activity[] = [
   },
   {
     id: "train-fce",
-    icon: "🚂",
+    icon: "train",
     name: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" },
     category: "decouverte",
     description: {
@@ -89,7 +89,7 @@ export const activities: Activity[] = [
   },
   {
     id: "trekking",
-    icon: "🦎",
+    icon: "binoculars",
     name: { fr: "Trekking", en: "Trekking", es: "Trekking" },
     category: "nature",
     description: {
@@ -102,7 +102,7 @@ export const activities: Activity[] = [
   },
   {
     id: "boutique",
-    icon: "🛍",
+    icon: "shop",
     name: { fr: "Boutique Mami", en: "Mami Shop", es: "Tienda Mami" },
     category: "bienetre",
     description: {

@@ -9,6 +9,7 @@ import TheicoleBookingForm from "./TheicoleBookingForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -40,11 +41,11 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
   });
 
   const excursionInfoItems = [
-    { icon: "⏱", label: locale === "fr" ? "Durée" : locale === "en" ? "Duration" : "Duración", value: dict.plantation.excursionInfo.duration },
-    { icon: "📋", label: locale === "fr" ? "Réservation" : locale === "en" ? "Booking" : "Reserva", value: dict.plantation.excursionInfo.travel },
-    { icon: "📐", label: locale === "fr" ? "Dénivelé" : locale === "en" ? "Elevation" : "Desnivel", value: dict.plantation.excursionInfo.elevation },
-    { icon: "🟢", label: locale === "fr" ? "Difficulté" : locale === "en" ? "Difficulty" : "Dificultad", value: dict.plantation.excursionInfo.difficulty },
-    { icon: "🥾", label: locale === "fr" ? "Marche" : locale === "en" ? "Walking" : "Caminata", value: dict.plantation.excursionInfo.walking },
+    { icon: "clock", label: locale === "fr" ? "Durée" : locale === "en" ? "Duration" : "Duración", value: dict.plantation.excursionInfo.duration },
+    { icon: "clipboard", label: locale === "fr" ? "Réservation" : locale === "en" ? "Booking" : "Reserva", value: dict.plantation.excursionInfo.travel },
+    { icon: "mountain", label: locale === "fr" ? "Dénivelé" : locale === "en" ? "Elevation" : "Desnivel", value: dict.plantation.excursionInfo.elevation },
+    { icon: "difficulty", label: locale === "fr" ? "Difficulté" : locale === "en" ? "Difficulty" : "Dificultad", value: dict.plantation.excursionInfo.difficulty },
+    { icon: "hike", label: locale === "fr" ? "Marche" : locale === "en" ? "Walking" : "Caminata", value: dict.plantation.excursionInfo.walking },
   ];
 
   return (
@@ -111,7 +112,12 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
                 {excursionInfoItems.map((info) => (
                   <div key={info.label} className="text-center">
-                    <span className="text-2xl mb-2 block">{info.icon}</span>
+                    <Icon
+                      name={info.icon}
+                      size={26}
+                      weight="regular"
+                      className="text-gold mx-auto mb-2"
+                    />
                     <span className="block text-sm text-text-muted">{info.label}</span>
                     <span className="block font-semibold text-brown-deep">{info.value}</span>
                   </div>
@@ -147,7 +153,12 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
             {(dict.plantation.shopItems as { name: string; desc: string }[]).map((item: any, i: number) => (
               <ScrollReveal key={item.name} delay={i * 100}>
                 <div className="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-3xl mb-3 block">🍃</span>
+                  <Icon
+                    name="leaf"
+                    size={30}
+                    weight="regular"
+                    className="text-gold mx-auto mb-3"
+                  />
                   <h3 className="text-lg mb-2">{item.name}</h3>
                   <p className="text-sm text-text-muted">{item.desc}</p>
                 </div>

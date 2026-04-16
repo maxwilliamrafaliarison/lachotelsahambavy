@@ -5,6 +5,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/data/site";
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -27,9 +28,9 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
   const dict = await getDictionary(locale as Locale);
 
   const circuits = [
-    { data: dict.loisirs.discovery, icon: "🌿", color: "bg-green-700/10 text-green-700" },
-    { data: dict.loisirs.cultural, icon: "🎭", color: "bg-amber-600/10 text-amber-700" },
-    { data: dict.loisirs.leisure, icon: "🛶", color: "bg-blue-600/10 text-blue-700" },
+    { data: dict.loisirs.discovery, icon: "nature", color: "bg-green-700/10 text-green-700" },
+    { data: dict.loisirs.cultural, icon: "culture", color: "bg-amber-600/10 text-amber-700" },
+    { data: dict.loisirs.leisure, icon: "boat", color: "bg-blue-600/10 text-blue-700" },
   ];
 
   return (
@@ -60,7 +61,12 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
             {circuits.map((circuit, ci) => (
               <ScrollReveal key={ci} delay={ci * 150}>
                 <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow h-full">
-                  <span className="text-4xl mb-4 block">{circuit.icon}</span>
+                  <Icon
+                    name={circuit.icon}
+                    size={36}
+                    weight="regular"
+                    className="text-gold mb-4"
+                  />
                   <h3 className="text-xl mb-4">{(circuit.data as any).title}</h3>
                   <ul className="space-y-3 mb-6">
                     {((circuit.data as any).items as string[]).map((item: string, i: number) => (
@@ -74,8 +80,14 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
                       </li>
                     ))}
                   </ul>
-                  <p className="text-sm font-semibold text-brown-deep italic">
-                    👉 {(circuit.data as any).ideal}
+                  <p className="text-sm font-semibold text-brown-deep italic flex items-start gap-2">
+                    <Icon
+                      name="arrow"
+                      size={16}
+                      weight="regular"
+                      className="text-gold mt-0.5 shrink-0"
+                    />
+                    <span>{(circuit.data as any).ideal}</span>
                   </p>
                 </div>
               </ScrollReveal>
@@ -205,7 +217,15 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
               <p className="text-red-600/80">✗ {dict.loisirs.trekkingExcludes}</p>
             </div>
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-              <p className="text-amber-800 text-sm">🎒 {dict.loisirs.trekkingAdvice}</p>
+              <p className="text-amber-800 text-sm flex items-start gap-2.5">
+                <Icon
+                  name="backpack"
+                  size={18}
+                  weight="regular"
+                  className="text-amber-800 mt-0.5 shrink-0"
+                />
+                <span>{dict.loisirs.trekkingAdvice}</span>
+              </p>
             </div>
           </ScrollReveal>
         </div>

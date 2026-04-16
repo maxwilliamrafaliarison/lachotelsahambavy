@@ -8,6 +8,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -197,13 +198,18 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
           />
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {[
-              { data: dict.loisirs.discovery, icon: "🌿" },
-              { data: dict.loisirs.cultural, icon: "🎭" },
-              { data: dict.loisirs.leisure, icon: "🛶" },
+              { data: dict.loisirs.discovery, icon: "nature" },
+              { data: dict.loisirs.cultural, icon: "culture" },
+              { data: dict.loisirs.leisure, icon: "boat" },
             ].map((circuit, ci) => (
               <ScrollReveal key={ci} delay={ci * 150}>
                 <div className="glass-card p-8 h-full">
-                  <span className="text-3xl mb-4 block">{circuit.icon}</span>
+                  <Icon
+                    name={circuit.icon}
+                    size={30}
+                    weight="regular"
+                    className="text-gold mb-4"
+                  />
                   <h3 className="text-lg mb-4">{(circuit.data as any).title}</h3>
                   <ul className="space-y-2 mb-4">
                     {((circuit.data as any).items as string[]).map((item: string, i: number) => (
@@ -242,7 +248,12 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
             {(dict.plantation.shopItems as { name: string; desc: string }[]).map((item: any, i: number) => (
               <ScrollReveal key={item.name} delay={i * 80}>
                 <div className="glass-card p-5 text-center h-full">
-                  <span className="text-2xl mb-3 block">🍃</span>
+                  <Icon
+                    name="leaf"
+                    size={24}
+                    weight="regular"
+                    className="text-gold mx-auto mb-3"
+                  />
                   <h4 className="text-sm font-semibold mb-1">{item.name}</h4>
                   <p className="text-xs text-text-muted">{item.desc}</p>
                 </div>
