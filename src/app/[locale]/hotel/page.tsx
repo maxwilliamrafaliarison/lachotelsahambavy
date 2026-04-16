@@ -54,16 +54,74 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
 
       {/* History */}
       <section className="py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
+        <div className="max-w-[1100px] mx-auto px-4">
           <SectionHeader label={dict.hotel.historyLabel} title={dict.hotel.historyTitle} />
-          <ScrollReveal>
-            <div className="space-y-6 text-text-muted leading-relaxed">
-              <p>{dict.hotel.historyP1}</p>
-              <p>{dict.hotel.historyP2}</p>
-              {dict.hotel.historyP3 && <p>{dict.hotel.historyP3}</p>}
-              {dict.hotel.historyP4 && <p className="font-medium text-brown-deep italic">{dict.hotel.historyP4}</p>}
-            </div>
-          </ScrollReveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 lg:gap-14 items-start">
+            {/* Texte — colonne principale */}
+            <ScrollReveal>
+              <div className="space-y-6 text-text-muted leading-relaxed">
+                <p>{dict.hotel.historyP1}</p>
+                <p>{dict.hotel.historyP2}</p>
+                {dict.hotel.historyP3 && <p>{dict.hotel.historyP3}</p>}
+                {dict.hotel.historyP4 && (
+                  <p className="font-medium text-brown-deep italic">{dict.hotel.historyP4}</p>
+                )}
+              </div>
+            </ScrollReveal>
+
+            {/* Diptyque — portraits Maggie & Sergi, discrets et élégants */}
+            <ScrollReveal delay={150}>
+              <figure className="space-y-5">
+                {[
+                  {
+                    src: `${basePath}/images/founders/maggie-leong.jpg`,
+                    name: "Maggie Leong",
+                    alt:
+                      loc === "fr"
+                        ? "Maggie Leong, co-dirigeante du Lac Hôtel"
+                        : loc === "es"
+                        ? "Maggie Leong, codirectora del Lac Hôtel"
+                        : "Maggie Leong, co-manager of Lac Hôtel",
+                  },
+                  {
+                    src: `${basePath}/images/founders/sergi-formentin.jpg`,
+                    name: "Sergi Formentin",
+                    alt:
+                      loc === "fr"
+                        ? "Sergi Formentin, co-dirigeant du Lac Hôtel"
+                        : loc === "es"
+                        ? "Sergi Formentin, codirector del Lac Hôtel"
+                        : "Sergi Formentin, co-manager of Lac Hôtel",
+                  },
+                ].map((p) => (
+                  <div key={p.name} className="group">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl shadow-sm ring-1 ring-brown-deep/5">
+                      <img
+                        src={p.src}
+                        alt={p.alt}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                      {/* Fine bordure dorée intérieure pour un touch "luxe" discret */}
+                      <div
+                        className="absolute inset-2 rounded-lg pointer-events-none"
+                        style={{ border: "1px solid rgba(196, 150, 42, 0.18)" }}
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-center">
+                      <span className="block text-[0.65rem] tracking-[0.25em] uppercase text-gold mb-1">
+                        &mdash;
+                      </span>
+                      <span className="text-sm font-[family-name:var(--font-sub)] italic text-brown-deep">
+                        {p.name}
+                      </span>
+                    </figcaption>
+                  </div>
+                ))}
+              </figure>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
