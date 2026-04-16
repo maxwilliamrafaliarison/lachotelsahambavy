@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { locales, type Locale } from "@/lib/utils";
 import { getDictionary } from "@/i18n/getDictionary";
+import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
@@ -38,6 +39,7 @@ export default async function LocaleLayout({
           lodgingBusinessSchema(typedLocale),
         ]}
       />
+      <TopBar />
       <Navbar locale={typedLocale} dict={dict} />
       <main className="flex-1">{children}</main>
       <Footer locale={typedLocale} dict={dict} />
