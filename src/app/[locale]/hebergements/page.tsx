@@ -68,8 +68,9 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             subtitle={dict.rooms.subtitle}
           />
 
+          {/* Desktop (≥ md) — classic table */}
           <ScrollReveal>
-            <div className="overflow-x-auto rounded-xl border border-brown-deep/10 shadow-sm">
+            <div className="hidden md:block overflow-x-auto rounded-xl border border-brown-deep/10 shadow-sm">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-brown-deep text-white">
@@ -113,6 +114,44 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
               </table>
             </div>
           </ScrollReveal>
+
+          {/* Mobile (< md) — stacked cards, no horizontal scroll */}
+          <div className="md:hidden space-y-3">
+            {rooms.map((room, i) => (
+              <ScrollReveal key={room.id} delay={i * 40}>
+                <div className="rounded-xl border border-brown-deep/10 bg-white shadow-sm overflow-hidden">
+                  <div className="bg-brown-deep text-white px-4 py-3">
+                    <div className="font-semibold text-sm leading-tight">{room.name[loc]}</div>
+                    <div className="text-white/65 text-[0.7rem] mt-0.5">
+                      {room.units} {dict.rooms.units}
+                      {room.surface ? ` · ${room.surface}` : ""}
+                      {" · "}{room.capacity} pers.
+                    </div>
+                  </div>
+                  <dl className="divide-y divide-brown-deep/5 text-sm">
+                    <div className="flex justify-between items-baseline px-4 py-2.5">
+                      <dt className="text-text-muted">{dict.rooms.rateTO}</dt>
+                      <dd className="font-semibold text-gold tabular-nums">
+                        {room.priceTOEUR ? `${room.priceTOEUR}\u20AC` : "—"}
+                      </dd>
+                    </div>
+                    <div className="flex justify-between items-baseline px-4 py-2.5">
+                      <dt className="text-text-muted">{dict.rooms.ratePublic}</dt>
+                      <dd className="font-semibold text-text-dark tabular-nums">
+                        {room.priceEUR ? `${room.priceEUR}\u20AC` : "—"}
+                      </dd>
+                    </div>
+                    <div className="flex justify-between items-baseline px-4 py-2.5">
+                      <dt className="text-text-muted">Ariary</dt>
+                      <dd className="text-text-muted tabular-nums">
+                        {room.priceAR.toLocaleString("fr-FR")} AR
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
 
           <ScrollReveal delay={100}>
             <div className="text-center text-xs text-text-muted mt-4 space-y-1">
