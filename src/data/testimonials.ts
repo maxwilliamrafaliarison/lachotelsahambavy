@@ -16,7 +16,7 @@ export interface Review {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Booking.com — 9.0/10 (Fabuleux) · 33 avis
+// Booking.com — 9.0/10 (Fabuleux) · 34 avis
 // ─────────────────────────────────────────────────────────────
 export const bookingReviews: Review[] = [
   {
@@ -218,7 +218,7 @@ export const googleReviews: Review[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-// TripAdvisor — 4.5/5 · 137 avis
+// TripAdvisor — 4.5/5 · 229 avis
 // ─────────────────────────────────────────────────────────────
 export const tripadvisorReviews: Review[] = [
   {
