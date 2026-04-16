@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { type Locale, getBasePath } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 
@@ -29,6 +29,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   const [menuOpen, setMenuOpen] = useState(false);
   const rafRef = useRef<number | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
+
+  // Homepage = `/fr`, `/fr/`, `/en`, `/en/`, `/es`, `/es/` (trailing slash
+  // config produces the `/` variant, but guard both to be safe).
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
 
   useEffect(() => {
     const onScroll = () => {
@@ -51,6 +56,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
 
   const scrolled = ratio >= 1;
   const darkText = ratio > SCROLL_THRESHOLD / SCROLL_END;
+
+  // Homepage only — show the FULL lockup with "The natural choice" tagline
+  // at generous size when the user is at the very top of the hero. As soon
+  // as they start scrolling, morph back to the compact mark.
+  const heroBrandMode = isHome && ratio < 0.08;
 
   // Typographic locale switcher — emoji flags read as DIY, a two-letter
   // code in uppercase tracking sits better next to nav-links of the same
@@ -87,14 +97,26 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       {/* Main nav */}
       <div className="py-4 px-6">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Logo — mark-only variant (no tagline) so it stays legible
-              at navbar heights. White on hero, brown once scrolled. */}
+          {/* Logo — on homepage hero-top, show the FULL lockup (tagline
+              "The natural choice" visible) at generous size. On scroll /
+              on any other page, drop back to the compact mark that stays
+              legible at navbar heights. White on hero, brown once scrolled. */}
           <Link href={`/${locale}/`} className="flex items-center gap-2">
             <img
-              src={`${basePath}/images/logo/${darkText ? "logo-mark-dark" : "logo-mark-white"}.png`}
-              alt="Lac Hôtel Sahambavy"
+              src={`${basePath}/images/logo/${
+                heroBrandMode
+                  ? "logo-white"
+                  : darkText
+                  ? "logo-mark-dark"
+                  : "logo-mark-white"
+              }.png`}
+              alt="Lac Hôtel Sahambavy — The natural choice"
               className={`w-auto transition-all duration-500 ${
-                darkText ? "h-11 md:h-14" : "h-16 md:h-20"
+                heroBrandMode
+                  ? "h-40 md:h-56 lg:h-64"
+                  : darkText
+                  ? "h-11 md:h-14"
+                  : "h-16 md:h-20"
               }`}
             />
           </Link>
