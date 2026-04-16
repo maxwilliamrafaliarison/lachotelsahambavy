@@ -39,7 +39,6 @@ export function JsonLd({ schemas }: JsonLdProps) {
     <>
       {list.map((schema, idx) => (
         <script
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(stripUndefined(schema)).replace(/</g, "\\u003c"),
           }}

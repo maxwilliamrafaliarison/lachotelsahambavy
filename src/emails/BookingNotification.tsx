@@ -131,7 +131,7 @@ export function BookingNotification({ booking, receivedAt }: BookingNotification
             <Text style={footerStyle}>
               Cet email est généré automatiquement par le formulaire de réservation lachotel.com.
               <br />
-              Les données sont stockées dans le Google Sheet CRM (si configuré) — l'IP du voyageur est
+              Les données sont stockées dans le Google Sheet CRM (si configuré) — l&apos;IP du voyageur est
               hashée SHA-256 salée pour conformité RGPD.
             </Text>
           </Section>
