@@ -20,18 +20,23 @@ import type { Locale } from "@/lib/utils";
 /**
  * Section Témoignages — version éditoriale 3 colonnes.
  *
- * Trois sources côte à côte (Booking / Google / TripAdvisor), chacune
- * un carrousel de paires d'avis (2 visibles à la fois). Auto-rotation
- * toutes les 6.5s, mise en pause pendant 15s après toute interaction
- * manuelle. Glissement horizontal via Pointer Events (touch + souris).
+ * Chaque colonne (Booking / Google / TripAdvisor) affiche EN PERMANENCE
+ * deux cartes (jamais de tuile vide : les avis défilent en boucle par
+ * arithmétique modulaire sur l'index). Auto-rotation toutes les 6.5 s,
+ * mise en pause 15 s après toute interaction manuelle. Glissement
+ * horizontal carte-par-carte (drag → ±1 avis, pas ±2) via Pointer
+ * Events — touch + souris unifiés.
  *
- * Le header de chaque colonne — nom de source + note + étoiles + total —
- * est un lien cliquable qui ouvre la page d'avis sur la plateforme.
+ * Les cartes ont une hauteur fixe : la grille reste parfaitement
+ * régulière même si les textes varient, et on privilégie le fixed-
+ * height + line-clamp à un lien « Lire la suite » (Belmond, Aman,
+ * Rosewood procèdent ainsi — discrétion éditoriale). Un drapeau du
+ * pays accompagne la localisation pour souligner la dimension
+ * internationale des avis.
  *
- * Inspiration : Rosewood, Belmond, Six Senses — afficher de l'agrégé
- * source-par-source plutôt qu'un slider monolithique "tous les sites
- * confondus". Permet au visiteur de jauger rapidement la constance de
- * la réputation sur chaque canal.
+ * En bas de colonne : un compteur tabulaire « 03 / 15 » + deux flèches
+ * de navigation discrètes remplacent les dots (15 pastilles seraient
+ * illisibles). Header de colonne = lien vers la plateforme d'origine.
  */
 
 const ROTATE_MS = 6500;
@@ -92,6 +97,46 @@ const VIEW_ON: Record<Locale, string> = {
   es: "Ver en",
 };
 
+const NAV_PREV: Record<Locale, string> = {
+  fr: "Avis précédent",
+  en: "Previous review",
+  es: "Reseña anterior",
+};
+
+const NAV_NEXT: Record<Locale, string> = {
+  fr: "Avis suivant",
+  en: "Next review",
+  es: "Reseña siguiente",
+};
+
+// Drapeaux Unicode (paires région-indicateur) — clé = nom de pays
+// en français tel que stocké dans testimonials.ts. Discret, lisible,
+// zéro dépendance externe. Fallback = rien si pays inconnu.
+const COUNTRY_FLAGS: Record<string, string> = {
+  "Allemagne": "🇩🇪",
+  "Australie": "🇦🇺",
+  "Autriche": "🇦🇹",
+  "Belgique": "🇧🇪",
+  "Brésil": "🇧🇷",
+  "Canada": "🇨🇦",
+  "Espagne": "🇪🇸",
+  "États-Unis": "🇺🇸",
+  "Finlande": "🇫🇮",
+  "France": "🇫🇷",
+  "Irlande": "🇮🇪",
+  "Italie": "🇮🇹",
+  "Japon": "🇯🇵",
+  "La Réunion": "🇷🇪",
+  "Luxembourg": "🇱🇺",
+  "Madagascar": "🇲🇬",
+  "Norvège": "🇳🇴",
+  "Pays-Bas": "🇳🇱",
+  "Portugal": "🇵🇹",
+  "Royaume-Uni": "🇬🇧",
+  "Suède": "🇸🇪",
+  "Suisse": "🇨🇭",
+};
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Testimonials({
   dict,
@@ -126,7 +171,7 @@ export default function Testimonials({
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-//  One source column = clickable header + paired carousel + dots
+//  One source column = clickable header + looped 2-card carousel + counter
 // ─────────────────────────────────────────────────────────────────────────
 
 function SourceColumn({
@@ -136,23 +181,23 @@ function SourceColumn({
   source: SourceDef;
   locale: Locale;
 }) {
-  const pairsCount = Math.max(1, Math.ceil(source.reviews.length / 2));
-  const [page, setPage] = useState(0);
+  const N = source.reviews.length;
+  const [index, setIndex] = useState(0);
   const [isPaused, setPaused] = useState(false);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setDragging] = useState(false);
   const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pointerDownX = useRef<number | null>(null);
 
-  // Auto-rotate. Pauses while user is actively dragging or within the
-  // recent-interaction window.
+  // Auto-rotate par pas de 1 (carte-par-carte). Pause pendant le drag et
+  // dans la fenêtre de 15 s après toute interaction manuelle.
   useEffect(() => {
     if (isPaused || isDragging) return;
     const id = setInterval(() => {
-      setPage((p) => (p + 1) % pairsCount);
+      setIndex((i) => (i + 1) % N);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [isPaused, isDragging, pairsCount]);
+  }, [isPaused, isDragging, N]);
 
   // Cleanup on unmount.
   useEffect(
@@ -170,12 +215,12 @@ function SourceColumn({
     }, PAUSE_AFTER_INTERACTION_MS);
   }, []);
 
-  const goTo = useCallback(
-    (p: number) => {
-      setPage(((p % pairsCount) + pairsCount) % pairsCount);
+  const advance = useCallback(
+    (delta: number) => {
+      setIndex((i) => (((i + delta) % N) + N) % N);
       pauseThenResume();
     },
-    [pairsCount, pauseThenResume]
+    [N, pauseThenResume]
   );
 
   // ── Drag handlers (Pointer Events — touch + mouse unified) ───────────
@@ -205,19 +250,26 @@ function SourceColumn({
       setDragging(false);
       setDragX(0);
       if (Math.abs(dx) > DRAG_THRESHOLD_PX) {
-        goTo(page + (dx < 0 ? 1 : -1));
+        advance(dx < 0 ? 1 : -1);
       }
     },
-    [goTo, page]
+    [advance]
   );
 
-  // Current pair of reviews.
-  const pair: Review[] = source.reviews.slice(page * 2, page * 2 + 2);
+  // Toujours DEUX cartes — modulo N garantit qu'il n'y a jamais de tuile
+  // vide, même si on « dépasse » la fin de la liste.
+  const topIdx = ((index % N) + N) % N;
+  const bottomIdx = (topIdx + 1) % N;
+  const topReview = source.reviews[topIdx];
+  const bottomReview = source.reviews[bottomIdx];
 
-  // Normalise every score to a 5-star display (Booking is on /10).
+  // Normalise chaque score vers une étoile /5 (Booking /10 → /5).
   const starRating = source.scale === 10 ? source.score / 2 : source.score;
   const scoreDisplay = source.score.toFixed(1);
   const scoreSuffix = source.scale === 10 ? "/10" : "/5";
+
+  // Compteur tabulaire « 03 / 15 » — plus lisible que 15 dots.
+  const counter = `${String(topIdx + 1).padStart(2, "0")} / ${String(N).padStart(2, "0")}`;
 
   return (
     <div className="flex flex-col h-full">
@@ -257,7 +309,7 @@ function SourceColumn({
         </span>
       </a>
 
-      {/* Pair — drag-able, auto-rotating */}
+      {/* Two cards — drag-able, auto-rotating, always populated */}
       <div
         className="flex-1 touch-pan-y cursor-grab active:cursor-grabbing select-none"
         onPointerDown={handlePointerDown}
@@ -273,42 +325,73 @@ function SourceColumn({
         }}
       >
         <div
-          key={`${source.id}-${page}`}
-          className="space-y-4 animate-testimonialPair"
+          key={`${source.id}-${topIdx}`}
+          className="space-y-4"
         >
-          {pair.map((review, i) => (
-            <ReviewCard
-              key={`${source.id}-${page}-${i}`}
-              review={review}
-              locale={locale}
-            />
-          ))}
+          <div className="animate-testimonialCard">
+            <ReviewCard review={topReview} locale={locale} />
+          </div>
+          <div
+            className="animate-testimonialCard"
+            style={{ animationDelay: "80ms" }}
+          >
+            <ReviewCard review={bottomReview} locale={locale} />
+          </div>
         </div>
       </div>
 
-      {/* Pagination dots */}
-      <div className="flex items-center justify-center gap-1.5 mt-7">
-        {Array.from({ length: pairsCount }).map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => goTo(i)}
-            className={`h-[2px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 ${
-              i === page
-                ? "w-7 bg-gold"
-                : "w-3.5 bg-brown-deep/15 hover:bg-brown-deep/30"
-            }`}
-            aria-label={`${i + 1} / ${pairsCount}`}
-            aria-current={i === page ? "true" : undefined}
-          />
-        ))}
+      {/* Counter + prev/next — sobriety over dots (15 pastilles seraient illisibles) */}
+      <div className="flex items-center justify-center gap-4 mt-7">
+        <button
+          type="button"
+          onClick={() => advance(-1)}
+          aria-label={NAV_PREV[locale]}
+          className="text-brown-deep/40 hover:text-gold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded-full p-1"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <span className="text-[0.65rem] tabular-nums uppercase tracking-[0.25em] text-text-muted min-w-[5ch] text-center">
+          {counter}
+        </span>
+        <button
+          type="button"
+          onClick={() => advance(1)}
+          aria-label={NAV_NEXT[locale]}
+          className="text-brown-deep/40 hover:text-gold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded-full p-1"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-//  Review card — cream-tinted editorial block
+//  Review card — fixed-height editorial block with country flag
 // ─────────────────────────────────────────────────────────────────────────
 
 function ReviewCard({
@@ -318,8 +401,9 @@ function ReviewCard({
   review: Review;
   locale: Locale;
 }) {
+  const flag = COUNTRY_FLAGS[review.location];
   return (
-    <article className="bg-cream/40 border border-border/70 rounded-md p-6 md:p-7 min-h-[220px]">
+    <article className="bg-cream/40 border border-border/70 rounded-md p-6 md:p-7 h-[260px] flex flex-col">
       {/* Per-review star rating */}
       <div className="flex gap-0.5 mb-4" aria-label={`${review.rating} / 5`}>
         {Array.from({ length: 5 }).map((_, j) => {
@@ -336,17 +420,25 @@ function ReviewCard({
         })}
       </div>
 
-      <blockquote className="font-[family-name:var(--font-sub)] text-[0.95rem] md:text-base text-text-body leading-[1.75] italic mb-5 line-clamp-[9]">
+      <blockquote className="font-[family-name:var(--font-sub)] text-[0.95rem] md:text-base text-text-body leading-[1.7] italic mb-5 line-clamp-5 flex-1">
         &ldquo;{review.text[locale]}&rdquo;
       </blockquote>
 
-      <div className="flex items-center gap-2.5 pt-1">
-        <span className="block w-5 h-px bg-gold/70" />
-        <span className="text-xs font-semibold text-brown-deep">
+      <div className="flex items-center gap-2.5 pt-1 mt-auto">
+        <span className="block w-5 h-px bg-gold/70 shrink-0" />
+        <span className="text-xs font-semibold text-brown-deep shrink-0">
           {review.name}
         </span>
-        <span className="text-[0.7rem] text-text-muted uppercase tracking-wider">
-          {review.location}
+        <span className="text-[0.7rem] text-text-muted uppercase tracking-wider inline-flex items-center gap-1.5 min-w-0 truncate">
+          <span className="truncate">{review.location}</span>
+          {flag && (
+            <span
+              aria-hidden="true"
+              className="text-sm leading-none shrink-0"
+            >
+              {flag}
+            </span>
+          )}
         </span>
       </div>
     </article>
