@@ -51,9 +51,9 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
             {/* Stats — elegant minimal */}
             <ScrollReveal delay={300}>
               <div className="grid grid-cols-3 gap-6">
-                <StatCounter value={50} suffix="+" label={dict.welcome.stat1} />
-                <StatCounter value={520} suffix=" ha" label={dict.welcome.stat2} />
-                <StatCounter value={28} suffix=" ans" label={dict.welcome.stat3} />
+                <StatCounter value={50} unit="+" label={dict.welcome.stat1} />
+                <StatCounter value={520} unit="ha" label={dict.welcome.stat2} />
+                <StatCounter value={28} unit="ans" label={dict.welcome.stat3} />
               </div>
             </ScrollReveal>
 
@@ -103,8 +103,13 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
   );
 }
 
-function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+// -----------------------------------------------------------------------------
+// Compte à rebours éditorial — chiffre Playfair `font-medium` + unité petite
+// capitale en Inter (cf. Aman, Belmond). Garde les tabular-nums pour que
+// l'animation 0 → 520 ne fasse pas sauter la largeur.
+// -----------------------------------------------------------------------------
+function StatCounter({ value, unit, label }: { value: number; unit: string; label: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
   const counted = useRef(false);
 
   useEffect(() => {
@@ -121,7 +126,7 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
           const animate = (now: number) => {
             const progress = Math.min((now - startTime) / duration, 1);
             const current = Math.floor(progress * value);
-            el.textContent = `${current}${suffix}`;
+            el.textContent = `${current}`;
             if (progress < 1) requestAnimationFrame(animate);
           };
           requestAnimationFrame(animate);
@@ -132,15 +137,20 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, suffix]);
+  }, [value]);
 
   return (
     <div className="text-center py-4">
-      <div
-        ref={ref}
-        className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl text-brown-deep font-bold leading-none"
-      >
-        0{suffix}
+      <div className="flex items-baseline justify-center gap-1 leading-none">
+        <span
+          ref={ref}
+          className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl text-brown-deep font-medium tabular-nums [font-variant-numeric:lining-nums_tabular-nums]"
+        >
+          0
+        </span>
+        <span className="text-base md:text-lg text-text-muted font-medium uppercase tracking-[0.1em]">
+          {unit}
+        </span>
       </div>
       <div className="text-[0.6rem] text-text-muted mt-3 uppercase tracking-[0.2em]">{label}</div>
     </div>
