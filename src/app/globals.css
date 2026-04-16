@@ -42,17 +42,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  color: var(--color-text-dark);
-  line-height: 1.2;
-  font-weight: 700;
-}
+/**
+ * Typographic defaults.
+ *
+ * NOTE: These rules live in `@layer base` — this guarantees that Tailwind
+ * utility classes (text-white, text-cream, text-gold, …) *beat* the default
+ * `color: var(--color-text-dark)` when an author drops a heading onto a dark
+ * section (e.g. `<h2 className="text-white">` inside `bg-brown-deep`).
+ *
+ * Without the layer, the raw element selector sits in the normal cascade
+ * (same specificity as utilities, but later in source → wins), which would
+ * force every coloured heading to use `!text-white` or an inline `style`.
+ */
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-text-dark);
+    line-height: 1.2;
+    font-weight: 700;
+  }
 
-h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
-h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
-h4 { font-size: 1.2rem; }
+  h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+  h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+  h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
+  h4 { font-size: 1.2rem; }
+}
 
 /* ===== ANIMATIONS ===== */
 
