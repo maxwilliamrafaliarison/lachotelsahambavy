@@ -37,18 +37,6 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
                 className="w-full aspect-[4/3] object-cover transition-transform duration-[1.2s] group-hover:scale-105"
                 loading="lazy"
               />
-              {/* Floating badge */}
-              <div className="absolute bottom-6 left-6 glass-card px-5 py-4 flex items-center gap-3">
-                <div className="text-gold font-bold text-xl font-[family-name:var(--font-heading)]">4.5</div>
-                <div>
-                  <div className="flex text-gold text-xs gap-0.5">
-                    {"★★★★★".split("").map((s, i) => (
-                      <span key={i}>{s}</span>
-                    ))}
-                  </div>
-                  <div className="text-[0.6rem] text-text-muted uppercase tracking-wider mt-0.5">TripAdvisor</div>
-                </div>
-              </div>
             </div>
           </ScrollReveal>
 

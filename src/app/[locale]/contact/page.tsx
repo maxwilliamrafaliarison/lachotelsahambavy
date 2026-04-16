@@ -46,14 +46,16 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: "\uD83D\uDCE7", label: dict.contact.reservations, value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-              { icon: "\uD83D\uDCF1", label: dict.contact.whatsapp, value: siteConfig.phone, href: `https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}` },
-              { icon: "\uD83D\uDCCD", label: dict.contact.address, value: siteConfig.address, href: siteConfig.social.google },
-              { icon: "\uD83D\uDE86", label: dict.contact.access, value: dict.contact.accessDetail, href: null },
+              { Icon: IconMail,  label: dict.contact.reservations, value: siteConfig.email, href: `mailto:${siteConfig.email}` },
+              { Icon: IconPhone, label: dict.contact.whatsapp,     value: siteConfig.phone, href: `https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}` },
+              { Icon: IconPin,   label: dict.contact.address,      value: siteConfig.address, href: siteConfig.social.google },
+              { Icon: IconTrain, label: dict.contact.access,       value: dict.contact.accessDetail, href: null },
             ].map((item, i) => (
               <ScrollReveal key={item.label} delay={i * 100}>
                 <div className="bg-cream rounded-xl p-6 text-center h-full">
-                  <div className="text-2xl mb-3">{item.icon}</div>
+                  <div className="mb-4 flex justify-center text-gold">
+                    <item.Icon />
+                  </div>
                   <h4 className="text-sm font-semibold text-text-dark mb-2">{item.label}</h4>
                   {item.href ? (
                     <a
@@ -213,5 +215,47 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
     </>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Line icons — fine-stroke pictograms. Softer and more editorial than emoji.
+// -----------------------------------------------------------------------------
+
+function IconMail() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M22 7l-10 6L2 7" />
+    </svg>
+  );
+}
+
+function IconPhone() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+    </svg>
+  );
+}
+
+function IconPin() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+function IconTrain() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="4" y="3" width="16" height="16" rx="3" />
+      <path d="M4 11h16" />
+      <circle cx="8.5" cy="15" r="1" />
+      <circle cx="15.5" cy="15" r="1" />
+      <path d="M8 19l-2 2M16 19l2 2" />
+    </svg>
   );
 }

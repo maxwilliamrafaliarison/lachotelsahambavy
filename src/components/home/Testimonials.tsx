@@ -129,7 +129,7 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
                 }`}
                 aria-label={`${source.name} — ${source.score}/${source.id === "booking" ? "10" : "5"}`}
               >
-                <span className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-brown-deep">
+                <span className="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-medium text-brown-deep tabular-nums">
                   {source.score}
                 </span>
                 <div className="flex gap-0.5">
