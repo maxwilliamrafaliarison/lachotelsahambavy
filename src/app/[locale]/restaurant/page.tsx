@@ -8,6 +8,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { restaurantSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -31,17 +32,17 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
 
   const philosophyCards = [
     {
-      icon: "\uD83C\uDF3F",
+      icon: "leaf",
       title: dict.restaurantSection.philosophyLocal,
       desc: dict.restaurantSection.philosophyLocalDesc,
     },
     {
-      icon: "\uD83D\uDC1F",
+      icon: "fish",
       title: dict.restaurantSection.philosophyLac,
       desc: dict.restaurantSection.philosophyLacDesc,
     },
     {
-      icon: "\uD83E\uDDD1\u200D\uD83C\uDF73",
+      icon: "chef",
       title: dict.restaurantSection.philosophyMaison,
       desc: dict.restaurantSection.philosophyMaisonDesc,
     },
@@ -49,17 +50,17 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
 
   const pricingItems = [
     {
-      icon: "\u2615",
+      icon: "coffee",
       label: dict.restaurantSection.breakfast,
       priceAR: extras.breakfast.priceAR,
     },
     {
-      icon: "\uD83C\uDF7D",
+      icon: "dining",
       label: dict.restaurantSection.menu,
       priceAR: extras.menu.priceAR,
     },
     {
-      icon: "\uD83E\uDDFA",
+      icon: "picnic",
       label: dict.restaurantSection.picnic,
       priceAR: extras.picnic.priceAR,
     },
@@ -87,7 +88,12 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             {philosophyCards.map((card, i) => (
               <ScrollReveal key={card.title} delay={i * 120}>
                 <div className="text-center p-8 rounded-xl bg-cream border border-brown-deep/5 h-full">
-                  <span className="text-4xl block mb-4">{card.icon}</span>
+                  <Icon
+                    name={card.icon}
+                    size={36}
+                    weight="regular"
+                    className="text-gold mx-auto mb-4"
+                  />
                   <h3 className="text-lg font-semibold text-text-dark mb-3">{card.title}</h3>
                   <p className="text-text-muted text-sm leading-relaxed">{card.desc}</p>
                 </div>
@@ -166,7 +172,12 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             {pricingItems.map((item, i) => (
               <ScrollReveal key={item.label} delay={i * 100}>
                 <div className="text-center bg-cream rounded-xl p-8 border border-brown-deep/5 h-full flex flex-col items-center justify-center">
-                  <span className="text-3xl block mb-3">{item.icon}</span>
+                  <Icon
+                    name={item.icon}
+                    size={30}
+                    weight="regular"
+                    className="text-gold mb-3"
+                  />
                   <h4 className="text-text-dark font-semibold mb-3">{item.label}</h4>
                   <div className="text-3xl font-bold text-gold mb-1">
                     {item.priceAR.toLocaleString("fr-FR")} AR

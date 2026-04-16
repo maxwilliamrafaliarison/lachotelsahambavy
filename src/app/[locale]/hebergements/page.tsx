@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { hotelRoomSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 import { siteConfig } from "@/data/site";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -208,9 +209,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                     {room.amenities.map((amenity, ai) => (
                       <div
                         key={ai}
-                        className="flex items-center gap-2 bg-white rounded-lg px-3 py-2 text-sm shadow-sm border border-brown-deep/5"
+                        className="flex items-center gap-2.5 bg-white rounded-lg px-3 py-2 text-sm shadow-sm border border-brown-deep/5"
                       >
-                        <span className="text-lg flex-shrink-0">{amenity.icon}</span>
+                        <Icon
+                          name={amenity.icon}
+                          size={18}
+                          weight="regular"
+                          className="text-gold flex-shrink-0"
+                        />
                         <span className="text-text-muted">{amenity.label[loc]}</span>
                       </div>
                     ))}
