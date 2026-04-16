@@ -500,5 +500,69 @@
     "ratePromo": "2-night offer",
     "submit": "Book now",
     "selectDate": "Select"
+  },
+  "booking": {
+    "steps": {
+      "stay": "Stay",
+      "traveler": "Guest",
+      "confirm": "Confirmation",
+      "next": "Next",
+      "back": "Back",
+      "submit": "Send request"
+    },
+    "nights": "Nights",
+    "rate": "Preferred rate",
+    "anyRoom": "Let the hotel decide",
+    "prefilledNotice": "Your dates have been pre-filled from the booking bar. Complete the form below.",
+    "review": {
+      "title": "Review your request before sending",
+      "note": "Once sent, your request will be processed within 24 h by our team."
+    },
+    "rates": {
+      "standard": "Standard rate",
+      "to": "Tour Operator rate",
+      "promo": "2-night offer (-50%)"
+    },
+    "pensions": {
+      "room-only": "Room only",
+      "bb": "Room + Breakfast (40,000 AR)",
+      "half-board": "Half-board",
+      "full-board": "Full-board"
+    },
+    "transfers": {
+      "none": "No thanks",
+      "fianarantsoa-4x4": "Private 4×4 transfer from Fianarantsoa (120,000 AR)",
+      "ambalakely": "From Ambalakely (110,000 AR)"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "invalidDate": "Invalid date.",
+      "invalidEmail": "Invalid email address.",
+      "invalidPhone": "Invalid phone number.",
+      "nameMin": "Name must be at least 2 characters.",
+      "nameMax": "Name is too long (max 100 characters).",
+      "emailTooLong": "Email is too long.",
+      "messageTooLong": "Message is too long (max 2000 characters).",
+      "guestsMin": "At least 1 guest.",
+      "guestsMax": "Maximum 20 guests — please contact us directly.",
+      "checkoutBeforeCheckin": "Check-out must be after check-in.",
+      "datesInPast": "Dates must be in the future.",
+      "gdprRequired": "You must accept the privacy policy.",
+      "termsRequired": "You must accept the booking conditions.",
+      "botDetected": "Submission error.",
+      "rateLimited": "Too many requests. Please try again in a few minutes.",
+      "captchaFailed": "Anti-spam verification failed. Please try again.",
+      "genericError": "An error occurred. Please try again or contact us directly via WhatsApp."
+    },
+    "confirmation": {
+      "title": "Request received!",
+      "subtitle": "Thank you {name}, your request has safely reached our inbox.",
+      "p1": "A confirmation email has been sent to your address. Our team will reply within 24 hours with the final confirmation and any practical details.",
+      "p2": "No payment is required now — settlement is made on arrival in Ariary, Euros or by prior bank transfer.",
+      "p3": "Urgent question? Feel free to reach us directly via WhatsApp.",
+      "whatsappCta": "Contact via WhatsApp",
+      "backHome": "Back to home",
+      "stayInfo": "Stay: {checkin} → {checkout}"
+    }
   }
 }

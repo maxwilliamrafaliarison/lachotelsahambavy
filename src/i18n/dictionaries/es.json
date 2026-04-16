@@ -500,5 +500,69 @@
     "ratePromo": "Oferta 2 noches",
     "submit": "Reservar",
     "selectDate": "Seleccionar"
+  },
+  "booking": {
+    "steps": {
+      "stay": "Estancia",
+      "traveler": "Viajero",
+      "confirm": "Confirmación",
+      "next": "Siguiente",
+      "back": "Atrás",
+      "submit": "Enviar solicitud"
+    },
+    "nights": "Noches",
+    "rate": "Tarifa deseada",
+    "anyRoom": "Confío en el hotel",
+    "prefilledNotice": "Sus fechas han sido prellenadas desde la barra de reserva. Complete el formulario.",
+    "review": {
+      "title": "Revise su solicitud antes de enviar",
+      "note": "Una vez enviada, su solicitud será procesada en 24 h por nuestro equipo."
+    },
+    "rates": {
+      "standard": "Tarifa estándar",
+      "to": "Tarifa Tour-Operador",
+      "promo": "Oferta 2 noches (-50 %)"
+    },
+    "pensions": {
+      "room-only": "Solo alojamiento",
+      "bb": "Alojamiento + Desayuno (40 000 AR)",
+      "half-board": "Media pensión",
+      "full-board": "Pensión completa"
+    },
+    "transfers": {
+      "none": "No, gracias",
+      "fianarantsoa-4x4": "Traslado privado 4×4 desde Fianarantsoa (120 000 AR)",
+      "ambalakely": "Desde Ambalakely (110 000 AR)"
+    },
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "invalidDate": "Fecha inválida.",
+      "invalidEmail": "Dirección de correo inválida.",
+      "invalidPhone": "Número de teléfono inválido.",
+      "nameMin": "El nombre debe tener al menos 2 caracteres.",
+      "nameMax": "El nombre es demasiado largo (máx. 100 caracteres).",
+      "emailTooLong": "El correo es demasiado largo.",
+      "messageTooLong": "El mensaje es demasiado largo (máx. 2000 caracteres).",
+      "guestsMin": "Al menos 1 viajero.",
+      "guestsMax": "Máximo 20 viajeros — contáctenos directamente.",
+      "checkoutBeforeCheckin": "La salida debe ser posterior a la llegada.",
+      "datesInPast": "Las fechas deben ser en el futuro.",
+      "gdprRequired": "Debe aceptar la política de privacidad.",
+      "termsRequired": "Debe aceptar las condiciones de reserva.",
+      "botDetected": "Error de envío.",
+      "rateLimited": "Demasiadas solicitudes. Inténtelo de nuevo en unos minutos.",
+      "captchaFailed": "Verificación anti-spam fallida. Inténtelo de nuevo.",
+      "genericError": "Ha ocurrido un error. Inténtelo de nuevo o contáctenos por WhatsApp."
+    },
+    "confirmation": {
+      "title": "¡Solicitud recibida!",
+      "subtitle": "Gracias {name}, su solicitud ha llegado correctamente a nuestra bandeja.",
+      "p1": "Le hemos enviado un correo de confirmación. Nuestro equipo le responderá en 24 horas con la confirmación definitiva y los detalles prácticos.",
+      "p2": "No se requiere pago ahora — el abono se efectúa a la llegada en Ariary, Euros o por transferencia bancaria previa.",
+      "p3": "¿Pregunta urgente? Contáctenos directamente por WhatsApp.",
+      "whatsappCta": "Contactar por WhatsApp",
+      "backHome": "Volver al inicio",
+      "stayInfo": "Estancia: {checkin} → {checkout}"
+    }
   }
 }

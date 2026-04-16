@@ -5,6 +5,12 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import CookieNotice from "@/components/layout/CookieNotice";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  lodgingBusinessSchema,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/schema-org";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -20,14 +26,22 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!locales.includes(locale as Locale)) notFound();
 
-  const dict = await getDictionary(locale as Locale);
+  const typedLocale = locale as Locale;
+  const dict = await getDictionary(typedLocale);
 
   return (
     <>
-      <Navbar locale={locale as Locale} dict={dict} />
+      <JsonLd
+        schemas={[
+          organizationSchema(),
+          websiteSchema(typedLocale),
+          lodgingBusinessSchema(typedLocale),
+        ]}
+      />
+      <Navbar locale={typedLocale} dict={dict} />
       <main className="flex-1">{children}</main>
-      <Footer locale={locale as Locale} dict={dict} />
-      <WhatsAppFloat locale={locale as Locale} dict={dict} />
+      <Footer locale={typedLocale} dict={dict} />
+      <WhatsAppFloat locale={typedLocale} dict={dict} />
       <CookieNotice dict={dict} />
     </>
   );

@@ -4,6 +4,9 @@ import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/data/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
@@ -38,9 +41,11 @@ const teamPhotos = [
 export default async function NotreEquipePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const loc = locale as Locale;
 
   return (
     <>
+      <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "notre-equipe"))]} />
       <PageHero
         title={dict.equipe.heroTitle}
         subtitle={dict.equipe.heroSubtitle}

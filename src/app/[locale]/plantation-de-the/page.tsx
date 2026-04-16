@@ -6,6 +6,9 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import TheicoleBookingForm from "./TheicoleBookingForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
@@ -26,6 +29,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function PlantationPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const loc = locale as Locale;
+
+  const attractionPlantation = touristAttractionSchema({
+    locale: loc,
+    slug: "plantation-de-the",
+    name: dict.plantation.heroTitle as string,
+    description: dict.plantation.heroSubtitle as string,
+    image: "/images/tea/plantation-drone-overhead.jpg",
+  });
 
   const excursionInfoItems = [
     { icon: "⏱", label: locale === "fr" ? "Durée" : locale === "en" ? "Duration" : "Duración", value: dict.plantation.excursionInfo.duration },
@@ -37,6 +49,12 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
 
   return (
     <>
+      <JsonLd
+        schemas={[
+          attractionPlantation,
+          breadcrumbSchema(buildBreadcrumb(loc, "plantation")),
+        ]}
+      />
       <PageHero
         title={dict.plantation.heroTitle}
         subtitle={dict.plantation.heroSubtitle}

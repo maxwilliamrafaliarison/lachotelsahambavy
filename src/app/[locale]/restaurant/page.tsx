@@ -5,6 +5,9 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { extras } from "@/data/rooms";
 import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { restaurantSchema, breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
@@ -64,6 +67,12 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
 
   return (
     <>
+      <JsonLd
+        schemas={[
+          restaurantSchema(loc),
+          breadcrumbSchema(buildBreadcrumb(loc, "restaurant")),
+        ]}
+      />
       {/* Hero */}
       <PageHero
         title={dict.restaurantSection.heroTitle}

@@ -1,30 +1,33 @@
 "use client";
 
-import { Suspense, useEffect, useState, useRef, type FormEvent } from "react";
+import { Suspense, useEffect, useState, use } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
 import { type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
+import BookingForm from "@/components/booking/BookingForm";
 import { siteConfig } from "@/data/site";
-import { rooms } from "@/data/rooms";
-import { use } from "react";
-import { useSearchParams } from "next/navigation";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = use(params);
+  const loc = locale as Locale;
   const [dict, setDict] = useState<any>(null);
 
   useEffect(() => {
-    getDictionary(locale as Locale).then(setDict);
-  }, [locale]);
+    getDictionary(loc).then(setDict);
+  }, [loc]);
 
   if (!dict) return null;
 
   return (
     <>
+      <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "contact"))]} />
       <PageHero
         title={dict.contact.heroTitle}
         subtitle={dict.contact.heroSubtitle}
@@ -43,7 +46,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: "\uD83D\uDCE7", label: dict.contact.reservations, value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-              { icon: "\uD83D\uDCF1", label: dict.contact.whatsapp, value: siteConfig.phone, href: `https://wa.me/${siteConfig.whatsapp}` },
+              { icon: "\uD83D\uDCF1", label: dict.contact.whatsapp, value: siteConfig.phone, href: `https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}` },
               { icon: "\uD83D\uDCCD", label: dict.contact.address, value: siteConfig.address, href: siteConfig.social.google },
               { icon: "\uD83D\uDE86", label: dict.contact.access, value: dict.contact.accessDetail, href: null },
             ].map((item, i) => (
@@ -52,7 +55,12 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
                   <div className="text-2xl mb-3">{item.icon}</div>
                   <h4 className="text-sm font-semibold text-text-dark mb-2">{item.label}</h4>
                   {item.href ? (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm text-gold hover:text-gold-light transition-colors">
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-gold hover:text-gold-light transition-colors"
+                    >
                       {item.value}
                     </a>
                   ) : (
@@ -65,12 +73,24 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
 
-      {/* Booking form */}
+      {/* Booking form multi-step */}
       <section id="booking-form" className="py-24 bg-cream">
-        <div className="max-w-[800px] mx-auto px-4">
-          <Suspense fallback={<div className="text-center py-12 text-text-muted">...</div>}>
-            <BookingForm dict={dict} locale={locale as Locale} />
-          </Suspense>
+        <div className="max-w-[900px] mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl text-brown-deep mb-3">{dict.contact.title}</h2>
+            <p className="text-text-muted text-sm md:text-base">{dict.contact.subtitle}</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-sm p-6 md:p-10 border border-brown-deep/5">
+            <Suspense
+              fallback={
+                <div className="text-center py-16 text-text-muted text-sm">
+                  Chargement du formulaire…
+                </div>
+              }
+            >
+              <BookingForm dict={dict} locale={locale as Locale} />
+            </Suspense>
+          </div>
         </div>
       </section>
 
@@ -95,8 +115,13 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
             <div className="bg-cream/60 rounded-xl p-6 md:p-8 border border-brown-deep/5">
               <ul className="space-y-3">
                 {dict.contact.cancellationRules.map((rule: string, i: number) => (
-                  <li key={i} className="flex items-start gap-3 text-text-muted text-sm leading-relaxed">
-                    <span className="text-gold mt-0.5 flex-shrink-0">{i < 2 ? "\u2139\uFE0F" : "\u26A0\uFE0F"}</span>
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-text-muted text-sm leading-relaxed"
+                  >
+                    <span className="text-gold mt-0.5 flex-shrink-0">
+                      {i < 2 ? "\u2139\uFE0F" : "\u26A0\uFE0F"}
+                    </span>
                     <span>{rule}</span>
                   </li>
                 ))}
@@ -132,7 +157,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         <div className="max-w-[600px] mx-auto px-4 text-center">
           <ScrollReveal>
             <a
-              href={`https://wa.me/${siteConfig.whatsapp}`}
+              href={`https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#20bd5a] transition-colors shadow-lg"
@@ -146,261 +171,5 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
     </>
-  );
-}
-
-/* ──── Booking Form with URL param pre-filling ──── */
-
-function BookingForm({ dict, locale }: { dict: any; locale: Locale }) {
-  const searchParams = useSearchParams();
-  const formRef = useRef<HTMLFormElement>(null);
-  const [sending, setSending] = useState(false);
-
-  // Pre-fill from booking bar URL params
-  const prefillCheckin = searchParams.get("checkin") || "";
-  const prefillCheckout = searchParams.get("checkout") || "";
-  const prefillGuests = searchParams.get("guests") || "2";
-  const prefillRate = searchParams.get("rate") || "standard";
-
-  // Scroll to form if we have pre-fill params
-  useEffect(() => {
-    if (searchParams.get("checkin") && formRef.current) {
-      setTimeout(() => {
-        formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 500);
-    }
-  }, [searchParams]);
-
-  const rateLabels: Record<string, Record<string, string>> = {
-    fr: { standard: "Tarif standard", to: "Tarif Tour-Opérateur", promo: "Offre 2 nuits (-50%)" },
-    en: { standard: "Standard rate", to: "Tour Operator rate", promo: "2-night offer (-50%)" },
-    es: { standard: "Tarifa estándar", to: "Tarifa Tour-Operador", promo: "Oferta 2 noches (-50%)" },
-  };
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSending(true);
-
-    const fd = new FormData(e.currentTarget);
-    const name = fd.get("name") as string;
-    const email = fd.get("email") as string;
-    const phone = fd.get("phone") as string;
-    const nationality = fd.get("nationality") as string;
-    const checkin = fd.get("checkin") as string;
-    const checkout = fd.get("checkout") as string;
-    const arrivalTime = fd.get("arrivalTime") as string;
-    const guests = fd.get("guests") as string;
-    const room = fd.get("room") as string;
-    const pension = fd.get("pension") as string;
-    const transfer = fd.get("transfer") as string;
-    const rateField = fd.get("rate") as string;
-    const message = fd.get("message") as string;
-
-    const body = [
-      `=== DEMANDE DE RESERVATION / BOOKING REQUEST ===`,
-      ``,
-      `Nom / Name: ${name}`,
-      `Email: ${email}`,
-      `Tel / Phone: ${phone}`,
-      `Nationalite / Nationality: ${nationality}`,
-      ``,
-      `--- SEJOUR / STAY ---`,
-      `Arrivee / Check-in: ${checkin}`,
-      `Depart / Check-out: ${checkout}`,
-      `Heure d'arrivee / Arrival time: ${arrivalTime || "Non precise"}`,
-      `Personnes / Guests: ${guests}`,
-      `Chambre / Room: ${room}`,
-      `Pension / Meal plan: ${pension}`,
-      `Tarif / Rate: ${rateField}`,
-      `Transfert / Transfer: ${transfer}`,
-      ``,
-      `--- MESSAGE ---`,
-      message || "(aucun message)",
-      ``,
-      `---`,
-      `Le client a accepte les conditions de reservation et la politique RGPD.`,
-      `The guest has accepted the booking conditions and GDPR policy.`,
-    ].join("\n");
-
-    const subject = `Reservation ${name} — ${checkin} > ${checkout}`;
-    const mailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailto;
-    setTimeout(() => setSending(false), 2000);
-  }
-
-  const inputClass =
-    "w-full bg-white border border-brown-deep/20 rounded-lg px-4 py-3 text-sm text-text-dark placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
-
-  return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-      <h3 className="text-2xl text-center mb-2">{dict.contact.title}</h3>
-      <p className="text-center text-text-muted text-sm mb-4">{dict.contact.subtitle}</p>
-      <p className="text-center text-xs text-text-muted/70 mb-8">* {dict.contact.form.required}</p>
-
-      {/* Pre-fill indicator */}
-      {prefillCheckin && (
-        <div className="bg-gold/10 border border-gold/20 rounded-xl p-4 text-sm text-brown-deep text-center">
-          <span className="font-semibold">{"\u2705"} </span>
-          {locale === "fr"
-            ? "Vos dates ont été pré-remplies depuis la barre de réservation. Complétez le formulaire ci-dessous."
-            : locale === "es"
-            ? "Sus fechas han sido prellenadas desde la barra de reserva. Complete el formulario a continuación."
-            : "Your dates have been pre-filled from the booking bar. Complete the form below."}
-        </div>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {/* Name */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.name} *</label>
-          <input type="text" name="name" required className={inputClass} />
-        </div>
-
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.email} *</label>
-          <input type="email" name="email" required className={inputClass} />
-        </div>
-
-        {/* Phone */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.phone} *</label>
-          <input type="tel" name="phone" required className={inputClass} placeholder="+33 6 12 34 56 78" />
-        </div>
-
-        {/* Nationality */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.nationality} *</label>
-          <input type="text" name="nationality" required className={inputClass} />
-        </div>
-
-        {/* Check-in */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.checkin} *</label>
-          <input type="date" name="checkin" required defaultValue={prefillCheckin} className={inputClass} />
-        </div>
-
-        {/* Check-out */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.checkout} *</label>
-          <input type="date" name="checkout" required defaultValue={prefillCheckout} className={inputClass} />
-        </div>
-
-        {/* Guests */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.guests} *</label>
-          <input type="number" name="guests" min="1" max="20" required defaultValue={Number(prefillGuests)} className={inputClass} />
-        </div>
-
-        {/* Arrival time */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.arrivalTime}</label>
-          <select name="arrivalTime" className={inputClass}>
-            <option value="">--</option>
-            <option value="10:00 - 12:00">10:00 - 12:00</option>
-            <option value="12:00 - 14:00">12:00 - 14:00</option>
-            <option value="14:00 - 16:00">14:00 - 16:00</option>
-            <option value="16:00 - 18:00">16:00 - 18:00</option>
-            <option value="18:00 - 20:00">18:00 - 20:00</option>
-            <option value="20:00+">20:00+</option>
-          </select>
-        </div>
-
-        {/* Room select */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.room} *</label>
-          <select name="room" required className={inputClass}>
-            <option value="">--</option>
-            {rooms.map((r) => (
-              <option key={r.id} value={r.name[locale]}>
-                {r.name[locale]}
-                {r.priceEUR ? ` — ${r.priceEUR}\u20AC` : ""}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Pension */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.pension}</label>
-          <select name="pension" className={inputClass}>
-            {dict.contact.form.pensionOptions.map((opt: string) => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Rate */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">
-            {locale === "fr" ? "Tarif souhaité" : locale === "es" ? "Tarifa deseada" : "Preferred rate"}
-          </label>
-          <select name="rate" defaultValue={rateLabels[locale]?.[prefillRate] || rateLabels.fr.standard} className={inputClass}>
-            {Object.values(rateLabels[locale] || rateLabels.fr).map((label) => (
-              <option key={label} value={label}>{label}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Transfer */}
-        <div>
-          <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.transfer}</label>
-          <select name="transfer" className={inputClass}>
-            {dict.contact.form.transferOptions.map((opt: string) => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Message */}
-      <div>
-        <label className="block text-sm font-medium text-text-dark mb-1.5">{dict.contact.form.message}</label>
-        <textarea name="message" rows={4} className={inputClass} />
-      </div>
-
-      {/* GDPR consent */}
-      <div className="space-y-4 bg-white rounded-xl p-5 border border-brown-deep/10">
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            name="gdpr"
-            required
-            className="mt-1 w-4 h-4 rounded border-brown-deep/30 text-gold focus:ring-gold/40 flex-shrink-0"
-          />
-          <span className="text-xs text-text-muted leading-relaxed">
-            {dict.contact.form.gdprConsent} *
-          </span>
-        </label>
-
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            name="terms"
-            required
-            className="mt-1 w-4 h-4 rounded border-brown-deep/30 text-gold focus:ring-gold/40 flex-shrink-0"
-          />
-          <span className="text-xs text-text-muted leading-relaxed">
-            {dict.contact.form.termsConsent} *
-          </span>
-        </label>
-      </div>
-
-      {/* Submit */}
-      <div className="text-center">
-        <button
-          type="submit"
-          disabled={sending}
-          className="bg-gold text-white px-12 py-4 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-md disabled:opacity-60 uppercase tracking-wider"
-        >
-          {sending ? dict.contact.form.sending : dict.contact.form.submit}
-        </button>
-      </div>
-    </form>
   );
 }

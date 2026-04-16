@@ -5,6 +5,10 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { rooms, extras } from "@/data/rooms";
 import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { hotelRoomSchema, breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { siteConfig } from "@/data/site";
 
 const basePath = getBasePath();
 
@@ -26,8 +30,28 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
 
+  // JSON-LD : ItemList de HotelRoom (un item par type d'hébergement)
+  const roomsItemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${siteConfig.url}/${loc}/hebergements/#rooms-list`,
+    name: dict.rooms.title,
+    numberOfItems: rooms.length,
+    itemListElement: rooms.map((room, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: hotelRoomSchema(room, loc),
+    })),
+  };
+
   return (
     <>
+      <JsonLd
+        schemas={[
+          roomsItemList,
+          breadcrumbSchema(buildBreadcrumb(loc, "hebergements")),
+        ]}
+      />
       {/* Hero */}
       <PageHero
         title={dict.rooms.title}

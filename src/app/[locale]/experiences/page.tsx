@@ -5,6 +5,9 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/data/site";
 import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
@@ -25,9 +28,49 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ExperiencesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const loc = locale as Locale;
+
+  // JSON-LD : 3 TouristAttractions clés (restaurant, plantation thé, train FCE)
+  const attractionRestaurant = touristAttractionSchema({
+    locale: loc,
+    slug: "restaurant",
+    name: dict.restaurantSection.title as string,
+    description: dict.restaurantSection.subtitle as string,
+    image: "/images/restaurant/restaurant-01.jpg",
+  });
+  const attractionPlantation = touristAttractionSchema({
+    locale: loc,
+    slug: "plantation-de-the",
+    name: loc === "fr" ? "Plantation de thé de Sahambavy" : loc === "en" ? "Sahambavy Tea Plantation" : "Plantación de té de Sahambavy",
+    description: loc === "fr"
+      ? "La seule plantation de thé de Madagascar — visite guidée, cueillette et dégustation à 5 min de l'hôtel."
+      : loc === "en"
+        ? "The only tea plantation in Madagascar — guided tour, picking and tasting 5 min from the hotel."
+        : "La única plantación de té de Madagascar — visita guiada, recolección y degustación a 5 min del hotel.",
+    image: "/images/tea/plantation-drone-overhead.jpg",
+  });
+  const attractionTrain = touristAttractionSchema({
+    locale: loc,
+    slug: "train-fce",
+    name: loc === "fr" ? "Train FCE Fianarantsoa–Manakara" : loc === "en" ? "FCE Train Fianarantsoa–Manakara" : "Tren FCE Fianarantsoa–Manakara",
+    description: loc === "fr"
+      ? "Ligne ferroviaire légendaire de 170 km reliant les hauts plateaux à la côte est. La gare de Sahambavy est à 2 min de l'hôtel."
+      : loc === "en"
+        ? "Legendary 170 km railway line connecting the highlands to the east coast. Sahambavy station is 2 min from the hotel."
+        : "Línea ferroviaria legendaria de 170 km que une las tierras altas con la costa este. La estación de Sahambavy está a 2 min del hotel.",
+    image: "/images/train/train-fce.jpg",
+  });
 
   return (
     <>
+      <JsonLd
+        schemas={[
+          attractionRestaurant,
+          attractionPlantation,
+          attractionTrain,
+          breadcrumbSchema(buildBreadcrumb(loc, "experiences")),
+        ]}
+      />
       <PageHero
         title={locale === "fr" ? "Expériences" : locale === "en" ? "Experiences" : "Experiencias"}
         subtitle={locale === "fr" ? "Gastronomie, nature et découverte" : locale === "en" ? "Gastronomy, nature and discovery" : "Gastronomía, naturaleza y descubrimiento"}
