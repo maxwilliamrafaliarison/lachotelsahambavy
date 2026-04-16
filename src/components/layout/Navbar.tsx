@@ -84,13 +84,14 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       {/* Main nav */}
       <div className="py-4 px-6">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo — mark-only variant (no tagline) so it stays legible
+              at navbar heights. White on hero, brown once scrolled. */}
           <Link href={`/${locale}/`} className="flex items-center gap-2">
             <img
-              src={`${basePath}/images/logo/logo-white.png`}
+              src={`${basePath}/images/logo/${darkText ? "logo-mark-dark" : "logo-mark-white"}.png`}
               alt="Lac Hôtel Sahambavy"
               className={`w-auto transition-all duration-500 ${
-                darkText ? "brightness-0 h-10 md:h-12" : "h-16 md:h-20"
+                darkText ? "h-11 md:h-14" : "h-16 md:h-20"
               }`}
             />
           </Link>
@@ -176,9 +177,9 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
         >
           <div className="flex justify-between items-center p-6">
             <img
-              src={`${basePath}/images/logo/logo-white.png`}
+              src={`${basePath}/images/logo/logo-dark.png`}
               alt="Lac Hôtel Sahambavy"
-              className="h-14 w-auto brightness-0"
+              className="h-20 w-auto"
             />
             <button
               onClick={() => setMenuOpen(false)}

@@ -87,9 +87,9 @@ export function organizationSchema(): SchemaType {
     url: siteConfig.url,
     logo: {
       "@type": "ImageObject",
-      url: `${siteConfig.url}/images/logo/logo-white.png`,
-      width: 512,
-      height: 512,
+      url: `${siteConfig.url}/images/logo/logo-color.png`,
+      width: 769,
+      height: 837,
     },
     sameAs: [
       siteConfig.social.facebook,
@@ -129,7 +129,7 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
       `${siteConfig.url}/images/hero/sunset.jpg`,
       `${siteConfig.url}/images/hero/lake.jpg`,
     ],
-    logo: `${siteConfig.url}/images/logo/logo-white.png`,
+    logo: `${siteConfig.url}/images/logo/logo-color.png`,
     telephone: siteConfig.phone,
     email: siteConfig.email,
     address: {
