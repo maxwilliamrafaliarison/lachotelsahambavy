@@ -60,47 +60,32 @@ export default function TopBar() {
         </div>
 
         {/* Right — Ratings + Social */}
-        <div className="flex items-center gap-3 md:gap-5 text-cream/60 text-[0.6875rem] tracking-[0.12em] uppercase font-medium">
+        <div className="flex items-center gap-3 md:gap-5 text-[0.6875rem] tracking-[0.12em] uppercase font-medium">
           {/* Ratings — desktop only */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
+            <RatingLink
               href={siteConfig.social.tripadvisor}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-gold transition-colors"
-              aria-label={`Avis TripAdvisor — ${siteConfig.ratings.tripadvisor.score} sur 5`}
-            >
-              <IconStar />
-              <span className="tabular-nums">
-                {siteConfig.ratings.tripadvisor.score.toFixed(1)}
-              </span>
-              <span className="text-cream/40">TripAdvisor</span>
-            </a>
+              score={siteConfig.ratings.tripadvisor.score}
+              max={5}
+              label={`Avis TripAdvisor — ${siteConfig.ratings.tripadvisor.score} sur 5`}
+              Logo={LogoTripAdvisor}
+            />
             <span className="w-px h-3 bg-cream/15" />
-            <a
+            <RatingLink
               href={siteConfig.social.google}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-gold transition-colors"
-              aria-label={`Avis Google — ${siteConfig.ratings.google.score} sur 5`}
-            >
-              <IconStar />
-              <span className="tabular-nums">
-                {siteConfig.ratings.google.score.toFixed(1)}
-              </span>
-              <span className="text-cream/40">Google</span>
-            </a>
+              score={siteConfig.ratings.google.score}
+              max={5}
+              label={`Avis Google — ${siteConfig.ratings.google.score} sur 5`}
+              Logo={LogoGoogle}
+            />
             <span className="w-px h-3 bg-cream/15" />
-            <div
-              className="flex items-center gap-1.5"
-              aria-label={`Note Booking — ${siteConfig.ratings.booking.score} sur 10`}
-            >
-              <IconStar />
-              <span className="tabular-nums">
-                {siteConfig.ratings.booking.score.toFixed(1)}
-              </span>
-              <span className="text-cream/40">Booking</span>
-            </div>
+            <RatingLink
+              href={siteConfig.social.booking}
+              score={siteConfig.ratings.booking.score}
+              max={10}
+              label={`Note Booking — ${siteConfig.ratings.booking.score} sur 10`}
+              Logo={LogoBooking}
+            />
           </div>
 
           <span className="hidden lg:block w-px h-3 bg-cream/15" />
@@ -132,6 +117,41 @@ export default function TopBar() {
   );
 }
 
+/* ── Rating link — star + score /max + brand logo, colorizes on hover ─── */
+
+function RatingLink({
+  href,
+  score,
+  max,
+  label,
+  Logo,
+}: {
+  href: string;
+  score: number;
+  max: 5 | 10;
+  label: string;
+  Logo: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="group flex items-center gap-1.5"
+    >
+      <IconStar className="text-cream/50 transition-colors duration-300 group-hover:text-gold" />
+      <span className="tabular-nums text-cream/70 transition-colors duration-300 group-hover:text-gold">
+        {score.toFixed(1)}
+      </span>
+      <span className="text-cream/30 transition-colors duration-300 group-hover:text-gold/70">
+        /{max}
+      </span>
+      <Logo className="ml-1 grayscale opacity-55 brightness-125 transition-[filter,opacity] duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100" />
+    </a>
+  );
+}
+
 /* ── Inline icons — minimal line-style ───────────────────────── */
 
 function IconPhone() {
@@ -151,10 +171,90 @@ function IconMail() {
   );
 }
 
-function IconStar() {
+function IconStar({ className }: { className?: string }) {
   return (
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
       <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6z" />
+    </svg>
+  );
+}
+
+/* ── Brand logo marks — rendered in brand colors, desaturated by CSS ─── */
+
+function LogoTripAdvisor({ className }: { className?: string }) {
+  return (
+    <svg
+      width="18"
+      height="11"
+      viewBox="0 0 128 79"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      {/* Official owl mark — two eyes + body, in TripAdvisor green */}
+      <g fill="#34E0A1">
+        <path d="M64 0C49.7 0 36 3.3 23.7 9.6H0l12 12.9C4.8 29 .5 38.5.5 49c0 16.4 13.3 29.7 29.7 29.7 7.8 0 14.9-3 20.2-7.9L64 78.7l13.6-7.9c5.3 4.9 12.4 7.9 20.2 7.9 16.4 0 29.7-13.3 29.7-29.7 0-10.5-4.3-20-11.4-26.5l11.9-12.9h-23.8C91.9 3.3 78.3 0 64 0zM30.2 71.7c-12.5 0-22.7-10.2-22.7-22.7s10.2-22.7 22.7-22.7 22.7 10.2 22.7 22.7S42.7 71.7 30.2 71.7zm33.8-3.9c-3.1-6.2-9.2-10.5-16.5-11.2 5-5.3 8.1-12.4 8.1-20.2 0-11-6.2-20.5-15.3-25.3 7.9-3.5 16.6-5.5 23.7-5.5s15.8 2 23.7 5.5c-9.1 4.8-15.3 14.3-15.3 25.3 0 7.8 3.1 14.9 8.1 20.2-7.3.7-13.4 5-16.5 11.2zm33.8 3.9c-12.5 0-22.7-10.2-22.7-22.7s10.2-22.7 22.7-22.7 22.7 10.2 22.7 22.7-10.2 22.7-22.7 22.7z" />
+        <circle cx="30.2" cy="49" r="11.1" fill="#000" />
+        <circle cx="97.8" cy="49" r="11.1" fill="#000" />
+      </g>
+    </svg>
+  );
+}
+
+function LogoGoogle({ className }: { className?: string }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 48 48"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        fill="#4285F4"
+        d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"
+      />
+      <path
+        fill="#EA4335"
+        d="M24 9.5c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 2.69 29.93 1 24 1 15.4 1 7.96 5.93 4.34 13.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"
+      />
+    </svg>
+  );
+}
+
+function LogoBooking({ className }: { className?: string }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      {/* Booking.com "B." lettermark — navy square, white B + dot */}
+      <rect width="32" height="32" rx="5" fill="#003580" />
+      <path
+        fill="#ffffff"
+        d="M10.4 8h6.1c3.1 0 5 1.2 5 3.9 0 1.4-.7 2.5-1.9 3.1 1.6.5 2.6 1.9 2.6 3.8 0 3.2-2.3 4.6-5.7 4.6h-6.1V8zm5.8 6.4c1.3 0 2-.5 2-1.7s-.7-1.7-2-1.7h-2.7v3.4h2.7zm.4 6.4c1.5 0 2.3-.6 2.3-2 0-1.3-.8-2-2.3-2h-3.1v4h3.1z"
+      />
+      <circle cx="25" cy="24" r="2.2" fill="#00a4f0" />
     </svg>
   );
 }
