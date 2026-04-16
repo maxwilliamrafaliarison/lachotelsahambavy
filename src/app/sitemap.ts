@@ -7,7 +7,9 @@ import { locales, defaultLocale } from "@/lib/utils";
  * Cf. Phase 5 §5.6 — SEO technique trilingue.
  *
  * Le `x-default` pointe vers la version FR (défaut éditorial).
+ * `force-static` requis pour le mode `output: export` (GitHub Pages).
  */
+export const dynamic = "force-static";
 
 // Routes publiques du site (slugs internes — non localisés pour l'instant)
 const publicRoutes = [

@@ -4,7 +4,11 @@ import { siteConfig } from "@/data/site";
 /**
  * Robots.txt généré dynamiquement.
  * Cf. Phase 5 §5.6 — SEO technique.
+ *
+ * `force-static` requis pour le mode `output: export` (GitHub Pages).
  */
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = siteConfig.url;
 
