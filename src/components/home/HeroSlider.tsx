@@ -58,7 +58,7 @@ export default function HeroSlider({ dict }: { dict: any }) {
   }, []);
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] overflow-hidden">
+    <section className="relative w-full h-[100svh] min-h-[560px] md:min-h-[700px] overflow-hidden">
       {/* Slides with parallax container */}
       <div ref={containerRef} className="absolute inset-0 will-change-transform">
         {slides.map((slide, i) => (
