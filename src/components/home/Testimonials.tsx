@@ -247,7 +247,7 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
           <button
             onClick={goPrev}
             aria-label={NAV_LABELS.previous[locale]}
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-brown-deep/15 text-brown-deep hover:bg-gold hover:text-white hover:border-gold transition-all duration-300"
+            className="md:hidden w-11 h-11 flex items-center justify-center rounded-full border border-brown-deep/15 text-brown-deep hover:bg-gold hover:text-white hover:border-gold active:bg-gold active:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -283,7 +283,7 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
           <button
             onClick={goNext}
             aria-label={NAV_LABELS.next[locale]}
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-brown-deep/15 text-brown-deep hover:bg-gold hover:text-white hover:border-gold transition-all duration-300"
+            className="md:hidden w-11 h-11 flex items-center justify-center rounded-full border border-brown-deep/15 text-brown-deep hover:bg-gold hover:text-white hover:border-gold active:bg-gold active:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
