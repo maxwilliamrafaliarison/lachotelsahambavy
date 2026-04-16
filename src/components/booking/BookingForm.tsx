@@ -211,11 +211,11 @@ function OccupancyStepper({
           onClick={() => canDec && onChange(value - 1)}
           disabled={!canDec}
           aria-label={`− ${label}`}
-          className="w-8 h-8 rounded-full border border-brown-deep/25 text-brown-deep text-lg leading-none flex items-center justify-center hover:bg-brown-deep/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="w-11 h-11 rounded-full border border-brown-deep/25 text-brown-deep text-lg leading-none flex items-center justify-center hover:bg-brown-deep/5 active:bg-brown-deep/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
           −
         </button>
-        <span className="text-sm font-semibold w-6 text-center tabular-nums text-brown-deep">
+        <span className="text-base font-semibold w-7 text-center tabular-nums text-brown-deep">
           {value}
         </span>
         <button
@@ -223,7 +223,7 @@ function OccupancyStepper({
           onClick={() => canInc && onChange(value + 1)}
           disabled={!canInc}
           aria-label={`+ ${label}`}
-          className="w-8 h-8 rounded-full border border-gold/40 bg-gold/10 text-gold text-lg leading-none flex items-center justify-center hover:bg-gold/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="w-11 h-11 rounded-full border border-gold/40 bg-gold/10 text-gold text-lg leading-none flex items-center justify-center hover:bg-gold/20 active:bg-gold/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
           +
         </button>
