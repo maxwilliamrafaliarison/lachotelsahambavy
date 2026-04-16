@@ -266,7 +266,7 @@
       "submit": "Send booking request",
       "sending": "Sending…",
       "gdprConsent": "I consent to my personal data being processed for this booking request, in accordance with the GDPR. My data will not be shared with third parties.",
-      "termsConsent": "I have read and accept the booking and cancellation conditions below.",
+      "termsConsent": "I have read and accept the booking and cancellation conditions.",
       "required": "Required fields"
     },
     "offerReminder": "2 nights = 50% off the 2nd",
@@ -471,6 +471,7 @@
     "contactTitle": "Contact",
     "legal": "Legal notice",
     "privacy": "Privacy",
+    "bookingConditions": "Booking conditions",
     "copyright": "Lac Hôtel Sahambavy. All rights reserved."
   },
   "cookie": {
@@ -569,5 +570,81 @@
       "backHome": "Back to home",
       "stayInfo": "Stay: {checkin} → {checkout}"
     }
+  },
+  "conditions": {
+    "slug": "conditions-reservation",
+    "navLabel": "Conditions",
+    "heroTitle": "Booking conditions",
+    "heroSubtitle": "Rights and commitments — travellers from the European Union",
+    "intro": "These conditions govern any booking request made on lachotel.com. They comply with the legal framework applicable to travellers from the European Union (Directive 2011/83/EU and Regulation 524/2013). By submitting the booking form, you acknowledge having read them.",
+    "lastUpdated": "Last updated",
+    "lastUpdatedDate": "16 April 2026",
+    "sections": [
+      {
+        "title": "1 · Booking and payment",
+        "items": [
+          "Any booking request becomes a confirmed reservation after receipt of a confirmation email sent by the hotel within 24 hours.",
+          "No payment is collected online. Settlement is made on arrival in cash (Ariary or Euros), by credit card, or by prior bank transfer.",
+          "Rates displayed on lachotel.com are in Euros (EUR) and per room, taxes included. Promotional offers (e.g. 2-night offer –50 %) cannot be combined with other discounts.",
+          "The tourist tax, collected on behalf of the Malagasy State, is added to the rate (approximately 5,000 AR per person per night).",
+          "The online form is limited to 20 guests and 4 rooms. For larger groups (seminars, weddings), please contact us directly."
+        ]
+      },
+      {
+        "title": "2 · Cancellation and modification",
+        "intro": "Any cancellation or modification must be communicated by email to booking@lachotel.com. Fees are calculated on the total amount of the initial reservation.",
+        "items": [
+          "More than 60 days before arrival: free cancellation.",
+          "From 60 to 15 days before arrival: 20 % of the total amount charged.",
+          "From 15 to 5 days before arrival: 70 % of the total amount charged.",
+          "Less than 3 days before arrival: 100 % of the total amount charged.",
+          "No-show or early departure: 100 % of the total amount charged.",
+          "Any date modification is subject to availability and may result in a rate adjustment depending on the season.",
+          "In case of documented force majeure (health crisis, natural disaster, official travel restrictions), the hotel commits to offering a fee-free rebooking over an equivalent period within 12 months."
+        ]
+      },
+      {
+        "title": "3 · Right of withdrawal",
+        "items": [
+          "In accordance with Article 16(l) of European Directive 2011/83/EU, transposed into Article L221-28 12° of the French Consumer Code, accommodation services provided on a specific date or period do not benefit from the 14-day withdrawal period usually applicable to distance contracts.",
+          "Your booking is therefore immediately binding once confirmed by the hotel, subject to the cancellation policy (section 2)."
+        ]
+      },
+      {
+        "title": "4 · Mediation and dispute resolution",
+        "intro": "Any dispute relating to the performance of the accommodation contract may be resolved amicably. Failing an amicable agreement, you have the following options:",
+        "items": [
+          "European Online Dispute Resolution (ODR) platform of the European Commission, open to any consumer residing in the EU: ec.europa.eu/consumers/odr/",
+          "Tourism and Travel Mediator (MTV) for travellers residing in France: www.mtv.travel",
+          "The courts of Madagascar (Fianarantsoa courts) have jurisdiction for any other legal action."
+        ]
+      },
+      {
+        "title": "5 · Personal data protection (GDPR)",
+        "intro": "Data collected via the booking form (name, email, phone, nationality, stay dates) is processed under the General Data Protection Regulation (GDPR, EU Regulation 2016/679):",
+        "items": [
+          "Data controller: Lac Hôtel Sahambavy — Sahambavy, Haute-Matsiatra, Madagascar — booking@lachotel.com",
+          "Purpose: processing your booking request, sending confirmations and invoicing.",
+          "Legal basis: performance of the accommodation contract (GDPR Art. 6.1.b) and legal obligations (accounting, hotel register).",
+          "Recipients: hotel reception and administration team only. No transmission to third parties for commercial purposes.",
+          "Retention: 3 years after your stay for customer relations, 10 years for accounting records (legal obligation).",
+          "Your rights: access, rectification, erasure, restriction, portability, objection. To exercise these rights: booking@lachotel.com",
+          "Supervisory authority: CNIL (France, www.cnil.fr) or any equivalent European authority in your country of residence."
+        ]
+      },
+      {
+        "title": "6 · Times and arrival",
+        "items": [
+          "Check-in: from 2:00 PM (Madagascar time, UTC+3).",
+          "Check-out: before 11:00 AM. Late check-out on request and subject to availability (until 3:00 PM, free; beyond, additional night charged).",
+          "Estimated arrival time: to be communicated in the booking form so the team can prepare your welcome.",
+          "In case of unexpected delay, please notify us via WhatsApp at (+261) 34 99 161 76."
+        ]
+      }
+    ],
+    "contactLead": "A question about these conditions?",
+    "contactCta": "Contact us",
+    "termsConsentLinkLabel": "booking conditions",
+    "viewFull": "See the full conditions"
   }
 }

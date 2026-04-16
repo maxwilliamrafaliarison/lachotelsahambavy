@@ -98,6 +98,16 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           {/* Divider */}
           <div className="h-[1px] bg-cream/8 mb-8" />
 
+          {/* Legal links row — booking conditions, privacy, etc. */}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6 text-[0.65rem] text-cream/40 uppercase tracking-[0.15em]">
+            <Link
+              href={`/${locale}/conditions-reservation/`}
+              className="hover:text-gold transition-colors"
+            >
+              {dict.footer.bookingConditions}
+            </Link>
+          </div>
+
           {/* Bottom bar — minimal */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[0.6rem] text-cream/25 uppercase tracking-wider">
             <p>&copy; {year} {dict.footer.copyright}</p>

@@ -266,7 +266,7 @@
       "submit": "Envoyer la demande de réservation",
       "sending": "Envoi en cours…",
       "gdprConsent": "J'accepte que mes données personnelles soient traitées pour le traitement de ma demande de réservation, conformément au RGPD. Mes données ne seront pas transmises à des tiers.",
-      "termsConsent": "J'ai lu et j'accepte les conditions de réservation et d'annulation ci-dessous.",
+      "termsConsent": "J'ai lu et j'accepte les conditions de réservation et d'annulation.",
       "required": "Champs obligatoires"
     },
     "offerReminder": "Offre 2 nuits = 50 % sur la 2ᵉ",
@@ -471,6 +471,7 @@
     "contactTitle": "Contact",
     "legal": "Mentions légales",
     "privacy": "Confidentialité",
+    "bookingConditions": "Conditions de réservation",
     "copyright": "Lac Hôtel Sahambavy. Tous droits réservés."
   },
   "cookie": {
@@ -569,5 +570,81 @@
       "backHome": "Retour à l'accueil",
       "stayInfo": "Séjour : {checkin} → {checkout}"
     }
+  },
+  "conditions": {
+    "slug": "conditions-reservation",
+    "navLabel": "Conditions",
+    "heroTitle": "Conditions de réservation",
+    "heroSubtitle": "Droits et engagements — voyageurs de l'Union européenne",
+    "intro": "Les présentes conditions encadrent toute demande de réservation passée sur lachotel.com. Elles respectent le cadre légal applicable aux voyageurs de l'Union européenne (Directive 2011/83/UE et Règlement 524/2013). En soumettant le formulaire de réservation, vous reconnaissez en avoir pris connaissance.",
+    "lastUpdated": "Dernière mise à jour",
+    "lastUpdatedDate": "16 avril 2026",
+    "sections": [
+      {
+        "title": "1 · Réservation et paiement",
+        "items": [
+          "Toute demande de réservation devient une réservation ferme après réception d'un e-mail de confirmation envoyé par l'hôtel sous 24 heures.",
+          "Aucun paiement n'est collecté en ligne. Le règlement s'effectue à l'arrivée, en espèces (Ariary ou Euros), par carte bancaire, ou par virement bancaire préalable.",
+          "Les tarifs affichés sur lachotel.com sont en Euros (EUR) et par chambre, taxes comprises. Les offres promotionnelles (ex. Offre 2 nuits –50 %) sont non cumulables avec d'autres remises.",
+          "La vignette touristique, collectée pour le compte de l'État malgache, s'ajoute au tarif (environ 5 000 AR par personne et par nuit).",
+          "Le formulaire en ligne limite les demandes à 20 voyageurs et 4 chambres. Pour les groupes plus importants (séminaires, mariages), merci de nous contacter directement."
+        ]
+      },
+      {
+        "title": "2 · Annulation et modification",
+        "intro": "Toute annulation ou modification doit être communiquée par e-mail à booking@lachotel.com. Les frais sont calculés sur le montant total de la réservation initiale.",
+        "items": [
+          "Plus de 60 jours avant l'arrivée : annulation gratuite.",
+          "De 60 à 15 jours avant l'arrivée : 20 % du montant total facturé.",
+          "De 15 à 5 jours avant l'arrivée : 70 % du montant total facturé.",
+          "Moins de 3 jours avant l'arrivée : 100 % du montant total facturé.",
+          "Non-présentation (no-show) ou départ anticipé : 100 % du montant total facturé.",
+          "Toute modification de dates est soumise à disponibilité et peut entraîner un ajustement tarifaire selon la saison.",
+          "En cas de force majeure documentée (crise sanitaire, catastrophe naturelle, restrictions officielles de voyage), l'hôtel s'engage à proposer un report sans frais sur une période équivalente de 12 mois."
+        ]
+      },
+      {
+        "title": "3 · Droit de rétractation",
+        "items": [
+          "Conformément à l'article 16 l) de la Directive européenne 2011/83/UE, transposé à l'article L221-28 12° du Code de la consommation français, les prestations d'hébergement fournies à une date ou période déterminée ne bénéficient pas du délai de rétractation de 14 jours habituellement applicable aux contrats conclus à distance.",
+          "Votre réservation est donc immédiatement engageante dès la confirmation par l'hôtel, dans les limites prévues par la politique d'annulation (section 2)."
+        ]
+      },
+      {
+        "title": "4 · Médiation et résolution des litiges",
+        "intro": "Tout litige relatif à l'exécution du contrat d'hébergement peut faire l'objet d'une résolution amiable. À défaut d'accord amiable, vous disposez des voies suivantes :",
+        "items": [
+          "Plateforme européenne de Règlement en Ligne des Litiges (RLL) de la Commission européenne, ouverte à tout consommateur résidant dans l'UE : ec.europa.eu/consumers/odr/",
+          "Médiateur du Tourisme et du Voyage (MTV) pour les voyageurs résidant en France : www.mtv.travel",
+          "Les juridictions compétentes de Madagascar (tribunaux de Fianarantsoa) pour tout autre recours."
+        ]
+      },
+      {
+        "title": "5 · Protection des données personnelles (RGPD)",
+        "intro": "Les données collectées via le formulaire de réservation (nom, e-mail, téléphone, nationalité, dates de séjour) sont traitées dans le cadre du Règlement général sur la protection des données (RGPD, Règlement UE 2016/679) :",
+        "items": [
+          "Responsable de traitement : Lac Hôtel Sahambavy — Sahambavy, Haute-Matsiatra, Madagascar — booking@lachotel.com",
+          "Finalité : traitement de votre demande de réservation, envoi de confirmations et facturation.",
+          "Base légale : exécution du contrat d'hébergement (art. 6.1.b RGPD) et obligations légales (comptabilité, registre hôtelier).",
+          "Destinataires : équipe réception et administration de l'hôtel uniquement. Aucune transmission à des tiers à des fins commerciales.",
+          "Conservation : 3 ans après votre séjour pour la relation client, 10 ans pour les pièces comptables (obligation légale).",
+          "Vos droits : accès, rectification, effacement, limitation, portabilité, opposition. Pour exercer ces droits : booking@lachotel.com",
+          "Autorité de contrôle : CNIL (France, www.cnil.fr) ou toute autorité européenne équivalente dans votre pays de résidence."
+        ]
+      },
+      {
+        "title": "6 · Horaires et arrivée",
+        "items": [
+          "Check-in : à partir de 14 h 00 (heure de Madagascar, UTC+3).",
+          "Check-out : avant 11 h 00. Départ tardif sur demande et sous réserve de disponibilité (jusqu'à 15 h, gratuit ; au-delà, nuit supplémentaire facturée).",
+          "Heure d'arrivée estimée : à communiquer dans le formulaire de réservation afin que l'équipe puisse préparer votre accueil.",
+          "En cas de retard imprévu, merci de nous prévenir par WhatsApp au (+261) 34 99 161 76."
+        ]
+      }
+    ],
+    "contactLead": "Une question sur ces conditions ?",
+    "contactCta": "Contactez-nous",
+    "termsConsentLinkLabel": "conditions de réservation",
+    "viewFull": "Voir les conditions complètes"
   }
 }
