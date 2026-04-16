@@ -22,7 +22,8 @@ export type BreadcrumbKey =
   | "galerie"
   | "contact"
   | "notre-equipe"
-  | "le-repos";
+  | "le-repos"
+  | "conditions";
 
 type LocalizedLabel = Record<Locale, string>;
 
@@ -68,6 +69,14 @@ const PAGE_LABELS: Record<BreadcrumbKey, { slug: string; label: LocalizedLabel }
   "le-repos": {
     slug: "le-repos",
     label: { fr: "Le Repos", en: "Le Repos", es: "Le Repos" },
+  },
+  conditions: {
+    slug: "conditions-reservation",
+    label: {
+      fr: "Conditions de réservation",
+      en: "Booking conditions",
+      es: "Condiciones de reserva",
+    },
   },
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Suspense, useEffect, useState, use } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
 import { type Locale, getBasePath } from "@/lib/utils";
@@ -126,6 +127,17 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
                   </li>
                 ))}
               </ul>
+              <div className="mt-6 pt-6 border-t border-brown-deep/10 text-center">
+                <Link
+                  href={`/${loc}/${dict.conditions?.slug || "conditions-reservation"}/`}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-brown-deep hover:text-gold transition-colors"
+                >
+                  {dict.conditions?.viewFull || "Voir les conditions complètes"}
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </ScrollReveal>
         </div>

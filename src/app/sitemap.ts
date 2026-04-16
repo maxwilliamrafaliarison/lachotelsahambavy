@@ -24,6 +24,7 @@ const publicRoutes = [
   { path: "/notre-equipe", priority: 0.6, changeFreq: "monthly" as const },
   { path: "/galerie", priority: 0.7, changeFreq: "weekly" as const },
   { path: "/contact", priority: 0.95, changeFreq: "monthly" as const },
+  { path: "/conditions-reservation", priority: 0.3, changeFreq: "yearly" as const },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

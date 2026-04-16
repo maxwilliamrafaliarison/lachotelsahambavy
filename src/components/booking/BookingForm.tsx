@@ -16,6 +16,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, FormProvider, useFormContext, type FieldError } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,6 +65,38 @@ function translateError(err: FieldError | undefined, dict: Dict): string | undef
     else return key;
   }
   return typeof node === "string" ? node : key;
+}
+
+/**
+ * Rend la phrase de consentement CGR en transformant la portion
+ * `termsConsentLinkLabel` (ex. "conditions de réservation") en lien vers la
+ * page /conditions-reservation. Si le label ne figure pas dans la phrase
+ * (jamais attendu — les dicts sont synchronisés), fallback plain text.
+ */
+function TermsConsentLabel({ dict, locale }: { dict: Dict; locale: Locale }) {
+  const text: string = dict.contact.form.termsConsent;
+  const linkLabel: string | undefined = dict.conditions?.termsConsentLinkLabel;
+  const slug: string = dict.conditions?.slug || "conditions-reservation";
+  if (!linkLabel) return <>{text}</>;
+  const idx = text.toLowerCase().indexOf(linkLabel.toLowerCase());
+  if (idx === -1) return <>{text}</>;
+  const before = text.slice(0, idx);
+  const matched = text.slice(idx, idx + linkLabel.length);
+  const after = text.slice(idx + linkLabel.length);
+  return (
+    <>
+      {before}
+      <Link
+        href={`/${locale}/${slug}/`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-brown-deep underline decoration-gold/60 hover:decoration-gold"
+      >
+        {matched}
+      </Link>
+      {after}
+    </>
+  );
 }
 
 // ─── Step indicator ───────────────────────────────────────
@@ -501,7 +534,8 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
             {...register("terms")}
           />
           <span className="text-xs text-text-muted leading-relaxed">
-            {dict.contact.form.termsConsent} <span className="text-gold">*</span>
+            <TermsConsentLabel dict={dict} locale={locale} />{" "}
+            <span className="text-gold">*</span>
           </span>
         </label>
         {errors.terms ? (
