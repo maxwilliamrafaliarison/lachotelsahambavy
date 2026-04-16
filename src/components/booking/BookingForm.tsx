@@ -148,13 +148,76 @@ function Field({
 const inputClass =
   "w-full bg-white border border-brown-deep/20 rounded-lg px-4 py-3 text-sm text-text-dark placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
 
+// ─── Occupancy stepper (rooms / adults / children) ─────────
+function OccupancyStepper({
+  label,
+  value,
+  min,
+  max,
+  onChange,
+  hint,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (v: number) => void;
+  hint?: string;
+}) {
+  const canDec = value > min;
+  const canInc = value < max;
+  return (
+    <div className="flex items-center justify-between bg-white border border-brown-deep/15 rounded-lg px-4 py-3">
+      <div className="flex flex-col">
+        <span className="text-sm text-text-dark font-medium">{label}</span>
+        {hint ? <span className="text-[0.7rem] text-text-muted/70">{hint}</span> : null}
+      </div>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => canDec && onChange(value - 1)}
+          disabled={!canDec}
+          aria-label={`− ${label}`}
+          className="w-8 h-8 rounded-full border border-brown-deep/25 text-brown-deep text-lg leading-none flex items-center justify-center hover:bg-brown-deep/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          −
+        </button>
+        <span className="text-sm font-semibold w-6 text-center tabular-nums text-brown-deep">
+          {value}
+        </span>
+        <button
+          type="button"
+          onClick={() => canInc && onChange(value + 1)}
+          disabled={!canInc}
+          aria-label={`+ ${label}`}
+          className="w-8 h-8 rounded-full border border-gold/40 bg-gold/10 text-gold text-lg leading-none flex items-center justify-center hover:bg-gold/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Step 1: Séjour ───────────────────────────────────────
 function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
   const {
     register,
+    setValue,
+    watch,
     formState: { errors },
   } = useFormContext<BookingFormValues>();
   const b = dict.booking;
+  const bb = dict.bookingBar;
+
+  // Sync guests = adults + children en temps réel
+  const adults = watch("adults") ?? 2;
+  const children = watch("children") ?? 0;
+  const totalGuests = (adults || 0) + (children || 0);
+  useEffect(() => {
+    setValue("guests", totalGuests, { shouldValidate: false, shouldDirty: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalGuests]);
 
   return (
     <div className="space-y-5">
@@ -184,21 +247,43 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
             {...register("checkout")}
           />
         </Field>
+      </div>
 
-        <Field
-          label={dict.contact.form.guests}
-          required
-          error={translateError(errors.guests, dict)}
-        >
-          <input
-            type="number"
+      {/* Occupation : 3 steppers au lieu d'un champ "nombre de voyageurs" */}
+      <Field
+        label={bb?.guests || dict.contact.form.guests}
+        required
+        error={translateError(errors.guests, dict) || translateError(errors.adults, dict) || translateError(errors.children, dict) || translateError(errors.rooms, dict)}
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <OccupancyStepper
+            label={bb?.rooms || "Chambres"}
+            value={watch("rooms") ?? 1}
+            min={1}
+            max={4}
+            onChange={(v) => setValue("rooms", v, { shouldDirty: true })}
+          />
+          <OccupancyStepper
+            label={bb?.adults || "Adultes"}
+            value={adults}
             min={1}
             max={20}
-            className={inputClass}
-            {...register("guests", { valueAsNumber: true })}
+            onChange={(v) => setValue("adults", v, { shouldDirty: true })}
           />
-        </Field>
+          <OccupancyStepper
+            label={bb?.child ? `${bb.child.charAt(0).toUpperCase()}${bb.child.slice(1)}s` : "Enfants"}
+            hint={bb?.children && bb.children.includes("(") ? bb.children.match(/\(([^)]+)\)/)?.[1] : undefined}
+            value={children}
+            min={0}
+            max={10}
+            onChange={(v) => setValue("children", v, { shouldDirty: true })}
+          />
+        </div>
+        {/* Guests reste géré en champ caché pour le submit (sync via useEffect) */}
+        <input type="hidden" {...register("guests", { valueAsNumber: true })} />
+      </Field>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Field
           label={dict.contact.form.arrivalTime}
           error={translateError(errors.arrivalTime, dict)}
@@ -337,10 +422,30 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
   const v = watch();
   const nights = v.checkin && v.checkout ? computeNights(v.checkin, v.checkout) : 0;
   const b = dict.booking;
+  const bb = dict.bookingBar;
   const roomLabel = useMemo(() => {
     const room = rooms.find((r) => r.id === v.room);
     return room ? room.name[locale] : v.room === "any" ? b?.anyRoom || "—" : "—";
   }, [v.room, locale, b]);
+
+  // Construit "2 adultes, 1 enfant · 2 chambres" à partir des champs décomposés.
+  // Se replie gracieusement sur le total `guests` si adults/children absents (legacy).
+  const occupancyLabel = useMemo(() => {
+    const a = v.adults;
+    const c = v.children;
+    const r = v.rooms;
+    if (a == null && c == null) {
+      return v.guests ? String(v.guests) : "—";
+    }
+    const aLabel = (a ?? 0) > 1 ? bb?.adultPlural || "adultes" : bb?.adult || "adulte";
+    const cLabel = (c ?? 0) > 1 ? bb?.childPlural || "enfants" : bb?.child || "enfant";
+    const parts: string[] = [];
+    if (a != null) parts.push(`${a} ${aLabel}`);
+    if (c != null && c > 0) parts.push(`${c} ${cLabel}`);
+    const rLabel = (r ?? 1) > 1 ? bb?.roomPlural || "chambres" : bb?.room || "chambre";
+    if (r != null) parts.push(`${r} ${rLabel}`);
+    return parts.join(" · ");
+  }, [v.adults, v.children, v.rooms, v.guests, bb]);
 
   return (
     <div className="space-y-6">
@@ -351,7 +456,7 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
           <Item label={dict.contact.form.checkin} value={v.checkin || "—"} />
           <Item label={dict.contact.form.checkout} value={v.checkout || "—"} />
           <Item label={b?.nights || "Nuits"} value={nights > 0 ? String(nights) : "—"} emphasis />
-          <Item label={dict.contact.form.guests} value={v.guests ? String(v.guests) : "—"} />
+          <Item label={bb?.guests || dict.contact.form.guests} value={occupancyLabel} />
           <Item label={dict.contact.form.room} value={roomLabel} />
           <Item label={dict.contact.form.pension} value={b?.pensions?.[v.pension] || v.pension || "—"} />
           <Item label={b?.rate || "Tarif"} value={b?.rates?.[v.rate] || v.rate || "—"} />
@@ -449,15 +554,38 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
   const prefill = useMemo<Partial<BookingFormValues>>(() => {
     const checkin = searchParams.get("checkin") || "";
     const checkout = searchParams.get("checkout") || "";
-    const guests = Number(searchParams.get("guests") || 2);
     const rateParam = searchParams.get("rate");
     const rate = (RATES as readonly string[]).includes(rateParam ?? "")
       ? (rateParam as BookingFormValues["rate"])
       : "standard";
+
+    // Occupation : priorité aux champs décomposés de la booking bar,
+    // fallback sur `guests` (legacy) puis valeurs par défaut.
+    const clampInt = (raw: string | null, min: number, max: number, def: number) => {
+      const n = Number(raw);
+      if (!Number.isFinite(n)) return def;
+      return Math.min(max, Math.max(min, Math.round(n)));
+    };
+    const hasAdults = searchParams.get("adults") != null;
+    const hasChildren = searchParams.get("children") != null;
+    const adults = hasAdults ? clampInt(searchParams.get("adults"), 1, 20, 2) : 2;
+    const children = hasChildren ? clampInt(searchParams.get("children"), 0, 10, 0) : 0;
+    const rooms = clampInt(searchParams.get("rooms"), 1, 4, 1);
+
+    // Guests : si adults ou children est passé, on recalcule pour garantir cohérence.
+    // Sinon, lecture directe du param `guests` (legacy).
+    const guests =
+      hasAdults || hasChildren
+        ? adults + children
+        : clampInt(searchParams.get("guests"), 1, 20, adults + children);
+
     return {
       checkin,
       checkout,
-      guests: Number.isFinite(guests) && guests > 0 ? guests : 2,
+      guests,
+      adults,
+      children,
+      rooms,
       rate,
       pension: "bb",
       transfer: "none",
@@ -473,6 +601,9 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
       pension: "bb",
       rate: prefill.rate || "standard",
       transfer: "none",
+      adults: prefill.adults ?? 2,
+      children: prefill.children ?? 0,
+      rooms: prefill.rooms ?? 1,
       name: "",
       email: "",
       phone: "",
@@ -508,7 +639,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
 
   const goNext = useCallback(async () => {
     const stepFields: Record<1 | 2, (keyof BookingFormValues)[]> = {
-      1: ["checkin", "checkout", "guests", "room", "pension", "rate", "transfer", "arrivalTime"],
+      1: ["checkin", "checkout", "guests", "adults", "children", "rooms", "room", "pension", "rate", "transfer", "arrivalTime"],
       2: ["name", "email", "phone", "nationality", "message"],
     };
     const fields = stepFields[step as 1 | 2];
@@ -660,6 +791,10 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
 // ─── Mailto fallback ──────────────────────────────────────
 function buildMailtoBody(data: BookingFormValues): string {
   const nights = computeNights(data.checkin, data.checkout);
+  const occupancyLine =
+    data.adults != null || data.children != null
+      ? `Occupation: ${data.adults ?? 0} adulte(s) + ${data.children ?? 0} enfant(s) · ${data.rooms ?? 1} chambre(s)`
+      : `Personnes / Guests: ${data.guests}`;
   return [
     "=== DEMANDE DE RESERVATION / BOOKING REQUEST ===",
     "",
@@ -672,6 +807,7 @@ function buildMailtoBody(data: BookingFormValues): string {
     `Arrivee / Check-in: ${data.checkin}`,
     `Depart / Check-out: ${data.checkout} (${nights} nuits)`,
     `Personnes / Guests: ${data.guests}`,
+    occupancyLine,
     `Chambre / Room: ${data.room}`,
     `Pension: ${data.pension}`,
     `Tarif: ${data.rate}`,

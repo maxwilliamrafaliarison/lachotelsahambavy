@@ -18,6 +18,10 @@ export interface GoogleSheetPayload {
   checkout: string;
   nights: number;
   guests: number;
+  /** Décomposition optionnelle — remplie quand la demande vient de la booking bar. */
+  adults?: number;
+  children?: number;
+  rooms?: number;
   room: string;
   pension: string;
   rate: string;

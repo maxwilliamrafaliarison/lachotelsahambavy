@@ -20,7 +20,7 @@ import {
 } from "@react-email/components";
 import type { BookingFormValues } from "@/lib/booking/schema";
 import { LABELS, computeNights } from "@/lib/booking/schema";
-import { EMAIL_COLORS, EMAIL_COPY, EMAIL_FONTS } from "./shared";
+import { EMAIL_COLORS, EMAIL_COPY, EMAIL_FONTS, formatOccupancy } from "./shared";
 
 export interface BookingNotificationProps {
   booking: BookingFormValues;
@@ -93,7 +93,15 @@ export function BookingNotification({ booking, receivedAt }: BookingNotification
               <Row label="Check-in" value={booking.checkin} />
               <Row label="Check-out" value={booking.checkout} />
               <Row label="Nuits" value={String(nights)} emphasis />
-              <Row label="Personnes" value={String(booking.guests)} />
+              <Row
+                label="Personnes"
+                value={formatOccupancy("fr", {
+                  guests: booking.guests,
+                  adults: booking.adults,
+                  children: booking.children,
+                  rooms: booking.rooms,
+                })}
+              />
               <Row label="Hébergement" value={roomLabel} />
               <Row label="Pension" value={pensionLabel} />
               <Row label="Tarif" value={rateLabel} emphasis />

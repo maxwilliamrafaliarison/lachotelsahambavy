@@ -132,3 +132,66 @@ export const EMAIL_COPY = {
 } as const;
 
 export type EmailCopy = (typeof EMAIL_COPY)[Locale];
+
+// ─── Occupancy formatting helpers ─────────────────────────
+// Génère "2 adultes · 1 enfant · 2 chambres" (ou équivalent EN/ES) à partir
+// des champs décomposés. Fallback gracieux sur "N voyageurs" si absents.
+const OCCUPANCY_WORDS: Record<
+  Locale,
+  { adult: string; adults: string; child: string; children: string; room: string; rooms: string; guest: string; guests: string }
+> = {
+  fr: {
+    adult: "adulte",
+    adults: "adultes",
+    child: "enfant",
+    children: "enfants",
+    room: "chambre",
+    rooms: "chambres",
+    guest: "voyageur",
+    guests: "voyageurs",
+  },
+  en: {
+    adult: "adult",
+    adults: "adults",
+    child: "child",
+    children: "children",
+    room: "room",
+    rooms: "rooms",
+    guest: "guest",
+    guests: "guests",
+  },
+  es: {
+    adult: "adulto",
+    adults: "adultos",
+    child: "niño",
+    children: "niños",
+    room: "habitación",
+    rooms: "habitaciones",
+    guest: "viajero",
+    guests: "viajeros",
+  },
+};
+
+export function formatOccupancy(
+  locale: Locale,
+  opts: { guests: number; adults?: number; children?: number; rooms?: number }
+): string {
+  const w = OCCUPANCY_WORDS[locale] ?? OCCUPANCY_WORDS.fr;
+  const { adults, children, rooms } = opts;
+  // Legacy : seul `guests` est connu → "3 voyageurs"
+  if (adults == null && children == null) {
+    const word = opts.guests > 1 ? w.guests : w.guest;
+    return `${opts.guests} ${word}`;
+  }
+  const parts: string[] = [];
+  if (adults != null) {
+    parts.push(`${adults} ${adults > 1 ? w.adults : w.adult}`);
+  }
+  if (children != null && children > 0) {
+    parts.push(`${children} ${children > 1 ? w.children : w.child}`);
+  }
+  if (rooms != null) {
+    parts.push(`${rooms} ${rooms > 1 ? w.rooms : w.room}`);
+  }
+  return parts.join(" · ");
+}

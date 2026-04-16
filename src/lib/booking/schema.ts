@@ -49,6 +49,11 @@ const stayStepObject = z.object({
     .int()
     .min(1, "booking.errors.guestsMin")
     .max(20, "booking.errors.guestsMax"),
+  // Décomposition facultative (héritée de la booking bar) — informationnelle.
+  // `guests` reste la source de vérité côté email/CRM pour compat rétro.
+  adults: z.number().int().min(1, "booking.errors.adultsMin").max(20).optional(),
+  children: z.number().int().min(0).max(10, "booking.errors.childrenMax").optional(),
+  rooms: z.number().int().min(1, "booking.errors.roomsMin").max(4, "booking.errors.roomsMax").optional(),
   room: z.enum(ROOM_IDS),
   pension: z.enum(PENSIONS).default("bb"),
   rate: z.enum(RATES).default("standard"),
@@ -108,6 +113,15 @@ export const bookingFormSchema = fullObject
       return ci.getTime() >= today.getTime();
     },
     { message: "booking.errors.datesInPast", path: ["checkin"] }
+  )
+  .refine(
+    // Si adults + children sont tous deux fournis, leur somme doit matcher guests.
+    // (Laisse passer les soumissions legacy avec `guests` seul.)
+    (d) =>
+      d.adults == null || d.children == null
+        ? true
+        : d.adults + d.children === d.guests,
+    { message: "booking.errors.guestsMismatch", path: ["guests"] }
   );
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;

@@ -21,7 +21,7 @@ import {
 } from "@react-email/components";
 import type { BookingFormValues } from "@/lib/booking/schema";
 import { LABELS, computeNights } from "@/lib/booking/schema";
-import { EMAIL_COLORS, EMAIL_COPY, EMAIL_FONTS } from "./shared";
+import { EMAIL_COLORS, EMAIL_COPY, EMAIL_FONTS, formatOccupancy } from "./shared";
 import { siteConfig } from "@/data/site";
 
 export interface BookingConfirmationProps {
@@ -88,7 +88,15 @@ export function BookingConfirmation({ booking }: BookingConfirmationProps) {
                 value={String(nights)}
                 emphasis
               />
-              <Row label={t.guests} value={String(booking.guests)} />
+              <Row
+                label={t.guests}
+                value={formatOccupancy(locale, {
+                  guests: booking.guests,
+                  adults: booking.adults,
+                  children: booking.children,
+                  rooms: booking.rooms,
+                })}
+              />
               <Row label={t.room} value={roomLabel} />
               <Row label={t.pension} value={pensionLabel} />
               <Row label={t.rate} value={rateLabel} />
