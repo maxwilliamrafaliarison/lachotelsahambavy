@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { useEffect, useState, use } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
-import { locales, type Locale, getBasePath } from "@/lib/utils";
+import { type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { use } from "react";
 
 const basePath = getBasePath();
 
@@ -90,7 +90,7 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
 
           {/* Masonry grid */}
           <div className="masonry-grid">
-            {filtered.map((photo, i) => (
+            {filtered.map((photo) => (
               <div
                 key={photo.src}
                 className="group cursor-pointer overflow-hidden rounded-xl"

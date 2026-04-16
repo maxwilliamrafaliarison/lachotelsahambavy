@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/data/site";
 

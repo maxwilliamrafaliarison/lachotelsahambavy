@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useEffect } from "react";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { rooms } from "@/data/rooms";
