@@ -55,7 +55,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
               {siteConfig.phone}
             </a>
             <span className="hidden md:block w-[1px] h-4 bg-cream/15" />
-            <span className="text-cream/30 text-center">{siteConfig.address}</span>
+            <span className="text-cream/55 text-center">{siteConfig.address}</span>
           </div>
 
           {/* Social icons */}
@@ -64,7 +64,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
               href={siteConfig.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/30 hover:text-gold transition-colors"
+              className="text-cream/50 hover:text-gold transition-colors"
               aria-label="Facebook"
             >
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/30 hover:text-gold transition-colors"
+              className="text-cream/50 hover:text-gold transition-colors"
               aria-label="Instagram"
             >
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
               href={siteConfig.social.tripadvisor}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/30 hover:text-gold transition-colors"
+              className="text-cream/50 hover:text-gold transition-colors"
               aria-label="TripAdvisor"
             >
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">

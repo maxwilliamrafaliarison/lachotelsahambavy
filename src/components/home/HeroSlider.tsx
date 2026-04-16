@@ -151,15 +151,6 @@ export default function HeroSlider({ dict }: { dict: any }) {
         </span>
       </div>
 
-      {/* Scroll indicator — elegant line */}
-      <div className="absolute bottom-12 right-6 md:right-12 lg:right-20 z-10 flex flex-col items-center gap-3">
-        <span className="text-[0.55rem] uppercase tracking-[0.2em] text-white/40 [writing-mode:vertical-lr]">
-          Scroll
-        </span>
-        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
-          <div className="absolute inset-x-0 h-full bg-gold animate-scrollLine" />
-        </div>
-      </div>
     </section>
   );
 }

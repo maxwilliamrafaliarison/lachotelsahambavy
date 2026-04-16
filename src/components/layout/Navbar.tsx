@@ -52,10 +52,13 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   const scrolled = ratio >= 1;
   const darkText = ratio > SCROLL_THRESHOLD / SCROLL_END;
 
+  // Typographic locale switcher — emoji flags read as DIY, a two-letter
+  // code in uppercase tracking sits better next to nav-links of the same
+  // weight (cf. Le Bristol, La Mamounia).
   const localeLinks = [
-    { code: "fr" as const, flag: "🇫🇷" },
-    { code: "en" as const, flag: "🇬🇧" },
-    { code: "es" as const, flag: "🇪🇸" },
+    { code: "fr" as const },
+    { code: "en" as const },
+    { code: "es" as const },
   ];
 
   function handleNav(href: string) {
@@ -113,17 +116,27 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               ))}
 
             {/* Locale switcher */}
-            <div className="flex gap-1.5 ml-2">
-              {localeLinks.map((l) => (
-                <Link
-                  key={l.code}
-                  href={`/${l.code}/`}
-                  className={`text-sm transition-all ${
-                    locale === l.code ? "opacity-100 scale-110" : "opacity-40 hover:opacity-70"
-                  }`}
-                >
-                  {l.flag}
-                </Link>
+            <div className="flex items-center gap-3 ml-2">
+              {localeLinks.map((l, i) => (
+                <span key={l.code} className="flex items-center gap-3">
+                  {i > 0 && (
+                    <span
+                      aria-hidden="true"
+                      className={`inline-block w-px h-3 ${darkText ? "bg-brown-deep/20" : "bg-white/30"}`}
+                    />
+                  )}
+                  <Link
+                    href={`/${l.code}/`}
+                    className={`text-[0.65rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${
+                      locale === l.code
+                        ? darkText ? "text-gold" : "text-white"
+                        : darkText ? "text-text-body/50 hover:text-gold" : "text-white/55 hover:text-white"
+                    }`}
+                    aria-current={locale === l.code ? "page" : undefined}
+                  >
+                    {l.code.toUpperCase()}
+                  </Link>
+                </span>
               ))}
             </div>
 
@@ -183,9 +196,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             />
             <button
               onClick={() => setMenuOpen(false)}
-              className="p-2 text-2xl text-brown-deep"
+              className="p-2 text-brown-deep"
+              aria-label="Fermer le menu"
             >
-              ✕
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
             </button>
           </div>
           <div className="flex flex-col px-8 py-6 gap-1">
@@ -200,16 +216,21 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 {item.label[locale]}
               </button>
             ))}
-            <div className="flex gap-4 pt-6 mt-4 border-t border-brown-deep/10">
-              {localeLinks.map((l) => (
-                <Link
-                  key={l.code}
-                  href={`/${l.code}/`}
-                  className={`text-2xl ${locale === l.code ? "opacity-100" : "opacity-40"}`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {l.flag}
-                </Link>
+            <div className="flex items-center gap-4 pt-6 mt-4 border-t border-brown-deep/10">
+              {localeLinks.map((l, i) => (
+                <span key={l.code} className="flex items-center gap-4">
+                  {i > 0 && <span aria-hidden="true" className="inline-block w-px h-4 bg-brown-deep/20" />}
+                  <Link
+                    href={`/${l.code}/`}
+                    className={`text-sm font-medium uppercase tracking-[0.25em] transition-colors ${
+                      locale === l.code ? "text-gold" : "text-brown-deep/60 hover:text-gold"
+                    }`}
+                    aria-current={locale === l.code ? "page" : undefined}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {l.code.toUpperCase()}
+                  </Link>
+                </span>
               ))}
             </div>
             <button
