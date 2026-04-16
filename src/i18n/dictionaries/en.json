@@ -46,6 +46,20 @@
     "stat3Value": "28 yrs",
     "cta": "View accommodation"
   },
+  "ourHouse": {
+    "label": "Our house",
+    "title": "A family story, turned into a place of welcome",
+    "paragraph": "In 1998, Kim and Olga Leong bought a plot of land at the edge of Lake Sahambavy to build a simple retirement cabin. Slowly, Olga turned it into a garden of Eden. Train travellers, intrigued, would stop by thinking they'd found a staging post — and so the idea of a hotel was born. Twenty-eight years on, their daughter Maggie has returned from Canada with her husband Sergi; together they have grown the estate into what it is today: some fifty bungalows tucked into unspoiled nature, and a team of more than fifty villagers for whom every guest is a neighbour.",
+    "quote": "“And the little story isn't over yet.”",
+    "signature": "— The Leong family",
+    "captions": {
+      "garden": "The garden",
+      "welcome": "The welcome",
+      "craft": "The craftsmen",
+      "rooms": "The bungalows"
+    },
+    "ctaLabel": "Meet the team"
+  },
   "rooms": {
     "label": "Accommodation · 2026 Rates",
     "title": "Our rooms & bungalows",
