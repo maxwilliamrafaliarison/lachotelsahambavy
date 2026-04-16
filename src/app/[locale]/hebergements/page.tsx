@@ -60,8 +60,10 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         image={`${basePath}/images/rooms/pilotis-01.jpg`}
       />
 
-      {/* Rate summary table */}
-      <section className="py-24 bg-white">
+      {/* Liquid-glass tariff grid — remplace l'ancien tableau "brut".
+          Chaque carte = un type d'hébergement avec photo, verre dépoli,
+          prix Public (et TO si dispo) + ancre vers la section détaillée. */}
+      <section className="py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.rooms.label}
@@ -69,96 +71,99 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             subtitle={dict.rooms.subtitle}
           />
 
-          {/* Desktop (≥ md) — classic table */}
-          <ScrollReveal>
-            <div className="hidden md:block overflow-x-auto rounded-xl border border-brown-deep/10 shadow-sm">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-brown-deep text-white">
-                    <th className="text-left px-6 py-4 font-semibold">
-                      {loc === "fr" ? "Hébergement" : loc === "es" ? "Alojamiento" : "Accommodation"}
-                    </th>
-                    <th className="text-center px-6 py-4 font-semibold">
-                      {loc === "fr" ? "Capacité" : loc === "es" ? "Capacidad" : "Capacity"}
-                    </th>
-                    <th className="text-center px-6 py-4 font-semibold">{dict.rooms.rateTO}</th>
-                    <th className="text-center px-6 py-4 font-semibold">{dict.rooms.ratePublic}</th>
-                    <th className="text-center px-6 py-4 font-semibold">Ariary</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rooms.map((room, i) => (
-                    <tr
-                      key={room.id}
-                      className={`border-b border-brown-deep/5 ${i % 2 === 0 ? "bg-cream/40" : "bg-white"}`}
-                    >
-                      <td className="px-6 py-4">
-                        <div className="font-semibold text-text-dark">{room.name[loc]}</div>
-                        <div className="text-text-muted text-xs mt-0.5">
-                          {room.units} {dict.rooms.units}
-                          {room.surface ? ` · ${room.surface}` : ""}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-center text-text-muted">{room.capacity} pers.</td>
-                      <td className="px-6 py-4 text-center font-semibold text-gold">
-                        {room.priceTOEUR ? `${room.priceTOEUR}\u20AC` : "—"}
-                      </td>
-                      <td className="px-6 py-4 text-center font-semibold text-text-dark">
-                        {room.priceEUR ? `${room.priceEUR}\u20AC` : "—"}
-                      </td>
-                      <td className="px-6 py-4 text-center text-text-muted">
-                        {room.priceAR.toLocaleString("fr-FR")} AR
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </ScrollReveal>
-
-          {/* Mobile (< md) — stacked cards, no horizontal scroll */}
-          <div className="md:hidden space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rooms.map((room, i) => (
-              <ScrollReveal key={room.id} delay={i * 40}>
-                <div className="rounded-xl border border-brown-deep/10 bg-white shadow-sm overflow-hidden">
-                  <div className="bg-brown-deep text-white px-4 py-3">
-                    <div className="font-semibold text-sm leading-tight">{room.name[loc]}</div>
-                    <div className="text-white/65 text-[0.7rem] mt-0.5">
+              <ScrollReveal key={room.id} delay={i * 70}>
+                <Link
+                  href={`#${room.id}`}
+                  className="tariff-card group block aspect-[3/4] bg-brown-deep"
+                  aria-label={`${room.name[loc]} — ${dict.rooms.from} ${room.priceEUR ? `${room.priceEUR}\u20AC` : `${room.priceAR.toLocaleString("fr-FR")} AR`}`}
+                >
+                  {/* Background image */}
+                  {room.images[0] ? (
+                    <img
+                      src={`${basePath}${room.images[0]}`}
+                      alt={room.name[loc]}
+                      className="tariff-card__image absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : null}
+
+                  {/* Gradient overlay — assure la lisibilité du panneau verre */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+
+                  {/* Badge top-left */}
+                  {room.badge && (
+                    <span className="absolute top-4 left-4 z-10 bg-gold/95 backdrop-blur-sm text-white text-[11px] font-semibold px-3 py-1 rounded-full tracking-wide uppercase shadow-lg">
+                      {room.badge}
+                    </span>
+                  )}
+
+                  {/* Liquid-glass info panel */}
+                  <div className="tariff-card__glass absolute inset-x-4 bottom-4 rounded-xl p-5 text-white">
+                    <h3 className="text-xl text-white mb-1 leading-tight">
+                      {room.name[loc]}
+                    </h3>
+                    <p className="text-white/75 text-xs mb-4 tracking-wide">
                       {room.units} {dict.rooms.units}
+                      {" · "}
+                      {room.capacity} pers.
                       {room.surface ? ` · ${room.surface}` : ""}
-                      {" · "}{room.capacity} pers.
+                    </p>
+
+                    <div className="flex items-end justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <span className="block text-[10px] uppercase tracking-[0.15em] text-white/60 mb-0.5">
+                          {dict.rooms.from}
+                        </span>
+                        {room.priceEUR ? (
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-bold text-gold-light tabular-nums">
+                              {room.priceEUR}
+                              {"\u20AC"}
+                            </span>
+                            <span className="text-white/55 text-[11px]">{dict.rooms.night}</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-xl font-bold text-gold-light tabular-nums">
+                              {(room.priceAR / 1000).toLocaleString("fr-FR")}k
+                            </span>
+                            <span className="text-white/55 text-[11px]">AR {dict.rooms.night}</span>
+                          </div>
+                        )}
+                        {room.priceEUR && (
+                          <div className="text-[10px] text-white/45 mt-0.5 tabular-nums">
+                            {room.priceAR.toLocaleString("fr-FR")} AR
+                            {room.priceTOEUR && room.priceTOEUR !== room.priceEUR ? (
+                              <span className="ml-2">
+                                {dict.rooms.rateTO}: {room.priceTOEUR}
+                                {"\u20AC"}
+                              </span>
+                            ) : null}
+                          </div>
+                        )}
+                      </div>
+
+                      <Icon
+                        name="arrow"
+                        size={20}
+                        weight="regular"
+                        className="tariff-card__arrow text-white/75 flex-shrink-0 mb-0.5"
+                      />
                     </div>
                   </div>
-                  <dl className="divide-y divide-brown-deep/5 text-sm">
-                    <div className="flex justify-between items-baseline px-4 py-2.5">
-                      <dt className="text-text-muted">{dict.rooms.rateTO}</dt>
-                      <dd className="font-semibold text-gold tabular-nums">
-                        {room.priceTOEUR ? `${room.priceTOEUR}\u20AC` : "—"}
-                      </dd>
-                    </div>
-                    <div className="flex justify-between items-baseline px-4 py-2.5">
-                      <dt className="text-text-muted">{dict.rooms.ratePublic}</dt>
-                      <dd className="font-semibold text-text-dark tabular-nums">
-                        {room.priceEUR ? `${room.priceEUR}\u20AC` : "—"}
-                      </dd>
-                    </div>
-                    <div className="flex justify-between items-baseline px-4 py-2.5">
-                      <dt className="text-text-muted">Ariary</dt>
-                      <dd className="text-text-muted tabular-nums">
-                        {room.priceAR.toLocaleString("fr-FR")} AR
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
 
           <ScrollReveal delay={100}>
-            <div className="text-center text-xs text-text-muted mt-4 space-y-1">
-              <p>{dict.rooms.extraBed}</p>
-              <p>{dict.rooms.taxeSejour}</p>
-            </div>
+            <p className="text-center text-xs text-text-muted mt-10">
+              {dict.rooms.extraBed}
+              {" · "}
+              {dict.rooms.taxeSejour}
+            </p>
           </ScrollReveal>
         </div>
       </section>
