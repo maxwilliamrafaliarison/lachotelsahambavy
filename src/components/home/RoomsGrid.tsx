@@ -74,17 +74,20 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
                     ))}
                   </div>
 
-                  {/* Price + CTA */}
+                  {/* Price + CTA — editorial rhythm: tabular digits, lining-nums,
+                      "from" en petites-capitales, pas de serif bold qui fait brochure. */}
                   <div className="flex items-end justify-between pt-6 border-t border-border">
                     <div>
-                      <span className="text-[0.6rem] text-text-muted uppercase tracking-wider block mb-1">
-                        {dict.rooms.from}
-                      </span>
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl text-brown-deep font-bold">
-                          {room.priceEUR ? `€${room.priceEUR}` : `${room.priceAR?.toLocaleString()} Ar`}
+                      <div className="flex items-baseline gap-2 tabular-nums [font-variant-numeric:lining-nums_proportional-nums]">
+                        <span className="text-[0.6rem] text-text-muted uppercase tracking-[0.2em]">
+                          {dict.rooms.from}
                         </span>
-                        <span className="text-sm text-text-muted">{dict.rooms.night}</span>
+                        <span className="text-2xl md:text-3xl text-brown-deep font-medium">
+                          {room.priceEUR ? `\u20AC${room.priceEUR}` : `${room.priceAR?.toLocaleString()} Ar`}
+                        </span>
+                        <span className="text-[0.65rem] text-text-muted uppercase tracking-[0.15em]">
+                          / {dict.rooms.night.replace(/^\s*\/\s*/, "")}
+                        </span>
                       </div>
                     </div>
                     <Link
