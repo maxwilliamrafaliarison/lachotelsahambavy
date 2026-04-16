@@ -97,15 +97,15 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       {/* Main nav */}
       <div className="py-4 px-6">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Logo — on homepage hero-top, show the FULL lockup (tagline
-              "The natural choice" visible) at generous size. On scroll /
-              on any other page, drop back to the compact mark that stays
-              legible at navbar heights. White on hero, brown once scrolled. */}
+          {/* Logo — on homepage hero-top, show the FULL color lockup
+              (tagline "The natural choice" visible). On scroll / on any
+              other page, drop back to the compact mark that stays legible
+              at navbar heights. White on hero, brown once scrolled. */}
           <Link href={`/${locale}/`} className="flex items-center gap-2">
             <img
               src={`${basePath}/images/logo/${
                 heroBrandMode
-                  ? "logo-white"
+                  ? "logo-color"
                   : darkText
                   ? "logo-mark-dark"
                   : "logo-mark-white"
@@ -113,7 +113,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               alt="Lac Hôtel Sahambavy — The natural choice"
               className={`w-auto transition-all duration-500 ${
                 heroBrandMode
-                  ? "h-40 md:h-56 lg:h-64"
+                  ? "h-20 md:h-28 lg:h-32"
                   : darkText
                   ? "h-11 md:h-14"
                   : "h-16 md:h-20"
