@@ -230,8 +230,16 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                 <ScrollReveal key={key} delay={i * 100}>
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center h-full border border-white/10">
                     <span className="text-3xl block mb-3">{icon}</span>
-                    <h4 className="text-white font-semibold mb-2">{extra.label[loc]}</h4>
-                    <div className="text-gold text-xl font-bold">
+                    <h4
+                      className="font-semibold mb-2"
+                      style={{ color: "#FFFFFF" }}
+                    >
+                      {extra.label[loc]}
+                    </h4>
+                    <div
+                      className="text-xl font-bold"
+                      style={{ color: "#D4A84B" }}
+                    >
                       {extra.priceAR.toLocaleString("fr-FR")} AR
                     </div>
                   </div>

@@ -95,14 +95,44 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
 
-      {/* Special offer reminder */}
+      {/* Special offer reminder — élégant, sur fond crème */}
       <section className="py-16 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
+        <div className="max-w-[760px] mx-auto px-4">
           <ScrollReveal>
-            <div className="bg-brown-deep text-cream rounded-xl p-8 text-center">
-              <span className="text-2xl mb-2 block">{"\uD83C\uDF89"}</span>
-              <h3 className="text-xl text-white mb-2">{dict.contact.offerReminder}</h3>
-              <p className="text-sm text-cream/70">{dict.contact.offerReminderDetail}</p>
+            <div
+              className="relative rounded-2xl p-10 text-center overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(135deg, #2C1810 0%, #3A2418 100%)",
+                boxShadow:
+                  "0 20px 60px -20px rgba(44, 24, 16, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
+              }}
+            >
+              {/* Décor : fine bordure dorée intérieure */}
+              <div
+                className="absolute inset-3 rounded-xl pointer-events-none"
+                style={{ border: "1px solid rgba(196, 150, 42, 0.25)" }}
+              />
+              <div className="relative">
+                <span
+                  className="inline-block text-[0.65rem] font-semibold uppercase tracking-[0.25em] mb-4"
+                  style={{ color: "#D4A84B" }}
+                >
+                  ★ Offre spéciale ★
+                </span>
+                <h3
+                  className="text-2xl md:text-3xl mb-3 font-[family-name:var(--font-heading)]"
+                  style={{ color: "#FFFFFF" }}
+                >
+                  {dict.contact.offerReminder}
+                </h3>
+                <p
+                  className="text-sm md:text-base max-w-lg mx-auto leading-relaxed font-[family-name:var(--font-sub)]"
+                  style={{ color: "rgba(248, 245, 240, 0.82)" }}
+                >
+                  {dict.contact.offerReminderDetail}
+                </p>
+              </div>
             </div>
           </ScrollReveal>
         </div>
