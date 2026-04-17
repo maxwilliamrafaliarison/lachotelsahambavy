@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { type Locale, getBasePath } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 
@@ -29,11 +29,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   const [menuOpen, setMenuOpen] = useState(false);
   const rafRef = useRef<number | null>(null);
   const router = useRouter();
-  const pathname = usePathname();
-
-  // Homepage = `/fr`, `/fr/`, `/en`, `/en/`, `/es`, `/es/` (trailing slash
-  // config produces the `/` variant, but guard both to be safe).
-  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
 
   useEffect(() => {
     const onScroll = () => {
@@ -57,10 +52,13 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   const scrolled = ratio >= 1;
   const darkText = ratio > SCROLL_THRESHOLD / SCROLL_END;
 
-  // Homepage only — show the FULL lockup with "The natural choice" tagline
-  // at generous size when the user is at the very top of the hero. As soon
-  // as they start scrolling, morph back to the compact mark.
-  const heroBrandMode = isHome && ratio < 0.08;
+  // Hero-top mode — show the FULL lockup (logo gris + tagline "The natural
+  // choice") à grande taille tant que l'utilisateur n'a pas commencé à
+  // scroller, sur TOUTES les pages (accueil, L'Hôtel, Hébergements, etc.).
+  // Dès qu'il scroll, morph vers le mark compact. Toutes les pages du site
+  // ont un <PageHero> (70 vh min 500 px), donc l'espace est suffisant pour
+  // que le lockup respire sans chevaucher le titre de la page.
+  const heroBrandMode = ratio < 0.08;
 
   // Typographic locale switcher — emoji flags read as DIY, a two-letter
   // code in uppercase tracking sits better next to nav-links of the same
@@ -97,10 +95,10 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       {/* Main nav */}
       <div className="py-4 px-6">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Logo — on homepage hero-top, show the FULL color lockup
-              (tagline "The natural choice" visible). On scroll / on any
-              other page, drop back to the compact mark that stays legible
-              at navbar heights. White on hero, brown once scrolled. */}
+          {/* Logo — hero-top sur TOUTES les pages : lockup complet couleur
+              avec la tagline "The natural choice" en grande taille. Dès que
+              l'utilisateur scroll : morph vers le mark compact (brun sur fond
+              glass, blanc tant qu'on est sur la photo du hero). */}
           <Link href={`/${locale}/`} className="flex items-center gap-2">
             <img
               src={`${basePath}/images/logo/${
