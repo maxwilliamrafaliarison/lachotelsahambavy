@@ -443,15 +443,35 @@
     "heroSubtitle": "Family stays in complete autonomy",
     "introLabel": "Hotel extension",
     "introTitle": "Le Repos — Your home by the lake",
-    "introP": "We have 4 duplex houses (two-storey), fully equipped for extended stays. They include a kitchenette with hob, fridge and crockery, offering all the comfort needed for a fully independent stay.",
+    "introP": "Four duplex houses on two storeys, fully equipped for extended stays. Each home comes with a full kitchenette — hob, fridge, crockery — so you can live at your own pace, in complete autonomy, while enjoying the Lac Hôtel setting.",
     "features": [
-      "4 independent duplex houses",
-      "Full kitchenette: hob, fridge, crockery",
-      "Ideal for family or extended stays",
-      "Peaceful, preserved natural setting"
+      {
+        "icon": "house",
+        "title": "4 duplex houses",
+        "desc": "Independent, two-storey, 800 metres from the main building — quiet, in the garden."
+      },
+      {
+        "icon": "cooking",
+        "title": "Full kitchenette",
+        "desc": "Hob, fridge and crockery provided — cook when and how you want."
+      },
+      {
+        "icon": "family",
+        "title": "Family & long-stay",
+        "desc": "Up to 5 people per house. Built for families and travellers staying several nights."
+      },
+      {
+        "icon": "leaf",
+        "title": "Preserved nature",
+        "desc": "A haven of tranquillity in the heart of the tropical garden — the lake a walk away, far from the noise."
+      }
     ],
-    "priceLabel": "Rate",
-    "price": "250,000 AR / night",
+    "photoCaption1": "The duplex houses, garden side",
+    "photoCaption2": "Preserved nature all around",
+    "priceLabel": "From",
+    "price": "250,000",
+    "priceUnit": "AR / night",
+    "priceFootnote": "Tourist tax and breakfast not included",
     "cta": "Book at Le Repos",
     "whatsappCta": "Questions? Contact us"
   },

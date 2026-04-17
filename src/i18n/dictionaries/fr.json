@@ -443,15 +443,35 @@
     "heroSubtitle": "Séjourner en famille, en toute autonomie",
     "introLabel": "Extension de l'hôtel",
     "introTitle": "Le Repos — Votre chez-vous au bord du lac",
-    "introP": "Nous disposons de 4 maisons en duplex (à deux étages), entièrement équipées pour les longs séjours. Elles comprennent une kitchenette avec plaque de cuisson, réfrigérateur et vaisselle, offrant ainsi tout le confort nécessaire pour un séjour en toute autonomie.",
+    "introP": "Quatre maisons en duplex, à deux étages, entièrement équipées pour les longs séjours. Chaque logement dispose d'une kitchenette complète — plaque de cuisson, réfrigérateur, vaisselle — pour vivre à votre rythme, en toute autonomie, tout en profitant du cadre du Lac Hôtel.",
     "features": [
-      "4 maisons duplex indépendantes",
-      "Kitchenette complète : plaque de cuisson, réfrigérateur, vaisselle",
-      "Idéal pour les séjours en famille ou de longue durée",
-      "Cadre naturel préservé, au calme"
+      {
+        "icon": "house",
+        "title": "4 maisons duplex",
+        "desc": "Indépendantes, sur deux étages, à 800 mètres du bâtiment principal — au calme, dans le jardin."
+      },
+      {
+        "icon": "cooking",
+        "title": "Kitchenette complète",
+        "desc": "Plaque de cuisson, réfrigérateur et vaisselle fournis — vous cuisinez quand et comme vous voulez."
+      },
+      {
+        "icon": "family",
+        "title": "Familial & long séjour",
+        "desc": "Jusqu'à 5 personnes par maison. Pensé pour les familles et les voyageurs qui s'installent plusieurs nuits."
+      },
+      {
+        "icon": "leaf",
+        "title": "Nature préservée",
+        "desc": "Un havre de tranquillité au cœur du jardin tropical — le lac à portée de marche, loin du bruit."
+      }
     ],
-    "priceLabel": "Tarif",
-    "price": "250 000 AR / nuit",
+    "photoCaption1": "Les maisons en duplex, côté jardin",
+    "photoCaption2": "Nature préservée tout autour",
+    "priceLabel": "À partir de",
+    "price": "250 000",
+    "priceUnit": "AR / nuit",
+    "priceFootnote": "Taxe de séjour et petit-déjeuner non inclus",
     "cta": "Réserver au Repos",
     "whatsappCta": "Des questions ? Contactez-nous"
   },
