@@ -7,6 +7,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { type Locale, getBasePath } from "@/lib/utils";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
+import GalleryLightbox from "@/components/gallery/GalleryLightbox";
 
 const basePath = getBasePath();
 
@@ -35,7 +36,7 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
   const { locale } = use(params);
   const [dict, setDict] = useState<any>(null);
   const [activeFilter, setActiveFilter] = useState<Category>("all");
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     getDictionary(locale as Locale).then(setDict);
@@ -64,73 +65,78 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
         image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
       />
 
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Filtres + grille masonry premium */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
           <SectionHeader
             title={dict.gallery.heroTitle}
             subtitle={dict.gallery.heroSubtitle}
           />
 
-          {/* Filter buttons */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {/* Boutons filtre premium — faux-glass avec bordure dorée translucide */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-14">
             {filters.map((f) => (
               <button
                 key={f.key}
                 onClick={() => setActiveFilter(f.key)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-[0.15em] transition-all duration-300 border ${
                   activeFilter === f.key
-                    ? "bg-brown-deep text-cream shadow-md"
-                    : "bg-cream text-text-dark hover:bg-brown-deep/10"
+                    ? "bg-brown-deep text-cream border-brown-deep shadow-lg"
+                    : "bg-white/70 text-text-body border-gold/20 hover:bg-white hover:border-gold/50 hover:text-brown-deep"
                 }`}
+                style={
+                  activeFilter !== f.key
+                    ? {
+                        backdropFilter: "blur(10px)",
+                        WebkitBackdropFilter: "blur(10px)",
+                      }
+                    : undefined
+                }
               >
                 {f.label}
               </button>
             ))}
           </div>
 
-          {/* Masonry grid */}
+          {/* Grille masonry — wrap chaque image avec .product-photo pour
+              la bordure dorée intérieure premium + hover zoom subtil */}
           <div className="masonry-grid">
-            {filtered.map((photo) => (
-              <div
+            {filtered.map((photo, i) => (
+              <button
                 key={photo.src}
-                className="group cursor-pointer overflow-hidden rounded-xl"
-                onClick={() => setLightboxSrc(photo.src)}
+                className="product-photo group cursor-pointer block w-full text-left"
+                onClick={() => setLightboxIndex(i)}
+                aria-label={`Ouvrir ${photo.alt}`}
               >
                 <img
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
-                  className="w-full block rounded-xl transition-transform duration-500 group-hover:scale-105"
+                  className="w-full block transition-transform duration-[1s] ease-out group-hover:scale-[1.04]"
                 />
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxSrc && (
-        <div
-          className="lightbox-overlay"
-          onClick={() => setLightboxSrc(null)}
-        >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxSrc(null);
-            }}
-            className="absolute top-6 right-6 text-white text-4xl font-light hover:text-cream transition-colors z-[2001]"
-            aria-label="Fermer"
-          >
-            &times;
-          </button>
-          <img
-            src={lightboxSrc}
-            alt=""
-            className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
+      {/* Lightbox avec swipe Apple-style */}
+      {lightboxIndex !== null && (
+        <GalleryLightbox
+          photos={filtered}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onIndexChange={setLightboxIndex}
+        />
       )}
     </>
   );

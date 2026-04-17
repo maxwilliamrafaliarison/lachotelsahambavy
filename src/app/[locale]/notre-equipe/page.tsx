@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -52,39 +53,57 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
         image={`${basePath}/images/team/team-staff.jpg`}
       />
 
-      {/* Introduction */}
+      {/* Introduction éditoriale */}
       <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
+        <div className="max-w-[800px] mx-auto px-5 md:px-6">
           <SectionHeader
             label={dict.equipe.introLabel}
             title={dict.equipe.introTitle}
           />
           <ScrollReveal>
-            <p className="text-text-muted text-lg leading-relaxed text-center font-[family-name:var(--font-sub)]">
+            <p className="text-text-muted text-lg leading-[1.8] text-center font-[family-name:var(--font-sub)]">
               {dict.equipe.introP}
             </p>
+          </ScrollReveal>
+          {/* Ornement éditorial doré discret */}
+          <ScrollReveal delay={150}>
+            <div className="flex items-center gap-3 mt-10 md:mt-12 max-w-md mx-auto">
+              <span className="h-px flex-1 bg-gold/30" />
+              <Icon name="hiring" size={18} weight="regular" className="text-gold" />
+              <span className="h-px flex-1 bg-gold/30" />
+            </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* RSE Engagement */}
-      <section className="py-14 md:py-24 bg-cream/50">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* RSE Engagement — liquid-glass premium */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
+        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
           <SectionHeader
             label={dict.equipe.rseLabel}
             title={dict.equipe.rseTitle}
           />
-          <div className="max-w-[800px] mx-auto">
-            <div className="space-y-4">
+          <div className="max-w-[900px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
               {(dict.equipe.rseItems as string[]).map((item, i) => (
                 <ScrollReveal key={i} delay={i * 80}>
-                  <div className="flex items-start gap-4 bg-white rounded-xl p-5 hover:shadow-md transition-shadow duration-300">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-700/10 flex items-center justify-center mt-0.5">
-                      <svg className="w-4 h-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
+                  <div className="repos-feature h-full p-5 md:p-6 flex items-start gap-4">
+                    <div className="repos-feature__badge flex-shrink-0" style={{ width: "2.5rem", height: "2.5rem" }}>
+                      <Icon name="hiring" size={18} weight="regular" />
                     </div>
-                    <p className="text-text-muted leading-relaxed">{item}</p>
+                    <p className="text-text-body leading-relaxed text-sm pt-1 flex-1">
+                      {item}
+                    </p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -93,34 +112,35 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
-      {/* Circular Economy */}
+      {/* Circular Economy — texte éditorial centré */}
       <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
+        <div className="max-w-[800px] mx-auto px-5 md:px-6">
           <SectionHeader
             label={dict.equipe.economyLabel}
             title={dict.equipe.economyTitle}
           />
           <ScrollReveal>
-            <p className="text-text-muted text-lg leading-relaxed text-center font-[family-name:var(--font-sub)]">
+            <p className="text-text-muted text-lg leading-[1.8] text-center font-[family-name:var(--font-sub)]">
               {dict.equipe.economyP}
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Team Photo Grid */}
+      {/* Grille photos équipe — chaque vignette avec .product-photo
+          (bordure dorée intérieure + ombre douce + hover zoom subtil) */}
       <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <SectionHeader
             label={dict.equipe.teamLabel}
             title={dict.equipe.teamTitle}
           />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
             {teamPhotos.map((photo, i) => (
               <ScrollReveal key={i} delay={i * 60}>
-                <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 group">
+                <div className="product-photo aspect-square group">
                   <div
-                    className="aspect-square bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full bg-cover bg-center transition-transform duration-[0.8s] ease-out group-hover:scale-[1.06]"
                     style={{ backgroundImage: `url(${basePath}${photo.src})` }}
                     role="img"
                     aria-label={photo.alt}
