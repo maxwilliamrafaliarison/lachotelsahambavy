@@ -103,35 +103,58 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Excursion Info */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Excursion Info — carte liquid-glass avec infos en amenity-chips
+          et itinéraire numéroté dans un container séparé */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
           <SectionHeader label={dict.plantation.excursionLabel} title={dict.plantation.excursionTitle} />
           <ScrollReveal>
-            <div className="bg-cream rounded-2xl shadow-lg p-8 md:p-12 max-w-3xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+            <div className="room-price p-7 md:p-10 max-w-3xl mx-auto">
+              {/* Infos clés — grille de amenity-chips, 5 colonnes sur desktop */}
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-10">
                 {excursionInfoItems.map((info) => (
-                  <div key={info.label} className="text-center">
+                  <div key={info.label} className="amenity-chip flex-col text-center !py-4">
                     <Icon
                       name={info.icon}
-                      size={26}
+                      size={22}
                       weight="regular"
-                      className="text-gold mx-auto mb-2"
+                      className="text-gold mb-1.5"
                     />
-                    <span className="block text-sm text-text-muted">{info.label}</span>
-                    <span className="block font-semibold text-brown-deep">{info.value}</span>
+                    <span className="block text-[0.65rem] uppercase tracking-wider text-text-muted mb-0.5">
+                      {info.label}
+                    </span>
+                    <span className="block text-sm font-semibold text-brown-deep">
+                      {info.value}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <h3 className="text-xl mb-6 text-center">{locale === "fr" ? "Déroulé de la visite" : locale === "en" ? "Visit itinerary" : "Itinerario de la visita"}</h3>
+              {/* Filet doré séparateur — signature éditoriale */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-px flex-1 bg-gold/20" />
+                <span className="text-[0.7rem] font-semibold text-gold uppercase tracking-[0.28em]">
+                  {locale === "fr" ? "Déroulé de la visite" : locale === "en" ? "Visit itinerary" : "Itinerario de la visita"}
+                </span>
+                <span className="h-px flex-1 bg-gold/20" />
+              </div>
+
               <div className="space-y-4">
                 {(dict.plantation.excursionSteps as string[]).map((step: string, i: number) => (
                   <div key={i} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-brown-deep text-cream flex items-center justify-center text-sm font-bold shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brown-deep to-gold text-cream flex items-center justify-center text-xs font-bold shrink-0 shadow-md">
                       {i + 1}
                     </div>
-                    <p className="text-text-body leading-relaxed pt-1">{step}</p>
+                    <p className="text-text-body leading-relaxed pt-1 text-sm md:text-base">{step}</p>
                   </div>
                 ))}
               </div>
@@ -140,38 +163,56 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Boutique - Mami Bio Shop */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Boutique - Mami Bio Shop — grille repos-feature premium */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
+          }}
+        />
+        <div className="absolute -top-32 -left-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
           <SectionHeader label={dict.plantation.shopLabel} title={dict.plantation.shopTitle} />
           <ScrollReveal>
-            <p className="text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-10">
+            <p className="text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12">
               {dict.plantation.shopIntro}
             </p>
           </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 max-w-[900px] mx-auto mb-8">
             {(dict.plantation.shopItems as { name: string; desc: string }[]).map((item: any, i: number) => (
               <ScrollReveal key={item.name} delay={i * 100}>
-                <div className="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-                  <Icon
-                    name="leaf"
-                    size={30}
-                    weight="regular"
-                    className="text-gold mx-auto mb-3"
-                  />
-                  <h3 className="text-lg mb-2">{item.name}</h3>
-                  <p className="text-sm text-text-muted">{item.desc}</p>
+                <div className="repos-feature h-full p-6 md:p-7 text-center">
+                  <div className="repos-feature__badge mx-auto mb-4">
+                    <Icon name="leaf" size={22} weight="regular" />
+                  </div>
+                  <h3 className="text-base md:text-lg text-text-dark mb-2 leading-tight">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-text-muted leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
           </div>
-          <ScrollReveal>
-            <div className="bg-white rounded-2xl p-8 max-w-2xl mx-auto">
-              <h3 className="text-lg mb-4 text-center">{locale === "fr" ? "Savons artisanaux 100 % naturels" : locale === "en" ? "100% Natural Handmade Soaps" : "Jabones artesanales 100 % naturales"}</h3>
-              <p className="text-text-muted text-sm leading-relaxed text-center">{dict.plantation.shopSoap}</p>
+
+          <ScrollReveal delay={200}>
+            <div className="repos-feature p-7 md:p-9 max-w-2xl mx-auto text-center">
+              <div className="flex items-center gap-3 justify-center mb-4">
+                <Icon name="soap" size={24} weight="regular" className="text-gold" />
+                <h3 className="text-lg md:text-xl text-text-dark">
+                  {locale === "fr" ? "Savons artisanaux 100 % naturels" : locale === "en" ? "100% Natural Handmade Soaps" : "Jabones artesanales 100 % naturales"}
+                </h3>
+              </div>
+              <p className="text-text-muted text-sm md:text-base leading-relaxed">
+                {dict.plantation.shopSoap}
+              </p>
             </div>
           </ScrollReveal>
-          <div className="text-center mt-8">
+
+          <div className="text-center mt-10">
             <Link href={`/${locale}/contact/`} className="btn btn--outline">
               {dict.plantation.shopCta}
             </Link>

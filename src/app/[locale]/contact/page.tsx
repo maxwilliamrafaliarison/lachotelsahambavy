@@ -12,6 +12,7 @@ import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { Icon } from "@/components/ui/Icon";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -35,34 +36,44 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         image={`${getBasePath()}/images/hero/hero-lake-sunset.jpg`}
       />
 
-      {/* Contact info cards */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Contact info cards — liquid-glass premium avec Phosphor badges */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
+          }}
+        />
+        <div className="absolute -top-40 -right-40 w-[420px] h-[420px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
+        <div className="absolute -bottom-40 -left-40 w-[420px] h-[420px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
           <SectionHeader
             label={dict.contact.label}
             title={dict.contact.title}
             subtitle={dict.contact.subtitle}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
             {[
-              { Icon: IconMail,  label: dict.contact.reservations, value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-              { Icon: IconPhone, label: dict.contact.whatsapp,     value: siteConfig.phone, href: `https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}` },
-              { Icon: IconPin,   label: dict.contact.address,      value: siteConfig.address, href: siteConfig.social.google },
-              { Icon: IconTrain, label: dict.contact.access,       value: dict.contact.accessDetail, href: null },
+              { icon: "mail",     label: dict.contact.reservations, value: siteConfig.email, href: `mailto:${siteConfig.email}` },
+              { icon: "phone",    label: dict.contact.whatsapp,     value: siteConfig.phone, href: `https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}` },
+              { icon: "location", label: dict.contact.address,      value: siteConfig.address, href: siteConfig.social.google },
+              { icon: "train",    label: dict.contact.access,       value: dict.contact.accessDetail, href: null as string | null },
             ].map((item, i) => (
               <ScrollReveal key={item.label} delay={i * 100}>
-                <div className="bg-cream rounded-xl p-6 text-center h-full">
-                  <div className="mb-4 flex justify-center text-gold">
-                    <item.Icon />
+                <div className="repos-feature h-full p-6 md:p-7 text-center">
+                  <div className="repos-feature__badge mx-auto mb-4">
+                    <Icon name={item.icon} size={22} weight="regular" />
                   </div>
-                  <h4 className="text-sm font-semibold text-text-dark mb-2">{item.label}</h4>
+                  <h4 className="text-sm font-semibold text-text-dark uppercase tracking-wider mb-2">{item.label}</h4>
                   {item.href ? (
                     <a
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-gold hover:text-gold-light transition-colors"
+                      className="text-sm text-gold hover:text-gold-light transition-colors break-words"
                     >
                       {item.value}
                     </a>
@@ -76,14 +87,14 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
 
-      {/* Booking form multi-step */}
+      {/* Booking form multi-step — container liquid-glass avec filet doré */}
       <section id="booking-form" className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[900px] mx-auto px-4">
+        <div className="max-w-[900px] mx-auto px-5 md:px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl text-brown-deep mb-3">{dict.contact.title}</h2>
             <p className="text-text-muted text-sm md:text-base">{dict.contact.subtitle}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm p-6 md:p-10 border border-brown-deep/5">
+          <div className="room-price p-6 md:p-10">
             <Suspense
               fallback={
                 <div className="text-center py-16 text-text-muted text-sm">
@@ -140,21 +151,24 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
 
-      {/* Cancellation & booking conditions */}
-      <section id="conditions" className="py-16 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
+      {/* Cancellation & booking conditions — liquid-glass avec pictos Info */}
+      <section id="conditions" className="py-14 md:py-20 bg-white">
+        <div className="max-w-[800px] mx-auto px-5 md:px-6">
           <ScrollReveal>
-            <h3 className="text-xl mb-6 text-center">{dict.contact.cancellation}</h3>
-            <div className="bg-cream/60 rounded-xl p-6 md:p-8 border border-brown-deep/5">
+            <h3 className="text-xl md:text-2xl mb-6 text-center">{dict.contact.cancellation}</h3>
+            <div className="repos-feature p-6 md:p-8">
               <ul className="space-y-3">
                 {dict.contact.cancellationRules.map((rule: string, i: number) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 text-text-muted text-sm leading-relaxed"
+                    className="flex items-start gap-3 text-text-body text-sm leading-relaxed"
                   >
-                    <span className="text-gold mt-0.5 flex-shrink-0">
-                      {i < 2 ? "\u2139\uFE0F" : "\u26A0\uFE0F"}
-                    </span>
+                    <Icon
+                      name={i < 2 ? "info" : "info"}
+                      size={18}
+                      weight="regular"
+                      className={i < 2 ? "text-gold mt-0.5 flex-shrink-0" : "text-red-600/70 mt-0.5 flex-shrink-0"}
+                    />
                     <span>{rule}</span>
                   </li>
                 ))}
@@ -165,9 +179,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
                   className="inline-flex items-center gap-2 text-sm font-medium text-brown-deep hover:text-gold transition-colors"
                 >
                   {dict.conditions?.viewFull || "Voir les conditions complètes"}
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
+                  <Icon name="arrow" size={16} weight="regular" />
                 </Link>
               </div>
             </div>
@@ -175,17 +187,17 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
       </section>
 
-      {/* Google Maps */}
-      <section className="py-16 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Google Maps — wrap avec product-photo pour bordure dorée intérieure */}
+      <section className="py-14 md:py-20 bg-cream">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <ScrollReveal>
-            <h3 className="text-xl mb-6 text-center">{dict.contact.mapTitle}</h3>
-            <div className="rounded-xl overflow-hidden shadow-lg">
+            <h3 className="text-xl md:text-2xl mb-6 text-center">{dict.contact.mapTitle}</h3>
+            <div className="product-photo">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.5!2d47.25!3d-21.0667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSahambavy!5e0!3m2!1sfr!2smg!4v1"
                 width="100%"
                 height="450"
-                style={{ border: 0 }}
+                style={{ border: 0, display: "block" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -218,44 +230,3 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
   );
 }
 
-// -----------------------------------------------------------------------------
-// Line icons — fine-stroke pictograms. Softer and more editorial than emoji.
-// -----------------------------------------------------------------------------
-
-function IconMail() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="M22 7l-10 6L2 7" />
-    </svg>
-  );
-}
-
-function IconPhone() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-    </svg>
-  );
-}
-
-function IconPin() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
-
-function IconTrain() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="4" y="3" width="16" height="16" rx="3" />
-      <path d="M4 11h16" />
-      <circle cx="8.5" cy="15" r="1" />
-      <circle cx="15.5" cy="15" r="1" />
-      <path d="M8 19l-2 2M16 19l2 2" />
-    </svg>
-  );
-}
