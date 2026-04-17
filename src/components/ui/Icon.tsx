@@ -8,6 +8,7 @@ import {
   Binoculars,
   Boat,
   Butterfly,
+  Car,
   CellSignalHigh,
   ChefHat,
   Clock,
@@ -37,6 +38,7 @@ import {
   SwimmingPool,
   TelevisionSimple,
   TennisBall,
+  Tent,
   Train,
   Tree,
   TreePalm,
@@ -112,6 +114,10 @@ const ICONS: Record<string, PhosphorIcon> = {
   dining: ForkKnife,
   picnic: PicnicTable,
   basket: Basket,
+
+  // Transport / camping
+  car: Car,
+  camping: Tent,
 
   // Indicateurs / notes contextuelles
   arrow: ArrowRight,
