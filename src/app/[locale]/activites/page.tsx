@@ -28,9 +28,9 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
   const dict = await getDictionary(locale as Locale);
 
   const circuits = [
-    { data: dict.loisirs.discovery, icon: "nature", color: "bg-green-700/10 text-green-700" },
-    { data: dict.loisirs.cultural, icon: "culture", color: "bg-amber-600/10 text-amber-700" },
-    { data: dict.loisirs.leisure, icon: "boat", color: "bg-blue-600/10 text-blue-700" },
+    { data: dict.loisirs.discovery, icon: "nature" },
+    { data: dict.loisirs.cultural, icon: "culture" },
+    { data: dict.loisirs.leisure, icon: "boat" },
   ];
 
   return (
@@ -53,42 +53,47 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* Circuits Nature */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Circuits Nature — grille 3 .repos-feature premium */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
+        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
           <SectionHeader label={dict.loisirs.circuitsLabel} title={dict.loisirs.circuitsTitle} />
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-5 md:gap-6">
             {circuits.map((circuit, ci) => (
               <ScrollReveal key={ci} delay={ci * 150}>
-                <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow h-full">
-                  <Icon
-                    name={circuit.icon}
-                    size={36}
-                    weight="regular"
-                    className="text-gold mb-4"
-                  />
-                  <h3 className="text-xl mb-4">{(circuit.data as any).title}</h3>
-                  <ul className="space-y-3 mb-6">
+                <div className="repos-feature h-full p-7 md:p-8 flex flex-col">
+                  <div className="repos-feature__badge mb-5">
+                    <Icon name={circuit.icon} size={26} weight="regular" />
+                  </div>
+                  <h3 className="text-xl mb-4 leading-tight">{(circuit.data as any).title}</h3>
+                  <ul className="space-y-2.5 mb-6 flex-1">
                     {((circuit.data as any).items as string[]).map((item: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 text-text-muted text-sm leading-relaxed">
-                        <span className={`w-6 h-6 rounded-full ${circuit.color} flex items-center justify-center shrink-0 mt-0.5`}>
-                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </span>
-                        {item}
+                        <span className="inline-block w-1 h-1 rounded-full bg-gold mt-2 flex-shrink-0" />
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                  <p className="text-sm font-semibold text-brown-deep italic flex items-start gap-2">
+                  <div className="flex items-start gap-2 pt-4 border-t border-gold/15">
                     <Icon
                       name="arrow"
-                      size={16}
+                      size={14}
                       weight="regular"
-                      className="text-gold mt-0.5 shrink-0"
+                      className="text-gold mt-0.5 flex-shrink-0"
                     />
-                    <span>{(circuit.data as any).ideal}</span>
-                  </p>
+                    <p className="text-sm font-medium text-gold italic leading-snug">
+                      {(circuit.data as any).ideal}
+                    </p>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -96,14 +101,14 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* Pool */}
+      {/* Pool — photo bordure dorée intérieure */}
       <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
             <ScrollReveal>
-              <div className="rounded-2xl overflow-hidden shadow-lg">
+              <div className="product-photo aspect-[4/3]">
                 <div
-                  className="aspect-[4/3] bg-cover bg-center"
+                  className="w-full h-full bg-cover bg-center"
                   style={{ backgroundImage: `url(${basePath}/images/pool/pool-night.jpg)` }}
                   role="img"
                   aria-label="Piscine en ardoise à eau salée"
@@ -112,26 +117,26 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <span className="section-label">{dict.loisirs.poolLabel}</span>
-              <h2 className="mt-2 mb-6">{dict.loisirs.poolTitle}</h2>
-              <p className="text-text-muted leading-relaxed">{dict.loisirs.poolP}</p>
+              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.loisirs.poolTitle}</h2>
+              <p className="text-text-muted leading-[1.8]">{dict.loisirs.poolP}</p>
             </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* Massage */}
+      {/* Massage — photo bordure dorée intérieure, ordre inversé */}
       <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
             <ScrollReveal delay={200}>
               <span className="section-label">{dict.loisirs.massageLabel}</span>
-              <h2 className="mt-2 mb-6">{dict.loisirs.massageTitle}</h2>
-              <p className="text-text-muted leading-relaxed">{dict.loisirs.massageP}</p>
+              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.loisirs.massageTitle}</h2>
+              <p className="text-text-muted leading-[1.8]">{dict.loisirs.massageP}</p>
             </ScrollReveal>
             <ScrollReveal>
-              <div className="rounded-2xl overflow-hidden shadow-lg">
+              <div className="product-photo aspect-[4/3]">
                 <div
-                  className="aspect-[4/3] bg-cover bg-center"
+                  className="w-full h-full bg-cover bg-center"
                   style={{ backgroundImage: `url(${basePath}/images/nature/garden-path.jpg)` }}
                   role="img"
                   aria-label="Massage & bien-être"
@@ -142,9 +147,9 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* Adventure Circuit */}
+      {/* Adventure Circuit — carte .room-price avec filet doré */}
       <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
+        <div className="max-w-[800px] mx-auto px-5 md:px-6">
           <SectionHeader label={dict.loisirs.aventureLabel} title={dict.loisirs.aventureTitle} />
           <ScrollReveal>
             <p className="text-text-muted text-lg leading-relaxed text-center mb-10 font-[family-name:var(--font-sub)]">
@@ -152,28 +157,41 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
             </p>
           </ScrollReveal>
           <ScrollReveal>
-            <div className="bg-cream rounded-2xl p-8">
-              <h3 className="text-lg mb-6">{locale === "fr" ? "Au programme" : locale === "en" ? "Programme" : "Programa"}</h3>
+            <div className="room-price p-7 md:p-9">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-px w-8 bg-gold" />
+                <span className="text-[0.7rem] font-semibold text-gold uppercase tracking-[0.28em]">
+                  {locale === "fr" ? "Au programme" : locale === "en" ? "Programme" : "Programa"}
+                </span>
+              </div>
               <div className="space-y-4 mb-8">
                 {(dict.loisirs.aventureProgram as string[]).map((step: string, i: number) => (
                   <div key={i} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-brown-deep text-cream flex items-center justify-center text-sm font-bold shrink-0">{i + 1}</div>
-                    <p className="text-text-body leading-relaxed pt-1">{step}</p>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brown-deep to-gold text-cream flex items-center justify-center text-xs font-bold shrink-0 shadow-md">
+                      {i + 1}
+                    </div>
+                    <p className="text-text-body leading-relaxed pt-1 text-sm md:text-base">{step}</p>
                   </div>
                 ))}
               </div>
-              <div className="space-y-2 text-sm text-text-muted">
-                <p className="text-green-700 font-medium">✓ {dict.loisirs.aventureIncludes}</p>
-                <p className="text-red-600/80">✗ {dict.loisirs.aventureExcludes}</p>
+              <div className="space-y-2 text-sm pt-5 border-t border-gold/15">
+                <p className="text-green-700 font-medium flex items-start gap-2">
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0" />
+                  <span>{dict.loisirs.aventureIncludes}</span>
+                </p>
+                <p className="text-red-600/80 flex items-start gap-2">
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-red-600/70 flex-shrink-0" />
+                  <span>{dict.loisirs.aventureExcludes}</span>
+                </p>
               </div>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Trekking Circuit - 2 Days */}
+      {/* Trekking Circuit - 2 Days — 2 cartes .repos-feature jour par jour */}
       <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[800px] mx-auto px-4">
+        <div className="max-w-[800px] mx-auto px-5 md:px-6">
           <SectionHeader label={dict.loisirs.trekkingLabel} title={dict.loisirs.trekkingTitle} />
           <ScrollReveal>
             <p className="text-text-muted text-lg leading-relaxed text-center mb-10 font-[family-name:var(--font-sub)]">
@@ -183,12 +201,19 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
 
           {/* Day 1 */}
           <ScrollReveal>
-            <div className="bg-white rounded-2xl p-8 mb-6">
-              <h3 className="text-xl mb-6 text-brown-deep">{(dict.loisirs.trekkingDay1 as any).title}</h3>
+            <div className="repos-feature p-7 md:p-9 mb-5">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-8 h-8 rounded-full bg-gradient-to-br from-brown-deep to-gold text-cream flex items-center justify-center text-xs font-bold shadow-md">
+                  1
+                </span>
+                <h3 className="text-lg md:text-xl text-brown-deep leading-tight">
+                  {(dict.loisirs.trekkingDay1 as any).title}
+                </h3>
+              </div>
               <div className="space-y-3">
                 {((dict.loisirs.trekkingDay1 as any).items as string[]).map((item: string, i: number) => (
                   <div key={i} className="flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-full bg-brown-deep/10 text-brown-deep flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
+                    <span className="w-6 h-6 rounded-full bg-gold/10 text-gold flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
                     <p className="text-text-muted leading-relaxed text-sm">{item}</p>
                   </div>
                 ))}
@@ -198,12 +223,19 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
 
           {/* Day 2 */}
           <ScrollReveal delay={100}>
-            <div className="bg-white rounded-2xl p-8 mb-8">
-              <h3 className="text-xl mb-6 text-brown-deep">{(dict.loisirs.trekkingDay2 as any).title}</h3>
+            <div className="repos-feature p-7 md:p-9 mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-8 h-8 rounded-full bg-gradient-to-br from-brown-deep to-gold text-cream flex items-center justify-center text-xs font-bold shadow-md">
+                  2
+                </span>
+                <h3 className="text-lg md:text-xl text-brown-deep leading-tight">
+                  {(dict.loisirs.trekkingDay2 as any).title}
+                </h3>
+              </div>
               <div className="space-y-3">
                 {((dict.loisirs.trekkingDay2 as any).items as string[]).map((item: string, i: number) => (
                   <div key={i} className="flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-full bg-brown-deep/10 text-brown-deep flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
+                    <span className="w-6 h-6 rounded-full bg-gold/10 text-gold flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
                     <p className="text-text-muted leading-relaxed text-sm">{item}</p>
                   </div>
                 ))}
@@ -212,20 +244,24 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
           </ScrollReveal>
 
           <ScrollReveal delay={200}>
-            <div className="space-y-2 text-sm text-text-muted mb-6">
-              <p className="text-green-700 font-medium">✓ {dict.loisirs.trekkingIncludes}</p>
-              <p className="text-red-600/80">✗ {dict.loisirs.trekkingExcludes}</p>
-            </div>
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-              <p className="text-amber-800 text-sm flex items-start gap-2.5">
-                <Icon
-                  name="backpack"
-                  size={18}
-                  weight="regular"
-                  className="text-amber-800 mt-0.5 shrink-0"
-                />
-                <span>{dict.loisirs.trekkingAdvice}</span>
+            <div className="space-y-2 text-sm mb-6">
+              <p className="text-green-700 font-medium flex items-start gap-2">
+                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-green-700 flex-shrink-0" />
+                <span>{dict.loisirs.trekkingIncludes}</span>
               </p>
+              <p className="text-red-600/80 flex items-start gap-2">
+                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-red-600/70 flex-shrink-0" />
+                <span>{dict.loisirs.trekkingExcludes}</span>
+              </p>
+            </div>
+            <div className="repos-feature p-4 md:p-5 flex items-start gap-3" style={{ background: "rgba(254, 243, 199, 0.85)", borderColor: "rgba(196, 150, 42, 0.25)" }}>
+              <Icon
+                name="backpack"
+                size={20}
+                weight="regular"
+                className="text-amber-700 mt-0.5 shrink-0"
+              />
+              <p className="text-amber-800 text-sm leading-relaxed">{dict.loisirs.trekkingAdvice}</p>
             </div>
           </ScrollReveal>
         </div>
