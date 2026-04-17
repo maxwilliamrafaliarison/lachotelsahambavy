@@ -460,6 +460,77 @@ body {
   color: var(--color-gold-light);
 }
 
+/* ===== ECO PILLAR CARD (Apple Store liquid-glass avec filigrane) =====
+ *
+ * Utilisé sur /hotel pour la section "Engagement éco-responsable". Chaque
+ * pilier RSE = une carte avec une GROSSE icône Phosphor en filigrane
+ * derrière le texte (opacity 0.08) + un picto net en haut à gauche + titre
+ * et description.
+ *
+ * Le principe Apple Store : le filigrane porte l'émotion, le texte porte
+ * l'information. Les deux cohabitent sans se gêner grâce à l'opacité
+ * et au positionnement absolu.
+ *
+ * Hover : la carte s'illumine (background passe de cream/50 à white/80),
+ * le filigrane gagne en présence (opacity 0.08 → 0.15), et le picto du
+ * haut passe au gold plein.
+ */
+
+.eco-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+              0 4px 24px rgba(74, 122, 90, 0.06);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.eco-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(196, 150, 42, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+              0 20px 50px -10px rgba(74, 122, 90, 0.2),
+              0 0 0 1px rgba(196, 150, 42, 0.1);
+}
+
+/* Grande icône en filigrane — positionnée bottom-right, à moitié sortie */
+.eco-card__watermark {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 180px;
+  height: 180px;
+  color: var(--color-green-tea);
+  opacity: 0.08;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.eco-card:hover .eco-card__watermark {
+  opacity: 0.16;
+  transform: scale(1.08) rotate(-4deg);
+  color: var(--color-gold);
+}
+
+/* Picto net top-left avec halo subtil */
+.eco-card__icon {
+  color: var(--color-green-tea);
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.eco-card:hover .eco-card__icon {
+  color: var(--color-gold);
+  transform: scale(1.1);
+}
+
 /* ===== WHATSAPP FLOAT ===== */
 
 .whatsapp-float {

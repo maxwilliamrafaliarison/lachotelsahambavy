@@ -316,14 +316,42 @@
     "ecoLabel": "Compromiso eco-responsable",
     "ecoTitle": "Por Madagascar, de Madagascar",
     "ecoP1": "El Lac Hôtel se inscribe plenamente en una política de responsabilidad social empresarial (RSE) y desarrollo sostenible. Contribuye activamente a la resiliencia de la comunidad local priorizando la contratación local, incluso para puestos de dirección.",
-    "ecoItems": [
-      "Productos bio cultivados en el lugar — huerto de 2 hectáreas",
-      "Contratación local, incluyendo puestos directivos",
-      "Compras en circuito corto a productores locales",
-      "Producción de miel para apoyar a las abejas",
-      "Fabricación de jabones artesanales 100 % naturales",
-      "Preservación del corredor de bosque primario Ranomafana–Andringitra",
-      "Tres menús para limitar el desperdicio alimentario"
+    "ecoPillars": [
+      {
+        "icon": "bio",
+        "title": "Huerto bio de 2 hectáreas",
+        "desc": "Frutas, verduras y hierbas cultivadas en el lugar — en el corazón de nuestros naranjales, sin insumos químicos."
+      },
+      {
+        "icon": "hiring",
+        "title": "Contratación local al 100 %",
+        "desc": "Un equipo enteramente del pueblo — incluyendo los puestos de dirección."
+      },
+      {
+        "icon": "shortSupply",
+        "title": "Circuito corto prioritario",
+        "desc": "Carnes, quesos, frutas y pescados comprados directamente a productores de Sahambavy."
+      },
+      {
+        "icon": "bees",
+        "title": "Apicultura responsable",
+        "desc": "Nuestras colmenas producen miel y polinización — un gesto por las colonias de abejas de la región."
+      },
+      {
+        "icon": "soap",
+        "title": "Jabones artesanales naturales",
+        "desc": "Hechos en el lugar con miel, leche y aceites esenciales. Sin sulfatos ni aditivos petroquímicos."
+      },
+      {
+        "icon": "forest",
+        "title": "Corredor Ranomafana–Andringitra",
+        "desc": "Preservación activa del último corredor de bosque primario entre estos dos parques nacionales."
+      },
+      {
+        "icon": "zeroWaste",
+        "title": "Cero desperdicio en cocina",
+        "desc": "Tres menús fijos por servicio para cocinar lo justo y transformar las sobras en compost."
+      }
     ]
   },
   "plantation": {

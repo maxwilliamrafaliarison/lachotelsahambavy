@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -136,28 +137,69 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      {/* Eco-responsibility / RSE */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
+      {/* Eco-responsibility / RSE — cartes liquid-glass avec icône filigrane.
+          Le fond subtilement dégradé fait ressortir la translucidité des
+          panneaux en verre. Chaque pilier = une icône Phosphor en filigrane
+          derrière le texte, un picto net en haut à gauche. */}
+      <section className="py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
+          }}
+        />
+        {/* Subtiles formes décoratives en arrière-plan pour donner du relief */}
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-4 relative">
           <SectionHeader label={dict.hotel.ecoLabel} title={dict.hotel.ecoTitle} />
-          <div className="max-w-[800px] mx-auto">
-            <ScrollReveal>
-              <p className="text-text-muted leading-relaxed mb-10">{dict.hotel.ecoP1}</p>
-            </ScrollReveal>
-            <div className="grid md:grid-cols-2 gap-4">
-              {(dict.hotel.ecoItems as string[]).map((item, i) => (
-                <ScrollReveal key={i} delay={i * 60}>
-                  <div className="glass-card flex items-start gap-4 p-5">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-700/10 flex items-center justify-center mt-0.5">
-                      <svg className="w-4 h-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
+
+          <ScrollReveal>
+            <p className="text-text-muted leading-relaxed mb-14 max-w-[780px] mx-auto text-center">
+              {dict.hotel.ecoP1}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {(dict.hotel.ecoPillars as { icon: string; title: string; desc: string }[]).map(
+              (pillar, i) => (
+                <ScrollReveal key={pillar.icon} delay={i * 80}>
+                  <div className="eco-card h-full p-7 pb-24">
+                    {/* Grande icône en filigrane (bottom-right) */}
+                    <div className="eco-card__watermark">
+                      <Icon name={pillar.icon} size={180} weight="regular" />
                     </div>
-                    <p className="text-text-muted leading-relaxed text-sm">{item}</p>
+
+                    {/* Picto net top-left */}
+                    <div className="eco-card__icon relative mb-5">
+                      <div
+                        className="inline-flex items-center justify-center w-12 h-12 rounded-2xl"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, rgba(74,122,90,0.12) 0%, rgba(196,150,42,0.08) 100%)",
+                          boxShadow:
+                            "inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 8px rgba(74,122,90,0.08)",
+                        }}
+                      >
+                        <Icon name={pillar.icon} size={24} weight="regular" />
+                      </div>
+                    </div>
+
+                    {/* Titre + description */}
+                    <div className="relative">
+                      <h3 className="text-lg font-semibold text-text-dark mb-2 leading-tight">
+                        {pillar.title}
+                      </h3>
+                      <p className="text-text-muted text-sm leading-relaxed">
+                        {pillar.desc}
+                      </p>
+                    </div>
                   </div>
                 </ScrollReveal>
-              ))}
-            </div>
+              ),
+            )}
           </div>
         </div>
       </section>

@@ -316,14 +316,42 @@
     "ecoLabel": "Engagement éco-responsable",
     "ecoTitle": "Pour Madagascar, par Madagascar",
     "ecoP1": "Le Lac Hôtel s'inscrit pleinement dans une démarche de responsabilité sociétale (RSE) et de développement durable. Il contribue activement à la résilience de la communauté locale en privilégiant le recrutement local, y compris pour les postes à responsabilité managériale.",
-    "ecoItems": [
-      "Produits bio cultivés sur place — potager de 2 hectares",
-      "Recrutement local, y compris aux postes de direction",
-      "Achats en circuit court auprès des producteurs locaux",
-      "Production de miel pour soutenir les abeilles",
-      "Fabrication de savons artisanaux 100 % naturels",
-      "Préservation du corridor de forêt primaire Ranomafana–Andringitra",
-      "Trois menus pour limiter le gaspillage alimentaire"
+    "ecoPillars": [
+      {
+        "icon": "bio",
+        "title": "Potager bio de 2 hectares",
+        "desc": "Fruits, légumes et herbes cultivés sur place, au cœur des orangeraies, sans intrants chimiques."
+      },
+      {
+        "icon": "hiring",
+        "title": "Recrutement local à 100 %",
+        "desc": "Une équipe entièrement issue du village — y compris aux postes de direction."
+      },
+      {
+        "icon": "shortSupply",
+        "title": "Circuit court prioritaire",
+        "desc": "Viandes, fromages, fruits et poissons achetés directement aux producteurs de Sahambavy."
+      },
+      {
+        "icon": "bees",
+        "title": "Apiculture responsable",
+        "desc": "Nos ruches produisent miel et pollinisation — un geste pour les colonies d'abeilles de la région."
+      },
+      {
+        "icon": "soap",
+        "title": "Savons artisanaux naturels",
+        "desc": "Fabriqués sur place avec miel, lait, huiles essentielles. Sans sulfates ni additifs pétrochimiques."
+      },
+      {
+        "icon": "forest",
+        "title": "Corridor Ranomafana–Andringitra",
+        "desc": "Préservation active du dernier couloir de forêt primaire reliant ces deux parcs nationaux."
+      },
+      {
+        "icon": "zeroWaste",
+        "title": "Zéro gaspillage en cuisine",
+        "desc": "Trois menus fixes par service pour cuisiner juste et réutiliser les restes en compost."
+      }
     ]
   },
   "plantation": {
