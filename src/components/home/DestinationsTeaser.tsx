@@ -9,7 +9,7 @@ const basePath = getBasePath();
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function DestinationsTeaser({ dict, locale }: { dict: any; locale: Locale }) {
   return (
-    <section className="py-32 md:py-40">
+    <section className="py-16 md:py-40">
       <div className="max-w-[1400px] mx-auto px-6">
         {/* Two side-by-side feature blocks */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

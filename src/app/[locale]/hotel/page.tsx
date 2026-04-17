@@ -54,7 +54,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       />
 
       {/* History */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[900px] mx-auto px-4">
           <SectionHeader label={dict.hotel.historyLabel} title={dict.hotel.historyTitle} />
 
@@ -125,7 +125,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* Philosophy */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader label={dict.hotel.philosophyLabel} title={dict.hotel.philosophyTitle} />
           <ScrollReveal>
@@ -141,7 +141,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
           Le fond subtilement dégradé fait ressortir la translucidité des
           panneaux en verre. Chaque pilier = une icône Phosphor en filigrane
           derrière le texte, un picto net en haut à gauche. */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-14 md:py-24 relative overflow-hidden">
         <div
           className="absolute inset-0 -z-10"
           style={{
@@ -166,8 +166,11 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             {(dict.hotel.ecoPillars as { icon: string; title: string; desc: string }[]).map(
               (pillar, i) => (
                 <ScrollReveal key={pillar.icon} delay={i * 80}>
-                  <div className="eco-card h-full p-7 pb-24">
-                    {/* Grande icône en filigrane (bottom-right) */}
+                  <div className="eco-card h-full p-6 md:p-7 pb-16 md:pb-24">
+                    {/* Grande icône en filigrane (bottom-right) — la taille
+                        est pilotée par .eco-card__watermark en CSS pour la
+                        responsivité ; le size={} ici n'est qu'une valeur
+                        initiale que le SVG remplace par width/height 100 %. */}
                     <div className="eco-card__watermark">
                       <Icon name={pillar.icon} size={180} weight="regular" />
                     </div>
@@ -205,7 +208,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* Team Photo Grid */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.equipe.teamLabel}

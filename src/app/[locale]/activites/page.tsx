@@ -42,7 +42,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       />
 
       {/* Intro */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[800px] mx-auto px-4 text-center">
           <SectionHeader label={dict.loisirs.introLabel} title={dict.loisirs.introTitle} />
           <ScrollReveal>
@@ -54,7 +54,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Circuits Nature */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader label={dict.loisirs.circuitsLabel} title={dict.loisirs.circuitsTitle} />
           <div className="grid md:grid-cols-3 gap-8">
@@ -97,7 +97,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Pool */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
@@ -120,7 +120,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Massage */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <ScrollReveal delay={200}>
@@ -143,7 +143,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Adventure Circuit */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader label={dict.loisirs.aventureLabel} title={dict.loisirs.aventureTitle} />
           <ScrollReveal>
@@ -172,7 +172,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Trekking Circuit - 2 Days */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader label={dict.loisirs.trekkingLabel} title={dict.loisirs.trekkingTitle} />
           <ScrollReveal>
@@ -232,7 +232,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-brown-deep text-white">
+      <section className="py-14 md:py-24 bg-brown-deep text-white">
         <div className="max-w-[600px] mx-auto px-4 text-center">
           <ScrollReveal>
             <h2 className="mb-6" style={{ color: "#FFFFFF" }}>{dict.loisirs.cta}</h2>

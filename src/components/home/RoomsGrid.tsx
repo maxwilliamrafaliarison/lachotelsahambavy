@@ -32,7 +32,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
   const compact = displayRooms.filter((r) => !["pilotis", "wagon"].includes(r.id));
 
   return (
-    <section id="rooms" className="py-32 md:py-40">
+    <section id="rooms" className="py-16 md:py-40">
       {/* ─── Header — eyebrow + title centered ─────────────────────── */}
       <div className="max-w-2xl mx-auto text-center mb-20 px-6">
         <ScrollReveal>

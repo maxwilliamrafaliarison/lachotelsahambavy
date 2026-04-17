@@ -9,7 +9,7 @@ export default function RestaurantTeaser({ dict, locale }: { dict: any; locale: 
   const basePath = getBasePath();
 
   return (
-    <section className="py-32 md:py-40 bg-white">
+    <section className="py-16 md:py-40 bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image composition */}

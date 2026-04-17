@@ -501,17 +501,34 @@ body {
               0 0 0 1px rgba(196, 150, 42, 0.1);
 }
 
-/* Grande icône en filigrane — positionnée bottom-right, à moitié sortie */
+/* Grande icône en filigrane — positionnée bottom-right, à moitié sortie.
+   Sur mobile on la réduit pour ne pas écraser la carte (390 px de large). */
 .eco-card__watermark {
   position: absolute;
-  bottom: -16px;
-  right: -16px;
-  width: 180px;
-  height: 180px;
+  bottom: -12px;
+  right: -12px;
+  width: 120px;
+  height: 120px;
   color: var(--color-green-tea);
   opacity: 0.08;
   pointer-events: none;
   transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  .eco-card__watermark {
+    bottom: -16px;
+    right: -16px;
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Force l'SVG Phosphor à remplir son conteneur — on laisse le container
+   piloter la taille, pas le size={} hardcodé côté JSX. */
+.eco-card__watermark svg {
+  width: 100%;
+  height: 100%;
 }
 
 .eco-card:hover .eco-card__watermark {
@@ -535,11 +552,11 @@ body {
 
 .whatsapp-float {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 16px;
+  right: 16px;
   z-index: 999;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   background: #25D366;
   border-radius: 50%;
   display: flex;
@@ -547,6 +564,15 @@ body {
   justify-content: center;
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .whatsapp-float {
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+  }
 }
 
 .whatsapp-float:hover {

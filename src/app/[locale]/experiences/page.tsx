@@ -79,7 +79,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       />
 
       {/* ──── RESTAURANT ──── */}
-      <section id="restaurant" className="py-24 bg-white">
+      <section id="restaurant" className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <ScrollReveal>
@@ -123,7 +123,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       </section>
 
       {/* ──── PLANTATION DE THÉ ──── */}
-      <section id="plantation" className="py-24 bg-cream">
+      <section id="plantation" className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <ScrollReveal delay={200} className="md:order-2">
@@ -150,7 +150,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       </section>
 
       {/* ──── PISCINE & MASSAGE ──── */}
-      <section id="wellness" className="py-24 bg-white">
+      <section id="wellness" className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.loisirs.massageLabel}
@@ -190,7 +190,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       </section>
 
       {/* ──── CIRCUITS & ACTIVITÉS ──── */}
-      <section id="activites" className="py-24 bg-cream">
+      <section id="activites" className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.loisirs.circuitsLabel}
@@ -233,7 +233,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       </section>
 
       {/* ──── BOUTIQUE ──── */}
-      <section id="boutique" className="py-24 bg-white">
+      <section id="boutique" className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.plantation.shopLabel}
@@ -264,7 +264,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       </section>
 
       {/* ──── CTA ──── */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-14 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${basePath}/images/hero/hero-lake.jpg)` }} />
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
         <div className="relative z-10 max-w-[600px] mx-auto px-4 text-center">

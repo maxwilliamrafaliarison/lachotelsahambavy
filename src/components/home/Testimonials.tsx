@@ -146,7 +146,7 @@ export default function Testimonials({
   locale: Locale;
 }) {
   return (
-    <section className="py-32 md:py-40 bg-white">
+    <section className="py-16 md:py-40 bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">

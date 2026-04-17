@@ -95,11 +95,22 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
       {/* Main nav */}
       <div className="py-4 px-6">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Logo — hero-top sur TOUTES les pages : lockup complet couleur
-              avec la tagline "The natural choice" en grande taille. Dès que
-              l'utilisateur scroll : morph vers le mark compact (brun sur fond
-              glass, blanc tant qu'on est sur la photo du hero). */}
+          {/* Logo — mobile (<md) : TOUJOURS le mark compact, quelle que soit
+              la page ou le scroll. Le full lockup avec tagline écrase le hero
+              sur un écran 390×844 et chevauche le titre de la page. Sur tablet+
+              (md+) : full lockup en hero-top, morph vers le mark compact au
+              scroll. Couleur : blanc tant qu'on est sur la photo, brun dès que
+              la navbar passe en glass. */}
           <Link href={`/${locale}/`} className="flex items-center gap-2">
+            {/* Version mobile — mark compact, petit et discret */}
+            <img
+              src={`${basePath}/images/logo/${
+                darkText ? "logo-mark-dark" : "logo-mark-white"
+              }.png`}
+              alt="Lac Hôtel Sahambavy"
+              className="md:hidden w-auto h-10 transition-opacity duration-500"
+            />
+            {/* Version tablet+ — full lockup en hero-top, mark compact au scroll */}
             <img
               src={`${basePath}/images/logo/${
                 heroBrandMode
@@ -109,12 +120,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   : "logo-mark-white"
               }.png`}
               alt="Lac Hôtel Sahambavy — The natural choice"
-              className={`w-auto transition-all duration-500 ${
+              className={`hidden md:block w-auto transition-all duration-500 ${
                 heroBrandMode
-                  ? "h-28 md:h-36 lg:h-40"
+                  ? "md:h-32 lg:h-40"
                   : darkText
-                  ? "h-11 md:h-14"
-                  : "h-16 md:h-20"
+                  ? "md:h-14"
+                  : "md:h-20"
               }`}
             />
           </Link>

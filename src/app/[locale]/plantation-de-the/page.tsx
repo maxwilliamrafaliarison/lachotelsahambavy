@@ -63,7 +63,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       />
 
       {/* History - Legend & Madagascar */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader
             label={dict.plantation.historyLabel}
@@ -79,7 +79,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* Timeline */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="relative">
             <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-brown-deep/20 hidden md:block" />
@@ -104,7 +104,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* Excursion Info */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader label={dict.plantation.excursionLabel} title={dict.plantation.excursionTitle} />
           <ScrollReveal>
@@ -141,7 +141,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* Boutique - Mami Bio Shop */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader label={dict.plantation.shopLabel} title={dict.plantation.shopTitle} />
           <ScrollReveal>
@@ -180,7 +180,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* Booking Form */}
-      <section className="py-24 bg-brown-deep text-white">
+      <section className="py-14 md:py-24 bg-brown-deep text-white">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader light label={dict.plantation.bookLabel} title={dict.plantation.bookTitle} />
           <TheicoleBookingForm dict={dict} />

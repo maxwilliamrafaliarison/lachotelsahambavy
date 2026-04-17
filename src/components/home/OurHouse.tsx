@@ -36,7 +36,7 @@ export default function OurHouse({ dict, locale }: { dict: any; locale: Locale }
   ] as const;
 
   return (
-    <section id="our-house" className="py-32 md:py-40 bg-cream-dark/30">
+    <section id="our-house" className="py-16 md:py-40 bg-cream-dark/30">
       <div className="max-w-[1300px] mx-auto px-6">
         {/* ─── Header — eyebrow + title centered ─────────────────────── */}
         <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20">

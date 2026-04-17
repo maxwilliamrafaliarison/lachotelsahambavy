@@ -39,7 +39,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
       />
 
       {/* Introduction */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader
             label={dict.repos.introLabel}
@@ -70,7 +70,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* Photos */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal>
@@ -98,7 +98,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* Price & CTA */}
-      <section className="py-24 bg-brown-deep text-white">
+      <section className="py-14 md:py-24 bg-brown-deep text-white">
         <div className="max-w-[600px] mx-auto px-4 text-center">
           <ScrollReveal>
             <span className="section-label !text-cream mb-4">{dict.repos.priceLabel}</span>
