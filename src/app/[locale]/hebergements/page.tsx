@@ -168,18 +168,22 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         </div>
       </section>
 
-      {/* Detailed room sections */}
+      {/* Sections détaillées chambres — pattern premium Apple liquid-glass :
+          photo avec bordure dorée intérieure (.product-photo), chips
+          d'équipements en faux-glass blanc (.amenity-chip), carte prix
+          liquid-glass avec filet doré en haut (.room-price). Alterne
+          cream/white et ordre image/texte pour un rythme éditorial. */}
       {rooms.map((room, index) => (
         <section
           key={room.id}
           id={room.id}
           className={`py-14 md:py-24 ${index % 2 === 0 ? "bg-cream" : "bg-white"}`}
         >
-          <div className="max-w-[1200px] mx-auto px-4">
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
-              {/* Image */}
+          <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
+              {/* Image avec bordure dorée intérieure */}
               <ScrollReveal className={index % 2 !== 0 ? "lg:order-2" : ""}>
-                <div className="relative rounded-xl overflow-hidden shadow-lg aspect-[4/3]">
+                <div className="product-photo aspect-[4/3]">
                   {room.images[0] ? (
                     <img
                       src={`${basePath}${room.images[0]}`}
@@ -193,7 +197,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                     </div>
                   )}
                   {room.badge && (
-                    <span className="absolute top-4 left-4 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                    <span className="absolute top-5 left-5 z-10 bg-gold/95 backdrop-blur-sm text-white text-[11px] font-semibold px-3 py-1 rounded-full tracking-wide uppercase shadow-lg">
                       {room.badge}
                     </span>
                   )}
@@ -204,48 +208,64 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
               <ScrollReveal delay={150} className={index % 2 !== 0 ? "lg:order-1" : ""}>
                 <div>
                   <span className="section-label">{room.type[loc]}</span>
-                  <h2 className="mt-2 mb-4">{room.name[loc]}</h2>
-                  <p className="text-text-muted leading-relaxed mb-6">
+                  <h2 className="mt-2 mb-4 leading-[1.15]">{room.name[loc]}</h2>
+                  <p className="text-text-muted leading-[1.8] mb-6">
                     {room.longDescription ? room.longDescription[loc] : room.description[loc]}
                   </p>
 
-                  {/* Amenities grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+                  {/* Equipements — chips liquid-glass avec Phosphor gold */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-8">
                     {room.amenities.map((amenity, ai) => (
-                      <div
-                        key={ai}
-                        className="flex items-center gap-2.5 bg-white rounded-lg px-3 py-2 text-sm shadow-sm border border-brown-deep/5"
-                      >
+                      <div key={ai} className="amenity-chip">
                         <Icon
                           name={amenity.icon}
                           size={18}
                           weight="regular"
                           className="text-gold flex-shrink-0"
                         />
-                        <span className="text-text-muted">{amenity.label[loc]}</span>
+                        <span className="text-text-body leading-tight">{amenity.label[loc]}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Pricing card */}
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-brown-deep/10">
-                    <div className="flex items-baseline justify-between mb-3">
-                      <span className="text-sm text-text-muted">{dict.rooms.from}</span>
-                      <div className="text-right">
+                  {/* Carte prix liquid-glass — filet doré en haut, chiffre
+                      en Playfair, unité en Cormorant italique */}
+                  <div className="room-price p-6 md:p-7">
+                    <div className="flex items-start justify-between gap-4 mb-5">
+                      <div className="flex-1 min-w-0">
+                        <span className="block text-[0.65rem] uppercase tracking-[0.28em] text-gold font-medium mb-2">
+                          {dict.rooms.from}
+                        </span>
                         {room.priceEUR ? (
-                          <span className="text-3xl font-bold text-gold">{room.priceEUR}&euro;</span>
+                          <div className="flex items-baseline gap-1.5">
+                            <span className="text-4xl md:text-5xl font-bold text-brown-deep font-[family-name:var(--font-heading)] tabular-nums leading-none">
+                              {room.priceEUR}
+                              {"\u20AC"}
+                            </span>
+                            <span className="text-sm text-text-muted font-[family-name:var(--font-sub)] italic">
+                              {dict.rooms.night}
+                            </span>
+                          </div>
                         ) : (
-                          <span className="text-lg text-text-muted">—</span>
+                          <div className="flex items-baseline gap-1.5">
+                            <span className="text-3xl md:text-4xl font-bold text-brown-deep font-[family-name:var(--font-heading)] tabular-nums leading-none">
+                              {(room.priceAR / 1000).toLocaleString("fr-FR")}k
+                            </span>
+                            <span className="text-sm text-text-muted font-[family-name:var(--font-sub)] italic">
+                              AR {dict.rooms.night}
+                            </span>
+                          </div>
                         )}
-                        <span className="text-sm text-text-muted ml-1">{dict.rooms.night}</span>
                       </div>
                     </div>
-                    <div className="text-sm text-text-muted mb-4">
-                      {room.priceAR.toLocaleString("fr-FR")} Ariary {dict.rooms.night}
-                    </div>
+                    {room.priceEUR && (
+                      <div className="text-xs text-text-muted mb-5 tabular-nums">
+                        {room.priceAR.toLocaleString("fr-FR")} AR {dict.rooms.night}
+                      </div>
+                    )}
                     <Link
                       href={`/${locale}/contact/`}
-                      className="block w-full text-center bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-md"
+                      className="block w-full text-center bg-gold text-white px-6 py-3.5 rounded-full text-sm font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md"
                     >
                       {dict.rooms.book}
                     </Link>
