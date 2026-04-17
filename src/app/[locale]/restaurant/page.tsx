@@ -81,20 +81,29 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         image={`${basePath}/images/restaurant/restaurant-01.jpg`}
       />
 
-      {/* Philosophy strip */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Philosophy strip — cartes liquid-glass premium avec Phosphor badge */}
+      <section className="py-14 md:py-24 relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
+          }}
+        />
+        <div className="absolute -top-32 -right-32 w-[360px] h-[360px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
+        <div className="absolute -bottom-32 -left-32 w-[360px] h-[360px] rounded-full bg-gold/5 blur-3xl -z-10" />
+
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {philosophyCards.map((card, i) => (
               <ScrollReveal key={card.title} delay={i * 120}>
-                <div className="text-center p-8 rounded-xl bg-cream border border-brown-deep/5 h-full">
-                  <Icon
-                    name={card.icon}
-                    size={36}
-                    weight="regular"
-                    className="text-gold mx-auto mb-4"
-                  />
-                  <h3 className="text-lg font-semibold text-text-dark mb-3">{card.title}</h3>
+                <div className="repos-feature h-full p-7 md:p-8 text-center">
+                  <div className="repos-feature__badge mx-auto mb-5">
+                    <Icon name={card.icon} size={26} weight="regular" />
+                  </div>
+                  <h3 className="text-lg md:text-xl text-text-dark mb-3 leading-tight">
+                    {card.title}
+                  </h3>
                   <p className="text-text-muted text-sm leading-relaxed">{card.desc}</p>
                 </div>
               </ScrollReveal>
@@ -103,13 +112,13 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Main content: intro + specialties */}
+      {/* Main content: intro + signatures — photo avec bordure dorée intérieure */}
       <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Image */}
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+            {/* Image produit */}
             <ScrollReveal>
-              <div className="rounded-xl overflow-hidden shadow-lg aspect-[4/3]">
+              <div className="product-photo aspect-[4/3]">
                 <img
                   src={`${basePath}/images/restaurant/restaurant-02.jpg`}
                   alt={dict.restaurantSection.heroTitle}
@@ -126,22 +135,30 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
                   label={dict.restaurantSection.label}
                   title={dict.restaurantSection.title}
                   subtitle={dict.restaurantSection.subtitle}
-                  className="text-left mb-10"
+                  className="text-left mb-8 md:mb-10"
                 />
 
-                <p className="text-text-muted leading-relaxed mb-8">
+                <p className="text-text-muted leading-[1.8] mb-8">
                   {dict.restaurantSection.p1}
                 </p>
 
-                {/* Signature dishes */}
-                <h4 className="text-sm font-semibold text-text-dark uppercase tracking-wider mb-4">
-                  {loc === "fr" ? "Nos signatures" : loc === "es" ? "Nuestras firmas" : "Our signatures"}
-                </h4>
+                {/* Signature dishes — badge editorial en haut + filet doré */}
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="h-px w-8 bg-gold" />
+                  <span className="text-[0.7rem] font-semibold text-gold uppercase tracking-[0.28em]">
+                    {loc === "fr" ? "Nos signatures" : loc === "es" ? "Nuestras firmas" : "Our signatures"}
+                  </span>
+                </div>
                 <ul className="space-y-3 mb-8">
                   {dict.restaurantSection.specialties.map((dish: string, i: number) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-gold mt-0.5 flex-shrink-0">{"\u2022"}</span>
-                      <span className="text-text-muted">{dish}</span>
+                      <Icon
+                        name="fish"
+                        size={16}
+                        weight="regular"
+                        className="text-gold mt-0.5 flex-shrink-0"
+                      />
+                      <span className="text-text-body leading-relaxed">{dish}</span>
                     </li>
                   ))}
                 </ul>
@@ -160,27 +177,29 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         <div className="absolute inset-0 bg-black/30" />
       </section>
 
-      {/* Pricing section */}
+      {/* Pricing section — liquid-glass cards avec filet doré en haut */}
       <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[900px] mx-auto px-4">
+        <div className="max-w-[900px] mx-auto px-5 md:px-6">
           <SectionHeader
             label={loc === "fr" ? "Tarifs" : loc === "es" ? "Tarifas" : "Pricing"}
             title={loc === "fr" ? "Nos formules" : loc === "es" ? "Nuestras formulas" : "Our options"}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {pricingItems.map((item, i) => (
               <ScrollReveal key={item.label} delay={i * 100}>
-                <div className="text-center bg-cream rounded-xl p-8 border border-brown-deep/5 h-full flex flex-col items-center justify-center">
-                  <Icon
-                    name={item.icon}
-                    size={30}
-                    weight="regular"
-                    className="text-gold mb-3"
-                  />
-                  <h4 className="text-text-dark font-semibold mb-3">{item.label}</h4>
-                  <div className="text-3xl font-bold text-gold mb-1">
-                    {item.priceAR.toLocaleString("fr-FR")} AR
+                <div className="room-price text-center p-7 md:p-8 h-full flex flex-col items-center justify-center">
+                  <div className="repos-feature__badge mb-5">
+                    <Icon name={item.icon} size={24} weight="regular" />
+                  </div>
+                  <h4 className="text-text-dark text-base font-semibold mb-5">{item.label}</h4>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-3xl md:text-4xl font-bold text-brown-deep font-[family-name:var(--font-heading)] tabular-nums leading-none">
+                      {item.priceAR.toLocaleString("fr-FR")}
+                    </span>
+                    <span className="text-sm text-text-muted font-[family-name:var(--font-sub)] italic">
+                      AR
+                    </span>
                   </div>
                 </div>
               </ScrollReveal>

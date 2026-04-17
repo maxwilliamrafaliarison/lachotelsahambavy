@@ -16,6 +16,7 @@ import {
   Coffee,
   CookingPot,
   Drop,
+  Envelope,
   Fish,
   Flower,
   FlowerLotus,
@@ -25,11 +26,13 @@ import {
   House,
   Info,
   Leaf,
+  MapPin,
   Martini,
   MaskHappy,
   Mountains,
   PersonSimpleHike,
   PersonSimpleWalk,
+  Phone,
   PicnicTable,
   Plant,
   Recycle,
@@ -132,6 +135,11 @@ const ICONS: Record<string, PhosphorIcon> = {
   soap: Drop, // savons artisanaux (goutte)
   forest: Tree, // corridor forestier (alias sémantique)
   zeroWaste: Recycle, // zéro gaspillage
+
+  // Contact
+  mail: Envelope,
+  phone: Phone,
+  location: MapPin,
 };
 
 export type IconName = keyof typeof ICONS;
