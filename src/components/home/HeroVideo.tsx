@@ -59,7 +59,13 @@ export default function HeroVideo({ dict }: { dict: any }) {
 
   return (
     <section className="relative w-full h-[100svh] min-h-[560px] md:min-h-[700px] overflow-hidden">
-      {/* Vidéo background — sources mobile/desktop, poster pour LCP */}
+      {/* Vidéo background — palindrome aller-retour pour que la boucle soit
+          sans coupure visible (frame de fin = frame de début grâce au
+          concat forward + reverse côté ffmpeg). Sources mobile/desktop.
+          Filtre CSS : saturation abaissée (0.85), contraste légèrement
+          poussé (1.05), sépia très léger (0.08) → le mood "premium luxe
+          nature" demandé, façon Aman / Belmond (pas trop saturé, pas
+          télé-promo). */}
       <video
         ref={videoRef}
         autoPlay
@@ -70,29 +76,33 @@ export default function HeroVideo({ dict }: { dict: any }) {
         poster={`${basePath}/videos/hero-drone-poster.jpg`}
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover will-change-transform"
-        style={{ transform: "scale(1.05)" }}
+        style={{
+          transform: "scale(1.05)",
+          filter: "saturate(0.85) contrast(1.05) sepia(0.08)",
+        }}
       >
-        {/* Mobile : version 960 px, 850 Ko — suffit pour un écran téléphone */}
+        {/* Mobile : version 960 px, 800 Ko — suffit pour un écran téléphone */}
         <source
           src={`${basePath}/videos/hero-drone-mobile.mp4`}
           type="video/mp4"
           media="(max-width: 767px)"
         />
-        {/* Desktop : 1600 px, 4,6 Mo */}
+        {/* Desktop : 1600 px, 4,0 Mo */}
         <source
           src={`${basePath}/videos/hero-drone.mp4`}
           type="video/mp4"
         />
       </video>
 
-      {/* Couche "filigrane clair" — cream translucide sur toute la surface
-          pour désaturer un peu la vidéo et donner le mood éditorial doux
-          demandé. Léger renfort noir en bas pour le contraste du texte. */}
+      {/* Overlay — scrim haut léger (la navbar a son propre text-shadow
+          pour la lisibilité, pas besoin d'assombrir trop l'image),
+          puis filigrane cream au milieu, puis renfort noir progressif
+          en bas pour le contraste du H1 et des CTA. */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(248,245,240,0.25) 0%, rgba(248,245,240,0.10) 35%, rgba(0,0,0,0.15) 65%, rgba(0,0,0,0.55) 100%)",
+            "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.10) 18%, rgba(248,245,240,0.10) 45%, rgba(0,0,0,0.25) 72%, rgba(0,0,0,0.60) 100%)",
         }}
       />
 

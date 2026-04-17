@@ -130,8 +130,19 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             />
           </Link>
 
-          {/* Desktop menu — minimal */}
-          <div className="hidden lg:flex items-center gap-10">
+          {/* Desktop menu — minimal.
+              Hors scroll, le texte est blanc sur fond hero — on ajoute un
+              text-shadow doux pour que les items restent lisibles même
+              quand la photo/vidéo montre un ciel clair ou un feuillage
+              vert pâle derrière (gros problème signalé sur /fr avec la
+              nouvelle vidéo drone). Scrolled : shadow neutralisé puisque
+              le fond devient blanc glass. */}
+          <div
+            className="hidden lg:flex items-center gap-10"
+            style={{
+              textShadow: darkText ? "none" : "0 1px 3px rgba(0,0,0,0.55), 0 0 20px rgba(0,0,0,0.30)",
+            }}
+          >
             {navigation
               .filter((n) => n.href !== "/" && n.href !== "/contact")
               .map((item) => (
@@ -139,7 +150,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   key={item.href}
                   href={`/${locale}${item.href}/`}
                   className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${
-                    darkText ? "text-text-body" : "text-white/90"
+                    darkText ? "text-text-body" : "text-white"
                   }`}
                 >
                   {item.label[locale]}
@@ -153,7 +164,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   {i > 0 && (
                     <span
                       aria-hidden="true"
-                      className={`inline-block w-px h-3 ${darkText ? "bg-brown-deep/20" : "bg-white/30"}`}
+                      className={`inline-block w-px h-3 ${darkText ? "bg-brown-deep/20" : "bg-white/40"}`}
                     />
                   )}
                   <Link
@@ -161,7 +172,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     className={`text-[0.65rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${
                       locale === l.code
                         ? darkText ? "text-gold" : "text-white"
-                        : darkText ? "text-text-body/50 hover:text-gold" : "text-white/55 hover:text-white"
+                        : darkText ? "text-text-body/50 hover:text-gold" : "text-white/70 hover:text-white"
                     }`}
                     aria-current={locale === l.code ? "page" : undefined}
                   >
@@ -171,13 +182,16 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               ))}
             </div>
 
-            {/* Book CTA */}
+            {/* Book CTA.
+                Hors scroll : fond dark glass (au lieu de white/15 qui
+                disparaissait sur la vidéo) → encadre clairement le CTA. */}
             <Link
               href={`/${locale}/contact/`}
+              style={{ textShadow: "none" }}
               className={`text-[0.7rem] font-semibold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full transition-all duration-300 ${
                 scrolled
                   ? "bg-gold text-white hover:bg-brown-deep"
-                  : "bg-white/15 backdrop-blur-md text-white border border-white/30 hover:bg-white/25"
+                  : "bg-black/35 backdrop-blur-md text-white border border-white/40 hover:bg-black/50"
               }`}
             >
               {dict.nav.book}
