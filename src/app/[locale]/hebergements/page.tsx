@@ -269,17 +269,19 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {(
               [
-                { key: "breakfast" as const, icon: "\u2615" },
-                { key: "menu" as const, icon: "\uD83C\uDF7D" },
-                { key: "picnic" as const, icon: "\uD83E\uDDFA" },
-                { key: "transfer" as const, icon: "\uD83D\uDE99" },
+                { key: "breakfast" as const, iconName: "coffee" },
+                { key: "menu" as const, iconName: "dining" },
+                { key: "picnic" as const, iconName: "basket" },
+                { key: "transfer" as const, iconName: "car" },
               ] as const
-            ).map(({ key, icon }, i) => {
+            ).map(({ key, iconName }, i) => {
               const extra = extras[key];
               return (
                 <ScrollReveal key={key} delay={i * 100}>
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center h-full border border-white/10">
-                    <span className="text-3xl block mb-3">{icon}</span>
+                    <div className="flex justify-center mb-3">
+                      <Icon name={iconName} size={28} weight="regular" className="text-gold-light" />
+                    </div>
                     <h4
                       className="font-semibold mb-2"
                       style={{ color: "#FFFFFF" }}
@@ -304,7 +306,9 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[800px] mx-auto px-4 text-center">
           <ScrollReveal>
-            <span className="text-4xl block mb-4">{"\u26FA"}</span>
+            <div className="flex justify-center mb-4">
+              <Icon name="camping" size={40} weight="regular" className="text-gold" />
+            </div>
             <h2 className="mb-4">{dict.rooms.camping}</h2>
             <p className="text-text-muted leading-relaxed mb-6">
               {dict.rooms.campingDesc}
