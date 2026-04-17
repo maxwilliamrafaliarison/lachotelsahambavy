@@ -62,10 +62,10 @@ export default function HeroVideo({ dict }: { dict: any }) {
       {/* Vidéo background — palindrome aller-retour pour que la boucle soit
           sans coupure visible (frame de fin = frame de début grâce au
           concat forward + reverse côté ffmpeg). Sources mobile/desktop.
-          Filtre CSS : saturation abaissée (0.85), contraste légèrement
-          poussé (1.05), sépia très léger (0.08) → le mood "premium luxe
-          nature" demandé, façon Aman / Belmond (pas trop saturé, pas
-          télé-promo). */}
+
+          Pas de filtre CSS : le client a fait son propre color grading
+          sur la source (accentuation des couleurs pour sortir du "fade")
+          — la désaturer ici annulerait son travail. */}
       <video
         ref={videoRef}
         autoPlay
@@ -76,10 +76,7 @@ export default function HeroVideo({ dict }: { dict: any }) {
         poster={`${basePath}/videos/hero-drone-poster.jpg`}
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover will-change-transform"
-        style={{
-          transform: "scale(1.05)",
-          filter: "saturate(0.85) contrast(1.05) sepia(0.08)",
-        }}
+        style={{ transform: "scale(1.05)" }}
       >
         {/* Mobile : version 960 px, 800 Ko — suffit pour un écran téléphone */}
         <source
@@ -94,15 +91,17 @@ export default function HeroVideo({ dict }: { dict: any }) {
         />
       </video>
 
-      {/* Overlay — scrim haut léger (la navbar a son propre text-shadow
-          pour la lisibilité, pas besoin d'assombrir trop l'image),
-          puis filigrane cream au milieu, puis renfort noir progressif
-          en bas pour le contraste du H1 et des CTA. */}
+      {/* Overlay — scrim haut léger pour la navbar (qui a son propre
+          text-shadow côté nav-items), zone centrale quasi-transparente
+          pour laisser respirer les couleurs vives du color grading
+          client, puis renfort noir progressif en bas pour le contraste
+          du H1 et des CTA. Plus de wash cream maintenant que la vidéo
+          n'est plus fade. */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.10) 18%, rgba(248,245,240,0.10) 45%, rgba(0,0,0,0.25) 72%, rgba(0,0,0,0.60) 100%)",
+            "linear-gradient(180deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.22) 72%, rgba(0,0,0,0.62) 100%)",
         }}
       />
 
