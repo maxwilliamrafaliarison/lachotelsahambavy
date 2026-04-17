@@ -443,15 +443,35 @@
     "heroSubtitle": "Estancias familiares con total autonomía",
     "introLabel": "Extensión del hotel",
     "introTitle": "Le Repos — Su hogar junto al lago",
-    "introP": "Disponemos de 4 casas dúplex (de dos plantas), totalmente equipadas para estancias prolongadas. Incluyen una cocina americana con placa de cocción, nevera y vajilla, ofreciendo todo el confort necesario para una estancia con total autonomía.",
+    "introP": "Cuatro casas dúplex de dos plantas, totalmente equipadas para estancias prolongadas. Cada vivienda dispone de una cocina americana completa — placa, nevera, vajilla — para vivir a su ritmo, con total autonomía, disfrutando del entorno del Lac Hôtel.",
     "features": [
-      "4 casas dúplex independientes",
-      "Cocina americana completa: placa, nevera, vajilla",
-      "Ideal para estancias familiares o de larga duración",
-      "Entorno natural preservado y tranquilo"
+      {
+        "icon": "house",
+        "title": "4 casas dúplex",
+        "desc": "Independientes, de dos plantas, a 800 metros del edificio principal — tranquilas, en el jardín."
+      },
+      {
+        "icon": "cooking",
+        "title": "Cocina americana completa",
+        "desc": "Placa, nevera y vajilla incluidas — cocine cuando y como quiera."
+      },
+      {
+        "icon": "family",
+        "title": "Familiar & larga estancia",
+        "desc": "Hasta 5 personas por casa. Pensado para familias y viajeros que se quedan varias noches."
+      },
+      {
+        "icon": "leaf",
+        "title": "Naturaleza preservada",
+        "desc": "Un remanso de paz en el corazón del jardín tropical — el lago a un paso, lejos del ruido."
+      }
     ],
-    "priceLabel": "Tarifa",
-    "price": "250 000 AR / noche",
+    "photoCaption1": "Las casas dúplex, lado jardín",
+    "photoCaption2": "Naturaleza preservada alrededor",
+    "priceLabel": "Desde",
+    "price": "250 000",
+    "priceUnit": "AR / noche",
+    "priceFootnote": "Tasa turística y desayuno no incluidos",
     "cta": "Reservar en Le Repos",
     "whatsappCta": "¿Preguntas? Contáctenos"
   },

@@ -548,6 +548,98 @@ body {
   transform: scale(1.1);
 }
 
+/* ===== REPOS FEATURE & PRICE CARDS (Apple liquid-glass premium) =====
+ *
+ * Utilisés sur /le-repos. Deux variantes :
+ *   - .repos-feature   : carte feature au-dessus d'un fond cream ; verre
+ *                        dépoli blanc translucide, picto en haut, titre +
+ *                        description en dessous. Hover léger lift + glow.
+ *   - .repos-price     : carte prix qui "flotte" sur une photo hero ; verre
+ *                        dépoli épais (blur 32) avec highlight apple iOS 26,
+ *                        centrée avec CTA.
+ */
+
+.repos-feature {
+  position: relative;
+  /* Sur fond cream, le backdrop-blur n'a rien à flouter ; on passe à un
+     "faux glass" : blanc dense + highlight interne + bordure dorée
+     translucide qui simulent la réfraction iOS 26 sans dépendre du
+     blur réel (qui ne fonctionne que sur un fond coloré / une photo). */
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(196, 150, 42, 0.15);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
+              inset 0 -1px 0 rgba(44, 24, 16, 0.03),
+              0 10px 32px -8px rgba(44, 24, 16, 0.08),
+              0 2px 6px rgba(44, 24, 16, 0.04);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.repos-feature:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(196, 150, 42, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1),
+              0 20px 48px -10px rgba(196, 150, 42, 0.22),
+              0 4px 12px rgba(44, 24, 16, 0.08);
+}
+
+.repos-feature__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(74, 122, 90, 0.12) 0%, rgba(196, 150, 42, 0.10) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8),
+              0 2px 8px rgba(74, 122, 90, 0.08);
+  color: var(--color-green-tea);
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.repos-feature:hover .repos-feature__badge {
+  color: var(--color-gold);
+  transform: scale(1.08);
+}
+
+/* Price card — liquid-glass apple iOS 26, flotte sur une photo */
+.repos-price {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 1.75rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+              0 24px 60px -12px rgba(0, 0, 0, 0.35),
+              0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Bordure dorée intérieure sur les photos (diptyque) — touche luxe discret.
+   Réutilise le pattern déjà en place sur /hotel (figures Maggie/Sergi). */
+.repos-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 40px -8px rgba(44, 24, 16, 0.15),
+              0 2px 8px rgba(44, 24, 16, 0.06);
+}
+
+.repos-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(196, 150, 42, 0.18);
+  pointer-events: none;
+}
+
 /* ===== WHATSAPP FLOAT ===== */
 
 .whatsapp-float {
