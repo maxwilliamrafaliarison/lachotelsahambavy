@@ -63,7 +63,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       {/* Liquid-glass tariff grid — remplace l'ancien tableau "brut".
           Chaque carte = un type d'hébergement avec photo, verre dépoli,
           prix Public (et TO si dispo) + ancre vers la section détaillée. */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.rooms.label}
@@ -173,7 +173,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <section
           key={room.id}
           id={room.id}
-          className={`py-24 ${index % 2 === 0 ? "bg-cream" : "bg-white"}`}
+          className={`py-14 md:py-24 ${index % 2 === 0 ? "bg-cream" : "bg-white"}`}
         >
           <div className="max-w-[1200px] mx-auto px-4">
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
@@ -258,7 +258,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       ))}
 
       {/* Extras section */}
-      <section className="py-24 bg-brown-deep text-white">
+      <section className="py-14 md:py-24 bg-brown-deep text-white">
         <div className="max-w-[1000px] mx-auto px-4">
           <SectionHeader
             label={loc === "fr" ? "Services & Extras" : loc === "es" ? "Servicios y Extras" : "Services & Extras"}
@@ -301,7 +301,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       </section>
 
       {/* Camping section */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[800px] mx-auto px-4 text-center">
           <ScrollReveal>
             <span className="text-4xl block mb-4">{"\u26FA"}</span>
@@ -320,7 +320,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       </section>
 
       {/* CTA to contact */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-[600px] mx-auto px-4 text-center">
           <ScrollReveal>
             <h2 className="mb-4">{dict.contact.title}</h2>

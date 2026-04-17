@@ -53,7 +53,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
       />
 
       {/* Introduction */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader
             label={dict.equipe.introLabel}
@@ -68,7 +68,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
       </section>
 
       {/* RSE Engagement */}
-      <section className="py-24 bg-cream/50">
+      <section className="py-14 md:py-24 bg-cream/50">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.equipe.rseLabel}
@@ -94,7 +94,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
       </section>
 
       {/* Circular Economy */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[800px] mx-auto px-4">
           <SectionHeader
             label={dict.equipe.economyLabel}
@@ -109,7 +109,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
       </section>
 
       {/* Team Photo Grid */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.equipe.teamLabel}

@@ -20,7 +20,7 @@ export default function Destinations({ dict, locale }: { dict: any; locale: Loca
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-14 md:py-24 bg-white">
       <div className="max-w-[1200px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {items.map((item, i) => (

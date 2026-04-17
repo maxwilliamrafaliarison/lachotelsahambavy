@@ -10,7 +10,7 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
   const basePath = getBasePath();
 
   return (
-    <section id="welcome" className="py-32 md:py-40">
+    <section id="welcome" className="py-16 md:py-40">
       <div className="max-w-[1300px] mx-auto px-6">
         {/* Top: editorial intro */}
         <div className="max-w-3xl mx-auto text-center mb-20 md:mb-28">

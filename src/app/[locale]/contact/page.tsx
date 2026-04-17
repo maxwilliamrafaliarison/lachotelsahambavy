@@ -36,7 +36,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
       />
 
       {/* Contact info cards */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             label={dict.contact.label}
@@ -77,7 +77,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
       </section>
 
       {/* Booking form multi-step */}
-      <section id="booking-form" className="py-24 bg-cream">
+      <section id="booking-form" className="py-14 md:py-24 bg-cream">
         <div className="max-w-[900px] mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl text-brown-deep mb-3">{dict.contact.title}</h2>

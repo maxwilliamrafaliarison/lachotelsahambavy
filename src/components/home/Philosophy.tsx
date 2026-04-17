@@ -49,7 +49,7 @@ function PillarIcon({ type }: { type: string }) {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Philosophy({ dict }: { dict: any }) {
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden">
+    <section className="relative py-16 md:py-40 overflow-hidden">
       {/* Background image with overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"

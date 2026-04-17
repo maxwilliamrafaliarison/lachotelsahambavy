@@ -7,7 +7,7 @@ const basePath = getBasePath();
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ContactSection({ dict }: { dict: any }) {
   return (
-    <section id="contact" className="relative py-32 md:py-40 overflow-hidden">
+    <section id="contact" className="relative py-16 md:py-40 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"

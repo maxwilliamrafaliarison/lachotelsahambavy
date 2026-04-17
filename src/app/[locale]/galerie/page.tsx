@@ -64,7 +64,7 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
         image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
       />
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionHeader
             title={dict.gallery.heroTitle}

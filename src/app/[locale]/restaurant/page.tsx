@@ -82,7 +82,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       />
 
       {/* Philosophy strip */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {philosophyCards.map((card, i) => (
@@ -104,7 +104,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* Main content: intro + specialties */}
-      <section className="py-24 bg-cream">
+      <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
@@ -161,7 +161,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* Pricing section */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-[900px] mx-auto px-4">
           <SectionHeader
             label={loc === "fr" ? "Tarifs" : loc === "es" ? "Tarifas" : "Pricing"}
@@ -206,7 +206,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       </section>
 
       {/* CTA to contact */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-[600px] mx-auto px-4 text-center">
           <ScrollReveal>
             <h2 className="mb-4">{dict.contact.title}</h2>
