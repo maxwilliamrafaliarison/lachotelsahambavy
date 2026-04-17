@@ -316,14 +316,42 @@
     "ecoLabel": "Eco-responsible commitment",
     "ecoTitle": "For Madagascar, by Madagascar",
     "ecoP1": "Lac Hôtel is fully committed to corporate social responsibility (CSR) and sustainable development. It actively contributes to the resilience of the local community by prioritising local recruitment, including for management positions.",
-    "ecoItems": [
-      "Organic products grown on-site — 2-hectare vegetable garden",
-      "Local recruitment, including management positions",
-      "Short-circuit sourcing from local producers",
-      "Honey production to support bee populations",
-      "Handmade 100% natural artisan soaps",
-      "Preservation of the Ranomafana–Andringitra primary forest corridor",
-      "Three-menu approach to reduce food waste"
+    "ecoPillars": [
+      {
+        "icon": "bio",
+        "title": "2-hectare organic garden",
+        "desc": "Fruit, vegetables and herbs grown on-site — in the heart of our orange groves, without chemical inputs."
+      },
+      {
+        "icon": "hiring",
+        "title": "100% local hiring",
+        "desc": "A team entirely from the village — including management positions."
+      },
+      {
+        "icon": "shortSupply",
+        "title": "Short-supply chain first",
+        "desc": "Meat, cheese, fruit and fish sourced directly from Sahambavy producers."
+      },
+      {
+        "icon": "bees",
+        "title": "Responsible beekeeping",
+        "desc": "Our hives produce honey and pollination — a gesture for the region's bee colonies."
+      },
+      {
+        "icon": "soap",
+        "title": "Natural handmade soaps",
+        "desc": "Made on-site with honey, milk and essential oils. Sulfate-free, no petrochemical additives."
+      },
+      {
+        "icon": "forest",
+        "title": "Ranomafana–Andringitra corridor",
+        "desc": "Active preservation of the last primary forest corridor linking these two national parks."
+      },
+      {
+        "icon": "zeroWaste",
+        "title": "Zero kitchen waste",
+        "desc": "Three fixed menus per service to cook just right and turn leftovers into compost."
+      }
     ]
   },
   "plantation": {

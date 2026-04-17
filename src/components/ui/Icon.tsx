@@ -7,17 +7,20 @@ import {
   Bed,
   Binoculars,
   Boat,
+  Butterfly,
   CellSignalHigh,
   ChefHat,
   Clock,
   ClipboardText,
   Coffee,
   CookingPot,
+  Drop,
   Fish,
   Flower,
   FlowerLotus,
   ForkKnife,
   GridFour,
+  HandHeart,
   House,
   Info,
   Leaf,
@@ -28,6 +31,7 @@ import {
   PersonSimpleWalk,
   PicnicTable,
   Plant,
+  Recycle,
   Ruler,
   Storefront,
   SwimmingPool,
@@ -113,6 +117,15 @@ const ICONS: Record<string, PhosphorIcon> = {
   arrow: ArrowRight,
   backpack: Backpack,
   info: Info,
+
+  // Engagement éco-responsable — filigranes / pictos RSE
+  bio: Plant, // potager bio (alias sémantique de plant)
+  hiring: HandHeart, // recrutement humain, local
+  shortSupply: Basket, // achats circuit court (alias sémantique)
+  bees: Butterfly, // apiculture / biodiversité
+  soap: Drop, // savons artisanaux (goutte)
+  forest: Tree, // corridor forestier (alias sémantique)
+  zeroWaste: Recycle, // zéro gaspillage
 };
 
 export type IconName = keyof typeof ICONS;
