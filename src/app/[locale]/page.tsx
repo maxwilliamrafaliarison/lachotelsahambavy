@@ -3,6 +3,8 @@ import { locales, type Locale, getBasePath } from "@/lib/utils";
 import HeroVideo from "@/components/home/HeroVideo";
 import PromoBanner from "@/components/home/PromoBanner";
 import Welcome from "@/components/home/Welcome";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { videoObjectSchema } from "@/lib/schema-org";
 import OurHouse from "@/components/home/OurHouse";
 import RoomsGrid from "@/components/home/RoomsGrid";
 import RestaurantTeaser from "@/components/home/RestaurantTeaser";
@@ -37,6 +39,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
+      <JsonLd schemas={videoObjectSchema(locale as Locale)} />
       <HeroVideo dict={dict} />
       <PromoBanner dict={dict} />
       <Welcome dict={dict} locale={locale as Locale} />

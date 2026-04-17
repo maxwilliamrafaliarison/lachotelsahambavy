@@ -389,3 +389,69 @@ export function imageGallerySchema(args: {
     })),
   };
 }
+
+// =====================================================
+// VideoObject (hero d'accueil — plan drone Sahambavy)
+// =====================================================
+
+/**
+ * Schema VideoObject pour la vidéo hero de la homepage. Google peut
+ * indexer cette entrée dans les résultats vidéo enrichis (rich snippets)
+ * si les attributs requis sont présents : name, description, thumbnailUrl,
+ * uploadDate. Les attributs recommandés (contentUrl, duration, embedUrl)
+ * améliorent le taux d'éligibilité.
+ *
+ * Durée = PT24S (palindrome 12 s × 2 aller-retour côté ffmpeg).
+ *
+ * Réf : https://developers.google.com/search/docs/appearance/structured-data/video
+ */
+export function videoObjectSchema(locale: Locale): SchemaType {
+  const TITLES: Record<Locale, string> = {
+    fr: "Lac Hôtel Sahambavy — vue drone aérienne",
+    en: "Lac Hôtel Sahambavy — aerial drone view",
+    es: "Lac Hôtel Sahambavy — vista aérea con dron",
+  };
+  const DESCRIPTIONS: Record<Locale, string> = {
+    fr:
+      "Survol cinématique du Lac Hôtel Sahambavy à Madagascar. Bungalows sur pilotis au bord du lac, collines verdoyantes et plantation de thé — la seule de Madagascar — en arrière-plan. Filmé au drone.",
+    en:
+      "Cinematic drone flight over Lac Hôtel Sahambavy in Madagascar. Overwater pilotis bungalows on the lake, green hills and tea plantation — the only one in Madagascar — in the background.",
+    es:
+      "Vuelo cinematográfico con dron sobre el Lac Hôtel Sahambavy en Madagascar. Bungalows sobre pilotes al borde del lago, colinas verdes y plantación de té — la única de Madagascar — al fondo.",
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "@id": `${siteConfig.url}/${locale}/#hero-video`,
+    name: TITLES[locale],
+    description: DESCRIPTIONS[locale],
+    thumbnailUrl: `${siteConfig.url}/videos/hero-drone-poster.jpg`,
+    contentUrl: `${siteConfig.url}/videos/hero-drone.mp4`,
+    uploadDate: "2026-04-17",
+    duration: "PT24S",
+    width: 1600,
+    height: 900,
+    encodingFormat: "video/mp4",
+    inLanguage: locale,
+    isFamilyFriendly: true,
+    publisher: {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}#organization`,
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/images/logo/logo-color.png`,
+      },
+    },
+    contentLocation: {
+      "@type": "Place",
+      name: "Sahambavy, Fianarantsoa, Madagascar",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: siteConfig.geo.lat,
+        longitude: siteConfig.geo.lng,
+      },
+    },
+  };
+}
