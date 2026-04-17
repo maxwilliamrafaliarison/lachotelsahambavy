@@ -1,6 +1,6 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import HeroSlider from "@/components/home/HeroSlider";
+import HeroVideo from "@/components/home/HeroVideo";
 import PromoBanner from "@/components/home/PromoBanner";
 import Welcome from "@/components/home/Welcome";
 import OurHouse from "@/components/home/OurHouse";
@@ -37,7 +37,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <HeroSlider dict={dict} />
+      <HeroVideo dict={dict} />
       <PromoBanner dict={dict} />
       <Welcome dict={dict} locale={locale as Locale} />
       <OurHouse dict={dict} locale={locale as Locale} />
