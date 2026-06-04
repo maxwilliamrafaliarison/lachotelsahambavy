@@ -81,6 +81,25 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         image={`${basePath}/images/restaurant/restaurant-01.jpg`}
       />
 
+      {/* Citation éditoriale — "La qualité commence à la source" (PDF v2026).
+          Bandeau crème discret entre le hero et la philosophy strip. */}
+      {dict.restaurantSection.qualityQuote && (
+        <section className="py-10 md:py-14 bg-cream">
+          <div className="max-w-[800px] mx-auto px-5 md:px-6 text-center">
+            <ScrollReveal>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="h-px w-10 bg-gold/40" />
+                <Icon name="leaf" size={16} weight="regular" className="text-gold" />
+                <span className="h-px w-10 bg-gold/40" />
+              </div>
+              <p className="font-[family-name:var(--font-sub)] italic text-brown-deep text-xl md:text-2xl leading-tight">
+                «&nbsp;{dict.restaurantSection.qualityQuote}&nbsp;»
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
       {/* Philosophy strip — cartes liquid-glass premium avec Phosphor badge */}
       <section className="py-14 md:py-24 relative overflow-hidden">
         <div
@@ -162,6 +181,64 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
                     </li>
                   ))}
                 </ul>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Herbes du potager + Eau filtrée — preuves concrètes éco-responsables
+          (PDF v2026). Layout 2 colonnes : à gauche grille d'herbes, à droite
+          carte "Eau filtrée à volonté". */}
+      <section className="py-14 md:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Herbes du potager — grid 4×2 pills */}
+            <ScrollReveal className="lg:col-span-7">
+              <span className="section-label">
+                {dict.restaurantSection.herbsLabel}
+              </span>
+              <h2 className="mt-2 mb-4 leading-[1.15]">
+                {dict.restaurantSection.herbsTitle}
+              </h2>
+              <p className="text-text-muted leading-[1.8] mb-6">
+                {dict.restaurantSection.herbsIntro}
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {(dict.restaurantSection.herbs as string[]).map((h: string) => (
+                  <div
+                    key={h}
+                    className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-full border border-gold/15 bg-white/60 backdrop-blur-sm"
+                  >
+                    <Icon
+                      name="leaf"
+                      size={14}
+                      weight="regular"
+                      className="text-gold flex-shrink-0"
+                    />
+                    <span className="text-sm font-medium text-brown-deep tracking-tight">
+                      {h}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            {/* Eau filtrée — carte glass */}
+            <ScrollReveal delay={180} className="lg:col-span-5">
+              <div className="repos-feature h-full p-7 md:p-8 text-center">
+                <div className="repos-feature__badge mx-auto mb-5">
+                  <Icon name="soap" size={28} weight="regular" />
+                </div>
+                <span className="block text-[0.6rem] uppercase tracking-[0.28em] text-gold font-medium mb-2">
+                  {dict.restaurantSection.waterRefillLabel}
+                </span>
+                <h3 className="text-lg md:text-xl text-text-dark mb-4 leading-tight">
+                  {dict.restaurantSection.waterRefillTitle}
+                </h3>
+                <p className="text-text-muted text-sm leading-relaxed">
+                  {dict.restaurantSection.waterRefillP}
+                </p>
               </div>
             </ScrollReveal>
           </div>

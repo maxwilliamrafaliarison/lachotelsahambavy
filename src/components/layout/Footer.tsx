@@ -17,7 +17,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
             <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hotel Sahambavy"
-              className="h-28 md:h-32 w-auto mb-6 opacity-85"
+              className="h-56 md:h-64 w-auto mb-6 opacity-85"
             />
             <p className="text-cream/40 font-[family-name:var(--font-sub)] italic text-lg max-w-md">
               {dict.footer.tagline}

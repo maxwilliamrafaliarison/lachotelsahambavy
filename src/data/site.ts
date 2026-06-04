@@ -35,11 +35,46 @@ export const siteConfig = {
   },
 };
 
-export const navigation = [
+/**
+ * Navigation globale du site.
+ *
+ * `primary: false` → page secondaire : visible uniquement dans le menu mobile
+ * (qui scroll) et le footer. Le menu desktop reste compact (6 items max)
+ * pour préserver la respiration éditoriale.
+ *
+ * Les 3 pages secondaires actuelles — Train FCE, Mariages & Séminaires,
+ * Nos Jardins — sont des pages "découverte" accessibles via le contenu
+ * éditorial (page Expériences) et via le footer.
+ */
+export const navigation: Array<{
+  href: string;
+  label: { fr: string; en: string; es: string };
+  primary?: boolean;
+}> = [
   { href: "/", label: { fr: "Accueil", en: "Home", es: "Inicio" } },
   { href: "/hotel", label: { fr: "L'Hôtel", en: "The Hotel", es: "El Hotel" } },
   { href: "/hebergements", label: { fr: "Séjourner", en: "Stay", es: "Alojarse" } },
   { href: "/experiences", label: { fr: "Expériences", en: "Experiences", es: "Experiencias" } },
   { href: "/galerie", label: { fr: "Galerie", en: "Gallery", es: "Galería" } },
   { href: "/contact", label: { fr: "Réserver", en: "Book", es: "Reservar" } },
+  // Pages secondaires — masquées du menu desktop, visibles en mobile + footer
+  {
+    href: "/train-fce",
+    label: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" },
+    primary: false,
+  },
+  {
+    href: "/mariages-seminaires",
+    label: {
+      fr: "Mariages & Séminaires",
+      en: "Weddings & Seminars",
+      es: "Bodas y Seminarios",
+    },
+    primary: false,
+  },
+  {
+    href: "/jardins",
+    label: { fr: "Nos Jardins", en: "Our Gardens", es: "Nuestros Jardines" },
+    primary: false,
+  },
 ];

@@ -108,9 +108,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 darkText ? "logo-mark-dark" : "logo-mark-white"
               }.png`}
               alt="Lac Hôtel Sahambavy"
-              className="md:hidden w-auto h-10 transition-opacity duration-500"
+              className="md:hidden w-auto h-14 transition-opacity duration-500"
             />
-            {/* Version tablet+ — full lockup en hero-top, mark compact au scroll */}
+            {/* Version tablet+ — full lockup en hero-top, mark compact au scroll.
+                Échelle ×2 par rapport à la v1 : 256/320 px en hero, 80/96 px en
+                navbar scrollée. Reste fonctionnel : la navbar scrollée ne
+                déborde pas, le hero affirme la marque sans écraser le titre. */}
             <img
               src={`${basePath}/images/logo/${
                 heroBrandMode
@@ -122,10 +125,10 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               alt="Lac Hôtel Sahambavy — The natural choice"
               className={`hidden md:block w-auto transition-all duration-500 ${
                 heroBrandMode
-                  ? "md:h-32 lg:h-40"
+                  ? "md:h-64 lg:h-80"
                   : darkText
-                  ? "md:h-14"
-                  : "md:h-20"
+                  ? "md:h-20"
+                  : "md:h-24"
               }`}
             />
           </Link>
@@ -144,7 +147,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             }}
           >
             {navigation
-              .filter((n) => n.href !== "/" && n.href !== "/contact")
+              .filter((n) => n.href !== "/" && n.href !== "/contact" && n.primary !== false)
               .map((item) => (
                 <Link
                   key={item.href}
@@ -237,7 +240,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             <img
               src={`${basePath}/images/logo/logo-dark.png`}
               alt="Lac Hôtel Sahambavy"
-              className="h-20 w-auto"
+              className="h-32 w-auto"
             />
             <button
               onClick={() => setMenuOpen(false)}

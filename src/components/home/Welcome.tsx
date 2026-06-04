@@ -12,6 +12,36 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
   return (
     <section id="welcome" className="py-16 md:py-40">
       <div className="max-w-[1300px] mx-auto px-6">
+        {/* Citation éditoriale d'ouverture — voix poétique du PDF v2026.
+            Encadrée par deux filets dorés, en sub italic large pour signer
+            la page d'accueil avant même le label "Bienvenue". Pattern Aman /
+            Belmond : laisser la prose respirer. */}
+        {dict.welcome.intro && (
+          <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
+            <ScrollReveal>
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <span className="h-px w-12 bg-gold/40" />
+                <span className="text-[0.6rem] tracking-[0.32em] uppercase text-gold font-medium">
+                  {locale === "fr"
+                    ? "Madagascar"
+                    : locale === "en"
+                      ? "Madagascar"
+                      : "Madagascar"}
+                </span>
+                <span className="h-px w-12 bg-gold/40" />
+              </div>
+              <blockquote
+                className="font-[family-name:var(--font-sub)] italic text-text-body text-lg md:text-2xl leading-[1.7] md:leading-[1.6] tracking-[0.005em]"
+                cite="Lac Hôtel Sahambavy — v2026"
+              >
+                <span aria-hidden className="text-gold/60 select-none mr-1">«&nbsp;</span>
+                {dict.welcome.intro}
+                <span aria-hidden className="text-gold/60 select-none ml-1">&nbsp;»</span>
+              </blockquote>
+            </ScrollReveal>
+          </div>
+        )}
+
         {/* Top: editorial intro */}
         <div className="max-w-3xl mx-auto text-center mb-20 md:mb-28">
           <ScrollReveal>

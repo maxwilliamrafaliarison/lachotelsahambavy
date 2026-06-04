@@ -134,7 +134,15 @@
     "philosophyLac": "Del Lago",
     "philosophyLacDesc": "Tilapia fresca del lago Sahambavy y pato salvaje",
     "philosophyMaison": "Casero",
-    "philosophyMaisonDesc": "Pan, queso, yogur, mermelada, miel — de nuestra propia producción"
+    "philosophyMaisonDesc": "Pan, queso, yogur, mermelada, miel — de nuestra propia producción",
+    "qualityQuote": "La calidad empieza en el origen",
+    "herbsLabel": "Del huerto",
+    "herbsTitle": "Nuestras hierbas aromáticas",
+    "herbsIntro": "Recolectadas cada mañana por nuestro equipo — firman cada plato y cada infusión.",
+    "herbs": ["Perejil", "Tomillo", "Romero", "Albahaca", "Cebollino", "Menta", "Laurel", "Citronela"],
+    "waterRefillLabel": "Cero plástico",
+    "waterRefillTitle": "Agua filtrada a voluntad",
+    "waterRefillP": "Recarga gratuita de agua filtrada a cualquier hora — nuestro compromiso contra el plástico de un solo uso."
   },
   "activities": {
     "label": "Actividades y Ocio",
@@ -708,5 +716,27 @@
     "contactCta": "Contáctenos",
     "termsConsentLinkLabel": "condiciones de reserva",
     "viewFull": "Ver las condiciones completas"
+  },
+  "jardins": {
+    "heroTitle": "Nuestros Jardines",
+    "heroSubtitle": "Un eco-jardín botánico a orillas del lago",
+    "introLabel": "Inmersión sensorial",
+    "introTitle": "Un jardín del Edén cultivado con pasión",
+    "introP": "Desde 1998, Olga y luego Maggie componen día tras día este eco-jardín de 2 hectáreas — flores silvestres, árboles del viajero, orquídeas bajo invernadero y bonsáis tallados a mano conviven en una armonía discreta, a pocos pasos del lago.",
+    "collectionsLabel": "Colecciones botánicas",
+    "collectionsTitle": "Lo que encontrarás",
+    "collections": [
+      { "icon": "flower", "title": "Orquídeas", "desc": "Una cincuentena de especies malgaches bajo invernaderos sombreados — Cymbidium, Angraecum, Eulophiella." },
+      { "icon": "palm", "title": "Árboles del viajero", "desc": "El emblema de Madagascar (Ravenala madagascariensis), alineados frente al lago." },
+      { "icon": "tree", "title": "Bonsáis", "desc": "Una colección tallada a mano — algunos pies tienen más de 30 años." },
+      { "icon": "leaf", "title": "Cactus y suculentas", "desc": "Especímenes endémicos del Sur — Pachypodium, Aloe, Euphorbia." },
+      { "icon": "bio", "title": "Huerto bio (2 ha)", "desc": "Frutas, verduras y hierbas aromáticas cultivadas sin insumos químicos para la cocina." },
+      { "icon": "bees", "title": "Colmenas y polinizadores", "desc": "Nuestras abejas polinizan el jardín y producen nuestra miel casera." }
+    ],
+    "philosophyLabel": "Nuestro enfoque",
+    "philosophyTitle": "Un jardín para todos",
+    "philosophyP": "Los macizos están etiquetados en latín y malgache para ayudarle a reconocer cada especie. La visita es libre y gratuita para nuestros huéspedes; un guía botánico del equipo puede acompañarle bajo petición.",
+    "ctaTitle": "Venga a pasear",
+    "cta": "Reservar su estancia"
   }
 }

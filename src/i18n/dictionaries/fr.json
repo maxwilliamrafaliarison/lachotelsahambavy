@@ -134,7 +134,15 @@
     "philosophyLac": "Du Lac",
     "philosophyLacDesc": "Tilapia frais du lac Sahambavy et canard sauvage",
     "philosophyMaison": "Fait maison",
-    "philosophyMaisonDesc": "Pain, fromage, yaourt, confiture, miel — issus de notre propre production"
+    "philosophyMaisonDesc": "Pain, fromage, yaourt, confiture, miel — issus de notre propre production",
+    "qualityQuote": "La qualité commence à la source",
+    "herbsLabel": "Du potager",
+    "herbsTitle": "Nos herbes aromatiques",
+    "herbsIntro": "Cueillies chaque matin par notre équipe — elles signent chaque plat, chaque infusion.",
+    "herbs": ["Persil", "Thym", "Romarin", "Basilic", "Ciboulette", "Menthe", "Laurier", "Citronnelle"],
+    "waterRefillLabel": "Zéro plastique",
+    "waterRefillTitle": "Eau filtrée à volonté",
+    "waterRefillP": "Recharge gratuite d'eau filtrée à toute heure — notre engagement contre le plastique à usage unique."
   },
   "activities": {
     "label": "Activités & Loisirs",
@@ -708,5 +716,27 @@
     "contactCta": "Contactez-nous",
     "termsConsentLinkLabel": "conditions de réservation",
     "viewFull": "Voir les conditions complètes"
+  },
+  "jardins": {
+    "heroTitle": "Nos Jardins",
+    "heroSubtitle": "Un éco-jardin botanique au bord du lac",
+    "introLabel": "Immersion sensorielle",
+    "introTitle": "Un jardin d'Éden cultivé avec passion",
+    "introP": "Depuis 1998, Olga puis Maggie composent jour après jour cet éco-jardin de 2 hectares — fleurs sauvages, arbres du voyageur, orchidées sous serre et bonsaïs sculptés à la main cohabitent dans une harmonie discrète, à quelques pas du lac.",
+    "collectionsLabel": "Collections botaniques",
+    "collectionsTitle": "Ce que vous y trouverez",
+    "collections": [
+      { "icon": "flower", "title": "Orchidées", "desc": "Une cinquantaine d'espèces malgaches sous serres ombragées — Cymbidium, Angraecum, Eulophiella." },
+      { "icon": "palm", "title": "Arbres du voyageur", "desc": "L'emblème de Madagascar (Ravenala madagascariensis), en alignement face au lac." },
+      { "icon": "tree", "title": "Bonsaïs", "desc": "Une collection sculptée à la main — certains pieds ont plus de 30 ans." },
+      { "icon": "leaf", "title": "Cactées & succulentes", "desc": "Spécimens endémiques du Sud — Pachypodium, Aloe, Euphorbia." },
+      { "icon": "bio", "title": "Potager bio (2 ha)", "desc": "Fruits, légumes et herbes aromatiques cultivés sans intrants chimiques pour la cuisine." },
+      { "icon": "bees", "title": "Ruches & pollinisateurs", "desc": "Nos abeilles assurent la pollinisation du jardin et produisent notre miel maison." }
+    ],
+    "philosophyLabel": "Notre démarche",
+    "philosophyTitle": "Un jardin pour tous",
+    "philosophyP": "Les massifs sont étiquetés en latin et en malgache pour vous aider à reconnaître chaque espèce. La visite est libre et gratuite pour nos hôtes ; un guide botanique de l'équipe peut vous accompagner sur demande.",
+    "ctaTitle": "Venez vous y promener",
+    "cta": "Réserver votre séjour"
   }
 }

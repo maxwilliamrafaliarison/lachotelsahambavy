@@ -23,6 +23,9 @@ export type BreadcrumbKey =
   | "contact"
   | "notre-equipe"
   | "le-repos"
+  | "mariages-seminaires"
+  | "train-fce"
+  | "jardins"
   | "conditions";
 
 type LocalizedLabel = Record<Locale, string>;
@@ -69,6 +72,22 @@ const PAGE_LABELS: Record<BreadcrumbKey, { slug: string; label: LocalizedLabel }
   "le-repos": {
     slug: "le-repos",
     label: { fr: "Le Repos", en: "Le Repos", es: "Le Repos" },
+  },
+  "mariages-seminaires": {
+    slug: "mariages-seminaires",
+    label: {
+      fr: "Mariages & Séminaires",
+      en: "Weddings & Seminars",
+      es: "Bodas y Seminarios",
+    },
+  },
+  "train-fce": {
+    slug: "train-fce",
+    label: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" },
+  },
+  jardins: {
+    slug: "jardins",
+    label: { fr: "Nos Jardins", en: "Our Gardens", es: "Nuestros Jardines" },
   },
   conditions: {
     slug: "conditions-reservation",

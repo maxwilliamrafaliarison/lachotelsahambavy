@@ -134,7 +134,15 @@
     "philosophyLac": "From the Lake",
     "philosophyLacDesc": "Fresh tilapia from Lake Sahambavy and wild duck",
     "philosophyMaison": "Homemade",
-    "philosophyMaisonDesc": "Bread, cheese, yoghurt, jam, honey — from our own production"
+    "philosophyMaisonDesc": "Bread, cheese, yoghurt, jam, honey — from our own production",
+    "qualityQuote": "Quality begins at the source",
+    "herbsLabel": "From the garden",
+    "herbsTitle": "Our aromatic herbs",
+    "herbsIntro": "Picked each morning by our team — they sign every dish, every infusion.",
+    "herbs": ["Parsley", "Thyme", "Rosemary", "Basil", "Chives", "Mint", "Bay leaf", "Lemongrass"],
+    "waterRefillLabel": "Zero plastic",
+    "waterRefillTitle": "Filtered water on tap",
+    "waterRefillP": "Free filtered-water refill at any time — our commitment against single-use plastic."
   },
   "activities": {
     "label": "Activities & Leisure",
@@ -708,5 +716,27 @@
     "contactCta": "Contact us",
     "termsConsentLinkLabel": "booking conditions",
     "viewFull": "See the full conditions"
+  },
+  "jardins": {
+    "heroTitle": "Our Gardens",
+    "heroSubtitle": "A botanical eco-garden by the lake",
+    "introLabel": "A sensory escape",
+    "introTitle": "An Eden cultivated with passion",
+    "introP": "Since 1998, Olga and then Maggie have shaped this 2-hectare eco-garden day after day — wild flowers, traveller's trees, shaded orchids and hand-sculpted bonsai live side by side, just steps from the lake.",
+    "collectionsLabel": "Botanical collections",
+    "collectionsTitle": "What you will find",
+    "collections": [
+      { "icon": "flower", "title": "Orchids", "desc": "Around fifty Malagasy species under shaded greenhouses — Cymbidium, Angraecum, Eulophiella." },
+      { "icon": "palm", "title": "Traveller's trees", "desc": "Madagascar's emblem (Ravenala madagascariensis), aligned facing the lake." },
+      { "icon": "tree", "title": "Bonsai", "desc": "A hand-sculpted collection — some specimens are over 30 years old." },
+      { "icon": "leaf", "title": "Cacti & succulents", "desc": "Endemic specimens from the South — Pachypodium, Aloe, Euphorbia." },
+      { "icon": "bio", "title": "Organic garden (2 ha)", "desc": "Fruit, vegetables and aromatic herbs grown chemical-free for the kitchen." },
+      { "icon": "bees", "title": "Hives & pollinators", "desc": "Our bees pollinate the garden and produce our homemade honey." }
+    ],
+    "philosophyLabel": "Our approach",
+    "philosophyTitle": "A garden for everyone",
+    "philosophyP": "Beds are labelled in Latin and Malagasy to help you identify each species. The visit is free for our guests; a botanical guide from the team can join you on request.",
+    "ctaTitle": "Come and wander",
+    "cta": "Book your stay"
   }
 }
