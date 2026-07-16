@@ -33,19 +33,14 @@
 
   /* — Alias hérités (LEGACY — à supprimer une fois la migration finie).
        Mappés sur le nouveau monde pour que les composants non migrés
-       restent cohérents visuellement pendant la transition. — */
+       restent cohérents visuellement pendant la transition.
+       Consommateurs restants : BookingBar, BookingForm, TopBar,
+       CookieNotice (+ les blocs .booking-bar__* / .cookie-notice ici). — */
   --color-cream: #FBFAF7;
-  --color-cream-dark: #EFEDE6;
   --color-brown-deep: #1B1B17;
-  --color-brown-brand: #4A4A44;
   --color-gold-light: #D8B77A;
-  --color-green-tea: #2F5D46;
-  --color-lake-blue: #5B8FA8;
   --color-text-dark: #1B1B17;
-  --color-text-body: #4A4A44;
   --color-text-muted: #8A867C;
-  --color-text-light: #B5B0A6;
-  --color-border: rgba(74, 74, 68, 0.14);
 
   /* — Fontes (chargées dans src/app/layout.tsx via next/font, variables
        sources --font-inter-tight / --font-cormorant / --font-inter) — */
@@ -227,19 +222,9 @@ body {
 
 /* ===== ANIMATIONS ===== */
 
-@keyframes kenburns {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
 }
 
 @keyframes scrollDown {
@@ -263,24 +248,6 @@ body {
   animation: testimonialCard 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes scrollLine {
-  0% { top: -100%; height: 100%; }
-  50% { top: 0; height: 100%; }
-  100% { top: 100%; height: 100%; }
-}
-
-.animate-scrollLine {
-  animation: scrollLine 2s ease-in-out infinite;
-}
-
-.animate-kenburns {
-  animation: kenburns 20s ease-in-out infinite alternate;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
 /* ===== SCROLL REVEAL ===== */
 
 [data-reveal] {
@@ -293,33 +260,6 @@ body {
 [data-reveal].revealed {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ===== HERO SLIDER ===== */
-
-.hero-slide {
-  opacity: 0;
-  transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-  position: absolute;
-  inset: 0;
-}
-
-.hero-slide.active {
-  opacity: 1;
-}
-
-.hero-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.hero-dot.active {
-  width: 24px;
-  background: var(--color-gold);
 }
 
 /* ===== SECTION LABEL ===== */
@@ -387,18 +327,6 @@ body {
   color: var(--color-white);
 }
 
-.btn--outline-white {
-  background: transparent;
-  color: var(--color-white);
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
-}
-
-.btn--outline-white:hover {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-color: rgba(255, 255, 255, 0.8);
-}
-
 .btn--cta {
   background: var(--color-gold);
   color: var(--color-white);
@@ -462,401 +390,6 @@ body {
   transform: translateX(4px);
 }
 
-.btn--minimal--light {
-  color: var(--color-white);
-}
-
-.btn--minimal--light:hover {
-  color: var(--color-gold-light);
-}
-
-/* ===== CARDS =====
- *
- * L'ancienne famille `.glass*` comportait 6 variantes (`.glass`, `.glass-
- * subtle`, `.glass-dark`, `.glass-card`, `.liquid-glass` + `.btn--glass`)
- * qui partageaient le même effet frosted-glass iOS 16. C'est beau sur un
- * fond photo (d'où le maintien de `.btn--glass` sur le hero), mais empilé
- * sur des sections plates (cream / blanc / brown-deep) c'est du bruit :
- * `backdrop-filter` sur un fond uni = coût GPU pour un rendu visuellement
- * identique à `background: white`.
- *
- * PR C garde les deux *noms* de classe (`.glass-card` et `.glass-dark`)
- * pour ne pas casser les 12 call-sites, mais leur implémentation devient
- * une carte éditoriale plate, dans la lignée de Aman / Belmond / Rosewood
- * (white on cream, hairline shadow, coins juste arrondis).
- *
- * Les variantes orphelines (`.glass`, `.glass-subtle`, `.liquid-glass`)
- * sont supprimées — elles n'étaient appelées nulle part.
- */
-
-.glass-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.glass-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-}
-
-.glass-dark {
-  background: var(--color-brown-deep);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-  color: var(--color-white);
-}
-
-/* ===== ROOM CARD ===== */
-
-.room-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.room-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-}
-
-/* ===== ACTIVITY CARD ===== */
-
-.activity-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 1.25rem;
-  padding: 2rem;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.3s ease;
-}
-
-.activity-card:hover {
-  background: rgba(44, 24, 16, 0.85);
-  backdrop-filter: blur(20px);
-  color: var(--color-gold-light);
-  border-color: rgba(255, 255, 255, 0.05);
-}
-
-.activity-card:hover h3,
-.activity-card:hover p {
-  color: var(--color-cream);
-}
-
-/* ===== TARIFF CARD (Apple liquid-glass) =====
- *
- * Utilisé sur /hebergements pour remplacer l'ancien tableau récapitulatif
- * "brut". Une vignette photo par type de chambre avec un panneau en verre
- * dépoli en bas — ancre vers la section détaillée (#pilotis, #wagon…).
- *
- * L'effet frosted-glass (backdrop-blur 24 + saturate 180 + highlight inner)
- * est celui d'iOS 26 : le panneau se pose SUR la photo et laisse transparaître
- * les couleurs dominantes. Hover : légère élévation + glow doré + zoom image.
- *
- * Le highlight `inset 0 1px 0 rgba(255,255,255,.25)` simule la réfraction
- * apple — c'est ce détail qui distingue du simple rgba(white, 0.1).
- */
-
-.tariff-card {
-  position: relative;
-  display: block;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tariff-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 60px -12px rgba(196, 150, 42, 0.3),
-              0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.tariff-card__image {
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tariff-card:hover .tariff-card__image {
-  transform: scale(1.06);
-}
-
-.tariff-card__glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-              0 8px 24px rgba(0, 0, 0, 0.2);
-  transition: background 0.4s ease, border-color 0.4s ease;
-}
-
-.tariff-card:hover .tariff-card__glass {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.32);
-}
-
-.tariff-card__arrow {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.3s ease;
-}
-
-.tariff-card:hover .tariff-card__arrow {
-  transform: translateX(4px);
-  color: var(--color-gold-light);
-}
-
-/* ===== ECO PILLAR CARD (Apple Store liquid-glass avec filigrane) =====
- *
- * Utilisé sur /hotel pour la section "Engagement éco-responsable". Chaque
- * pilier RSE = une carte avec une GROSSE icône Phosphor en filigrane
- * derrière le texte (opacity 0.08) + un picto net en haut à gauche + titre
- * et description.
- *
- * Le principe Apple Store : le filigrane porte l'émotion, le texte porte
- * l'information. Les deux cohabitent sans se gêner grâce à l'opacité
- * et au positionnement absolu.
- *
- * Hover : la carte s'illumine (background passe de cream/50 à white/80),
- * le filigrane gagne en présence (opacity 0.08 → 0.15), et le picto du
- * haut passe au gold plein.
- */
-
-.eco-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 1.5rem;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
-              0 4px 24px rgba(74, 122, 90, 0.06);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.4s ease,
-              border-color 0.4s ease,
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.eco-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(196, 150, 42, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-              0 20px 50px -10px rgba(74, 122, 90, 0.2),
-              0 0 0 1px rgba(196, 150, 42, 0.1);
-}
-
-/* Grande icône en filigrane — positionnée bottom-right, à moitié sortie.
-   Sur mobile on la réduit pour ne pas écraser la carte (390 px de large). */
-.eco-card__watermark {
-  position: absolute;
-  bottom: -12px;
-  right: -12px;
-  width: 120px;
-  height: 120px;
-  color: var(--color-green-tea);
-  opacity: 0.08;
-  pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (min-width: 768px) {
-  .eco-card__watermark {
-    bottom: -16px;
-    right: -16px;
-    width: 180px;
-    height: 180px;
-  }
-}
-
-/* Force l'SVG Phosphor à remplir son conteneur — on laisse le container
-   piloter la taille, pas le size={} hardcodé côté JSX. */
-.eco-card__watermark svg {
-  width: 100%;
-  height: 100%;
-}
-
-.eco-card:hover .eco-card__watermark {
-  opacity: 0.16;
-  transform: scale(1.08) rotate(-4deg);
-  color: var(--color-gold);
-}
-
-/* Picto net top-left avec halo subtil */
-.eco-card__icon {
-  color: var(--color-green-tea);
-  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.eco-card:hover .eco-card__icon {
-  color: var(--color-gold);
-  transform: scale(1.1);
-}
-
-/* ===== REPOS FEATURE & PRICE CARDS (Apple liquid-glass premium) =====
- *
- * Utilisés sur /le-repos. Deux variantes :
- *   - .repos-feature   : carte feature au-dessus d'un fond cream ; verre
- *                        dépoli blanc translucide, picto en haut, titre +
- *                        description en dessous. Hover léger lift + glow.
- *   - .repos-price     : carte prix qui "flotte" sur une photo hero ; verre
- *                        dépoli épais (blur 32) avec highlight apple iOS 26,
- *                        centrée avec CTA.
- */
-
-.repos-feature {
-  position: relative;
-  /* Sur fond cream, le backdrop-blur n'a rien à flouter ; on passe à un
-     "faux glass" : blanc dense + highlight interne + bordure dorée
-     translucide qui simulent la réfraction iOS 26 sans dépendre du
-     blur réel (qui ne fonctionne que sur un fond coloré / une photo). */
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(196, 150, 42, 0.15);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
-              inset 0 -1px 0 rgba(44, 24, 16, 0.03),
-              0 10px 32px -8px rgba(44, 24, 16, 0.08),
-              0 2px 6px rgba(44, 24, 16, 0.04);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.4s ease,
-              border-color 0.4s ease,
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.repos-feature:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(196, 150, 42, 0.45);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1),
-              0 20px 48px -10px rgba(196, 150, 42, 0.22),
-              0 4px 12px rgba(44, 24, 16, 0.08);
-}
-
-.repos-feature__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(74, 122, 90, 0.12) 0%, rgba(196, 150, 42, 0.10) 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8),
-              0 2px 8px rgba(74, 122, 90, 0.08);
-  color: var(--color-green-tea);
-  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.repos-feature:hover .repos-feature__badge {
-  color: var(--color-gold);
-  transform: scale(1.08);
-}
-
-/* Price card — liquid-glass apple iOS 26, flotte sur une photo */
-.repos-price {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 1.75rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
-              0 24px 60px -12px rgba(0, 0, 0, 0.35),
-              0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Bordure dorée intérieure sur les photos "produit" — touche luxe discrète
-   qui signe la mise en scène. Réutilisé partout où un produit (chambre,
-   pilotis, villa, le-repos, restaurant…) est présenté avec sa photo.
-   Pattern d'origine : /hotel > figures fondatrices Maggie/Sergi. */
-.repos-photo,
-.product-photo {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1.25rem;
-  box-shadow: 0 10px 40px -8px rgba(44, 24, 16, 0.15),
-              0 2px 8px rgba(44, 24, 16, 0.06);
-}
-
-.repos-photo::after,
-.product-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0.5rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(196, 150, 42, 0.18);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Amenity-chip — pastille equipment pour les sections chambres détaillées.
-   Faux glass blanc + bordure dorée translucide pour harmoniser avec le
-   ton premium du site. */
-.amenity-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(196, 150, 42, 0.15);
-  border-radius: 0.625rem;
-  font-size: 0.8125rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7),
-              0 1px 3px rgba(44, 24, 16, 0.04);
-  transition: background 0.3s ease, border-color 0.3s ease,
-              transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.amenity-chip:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(196, 150, 42, 0.35);
-  transform: translateY(-1px);
-}
-
-/* Carte prix "chambre" — liquid-glass sur fond cream/blanc, avec filet
-   doré discret en haut. Hiérarchie : nombre en Playfair, unité en
-   Cormorant italique. Utilisé sur les sections détaillées de /hebergements. */
-.room-price {
-  position: relative;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(196, 150, 42, 0.2);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
-              inset 0 -1px 0 rgba(196, 150, 42, 0.08),
-              0 12px 36px -8px rgba(44, 24, 16, 0.1),
-              0 3px 8px rgba(44, 24, 16, 0.04);
-}
-
-.room-price::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%);
-  opacity: 0.6;
-}
-
 /* ===== WHATSAPP FLOAT ===== */
 
 .whatsapp-float {
@@ -911,19 +444,6 @@ body {
   .masonry-grid {
     columns: 1;
   }
-}
-
-/* ===== LIGHTBOX ===== */
-
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(20px);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* ===== COOKIE NOTICE ===== */

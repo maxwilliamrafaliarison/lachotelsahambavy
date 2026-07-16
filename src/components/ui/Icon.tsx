@@ -55,7 +55,7 @@ import type { Icon as PhosphorIcon } from "@phosphor-icons/react/lib";
  * Icon — mapping nom sémantique → composant Phosphor.
  *
  * Source unique pour toutes les icônes du site. Les fichiers data
- * (rooms.ts, activities.ts) stockent un nom court ("bed", "wifi"…)
+ * (rooms.ts) stockent un nom court ("bed", "wifi"…)
  * plutôt qu'un emoji ou un composant React — ce qui permet aux fichiers
  * .ts de rester agnostiques du rendu et aux .tsx d'importer un seul
  * composant <Icon name="…" />.

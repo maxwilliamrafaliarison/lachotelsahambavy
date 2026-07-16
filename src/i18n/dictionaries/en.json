@@ -113,22 +113,6 @@
     "pillar4": "Biodiversity",
     "pillar4Desc": "Preserving the Ranomafana–Andringitra primary forest corridor, honey production, valorisation of plant species."
   },
-  "offers": {
-    "label": "Our offers",
-    "title": "Discover our experiences",
-    "restaurant": "Restaurant",
-    "restaurantDesc": "Malagasy & European cuisine. Menu 70,000 AR · Breakfast 40,000 AR. Garden-fresh, homemade products.",
-    "pool": "Swimming Pool",
-    "poolDesc": "Saltwater slate pool. Gentle on the skin, chemical-free. Sun loungers, lake view.",
-    "lake": "Lake Walk",
-    "lakeDesc": "8 km marked and secured trail around the lake. A 2-hour walk through lush green landscapes.",
-    "massage": "Massage & Wellness",
-    "massageDesc": "Relaxing massages with homemade oils: katrafay, ravintsara, rosemary. Back, feet or full body.",
-    "conference": "Conference Room",
-    "conferenceDesc": "Up to 80 people. Modular, Wi-Fi, microphone, projector. A setting conducive to focus.",
-    "wedding": "Weddings & Celebrations",
-    "weddingDesc": "Celebrate your love between the lakeside and a blooming garden. Hall decorated to your wishes."
-  },
   "restaurantSection": {
     "label": "Gastronomy",
     "title": "Awaken your taste buds",
@@ -185,18 +169,6 @@
     "pricesTitle": "Our dining options",
     "pricesFootnote": "Prices per person. Indicative rate: €1 ≈ 4,900 Ar.",
     "glassBottlesP": "In the rooms, it awaits you in glass bottles."
-  },
-  "activities": {
-    "label": "Activities & Leisure",
-    "title": "Your experiences at Lac Hôtel",
-    "subtitle": "From the hotel — included or on request",
-    "all": "View all",
-    "nature": "Nature",
-    "sport": "Sport",
-    "decouverte": "Discovery",
-    "bienetre": "Wellness",
-    "included": "Included",
-    "onRequest": "On request"
   },
   "loisirs": {
     "heroTitle": "Activities & Leisure",

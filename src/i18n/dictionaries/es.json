@@ -113,22 +113,6 @@
     "pillar4": "Biodiversidad",
     "pillar4Desc": "Preservación del corredor de bosque primario Ranomafana–Andringitra, producción de miel, valorización de especies florísticas."
   },
-  "offers": {
-    "label": "Nuestras ofertas",
-    "title": "Descubra nuestras experiencias",
-    "restaurant": "Restaurante",
-    "restaurantDesc": "Cocina malgache y europea. Menú 70 000 AR · Desayuno 40 000 AR. Productos del huerto, caseros.",
-    "pool": "Piscina",
-    "poolDesc": "Piscina de pizarra con agua salada. Suave para la piel, sin productos químicos. Tumbonas, vista al lago.",
-    "lake": "Paseo del Lago",
-    "lakeDesc": "Circuito de 8 km señalizado y seguro alrededor del lago. 2 horas de paseo entre paisajes verdes.",
-    "massage": "Masaje y Bienestar",
-    "massageDesc": "Masajes relajantes con aceites caseros: katrafay, ravintsara, romero. Espalda, pies o cuerpo entero.",
-    "conference": "Sala de conferencias",
-    "conferenceDesc": "Hasta 80 personas. Modular, Wi-Fi, micrófono, proyector. Un entorno propicio para la concentración.",
-    "wedding": "Bodas y Celebraciones",
-    "weddingDesc": "Celebre su amor entre las orillas del lago y un jardín florido. Salón decorado según sus deseos."
-  },
   "restaurantSection": {
     "label": "Gastronomía",
     "title": "Despierte sus papilas",
@@ -185,18 +169,6 @@
     "pricesTitle": "Nuestras fórmulas",
     "pricesFootnote": "Precios por persona. Tipo indicativo: 1 € ≈ 4 900 Ar.",
     "glassBottlesP": "En las habitaciones, le espera en botellas de vidrio."
-  },
-  "activities": {
-    "label": "Actividades y Ocio",
-    "title": "Sus experiencias en el Lac Hôtel",
-    "subtitle": "Desde el hotel — incluidas o bajo reserva",
-    "all": "Ver todo",
-    "nature": "Naturaleza",
-    "sport": "Deporte",
-    "decouverte": "Descubrimiento",
-    "bienetre": "Bienestar",
-    "included": "Incluido",
-    "onRequest": "Bajo reserva"
   },
   "loisirs": {
     "heroTitle": "Actividades y Ocio",

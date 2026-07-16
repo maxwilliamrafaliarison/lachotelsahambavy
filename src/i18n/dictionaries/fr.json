@@ -113,22 +113,6 @@
     "pillar4": "Biodiversité",
     "pillar4Desc": "Préservation du corridor de forêt primaire Ranomafana–Andringitra, production de miel, valorisation des espèces floristiques."
   },
-  "offers": {
-    "label": "Nos offres",
-    "title": "Découvrez nos expériences",
-    "restaurant": "Restaurant",
-    "restaurantDesc": "Cuisine malgache et européenne. Menu 70 000 AR · Petit-déjeuner 40 000 AR. Produits du jardin, faits maison.",
-    "pool": "Piscine",
-    "poolDesc": "Piscine en ardoise à eau salée. Douce pour la peau, sans produits chimiques. Transats, vue sur le lac.",
-    "lake": "Tour du Lac",
-    "lakeDesc": "Circuit de 8 km balisé et sécurisé autour du lac. 2 heures de balade dans des paysages verdoyants.",
-    "massage": "Massage & Bien-être",
-    "massageDesc": "Massages relaxants aux huiles maison : katrafay, ravintsara, romarin. Dos, pieds ou corps entier.",
-    "conference": "Salle de conférence",
-    "conferenceDesc": "Jusqu'à 80 personnes. Modulable, Wi-Fi, micro, rétroprojecteur. Cadre propice à la concentration.",
-    "wedding": "Mariages & Célébrations",
-    "weddingDesc": "Célébrez votre amour entre les rives du lac et un jardin fleuri. Salle décorée selon vos envies."
-  },
   "restaurantSection": {
     "label": "Gastronomie",
     "title": "Éveillez vos papilles",
@@ -185,18 +169,6 @@
     "pricesTitle": "Nos formules",
     "pricesFootnote": "Prix par personne. Taux indicatif : 1 € ≈ 4 900 Ar.",
     "glassBottlesP": "Dans les chambres, elle vous attend en bouteilles de verre."
-  },
-  "activities": {
-    "label": "Activités & Loisirs",
-    "title": "Vos expériences au Lac Hôtel",
-    "subtitle": "À partir de l'hôtel — inclus ou sur réservation",
-    "all": "Tout voir",
-    "nature": "Nature",
-    "sport": "Sport",
-    "decouverte": "Découverte",
-    "bienetre": "Bien-être",
-    "included": "Inclus",
-    "onRequest": "Sur rés."
   },
   "loisirs": {
     "heroTitle": "Activités & Loisirs",
