@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -45,11 +46,12 @@ export default function EditorialSplit({
       <div
         className={`relative min-h-[260px] md:min-h-[420px] ${reverse ? "md:order-2" : ""}`}
       >
-        <img
+        <Image
           src={image}
           alt={imageAlt}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="object-cover"
         />
       </div>
       <div className={`flex flex-col justify-center px-6 py-10 md:px-11 md:py-14 ${reverse ? "md:order-1" : ""}`}>

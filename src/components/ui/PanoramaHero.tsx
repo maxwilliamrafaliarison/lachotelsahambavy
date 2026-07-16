@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
@@ -71,17 +72,24 @@ export default function PanoramaHero({
           : "h-[78vh] min-h-[480px] md:min-h-[560px]"
       }`}
     >
-      {/* Photo de fond — parallaxe désactivée si reduced-motion */}
+      {/* Photo de fond via next/image : AVIF/srcset optimisés sur Vercel,
+          passthrough unoptimized en export GitHub Pages (src déjà préfixée
+          basePath par l'appelant — vide sur Vercel, donc correct en bi-mode).
+          Parallaxe appliquée au conteneur, désactivée si reduced-motion. */}
       <div
         ref={bgRef}
-        role={imageAlt ? "img" : undefined}
-        aria-label={imageAlt || undefined}
-        className="absolute inset-0 bg-cover bg-center will-change-transform"
-        style={{
-          backgroundImage: `url(${image})`,
-          transform: "scale(1.06)",
-        }}
-      />
+        className="absolute inset-0 will-change-transform"
+        style={{ transform: "scale(1.06)" }}
+      >
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="100vw"
+          preload
+          className="object-cover object-center"
+        />
+      </div>
       {/* Voile de contraste — obligatoire sous le titrage ultra-light */}
       <div
         className="absolute inset-0"
