@@ -83,6 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      data-scroll-behavior="smooth"
       className={`${interTight.variable} ${inter.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >

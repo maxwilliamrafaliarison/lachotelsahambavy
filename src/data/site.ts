@@ -49,6 +49,8 @@ export type NavChild = { href: string; label: NavLabel };
 export type NavItem = {
   href: string;
   label: NavLabel;
+  /** Libellé compact pour la barre desktop (le libellé complet reste dans le méga-menu et le footer). */
+  shortLabel?: NavLabel;
   children?: NavChild[];
   primary?: boolean;
 };
@@ -57,6 +59,7 @@ export const navigation: NavItem[] = [
   {
     href: "/hotel",
     label: { fr: "Le Lac Hôtel", en: "The Lac Hôtel", es: "El Lac Hôtel" },
+    shortLabel: { fr: "L'Hôtel", en: "The Hotel", es: "El Hotel" },
     children: [
       {
         href: "/hotel#philosophie",
@@ -133,6 +136,7 @@ export const navigation: NavItem[] = [
   {
     href: "/restaurant",
     label: { fr: "Restaurant & Bar", en: "Restaurant & Bar", es: "Restaurante y Bar" },
+    shortLabel: { fr: "Restaurant", en: "Restaurant", es: "Restaurante" },
   },
   {
     href: "/experiences",
@@ -187,6 +191,7 @@ export const navigation: NavItem[] = [
   {
     href: "/train-fce",
     label: { fr: "Ligne ferroviaire FCE", en: "FCE railway line", es: "Línea férrea FCE" },
+    shortLabel: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" },
     children: [
       {
         href: "/train-fce#ligne-fce",

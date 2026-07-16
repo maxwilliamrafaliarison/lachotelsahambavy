@@ -140,6 +140,8 @@ const ICONS: Record<string, PhosphorIcon> = {
   mail: Envelope,
   phone: Phone,
   location: MapPin,
+  pin: MapPin,
+  people: UsersThree,
 };
 
 export type IconName = keyof typeof ICONS;

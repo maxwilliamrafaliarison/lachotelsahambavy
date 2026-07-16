@@ -327,18 +327,18 @@ body {
 .section-label {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--color-gold);
+  letter-spacing: 0.24em;
+  color: var(--color-tea);
   margin-bottom: 0.75rem;
 }
 
 .section-divider {
-  width: 60px;
-  height: 2px;
-  background: var(--color-gold);
+  width: 44px;
+  height: 1px;
+  background: var(--color-hairline);
   margin: 1.25rem auto 0;
 }
 
@@ -365,14 +365,15 @@ body {
 }
 
 .btn--primary {
-  background: var(--color-gold);
+  background: var(--color-tea);
   color: var(--color-white);
-  border: 1.5px solid var(--color-gold);
+  border: 1.5px solid var(--color-tea);
 }
 
 .btn--primary:hover {
-  background: transparent;
-  color: var(--color-gold);
+  background: var(--color-tea-deep);
+  border-color: var(--color-tea-deep);
+  color: var(--color-white);
 }
 
 .btn--outline {

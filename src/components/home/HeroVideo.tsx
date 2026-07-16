@@ -105,27 +105,31 @@ export default function HeroVideo({ dict }: { dict: any }) {
         }}
       />
 
-      {/* Contenu éditorial — bottom-left, inchangé vs l'ancien HeroSlider */}
-      <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-12 lg:px-20 pb-24 md:pb-40">
-        <div className="max-w-2xl">
-          <span className="inline-block text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-gold-light mb-5 md:mb-6">
+      {/* Contenu éditorial — bottom-left. Titrage « Panorama » : géant,
+          ultra-light, une seule voix typographique (l'italique Cormorant
+          est réservé au monde Nuit des pages signature). */}
+      <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-12 lg:px-20 pb-24 md:pb-36">
+        <div className="max-w-4xl">
+          <span
+            className="inline-block text-[11px] font-semibold uppercase tracking-[0.26em] text-white/90 mb-4 md:mb-5"
+            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.35)" }}
+          >
             {dict.hero.eyebrow}
           </span>
           <h1
-            className="mb-5 md:mb-6 leading-[1.05]"
+            className="mb-5 md:mb-6"
             style={{
               color: "#FFFFFF",
               textShadow: "0 2px 40px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.3)",
+              textWrap: "balance",
             }}
           >
             {dict.hero.title}
             <br />
-            <em className="font-[family-name:var(--font-sub)] font-normal text-white/95">
-              {dict.hero.titleEm}
-            </em>
+            {dict.hero.titleEm}
           </h1>
           <p
-            className="max-w-lg text-base md:text-lg text-white/90 mb-8 md:mb-10 font-[family-name:var(--font-sub)] leading-relaxed"
+            className="max-w-[52ch] text-[15px] md:text-base text-white/90 mb-8 md:mb-10 leading-relaxed"
             style={{ textShadow: "0 1px 12px rgba(0,0,0,0.35)" }}
           >
             {dict.hero.subtitle}
@@ -133,7 +137,7 @@ export default function HeroVideo({ dict }: { dict: any }) {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
             <a
               href="#rooms"
-              className="btn btn--primary"
+              className="ge-cta"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById("rooms")?.scrollIntoView({ behavior: "smooth" });
@@ -143,7 +147,7 @@ export default function HeroVideo({ dict }: { dict: any }) {
             </a>
             <a
               href="#contact"
-              className="btn btn--glass"
+              className="ge-cta ge-cta--onphoto"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -155,11 +159,10 @@ export default function HeroVideo({ dict }: { dict: any }) {
         </div>
       </div>
 
-      {/* Crédit discret du format — remplace les slide indicators,
-          qui n'ont plus de sens avec une seule vidéo en boucle */}
-      <div className="absolute bottom-8 md:bottom-12 left-6 md:left-12 lg:left-20 z-10 flex items-center gap-3">
-        <span className="h-px w-8 bg-gold-light/60" />
-        <span className="text-[0.6rem] text-white/60 font-mono tabular-nums uppercase tracking-[0.25em]">
+      {/* Signature discrète bas-gauche */}
+      <div className="absolute bottom-8 md:bottom-10 left-6 md:left-12 lg:left-20 z-10 flex items-center gap-3">
+        <span className="h-px w-8 bg-white/40" />
+        <span className="text-[0.6rem] text-white/60 tabular-nums uppercase tracking-[0.25em]">
           Sahambavy
         </span>
       </div>

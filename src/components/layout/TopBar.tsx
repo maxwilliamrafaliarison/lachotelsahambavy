@@ -35,7 +35,7 @@ export default function TopBar() {
       className={`fixed top-0 left-0 right-0 z-[1001] overflow-hidden transition-[max-height,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         hidden ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
       }`}
-      style={{ background: "#1A1410" }}
+      style={{ background: "#14110D" }}
     >
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 h-9 flex items-center justify-between gap-4">
         {/* Left — Contact */}
