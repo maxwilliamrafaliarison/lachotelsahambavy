@@ -28,8 +28,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         {/* Marque + tagline */}
         <div className="mb-14 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
           <div className="flex items-center gap-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+                <img
               src={`${basePath}/images/logo/logo-white.png`}
               alt="Lac Hôtel Sahambavy"
               className="h-20 w-auto opacity-90 md:h-24"

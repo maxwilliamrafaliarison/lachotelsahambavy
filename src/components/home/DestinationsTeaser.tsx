@@ -1,83 +1,71 @@
-"use client";
-
-import Link from "next/link";
+import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { type Locale, getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
 
+/**
+ * Teaser destinations — trois EditorialSplit alternés (LE rythme de section
+ * du site) : Plantation de thé, Train FCE, Le Repos. Textes de
+ * dict.destinations, photos signature de chaque univers.
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function DestinationsTeaser({ dict, locale }: { dict: any; locale: Locale }) {
-  return (
-    <section className="py-16 md:py-40">
-      <div className="max-w-[1400px] mx-auto px-6">
-        {/* Two side-by-side feature blocks */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Plantation de Thé */}
-          <ScrollReveal>
-            <Link
-              href={`/${locale}/plantation-de-the/`}
-              className="group relative block rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[3/4]"
-            >
-              <img
-                src={`${basePath}/images/tea/plantation-drone-overhead.jpg`}
-                alt={dict.destinations.plantation.title}
-                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-                <span className="inline-block text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gold mb-3">
-                  {dict.destinations.plantation.label}
-                </span>
-                <h3 className="text-2xl md:text-3xl text-white mb-3 leading-tight">
-                  {dict.destinations.plantation.title}
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-md">
-                  {dict.destinations.plantation.desc}
-                </p>
-                <span className="inline-flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold group-hover:tracking-[0.25em] transition-all duration-300">
-                  {dict.destinations.plantation.cta}
-                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </div>
-            </Link>
-          </ScrollReveal>
+  const items = [
+    {
+      key: "plantation",
+      data: dict.destinations.plantation,
+      image: `${basePath}/images/tea/plantation-cinematic.jpg`,
+      imageAlt: "Cueilleuses dans la plantation de thé de Sahambavy",
+      href: `/${locale}/plantation-de-the/`,
+    },
+    {
+      key: "train",
+      data: dict.destinations.train,
+      image: `${basePath}/images/train/draisine-fce-embarquement-voyageurs.jpg`,
+      imageAlt: "Embarquement des voyageurs sur la draisine de la ligne FCE",
+      href: `/${locale}/train-fce/`,
+    },
+    {
+      key: "repos",
+      data: dict.destinations.repos,
+      image: `${basePath}/images/repos/le-repos-allee-chalets-pins.jpg`,
+      imageAlt: "Allée de chalets sous les pins à l'extension Le Repos",
+      href: `/${locale}/le-repos/`,
+    },
+  ];
 
-          {/* Le Repos */}
-          <ScrollReveal delay={150}>
-            <Link
-              href={`/${locale}/le-repos/`}
-              className="group relative block rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[3/4]"
-            >
-              <img
-                src={`${basePath}/images/rooms/le-repos-exterior.jpg`}
-                alt={dict.destinations.repos.title}
-                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-                <span className="inline-block text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gold mb-3">
-                  {dict.destinations.repos.label}
-                </span>
-                <h3 className="text-2xl md:text-3xl text-white mb-3 leading-tight">
-                  {dict.destinations.repos.title}
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-md">
-                  {dict.destinations.repos.desc}
-                </p>
-                <span className="inline-flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold group-hover:tracking-[0.25em] transition-all duration-300">
-                  {dict.destinations.repos.cta}
-                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </div>
-            </Link>
+  return (
+    <section className="py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        {/* ─── En-tête de section ────────────────────────────────────── */}
+        <div className="mb-12 md:mb-16">
+          <ScrollReveal>
+            <span className="ge-label mb-4">
+              {dict.destinations.sectionLabel ?? "La destination"}
+            </span>
+            <h2 style={{ textWrap: "balance" }}>
+              {dict.destinations.sectionTitle ?? "Trois expériences autour du lac"}
+            </h2>
           </ScrollReveal>
+        </div>
+
+        {/* ─── 3 blocs éditoriaux alternés ───────────────────────────── */}
+        <div className="space-y-8 md:space-y-12">
+          {items.map((item, i) => (
+            <EditorialSplit
+              key={item.key}
+              image={item.image}
+              imageAlt={item.imageAlt}
+              label={item.data.label}
+              title={item.data.title}
+              reverse={i % 2 === 1}
+              cta={{ href: item.href, label: item.data.cta }}
+            >
+              <p>{item.data.desc}</p>
+            </EditorialSplit>
+          ))}
         </div>
       </div>
     </section>

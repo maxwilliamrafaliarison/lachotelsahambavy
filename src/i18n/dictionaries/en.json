@@ -38,11 +38,11 @@
     "p1": "An unmissable stop on your journey, ideally located midway between northern and southern Madagascar (RN7 route), Lac Hôtel welcomes you in an exceptional natural setting. Nestled on the shores of Lake Sahambavy at the foot of verdant hills, it offers breathtaking views of the island's only tea plantation, stretching over 520 hectares.",
     "p2": "Stay in charming traditional overwater bungalows, set amid a lush tropical garden where comfort and authenticity come together. Lac Hôtel captivates with its peaceful atmosphere, the beauty of its outdoor spaces, and the quality of its attentive, personalised service.",
     "p3": "An ideal starting point for exploring the surrounding treasures, the hotel also invites you to discover the traditions of Betsileo culture.",
-    "stat1": "bungalows",
+    "stat1": "Charming bungalows",
     "stat1Value": "50+",
-    "stat2": "tea plantation",
+    "stat2": "Tea plantation",
     "stat2Value": "520 ha",
-    "stat3": "of hospitality",
+    "stat3": "Family hospitality",
     "stat3Value": "28 yrs",
     "cta": "View accommodation"
   },
@@ -64,7 +64,7 @@
     "label": "Accommodation · 2026 Rates",
     "title": "Our rooms & bungalows",
     "subtitle": "From standard bungalow to overwater experience — around fifty units for every journey",
-    "intro": "Our rooms are designed to ensure the comfort and tranquillity of our guests. They feature spacious 2.20 m × 2.20 m beds, private bathrooms with hot water, a terrace with lake views, and a television. Wi-Fi is available in the restaurant area.",
+    "intro": "Our rooms are designed to ensure the comfort and tranquillity of our guests: a spacious 2.20 m × 2.20 m bed, private bathrooms with hot water, a terrace overlooking the lake and a television. Wi-Fi is available in the restaurant area, and every bathroom is stocked with cold-process organic soaps.",
     "from": "from",
     "night": "/ night",
     "viewAll": "All accommodation",
@@ -77,7 +77,27 @@
     "taxeSejour": "Tourist tax: 5,000 AR / person / night",
     "camping": "Camping — Private Annex",
     "campingDesc": "1 hectare of private grounds · Security · Shared toilets and showers (camping equipment not provided)",
-    "tableTitle": "Choose your stay"
+    "tableTitle": "Choose your stay",
+    "nightOnLake": "A night on the lake",
+    "pilotisTagline": "sleeping on the water",
+    "wagonTagline": "Sleep in a century-old carriage from the FCE railway line, facing the lake — an experience found nowhere else.",
+    "comingSoon": "Photos coming soon",
+    "discoverRepos": "Discover Le Repos",
+    "extrasTitle": "Extras & services",
+    "currencyNote": "Reference rate: €1 = 4,900 Ar",
+    "rowRate": "2026 rate",
+    "rowBeds": "Beds",
+    "rowCapacity": "Capacity",
+    "rowUnits": "Units",
+    "rowSurface": "Size",
+    "rowServices": "Services",
+    "persons": "people",
+    "familyLabel": "“Le Repos” extension",
+    "familyTitle": "Families & longer stays",
+    "familyDesc": "The “Le Repos” extension offers four duplex houses fully equipped for extended stays: a kitchenette with hob, refrigerator and full crockery. The ideal address for families and travellers taking their time.",
+    "craftTitle": "Artisan details",
+    "craftText": "Carved wooden doors, hand-embroidered linens, basins and bathrooms shaped by artisans from the region — and, in every bathroom, cold-process organic soaps.",
+    "tarzanText": "Perched in the trees of the tropical garden, our two “Tarzan” bungalows are reserved for children — single or double, for a night of adventure just steps from their parents' bungalow."
   },
   "philosophy": {
     "label": "Our philosophy",
@@ -135,14 +155,36 @@
     "philosophyLacDesc": "Fresh tilapia from Lake Sahambavy and wild duck",
     "philosophyMaison": "Homemade",
     "philosophyMaisonDesc": "Bread, cheese, yoghurt, jam, honey — from our own production",
-    "qualityQuote": "Quality begins at the source",
+    "qualityQuote": "With us, quality begins at the source",
     "herbsLabel": "From the garden",
     "herbsTitle": "Our aromatic herbs",
     "herbsIntro": "Picked each morning by our team — they sign every dish, every infusion.",
-    "herbs": ["Parsley", "Thyme", "Rosemary", "Basil", "Chives", "Mint", "Bay leaf", "Lemongrass"],
+    "herbs": [
+      "Parsley",
+      "Thyme",
+      "Rosemary",
+      "Basil",
+      "Chives",
+      "Mint",
+      "Bay leaf",
+      "Lemongrass"
+    ],
     "waterRefillLabel": "Zero plastic",
     "waterRefillTitle": "Filtered water on tap",
-    "waterRefillP": "Free filtered-water refill at any time — our commitment against single-use plastic."
+    "waterRefillP": "Free filtered-water refill at any time — our commitment against single-use plastic.",
+    "sourcingP": "Our fruit, vegetables and aromatic herbs come from the hotel's kitchen garden, joined by the harvests of farmers from Sahambavy village.",
+    "signaturesLabel": "Our signatures",
+    "signaturesTitle": "Wild duck & lake tilapia",
+    "signaturesP": "Two dishes tell the story of Sahambavy better than any other: wild duck hunted by Kim, our founder, and lake tilapia lifted with fresh ginger.",
+    "breakfastTitle": "Mornings by the water",
+    "breakfastP": "Breads, yoghurts, cheeses, jams and honey are all made in-house, served at breakfast facing the lake or beside the pool.",
+    "barLabel": "The bar",
+    "barTitle": "Golden hour over the lake",
+    "barP": "Fresh fruit juices, cocktails and Sahambavy tea are best enjoyed at the bar or on our shaded terraces, as the sun sinks over the lake.",
+    "pricesLabel": "Rates",
+    "pricesTitle": "Our dining options",
+    "pricesFootnote": "Prices per person. Indicative rate: €1 ≈ 4,900 Ar.",
+    "glassBottlesP": "In the rooms, it awaits you in glass bottles."
   },
   "activities": {
     "label": "Activities & Leisure",
@@ -234,7 +276,9 @@
     "trekkingIncludes": "Included: return train, full board, accommodation, entrance fees, guide, village taxes",
     "trekkingExcludes": "Not included: drinks, activities not listed",
     "trekkingAdvice": "Tips: rain jacket, sturdy walking shoes with good grip, insect repellent, sunscreen and a good mood!",
-    "cta": "Book an activity"
+    "cta": "Book an activity",
+    "poolP2": "A zen corner, sun loungers and garden views: the poolside invites swimming and meditation alike.",
+    "ctaTitle": "Shape your days by the lake"
   },
   "destinations": {
     "train": {
@@ -254,7 +298,9 @@
       "title": "Le Repos — Villas with kitchenette",
       "desc": "4 fully equipped duplex houses for extended stays and families. Kitchenette, terrace and preserved natural setting.",
       "cta": "Discover Le Repos"
-    }
+    },
+    "sectionLabel": "The destination",
+    "sectionTitle": "Three experiences around the lake"
   },
   "testimonials": {
     "label": "Testimonials",
@@ -279,9 +325,18 @@
       "guests": "Number of guests",
       "room": "Preferred accommodation",
       "pension": "Meal plan",
-      "pensionOptions": ["Room only", "Room + Breakfast (40,000 AR)", "Half board", "Full board"],
+      "pensionOptions": [
+        "Room only",
+        "Room + Breakfast (40,000 AR)",
+        "Half board",
+        "Full board"
+      ],
       "transfer": "Transfer from Fianarantsoa?",
-      "transferOptions": ["No thanks", "Yes — Private 4×4 transfer (120,000 AR one way)", "Yes — From Ambalakely (110,000 AR)"],
+      "transferOptions": [
+        "No thanks",
+        "Yes — Private 4×4 transfer (120,000 AR one way)",
+        "Yes — From Ambalakely (110,000 AR)"
+      ],
       "message": "Message / Special requests",
       "nationality": "Nationality / Country of residence",
       "arrivalTime": "Estimated arrival time",
@@ -306,14 +361,15 @@
     ],
     "heroTitle": "Plan your stay",
     "heroSubtitle": "We reply within 24 hours · Zero commission · Payment on arrival",
-    "mapTitle": "Find us"
+    "mapTitle": "Find us",
+    "cta": "Request a booking"
   },
   "hotel": {
     "heroTitle": "The Hotel",
     "heroSubtitle": "Charm and comfort in the heart of nature",
     "historyLabel": "Our story",
     "historyTitle": "A dream born by the lake",
-    "historyP1": "It was chance that one day led Kim and Olga to the shores of Lake Sahambavy in 1998. Their plan was simple: to buy a piece of land by the lake and build a modest cabin for a peaceful retirement. But under Olga's impetus, the place quickly became a true Garden of Eden.",
+    "historyP1": "It was chance that one day led Leong and Olga to the shores of Lake Sahambavy in 1998. Their plan was simple: to buy a piece of land by the lake and build a modest cabin for a peaceful retirement. But under Olga's impetus, the place quickly became a true Garden of Eden.",
     "historyP2": "Over time, travellers on the train stopping at Sahambavy would pause, intrigued by the beauty of the place, thinking they had found a guesthouse… And so the idea was born to open the doors of this little paradise and turn it into a hotel.",
     "historyP3": "Fate then brought the generations together when their eldest daughter, Maggie Leong, returned from Canada with her husband Sergi Formentin to take over the family adventure. The combination of youth and experience transformed this place into a green paradise.",
     "historyP4": "Day after day, the story of Lac Hôtel continues to be written. In nearly 28 years, the estate has grown to welcome around fifty bungalows, nestled in the heart of pristine nature. And the adventure is far from over…",
@@ -360,7 +416,17 @@
         "title": "Zero kitchen waste",
         "desc": "Three fixed menus per service to cook just right and turn leftovers into compost."
       }
-    ]
+    ],
+    "equipeCta": "Meet the team",
+    "rse": {
+      "threeMenusLabel": "Zero waste",
+      "threeMenus": "In the restaurant, just three menus per service: honest cooking designed to prevent food waste, nourished by Sahambavy's short supply chain."
+    },
+    "reserveBand": {
+      "label": "Booking",
+      "title": "Write your own chapter by the lake",
+      "button": "Book your stay"
+    }
   },
   "plantation": {
     "heroTitle": "Sahambavy Tea Plantation",
@@ -368,15 +434,36 @@
     "historyLabel": "The history of tea",
     "historyTitle": "From Chinese legend to the hills of Sahambavy",
     "historyIntro": "If tea is a legendary drink, then its story must begin with a legend. In 2737 BC, leaves from a Camellia sinensis shrub accidentally fell into a cauldron of boiling water belonging to Chinese emperor and herbalist Shen Nong. Impressed by the resulting infusion, he quickly adopted this new beverage, which became an essential part of Chinese culture.",
-    "historyMadagascar": "Tea arrived in Madagascar through the French colonial period. From the early 20th century, colonial authorities introduced tea cultivation in the Malagasy Highlands. Tea plants were imported from Asia and acclimatised in regions with favourable climates, such as Sahambavy. The name means 'women's fields' in Malagasy, highlighting the key role of women in hand-picking.",
+    "historyMadagascar": "Tea arrived in Madagascar through the French colonial period. From the early 20th century, colonial authorities introduced tea cultivation in the Malagasy Highlands. Tea plants were imported from Réunion Island and acclimatised in regions with favourable climates, such as Sahambavy. The name means 'women's fields' in Malagasy, highlighting the key role of women in hand-picking.",
     "historyTimeline": [
-      { "year": "2737 BC", "text": "First legendary infusion in China by Emperor Shen Nong." },
-      { "year": "Early 20th c.", "text": "Introduction of tea to Madagascar by French colonial authorities." },
-      { "year": "1969", "text": "Arrival of the French Institute of Coffee and Cocoa — scientific research begins." },
-      { "year": "1970", "text": "The European Development Fund finances the plantation's expansion." },
-      { "year": "1973", "text": "The company becomes a state enterprise under the name SOTEMAD." },
-      { "year": "1996", "text": "Return to the private sector — Mauritian investors. Current name: SIDEXAM Sahambavy." },
-      { "year": "Today", "text": "520 hectares — Madagascar's only tea plantation. Green tea development and organic tea project." }
+      {
+        "year": "2737 BC",
+        "text": "First legendary infusion in China by Emperor Shen Nong."
+      },
+      {
+        "year": "Early 20th c.",
+        "text": "Introduction of tea to Madagascar by French colonial authorities."
+      },
+      {
+        "year": "1969",
+        "text": "Arrival of the French Institute of Coffee and Cocoa — scientific research begins."
+      },
+      {
+        "year": "1970",
+        "text": "The European Development Fund finances the plantation's expansion."
+      },
+      {
+        "year": "1973",
+        "text": "The company becomes a state enterprise under the name SOTEMAD."
+      },
+      {
+        "year": "1996",
+        "text": "Return to the private sector — Mauritian investors. Current name: SIDEXAM Sahambavy."
+      },
+      {
+        "year": "Today",
+        "text": "520 hectares — Madagascar's only tea plantation. Green tea development and organic tea project."
+      }
     ],
     "excursionLabel": "The excursion",
     "excursionTitle": "Plantation & Factory Visit",
@@ -397,16 +484,66 @@
     "shopTitle": "Local crafts & Vita Malagasy products",
     "shopIntro": "Find Vita Malagasy products at the Mami Bio Shop artisan boutique, a genuine showcase of quality local products.",
     "shopItems": [
-      { "name": "Essential oils", "desc": "Katrafay, ravintsara, rosemary" },
-      { "name": "Handmade organic soaps", "desc": "Cold saponification, 100% natural" },
-      { "name": "Black and green tea from Sahambavy", "desc": "Loose leaf and teabags" },
-      { "name": "Traditional embroidery", "desc": "Know-how passed down through generations" },
-      { "name": "Raffia and reed baskets", "desc": "Handcrafted by the women of Sahambavy" }
+      {
+        "name": "Essential oils",
+        "desc": "Katrafay, ravintsara, rosemary"
+      },
+      {
+        "name": "Handmade organic soaps",
+        "desc": "Cold saponification, 100% natural"
+      },
+      {
+        "name": "Black and green tea from Sahambavy",
+        "desc": "Loose leaf and teabags"
+      },
+      {
+        "name": "Traditional embroidery",
+        "desc": "Know-how passed down through generations"
+      },
+      {
+        "name": "Raffia and reed baskets",
+        "desc": "Handcrafted by the women of Sahambavy"
+      }
     ],
     "shopSoap": "We make our own soaps using the traditional cold saponification method, an ancient process. Fully biodegradable, they are crafted from simple, natural, plant-based ingredients.",
     "shopCta": "Discover our shop",
     "bookLabel": "Book a visit",
-    "bookTitle": "Plan your excursion"
+    "bookTitle": "Plan your excursion",
+    "heroKicker": "520 hectares of tea bushes roll between the lake and the hills. The world's second most consumed drink after water grows here — and nowhere else in Madagascar.",
+    "factsTitle": "The plantation at a glance",
+    "factsRows": [
+      {
+        "label": "Area",
+        "value": "520 hectares"
+      },
+      {
+        "label": "Teas produced",
+        "value": "Black & green"
+      },
+      {
+        "label": "Harvest",
+        "value": "Picked by hand"
+      },
+      {
+        "label": "Guided visit",
+        "value": "Half day"
+      }
+    ],
+    "factsFootnote": "Madagascar's only tea plantation, right on the hotel's doorstep.",
+    "timelineLabel": "Timeline",
+    "timelineTitle": "Key dates",
+    "womenLabel": "Tea in Madagascar",
+    "womenTitle": "Sahambavy, 'women's fields'",
+    "cinematicCaption": "Tea pickers in the early morning — every leaf is still harvested by hand.",
+    "excursionIntro": "Four hours to see it all: the factory and each stage of tea making, a tasting of the different grades, then a walk through the rows of tea bushes to meet the pickers. Book at the hotel reception.",
+    "stepsTitle": "Visit itinerary",
+    "infoDurationLabel": "Duration",
+    "infoBookingLabel": "Booking",
+    "infoElevationLabel": "Elevation",
+    "infoDifficultyLabel": "Difficulty",
+    "infoWalkingLabel": "Walking",
+    "soapTitle": "100% natural handmade soaps",
+    "bookIntro": "Tell us your dates — reception arranges your visit and confirms by email."
   },
   "train": {
     "heroTitle": "FCE Train",
@@ -418,9 +555,18 @@
     "optionsLabel": "Our options",
     "optionsTitle": "Three ways to experience the rails",
     "options": [
-      { "name": "Micheline", "desc": "The historic railcar, classic comfort. Ideal for the full Fianarantsoa–Manakara journey." },
-      { "name": "Private Draisine", "desc": "Exclusive rental for 12 to 19 passengers. The most immersive Malagasy rail experience." },
-      { "name": "Classic Train", "desc": "The popular train, a total immersion in daily Malagasy life." }
+      {
+        "name": "Micheline",
+        "desc": "The historic railcar, classic comfort. Ideal for the full Fianarantsoa–Manakara journey."
+      },
+      {
+        "name": "Private Draisine",
+        "desc": "Exclusive rental for 12 to 19 passengers. The most immersive Malagasy rail experience."
+      },
+      {
+        "name": "Classic Train",
+        "desc": "The popular train, a total immersion in daily Malagasy life."
+      }
     ],
     "draisineLabel": "Draisine Rental",
     "draisineTitle": "Private Draisine Rental",
@@ -444,14 +590,36 @@
     },
     "ctaTitle": "The hotel takes care of everything",
     "ctaP": "Lac Hôtel Sahambavy organises your train journey. Contact us to book your seat — Micheline, Draisine or Classic Train.",
-    "cta": "Book via the hotel"
+    "cta": "Book via the hotel",
+    "infoLabels": {
+      "route": "Route",
+      "distance": "Distance",
+      "duration": "Duration",
+      "altitude": "Altitude",
+      "station": "Station",
+      "booking": "Booking"
+    },
+    "stationCaption": "Lac Hôtel Sahambavy, a two-minute walk from Sahambavy station — the ideal starting point on the FCE line.",
+    "routesLabel": "Journeys",
+    "routesTitle": "Three itineraries departing from Sahambavy",
+    "routeNotes": [
+      "Towards the primary forest corridor",
+      "Into the heart of the FCE line",
+      "All the way to the Indian Ocean"
+    ],
+    "departuresLabel": "Departures",
+    "departuresValue": "Fianarantsoa or Sahambavy, opposite the hotel",
+    "ratesLabel": "Rates",
+    "ratesValue": "On request",
+    "projectLabel": "Conservation project",
+    "projectTitle": "Andrambovato, a primary forest corridor"
   },
   "repos": {
-    "heroTitle": "Le Repos — Hotel Extension",
-    "heroSubtitle": "Family stays in complete autonomy",
-    "introLabel": "Hotel extension",
-    "introTitle": "Le Repos — Your home by the lake",
-    "introP": "Four duplex houses on two storeys, fully equipped for extended stays. Each home comes with a full kitchenette — hob, fridge, crockery — so you can live at your own pace, in complete autonomy, while enjoying the Lac Hôtel setting.",
+    "heroTitle": "Le Repos",
+    "heroSubtitle": "800 metres from the main building, an extension devoted to calm, yoga and reconnection — the quiet luxury of Malagasy simplicity.",
+    "introLabel": "The spirit of the place",
+    "introTitle": "The art of slowing down",
+    "introP": "Le Repos is a place apart, deliberately secluded, where days follow the light. Guests come for sunrise yoga, long walks beneath the pines and the silence — a discreet luxury of pared-back spaces open to nature.",
     "features": [
       {
         "icon": "house",
@@ -481,7 +649,51 @@
     "priceUnit": "AR / night",
     "priceFootnote": "Tourist tax and breakfast not included",
     "cta": "Book at Le Repos",
-    "whatsappCta": "Questions? Contact us"
+    "whatsappCta": "Questions? Contact us",
+    "heroLabel": "The hotel's extension",
+    "heroKicker": "800 metres from the main building, a clearing devoted to calm, yoga and reconnection.",
+    "heroCta": "Discover the spirit of the place",
+    "spiritLabel": "Who it is for",
+    "spiritTitle": "Eco-travellers, cyclists, lovers of quiet",
+    "spiritP1": "Le Repos is made for those seeking seclusion and a zen atmosphere: nature-minded travellers, long-distance cyclists, couples in search of tranquillity.",
+    "spiritP2": "No programme, no schedule. Meditation replaces the watch — the forest does the rest.",
+    "bungalowsLabel": "The bungalows",
+    "bungalowsTitle": "Malagasy simplicity",
+    "bungalowsP1": "Built in the Malagasy style, the bungalows of Le Repos favour simplicity and functionality: the essentials, thoughtfully done, at a gentle cost.",
+    "bungalowsP2": "Wi-Fi remains available for those who need it — you are just as welcome to leave it aside.",
+    "bungalowsRowStyleLabel": "Style",
+    "bungalowsRowStyleValue": "Malagasy — simplicity and functionality",
+    "bungalowsRowWifiLabel": "Wi-Fi",
+    "bungalowsRowWifiValue": "Available",
+    "natureLabel": "Around the bungalows",
+    "natureTitle": "Pared-back spaces, open to nature",
+    "natureP1": "Luxury at Le Repos is discreet: simple volumes opening onto the pine and eucalyptus forest, pale sandy paths, light filtering through the trunks.",
+    "natureP2": "Yoga and meditation are practised in the open air; you walk, you breathe — reconnection begins here.",
+    "ratesLabel": "Rate",
+    "ratesTitle": "A gentle rate, in all simplicity",
+    "ratesP": "Staying at Le Repos means choosing the essential — and the rate follows the same philosophy.",
+    "ratesRecapTitle": "At a glance",
+    "ratesRowNightLabel": "Per night, per bungalow",
+    "ratesRowNightValue": "250,000 Ar · €50",
+    "ratesRowWifiLabel": "Wi-Fi",
+    "ratesRowWifiValue": "Included",
+    "ratesRowDistanceLabel": "Distance from the main building",
+    "ratesRowDistanceValue": "800 m",
+    "ratesFootnote": "Tourist tax and breakfast not included.",
+    "ratesCta": "Book a bungalow",
+    "formLabel": "Preview",
+    "formTitle": "Be the first to know",
+    "formIntro": "Le Repos will soon welcome its first guests. Leave us your address and you will be the first to hear when bookings open.",
+    "formNote": "The form simply opens your email app — no data is stored on the site.",
+    "formNameLabel": "Name",
+    "formNamePlaceholder": "Your name",
+    "formEmailPlaceholder": "you@example.com",
+    "formSubmit": "Join the preview list",
+    "altHero": "Le Repos bungalow with a green roof and ochre façade adorned with Malagasy motifs, in the garden beneath the pines",
+    "altAllee": "Paved lane of Le Repos beneath tall pines, colourful bungalows in the background",
+    "altChalets": "Brick chalets of Le Repos lining the sandy path, beneath the pines",
+    "altForet": "Pale sandy trail through the pine and eucalyptus forest of Le Repos",
+    "altNature": "Sandy track winding through the forest surrounding Le Repos"
   },
   "equipe": {
     "heroTitle": "Our Team",
@@ -505,21 +717,68 @@
     "economyTitle": "A positive impact on the community",
     "economyP": "In a circular economy approach, the hotel maximises its purchases from local producers, particularly farmers, thus promoting the village's socio-economic development. By providing a suitable setting for certain NGOs, it contributes to improving community health and quality of life.",
     "teamLabel": "The team",
-    "teamTitle": "Our faces"
+    "teamTitle": "Our faces",
+    "personnel": {
+      "label": "Our staff",
+      "title": "Young people from the village, mentored every day",
+      "p1": "Our team is largely made up of young people from the village of Sahambavy and the surrounding villages. Mentored and trained on a daily basis, they build their skills and grow professionally within the hotel.",
+      "p2": "This responsible, community-minded approach — local employment and the sharing of know-how — lies at the heart of the Lac Hôtel's identity.",
+      "welcomeLabel": "The welcome",
+      "welcomeTitle": "A warm and respectful welcome",
+      "welcomeP1": "French is not our teams' first language, yet they understand your needs and take great pride in attending to them with care.",
+      "welcomeP2": "You will be received with the warmth and respect for which Betsileo hospitality is renowned.",
+      "welcomeAlt": "A member of the Lac Hôtel team welcoming travellers",
+      "economyAlt": "The Lac Hôtel team in the hotel gardens",
+      "cta": "Write to us",
+      "heroAlt": "The Lac Hôtel Sahambavy team gathered in front of the hotel"
+    }
   },
   "conference": {
     "title": "Conference Room",
     "p1": "Combining comfort, functionality and serenity, our conference room can accommodate up to 80 people. Fully modular, it adapts to all your professional event formats: meetings, seminars, training sessions or workshops.",
     "p2": "Set in a calm environment conducive to reflection, it offers an ideal setting for focus, creativity and quality exchanges.",
-    "equipment": ["Wi-Fi connection", "Microphone", "Projector", "Whiteboard"],
-    "capacity": "Up to 80 people"
+    "equipment": [
+      "Wi-Fi connection",
+      "Microphone",
+      "Projector",
+      "Whiteboard"
+    ],
+    "capacity": "Up to 80 people",
+    "label": "Seminars & Conferences",
+    "recapTitle": "The room at a glance",
+    "capacityLabel": "Capacity",
+    "configLabel": "Layout",
+    "configValue": "Fully modular",
+    "includedValue": "Included",
+    "footnote": "Meetings, seminars, training sessions or workshops — tailor-made quote.",
+    "ctaLabel": "Plan a seminar"
   },
   "wedding": {
     "title": "Weddings & Celebrations",
     "subtitle": "Celebrate your love in an exceptional setting",
     "p1": "At Lac Hôtel, every wedding is a unique story that we are passionate about enhancing.",
     "p2": "In an enchanting setting, between the peaceful shores of Lake Sahambavy and the softness of a flowering garden, we accompany you in organising this precious day. Nature, light and the harmony of the surroundings create an intimate and unforgettable atmosphere.",
-    "p3": "Our team puts all its expertise at your service to create a reception in your image. The hall is carefully decorated according to your wishes."
+    "p3": "Our team puts all its expertise at your service to create a reception in your image. The hall is carefully decorated according to your wishes.",
+    "heroLabel": "Events & celebrations",
+    "heroTitle": "Weddings & seminars",
+    "heroTitleEm": "on the shores of the lake",
+    "storyTitle1": "Celebrate your",
+    "storyTitleEm": "love",
+    "storyTitle2": "in an exceptional setting",
+    "caption1": "The newlyweds at sunset, on the shores of the lake",
+    "caption2": "The ceremony beneath the flowered arch, in the garden",
+    "receptionLabel": "The reception",
+    "receptionTitle": "A reception",
+    "receptionTitleEm": "uniquely yours",
+    "rowSettingLabel": "Setting",
+    "rowSettingValue": "Between lake and flowering garden",
+    "rowRatesLabel": "Rates",
+    "rowRatesValue": "Tailor-made quote",
+    "ctaTitle": "Let's talk about",
+    "ctaTitleEm": "your project",
+    "ctaText": "An intimate wedding, a corporate seminar, a milestone birthday — every event is unique. Contact us for a tailor-made quote.",
+    "ctaButton": "Request a quote",
+    "whatsappText": "Hello, I would like to organise an event (wedding / seminar) at Lac Hôtel."
   },
   "gallery": {
     "heroTitle": "Gallery",
@@ -531,7 +790,11 @@
     "plantation": "Tea Plantation",
     "train": "FCE Train",
     "repos": "Le Repos",
-    "equipe": "Our Team"
+    "equipe": "Our Team",
+    "heroLabel": "Lac Hôtel Sahambavy",
+    "village": "Village",
+    "jardins": "Gardens",
+    "boutique": "Boutique"
   },
   "footer": {
     "brand": "Lac Hôtel Sahambavy",
@@ -726,17 +989,228 @@
     "collectionsLabel": "Botanical collections",
     "collectionsTitle": "What you will find",
     "collections": [
-      { "icon": "flower", "title": "Orchids", "desc": "Around fifty Malagasy species under shaded greenhouses — Cymbidium, Angraecum, Eulophiella." },
-      { "icon": "palm", "title": "Traveller's trees", "desc": "Madagascar's emblem (Ravenala madagascariensis), aligned facing the lake." },
-      { "icon": "tree", "title": "Bonsai", "desc": "A hand-sculpted collection — some specimens are over 30 years old." },
-      { "icon": "leaf", "title": "Cacti & succulents", "desc": "Endemic specimens from the South — Pachypodium, Aloe, Euphorbia." },
-      { "icon": "bio", "title": "Organic garden (2 ha)", "desc": "Fruit, vegetables and aromatic herbs grown chemical-free for the kitchen." },
-      { "icon": "bees", "title": "Hives & pollinators", "desc": "Our bees pollinate the garden and produce our homemade honey." }
+      {
+        "icon": "flower",
+        "title": "Orchids",
+        "desc": "Around fifty Malagasy species under shaded greenhouses — Cymbidium, Angraecum, Eulophiella."
+      },
+      {
+        "icon": "palm",
+        "title": "Traveller's trees",
+        "desc": "Madagascar's emblem (Ravenala madagascariensis), aligned facing the lake."
+      },
+      {
+        "icon": "tree",
+        "title": "Bonsai",
+        "desc": "A hand-sculpted collection — some specimens are over 30 years old."
+      },
+      {
+        "icon": "leaf",
+        "title": "Cacti & succulents",
+        "desc": "Endemic specimens from the South — Pachypodium, Aloe, Euphorbia."
+      },
+      {
+        "icon": "bio",
+        "title": "Organic garden (2 ha)",
+        "desc": "Fruit, vegetables and aromatic herbs grown chemical-free for the kitchen."
+      },
+      {
+        "icon": "bees",
+        "title": "Hives & pollinators",
+        "desc": "Our bees pollinate the garden and produce our homemade honey."
+      }
     ],
     "philosophyLabel": "Our approach",
     "philosophyTitle": "A garden for everyone",
     "philosophyP": "Beds are labelled in Latin and Malagasy to help you identify each species. The visit is free for our guests; a botanical guide from the team can join you on request.",
     "ctaTitle": "Come and wander",
-    "cta": "Book your stay"
+    "cta": "Book your stay",
+    "heroLabel": "Gardens & village",
+    "eden": {
+      "label": "A garden of Eden",
+      "title": "The full botanical richness of Madagascar",
+      "p1": "Brightly coloured flowers, travellers' trees, orchids, cacti and bonsai: along its winding paths, the Lac Hôtel's grounds bring together the full botanical richness of Madagascar — a true garden of Eden on the lakeshore.",
+      "p2": "Designed and tended with respect for the environment, the garden is an invitation to serenity. Every stroll becomes a sensory immersion in preserved biodiversity — fragrances, colours, birdsong.",
+      "heroAlt": "The flower gardens of the Lac Hôtel on the shore of Lake Sahambavy",
+      "orchidsLabel": "The signature collection",
+      "orchidsTitle": "Orchids in the spotlight",
+      "orchidsP1": "Stars of the garden, the orchids unfold their varieties, shapes and colours here: delicate Malagasy species patiently grown by our gardeners under shaded greenhouses.",
+      "orchidsP2": "With each season comes a different bloom — a new surprise on every stay.",
+      "orchidsAlt": "Tiger orchid in bloom in the Lac Hôtel gardens",
+      "flowersLabel": "Along the flowerbeds",
+      "flowersTitle": "Colours of the garden",
+      "flowers": [
+        {
+          "caption": "Zinnia and forager",
+          "alt": "Orange zinnia visited by a bee in the garden"
+        },
+        {
+          "caption": "Blanket flower",
+          "alt": "Red and yellow blanket flower in the garden beds"
+        },
+        {
+          "caption": "Bougainvillea",
+          "alt": "Purple bougainvillea in bloom in the garden"
+        }
+      ],
+      "philosophyAlt": "Cherub statue among the ferns of the garden"
+    },
+    "village": {
+      "label": "Beyond the gardens",
+      "title": "The village of Sahambavy",
+      "intro": "A few steps from the hotel, the village of Sahambavy moves to the peaceful rhythm of the Betsileo highlands. Terraced rice paddies, red-earth houses, welcoming smiles: an authentic stop, far from the beaten track.",
+      "womenLabel": "The origin of the name",
+      "womenTitle": "“The field of women”",
+      "womenP1": "In Malagasy, Sahambavy means “the field of women”: tradition has it that these fertile lands were farmed by the women of the village, who gave them their name.",
+      "womenP2": "Betsileo life can still be discovered here in the simplest of ways — everyday gestures, rice granaries, zebus wandering home at dusk.",
+      "womenAlt": "Betsileo woman in front of a traditional house in Sahambavy",
+      "riceLabel": "Artisans & rice paddies",
+      "riceTitle": "Terraced paddies and living craftsmanship",
+      "riceP1": "Around the lake, the rice paddies weave a patchwork of greens that changes with the seasons. In the village, artisans keep alive skills handed down from generation to generation.",
+      "riceP2": "Our team will gladly arrange an accompanied walk to meet the villagers — simply, and with full respect for their traditions.",
+      "riceAlt": "Aerial view of the terraced rice paddies of Sahambavy",
+      "riceCta": "Arrange a village walk",
+      "moments": [
+        {
+          "caption": "Portraits",
+          "alt": "Portrait of a smiling Betsileo man from the village of Sahambavy"
+        },
+        {
+          "caption": "Village life",
+          "alt": "Village scene with zebus under a large tree in Sahambavy"
+        },
+        {
+          "caption": "Betsileo houses",
+          "alt": "Traditional Betsileo house with children at the windows"
+        }
+      ]
+    }
+  },
+  "experiences": {
+    "heroLabel": "Lac Hôtel Sahambavy",
+    "heroTitle": "Experiences",
+    "heroKicker": "Between the lake, the tea hills and the Betsileo villages, every day invites a different discovery — starting right from the hotel.",
+    "introLabel": "Living Sahambavy",
+    "introTitle": "A land of experiences",
+    "introP": "Leisure by the water, massages with house-made oils, village craftsmanship, a river descent by traditional dugout canoe: shape your stay to the rhythm of the lake.",
+    "loisirs": {
+      "label": "Leisure",
+      "title": "The lake as your playground",
+      "p": "The lake loop — 8 km of marked trails, about a two-hour walk — sets the tone: here, everything unfolds gently. The TAF tea plantation and factory can be visited in four hours, the surrounding villages on a two-hour stroll, between embroidery and basketry workshops and Mamie Olga's farm and vegetable garden.",
+      "items": [
+        "Lake loop — 8 km marked trail, 2 hrs",
+        "Tea plantation & TAF factory visit — 4 hrs",
+        "Walk through the nearby villages — 2 hrs",
+        "Meet the artisans — embroidery, basketry",
+        "Mamie Olga's farm & vegetable garden",
+        "Canoeing and pedal boats on the lake",
+        "Cycling around the lake",
+        "Tennis, table tennis, table football",
+        "Poolside meditation"
+      ],
+      "cta": "See all leisure activities"
+    },
+    "conference": {
+      "label": "Business events",
+      "rowCapacity": "Capacity",
+      "rowEquipment": "Equipment",
+      "rowLayout": "Layout",
+      "layoutValue": "Fully modular",
+      "cta": "Plan your event"
+    },
+    "mamiShop": {
+      "label": "Boutique",
+      "title": "Mami Bio Shop, the craft of Sahambavy",
+      "p1": "The hotel boutique celebrates the know-how of Sahambavy's artisans — first and foremost the work of the village women.",
+      "p2": "Essential and massage oils, estate tea grades, cold-process organic soaps, embroidery and baskets woven from the lake's reeds: every piece tells the story of this land."
+    },
+    "riviere": {
+      "label": "Adventure",
+      "recapTitle": "At a glance",
+      "rowDeparture": "Departure",
+      "departureValue": "Lac Hôtel → Mahasoabe (45 km)",
+      "rowNavigation": "On the water",
+      "navigationValue": "2 hrs by traditional dugout canoe",
+      "rowWalk": "On foot",
+      "walkValue": "1.5 hrs — villages, rice terraces, tea fields",
+      "rowLunch": "Lunch",
+      "lunchValue": "Picnic at the foot of a waterfall",
+      "included": "Included",
+      "includedValue": "Picnic lunch, canoe and boatman, guide, village taxes",
+      "notIncluded": "Not included",
+      "notIncludedValue": "Transport, drinks, activities not mentioned"
+    },
+    "teasers": {
+      "label": "Keep exploring",
+      "mariagesLabel": "Signature moments",
+      "mariagesTitle": "Celebrate",
+      "mariagesTitleEm": "by the lake",
+      "mariagesP": "Garden ceremonies, sunset dinners and countryside seminars: Lac Hôtel orchestrates your milestone moments, from intimate weddings to corporate events.",
+      "mariagesCta": "Weddings & seminars"
+    }
+  },
+  "localisation": {
+    "heroLabel": "Getting to Lac Hôtel",
+    "heroTitle": "Location & access",
+    "heroSubtitle": "On the shores of Lake Sahambavy, amid rice paddies and tea plantations — 40 minutes from Fianarantsoa and 2 minutes from the station.",
+    "heroAlt": "Aerial view of the terraced rice paddies and Lake Sahambavy",
+    "metaTitle": "Location & access",
+    "metaDescription": "How to reach Lac Hôtel Sahambavy: 2 minutes from the station (Fianarantsoa–Manakara line), 40 minutes from Fianarantsoa by road via the RN7, hotel shuttle and private 4x4 transfer on request.",
+    "introLabel": "How to get here",
+    "introTitle": "Two ways to reach us",
+    "introP": "By rail or by road, the journey to Sahambavy is already part of the experience: tea-covered hills, terraced rice paddies and Betsileo villages accompany your arrival on the lakeshore.",
+    "train": {
+      "label": "By train",
+      "title": "2 minutes from Sahambavy station",
+      "p1": "Lac Hôtel stands just 2 minutes from Sahambavy station, on the legendary Fianarantsoa–Manakara line (FCE).",
+      "p2": "Step off onto the platform: the hotel awaits you on the lakeshore, only a few steps away. An arrival from another era, at the gentle pace of the highland train.",
+      "alt": "The blue Micheline railcar at the platform of Sahambavy station"
+    },
+    "route": {
+      "label": "By road",
+      "title": "40 minutes from Fianarantsoa",
+      "p1": "The hotel is 40 minutes from Fianarantsoa city centre. From Antananarivo, follow the RN7 and turn left at the village of Ambalakely (Shell petrol station): the road leads you straight to Sahambavy.",
+      "p2": "A paid hotel shuttle is available, as well as a private 4x4 transfer between Lac Hôtel and Fianarantsoa (Ar 120,000 · €25).",
+      "alt": "Aerial view of Lac Hôtel and its lush green setting on the lakeshore",
+      "cta": "Arrange my transfer"
+    },
+    "recap": {
+      "label": "At a glance",
+      "title": "Access at a glance",
+      "rows": [
+        {
+          "label": "Sahambavy station",
+          "value": "2 minutes from the hotel"
+        },
+        {
+          "label": "Railway line",
+          "value": "Fianarantsoa–Manakara (FCE)"
+        },
+        {
+          "label": "Fianarantsoa (city centre)",
+          "value": "40 minutes by road"
+        },
+        {
+          "label": "From Antananarivo",
+          "value": "RN7, turn left at Ambalakely (Shell petrol station)"
+        },
+        {
+          "label": "Hotel shuttle",
+          "value": "Paid service, on request"
+        },
+        {
+          "label": "Private 4x4 transfer Lac Hôtel / Fianarantsoa",
+          "value": "Ar 120,000 · €25"
+        }
+      ],
+      "footnote": "Contact reception to arrange your shuttle or transfer."
+    },
+    "map": {
+      "title": "Find us",
+      "iframeTitle": "Map — Lac Hôtel Sahambavy, Madagascar",
+      "openLink": "Open in Google Maps"
+    },
+    "ctaTitle": "Need help planning your journey?",
+    "cta": "Contact us"
   }
 }

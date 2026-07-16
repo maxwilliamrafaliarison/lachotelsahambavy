@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation, siteConfig, type NavItem } from "@/data/site";
 import { getBasePath, locales, type Locale } from "@/lib/utils";
@@ -67,11 +68,10 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
     };
   }, [mobileOpen]);
 
-  /* — Fermer menus à la navigation — */
-  useEffect(() => {
+  const closeAll = useCallback(() => {
     setOpenMenu(null);
     setMobileOpen(false);
-  }, [pathname]);
+  }, []);
 
   /* — Fermeture au clic extérieur / Échap — */
   useEffect(() => {
@@ -132,8 +132,8 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
         >
           <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-4 px-5 md:px-8">
             {/* Marque — mark + lockup typographique */}
-            <a
-              href={`${basePath}/${locale}/`}
+            <Link
+              href={`/${locale}/`}
               className={`flex shrink-0 items-center gap-3 ${itemColor}`}
               style={itemShadow}
               aria-label="Lac Hôtel Sahambavy — Accueil"
@@ -152,7 +152,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   Sahambavy · Madagascar
                 </span>
               </span>
-            </a>
+            </Link>
 
             {/* Menu desktop */}
             <ul className="ml-auto hidden items-center gap-0.5 lg:flex">
@@ -192,15 +192,15 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                       </svg>
                     </button>
                   ) : (
-                    <a
-                      href={`${basePath}${localizeHref(item.href, locale)}`}
+                    <Link
+                      href={localizeHref(item.href, locale)}
                       className={`block whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
                         darkText ? "hover:text-tea" : "hover:text-white/75"
                       }`}
                       style={itemShadow}
                     >
                       {(item.shortLabel ?? item.label)[locale]}
-                    </a>
+                    </Link>
                   )}
                 </li>
               ))}
@@ -214,8 +214,8 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               {locales.map((code, i) => (
                 <span key={code} className="flex items-center gap-1.5">
                   {i > 0 && <span className="opacity-35">·</span>}
-                  <a
-                    href={`${basePath}${replaceLocale(pathname, code)}`}
+                  <Link
+                    href={replaceLocale(pathname, code)}
                     aria-current={code === locale ? "page" : undefined}
                     className={
                       code === locale
@@ -226,15 +226,15 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     }
                   >
                     {code.toUpperCase()}
-                  </a>
+                  </Link>
                 </span>
               ))}
             </div>
 
             {/* CTA Réserver */}
-            <a href={`${basePath}/${locale}/contact/`} className="ge-cta hidden !px-5 !py-2.5 !text-[11.5px] lg:inline-flex">
+            <Link href={`/${locale}/contact/`} className="ge-cta hidden !px-5 !py-2.5 !text-[11.5px] lg:inline-flex">
               {dict.nav.book}
-            </a>
+            </Link>
 
             {/* Burger mobile */}
             <button
@@ -269,8 +269,9 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   className="absolute inset-x-0 top-full hidden border-b border-hairline bg-paper/[0.97] backdrop-blur-xl lg:block"
                 >
                   <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-10 gap-y-1 px-10 py-7 xl:grid-cols-3">
-                    <a
-                      href={`${basePath}${localizeHref(item.href, locale)}`}
+                    <Link
+                      href={localizeHref(item.href, locale)}
+                      onClick={closeAll}
                       className="col-span-full mb-2 flex items-baseline gap-3 text-ink transition-colors hover:text-tea"
                     >
                       <span className="font-[family-name:var(--font-display)] text-[22px] font-extralight tracking-[-0.01em]">
@@ -279,16 +280,17 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                       <span className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-tea">
                         {locale === "fr" ? "Voir la page" : locale === "es" ? "Ver la página" : "View page"}
                       </span>
-                    </a>
+                    </Link>
                     {item.children.map((child) => (
-                      <a
+                      <Link
                         key={child.href}
-                        href={`${basePath}${localizeHref(child.href, locale)}`}
+                        href={localizeHref(child.href, locale)}
+                        onClick={closeAll}
                         className="group flex items-center gap-2.5 rounded px-2 py-2 text-[14px] text-body transition-colors hover:text-tea"
                       >
                         <span className="h-px w-4 bg-hairline transition-all duration-200 group-hover:w-6 group-hover:bg-tea" />
                         {child.label[locale]}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -303,24 +305,24 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
           <div className="flex min-h-full flex-col px-6 pb-12 pt-24">
             <ul className="flex flex-col">
               <li>
-                <a
-                  href={`${basePath}/${locale}/`}
+                <Link
+                  href={`/${locale}/`}
                   className="block border-b border-hairline py-4 font-[family-name:var(--font-display)] text-[22px] font-extralight text-ink"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={closeAll}
                 >
                   {locale === "fr" ? "Accueil" : locale === "es" ? "Inicio" : "Home"}
-                </a>
+                </Link>
               </li>
               {mobileItems.map((item: NavItem) => (
                 <li key={item.href} className="border-b border-hairline">
                   <div className="flex items-center">
-                    <a
-                      href={`${basePath}${localizeHref(item.href, locale)}`}
+                    <Link
+                      href={localizeHref(item.href, locale)}
                       className="grow py-4 font-[family-name:var(--font-display)] text-[22px] font-extralight text-ink"
-                      onClick={() => setMobileOpen(false)}
+                      onClick={closeAll}
                     >
                       {item.label[locale]}
-                    </a>
+                    </Link>
                     {item.children && (
                       <button
                         type="button"
@@ -351,13 +353,13 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     <ul className="pb-4 pl-1">
                       {item.children.map((child) => (
                         <li key={child.href}>
-                          <a
-                            href={`${basePath}${localizeHref(child.href, locale)}`}
+                          <Link
+                            href={localizeHref(child.href, locale)}
                             className="block py-2 text-[14.5px] text-body"
-                            onClick={() => setMobileOpen(false)}
+                            onClick={closeAll}
                           >
                             {child.label[locale]}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -368,20 +370,20 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
 
             <div className="mt-8 flex items-center gap-4 text-[13px] font-semibold tracking-[0.14em]">
               {locales.map((code) => (
-                <a
+                <Link
                   key={code}
-                  href={`${basePath}${replaceLocale(pathname, code)}`}
+                  href={replaceLocale(pathname, code)}
                   aria-current={code === locale ? "page" : undefined}
                   className={code === locale ? "text-tea underline underline-offset-4" : "text-muted"}
                 >
                   {code.toUpperCase()}
-                </a>
+                </Link>
               ))}
             </div>
 
-            <a href={`${basePath}/${locale}/contact/`} className="ge-cta mt-8 self-start">
+            <Link href={`/${locale}/contact/`} className="ge-cta mt-8 self-start">
               {dict.nav.book}
-            </a>
+            </Link>
 
             <div className="mt-8 flex flex-col gap-2 text-[13.5px] text-body">
               <a href={`mailto:${siteConfig.email}`} className="hover:text-tea">

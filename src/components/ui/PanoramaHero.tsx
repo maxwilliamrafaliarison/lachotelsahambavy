@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 /**
@@ -37,12 +37,14 @@ export default function PanoramaHero({
   night = false,
 }: PanoramaHeroProps) {
   const bgRef = useRef<HTMLDivElement>(null);
-  const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    if (mq.matches) return;
+    if (mq.matches) {
+      // Reduced motion : image fixe, sans parallaxe ni sur-échantillonnage.
+      if (bgRef.current) bgRef.current.style.transform = "none";
+      return;
+    }
 
     let raf = 0;
     const onScroll = () => {
@@ -77,7 +79,7 @@ export default function PanoramaHero({
         className="absolute inset-0 bg-cover bg-center will-change-transform"
         style={{
           backgroundImage: `url(${image})`,
-          transform: reduced ? undefined : "scale(1.06)",
+          transform: "scale(1.06)",
         }}
       />
       {/* Voile de contraste — obligatoire sous le titrage ultra-light */}

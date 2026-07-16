@@ -1,13 +1,13 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Icon } from "@/components/ui/Icon";
 import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
 
@@ -24,215 +24,258 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const teamPhotos = [
-  { src: "/images/team/team-01.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-02.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-03.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-04.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-05.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-06.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-chef.jpg", alt: "Notre chef cuisinier" },
-  { src: "/images/team/team-07.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-08.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-09.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-10.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-staff.jpg", alt: "L'équipe du Lac Hôtel" },
-];
+/**
+ * Clés en attente de fusion dans les dictionnaires (delta déposé dans
+ * scratchpad/dict-deltas/hotel.json). Les fallbacks ci-dessous sont
+ * identiques au delta : la page est correcte avant ET après la fusion.
+ */
+type HotelDictExtras = {
+  equipeCta?: string;
+  rse?: { threeMenusLabel?: string; threeMenus?: string };
+  reserveBand?: { label?: string; title?: string; button?: string };
+};
+
+const EXTRAS_FALLBACK: Record<
+  Locale,
+  {
+    equipeCta: string;
+    rse: { threeMenusLabel: string; threeMenus: string };
+    reserveBand: { label: string; title: string; button: string };
+  }
+> = {
+  fr: {
+    equipeCta: "Rencontrer l'équipe",
+    rse: {
+      threeMenusLabel: "Zéro gaspillage",
+      threeMenus:
+        "Au restaurant, trois menus seulement par service : une cuisine juste, pensée contre le gaspillage alimentaire et nourrie par le circuit court de Sahambavy.",
+    },
+    reserveBand: {
+      label: "Réservation",
+      title: "Écrivez votre chapitre au bord du lac",
+      button: "Réserver votre séjour",
+    },
+  },
+  en: {
+    equipeCta: "Meet the team",
+    rse: {
+      threeMenusLabel: "Zero waste",
+      threeMenus:
+        "In the restaurant, just three menus per service: honest cooking designed to prevent food waste, nourished by Sahambavy's short supply chain.",
+    },
+    reserveBand: {
+      label: "Booking",
+      title: "Write your own chapter by the lake",
+      button: "Book your stay",
+    },
+  },
+  es: {
+    equipeCta: "Conozca al equipo",
+    rse: {
+      threeMenusLabel: "Cero desperdicio",
+      threeMenus:
+        "En el restaurante, solo tres menús por servicio: una cocina justa, concebida contra el desperdicio alimentario y abastecida por el circuito corto de Sahambavy.",
+    },
+    reserveBand: {
+      label: "Reservas",
+      title: "Escriba su capítulo a orillas del lago",
+      button: "Reserve su estancia",
+    },
+  },
+};
 
 export default async function HotelPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
 
+  const hotelDict = dict.hotel as typeof dict.hotel & HotelDictExtras;
+  const fallback = EXTRAS_FALLBACK[loc];
+  const equipeCta = hotelDict.equipeCta ?? fallback.equipeCta;
+  const threeMenusLabel = hotelDict.rse?.threeMenusLabel ?? fallback.rse.threeMenusLabel;
+  const threeMenus = hotelDict.rse?.threeMenus ?? fallback.rse.threeMenus;
+  const reserveBand = {
+    label: hotelDict.reserveBand?.label ?? fallback.reserveBand.label,
+    title: hotelDict.reserveBand?.title ?? fallback.reserveBand.title,
+    button: hotelDict.reserveBand?.button ?? fallback.reserveBand.button,
+  };
+
+  const founders = [
+    {
+      src: `${basePath}/images/founders/maggie-leong.jpg`,
+      name: "Maggie Leong",
+      alt:
+        loc === "fr"
+          ? "Maggie Leong, co-dirigeante du Lac Hôtel"
+          : loc === "es"
+          ? "Maggie Leong, codirectora del Lac Hôtel"
+          : "Maggie Leong, co-manager of Lac Hôtel",
+    },
+    {
+      src: `${basePath}/images/founders/sergi-formentin.jpg`,
+      name: "Sergi Formentin",
+      alt:
+        loc === "fr"
+          ? "Sergi Formentin, co-dirigeant du Lac Hôtel"
+          : loc === "es"
+          ? "Sergi Formentin, codirector del Lac Hôtel"
+          : "Sergi Formentin, co-manager of Lac Hôtel",
+    },
+  ];
+
+  const ecoPillars = dict.hotel.ecoPillars as { icon: string; title: string; desc: string }[];
+
   return (
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "hotel"))]} />
-      <PageHero
+
+      {/* 1 — Hero Panorama : lever de soleil au drone, LE plan d'ensemble du domaine */}
+      <PanoramaHero
+        image={`${basePath}/images/hero/hero-drone-sunrise.jpg`}
+        imageAlt="Vue aérienne du Lac Hôtel et du lac de Sahambavy au lever du soleil"
+        label={dict.hero.eyebrow}
         title={dict.hotel.heroTitle}
-        subtitle={dict.hotel.heroSubtitle}
-        image={`${basePath}/images/hotel/hotel-facade.jpg`}
+        kicker={dict.hotel.heroSubtitle}
       />
 
-      {/* History */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[900px] mx-auto px-4">
-          <SectionHeader label={dict.hotel.historyLabel} title={dict.hotel.historyTitle} />
+      {/* 2 — Notre philosophie : tourisme responsable, production maison */}
+      <section id="philosophie" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/hotel/hotel-gardens.jpg`}
+            imageAlt="Jardins et cultures biologiques du Lac Hôtel à Sahambavy"
+            label={dict.hotel.philosophyLabel}
+            title={dict.hotel.philosophyTitle}
+          >
+            <p>{dict.hotel.philosophyP1}</p>
+            <p>{dict.hotel.philosophyP2}</p>
+          </EditorialSplit>
 
-          {/* Texte — centré, lecture confortable */}
-          <ScrollReveal>
-            <div className="space-y-6 text-text-muted leading-relaxed max-w-[720px] mx-auto">
-              <p>{dict.hotel.historyP1}</p>
-              <p>{dict.hotel.historyP2}</p>
-              {dict.hotel.historyP3 && <p>{dict.hotel.historyP3}</p>}
-              {dict.hotel.historyP4 && (
-                <p className="font-medium text-brown-deep italic">{dict.hotel.historyP4}</p>
-              )}
-            </div>
-          </ScrollReveal>
+          {/* Les 7 piliers éco-responsables — grille à filets fins */}
+          <div className="mt-10 grid grid-cols-1 gap-px border border-hairline bg-hairline sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
+            {ecoPillars.map((pillar, i) => (
+              <ScrollReveal key={pillar.icon} delay={i * 60} className="h-full">
+                <div className="flex h-full flex-col bg-paper p-6 md:p-8">
+                  <span className="mb-5 text-tea">
+                    <Icon name={pillar.icon} size={28} weight="light" />
+                  </span>
+                  <h4 className="mb-2">{pillar.title}</h4>
+                  <p className="text-sm leading-relaxed text-body">{pillar.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+            {/* Cellules de complétion : la grille reste pleine à 2 et 3 colonnes */}
+            <div aria-hidden className="hidden bg-paper sm:block" />
+            <div aria-hidden className="hidden bg-paper lg:block" />
+          </div>
+        </div>
+      </section>
 
-          {/* Diptyque — Maggie & Sergi côte à côte */}
-          <ScrollReveal delay={200}>
-            <figure className="mt-14 md:mt-20 grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-[640px] mx-auto">
-              {[
-                {
-                  src: `${basePath}/images/founders/maggie-leong.jpg`,
-                  name: "Maggie Leong",
-                  alt:
-                    loc === "fr"
-                      ? "Maggie Leong, co-dirigeante du Lac Hôtel"
-                      : loc === "es"
-                      ? "Maggie Leong, codirectora del Lac Hôtel"
-                      : "Maggie Leong, co-manager of Lac Hôtel",
-                },
-                {
-                  src: `${basePath}/images/founders/sergi-formentin.jpg`,
-                  name: "Sergi Formentin",
-                  alt:
-                    loc === "fr"
-                      ? "Sergi Formentin, co-dirigeant du Lac Hôtel"
-                      : loc === "es"
-                      ? "Sergi Formentin, codirector del Lac Hôtel"
-                      : "Sergi Formentin, co-manager of Lac Hôtel",
-                },
-              ].map((p) => (
-                <div key={p.name} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-xl shadow-sm ring-1 ring-brown-deep/5">
+      {/* 3 — La petite histoire : de la cabane de retraite au jardin d'Éden */}
+      <section id="histoire" className="scroll-mt-24 pb-16 md:pb-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/hero/hero-pilotis.jpg`}
+            imageAlt="Allée des chambres sur pilotis du Lac Hôtel au bord du lac de Sahambavy"
+            label={dict.hotel.historyLabel}
+            title={dict.hotel.historyTitle}
+            reverse
+          >
+            <p>{dict.hotel.historyP1}</p>
+            <p>{dict.hotel.historyP2}</p>
+            {dict.hotel.historyP3 && <p>{dict.hotel.historyP3}</p>}
+            {dict.hotel.historyP4 && <p className="font-medium text-ink">{dict.hotel.historyP4}</p>}
+          </EditorialSplit>
+
+          {/* Maggie & Sergi — la génération qui poursuit l'aventure */}
+          <ScrollReveal className="mx-auto mt-12 max-w-xl md:mt-16">
+            <div className="grid grid-cols-2 gap-6 md:gap-8">
+              {founders.map((p) => (
+                <figure key={p.name}>
+                  <div className="overflow-hidden border border-hairline">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={p.src}
                       alt={p.alt}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                    {/* Fine bordure dorée intérieure — touch "luxe" discret */}
-                    <div
-                      className="absolute inset-2 rounded-lg pointer-events-none"
-                      style={{ border: "1px solid rgba(196, 150, 42, 0.18)" }}
+                      className="aspect-[3/4] w-full object-cover"
                     />
                   </div>
-                  <figcaption className="mt-3 md:mt-4 text-center">
-                    <span className="block text-[0.65rem] tracking-[0.25em] uppercase text-gold mb-1">
-                      &mdash;
-                    </span>
-                    <span className="text-sm md:text-base font-[family-name:var(--font-sub)] italic text-brown-deep">
-                      {p.name}
-                    </span>
+                  <figcaption className="mt-4 text-center">
+                    <span className="ge-label">{p.name}</span>
                   </figcaption>
-                </div>
+                </figure>
               ))}
-            </figure>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Philosophy */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[800px] mx-auto px-4">
-          <SectionHeader label={dict.hotel.philosophyLabel} title={dict.hotel.philosophyTitle} />
-          <ScrollReveal>
-            <div className="space-y-6 text-text-muted leading-relaxed">
-              <p>{dict.hotel.philosophyP1}</p>
-              <p>{dict.hotel.philosophyP2}</p>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Eco-responsibility / RSE — cartes liquid-glass avec icône filigrane.
-          Le fond subtilement dégradé fait ressortir la translucidité des
-          panneaux en verre. Chaque pilier = une icône Phosphor en filigrane
-          derrière le texte, un picto net en haut à gauche. */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
-          }}
-        />
-        {/* Subtiles formes décoratives en arrière-plan pour donner du relief */}
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-gold/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-4 relative">
-          <SectionHeader label={dict.hotel.ecoLabel} title={dict.hotel.ecoTitle} />
-
+      {/* 4 — RSE : recrutement local, économie circulaire, engagements concrets */}
+      <section id="rse" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <p className="text-text-muted leading-relaxed mb-14 max-w-[780px] mx-auto text-center">
-              {dict.hotel.ecoP1}
-            </p>
+            <span className="ge-label mb-3">{dict.hotel.ecoLabel}</span>
+            <h2 className="mb-5" style={{ textWrap: "balance" }}>
+              {dict.hotel.ecoTitle}
+            </h2>
+            <p className="ge-measure leading-relaxed text-body">{dict.hotel.ecoP1}</p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {(dict.hotel.ecoPillars as { icon: string; title: string; desc: string }[]).map(
-              (pillar, i) => (
-                <ScrollReveal key={pillar.icon} delay={i * 80}>
-                  <div className="eco-card h-full p-6 md:p-7 pb-16 md:pb-24">
-                    {/* Grande icône en filigrane (bottom-right) — la taille
-                        est pilotée par .eco-card__watermark en CSS pour la
-                        responsivité ; le size={} ici n'est qu'une valeur
-                        initiale que le SVG remplace par width/height 100 %. */}
-                    <div className="eco-card__watermark">
-                      <Icon name={pillar.icon} size={180} weight="regular" />
-                    </div>
+          <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-14">
+            <ScrollReveal>
+              <span className="ge-label mb-3">{dict.equipe.economyLabel}</span>
+              <h3 className="mb-4" style={{ textWrap: "balance" }}>
+                {dict.equipe.economyTitle}
+              </h3>
+              <p className="text-[15px] leading-relaxed text-body">{dict.equipe.economyP}</p>
 
-                    {/* Picto net top-left */}
-                    <div className="eco-card__icon relative mb-5">
-                      <div
-                        className="inline-flex items-center justify-center w-12 h-12 rounded-2xl"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(74,122,90,0.12) 0%, rgba(196,150,42,0.08) 100%)",
-                          boxShadow:
-                            "inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 8px rgba(74,122,90,0.08)",
-                        }}
-                      >
-                        <Icon name={pillar.icon} size={24} weight="regular" />
-                      </div>
-                    </div>
+              {/* Restauration : trois menus seulement, contre le gaspillage */}
+              <div className="mt-9 border-l-2 border-tea pl-5 md:pl-6">
+                <span className="ge-label mb-2">{threeMenusLabel}</span>
+                <p className="text-[15px] leading-relaxed text-body">{threeMenus}</p>
+              </div>
+            </ScrollReveal>
 
-                    {/* Titre + description */}
-                    <div className="relative">
-                      <h3 className="text-lg font-semibold text-text-dark mb-2 leading-tight">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-text-muted text-sm leading-relaxed">
-                        {pillar.desc}
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ),
-            )}
+            <ScrollReveal delay={120}>
+              <span className="ge-label mb-4">{dict.equipe.rseLabel}</span>
+              <ul className="border-t border-hairline">
+                {(dict.equipe.rseItems as string[]).map((item, i) => (
+                  <li key={i} className="flex items-baseline gap-4 border-b border-hairline py-3.5">
+                    <span className="text-xs font-semibold tabular-nums text-tea">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[15px] leading-relaxed text-body">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* Team Photo Grid */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <SectionHeader
+      {/* 5 — Teaser équipe + bande réservation */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/team/team-staff.jpg`}
+            imageAlt="L'équipe du Lac Hôtel réunie à Sahambavy"
             label={dict.equipe.teamLabel}
-            title={dict.equipe.teamTitle}
-          />
-          <ScrollReveal>
-            <p className="text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-12">
-              {dict.equipe.introP}
-            </p>
+            title={dict.equipe.introTitle}
+            cta={{ href: `${basePath}/${loc}/notre-equipe/`, label: equipeCta }}
+          >
+            <p>{dict.equipe.introP}</p>
+          </EditorialSplit>
+
+          <ScrollReveal className="mt-16 md:mt-24">
+            <div className="border-t border-hairline pt-12 text-center md:pt-16">
+              <span className="ge-label mb-3">{reserveBand.label}</span>
+              <h2 style={{ textWrap: "balance" }}>{reserveBand.title}</h2>
+              <a href={`${basePath}/${loc}/contact/`} className="ge-cta mt-8">
+                {reserveBand.button}
+              </a>
+            </div>
           </ScrollReveal>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {teamPhotos.map((photo, i) => (
-              <ScrollReveal key={i} delay={i * 50}>
-                <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 group">
-                  <div
-                    className="aspect-square bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
-                    style={{ backgroundImage: `url(${basePath}${photo.src})` }}
-                    role="img"
-                    aria-label={photo.alt}
-                  />
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
         </div>
       </section>
     </>

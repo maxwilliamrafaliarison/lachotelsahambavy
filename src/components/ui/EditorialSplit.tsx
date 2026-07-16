@@ -45,7 +45,6 @@ export default function EditorialSplit({
       <div
         className={`relative min-h-[260px] md:min-h-[420px] ${reverse ? "md:order-2" : ""}`}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={image}
           alt={imageAlt}

@@ -984,10 +984,10 @@ body {
   border-radius: 1rem 1rem 0 0;
   margin-bottom: 0;
   padding: 0.75rem 1.5rem;
-  background: var(--color-gold);
+  background: var(--color-tea);
   color: white;
-  border-color: var(--color-gold);
-  box-shadow: 0 -4px 24px rgba(196, 150, 42, 0.3);
+  border-color: var(--color-tea);
+  box-shadow: 0 -4px 24px rgba(47, 93, 70, 0.3);
 }
 
 .booking-bar-fixed__toggle:hover {
@@ -995,7 +995,7 @@ body {
 }
 
 .booking-bar-fixed--minimized .booking-bar-fixed__toggle:hover {
-  background: var(--color-gold-light);
+  background: var(--color-tea-deep);
 }
 
 @keyframes slideUpBar {
@@ -1201,7 +1201,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.125rem 2.25rem;
-  background: var(--color-gold);
+  background: var(--color-tea);
   color: white;
   font-size: 0.8125rem;
   font-weight: 700;
