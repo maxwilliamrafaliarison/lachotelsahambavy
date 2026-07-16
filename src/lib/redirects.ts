@@ -132,7 +132,14 @@ export const wordpressRedirects: Redirect[] = [
 /**
  * Headers de sécurité (cf. Phase 8 §8.9).
  * NB : Ne s'appliquent qu'en mode SSR Vercel (pas en static export GitHub Pages).
+ *
+ * HSTS et `upgrade-insecure-requests` ne sont émis QUE sur Vercel : en
+ * `next start` local (http), ils forcent le navigateur à réécrire toutes les
+ * requêtes en https → l'app devient intestable en local (et pollue le cache
+ * HSTS du navigateur pour localhost). Sur Vercel, le https est garanti.
  */
+const isVercel = !!process.env.VERCEL;
+
 export const securityHeaders: Awaited<
   ReturnType<NonNullable<NextConfig["headers"]>>
 > = [
@@ -146,10 +153,14 @@ export const securityHeaders: Awaited<
         key: "Permissions-Policy",
         value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
       },
-      {
-        key: "Strict-Transport-Security",
-        value: "max-age=63072000; includeSubDomains; preload",
-      },
+      ...(isVercel
+        ? [
+            {
+              key: "Strict-Transport-Security",
+              value: "max-age=63072000; includeSubDomains; preload",
+            },
+          ]
+        : []),
       {
         key: "Content-Security-Policy",
         value: [
@@ -163,7 +174,7 @@ export const securityHeaders: Awaited<
           "form-action 'self'",
           "frame-ancestors 'self'",
           "base-uri 'self'",
-          "upgrade-insecure-requests",
+          ...(isVercel ? ["upgrade-insecure-requests"] : []),
         ].join("; "),
       },
     ],
