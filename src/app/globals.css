@@ -1,24 +1,59 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-white: #FFFFFF;
-  --color-cream: #F8F5F0;
-  --color-cream-dark: #EDE8E0;
-  --color-brown-deep: #2C1810;
-  --color-brown-brand: #695353;
-  --color-gold: #C4962A;
-  --color-gold-light: #D4A84B;
-  --color-green-tea: #4A7A5A;
-  --color-lake-blue: #5B8FA8;
-  --color-text-dark: #1A1A1A;
-  --color-text-body: #3A3A3A;
-  --color-text-muted: #7A7A7A;
-  --color-text-light: #AAAAAA;
-  --color-border: rgba(105, 83, 83, 0.15);
+  /* ============================================================
+     Direction artistique « Panorama + Nuit sur le lac » (16/07/2026)
+     Socle clair transposé de la grammaire Glacier Express :
+     papier presque blanc, encre chaude, UN accent vert thé.
+     Canvas « nuit » réservé aux pages signature (Pilotis Nuptial,
+     Wagon Nuptial, Mariages) : noir chaud + or champagne.
+     ============================================================ */
 
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-sub: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* — Panorama (socle clair) — */
+  --color-white: #FFFFFF;
+  --color-paper: #FBFAF7;
+  --color-ink: #1B1B17;
+  --color-body: #4A4A44;
+  --color-muted: #8A867C;
+  --color-hairline: #E7E4DC;
+  --color-tea: #2F5D46;
+  --color-tea-deep: #234838;
+  --color-mist: #9DB5A5;
+  --color-mist-bg: #F0F3EF;
+  --color-gold: #C8A254;
+
+  /* — Nuit sur le lac (canvas sombre signature) — */
+  --color-night: #14110D;
+  --color-night-soft: #1C1812;
+  --color-night-hairline: #2C2619;
+  --color-champagne: #D8B77A;
+  --color-linen: #F3EAD8;
+  --color-night-body: #BFB4A0;
+  --color-copper: #8A4B2E;
+
+  /* — Alias hérités (LEGACY — à supprimer une fois la migration finie).
+       Mappés sur le nouveau monde pour que les composants non migrés
+       restent cohérents visuellement pendant la transition. — */
+  --color-cream: #FBFAF7;
+  --color-cream-dark: #EFEDE6;
+  --color-brown-deep: #1B1B17;
+  --color-brown-brand: #4A4A44;
+  --color-gold-light: #D8B77A;
+  --color-green-tea: #2F5D46;
+  --color-lake-blue: #5B8FA8;
+  --color-text-dark: #1B1B17;
+  --color-text-body: #4A4A44;
+  --color-text-muted: #8A867C;
+  --color-text-light: #B5B0A6;
+  --color-border: rgba(74, 74, 68, 0.14);
+
+  /* — Fontes (chargées dans src/app/layout.tsx via next/font, variables
+       sources --font-inter-tight / --font-cormorant / --font-inter) — */
+  --font-heading: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-sub: var(--font-cormorant), Baskerville, Georgia, serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-serif: var(--font-cormorant), Baskerville, Georgia, serif;
 
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
@@ -35,8 +70,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text-body);
-  background: var(--color-cream);
+  color: var(--color-body);
+  background: var(--color-paper);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -55,17 +90,139 @@ body {
  * force every coloured heading to use `!text-white` or an inline `style`.
  */
 @layer base {
+  /* Titrage « Panorama » : ultra-light, interlettrage resserré, très grand.
+     Le poids 200-300 exige un contraste strict sur photo (voile sombre). */
   h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    color: var(--color-text-dark);
-    line-height: 1.2;
-    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    line-height: 1.08;
+    font-weight: 250;
+    letter-spacing: -0.015em;
   }
 
-  h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-  h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
-  h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
-  h4 { font-size: 1.2rem; }
+  h1 { font-size: clamp(2.6rem, 6vw, 5.25rem); font-weight: 200; }
+  h2 { font-size: clamp(2rem, 3.6vw, 3.1rem); }
+  h3 { font-size: clamp(1.45rem, 2.4vw, 1.9rem); font-weight: 300; }
+  h4 { font-size: 1.2rem; font-weight: 400; letter-spacing: -0.008em; }
+}
+
+/* Pont pour le CSS brut : garantit que var(--font-heading) & co résolvent
+   même hors utilitaires Tailwind, sans dépendre de l'émission @theme. */
+:root {
+  --font-heading: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-sub: var(--font-cormorant), Baskerville, Georgia, serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-serif: var(--font-cormorant), Baskerville, Georgia, serif;
+}
+
+/* ============================================================
+   SYSTÈME « GE » — composants de la refonte Panorama / Nuit.
+   Namespace .ge-* : aucune collision avec les classes historiques,
+   qui seront supprimées à la fin de la migration.
+   ============================================================ */
+
+/* Label uppercase (eyebrow) — micro-typo signature du système */
+.ge-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-tea);
+}
+.ge-night .ge-label { color: var(--color-champagne); }
+
+/* Boutons */
+.ge-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.9rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--color-tea);
+  color: #fff;
+  border: 1px solid var(--color-tea);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.ge-cta:hover { background: var(--color-tea-deep); border-color: var(--color-tea-deep); transform: translateY(-1px); }
+.ge-cta--ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: currentColor;
+}
+.ge-cta--ghost:hover { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
+.ge-cta--onphoto {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+.ge-cta--onphoto:hover { background: #fff; border-color: #fff; color: var(--color-ink); }
+.ge-cta--night {
+  background: transparent;
+  border-color: var(--color-champagne);
+  color: var(--color-champagne);
+}
+.ge-cta--night:hover { background: var(--color-champagne); border-color: var(--color-champagne); color: var(--color-night); }
+
+/* Récapitulatifs à filets fins (pattern « Aperçu » Glacier Express) */
+.ge-rows { border-top: 1px solid var(--color-hairline); }
+.ge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.8rem 0.125rem;
+  border-bottom: 1px solid var(--color-hairline);
+  font-size: 0.9rem;
+}
+.ge-row > :last-child {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-tea);
+  font-weight: 600;
+}
+.ge-night .ge-rows { border-color: var(--color-night-hairline); }
+.ge-night .ge-row { border-color: var(--color-night-hairline); }
+.ge-night .ge-row > :last-child { color: var(--color-champagne); }
+
+/* Canvas « Nuit sur le lac » — monde sombre des pages signature */
+.ge-night {
+  background: var(--color-night);
+  color: var(--color-night-body);
+}
+.ge-night h1, .ge-night h2, .ge-night h3, .ge-night h4 {
+  font-family: var(--font-serif);
+  color: var(--color-linen);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+.ge-night em { font-style: italic; color: var(--color-champagne); }
+
+/* Filet fin autonome */
+.ge-hairline { border: 0; border-top: 1px solid var(--color-hairline); }
+.ge-night .ge-hairline { border-color: var(--color-night-hairline); }
+
+/* Mesure de lecture */
+.ge-measure { max-width: 65ch; }
+
+/* Révélation au scroll (sobre, désactivée si reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .ge-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ge-reveal.is-visible { opacity: 1; transform: none; }
 }
 
 /* ===== ANIMATIONS ===== */
