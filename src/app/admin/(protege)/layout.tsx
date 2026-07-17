@@ -20,6 +20,9 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
             </span>
           </Link>
           <nav className="ml-auto flex items-center gap-5 text-[13px] text-body">
+            <Link href="/admin/tableau-de-bord" className="transition-colors hover:text-tea">
+              Tableau de bord
+            </Link>
             <Link href="/admin/proforma" className="transition-colors hover:text-tea">
               Facture proforma
             </Link>

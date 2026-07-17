@@ -20,6 +20,21 @@ export default async function AdminHome() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Link
+          href="/admin/tableau-de-bord"
+          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-tea"
+        >
+          <p className="ge-label mb-2">Activité</p>
+          <h2 className="mb-2 !text-[24px]">Tableau de bord</h2>
+          <p className="text-[14px] text-body">
+            Chiffre d&apos;affaires, agences les plus actives, saisonnalité — à partir
+            de l&apos;historique des factures.
+          </p>
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-tea">
+            Ouvrir →
+          </span>
+        </Link>
+
+        <Link
           href="/admin/proforma"
           className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-tea"
         >

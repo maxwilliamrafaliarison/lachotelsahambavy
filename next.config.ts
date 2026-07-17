@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
 
+  // PGlite (mode dev local du tableau de bord) charge des assets WASM via
+  // import.meta.url : à laisser hors du bundle serveur pour éviter que le
+  // bundler ne casse la résolution des chemins. Sans effet en prod (Neon).
+  serverExternalPackages: ["@electric-sql/pglite"],
+
   images: {
     // Static export ne supporte pas l'optimisation Next/Image
     unoptimized: isStaticExport,
