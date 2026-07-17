@@ -27,16 +27,17 @@ export default function AidePage() {
         <li className="rounded-[3px] border border-hairline bg-white p-5">
           <strong className="text-ink">2 · Composez le séjour.</strong> Cliquez sur les
           boutons : chaque clic ajoute une ligne avec la bonne quantité (une chambre
-          → nombre de nuits ; petit-déjeuner ou taxe de séjour → personnes × nuits).
+          → nombre de nuits ; petit-déjeuner ou vignette touristique → personnes × nuits).
           Tout reste modifiable dans le tableau : désignation, quantité, prix.
           « Ligne libre » sert aux prestations sur mesure (draisine, pique-nique…).
         </li>
         <li className="rounded-[3px] border border-hairline bg-white p-5">
-          <strong className="text-ink">3 · Remise & PDF.</strong> Choisissez la remise
-          (en % ou en montant — ex. l&apos;offre « 50 % sur la 2ᵉ nuitée » = montant
-          fixe équivalent à une demi-nuitée), vérifiez le récapitulatif à droite,
-          puis <strong>Générer le PDF</strong> : il se télécharge immédiatement,
-          prêt à joindre à un e-mail.
+          <strong className="text-ink">3 · Remise, exonération & PDF.</strong> Choisissez la
+          remise (en % ou en montant) : la <strong>jauge</strong> passe du vert à l&apos;orange
+          puis au rouge selon son ampleur — au-delà de 30 %, prévenez la Direction. Cochez
+          <strong> Exonération de TVA</strong> si le client y a droit (le total baisse de
+          20 % sur les prestations taxées). Vérifiez le récapitulatif à droite, puis
+          <strong> Générer le PDF</strong> : il se télécharge immédiatement, prêt à envoyer.
         </li>
       </ol>
 
@@ -48,8 +49,8 @@ export default function AidePage() {
           pouvez le corriger à la main — l&apos;outil retiendra le plus grand numéro.
         </li>
         <li>
-          <strong className="text-ink">Taux euro.</strong> 1 € = 4 900 Ar par défaut
-          (doc tarifs 2026). Changez-le dans « Remise & paramètres » : il est mémorisé
+          <strong className="text-ink">Taux euro.</strong> 1 € = 5 000 Ar par défaut
+          (grilles TO-PUBLIC). Changez-le dans « Remise & paramètres » : il est mémorisé
           pour les prochaines factures sur ce poste.
         </li>
         <li>

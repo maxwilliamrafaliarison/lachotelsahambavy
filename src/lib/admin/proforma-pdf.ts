@@ -171,22 +171,35 @@ export async function genererProformaPdf(devis: Devis, logoUrl: string): Promise
   }
   y -= 4;
   const totalX1 = 330;
-  text(page, "Sous-total", totalX1, y, { size: 9.5 });
-  text(page, fmtAr(t.sousTotal), COL.total, y, { size: 9.5, align: "right" });
-  y -= 16;
-  if (t.remiseAr > 0) {
-    text(page, libelleRemise(devis.remise), totalX1, y, { size: 9.5, color: TEA });
-    text(page, `- ${fmtAr(t.remiseAr)}`, COL.total, y, { size: 9.5, color: TEA, align: "right" });
+  const totLine = (label: string, val: string, opts: { color?: ReturnType<typeof rgb>; bold?: boolean } = {}) => {
+    text(page, label, totalX1, y, { size: 9.5, color: opts.color, font: opts.bold ? helvBold : helv });
+    text(page, val, COL.total, y, { size: 9.5, color: opts.color, font: opts.bold ? helvBold : helv, align: "right" });
     y -= 16;
+  };
+
+  totLine("Prestations TTC", fmtAr(t.prestationsTtc));
+  if (t.remiseAr > 0) totLine(libelleRemise(devis.remise), `- ${fmtAr(t.remiseAr)}`, { color: TEA });
+  totLine("dont HT", fmtAr(t.ht), { color: MUTED });
+  if (devis.exoneration) {
+    totLine("TVA", "Exoneree", { color: TEA });
+  } else {
+    totLine("dont TVA 20%", fmtAr(t.tva), { color: MUTED });
   }
+  if (t.vignette > 0) totLine("Vignette touristique (hors TVA)", fmtAr(t.vignette));
+
   line(page, y + 4, totalX1, A4[0] - MARGE, rgb(0.72, 0.7, 0.66));
   y -= 8;
-  text(page, "TOTAL", totalX1, y, { font: helvBold, size: 12, color: INK });
+  text(page, "TOTAL A PAYER", totalX1, y, { font: helvBold, size: 12, color: INK });
   text(page, fmtAr(t.totalAr), COL.total, y, { font: helvBold, size: 12, color: INK, align: "right" });
   y -= 16;
   text(page, `Équivalent au taux 1 EUR = ${new Intl.NumberFormat("fr-FR").format(devis.tauxEur).replace(/[  ]/g, " ")} Ar`, totalX1, y, { size: 8.5, color: MUTED });
   text(page, fmtEur(t.totalEur), COL.total, y, { font: helvBold, size: 10.5, color: TEA, align: "right" });
-  y -= 30;
+  y -= 20;
+  if (devis.exoneration) {
+    text(page, "Exonere de TVA — a confirmer selon le regime applicable.", MARGE, y, { size: 8, color: MUTED });
+    y -= 14;
+  }
+  y -= 10;
 
   /* ---------- Notes ---------- */
   if (devis.notes.trim()) {

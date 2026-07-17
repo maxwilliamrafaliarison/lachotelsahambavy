@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CATALOGUE, TAUX_EUR_DEFAUT, formatAr, formatEur, type CatalogueItem } from "@/lib/admin/tarifs";
+import {
+  CATALOGUE,
+  TAUX_EUR_DEFAUT,
+  estSoumisTva,
+  formatAr,
+  formatEur,
+  type CatalogueItem,
+} from "@/lib/admin/tarifs";
 import {
   type Devis,
   type LigneDevis,
@@ -14,6 +21,14 @@ import { genererProformaPdf } from "@/lib/admin/proforma-pdf";
 import { getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
+
+/**
+ * Seuils de la jauge de remise (en % des prestations). Sous le 1er seuil, la
+ * réception accorde librement ; entre les deux, la remise reste raisonnable ;
+ * au-delà, elle relève de la Direction. Valeurs à ajuster par Maggie.
+ */
+const SEUIL_RECEPTION = 15;
+const SEUIL_DIRECTION = 30;
 
 /** Compteur annuel PRO-2026-NNN, mémorisé sur le poste (modifiable à la main). */
 function numeroSuivant(): string {
@@ -48,6 +63,7 @@ export default function ProformaSimulator() {
   const [lignes, setLignes] = useState<LigneDevis[]>([]);
   const [remiseType, setRemiseType] = useState<Remise["type"]>("aucune");
   const [remiseValeur, setRemiseValeur] = useState(0);
+  const [exoneration, setExoneration] = useState(false);
   const [tauxEur, setTauxEur] = useState(TAUX_EUR_DEFAUT);
   const [notes, setNotes] = useState("");
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
@@ -67,22 +83,33 @@ export default function ProformaSimulator() {
 
   const nuits = nbNuits(arrivee, depart);
 
-  /** Quantité intelligente à l'ajout : chambre → nuits ; pers./nuit → personnes×nuits ; personne → personnes. */
   function qteParDefaut(item: CatalogueItem): number {
-    if (item.unite === "nuit") return Math.max(1, nuits);
-    if (item.unite === "pers./nuit") return Math.max(1, nuits) * Math.max(1, personnes);
-    if (item.unite === "personne") return Math.max(1, personnes);
+    const n = Number.isFinite(nuits) ? Math.max(1, nuits) : 1;
+    const pax = Number.isFinite(personnes) ? Math.max(1, personnes) : 1;
+    if (item.unite === "nuit") return n;
+    if (item.unite === "pers./nuit") return n * pax;
+    if (item.unite === "personne") return pax;
     return 1;
   }
 
   function ajouterCatalogue(item: CatalogueItem) {
     setLignes((ls) => [
       ...ls,
-      { id: uid(), label: item.label, qte: qteParDefaut(item), unite: item.unite, prixAr: item.prixAr },
+      {
+        id: uid(),
+        label: item.label,
+        qte: qteParDefaut(item),
+        unite: item.unite,
+        prixAr: item.prixAr,
+        soumisTva: estSoumisTva(item),
+      },
     ]);
   }
   function ajouterLigneLibre() {
-    setLignes((ls) => [...ls, { id: uid(), label: "", qte: 1, unite: "unité", prixAr: 0 }]);
+    setLignes((ls) => [
+      ...ls,
+      { id: uid(), label: "", qte: 1, unite: "unité", prixAr: 0, soumisTva: true },
+    ]);
   }
   function modifierLigne(id: string, patch: Partial<LigneDevis>) {
     setLignes((ls) => ls.map((l) => (l.id === id ? { ...l, ...patch } : l)));
@@ -105,10 +132,14 @@ export default function ProformaSimulator() {
     sejour: { arrivee, depart, personnes },
     lignes,
     remise,
+    exoneration,
     tauxEur,
     notes,
   };
   const t = totaux(devis);
+
+  /** Remise en % des prestations, pour la jauge (même si saisie en montant). */
+  const remisePct = t.prestationsTtc > 0 ? (t.remiseAr / t.prestationsTtc) * 100 : 0;
 
   async function genererPdf() {
     setErreur(null);
@@ -131,12 +162,10 @@ export default function ProformaSimulator() {
       const nomFichier = `${numero} — ${nom.trim().replace(/[\\/:*?"<>|]/g, "")}.pdf`;
       setPdfUrl(url);
       setPdfNom(nomFichier);
-      // Téléchargement immédiat
       const a = document.createElement("a");
       a.href = url;
       a.download = nomFichier;
       a.click();
-      // Le numéro est consommé → mémorise et propose le suivant à la prochaine ouverture
       enregistrerNumero(numero);
     } catch (e) {
       setErreur(`La génération du PDF a échoué : ${e instanceof Error ? e.message : String(e)}`);
@@ -200,7 +229,7 @@ export default function ProformaSimulator() {
                     type="button"
                     onClick={() => ajouterCatalogue(item)}
                     className="rounded-full border border-hairline bg-paper px-3.5 py-1.5 text-[12.5px] text-body transition-colors hover:border-tea hover:text-tea"
-                    title={`${formatAr(item.prixAr)} / ${item.unite}`}
+                    title={`${formatAr(item.prixAr)} / ${item.unite}${estSoumisTva(item) ? " · TTC" : " · hors TVA"}`}
                   >
                     + {item.label.replace(" (double/twin/single)", "")}
                   </button>
@@ -214,14 +243,15 @@ export default function ProformaSimulator() {
 
           {lignes.length > 0 && (
             <div className="mt-6 overflow-x-auto">
-              <table className="w-full min-w-[560px] text-[13.5px]">
+              <table className="w-full min-w-[620px] text-[13.5px]">
                 <thead>
                   <tr className="border-b border-hairline text-left">
                     <th className="pb-2 pr-3 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Désignation</th>
-                    <th className="w-20 pb-2 pr-3 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Qté</th>
-                    <th className="w-28 pb-2 pr-3 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Unité</th>
-                    <th className="w-32 pb-2 pr-3 text-right text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">P.U. (Ar)</th>
-                    <th className="w-32 pb-2 text-right text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Total</th>
+                    <th className="w-16 pb-2 pr-3 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Qté</th>
+                    <th className="w-24 pb-2 pr-3 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Unité</th>
+                    <th className="w-28 pb-2 pr-3 text-right text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">P.U. TTC</th>
+                    <th className="w-14 pb-2 text-center text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted" title="Soumis à la TVA 20 %">TVA</th>
+                    <th className="w-28 pb-2 text-right text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">Total</th>
                     <th className="w-8 pb-2"></th>
                   </tr>
                 </thead>
@@ -238,7 +268,16 @@ export default function ProformaSimulator() {
                         <input aria-label="Unité" className={inputCls} value={l.unite} onChange={(e) => modifierLigne(l.id, { unite: e.target.value })} />
                       </td>
                       <td className="py-2 pr-3">
-                        <input aria-label="Prix unitaire en ariary" type="number" min={0} step={1000} className={`${inputCls} text-right`} value={l.prixAr} onChange={(e) => modifierLigne(l.id, { prixAr: Math.max(0, parseInt(e.target.value || "0", 10)) })} />
+                        <input aria-label="Prix unitaire TTC en ariary" type="number" min={0} step={1000} className={`${inputCls} text-right`} value={l.prixAr} onChange={(e) => modifierLigne(l.id, { prixAr: Math.max(0, parseInt(e.target.value || "0", 10)) })} />
+                      </td>
+                      <td className="py-2 text-center">
+                        <input
+                          type="checkbox"
+                          aria-label="Ligne soumise à la TVA"
+                          checked={l.soumisTva}
+                          onChange={(e) => modifierLigne(l.id, { soumisTva: e.target.checked })}
+                          className="h-4 w-4 accent-[var(--color-tea)]"
+                        />
                       </td>
                       <td className="py-2 text-right font-semibold tabular-nums text-ink">{formatAr(l.qte * l.prixAr)}</td>
                       <td className="py-2 pl-2">
@@ -248,28 +287,91 @@ export default function ProformaSimulator() {
                   ))}
                 </tbody>
               </table>
+              <p className="mt-2 text-[11.5px] text-muted">
+                Prix saisis <strong>TTC</strong> (TVA 20 % comprise). Décochez « TVA »
+                pour une ligne hors taxe (ex. vignette touristique).
+              </p>
             </div>
           )}
         </section>
 
-        {/* Remise + paramètres */}
+        {/* Remise, exonération, paramètres */}
         <section className="rounded-[3px] border border-hairline bg-white p-6">
-          <p className="ge-label mb-4">3 · Remise & paramètres</p>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div>
-              <label className={labelCls} htmlFor="pf-remise-type">Remise</label>
-              <select id="pf-remise-type" className={inputCls} value={remiseType} onChange={(e) => setRemiseType(e.target.value as Remise["type"]) }>
-                <option value="aucune">Aucune</option>
-                <option value="pourcent">En % du sous-total</option>
-                <option value="montant">Montant fixe (Ar)</option>
-              </select>
-            </div>
-            {remiseType !== "aucune" && (
+          <p className="ge-label mb-4">3 · Remise, exonération & paramètres</p>
+
+          {/* Remise + jauge */}
+          <div className="mb-5 rounded-[3px] border border-hairline bg-paper p-4">
+            <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className={labelCls} htmlFor="pf-remise-val">{remiseType === "pourcent" ? "Pourcentage (%)" : "Montant (Ar)"}</label>
-                <input id="pf-remise-val" type="number" min={0} max={remiseType === "pourcent" ? 100 : undefined} className={inputCls} value={remiseValeur} onChange={(e) => setRemiseValeur(Math.max(0, parseFloat(e.target.value || "0")))} />
+                <label className={labelCls} htmlFor="pf-remise-type">Remise accordée</label>
+                <select id="pf-remise-type" className={inputCls} value={remiseType} onChange={(e) => setRemiseType(e.target.value as Remise["type"])}>
+                  <option value="aucune">Aucune</option>
+                  <option value="pourcent">En % des prestations</option>
+                  <option value="montant">Montant fixe (Ar)</option>
+                </select>
               </div>
-            )}
+              {remiseType !== "aucune" && (
+                <div>
+                  <label className={labelCls} htmlFor="pf-remise-val">{remiseType === "pourcent" ? "Pourcentage (%)" : "Montant (Ar)"}</label>
+                  <input id="pf-remise-val" type="number" min={0} max={remiseType === "pourcent" ? 100 : undefined} className={inputCls} value={remiseValeur} onChange={(e) => setRemiseValeur(Math.max(0, parseFloat(e.target.value || "0")))} />
+                </div>
+              )}
+            </div>
+
+            {/* Jauge de remise */}
+            <div className="mt-4">
+              <div className="mb-1.5 flex items-baseline justify-between text-[12px]">
+                <span className="font-semibold uppercase tracking-[0.12em] text-muted">Niveau de remise</span>
+                <span className="tabular-nums font-semibold text-ink">
+                  {remisePct.toFixed(1)} % · {formatAr(t.remiseAr)}
+                </span>
+              </div>
+              <div className="relative h-3 w-full overflow-hidden rounded-full bg-hairline">
+                {/* zones repères */}
+                <div className="absolute inset-y-0 left-0 bg-tea/15" style={{ width: `${(SEUIL_RECEPTION / 50) * 100}%` }} />
+                <div className="absolute inset-y-0 bg-gold/20" style={{ left: `${(SEUIL_RECEPTION / 50) * 100}%`, width: `${((SEUIL_DIRECTION - SEUIL_RECEPTION) / 50) * 100}%` }} />
+                {/* remplissage */}
+                <div
+                  className="absolute inset-y-0 left-0 rounded-full transition-all"
+                  style={{
+                    width: `${Math.min(100, (remisePct / 50) * 100)}%`,
+                    background:
+                      remisePct <= SEUIL_RECEPTION
+                        ? "var(--color-tea)"
+                        : remisePct <= SEUIL_DIRECTION
+                          ? "var(--color-gold)"
+                          : "var(--color-copper)",
+                  }}
+                />
+              </div>
+              <p className="mt-1.5 text-[11.5px] leading-snug text-muted">
+                {remisePct <= SEUIL_RECEPTION ? (
+                  <span className="text-tea">Marge confortable — la réception peut accorder cette remise.</span>
+                ) : remisePct <= SEUIL_DIRECTION ? (
+                  <span className="text-gold">Remise importante — à confirmer selon l&apos;accord agence.</span>
+                ) : (
+                  <span className="text-copper">Au-delà de {SEUIL_DIRECTION} % — validation de la Direction recommandée.</span>
+                )}
+              </p>
+            </div>
+          </div>
+
+          {/* Exonération */}
+          <label className="mb-5 flex cursor-pointer items-start gap-3 rounded-[3px] border border-hairline bg-paper p-4">
+            <input
+              type="checkbox"
+              checked={exoneration}
+              onChange={(e) => setExoneration(e.target.checked)}
+              className="mt-0.5 h-4 w-4 accent-[var(--color-tea)]"
+            />
+            <span className="text-[13.5px] leading-snug text-body">
+              <span className="font-semibold text-ink">Exonération de TVA</span> — les
+              prestations sont facturées hors taxe (le total baisse de 20 % sur les
+              lignes soumises à TVA). La mention « Exonéré de TVA » apparaît sur la facture.
+            </span>
+          </label>
+
+          <div className="grid gap-4 sm:grid-cols-3">
             <div>
               <label className={labelCls} htmlFor="pf-taux">Taux : 1 € = … Ar</label>
               <input id="pf-taux" type="number" min={1} step={50} className={inputCls} value={tauxEur} onChange={(e) => setTauxEur(Math.max(1, parseInt(e.target.value || "1", 10)))} />
@@ -286,9 +388,9 @@ export default function ProformaSimulator() {
               <label className={labelCls} htmlFor="pf-validite">Validité (jours)</label>
               <input id="pf-validite" type="number" min={1} className={inputCls} value={validiteJours} onChange={(e) => setValiditeJours(Math.max(1, parseInt(e.target.value || "30", 10)))} />
             </div>
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label className={labelCls} htmlFor="pf-notes">Notes sur la facture (optionnel)</label>
-              <textarea id="pf-notes" rows={2} className={inputCls} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Acompte de 50 % à la confirmation…" />
+              <input id="pf-notes" className={inputCls} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Acompte de 50 % à la confirmation…" />
             </div>
           </div>
         </section>
@@ -299,12 +401,21 @@ export default function ProformaSimulator() {
         <div className="rounded-[3px] border border-hairline bg-white p-6">
           <p className="ge-label mb-4">Récapitulatif</p>
           <div className="ge-rows">
-            <div className="ge-row"><span>Sous-total</span><span>{formatAr(t.sousTotal)}</span></div>
+            <div className="ge-row"><span>Prestations TTC</span><span>{formatAr(t.prestationsTtc)}</span></div>
             {t.remiseAr > 0 && (
               <div className="ge-row"><span>{libelleRemise(remise)}</span><span>- {formatAr(t.remiseAr)}</span></div>
             )}
+            <div className="ge-row"><span>dont HT</span><span>{formatAr(t.ht)}</span></div>
+            {exoneration ? (
+              <div className="ge-row"><span>TVA</span><span className="!text-tea">Exonéré</span></div>
+            ) : (
+              <div className="ge-row"><span>dont TVA 20 %</span><span>{formatAr(t.tva)}</span></div>
+            )}
+            {t.vignette > 0 && (
+              <div className="ge-row"><span>Vignette touristique</span><span>{formatAr(t.vignette)}</span></div>
+            )}
             <div className="ge-row !border-b-2 !border-b-ink/20">
-              <span className="font-semibold text-ink">TOTAL</span>
+              <span className="font-semibold text-ink">TOTAL À PAYER</span>
               <span className="!text-[17px]">{formatAr(t.totalAr)}</span>
             </div>
             <div className="ge-row"><span>Équivalent (1 € = {new Intl.NumberFormat("fr-FR").format(tauxEur)} Ar)</span><span>{formatEur(t.totalAr, tauxEur)}</span></div>
