@@ -208,8 +208,8 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
 
       {/* Hero Panorama — le seul h1 de la page */}
       <PanoramaHero
-        image={`${basePath}/images/hero/hero-pilotis.jpg`}
-        imageAlt="Allée des bungalows sur pilotis au-dessus du lac Sahambavy, au coucher du soleil"
+        image={`${basePath}/images/rooms/allee-pierre-bungalows-pilotis.jpg`}
+        imageAlt="Allée pavée menant aux bungalows sur pilotis, au-dessus du lac Sahambavy"
         label={dict.rooms.label}
         title={dict.rooms.title}
         kicker={dict.rooms.intro}
@@ -250,8 +250,8 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <EditorialSplit
             night
             id="pilotis-nuptial"
-            image={`${basePath}/images/rooms/pilotis-lake-view.jpg`}
-            imageAlt="Bungalow sur pilotis ouvert sur le lac Sahambavy, vue depuis la terrasse"
+            image={`${basePath}/images/rooms/pilotis-crepuscule-rose-lac.jpg`}
+            imageAlt="Les bungalows sur pilotis se reflétant dans le lac Sahambavy au crépuscule"
             label={rx.nightOnLake}
             title={
               <>
@@ -280,8 +280,8 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <EditorialSplit
             reverse
             id="superior-lake-view"
-            image={`${basePath}/images/rooms/superior-01.jpg`}
-            imageAlt="Superior Lake View Room, parquet en bois précieux et baie ouverte sur le lac"
+            image={`${basePath}/images/gallery/gallery-lake-view-interior.jpg`}
+            imageAlt="Superior Lake View Room : baie vitrée grand angle ouverte sur le lac et les bambous"
             label={superior.type[loc]}
             title={superior.name[loc]}
             rows={[
@@ -302,8 +302,8 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             id="bungalow-standard"
-            image={`${basePath}/images/rooms/standard-01.jpg`}
-            imageAlt="Bungalow standard dans le jardin tropical du Lac Hôtel Sahambavy"
+            image={`${basePath}/images/rooms/bungalows-colores-annexe.jpg`}
+            imageAlt="Bungalows standard aux façades colorées, dans les jardins paysagers du Lac Hôtel"
             label={standard.type[loc]}
             title={standard.name[loc]}
             rows={[

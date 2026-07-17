@@ -125,7 +125,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
     slug: "restaurant",
     name: dict.restaurantSection.title as string,
     description: dict.restaurantSection.subtitle as string,
-    image: "/images/restaurant/restaurant-01.jpg",
+    image: "/images/restaurant/salle-restaurant-tables-dressees.jpg",
   });
   const attractionPlantation = touristAttractionSchema({
     locale: loc,
@@ -284,8 +284,8 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       <section id="massage" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
-            image={`${basePath}/images/activities/massage.jpg`}
-            imageAlt="Massage relaxant aux huiles maison au Lac Hôtel"
+            image={`${basePath}/images/activities/salon-detente-vue-lac.jpg`}
+            imageAlt="Salon de détente ouvert sur le lac Sahambavy, fauteuils et terrasse au bord de l'eau"
             label={dict.loisirs.massageLabel}
             title={dict.loisirs.massageTitle}
             cta={{ href: `/${locale}/contact/`, label: dict.loisirs.cta }}
@@ -375,7 +375,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
 
             <ScrollReveal delay={150}>
               <img
-                src={`${basePath}/images/activities/kayaks-dock.jpg`}
+                src={`${basePath}/images/activities/pedalos-colores-ponton.jpg`}
                 alt="Embarcations au ponton du Lac Hôtel, point de départ des excursions"
                 loading="lazy"
                 className="aspect-[4/3] w-full rounded-[3px] border border-hairline object-cover"

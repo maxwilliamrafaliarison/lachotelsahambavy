@@ -111,7 +111,7 @@ export default async function JardinsPage({
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "jardins"))]} />
 
       <PanoramaHero
-        image={`${basePath}/images/hotel/hotel-gardens.jpg`}
+        image={`${basePath}/images/gallery/gallery-gardens.jpg`}
         imageAlt={eden.heroAlt}
         label={heroLabel}
         title={dict.jardins.heroTitle}
@@ -204,7 +204,7 @@ export default async function JardinsPage({
           {/* Démarche — jardin pour tous */}
           <div className="mt-12 md:mt-16">
             <EditorialSplit
-              image={`${basePath}/images/jardins/statue-cherubin-jardin-fougeres.jpg`}
+              image={`${basePath}/images/jardins/pergola-pots-plantes-jardin.jpg`}
               imageAlt={eden.philosophyAlt}
               label={dict.jardins.philosophyLabel}
               title={dict.jardins.philosophyTitle}

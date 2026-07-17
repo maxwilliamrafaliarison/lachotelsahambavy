@@ -159,13 +159,13 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         <div className="mx-auto max-w-7xl space-y-8 px-6 md:space-y-12 md:px-10">
           <EditorialSplit
             id="cuisine"
-            image={`${basePath}/images/restaurant/table-dressee-nappe-rouge.jpg`}
+            image={`${basePath}/images/restaurant/salle-restaurant-tables-dressees.jpg`}
             imageAlt={
               loc === "fr"
-                ? "Table dressée du restaurant, nappe rouge et serviettes pliées dans les verres"
+                ? "Salle du restaurant panoramique, tables rondes dressées sous la charpente en bois"
                 : loc === "es"
-                  ? "Mesa puesta del restaurante, mantel rojo y servilletas plegadas en las copas"
-                  : "Restaurant table setting with red tablecloth and folded napkins in the glasses"
+                  ? "Sala del restaurante panorámico, mesas redondas puestas bajo la techumbre de madera"
+                  : "The panoramic restaurant dining room, round tables set beneath the timber roof"
             }
             label={rs.label}
             title={rs.title}
@@ -250,13 +250,13 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
 
           <EditorialSplit
             id="bar"
-            image={`${basePath}/images/restaurant/cocktail-bar.jpg`}
+            image={`${basePath}/images/restaurant/restaurant-01.jpg`}
             imageAlt={
               loc === "fr"
-                ? "Cocktail servi au bar du Lac Hôtel Sahambavy"
+                ? "Cheminée en pierre et tables dressées du restaurant, à la tombée du soir"
                 : loc === "es"
-                  ? "Cóctel servido en el bar del Lac Hôtel Sahambavy"
-                  : "Cocktail served at the Lac Hôtel Sahambavy bar"
+                  ? "Chimenea de piedra y mesas puestas del restaurante, al caer la noche"
+                  : "Stone fireplace and set tables in the restaurant at dusk"
             }
             label={xt.barLabel}
             title={xt.barTitle}
