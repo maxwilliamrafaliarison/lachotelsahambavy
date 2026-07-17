@@ -26,7 +26,18 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
             <Link href="/admin/aide" className="transition-colors hover:text-tea">
               Aide
             </Link>
-            <span className="hidden text-muted sm:inline">{session.user.name}</span>
+            <span className="hidden items-center gap-2 sm:flex">
+              <span className="text-muted">{session.user.name}</span>
+              <span
+                className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+                  session.user.role === "admin"
+                    ? "bg-tea/10 text-tea"
+                    : "bg-hairline/60 text-body"
+                }`}
+              >
+                {session.user.role === "admin" ? "Direction" : "Réception"}
+              </span>
+            </span>
             <form
               action={async () => {
                 "use server";

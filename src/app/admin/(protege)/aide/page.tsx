@@ -58,6 +58,12 @@ export default function AidePage() {
           page, avec RCS, STAT et NIF de l&apos;hôtel.
         </li>
         <li>
+          <strong className="text-ink">Profils.</strong> « Direction » (Maggie, Max) et
+          « Réception » (Toky, Tata) ont aujourd&apos;hui exactement le même accès à
+          l&apos;outil — le profil sert à savoir qui est connecté. Votre profil
+          s&apos;affiche en haut à droite.
+        </li>
+        <li>
           <strong className="text-ink">Mot de passe oublié ?</strong> Voir avec Max :
           les comptes se gèrent dans la configuration du site (Vercel), aucune donnée
           client n&apos;est stockée en ligne.

@@ -5,9 +5,13 @@ export default async function AdminHome() {
   const session = await auth();
   const prenom = session?.user?.name?.split(" ")[0] ?? "";
 
+  const estDirection = session?.user?.role === "admin";
+
   return (
     <div>
-      <p className="ge-label mb-2">Tableau de bord</p>
+      <p className="ge-label mb-2">
+        Tableau de bord · {estDirection ? "Direction" : "Réception"}
+      </p>
       <h1 className="mb-3 !text-[38px]">Bonjour {prenom}</h1>
       <p className="ge-measure mb-10 text-[15px] text-body">
         Outils internes du Lac Hôtel. La facture proforma se génère en moins de deux

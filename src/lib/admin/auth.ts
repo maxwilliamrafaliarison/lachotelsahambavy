@@ -14,23 +14,36 @@ import { loginAttemptAllowed } from "@/lib/admin/rate-limit";
 const DUMMY_HASH = hashSync("timing-attack-mitigation", 12);
 
 /**
- * Authentification de l'espace admin (Phase 2 — simulateur proforma).
+ * Authentification de l'espace équipe (Phase 2 — simulateur proforma).
  *
  * Choix validé le 16/07/2026 : authentification complète par comptes
  * utilisateurs (et non mot de passe partagé). Les comptes vivent dans la
  * variable d'environnement ADMIN_USERS_JSON — pas de base de données à
- * maintenir pour 2-3 comptes :
+ * maintenir pour une poignée de comptes :
  *
- *   ADMIN_USERS_JSON='[{"email":"maggie@lachotel.com","name":"Maggie","hash":"$2a$12$…"}]'
+ *   ADMIN_USERS_JSON='[{"email":"maggie@lachotel.com","name":"Maggie","role":"admin","hash":"$2a$12$…"}]'
  *
  * Le hash bcrypt d'un mot de passe se génère avec :
  *   node scripts/hash-admin-password.mjs "le-mot-de-passe"
  *
- * L'espace admin n'existe que sur Vercel (le workflow GitHub Pages supprime
- * src/app/admin et src/app/api avant l'export statique).
+ * RÔLES (17/07/2026) : « admin » (direction — Maggie, Max) et « reception »
+ * (Toky, Tata). À ce stade les deux rôles ont le MÊME accès : le rôle sert
+ * à identifier qui est connecté et prépare les droits plus fins de la
+ * Phase 3 (réservations, facturation). Ne pas inventer de restriction ici
+ * sans arbitrage — décision explicite de Max.
+ *
+ * L'espace admin n'existe que sur Vercel (prepare-static-export.mjs retire
+ * src/app/admin et src/app/api avant l'export statique GitHub Pages).
  */
 
-type AdminUser = { email: string; name: string; hash: string };
+export type AdminRole = "admin" | "reception";
+
+type AdminUser = { email: string; name: string; hash: string; role: AdminRole };
+
+/** Rôle par défaut si absent/inconnu : le moins privilégié. */
+function normalizeRole(v: unknown): AdminRole {
+  return v === "admin" ? "admin" : "reception";
+}
 
 function loadUsers(): AdminUser[] {
   // Deux formes acceptées :
@@ -46,7 +59,15 @@ function loadUsers(): AdminUser[] {
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter((u) => u && typeof u.email === "string" && typeof u.hash === "string")
+      .map((u) => ({
+        email: String(u.email),
+        name: String(u.name ?? u.email),
+        hash: String(u.hash),
+        role: normalizeRole(u.role),
+      }));
   } catch {
     console.error("ADMIN_USERS_JSON / ADMIN_USERS_B64 invalide (JSON attendu)");
     return [];
@@ -82,8 +103,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         // → même coût cryptographique, pas d'oracle d'énumération d'e-mails.
         const ok = await compare(password, user?.hash ?? DUMMY_HASH);
         if (!user || !ok) return null;
-        return { email: user.email, name: user.name };
+        return { email: user.email, name: user.name, role: user.role };
       },
     }),
   ],
+  callbacks: {
+    // Le rôle voyage dans le JWT (pas de base de données à interroger).
+    jwt({ token, user }) {
+      if (user) token.role = (user as { role?: AdminRole }).role ?? "reception";
+      return token;
+    },
+    session({ session, token }) {
+      if (session.user) session.user.role = normalizeRole(token.role);
+      return session;
+    },
+  },
 });
