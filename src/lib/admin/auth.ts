@@ -1,8 +1,16 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { cookies, headers } from "next/headers";
 import { compare, hashSync } from "bcryptjs";
 import { hashIp, extractIp } from "@/lib/booking/hash-ip";
 import { loginAttemptAllowed } from "@/lib/admin/rate-limit";
+import {
+  DEVICE_COOKIE,
+  DEVICE_MAX_AGE,
+  createDeviceToken,
+  isKnownDevice,
+} from "@/lib/admin/device";
+import { notifierNouvelleConnexion } from "@/lib/admin/notify-login";
 
 /**
  * Hash bcrypt VALIDE (cost 12) précalculé une fois au chargement du module.
@@ -116,6 +124,42 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     session({ session, token }) {
       if (session.user) session.user.role = normalizeRole(token.role);
       return session;
+    },
+  },
+  events: {
+    /**
+     * Alerte « nouvel appareil » (Max + Maggie). On ne notifie que si le
+     * navigateur ne porte pas de marqueur signé valide — sinon l'équipe
+     * recevrait un e-mail à chaque connexion et cesserait de les lire.
+     *
+     * Tout est encapsulé : ni l'absence de Resend ni une panne d'envoi ne
+     * doivent empêcher quelqu'un de se connecter.
+     */
+    async signIn({ user }) {
+      try {
+        const jar = await cookies();
+        if (isKnownDevice(jar.get(DEVICE_COOKIE)?.value)) return;
+
+        const h = await headers();
+        await notifierNouvelleConnexion({
+          nom: user.name ?? "—",
+          email: user.email ?? "—",
+          role: (user as { role?: AdminRole }).role ?? "reception",
+          ip: extractIp(h),
+          userAgent: h.get("user-agent"),
+          date: new Date(),
+        });
+
+        jar.set(DEVICE_COOKIE, createDeviceToken(), {
+          httpOnly: true,
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+          path: "/",
+          maxAge: DEVICE_MAX_AGE,
+        });
+      } catch (e) {
+        console.error("[admin] Alerte nouvel appareil impossible :", e);
+      }
     },
   },
 });

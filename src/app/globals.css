@@ -113,112 +113,118 @@ body {
 
 /* ============================================================
    SYSTÈME « GE » — composants de la refonte Panorama / Nuit.
-   Namespace .ge-* : aucune collision avec les classes historiques,
-   qui seront supprimées à la fin de la migration.
+
+   Encapsulé dans @layer components : les utilitaires Tailwind vivent dans
+   la couche `utilities`, qui gagne toujours sur `components`. Sans ce layer,
+   ces règles (non layerées) passaient APRÈS les utilitaires et les
+   écrasaient — `.ge-cta hidden` restait affiché, car `display:inline-flex`
+   battait `display:none`. Bug constaté sur la navbar mobile le 17/07/2026.
    ============================================================ */
-
-/* Label uppercase (eyebrow) — micro-typo signature du système */
-.ge-label {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--color-tea);
-}
-.ge-night .ge-label { color: var(--color-champagne); }
-
-/* Boutons */
-.ge-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.9rem;
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--color-tea);
-  color: #fff;
-  border: 1px solid var(--color-tea);
-  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
-}
-.ge-cta:hover { background: var(--color-tea-deep); border-color: var(--color-tea-deep); transform: translateY(-1px); }
-.ge-cta--ghost {
-  background: transparent;
-  color: var(--color-ink);
-  border-color: currentColor;
-}
-.ge-cta--ghost:hover { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
-.ge-cta--onphoto {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.65);
-  color: #fff;
-  backdrop-filter: blur(6px);
-}
-.ge-cta--onphoto:hover { background: #fff; border-color: #fff; color: var(--color-ink); }
-.ge-cta--night {
-  background: transparent;
-  border-color: var(--color-champagne);
-  color: var(--color-champagne);
-}
-.ge-cta--night:hover { background: var(--color-champagne); border-color: var(--color-champagne); color: var(--color-night); }
-
-/* Récapitulatifs à filets fins (pattern « Aperçu » Glacier Express) */
-.ge-rows { border-top: 1px solid var(--color-hairline); }
-.ge-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1.25rem;
-  padding: 0.8rem 0.125rem;
-  border-bottom: 1px solid var(--color-hairline);
-  font-size: 0.9rem;
-}
-.ge-row > :last-child {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-tea);
-  font-weight: 600;
-}
-.ge-night .ge-rows { border-color: var(--color-night-hairline); }
-.ge-night .ge-row { border-color: var(--color-night-hairline); }
-.ge-night .ge-row > :last-child { color: var(--color-champagne); }
-
-/* Canvas « Nuit sur le lac » — monde sombre des pages signature */
-.ge-night {
-  background: var(--color-night);
-  color: var(--color-night-body);
-}
-.ge-night h1, .ge-night h2, .ge-night h3, .ge-night h4 {
-  font-family: var(--font-serif);
-  color: var(--color-linen);
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.12;
-}
-.ge-night em { font-style: italic; color: var(--color-champagne); }
-
-/* Filet fin autonome */
-.ge-hairline { border: 0; border-top: 1px solid var(--color-hairline); }
-.ge-night .ge-hairline { border-color: var(--color-night-hairline); }
-
-/* Mesure de lecture */
-.ge-measure { max-width: 65ch; }
-
-/* Révélation au scroll (sobre, désactivée si reduced-motion) */
-@media (prefers-reduced-motion: no-preference) {
-  .ge-reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+@layer components {
+  /* Label uppercase (eyebrow) — micro-typo signature du système */
+  .ge-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-tea);
   }
-  .ge-reveal.is-visible { opacity: 1; transform: none; }
+  .ge-night .ge-label { color: var(--color-champagne); }
+
+  /* Boutons */
+  .ge-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.9rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--color-tea);
+    color: #fff;
+    border: 1px solid var(--color-tea);
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .ge-cta:hover { background: var(--color-tea-deep); border-color: var(--color-tea-deep); transform: translateY(-1px); }
+  .ge-cta--ghost {
+    background: transparent;
+    color: var(--color-ink);
+    border-color: currentColor;
+  }
+  .ge-cta--ghost:hover { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
+  .ge-cta--onphoto {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.65);
+    color: #fff;
+    backdrop-filter: blur(6px);
+  }
+  .ge-cta--onphoto:hover { background: #fff; border-color: #fff; color: var(--color-ink); }
+  .ge-cta--night {
+    background: transparent;
+    border-color: var(--color-champagne);
+    color: var(--color-champagne);
+  }
+  .ge-cta--night:hover { background: var(--color-champagne); border-color: var(--color-champagne); color: var(--color-night); }
+
+  /* Récapitulatifs à filets fins (pattern « Aperçu » Glacier Express) */
+  .ge-rows { border-top: 1px solid var(--color-hairline); }
+  .ge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 0.8rem 0.125rem;
+    border-bottom: 1px solid var(--color-hairline);
+    font-size: 0.9rem;
+  }
+  .ge-row > :last-child {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-tea);
+    font-weight: 600;
+  }
+  .ge-night .ge-rows { border-color: var(--color-night-hairline); }
+  .ge-night .ge-row { border-color: var(--color-night-hairline); }
+  .ge-night .ge-row > :last-child { color: var(--color-champagne); }
+
+  /* Canvas « Nuit sur le lac » — monde sombre des pages signature */
+  .ge-night {
+    background: var(--color-night);
+    color: var(--color-night-body);
+  }
+  .ge-night h1, .ge-night h2, .ge-night h3, .ge-night h4 {
+    font-family: var(--font-serif);
+    color: var(--color-linen);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.12;
+  }
+  .ge-night em { font-style: italic; color: var(--color-champagne); }
+
+  /* Filet fin autonome */
+  .ge-hairline { border: 0; border-top: 1px solid var(--color-hairline); }
+  .ge-night .ge-hairline { border-color: var(--color-night-hairline); }
+
+  /* Mesure de lecture */
+  .ge-measure { max-width: 65ch; }
+
+  /* Révélation au scroll (sobre, désactivée si reduced-motion) */
+  @media (prefers-reduced-motion: no-preference) {
+    .ge-reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ge-reveal.is-visible { opacity: 1; transform: none; }
+  }
 }
+
 
 /* ===== ANIMATIONS ===== */
 

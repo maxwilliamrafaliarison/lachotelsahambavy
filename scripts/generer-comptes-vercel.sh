@@ -24,9 +24,9 @@ fi
 # — Les comptes. Modifier les e-mails/noms ici si besoin. —
 #   Format : e-mail|Nom affiché|role   (role = admin | reception)
 COMPTES=(
-  "maggie@lachotel.com|Maggie Leong|admin"
+  "mleongformentin@gmail.com|Maggie Leong|admin"
   "max.fianar@gmail.com|Max|admin"
-  "toky@lachotel.com|Toky|reception"
+  "lachotelsahambavy@gmail.com|Toky|reception"
   "tata@lachotel.com|Tata|reception"
 )
 

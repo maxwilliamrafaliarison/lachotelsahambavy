@@ -111,6 +111,21 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   const itemColor = darkText ? "text-ink" : "text-white";
   const itemShadow = darkText ? undefined : { textShadow: "0 1px 8px rgba(0,0,0,0.35)" };
 
+  /**
+   * Marque géante de l'accueil (demande de Maggie, 17/07/2026) : le lockup
+   * complet s'affiche très grand sur le ciel de la photo hero, puis rétrécit
+   * et se fond dans la marque compacte au défilement.
+   *
+   * `brand` va de 1 (haut de page) à 0, plus vite que le fondu de la barre :
+   * le lockup a fini de disparaître avant que la barre ne devienne claire —
+   * sinon on verrait un logo blanc sur fond papier. Un lockup réduit à 36 px
+   * serait illisible : on l'échelonne ET on le fond, la marque compacte
+   * prenant le relais en fondu inverse.
+   */
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const brand = isHome ? Math.max(0, 1 - eased * 1.9) : 0;
+  const markOpacity = isHome ? 1 - brand : 1;
+
   return (
     <>
       <header
@@ -142,9 +157,13 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               <img
                 src={`${basePath}/images/logo/${darkText ? "logo-mark-dark" : "logo-mark-white"}.png`}
                 alt=""
-                className="h-9 w-auto"
+                className="h-9 w-auto transition-opacity duration-200"
+                style={{ opacity: markOpacity }}
               />
-              <span className="hidden flex-col leading-none xl:flex">
+              <span
+                className="hidden flex-col leading-none xl:flex"
+                style={{ opacity: markOpacity }}
+              >
                 <span className="font-[family-name:var(--font-display)] text-[17px] font-light tracking-[0.18em]">
                   LAC HÔTEL
                 </span>
@@ -153,6 +172,31 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 </span>
               </span>
             </Link>
+
+            {/* Lockup géant — accueil, haut de page. Décoratif (la marque
+                compacte au-dessous porte déjà le lien et le libellé). */}
+            {brand > 0.01 && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-4 top-3 origin-top-left md:left-7"
+                style={{
+                  opacity: brand,
+                  transform: `scale(${0.32 + 0.68 * brand})`,
+                  // Ombre en deux temps : un liseré net qui détache le tracé
+                  // du ciel clair, puis un halo doux. Sans cela le logo blanc
+                  // se dissout sur le bleu et la signature disparaît.
+                  filter:
+                    "drop-shadow(0 1px 2px rgba(0,0,0,0.55)) drop-shadow(0 4px 34px rgba(0,0,0,0.45))",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${basePath}/images/logo/logo-white.png`}
+                  alt=""
+                  className="h-40 w-auto sm:h-52 md:h-64 lg:h-72"
+                />
+              </div>
+            )}
 
             {/* Menu desktop */}
             <ul className="ml-auto hidden items-center gap-0.5 lg:flex">
