@@ -1,15 +1,59 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Icon } from "@/components/ui/Icon";
 import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
+
+/* ── Textes FR par défaut — remplacés par le dictionnaire dès fusion des
+      deltas (dict-deltas/equipe-galerie.json). Garantit un rendu complet
+      même avant la fusion. ── */
+const PERSONNEL_FR = {
+  label: "Notre personnel",
+  title: "Des jeunes du village, accompagnés au quotidien",
+  p1: "Notre équipe est majoritairement composée de jeunes issus du village de Sahambavy ou des villages environnants. Accompagnés et formés au quotidien, ils développent leurs compétences et s'épanouissent professionnellement au sein de l'hôtel.",
+  p2: "Cette démarche responsable et solidaire — emploi local, partage des savoir-faire — est au cœur de l'identité du Lac Hôtel.",
+  welcomeLabel: "L'accueil",
+  welcomeTitle: "Un accueil chaleureux et respectueux",
+  welcomeP1: "Le français n'est pas la langue principale de nos équipes, mais elles comprennent vos besoins et mettent un point d'honneur à y répondre avec attention.",
+  welcomeP2: "Vous serez reçus avec la chaleur et le respect qui font la réputation de l'hospitalité betsileo.",
+  welcomeAlt: "Un membre de l'équipe du Lac Hôtel accueille les voyageurs",
+  economyAlt: "L'équipe du Lac Hôtel dans les jardins de l'hôtel",
+  cta: "Nous écrire",
+  heroAlt: "L'équipe du Lac Hôtel Sahambavy réunie devant l'hôtel",
+};
+
+const RSE_ICONS = [
+  "hiring",
+  "shortSupply",
+  "people",
+  "bees",
+  "soap",
+  "flower",
+  "zeroWaste",
+  "leaf",
+];
+
+const teamPhotos = [
+  { src: "/images/team/team-01.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-02.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-03.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-04.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-05.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-06.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-chef.jpg", alt: "Notre chef cuisinier" },
+  { src: "/images/team/team-07.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-08.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-09.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-10.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-craft.jpg", alt: "Le savoir-faire artisanal de l'équipe" },
+];
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -24,128 +68,122 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const teamPhotos = [
-  { src: "/images/team/team-01.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-02.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-03.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-04.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-05.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-06.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-chef.jpg", alt: "Notre chef cuisinier" },
-  { src: "/images/team/team-07.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-08.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-09.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-10.jpg", alt: "Membre de l'équipe" },
-  { src: "/images/team/team-staff.jpg", alt: "L'équipe du Lac Hôtel" },
-];
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export default async function NotreEquipePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
 
+  const eq = dict.equipe as any;
+  const personnel: typeof PERSONNEL_FR = { ...PERSONNEL_FR, ...(eq.personnel ?? {}) };
+  const contactHref = `/${loc}/contact/`;
+
   return (
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "notre-equipe"))]} />
-      <PageHero
-        title={dict.equipe.heroTitle}
-        subtitle={dict.equipe.heroSubtitle}
+
+      <PanoramaHero
         image={`${basePath}/images/team/team-staff.jpg`}
+        imageAlt={personnel.heroAlt}
+        label={dict.equipe.introLabel}
+        title={dict.equipe.heroTitle}
+        kicker={dict.equipe.heroSubtitle}
       />
 
-      {/* Introduction éditoriale */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-5 md:px-6">
-          <SectionHeader
-            label={dict.equipe.introLabel}
-            title={dict.equipe.introTitle}
-          />
+      {/* ──── Notre personnel — jeunes du village, formation, solidarité ──── */}
+      <section id="personnel" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <p className="text-text-muted text-lg leading-[1.8] text-center font-[family-name:var(--font-sub)]">
-              {dict.equipe.introP}
-            </p>
-          </ScrollReveal>
-          {/* Ornement éditorial doré discret */}
-          <ScrollReveal delay={150}>
-            <div className="flex items-center gap-3 mt-10 md:mt-12 max-w-md mx-auto">
-              <span className="h-px flex-1 bg-gold/30" />
-              <Icon name="hiring" size={18} weight="regular" className="text-gold" />
-              <span className="h-px flex-1 bg-gold/30" />
+            <span className="ge-label mb-3">{personnel.label}</span>
+            <h2 className="mb-6" style={{ textWrap: "balance" }}>
+              {personnel.title}
+            </h2>
+            <div className="ge-measure space-y-4 text-[15px] leading-relaxed text-body md:text-base">
+              <p>{personnel.p1}</p>
+              <p>{personnel.p2}</p>
             </div>
           </ScrollReveal>
-        </div>
-      </section>
 
-      {/* RSE Engagement — liquid-glass premium */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader
-            label={dict.equipe.rseLabel}
-            title={dict.equipe.rseTitle}
-          />
-          <div className="max-w-[900px] mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-              {(dict.equipe.rseItems as string[]).map((item, i) => (
-                <ScrollReveal key={i} delay={i * 80}>
-                  <div className="repos-feature h-full p-5 md:p-6 flex items-start gap-4">
-                    <div className="repos-feature__badge flex-shrink-0" style={{ width: "2.5rem", height: "2.5rem" }}>
-                      <Icon name="hiring" size={18} weight="regular" />
-                    </div>
-                    <p className="text-text-body leading-relaxed text-sm pt-1 flex-1">
-                      {item}
-                    </p>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
+          <div className="mt-12 md:mt-16">
+            <EditorialSplit
+              image={`${basePath}/images/team/team-welcome.jpg`}
+              imageAlt={personnel.welcomeAlt}
+              label={personnel.welcomeLabel}
+              title={personnel.welcomeTitle}
+            >
+              <p>{personnel.welcomeP1}</p>
+              <p>{personnel.welcomeP2}</p>
+            </EditorialSplit>
           </div>
         </div>
       </section>
 
-      {/* Circular Economy — texte éditorial centré */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-5 md:px-6">
-          <SectionHeader
-            label={dict.equipe.economyLabel}
-            title={dict.equipe.economyTitle}
-          />
+      {/* ──── Engagement RSE — grille hairline ──── */}
+      <section id="rse" className="scroll-mt-24 border-y border-hairline bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <p className="text-text-muted text-lg leading-[1.8] text-center font-[family-name:var(--font-sub)]">
-              {dict.equipe.economyP}
+            <span className="ge-label mb-3">{dict.equipe.rseLabel}</span>
+            <h2 className="mb-6" style={{ textWrap: "balance" }}>
+              {dict.equipe.rseTitle}
+            </h2>
+            <p className="ge-measure mb-10 text-[15px] leading-relaxed text-body md:mb-12 md:text-base">
+              {dict.equipe.introP}
             </p>
           </ScrollReveal>
+
+          <div className="grid gap-px overflow-hidden rounded-[3px] border border-hairline bg-hairline sm:grid-cols-2">
+            {(dict.equipe.rseItems as string[]).map((item, i) => (
+              <ScrollReveal key={i} delay={i * 60} className="h-full">
+                <div className="flex h-full items-start gap-4 bg-white p-6 md:p-7">
+                  <span className="mt-0.5 flex-shrink-0 text-tea">
+                    <Icon name={RSE_ICONS[i % RSE_ICONS.length]} size={22} weight="regular" />
+                  </span>
+                  <p className="text-sm leading-relaxed text-body">{item}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Grille photos équipe — chaque vignette avec .product-photo
-          (bordure dorée intérieure + ombre douce + hover zoom subtil) */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <SectionHeader
-            label={dict.equipe.teamLabel}
-            title={dict.equipe.teamTitle}
-          />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+      {/* ──── Économie circulaire ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/team/team-garden.jpg`}
+            imageAlt={personnel.economyAlt}
+            label={dict.equipe.economyLabel}
+            title={dict.equipe.economyTitle}
+            cta={{ href: contactHref, label: personnel.cta }}
+            reverse
+          >
+            <p>{dict.equipe.economyP}</p>
+          </EditorialSplit>
+        </div>
+      </section>
+
+      {/* ──── Grille portraits — hairline ──── */}
+      <section id="visages" className="scroll-mt-24 border-t border-hairline py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <ScrollReveal>
+            <span className="ge-label mb-3">{dict.equipe.teamLabel}</span>
+            <h2 className="mb-10 md:mb-12" style={{ textWrap: "balance" }}>
+              {dict.equipe.teamTitle}
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[3px] border border-hairline bg-hairline md:grid-cols-3 lg:grid-cols-4">
             {teamPhotos.map((photo, i) => (
-              <ScrollReveal key={i} delay={i * 60}>
-                <div className="product-photo aspect-square group">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-[0.8s] ease-out group-hover:scale-[1.06]"
-                    style={{ backgroundImage: `url(${basePath}${photo.src})` }}
-                    role="img"
-                    aria-label={photo.alt}
+              <ScrollReveal key={photo.src} delay={i * 50} className="h-full">
+                <figure className="group h-full overflow-hidden bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`${basePath}${photo.src}`}
+                    alt={photo.alt}
+                    loading="lazy"
+                    className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
-                </div>
+                </figure>
               </ScrollReveal>
             ))}
           </div>

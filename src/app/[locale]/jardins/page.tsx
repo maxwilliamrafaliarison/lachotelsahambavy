@@ -1,16 +1,74 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Icon } from "@/components/ui/Icon";
 import { siteConfig } from "@/data/site";
-import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
+
+/* ── Textes FR par défaut — remplacés par le dictionnaire dès fusion des
+      deltas (dict-deltas/jardins.json). Garantit un rendu complet même
+      avant la fusion. ── */
+const EDEN_FR = {
+  label: "Jardin d'Éden",
+  title: "Toute la richesse végétale de Madagascar",
+  p1: "Fleurs aux couleurs éclatantes, arbres du voyageur, orchidées, cactus et bonsaïs : au fil des allées, les jardins du Lac Hôtel rassemblent toute la richesse végétale de Madagascar, en un véritable jardin d'Éden au bord du lac.",
+  p2: "Pensé et entretenu dans le respect de l'environnement, le jardin invite à la sérénité. Chaque promenade devient une immersion sensorielle au cœur d'une biodiversité préservée — parfums, couleurs, chants d'oiseaux.",
+  heroAlt: "Les jardins fleuris du Lac Hôtel au bord du lac de Sahambavy",
+  orchidsLabel: "La collection phare",
+  orchidsTitle: "Les orchidées à l'honneur",
+  orchidsP1: "Stars du jardin, les orchidées déclinent ici leurs variétés, leurs formes et leurs couleurs : des espèces malgaches délicates que nos jardiniers cultivent avec patience sous les serres ombragées.",
+  orchidsP2: "Selon la saison, une floraison différente vous surprend à chaque séjour.",
+  orchidsAlt: "Orchidée tigrée en fleur dans les jardins du Lac Hôtel",
+  flowersLabel: "Au fil des massifs",
+  flowersTitle: "Couleurs du jardin",
+  flowers: [
+    { caption: "Zinnia et butineuse", alt: "Zinnia orange visité par une abeille dans le jardin" },
+    { caption: "Gaillarde", alt: "Gaillarde rouge et jaune dans les massifs du jardin" },
+    { caption: "Bougainvillier", alt: "Bougainvillier violet en fleur dans le jardin" },
+  ],
+  philosophyAlt: "Statue de chérubin parmi les fougères du jardin",
+};
+
+const VILLAGE_FR = {
+  label: "Au-delà des jardins",
+  title: "Le village de Sahambavy",
+  intro:
+    "À quelques pas de l'hôtel, le village de Sahambavy vit au rythme paisible des hautes terres betsileo. Rizières en terrasses, maisons de terre rouge, sourires des habitants : une escale authentique, loin des sentiers battus.",
+  womenLabel: "L'origine du nom",
+  womenTitle: "« Le champ des femmes »",
+  womenP1: "En malgache, Sahambavy signifie « le champ des femmes » : la tradition raconte que ces terres fertiles étaient cultivées par les femmes du village, qui leur ont laissé leur nom.",
+  womenP2: "Aujourd'hui encore, la vie betsileo se découvre ici simplement — les gestes du quotidien, les greniers à riz, les zébus qui rentrent au village à la tombée du jour.",
+  womenAlt: "Femme betsileo devant une maison traditionnelle de Sahambavy",
+  riceLabel: "Artisans & rizières",
+  riceTitle: "Rizières en terrasses et savoir-faire",
+  riceP1: "Autour du lac, les rizières dessinent un patchwork de verts qui change avec les saisons. Dans le village, les artisans perpétuent des savoir-faire transmis de génération en génération.",
+  riceP2: "Nos équipes organisent volontiers une promenade accompagnée à la rencontre des habitants — en toute simplicité et dans le respect de leurs traditions.",
+  riceAlt: "Vue aérienne des rizières en terrasses de Sahambavy",
+  riceCta: "Organiser une promenade au village",
+  moments: [
+    { caption: "Portraits", alt: "Portrait d'un homme betsileo souriant du village de Sahambavy" },
+    { caption: "Vie du village", alt: "Scène de village avec zébus sous un grand arbre à Sahambavy" },
+    { caption: "Maisons betsileo", alt: "Maison betsileo traditionnelle avec des enfants aux fenêtres" },
+  ],
+};
+
+const FLOWER_IMAGES = [
+  "zinnia-orange-abeille-jardin.jpg",
+  "gaillarde-rouge-jaune-jardin.jpg",
+  "bougainvillier-violet-jardin.jpg",
+];
+
+const MOMENT_IMAGES = [
+  "portrait-homme-betsileo-sourire.jpg",
+  "scene-village-zebus-grand-arbre.jpg",
+  "maison-betsileo-enfants-fenetres.jpg",
+];
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -35,89 +93,78 @@ export default async function JardinsPage({
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
 
-  const collections = dict.jardins.collections as {
+  const jd = dict.jardins as any;
+  const eden: typeof EDEN_FR = { ...EDEN_FR, ...(jd.eden ?? {}) };
+  const village: typeof VILLAGE_FR = { ...VILLAGE_FR, ...(jd.village ?? {}) };
+  const heroLabel: string = jd.heroLabel ?? "Jardins & village";
+
+  const collections = jd.collections as {
     icon: string;
     title: string;
     desc: string;
   }[];
 
+  const contactHref = `/${loc}/contact/`;
+
   return (
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "jardins"))]} />
 
-      <PageHero
+      <PanoramaHero
+        image={`${basePath}/images/gallery/gallery-gardens.jpg`}
+        imageAlt={eden.heroAlt}
+        label={heroLabel}
         title={dict.jardins.heroTitle}
-        subtitle={dict.jardins.heroSubtitle}
-        image={`${basePath}/images/hotel/hotel-gardens.jpg`}
+        kicker={dict.jardins.heroSubtitle}
       />
 
-      {/* ──── INTRO — photo bordure dorée + texte ──── */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-            <ScrollReveal className="lg:col-span-6">
-              <div className="repos-photo aspect-[4/5] md:aspect-[4/3]">
-                <img
-                  src={`${basePath}/images/hero/hero-garden.jpg`}
-                  alt={dict.jardins.introTitle}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollReveal>
+      {/* ──── #jardins-eden — richesse végétale ──── */}
+      <section id="jardins-eden" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <ScrollReveal>
+            <span className="ge-label mb-3">{eden.label}</span>
+            <h2 className="mb-6" style={{ textWrap: "balance" }}>
+              {eden.title}
+            </h2>
+            <div className="ge-measure space-y-4 text-[15px] leading-relaxed text-body md:text-base">
+              <p>{eden.p1}</p>
+              <p>{eden.p2}</p>
+            </div>
+          </ScrollReveal>
 
-            <ScrollReveal delay={180} className="lg:col-span-6">
-              <span className="section-label">{dict.jardins.introLabel}</span>
-              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.jardins.introTitle}</h2>
-              <p className="text-text-muted leading-[1.8] text-base md:text-lg">
-                {dict.jardins.introP}
-              </p>
-              <div className="flex items-center gap-3 mt-8">
-                <span className="h-px w-10 bg-gold" />
-                <span className="text-[0.7rem] tracking-[0.28em] uppercase text-gold font-medium">
-                  {loc === "fr"
-                    ? "2 hectares · entièrement bio"
-                    : loc === "en"
-                      ? "2 hectares · fully organic"
-                      : "2 hectáreas · totalmente bio"}
-                </span>
-                <span className="h-px flex-1 bg-gold/30" />
-              </div>
-            </ScrollReveal>
+          <div className="mt-12 md:mt-16">
+            <EditorialSplit
+              image={`${basePath}/images/jardins/orchidee-tigree-jardin-hotel.jpg`}
+              imageAlt={eden.orchidsAlt}
+              label={eden.orchidsLabel}
+              title={eden.orchidsTitle}
+            >
+              <p>{eden.orchidsP1}</p>
+              <p>{eden.orchidsP2}</p>
+            </EditorialSplit>
           </div>
         </div>
       </section>
 
-      {/* ──── COLLECTIONS — grille 3×2 cartes glass ──── */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background: "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
-          }}
-        />
-        <div className="absolute -top-40 -left-40 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-        <div className="absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
+      {/* ──── Collections botaniques — grille hairline ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <ScrollReveal>
+            <span className="ge-label mb-3">{dict.jardins.collectionsLabel}</span>
+            <h2 className="mb-10 md:mb-12" style={{ textWrap: "balance" }}>
+              {dict.jardins.collectionsTitle}
+            </h2>
+          </ScrollReveal>
 
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader
-            label={dict.jardins.collectionsLabel}
-            title={dict.jardins.collectionsTitle}
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid gap-px overflow-hidden rounded-[3px] border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-3">
             {collections.map((c, i) => (
-              <ScrollReveal key={c.title} delay={i * 90}>
-                <div className="repos-feature h-full p-7 md:p-8 flex flex-col">
-                  <div className="repos-feature__badge mb-5">
+              <ScrollReveal key={c.title} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col bg-white p-7 md:p-8">
+                  <span className="mb-4 text-tea">
                     <Icon name={c.icon} size={26} weight="regular" />
-                  </div>
-                  <h3 className="text-lg md:text-xl text-text-dark mb-3 leading-tight">
-                    {c.title}
-                  </h3>
-                  <p className="text-text-muted text-sm leading-relaxed flex-1">
-                    {c.desc}
-                  </p>
+                  </span>
+                  <h3 className="mb-2 text-lg md:text-xl">{c.title}</h3>
+                  <p className="flex-1 text-sm leading-relaxed text-body">{c.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -125,69 +172,125 @@ export default async function JardinsPage({
         </div>
       </section>
 
-      {/* ──── PHILOSOPHIE — bandeau atmosphérique ──── */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[900px] mx-auto px-5 md:px-6 text-center">
+      {/* ──── Grille photos fleurs — 3 colonnes hairline ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <span className="section-label">{dict.jardins.philosophyLabel}</span>
-            <h2 className="mt-2 mb-6 leading-[1.15]">{dict.jardins.philosophyTitle}</h2>
-            <p className="text-text-muted leading-[1.9] text-base md:text-lg max-w-2xl mx-auto">
-              {dict.jardins.philosophyP}
-            </p>
+            <span className="ge-label mb-3">{eden.flowersLabel}</span>
+            <h2 className="mb-10 md:mb-12" style={{ textWrap: "balance" }}>
+              {eden.flowersTitle}
+            </h2>
           </ScrollReveal>
-        </div>
-      </section>
 
-      {/* ──── DIPTYQUE PHOTOS ──── */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-            <ScrollReveal>
-              <div className="repos-photo aspect-[4/3]">
-                <img
-                  src={`${basePath}/images/hotel/hotel-gardens.jpg`}
-                  alt={loc === "fr" ? "Jardins du Lac Hôtel" : loc === "en" ? "Lac Hôtel gardens" : "Jardines del Lac Hôtel"}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={200}>
-              <div className="repos-photo aspect-[4/3]">
-                <img
-                  src={`${basePath}/images/hero/hero-twilight.jpg`}
-                  alt={loc === "fr" ? "Jardin au crépuscule" : loc === "en" ? "Garden at twilight" : "Jardín al atardecer"}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollReveal>
+          <div className="grid gap-px overflow-hidden rounded-[3px] border border-hairline bg-hairline sm:grid-cols-3">
+            {eden.flowers.map((f, i) => (
+              <ScrollReveal key={f.caption} delay={i * 100} className="h-full">
+                <figure className="flex h-full flex-col bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`${basePath}/images/jardins/${FLOWER_IMAGES[i]}`}
+                    alt={f.alt}
+                    loading="lazy"
+                    className="aspect-[4/5] w-full object-cover"
+                  />
+                  <figcaption className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
+                    {f.caption}
+                  </figcaption>
+                </figure>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Démarche — jardin pour tous */}
+          <div className="mt-12 md:mt-16">
+            <EditorialSplit
+              image={`${basePath}/images/jardins/pergola-pots-plantes-jardin.jpg`}
+              imageAlt={eden.philosophyAlt}
+              label={dict.jardins.philosophyLabel}
+              title={dict.jardins.philosophyTitle}
+              reverse
+            >
+              <p>{dict.jardins.philosophyP}</p>
+            </EditorialSplit>
           </div>
         </div>
       </section>
 
-      {/* ──── CTA ──── */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center -z-10"
-          style={{ backgroundImage: `url(${basePath}/images/hero/hero-garden.jpg)` }}
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
-
-        <div className="max-w-[600px] mx-auto px-5 md:px-6 relative text-center">
+      {/* ──── #village — Sahambavy, « le champ des femmes » ──── */}
+      <section id="village" className="scroll-mt-24 border-y border-hairline bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <h2 className="mb-6" style={{ color: "#FFFFFF" }}>
+            <span className="ge-label mb-3">{village.label}</span>
+            <h2 className="mb-6" style={{ textWrap: "balance" }}>
+              {village.title}
+            </h2>
+            <p className="ge-measure text-[15px] leading-relaxed text-body md:text-base">
+              {village.intro}
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-12 flex flex-col gap-10 md:mt-16 md:gap-14">
+            <EditorialSplit
+              image={`${basePath}/images/village/femme-betsileo-maison-traditionnelle.jpg`}
+              imageAlt={village.womenAlt}
+              label={village.womenLabel}
+              title={village.womenTitle}
+            >
+              <p>{village.womenP1}</p>
+              <p>{village.womenP2}</p>
+            </EditorialSplit>
+
+            <EditorialSplit
+              image={`${basePath}/images/village/rizieres-sahambavy-vue-aerienne.jpg`}
+              imageAlt={village.riceAlt}
+              label={village.riceLabel}
+              title={village.riceTitle}
+              cta={{ href: contactHref, label: village.riceCta }}
+              reverse
+            >
+              <p>{village.riceP1}</p>
+              <p>{village.riceP2}</p>
+            </EditorialSplit>
+          </div>
+
+          {/* Instants du village — bande 3 colonnes hairline */}
+          <div className="mt-12 grid gap-px overflow-hidden rounded-[3px] border border-hairline bg-hairline sm:grid-cols-3 md:mt-16">
+            {village.moments.map((m, i) => (
+              <ScrollReveal key={m.caption} delay={i * 100} className="h-full">
+                <figure className="flex h-full flex-col bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`${basePath}/images/village/${MOMENT_IMAGES[i]}`}
+                    alt={m.alt}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                  <figcaption className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
+                    {m.caption}
+                  </figcaption>
+                </figure>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ──── CTA final ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 text-center md:px-10">
+          <ScrollReveal>
+            <h2 className="mb-8" style={{ textWrap: "balance" }}>
               {dict.jardins.ctaTitle}
             </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={`/${locale}/contact/`} className="btn btn--primary">
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a href={contactHref} className="ge-cta">
                 {dict.jardins.cta}
-              </Link>
+              </a>
               <a
                 href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(dict.whatsappMessage ?? "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn--glass"
+                className="ge-cta ge-cta--ghost"
               >
                 WhatsApp
               </a>

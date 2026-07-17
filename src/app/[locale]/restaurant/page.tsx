@@ -1,16 +1,84 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
+import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
 import { extras } from "@/data/rooms";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { restaurantSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
+
+/* Taux de conversion indicatif validé (tarifs 2026) : 1 € = 4 900 Ar */
+const AR_PER_EUR = 4900;
+const ar = (v: number) => `${v.toLocaleString("fr-FR")} Ar`;
+const eur = (v: number) => `${Math.round(v / AR_PER_EUR)} €`;
+
+/* Textes nouveaux de la refonte — fallbacks locaux en attendant la fusion
+   des deltas dictionnaire (scratchpad/dict-deltas/restaurant.json). Si la
+   clé existe déjà dans dict.restaurantSection, elle est prioritaire. */
+const extraTexts = {
+  fr: {
+    sourcingP:
+      "Nos fruits, légumes et herbes aromatiques viennent du potager de l'hôtel, complétés par les récoltes des agriculteurs du village de Sahambavy.",
+    signaturesLabel: "Nos signatures",
+    signaturesTitle: "Canard sauvage & tilapia du lac",
+    signaturesP:
+      "Deux plats racontent Sahambavy mieux que tout : le canard sauvage chassé par Kim, le fondateur, et le tilapia du lac relevé au gingembre frais.",
+    breakfastTitle: "Les matins au bord de l'eau",
+    breakfastP:
+      "Pains, yaourts, fromages, confitures et miel sont faits maison, servis au petit-déjeuner face au lac ou au bord de la piscine.",
+    barLabel: "Le bar",
+    barTitle: "L'heure dorée sur le lac",
+    barP:
+      "Jus de fruits frais, cocktails et thé de Sahambavy se savourent au bar ou sur nos terrasses ombragées, quand le soleil descend sur le lac.",
+    pricesLabel: "Tarifs",
+    pricesTitle: "Nos formules",
+    pricesFootnote: "Prix par personne. Taux indicatif : 1 € ≈ 4 900 Ar.",
+    glassBottlesP: "Dans les chambres, elle vous attend en bouteilles de verre.",
+  },
+  en: {
+    sourcingP:
+      "Our fruit, vegetables and aromatic herbs come from the hotel's kitchen garden, joined by the harvests of farmers from Sahambavy village.",
+    signaturesLabel: "Our signatures",
+    signaturesTitle: "Wild duck & lake tilapia",
+    signaturesP:
+      "Two dishes tell the story of Sahambavy better than any other: wild duck hunted by Kim, our founder, and lake tilapia lifted with fresh ginger.",
+    breakfastTitle: "Mornings by the water",
+    breakfastP:
+      "Breads, yoghurts, cheeses, jams and honey are all made in-house, served at breakfast facing the lake or beside the pool.",
+    barLabel: "The bar",
+    barTitle: "Golden hour over the lake",
+    barP:
+      "Fresh fruit juices, cocktails and Sahambavy tea are best enjoyed at the bar or on our shaded terraces, as the sun sinks over the lake.",
+    pricesLabel: "Rates",
+    pricesTitle: "Our dining options",
+    pricesFootnote: "Prices per person. Indicative rate: €1 ≈ 4,900 Ar.",
+    glassBottlesP: "In the rooms, it awaits you in glass bottles.",
+  },
+  es: {
+    sourcingP:
+      "Nuestras frutas, verduras y hierbas aromáticas proceden del huerto del hotel, completadas con las cosechas de los agricultores del pueblo de Sahambavy.",
+    signaturesLabel: "Nuestras especialidades",
+    signaturesTitle: "Pato salvaje y tilapia del lago",
+    signaturesP:
+      "Dos platos cuentan Sahambavy mejor que nada: el pato salvaje cazado por Kim, el fundador, y la tilapia del lago realzada con jengibre fresco.",
+    breakfastTitle: "Mañanas junto al agua",
+    breakfastP:
+      "Panes, yogures, quesos, mermeladas y miel son de elaboración propia, servidos en el desayuno frente al lago o junto a la piscina.",
+    barLabel: "El bar",
+    barTitle: "La hora dorada sobre el lago",
+    barP:
+      "Zumos de fruta fresca, cócteles y té de Sahambavy se disfrutan en el bar o en nuestras terrazas sombreadas, mientras el sol desciende sobre el lago.",
+    pricesLabel: "Tarifas",
+    pricesTitle: "Nuestras fórmulas",
+    pricesFootnote: "Precios por persona. Tipo indicativo: 1 € ≈ 4 900 Ar.",
+    glassBottlesP: "En las habitaciones, le espera en botellas de vidrio.",
+  },
+} as const;
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,41 +97,21 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
+  const rs = dict.restaurantSection;
 
-  const philosophyCards = [
-    {
-      icon: "leaf",
-      title: dict.restaurantSection.philosophyLocal,
-      desc: dict.restaurantSection.philosophyLocalDesc,
-    },
-    {
-      icon: "fish",
-      title: dict.restaurantSection.philosophyLac,
-      desc: dict.restaurantSection.philosophyLacDesc,
-    },
-    {
-      icon: "chef",
-      title: dict.restaurantSection.philosophyMaison,
-      desc: dict.restaurantSection.philosophyMaisonDesc,
-    },
-  ];
+  /* Clé du dict si déjà fusionnée, sinon fallback local (même texte). */
+  const rsAny = rs as Record<string, unknown>;
+  const xt = Object.fromEntries(
+    Object.entries(extraTexts[loc]).map(([k, v]) => [
+      k,
+      typeof rsAny[k] === "string" ? (rsAny[k] as string) : v,
+    ]),
+  ) as { [K in keyof (typeof extraTexts)["fr"]]: string };
 
-  const pricingItems = [
-    {
-      icon: "coffee",
-      label: dict.restaurantSection.breakfast,
-      priceAR: extras.breakfast.priceAR,
-    },
-    {
-      icon: "dining",
-      label: dict.restaurantSection.menu,
-      priceAR: extras.menu.priceAR,
-    },
-    {
-      icon: "picnic",
-      label: dict.restaurantSection.picnic,
-      priceAR: extras.picnic.priceAR,
-    },
+  const priceRows = [
+    { label: rs.breakfast, value: `${ar(extras.breakfast.priceAR)} · ${eur(extras.breakfast.priceAR)}` },
+    { label: rs.menu, value: `${ar(extras.menu.priceAR)} · ${eur(extras.menu.priceAR)}` },
+    { label: rs.picnic, value: `${ar(extras.picnic.priceAR)} · ${eur(extras.picnic.priceAR)}` },
   ];
 
   return (
@@ -74,245 +122,194 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
           breadcrumbSchema(buildBreadcrumb(loc, "restaurant")),
         ]}
       />
-      {/* Hero */}
-      <PageHero
-        title={dict.restaurantSection.heroTitle}
-        subtitle={dict.restaurantSection.heroSubtitle}
-        image={`${basePath}/images/restaurant/restaurant-01.jpg`}
+
+      {/* Hero Panorama — façade du restaurant depuis les jardins */}
+      <PanoramaHero
+        image={`${basePath}/images/restaurant/restaurant-facade.jpg`}
+        imageAlt={
+          loc === "fr"
+            ? "Façade du restaurant panoramique du Lac Hôtel Sahambavy, vue depuis les jardins"
+            : loc === "es"
+              ? "Fachada del restaurante panorámico del Lac Hôtel Sahambavy vista desde los jardines"
+              : "Facade of the Lac Hôtel Sahambavy panoramic restaurant seen from the gardens"
+        }
+        label={rs.label}
+        title={rs.heroTitle}
+        kicker={rs.heroSubtitle}
       />
 
-      {/* Citation éditoriale — "La qualité commence à la source" (PDF v2026).
-          Bandeau crème discret entre le hero et la philosophy strip. */}
-      {dict.restaurantSection.qualityQuote && (
-        <section className="py-10 md:py-14 bg-cream">
-          <div className="max-w-[800px] mx-auto px-5 md:px-6 text-center">
-            <ScrollReveal>
-              <div className="flex items-center justify-center gap-4 mb-4">
-                <span className="h-px w-10 bg-gold/40" />
-                <Icon name="leaf" size={16} weight="regular" className="text-gold" />
-                <span className="h-px w-10 bg-gold/40" />
-              </div>
-              <p className="font-[family-name:var(--font-sub)] italic text-brown-deep text-xl md:text-2xl leading-tight">
-                «&nbsp;{dict.restaurantSection.qualityQuote}&nbsp;»
-              </p>
-            </ScrollReveal>
-          </div>
-        </section>
-      )}
-
-      {/* Philosophy strip — cartes liquid-glass premium avec Phosphor badge */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[360px] h-[360px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-        <div className="absolute -bottom-32 -left-32 w-[360px] h-[360px] rounded-full bg-gold/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-            {philosophyCards.map((card, i) => (
-              <ScrollReveal key={card.title} delay={i * 120}>
-                <div className="repos-feature h-full p-7 md:p-8 text-center">
-                  <div className="repos-feature__badge mx-auto mb-5">
-                    <Icon name={card.icon} size={26} weight="regular" />
-                  </div>
-                  <h3 className="text-lg md:text-xl text-text-dark mb-3 leading-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-text-muted text-sm leading-relaxed">{card.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main content: intro + signatures — photo avec bordure dorée intérieure */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-            {/* Image produit */}
-            <ScrollReveal>
-              <div className="product-photo aspect-[4/3]">
-                <img
-                  src={`${basePath}/images/restaurant/restaurant-02.jpg`}
-                  alt={dict.restaurantSection.heroTitle}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollReveal>
-
-            {/* Text */}
-            <ScrollReveal delay={150}>
-              <div>
-                <SectionHeader
-                  label={dict.restaurantSection.label}
-                  title={dict.restaurantSection.title}
-                  subtitle={dict.restaurantSection.subtitle}
-                  className="text-left mb-8 md:mb-10"
-                />
-
-                <p className="text-text-muted leading-[1.8] mb-8">
-                  {dict.restaurantSection.p1}
-                </p>
-
-                {/* Signature dishes — badge editorial en haut + filet doré */}
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="h-px w-8 bg-gold" />
-                  <span className="text-[0.7rem] font-semibold text-gold uppercase tracking-[0.28em]">
-                    {loc === "fr" ? "Nos signatures" : loc === "es" ? "Nuestras firmas" : "Our signatures"}
-                  </span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {dict.restaurantSection.specialties.map((dish: string, i: number) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <Icon
-                        name="fish"
-                        size={16}
-                        weight="regular"
-                        className="text-gold mt-0.5 flex-shrink-0"
-                      />
-                      <span className="text-text-body leading-relaxed">{dish}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Herbes du potager + Eau filtrée — preuves concrètes éco-responsables
-          (PDF v2026). Layout 2 colonnes : à gauche grille d'herbes, à droite
-          carte "Eau filtrée à volonté". */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Herbes du potager — grid 4×2 pills */}
-            <ScrollReveal className="lg:col-span-7">
-              <span className="section-label">
-                {dict.restaurantSection.herbsLabel}
-              </span>
-              <h2 className="mt-2 mb-4 leading-[1.15]">
-                {dict.restaurantSection.herbsTitle}
-              </h2>
-              <p className="text-text-muted leading-[1.8] mb-6">
-                {dict.restaurantSection.herbsIntro}
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                {(dict.restaurantSection.herbs as string[]).map((h: string) => (
-                  <div
-                    key={h}
-                    className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-full border border-gold/15 bg-white/60 backdrop-blur-sm"
-                  >
-                    <Icon
-                      name="leaf"
-                      size={14}
-                      weight="regular"
-                      className="text-gold flex-shrink-0"
-                    />
-                    <span className="text-sm font-medium text-brown-deep tracking-tight">
-                      {h}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-
-            {/* Eau filtrée — carte glass */}
-            <ScrollReveal delay={180} className="lg:col-span-5">
-              <div className="repos-feature h-full p-7 md:p-8 text-center">
-                <div className="repos-feature__badge mx-auto mb-5">
-                  <Icon name="soap" size={28} weight="regular" />
-                </div>
-                <span className="block text-[0.6rem] uppercase tracking-[0.28em] text-gold font-medium mb-2">
-                  {dict.restaurantSection.waterRefillLabel}
-                </span>
-                <h3 className="text-lg md:text-xl text-text-dark mb-4 leading-tight">
-                  {dict.restaurantSection.waterRefillTitle}
-                </h3>
-                <p className="text-text-muted text-sm leading-relaxed">
-                  {dict.restaurantSection.waterRefillP}
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Atmospheric photo strip */}
-      <section className="relative h-[50vh] min-h-[350px] overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${basePath}/images/hero/hero-twilight.jpg)` }}
-        />
-        <div className="absolute inset-0 bg-black/30" />
-      </section>
-
-      {/* Pricing section — liquid-glass cards avec filet doré en haut */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[900px] mx-auto px-5 md:px-6">
-          <SectionHeader
-            label={loc === "fr" ? "Tarifs" : loc === "es" ? "Tarifas" : "Pricing"}
-            title={loc === "fr" ? "Nos formules" : loc === "es" ? "Nuestras formulas" : "Our options"}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-            {pricingItems.map((item, i) => (
-              <ScrollReveal key={item.label} delay={i * 100}>
-                <div className="room-price text-center p-7 md:p-8 h-full flex flex-col items-center justify-center">
-                  <div className="repos-feature__badge mb-5">
-                    <Icon name={item.icon} size={24} weight="regular" />
-                  </div>
-                  <h4 className="text-text-dark text-base font-semibold mb-5">{item.label}</h4>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-3xl md:text-4xl font-bold text-brown-deep font-[family-name:var(--font-heading)] tabular-nums leading-none">
-                      {item.priceAR.toLocaleString("fr-FR")}
-                    </span>
-                    <span className="text-sm text-text-muted font-[family-name:var(--font-sub)] italic">
-                      AR
-                    </span>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Second atmospheric photo */}
-      <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${basePath}/images/hero/hero-lake-sunset.jpg)` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        <div className="relative z-10 flex items-end justify-center h-full pb-12 px-4">
+      {/* Déclaration — « Chez nous, la qualité commence à la source » */}
+      <section id="philosophie" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <p className="text-white text-xl font-[family-name:var(--font-sub)] text-center max-w-xl">
-              {dict.philosophy.title} — {dict.philosophy.pillar1}
-            </p>
+            <span className="ge-label mb-4">{dict.philosophy.label}</span>
+            <h2 className="max-w-[24ch]" style={{ textWrap: "balance" }}>
+              {rs.qualityQuote}
+            </h2>
+            <div className="ge-measure mt-6 space-y-4 text-[15px] leading-relaxed text-body md:text-base">
+              <p>{rs.p2}</p>
+              <p>{xt.sourcingP}</p>
+            </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* CTA to contact */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="max-w-[600px] mx-auto px-4 text-center">
+      {/* Blocs éditoriaux alternés — cuisine, potager, signatures, petit-déj, bar */}
+      <section className="pb-16 md:pb-24">
+        <div className="mx-auto max-w-7xl space-y-8 px-6 md:space-y-12 md:px-10">
+          <EditorialSplit
+            id="cuisine"
+            image={`${basePath}/images/restaurant/salle-restaurant-tables-dressees.jpg`}
+            imageAlt={
+              loc === "fr"
+                ? "Salle du restaurant panoramique, tables rondes dressées sous la charpente en bois"
+                : loc === "es"
+                  ? "Sala del restaurante panorámico, mesas redondas puestas bajo la techumbre de madera"
+                  : "The panoramic restaurant dining room, round tables set beneath the timber roof"
+            }
+            label={rs.label}
+            title={rs.title}
+          >
+            <p>{rs.p1}</p>
+          </EditorialSplit>
+
+          <EditorialSplit
+            id="potager"
+            reverse
+            image={`${basePath}/images/restaurant/plat-croustillant-salade-vue-jardin.jpg`}
+            imageAlt={
+              loc === "fr"
+                ? "Plat croustillant et salade fraîche du potager, servis face au jardin"
+                : loc === "es"
+                  ? "Plato crujiente y ensalada fresca del huerto, servidos frente al jardín"
+                  : "Crispy dish and fresh garden salad served overlooking the garden"
+            }
+            label={rs.herbsLabel}
+            title={rs.herbsTitle}
+          >
+            <p>{rs.herbsIntro}</p>
+            <p>{xt.sourcingP}</p>
+            <ul className="flex flex-wrap gap-2 pt-1">
+              {(rs.herbs as string[]).map((h: string) => (
+                <li
+                  key={h}
+                  className="rounded-full border border-hairline px-3.5 py-1.5 text-[13px] text-body"
+                >
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </EditorialSplit>
+
+          <EditorialSplit
+            id="signatures"
+            image={`${basePath}/images/restaurant/brochettes-viande-grillee-salade.jpg`}
+            imageAlt={
+              loc === "fr"
+                ? "Brochettes de viande grillée accompagnées de salade fraîche"
+                : loc === "es"
+                  ? "Brochetas de carne a la parrilla acompañadas de ensalada fresca"
+                  : "Grilled meat skewers served with fresh salad"
+            }
+            label={xt.signaturesLabel}
+            title={xt.signaturesTitle}
+          >
+            <p>{xt.signaturesP}</p>
+            <ul className="space-y-2.5 pt-1">
+              {(rs.specialties as string[]).map((dish: string) => (
+                <li key={dish} className="flex items-start gap-3">
+                  <span className="mt-[9px] h-1 w-1 flex-shrink-0 rounded-full bg-tea" />
+                  <span>{dish}</span>
+                </li>
+              ))}
+            </ul>
+          </EditorialSplit>
+
+          <EditorialSplit
+            id="petit-dejeuner"
+            reverse
+            image={`${basePath}/images/restaurant/breakfast-poolside.jpg`}
+            imageAlt={
+              loc === "fr"
+                ? "Petit-déjeuner servi au bord de la piscine, face au lac de Sahambavy"
+                : loc === "es"
+                  ? "Desayuno servido junto a la piscina, frente al lago de Sahambavy"
+                  : "Breakfast served beside the pool, overlooking Lake Sahambavy"
+            }
+            label={rs.philosophyMaison}
+            title={xt.breakfastTitle}
+            rows={[
+              {
+                label: rs.breakfast,
+                value: `${ar(extras.breakfast.priceAR)} · ${eur(extras.breakfast.priceAR)}`,
+              },
+            ]}
+          >
+            <p>{xt.breakfastP}</p>
+          </EditorialSplit>
+
+          <EditorialSplit
+            id="bar"
+            image={`${basePath}/images/restaurant/restaurant-01.jpg`}
+            imageAlt={
+              loc === "fr"
+                ? "Cheminée en pierre et tables dressées du restaurant, à la tombée du soir"
+                : loc === "es"
+                  ? "Chimenea de piedra y mesas puestas del restaurante, al caer la noche"
+                  : "Stone fireplace and set tables in the restaurant at dusk"
+            }
+            label={xt.barLabel}
+            title={xt.barTitle}
+          >
+            <p>{xt.barP}</p>
+          </EditorialSplit>
+        </div>
+      </section>
+
+      {/* Aperçu tarifs — filets fins */}
+      <section id="tarifs" className="scroll-mt-24 border-y border-hairline bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="mx-auto max-w-2xl">
+            <ScrollReveal>
+              <span className="ge-label mb-3">{xt.pricesLabel}</span>
+              <h2 className="mb-8">{xt.pricesTitle}</h2>
+              <RecapRows rows={priceRows} footnote={xt.pricesFootnote} />
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Bandeau éco-responsable — eau filtrée & bouteilles en verre */}
+      <section id="eau-filtree" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <h2 className="mb-4">{dict.contact.title}</h2>
-            <p className="text-text-muted mb-8">{dict.contact.subtitle}</p>
-            <Link
-              href={`/${locale}/contact/`}
-              className="inline-block bg-gold text-white px-10 py-4 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-lg"
-            >
-              {dict.rooms.book}
-            </Link>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="ge-label mb-4">{rs.waterRefillLabel}</span>
+              <h2 className="mb-5">{rs.waterRefillTitle}</h2>
+              <p className="text-[15px] leading-relaxed text-body md:text-base">
+                {rs.waterRefillP}
+              </p>
+              <p className="mt-3 text-[15px] leading-relaxed text-body md:text-base">
+                {xt.glassBottlesP}
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* CTA final — vers le contact */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <ScrollReveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="mb-4">{dict.contact.title}</h2>
+              <p className="mb-8 text-[15px] leading-relaxed text-body md:text-base">
+                {dict.contact.subtitle}
+              </p>
+              <Link href={`/${locale}/contact/`} className="ge-cta">
+                {dict.rooms.book}
+              </Link>
+            </div>
           </ScrollReveal>
         </div>
       </section>

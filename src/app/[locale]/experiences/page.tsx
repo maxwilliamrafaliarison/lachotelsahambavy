@@ -1,16 +1,101 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
+import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/data/site";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
+
+/* ------------------------------------------------------------------ */
+/* Textes FR de secours — remplacés par dict.experiences dès que le    */
+/* delta scratchpad/dict-deltas/experiences.json est fusionné (fr/en/es). */
+/* ------------------------------------------------------------------ */
+const EX_FR = {
+  heroLabel: "Lac Hôtel Sahambavy",
+  heroTitle: "Expériences",
+  heroKicker:
+    "Entre le lac, les collines de thé et les villages betsileo, chaque journée invite à une découverte différente — au départ direct de l'hôtel.",
+  introLabel: "Vivre Sahambavy",
+  introTitle: "Un territoire d'expériences",
+  introP:
+    "Loisirs au bord de l'eau, massages aux huiles maison, artisanat du village, descente de rivière en pirogue traditionnelle : composez votre séjour au rythme du lac.",
+  loisirs: {
+    label: "Loisirs",
+    title: "Le lac comme terrain de jeu",
+    p: "Le tour du lac — 8 km balisés, environ 2 heures de marche — donne le ton : ici, tout se découvre en douceur. La plantation et l'usine de thé TAF se visitent en 4 heures, les villages alentour en 2 heures de balade, entre ateliers de broderie et de vannerie, ferme et potager de Mamie Olga.",
+    items: [
+      "Tour du Lac — 8 km balisés, 2 h",
+      "Visite de la plantation & de l'usine de thé TAF — 4 h",
+      "Balade dans les villages alentour — 2 h",
+      "Rencontre des artisans — broderie, vannerie",
+      "Ferme & potager de Mamie Olga",
+      "Canoë et pédalo sur le lac",
+      "Vélo autour du lac",
+      "Tennis, ping-pong, baby-foot",
+      "Méditation au bord de la piscine",
+    ],
+    cta: "Voir tous les loisirs",
+  },
+  conference: {
+    label: "Événements professionnels",
+    rowCapacity: "Capacité",
+    rowEquipment: "Équipement",
+    rowLayout: "Configuration",
+    layoutValue: "Entièrement modulable",
+    cta: "Organiser votre événement",
+  },
+  mamiShop: {
+    label: "Boutique",
+    title: "Mami Bio Shop, le savoir-faire de Sahambavy",
+    p1: "La boutique de l'hôtel met à l'honneur le savoir-faire des artisans de Sahambavy — et en premier lieu le travail des femmes du village.",
+    p2: "Huiles essentielles et huiles de massage, grades de thés de la plantation, savons bio saponifiés à froid, broderies et paniers tressés dans les roseaux du lac : chaque pièce raconte le territoire.",
+  },
+  riviere: {
+    label: "Aventure",
+    recapTitle: "Aperçu",
+    rowDeparture: "Départ",
+    departureValue: "Lac Hôtel → Mahasoabe (45 km)",
+    rowNavigation: "Navigation",
+    navigationValue: "2 h de pirogue traditionnelle",
+    rowWalk: "Marche",
+    walkValue: "1 h 30 — villages, rizières, champs de thé",
+    rowLunch: "Déjeuner",
+    lunchValue: "Pique-nique au pied d'une cascade",
+    included: "Inclus",
+    includedValue: "Pique-nique, pirogue et piroguier, guide, taxes villageoises",
+    notIncluded: "Non inclus",
+    notIncludedValue: "Transport, boissons, activités non mentionnées",
+  },
+  teasers: {
+    label: "Continuer l'exploration",
+    mariagesLabel: "Moments signature",
+    mariagesTitle: "Célébrer",
+    mariagesTitleEm: "au bord du lac",
+    mariagesP:
+      "Cérémonies au jardin, dîners au coucher du soleil et séminaires au vert : le Lac Hôtel orchestre vos grands moments, du mariage intime à l'événement d'entreprise.",
+    mariagesCta: "Mariages & séminaires",
+  },
+};
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function mergeSection<T>(base: T, over: any): T {
+  if (!over || typeof over !== "object") return base;
+  const out: any = { ...(base as any) };
+  for (const k of Object.keys(over)) {
+    const b = (base as any)[k];
+    out[k] =
+      b && typeof b === "object" && !Array.isArray(b) && typeof over[k] === "object" && !Array.isArray(over[k])
+        ? mergeSection(b, over[k])
+        : over[k];
+  }
+  return out as T;
+}
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -19,17 +104,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const ex = mergeSection(EX_FR, (dict as any).experiences);
   return {
     title: `${locale === "fr" ? "Expériences" : locale === "en" ? "Experiences" : "Experiencias"} — ${siteConfig.name}`,
-    description: dict.loisirs.heroSubtitle,
+    description: ex.heroKicker ?? dict.loisirs.heroSubtitle,
   };
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default async function ExperiencesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
+  const ex = mergeSection(EX_FR, (dict as any).experiences);
+  const poolP2 = ((dict.loisirs as any).poolP2 as string | undefined) ??
+    "Espace zen, chaises longues et vue sur les jardins : le bord de la piscine se prête autant à la baignade qu'à la méditation.";
 
   // JSON-LD : 3 TouristAttractions clés (restaurant, plantation thé, train FCE)
   const attractionRestaurant = touristAttractionSchema({
@@ -37,7 +125,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
     slug: "restaurant",
     name: dict.restaurantSection.title as string,
     description: dict.restaurantSection.subtitle as string,
-    image: "/images/restaurant/restaurant-01.jpg",
+    image: "/images/restaurant/salle-restaurant-tables-dressees.jpg",
   });
   const attractionPlantation = touristAttractionSchema({
     locale: loc,
@@ -62,6 +150,57 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
     image: "/images/train/train-fce.jpg",
   });
 
+  const conferenceRows = [
+    { label: ex.conference.rowCapacity, value: dict.conference.capacity },
+    {
+      label: ex.conference.rowEquipment,
+      value: (
+        <span className="block max-w-[26ch] whitespace-normal text-right">
+          {(dict.conference.equipment as string[]).join(" · ")}
+        </span>
+      ),
+    },
+    { label: ex.conference.rowLayout, value: ex.conference.layoutValue },
+  ];
+
+  const riviereRows = [
+    { label: ex.riviere.rowDeparture, value: ex.riviere.departureValue },
+    { label: ex.riviere.rowNavigation, value: ex.riviere.navigationValue },
+    { label: ex.riviere.rowWalk, value: ex.riviere.walkValue },
+    { label: ex.riviere.rowLunch, value: ex.riviere.lunchValue },
+    {
+      label: ex.riviere.included,
+      value: (
+        <span className="block max-w-[34ch] whitespace-normal text-right">{ex.riviere.includedValue}</span>
+      ),
+    },
+    {
+      label: ex.riviere.notIncluded,
+      value: (
+        <span className="block max-w-[34ch] whitespace-normal text-right">{ex.riviere.notIncludedValue}</span>
+      ),
+    },
+  ];
+
+  const shopPhotos = [
+    {
+      src: "/images/boutique/savon-artisanal-curcuma-natural-by-maggie.jpg",
+      alt: "Savon artisanal au curcuma « Natural by Maggie »",
+    },
+    {
+      src: "/images/boutique/savon-coco-artisanal-bois-sculpte.jpg",
+      alt: "Savon artisanal à la noix de coco sur bois sculpté",
+    },
+    {
+      src: "/images/boutique/savon-fleur-marguerite-artisanal.jpg",
+      alt: "Savon artisanal décoré d'une fleur de marguerite",
+    },
+    {
+      src: "/images/boutique/etal-legumes-bio-mami-shop.jpg",
+      alt: "Étal de légumes bio du Mami Bio Shop",
+    },
+  ];
+
   return (
     <>
       <JsonLd
@@ -72,252 +211,217 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
           breadcrumbSchema(buildBreadcrumb(loc, "experiences")),
         ]}
       />
-      <PageHero
-        title={locale === "fr" ? "Expériences" : locale === "en" ? "Experiences" : "Experiencias"}
-        subtitle={locale === "fr" ? "Gastronomie, nature et découverte" : locale === "en" ? "Gastronomy, nature and discovery" : "Gastronomía, naturaleza y descubrimiento"}
-        image={`${basePath}/images/hero/hero-sunset.jpg`}
+      <PanoramaHero
+        image={`${basePath}/images/activities/canoe-aerial.jpg`}
+        imageAlt="Canoë sur le lac de Sahambavy vu du ciel"
+        label={ex.heroLabel}
+        title={ex.heroTitle}
+        kicker={ex.heroKicker}
       />
 
-      {/* ──── RESTAURANT ──── */}
-      <section id="restaurant" className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-            <ScrollReveal>
-              <div className="product-photo aspect-[4/3]">
-                <img
-                  src={`${basePath}/images/restaurant/restaurant-01.jpg`}
-                  alt="Restaurant panoramique"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={200}>
-              <span className="section-label">{dict.restaurantSection.label}</span>
-              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.restaurantSection.title}</h2>
-              <p className="text-text-muted leading-[1.8] mb-4">{dict.restaurantSection.p1}</p>
-              {dict.restaurantSection.p2 && (
-                <p className="text-text-muted leading-[1.8] mb-6">{dict.restaurantSection.p2}</p>
-              )}
-              <div className="space-y-2.5 mb-8">
-                {(dict.restaurantSection.specialties as string[]).map((spec: string, i: number) => (
-                  <div key={i} className="flex items-start gap-3 text-text-body text-sm">
-                    <Icon name="fish" size={16} weight="regular" className="text-gold mt-0.5 flex-shrink-0" />
-                    <span>{spec}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
-                <div className="room-price text-center p-5">
-                  <span className="block text-[0.6rem] uppercase tracking-[0.25em] text-gold font-medium mb-1.5">
-                    {dict.restaurantSection.breakfast}
-                  </span>
-                  <span className="block text-xl md:text-2xl font-bold text-brown-deep font-[family-name:var(--font-heading)]">
-                    {dict.restaurantSection.breakfastPrice}
-                  </span>
-                </div>
-                <div className="room-price text-center p-5">
-                  <span className="block text-[0.6rem] uppercase tracking-[0.25em] text-gold font-medium mb-1.5">
-                    {dict.restaurantSection.menu}
-                  </span>
-                  <span className="block text-xl md:text-2xl font-bold text-brown-deep font-[family-name:var(--font-heading)]">
-                    {dict.restaurantSection.menuPrice}
-                  </span>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ──── PLANTATION DE THÉ ──── */}
-      <section id="plantation" className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-            <ScrollReveal delay={200} className="md:order-2">
-              <div className="product-photo aspect-[4/3]">
-                <img
-                  src={`${basePath}/images/tea/plantation-drone-overhead.jpg`}
-                  alt="Vue aérienne de la plantation de thé Sahambavy"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollReveal>
-            <ScrollReveal className="md:order-1">
-              <span className="section-label">{dict.plantation.historyLabel}</span>
-              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.plantation.heroTitle}</h2>
-              <p className="text-text-muted leading-[1.8] mb-4">{dict.plantation.historyIntro}</p>
-              <p className="text-text-muted leading-[1.8] mb-8">{dict.plantation.historyMadagascar}</p>
-              <Link href={`/${locale}/plantation-de-the/`} className="btn btn--outline">
-                {dict.destinations.plantation.cta}
-              </Link>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ──── PISCINE & MASSAGE ──── */}
-      <section id="wellness" className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader
-            label={dict.loisirs.massageLabel}
-            title={dict.loisirs.poolTitle}
-          />
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-8">
-            {[
-              {
-                image: "/images/pool/pool-night.jpg",
-                alt: "Piscine en ardoise à eau salée",
-                title: dict.loisirs.poolTitle,
-                desc: dict.loisirs.poolP,
-              },
-              {
-                image: "/images/nature/garden-path.jpg",
-                alt: "Massage & bien-être",
-                title: dict.loisirs.massageTitle,
-                desc: dict.loisirs.massageP,
-              },
-            ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 200}>
-                <article className="h-full flex flex-col">
-                  <div className="product-photo aspect-[4/3] mb-5">
-                    <img
-                      src={`${basePath}${item.image}`}
-                      alt={item.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg md:text-xl mb-3 leading-tight">{item.title}</h3>
-                    <p className="text-text-muted text-sm md:text-base leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </article>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ──── CIRCUITS & ACTIVITÉS ──── */}
-      <section id="activites" className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
-          }}
-        />
-        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader
-            label={dict.loisirs.circuitsLabel}
-            title={dict.loisirs.circuitsTitle}
-          />
-          <div className="grid md:grid-cols-3 gap-5 md:gap-6 mb-10">
-            {[
-              { data: dict.loisirs.discovery, icon: "nature" },
-              { data: dict.loisirs.cultural, icon: "culture" },
-              { data: dict.loisirs.leisure, icon: "boat" },
-            ].map((circuit, ci) => (
-              <ScrollReveal key={ci} delay={ci * 150}>
-                <div className="repos-feature h-full p-7 md:p-8 flex flex-col">
-                  <div className="repos-feature__badge mb-5">
-                    <Icon name={circuit.icon} size={24} weight="regular" />
-                  </div>
-                  <h3 className="text-lg md:text-xl mb-4 leading-tight">
-                    {(circuit.data as any).title}
-                  </h3>
-                  <ul className="space-y-2 mb-5 flex-1">
-                    {((circuit.data as any).items as string[]).map((item: string, i: number) => (
-                      <li key={i} className="text-text-muted text-sm leading-relaxed flex items-start gap-2.5">
-                        <span className="inline-block w-1 h-1 rounded-full bg-gold mt-2 flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex items-center gap-2 pt-4 border-t border-gold/15">
-                    <Icon name="arrow" size={14} weight="regular" className="text-gold flex-shrink-0" />
-                    <p className="text-sm font-medium text-gold italic leading-snug">
-                      {(circuit.data as any).ideal}
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link href={`/${locale}/activites/`} className="btn btn--outline">
-              {dict.loisirs.cta}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ──── BOUTIQUE ──── */}
-      <section id="boutique" className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <SectionHeader
-            label={dict.plantation.shopLabel}
-            title={dict.plantation.shopTitle}
-          />
+      {/* ──── INTRO ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <p className="text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12">
-              {dict.plantation.shopIntro}
+            <span className="ge-label mb-3">{ex.introLabel}</span>
+            <h2 className="max-w-[22ch]" style={{ textWrap: "balance" }}>
+              {ex.introTitle}
+            </h2>
+            <p className="ge-measure mt-5 text-[15px] leading-relaxed text-body md:text-base">
+              {ex.introP}
             </p>
           </ScrollReveal>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
-            {(dict.plantation.shopItems as { name: string; desc: string }[]).map((item: any, i: number) => (
-              <ScrollReveal key={item.name} delay={i * 80}>
-                <div className="repos-feature h-full p-5 text-center">
-                  <div className="repos-feature__badge mx-auto mb-3" style={{ width: "2.5rem", height: "2.5rem" }}>
-                    <Icon name="leaf" size={20} weight="regular" />
-                  </div>
-                  <h4 className="text-sm font-semibold mb-1">{item.name}</h4>
-                  <p className="text-xs text-text-muted leading-relaxed">{item.desc}</p>
-                </div>
+        </div>
+      </section>
+
+      {/* ──── LOISIRS ──── */}
+      <section id="loisirs" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <ScrollReveal>
+            <span className="ge-label mb-3">{ex.loisirs.label}</span>
+            <h2 className="max-w-[22ch]" style={{ textWrap: "balance" }}>
+              {ex.loisirs.title}
+            </h2>
+            <p className="ge-measure mt-5 text-[15px] leading-relaxed text-body md:text-base">
+              {ex.loisirs.p}
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal delay={120}>
+            <ul className="mt-10 grid gap-x-10 md:grid-cols-2">
+              {(ex.loisirs.items as string[]).map((item, i) => (
+                <li
+                  key={i}
+                  className="border-t border-hairline py-3 text-[15px] leading-relaxed text-body"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-9">
+              <Link href={`/${locale}/activites/`} className="ge-cta ge-cta--ghost">
+                {ex.loisirs.cta}
+              </Link>
+            </div>
+          </ScrollReveal>
+
+          <div className="mt-14 md:mt-20">
+            <EditorialSplit
+              image={`${basePath}/images/pool/tete-bouddha-bord-piscine.jpg`}
+              imageAlt="Tête de Bouddha au bord de la piscine en ardoise"
+              label={dict.loisirs.poolLabel}
+              title={dict.loisirs.poolTitle}
+              reverse
+            >
+              <p>{dict.loisirs.poolP}</p>
+              <p>{poolP2}</p>
+            </EditorialSplit>
+          </div>
+        </div>
+      </section>
+
+      {/* ──── MASSAGES & BIEN-ÊTRE ──── */}
+      <section id="massage" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/activities/salon-detente-vue-lac.jpg`}
+            imageAlt="Salon de détente ouvert sur le lac Sahambavy, fauteuils et terrasse au bord de l'eau"
+            label={dict.loisirs.massageLabel}
+            title={dict.loisirs.massageTitle}
+            cta={{ href: `/${locale}/contact/`, label: dict.loisirs.cta }}
+          >
+            <p>{dict.loisirs.massageP}</p>
+          </EditorialSplit>
+        </div>
+      </section>
+
+      {/* ──── SALLE DE CONFÉRENCE ──── */}
+      <section id="salle-de-conference" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/gallery/gallery-lake-view-interior.jpg`}
+            imageAlt="Salon lumineux ouvert sur le lac de Sahambavy"
+            label={ex.conference.label}
+            title={dict.conference.title}
+            rows={conferenceRows}
+            cta={{ href: `/${locale}/contact/`, label: ex.conference.cta }}
+            reverse
+          >
+            <p>{dict.conference.p1}</p>
+            <p>{dict.conference.p2}</p>
+          </EditorialSplit>
+        </div>
+      </section>
+
+      {/* ──── MAMI BIO SHOP ──── */}
+      <section id="mami-bio-shop" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/boutique/bio-mami-shop-entree-boutique.jpg`}
+            imageAlt="Entrée de la boutique Mami Bio Shop"
+            label={ex.mamiShop.label}
+            title={ex.mamiShop.title}
+          >
+            <p>{ex.mamiShop.p1}</p>
+            <p>{ex.mamiShop.p2}</p>
+          </EditorialSplit>
+
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+            {shopPhotos.map((photo, i) => (
+              <ScrollReveal key={photo.src} delay={i * 90}>
+                <img
+                  src={`${basePath}${photo.src}`}
+                  alt={photo.alt}
+                  loading="lazy"
+                  className="aspect-square w-full rounded-[3px] border border-hairline object-cover"
+                />
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ──── CTA ──── */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${basePath}/images/hero/hero-lake.jpg)` }} />
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-        <div className="relative z-10 max-w-[600px] mx-auto px-5 md:px-6 text-center">
+      {/* ──── DESCENTE DE LA RIVIÈRE MATSIATRA ──── */}
+      <section id="riviere-matsiatra" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <h2 className="mb-6" style={{ color: "#FFFFFF" }}>
-              {locale === "fr" ? "Prêt à vivre l'expérience ?" : locale === "en" ? "Ready for the experience?" : "¿Listo para la experiencia?"}
+            <span className="ge-label mb-3">{ex.riviere.label}</span>
+            <h2 className="max-w-[24ch]" style={{ textWrap: "balance" }}>
+              {dict.loisirs.aventureTitle}
             </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={`/${locale}/contact/`} className="btn btn--primary">
-                {dict.nav.book}
-              </Link>
-              <a
-                href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(dict.whatsappMessage ?? "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn--glass"
-              >
-                WhatsApp
-              </a>
-            </div>
+            <p className="ge-measure mt-5 text-[15px] leading-relaxed text-body md:text-base">
+              {dict.loisirs.aventureP}
+            </p>
           </ScrollReveal>
+
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-14">
+            <ScrollReveal>
+              <ol className="ge-rows">
+                {(dict.loisirs.aventureProgram as string[]).map((step, i) => (
+                  <li key={i} className="flex items-baseline gap-5 border-b border-hairline py-4">
+                    <span className="text-xs font-semibold tabular-nums text-tea">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[15px] leading-relaxed text-body">{step}</span>
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-9">
+                <Link href={`/${locale}/contact/`} className="ge-cta">
+                  {dict.loisirs.cta}
+                </Link>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={150}>
+              <img
+                src={`${basePath}/images/activities/pedalos-colores-ponton.jpg`}
+                alt="Embarcations au ponton du Lac Hôtel, point de départ des excursions"
+                loading="lazy"
+                className="aspect-[4/3] w-full rounded-[3px] border border-hairline object-cover"
+              />
+              <RecapRows className="mt-8" title={ex.riviere.recapTitle} rows={riviereRows} />
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ──── TEASER PLANTATION DE THÉ ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <ScrollReveal>
+            <span className="ge-label mb-10 block">{ex.teasers.label}</span>
+          </ScrollReveal>
+          <EditorialSplit
+            image={`${basePath}/images/tea/plantation-cinematic.jpg`}
+            imageAlt="Cueilleuses dans la plantation de thé de Sahambavy"
+            label={dict.destinations.plantation.label}
+            title={dict.destinations.plantation.title}
+            cta={{ href: `/${locale}/plantation-de-the/`, label: dict.destinations.plantation.cta }}
+            reverse
+          >
+            <p>{dict.destinations.plantation.desc}</p>
+          </EditorialSplit>
+        </div>
+      </section>
+
+      {/* ──── TEASER MARIAGES — Nuit sur le lac ──── */}
+      <section className="ge-night py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            night
+            image={`${basePath}/images/mariage/maries-coucher-soleil-lac.jpg`}
+            imageAlt="Jeunes mariés au coucher du soleil sur le lac de Sahambavy"
+            label={ex.teasers.mariagesLabel}
+            title={
+              <>
+                {ex.teasers.mariagesTitle} <em>{ex.teasers.mariagesTitleEm}</em>
+              </>
+            }
+            cta={{ href: `/${locale}/mariages-seminaires/`, label: ex.teasers.mariagesCta, night: true }}
+          >
+            <p>{ex.teasers.mariagesP}</p>
+          </EditorialSplit>
         </div>
       </section>
     </>

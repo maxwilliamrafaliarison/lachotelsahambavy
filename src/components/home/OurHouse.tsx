@@ -2,32 +2,22 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { type Locale, getBasePath } from "@/lib/utils";
 
+const basePath = getBasePath();
+
 /**
- * "Notre Maison" — homepage human-storytelling block.
+ * « Notre Maison » — bloc humain de la page d'accueil, version « Panorama ».
  *
- * Why this section exists:
- *   La page d'accueil enchaînait Welcome (mise en bouche éditoriale) →
- *   RoomsGrid (catalogue) → Philosophy (générique RSE). Aucun visage,
- *   aucun prénom, aucune voix : le site sonnait "hôtel de chaîne dans un
- *   beau cadre" alors que c'est un domaine familial fondé en 1998 par
- *   Kim et Olga Leong, repris par leur fille Maggie revenue du Canada.
- *   Cette section ramène les humains au premier plan, juste après le
- *   premier paragraphe d'accueil — "voilà qui vous reçoit".
+ * Fond brume pour marquer la respiration après l'intro éditoriale, photo
+ * d'équipe en 7/5 avec la citation famille en Inter Tight light (PAS
+ * d'italique serif en monde clair — réservé au monde nuit), signature en
+ * .ge-label, puis les 4 vignettes-métiers (captions conservées : elles
+ * désignent des métiers, pas des personnes — pas de consentement nominal).
  *
- *   Les 4 vignettes ne nomment personne (on n'a pas le consentement
- *   nominal de l'équipe villageoise) — elles désignent des *métiers*
- *   ("Le jardin", "L'accueil", "Les artisans", "Les bungalows").
- *   Les noms de la famille restent dans le paragraphe, signé.
- *
- * Server Component : aucun état, aucune interaction au-delà de
- * ScrollReveal (lui-même client). On évite donc d'embarquer du JS pour
- * cette section.
+ * Server Component : aucune interaction au-delà de ScrollReveal.
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function OurHouse({ dict, locale }: { dict: any; locale: Locale }) {
-  const basePath = getBasePath();
-
   const vignettes = [
     { key: "garden", src: "team-garden.jpg", label: dict.ourHouse.captions.garden },
     { key: "welcome", src: "team-welcome.jpg", label: dict.ourHouse.captions.welcome },
@@ -36,56 +26,50 @@ export default function OurHouse({ dict, locale }: { dict: any; locale: Locale }
   ] as const;
 
   return (
-    <section id="our-house" className="py-16 md:py-40 bg-cream-dark/30">
-      <div className="max-w-[1300px] mx-auto px-6">
-        {/* ─── Header — eyebrow + title centered ─────────────────────── */}
-        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20">
-          <ScrollReveal>
-            <span className="section-label">{dict.ourHouse.label}</span>
-            <h2 className="mb-6">{dict.ourHouse.title}</h2>
-            <div className="section-divider" />
-          </ScrollReveal>
-        </div>
-
-        {/* ─── Middle — 7/5 split: hero photo + paragraph + signed line ─ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-16 md:mb-24">
+    <section id="our-house" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        {/* ─── Photo famille + récit + citation ──────────────────────── */}
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <ScrollReveal className="lg:col-span-7">
-            <div className="rounded-md overflow-hidden shadow-lg">
+            <div className="overflow-hidden rounded-[3px] border border-hairline">
               <img
                 src={`${basePath}/images/team/team-hero.jpg`}
                 alt="Maggie Leong et l'équipe du Lac Hôtel Sahambavy"
-                className="w-full aspect-[4/3] object-cover"
+                className="aspect-[4/3] w-full object-cover"
                 loading="lazy"
               />
             </div>
           </ScrollReveal>
 
           <ScrollReveal className="lg:col-span-5" delay={150}>
-            <p className="text-text-body leading-[1.95] text-base mb-8">
+            <span className="ge-label mb-4">{dict.ourHouse.label}</span>
+            <h2 className="mb-6" style={{ textWrap: "balance" }}>
+              {dict.ourHouse.title}
+            </h2>
+            <p className="ge-measure mb-8 text-[15px] leading-relaxed text-body">
               {dict.ourHouse.paragraph}
             </p>
-            <blockquote className="font-[family-name:var(--font-sub)] italic text-xl md:text-2xl text-gold leading-snug mb-3 not-prose">
+            {/* Citation en Inter Tight light — jamais d'italique serif en monde clair */}
+            <blockquote className="mb-4 font-[family-name:var(--font-display)] text-2xl font-light leading-snug text-ink">
               {dict.ourHouse.quote}
             </blockquote>
-            <cite className="not-italic text-[0.65rem] uppercase tracking-[0.25em] text-text-muted">
-              {dict.ourHouse.signature}
-            </cite>
+            <cite className="ge-label not-italic">{dict.ourHouse.signature}</cite>
           </ScrollReveal>
         </div>
 
-        {/* ─── Bottom — 4 portrait vignettes with role captions ──────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+        {/* ─── 4 vignettes-métiers, captions conservées ──────────────── */}
+        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
           {vignettes.map((v, i) => (
             <ScrollReveal key={v.key} delay={i * 80}>
-              <figure className="group relative overflow-hidden rounded-md">
+              <figure className="group relative overflow-hidden rounded-[3px]">
                 <img
                   src={`${basePath}/images/team/${v.src}`}
                   alt={v.label}
-                  className="w-full aspect-[4/5] object-cover transition-transform duration-[1.2s] group-hover:scale-105"
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
                   loading="lazy"
                 />
-                <figcaption className="absolute inset-x-0 bottom-0 px-4 py-3 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
-                  <span className="text-[0.6rem] uppercase tracking-[0.25em] text-white font-medium">
+                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-4 py-3">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white">
                     {v.label}
                   </span>
                 </figcaption>
@@ -94,10 +78,10 @@ export default function OurHouse({ dict, locale }: { dict: any; locale: Locale }
           ))}
         </div>
 
-        {/* ─── CTA — minimal underline pattern (introduced in PR #20) ── */}
-        <div className="text-center mt-16">
+        {/* ─── CTA ───────────────────────────────────────────────────── */}
+        <div className="mt-14 text-center">
           <ScrollReveal>
-            <Link href={`/${locale}/notre-equipe/`} className="btn btn--minimal">
+            <Link href={`/${locale}/notre-equipe/`} className="ge-cta ge-cta--ghost">
               {dict.ourHouse.ctaLabel}
             </Link>
           </ScrollReveal>

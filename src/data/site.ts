@@ -36,45 +36,217 @@ export const siteConfig = {
 };
 
 /**
- * Navigation globale du site.
+ * Navigation globale du site — arborescence du document de référence de
+ * Maggie (« TExte proposition de Maggie », 16/07/2026), qui fait foi.
  *
- * `primary: false` → page secondaire : visible uniquement dans le menu mobile
- * (qui scroll) et le footer. Le menu desktop reste compact (6 items max)
- * pour préserver la respiration éditoriale.
- *
- * Les 3 pages secondaires actuelles — Train FCE, Mariages & Séminaires,
- * Nos Jardins — sont des pages "découverte" accessibles via le contenu
- * éditorial (page Expériences) et via le footer.
+ * - Item AVEC `children` → méga-menu déroulant en desktop, accordéon en mobile.
+ * - `primary: false` → entrée secondaire : footer + menu mobile uniquement.
+ * - L'Accueil est porté par le logo ; le CTA « Réserver » (→ /contact) est
+ *   rendu à part par la Navbar.
  */
-export const navigation: Array<{
+export type NavLabel = { fr: string; en: string; es: string };
+export type NavChild = { href: string; label: NavLabel };
+export type NavItem = {
   href: string;
-  label: { fr: string; en: string; es: string };
+  label: NavLabel;
+  /** Libellé compact pour la barre desktop (le libellé complet reste dans le méga-menu et le footer). */
+  shortLabel?: NavLabel;
+  children?: NavChild[];
   primary?: boolean;
-}> = [
-  { href: "/", label: { fr: "Accueil", en: "Home", es: "Inicio" } },
-  { href: "/hotel", label: { fr: "L'Hôtel", en: "The Hotel", es: "El Hotel" } },
-  { href: "/hebergements", label: { fr: "Séjourner", en: "Stay", es: "Alojarse" } },
-  { href: "/experiences", label: { fr: "Expériences", en: "Experiences", es: "Experiencias" } },
-  { href: "/galerie", label: { fr: "Galerie", en: "Gallery", es: "Galería" } },
-  { href: "/contact", label: { fr: "Réserver", en: "Book", es: "Reservar" } },
-  // Pages secondaires — masquées du menu desktop, visibles en mobile + footer
+};
+
+export const navigation: NavItem[] = [
   {
-    href: "/train-fce",
-    label: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" },
-    primary: false,
+    href: "/hotel",
+    label: { fr: "Le Lac Hôtel", en: "The Lac Hôtel", es: "El Lac Hôtel" },
+    shortLabel: { fr: "L'Hôtel", en: "The Hotel", es: "El Hotel" },
+    children: [
+      {
+        href: "/hotel#philosophie",
+        label: {
+          fr: "Notre philosophie",
+          en: "Our philosophy",
+          es: "Nuestra filosofía",
+        },
+      },
+      {
+        href: "/hotel#histoire",
+        label: {
+          fr: "La petite histoire",
+          en: "Our story",
+          es: "Nuestra historia",
+        },
+      },
+      {
+        href: "/hotel#rse",
+        label: {
+          fr: "RSE & développement durable",
+          en: "CSR & sustainability",
+          es: "RSE y sostenibilidad",
+        },
+      },
+      {
+        href: "/notre-equipe",
+        label: { fr: "L'équipe", en: "The team", es: "El equipo" },
+      },
+    ],
   },
   {
-    href: "/mariages-seminaires",
-    label: {
-      fr: "Mariages & Séminaires",
-      en: "Weddings & Seminars",
-      es: "Bodas y Seminarios",
-    },
-    primary: false,
+    href: "/hebergements",
+    label: { fr: "Hébergements", en: "Accommodation", es: "Alojamientos" },
+    children: [
+      {
+        href: "/hebergements#pilotis-nuptial",
+        label: { fr: "Pilotis Nuptial", en: "Pilotis Nuptial", es: "Pilotis Nuptial" },
+      },
+      {
+        href: "/hebergements#superior-lake-view",
+        label: {
+          fr: "Superior Lake View Room",
+          en: "Superior Lake View Room",
+          es: "Superior Lake View Room",
+        },
+      },
+      {
+        href: "/hebergements#bungalow-standard",
+        label: { fr: "Bungalow standard", en: "Standard bungalow", es: "Bungaló estándar" },
+      },
+      {
+        href: "/hebergements#wagon-nuptial",
+        label: { fr: "Wagon Nuptial", en: "Wagon Nuptial", es: "Wagon Nuptial" },
+      },
+      {
+        href: "/hebergements#bungalow-tarzan",
+        label: {
+          fr: "Bungalow Tarzan sur arbre",
+          en: "Tarzan tree bungalow",
+          es: "Bungaló Tarzán en árbol",
+        },
+      },
+      {
+        href: "/le-repos",
+        label: {
+          fr: "Extension « Le Repos »",
+          en: "“Le Repos” extension",
+          es: "Extensión «Le Repos»",
+        },
+      },
+    ],
+  },
+  {
+    href: "/restaurant",
+    label: { fr: "Restaurant & Bar", en: "Restaurant & Bar", es: "Restaurante y Bar" },
+    shortLabel: { fr: "Restaurant", en: "Restaurant", es: "Restaurante" },
+  },
+  {
+    href: "/experiences",
+    label: { fr: "Expériences", en: "Experiences", es: "Experiencias" },
+    children: [
+      {
+        href: "/experiences#loisirs",
+        label: { fr: "Loisirs", en: "Leisure", es: "Ocio" },
+      },
+      {
+        href: "/experiences#massage",
+        label: {
+          fr: "Massages & bien-être",
+          en: "Massages & wellness",
+          es: "Masajes y bienestar",
+        },
+      },
+      {
+        href: "/experiences#salle-de-conference",
+        label: {
+          fr: "Salle de conférence",
+          en: "Conference room",
+          es: "Sala de conferencias",
+        },
+      },
+      {
+        href: "/experiences#mami-bio-shop",
+        label: { fr: "Mami Bio Shop", en: "Mami Bio Shop", es: "Mami Bio Shop" },
+      },
+      {
+        href: "/mariages-seminaires",
+        label: { fr: "Mariage", en: "Weddings", es: "Bodas" },
+      },
+      {
+        href: "/plantation-de-the",
+        label: {
+          fr: "La Plantation de thé de Sahambavy",
+          en: "The Sahambavy tea plantation",
+          es: "La plantación de té de Sahambavy",
+        },
+      },
+      {
+        href: "/experiences#riviere-matsiatra",
+        label: {
+          fr: "Descente de la Rivière Matsiatra",
+          en: "Matsiatra River descent",
+          es: "Descenso del río Matsiatra",
+        },
+      },
+    ],
+  },
+  {
+    href: "/train-fce",
+    label: { fr: "Ligne ferroviaire FCE", en: "FCE railway line", es: "Línea férrea FCE" },
+    shortLabel: { fr: "Train FCE", en: "FCE Train", es: "Tren FCE" },
+    children: [
+      {
+        href: "/train-fce#ligne-fce",
+        label: { fr: "La ligne FCE", en: "The FCE line", es: "La línea FCE" },
+      },
+      {
+        href: "/train-fce#draisine",
+        label: {
+          fr: "Location privative de la draisine",
+          en: "Private draisine hire",
+          es: "Alquiler privado de la dresina",
+        },
+      },
+    ],
   },
   {
     href: "/jardins",
     label: { fr: "Nos Jardins", en: "Our Gardens", es: "Nuestros Jardines" },
+    children: [
+      {
+        href: "/jardins#jardins-eden",
+        label: { fr: "Jardins d'Éden", en: "Gardens of Eden", es: "Jardines del Edén" },
+      },
+      {
+        href: "/jardins#village",
+        label: {
+          fr: "Le Village de Sahambavy",
+          en: "Sahambavy village",
+          es: "El pueblo de Sahambavy",
+        },
+      },
+    ],
+  },
+  {
+    href: "/localisation",
+    label: { fr: "Localisation", en: "Location", es: "Ubicación" },
+  },
+  // Secondaires — footer + menu mobile uniquement
+  {
+    href: "/galerie",
+    label: { fr: "Galerie", en: "Gallery", es: "Galería" },
+    primary: false,
+  },
+  {
+    href: "/contact",
+    label: { fr: "Contactez-nous", en: "Contact us", es: "Contáctenos" },
+    primary: false,
+  },
+  {
+    href: "/conditions-reservation",
+    label: {
+      fr: "Conditions de réservation",
+      en: "Booking conditions",
+      es: "Condiciones de reserva",
+    },
     primary: false,
   },
 ];

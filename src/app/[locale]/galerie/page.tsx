@@ -5,13 +5,21 @@
 import { useEffect, useState, use } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
 import { type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
-import SectionHeader from "@/components/ui/SectionHeader";
+import PanoramaHero from "@/components/ui/PanoramaHero";
 import GalleryLightbox from "@/components/gallery/GalleryLightbox";
 
 const basePath = getBasePath();
 
-type Category = "all" | "rooms" | "restaurant" | "nature" | "plantation" | "train" | "repos" | "equipe";
+type Category =
+  | "all"
+  | "rooms"
+  | "restaurant"
+  | "nature"
+  | "plantation"
+  | "train"
+  | "village"
+  | "jardins"
+  | "boutique";
 
 interface Photo {
   src: string;
@@ -28,8 +36,27 @@ const photos: Photo[] = [
   { src: `${basePath}/images/gallery/gallery-03.jpg`, alt: "Vue lac bungalows", category: "nature" },
   { src: `${basePath}/images/gallery/gallery-08.jpg`, alt: "Coucher de soleil sur le lac", category: "nature" },
   { src: `${basePath}/images/gallery/gallery-06.jpg`, alt: "Activité kayak sur le lac", category: "nature" },
+  { src: `${basePath}/images/pool/piscine-jardin-palmiers-jour.jpg`, alt: "Piscine au milieu des palmiers du jardin", category: "nature" },
   { src: `${basePath}/images/gallery/gallery-04.jpg`, alt: "Jardins et plantation de thé", category: "plantation" },
   { src: `${basePath}/images/gallery/gallery-10.jpg`, alt: "Bâtiment principal et jardins", category: "train" },
+  { src: `${basePath}/images/train/draisine-fce-embarquement-voyageurs.jpg`, alt: "Embarquement des voyageurs sur la draisine FCE", category: "train" },
+  { src: `${basePath}/images/train/draisine-rails-gare-sahambavy.jpg`, alt: "Draisine sur les rails à la gare de Sahambavy", category: "train" },
+  { src: `${basePath}/images/village/rizieres-sahambavy-vue-aerienne.jpg`, alt: "Rizières en terrasses de Sahambavy vues du ciel", category: "village" },
+  { src: `${basePath}/images/village/femme-betsileo-maison-traditionnelle.jpg`, alt: "Femme betsileo devant une maison traditionnelle", category: "village" },
+  { src: `${basePath}/images/village/portrait-homme-betsileo-sourire.jpg`, alt: "Portrait d'un homme betsileo souriant", category: "village" },
+  { src: `${basePath}/images/village/scene-village-zebus-grand-arbre.jpg`, alt: "Scène de village avec zébus sous un grand arbre", category: "village" },
+  { src: `${basePath}/images/village/maison-betsileo-enfants-fenetres.jpg`, alt: "Maison betsileo avec des enfants aux fenêtres", category: "village" },
+  { src: `${basePath}/images/jardins/orchidee-tigree-jardin-hotel.jpg`, alt: "Orchidée tigrée des jardins de l'hôtel", category: "jardins" },
+  { src: `${basePath}/images/jardins/bougainvillier-violet-jardin.jpg`, alt: "Bougainvillier violet en fleur dans le jardin", category: "jardins" },
+  { src: `${basePath}/images/jardins/zinnia-orange-abeille-jardin.jpg`, alt: "Zinnia orange visité par une abeille", category: "jardins" },
+  { src: `${basePath}/images/jardins/gaillarde-rouge-jaune-jardin.jpg`, alt: "Gaillarde rouge et jaune dans les massifs", category: "jardins" },
+  { src: `${basePath}/images/jardins/statue-cherubin-jardin-fougeres.jpg`, alt: "Statue de chérubin parmi les fougères du jardin", category: "jardins" },
+  { src: `${basePath}/images/boutique/boutique-exterior.jpg`, alt: "La boutique du Lac Hôtel", category: "boutique" },
+  { src: `${basePath}/images/boutique/bio-mami-shop-entree-boutique.jpg`, alt: "Entrée de la boutique Bio Mami Shop", category: "boutique" },
+  { src: `${basePath}/images/boutique/etal-legumes-bio-mami-shop.jpg`, alt: "Étal de légumes bio de la boutique", category: "boutique" },
+  { src: `${basePath}/images/boutique/savon-artisanal-curcuma-natural-by-maggie.jpg`, alt: "Savon artisanal au curcuma Natural by Maggie", category: "boutique" },
+  { src: `${basePath}/images/boutique/savon-coco-artisanal-bois-sculpte.jpg`, alt: "Savon artisanal à la coco sur bois sculpté", category: "boutique" },
+  { src: `${basePath}/images/boutique/savon-fleur-marguerite-artisanal.jpg`, alt: "Savon artisanal à la fleur de marguerite", category: "boutique" },
 ];
 
 export default function GalleryPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -51,6 +78,9 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
     { key: "nature", label: dict.gallery.nature },
     { key: "plantation", label: dict.gallery.plantation },
     { key: "train", label: dict.gallery.train },
+    { key: "village", label: dict.gallery.village ?? "Village" },
+    { key: "jardins", label: dict.gallery.jardins ?? "Jardins" },
+    { key: "boutique", label: dict.gallery.boutique ?? "Boutique" },
   ];
 
   const filtered = activeFilter === "all"
@@ -59,69 +89,53 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
 
   return (
     <>
-      <PageHero
-        title={dict.gallery.heroTitle}
-        subtitle={dict.gallery.heroSubtitle}
+      <PanoramaHero
         image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
+        imageAlt={dict.gallery.heroSubtitle}
+        label={dict.gallery.heroLabel ?? "Lac Hôtel Sahambavy"}
+        title={dict.gallery.heroTitle}
+        kicker={dict.gallery.heroSubtitle}
       />
 
-      {/* Filtres + grille masonry premium */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader
-            title={dict.gallery.heroTitle}
-            subtitle={dict.gallery.heroSubtitle}
-          />
-
-          {/* Boutons filtre premium — faux-glass avec bordure dorée translucide */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-14">
+      {/* ──── Filtres + grille masonry — grammaire Panorama ──── */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          {/* Filtres — pastilles hairline, accent thé unique */}
+          <div className="mb-10 flex flex-wrap gap-2 md:mb-14 md:gap-3">
             {filters.map((f) => (
               <button
                 key={f.key}
-                onClick={() => setActiveFilter(f.key)}
-                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-[0.15em] transition-all duration-300 border ${
+                onClick={() => {
+                  setActiveFilter(f.key);
+                  setLightboxIndex(null);
+                }}
+                aria-pressed={activeFilter === f.key}
+                className={`rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 md:px-5 md:py-2.5 ${
                   activeFilter === f.key
-                    ? "bg-brown-deep text-cream border-brown-deep shadow-lg"
-                    : "bg-white/70 text-text-body border-gold/20 hover:bg-white hover:border-gold/50 hover:text-brown-deep"
+                    ? "border-tea bg-tea text-white"
+                    : "border-hairline bg-white text-muted hover:border-tea hover:text-tea"
                 }`}
-                style={
-                  activeFilter !== f.key
-                    ? {
-                        backdropFilter: "blur(10px)",
-                        WebkitBackdropFilter: "blur(10px)",
-                      }
-                    : undefined
-                }
               >
                 {f.label}
               </button>
             ))}
           </div>
 
-          {/* Grille masonry — wrap chaque image avec .product-photo pour
-              la bordure dorée intérieure premium + hover zoom subtil */}
+          {/* Grille masonry — vignettes hairline, zoom discret au survol */}
           <div className="masonry-grid">
             {filtered.map((photo, i) => (
               <button
                 key={photo.src}
-                className="product-photo group cursor-pointer block w-full text-left"
+                className="group block w-full cursor-pointer overflow-hidden rounded-[3px] border border-hairline bg-white text-left"
                 onClick={() => setLightboxIndex(i)}
                 aria-label={`Ouvrir ${photo.alt}`}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
-                  className="w-full block transition-transform duration-[1s] ease-out group-hover:scale-[1.04]"
+                  className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
               </button>
             ))}

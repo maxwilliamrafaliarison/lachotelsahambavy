@@ -12,7 +12,7 @@
 import Link from "next/link";
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -73,7 +73,7 @@ function Linkify({ text }: { text: string }) {
             <a
               key={i}
               href={`mailto:${part.value}`}
-              className="text-brown-deep underline decoration-gold/60 hover:decoration-gold"
+              className="text-ink underline decoration-tea/50 underline-offset-2 transition-colors hover:decoration-tea"
             >
               {part.value}
             </a>
@@ -86,7 +86,7 @@ function Linkify({ text }: { text: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brown-deep underline decoration-gold/60 hover:decoration-gold"
+            className="text-ink underline decoration-tea/50 underline-offset-2 transition-colors hover:decoration-tea"
           >
             {part.value}
           </a>
@@ -110,81 +110,101 @@ export default async function ConditionsPage({
   return (
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "conditions"))]} />
-      <PageHero
-        title={dict.conditions.heroTitle}
-        subtitle={dict.conditions.heroSubtitle}
+
+      <PanoramaHero
         image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
+        label={dict.conditions.navLabel}
+        title={dict.conditions.heroTitle}
+        kicker={dict.conditions.heroSubtitle}
+        height="tall"
       />
 
-      {/* Intro + metadata */}
-      <section className="py-20 bg-white">
-        <div className="max-w-[820px] mx-auto px-6">
-          <ScrollReveal>
-            <p className="text-text-muted leading-relaxed text-lg font-[family-name:var(--font-sub)]">
-              {dict.conditions.intro}
-            </p>
-            <p className="mt-6 text-sm text-text-muted/80 italic">
-              {dict.conditions.lastUpdated} — {dict.conditions.lastUpdatedDate}
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Sections (table of contents + content) */}
-      <section className="pb-20 bg-white">
-        <div className="max-w-[820px] mx-auto px-6 grid gap-12 md:gap-16">
-          {sections.map((section, i) => {
-            const anchor = `sec-${i + 1}`;
-            return (
-              <ScrollReveal key={anchor} delay={i * 40}>
-                <article
-                  id={anchor}
-                  className="bg-cream/60 rounded-2xl p-8 md:p-10 scroll-mt-24"
-                >
-                  <h2 className="text-2xl md:text-3xl font-[family-name:var(--font-heading)] text-brown-deep mb-6">
+      {/* Intro + sommaire à filets fins */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="grid gap-12 md:grid-cols-[1fr_320px] md:gap-16 lg:gap-24">
+            <ScrollReveal>
+              <p className="ge-measure text-base leading-relaxed text-body md:text-lg">
+                {dict.conditions.intro}
+              </p>
+              <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">
+                {dict.conditions.lastUpdated} — {dict.conditions.lastUpdatedDate}
+              </p>
+            </ScrollReveal>
+            <ScrollReveal delay={100}>
+              <nav aria-label={dict.conditions.heroTitle} className="border-t border-hairline">
+                {sections.map((section, i) => (
+                  <a
+                    key={i}
+                    href={`#sec-${i + 1}`}
+                    className="block border-b border-hairline py-3 text-sm text-body transition-colors hover:text-tea"
+                  >
                     {section.title}
-                  </h2>
-                  {section.intro && (
-                    <p className="text-text-muted leading-relaxed mb-6">
-                      <Linkify text={section.intro} />
-                    </p>
-                  )}
-                  <ul className="space-y-4">
-                    {section.items.map((item, j) => (
-                      <li key={j} className="flex gap-4 text-text-muted leading-relaxed">
-                        <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gold mt-2.5" />
-                        <span>
-                          <Linkify text={item} />
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </ScrollReveal>
-            );
-          })}
+                  </a>
+                ))}
+              </nav>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="py-20 bg-brown-deep text-white">
-        <div className="max-w-[640px] mx-auto px-6 text-center">
-          <ScrollReveal>
-            <p className="text-lg md:text-xl mb-8 font-[family-name:var(--font-sub)] text-cream/90">
-              {dict.conditions.contactLead}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={`/${loc}/contact/`} className="btn btn--primary">
-                {dict.conditions.contactCta}
-              </Link>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-cream/40 text-cream rounded-lg hover:bg-cream/10 transition-colors duration-300"
-              >
-                {siteConfig.email}
-              </a>
-            </div>
-          </ScrollReveal>
+      {/* Sections — blocs hairline, typo éditoriale */}
+      <section className="pb-16 md:pb-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="mx-auto grid max-w-[820px] gap-14 md:gap-20">
+            {sections.map((section, i) => {
+              const anchor = `sec-${i + 1}`;
+              return (
+                <ScrollReveal key={anchor} delay={i * 40}>
+                  <article id={anchor} className="scroll-mt-24 border-t border-hairline pt-8 md:pt-10">
+                    <h2 className="mb-6" style={{ textWrap: "balance" }}>
+                      {section.title}
+                    </h2>
+                    {section.intro && (
+                      <p className="mb-6 text-[15px] leading-relaxed text-body">
+                        <Linkify text={section.intro} />
+                      </p>
+                    )}
+                    <ul className="space-y-4">
+                      {section.items.map((item, j) => (
+                        <li key={j} className="flex gap-4 text-[15px] leading-relaxed text-body">
+                          <span className="mt-[0.65em] h-1 w-1 flex-shrink-0 rounded-full bg-tea" />
+                          <span>
+                            <Linkify text={item} />
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact — bande douce, monde clair */}
+      <section className="bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="mx-auto max-w-[640px] text-center">
+            <ScrollReveal>
+              <h3 className="mb-8" style={{ textWrap: "balance" }}>
+                {dict.conditions.contactLead}
+              </h3>
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                <Link href={`/${loc}/contact/`} className="ge-cta">
+                  {dict.conditions.contactCta}
+                </Link>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="ge-cta ge-cta--ghost"
+                  style={{ textTransform: "none", letterSpacing: "0.02em" }}
+                >
+                  {siteConfig.email}
+                </a>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
     </>

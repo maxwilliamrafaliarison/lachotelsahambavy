@@ -44,11 +44,11 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/fr/notre-restaurant", "/fr/restaurant/"),
   ...both("/fr/plantation", "/fr/plantation-de-the/"),
   ...both("/fr/the", "/fr/plantation-de-the/"),
-  ...both("/fr/the-fce", "/fr/experiences/train-fce/"),
-  ...both("/fr/train", "/fr/experiences/train-fce/"),
-  ...both("/fr/train-fce", "/fr/experiences/train-fce/"),
+  ...both("/fr/the-fce", "/fr/train-fce/"),
+  ...both("/fr/train", "/fr/train-fce/"),
   ...both("/fr/excursions", "/fr/experiences/"),
-  ...both("/fr/activites", "/fr/experiences/"),
+  // NOTE : /fr/activites est une vraie page (Loisirs, sous-page d'Expériences)
+  // depuis la refonte 2026 — ne pas la rediriger.
   ...both("/fr/about", "/fr/hotel/"),
   ...both("/fr/a-propos", "/fr/hotel/"),
   ...both("/fr/galerie-photos", "/fr/galerie/"),
@@ -69,9 +69,8 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/en/plantation", "/en/plantation-de-the/"),
   ...both("/en/tea", "/en/plantation-de-the/"),
   ...both("/en/tea-plantation", "/en/plantation-de-the/"),
-  ...both("/en/fce-train", "/en/experiences/train-fce/"),
-  ...both("/en/train", "/en/experiences/train-fce/"),
-  ...both("/en/train-fce", "/en/experiences/train-fce/"),
+  ...both("/en/fce-train", "/en/train-fce/"),
+  ...both("/en/train", "/en/train-fce/"),
   ...both("/en/excursions", "/en/experiences/"),
   ...both("/en/activities", "/en/experiences/"),
   ...both("/en/about", "/en/hotel/"),
@@ -90,7 +89,7 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/es/restaurante", "/es/restaurant/"),
   ...both("/es/plantacion-te", "/es/plantation-de-the/"),
   ...both("/es/te", "/es/plantation-de-the/"),
-  ...both("/es/tren-fce", "/es/experiences/train-fce/"),
+  ...both("/es/tren-fce", "/es/train-fce/"),
   ...both("/es/excursiones", "/es/experiences/"),
   ...both("/es/actividades", "/es/experiences/"),
   ...both("/es/nuestro-equipo", "/es/notre-equipe/"),
@@ -133,7 +132,14 @@ export const wordpressRedirects: Redirect[] = [
 /**
  * Headers de sécurité (cf. Phase 8 §8.9).
  * NB : Ne s'appliquent qu'en mode SSR Vercel (pas en static export GitHub Pages).
+ *
+ * HSTS et `upgrade-insecure-requests` ne sont émis QUE sur Vercel : en
+ * `next start` local (http), ils forcent le navigateur à réécrire toutes les
+ * requêtes en https → l'app devient intestable en local (et pollue le cache
+ * HSTS du navigateur pour localhost). Sur Vercel, le https est garanti.
  */
+const isVercel = !!process.env.VERCEL;
+
 export const securityHeaders: Awaited<
   ReturnType<NonNullable<NextConfig["headers"]>>
 > = [
@@ -147,10 +153,14 @@ export const securityHeaders: Awaited<
         key: "Permissions-Policy",
         value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
       },
-      {
-        key: "Strict-Transport-Security",
-        value: "max-age=63072000; includeSubDomains; preload",
-      },
+      ...(isVercel
+        ? [
+            {
+              key: "Strict-Transport-Security",
+              value: "max-age=63072000; includeSubDomains; preload",
+            },
+          ]
+        : []),
       {
         key: "Content-Security-Policy",
         value: [
@@ -164,7 +174,7 @@ export const securityHeaders: Awaited<
           "form-action 'self'",
           "frame-ancestors 'self'",
           "base-uri 'self'",
-          "upgrade-insecure-requests",
+          ...(isVercel ? ["upgrade-insecure-requests"] : []),
         ].join("; "),
       },
     ],

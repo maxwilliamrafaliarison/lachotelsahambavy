@@ -146,14 +146,13 @@ export default function Testimonials({
   locale: Locale;
 }) {
   return (
-    <section className="py-16 md:py-40 bg-white">
-      <div className="max-w-[1400px] mx-auto px-6">
+    <section className="py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
         {/* Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+        <div className="mb-12 md:mb-16 max-w-2xl mx-auto text-center">
           <ScrollReveal>
-            <span className="section-label">{dict.testimonials.label}</span>
-            <h2 className="mb-4">{dict.testimonials.title}</h2>
-            <div className="section-divider" />
+            <span className="ge-label mb-4">{dict.testimonials.label}</span>
+            <h2 style={{ textWrap: "balance" }}>{dict.testimonials.title}</h2>
           </ScrollReveal>
         </div>
 
@@ -278,15 +277,15 @@ function SourceColumn({
         href={source.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group text-center mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded-sm p-2 -m-2"
+        className="group text-center mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tea/40 rounded-sm p-2 -m-2"
         aria-label={`${VIEW_ON[locale]} ${source.name} — ${scoreDisplay}${scoreSuffix}, ${source.total} ${REVIEW_NOUN[locale]}`}
       >
-        <span className="block text-[0.65rem] font-medium uppercase tracking-[0.3em] text-text-muted group-hover:text-gold transition-colors duration-300 mb-3">
+        <span className="ge-label mb-3 transition-colors duration-300 group-hover:text-tea-deep">
           {source.name}
         </span>
-        <span className="block font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-medium text-brown-deep group-hover:text-gold tabular-nums transition-colors duration-300 [font-variant-numeric:lining-nums_proportional-nums]">
+        <span className="block text-3xl md:text-4xl font-light text-ink group-hover:text-tea tabular-nums transition-colors duration-300 [font-variant-numeric:lining-nums_proportional-nums]">
           {scoreDisplay}
-          <span className="text-base text-text-muted font-normal">
+          <span className="text-base text-muted font-normal">
             {scoreSuffix}
           </span>
         </span>
@@ -296,7 +295,7 @@ function SourceColumn({
             return (
               <span
                 key={j}
-                className={`text-[0.7rem] ${filled ? "text-gold" : "text-brown-deep/15"}`}
+                className={`text-[0.7rem] ${filled ? "text-tea" : "text-ink/15"}`}
                 aria-hidden="true"
               >
                 ★
@@ -304,7 +303,7 @@ function SourceColumn({
             );
           })}
         </span>
-        <span className="block text-[0.6rem] uppercase tracking-[0.25em] text-text-muted tabular-nums">
+        <span className="block text-[0.6rem] uppercase tracking-[0.25em] text-muted tabular-nums">
           {source.total} {REVIEW_NOUN[locale]}
         </span>
       </a>
@@ -346,7 +345,7 @@ function SourceColumn({
           type="button"
           onClick={() => advance(-1)}
           aria-label={NAV_PREV[locale]}
-          className="text-brown-deep/40 hover:text-gold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded-full p-1"
+          className="text-ink/40 hover:text-tea transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tea/40 rounded-full p-1"
         >
           <svg
             width="14"
@@ -362,14 +361,14 @@ function SourceColumn({
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
-        <span className="text-[0.65rem] tabular-nums uppercase tracking-[0.25em] text-text-muted min-w-[5ch] text-center">
+        <span className="text-[0.65rem] tabular-nums uppercase tracking-[0.25em] text-muted min-w-[5ch] text-center">
           {counter}
         </span>
         <button
           type="button"
           onClick={() => advance(1)}
           aria-label={NAV_NEXT[locale]}
-          className="text-brown-deep/40 hover:text-gold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded-full p-1"
+          className="text-ink/40 hover:text-tea transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tea/40 rounded-full p-1"
         >
           <svg
             width="14"
@@ -403,7 +402,7 @@ function ReviewCard({
 }) {
   const flag = COUNTRY_FLAGS[review.location];
   return (
-    <article className="bg-cream/40 border border-border/70 rounded-md p-6 md:p-7 h-[260px] flex flex-col">
+    <article className="bg-white border border-hairline rounded-[3px] p-6 md:p-7 h-[260px] flex flex-col">
       {/* Per-review star rating */}
       <div className="flex gap-0.5 mb-4" aria-label={`${review.rating} / 5`}>
         {Array.from({ length: 5 }).map((_, j) => {
@@ -411,7 +410,7 @@ function ReviewCard({
           return (
             <span
               key={j}
-              className={`text-[0.75rem] ${filled ? "text-gold" : "text-brown-deep/15"}`}
+              className={`text-[0.75rem] ${filled ? "text-tea" : "text-ink/15"}`}
               aria-hidden="true"
             >
               ★
@@ -420,16 +419,16 @@ function ReviewCard({
         })}
       </div>
 
-      <blockquote className="font-[family-name:var(--font-sub)] text-[0.95rem] md:text-base text-text-body leading-[1.7] italic mb-5 line-clamp-5 flex-1">
+      <blockquote className="text-sm md:text-[0.95rem] text-body leading-[1.7] mb-5 line-clamp-5 flex-1">
         &ldquo;{review.text[locale]}&rdquo;
       </blockquote>
 
       <div className="flex items-center gap-2.5 pt-1 mt-auto">
-        <span className="block w-5 h-px bg-gold/70 shrink-0" />
-        <span className="text-xs font-semibold text-brown-deep shrink-0">
+        <span className="block w-5 h-px bg-tea/60 shrink-0" />
+        <span className="text-xs font-semibold text-ink shrink-0">
           {review.name}
         </span>
-        <span className="text-[0.7rem] text-text-muted uppercase tracking-wider inline-flex items-center gap-1.5 min-w-0 truncate">
+        <span className="text-[0.7rem] text-muted uppercase tracking-wider inline-flex items-center gap-1.5 min-w-0 truncate">
           <span className="truncate">{review.location}</span>
           {flag && (
             <span

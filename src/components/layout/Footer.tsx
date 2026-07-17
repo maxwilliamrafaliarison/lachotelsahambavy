@@ -1,117 +1,155 @@
-import Link from "next/link";
 import { type Locale, getBasePath } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
+
+/**
+ * Footer « Nuit sur le lac » — le monde sombre C clôt chaque page.
+ * Plan du site en colonnes fidèle à l'arborescence de Maggie (une colonne
+ * par grande rubrique, sous-items dessous), pattern footer Glacier Express.
+ */
+
+/** "/hotel#philosophie" → "/fr/hotel/#philosophie" (trailing slash). */
+function localizeHref(href: string, locale: string): string {
+  const [path, hash] = href.split("#");
+  const normalized = path === "/" ? `/${locale}/` : `/${locale}${path}/`;
+  return hash ? `${normalized}#${hash}` : normalized;
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Footer({ locale, dict }: { locale: Locale; dict: any }) {
   const basePath = getBasePath();
   const year = new Date().getFullYear();
 
-  return (
-    <footer className="relative overflow-hidden">
-      {/* Glass-dark background */}
-      <div className="bg-[#1A1410]">
-        <div className="max-w-[1200px] mx-auto px-6 pt-20 pb-8">
-          {/* Top section — logo + tagline */}
-          <div className="flex flex-col items-center text-center mb-16">
-            <img
-              src={`${basePath}/images/logo/logo-white.png`}
-              alt="Lac Hotel Sahambavy"
-              className="h-56 md:h-64 w-auto mb-6 opacity-85"
-            />
-            <p className="text-cream/40 font-[family-name:var(--font-sub)] italic text-lg max-w-md">
-              {dict.footer.tagline}
-            </p>
-          </div>
+  const columns = navigation.filter((n) => n.primary !== false);
+  const secondary = navigation.filter((n) => n.primary === false);
 
-          {/* Navigation — single row, centered */}
-          <div className="flex flex-wrap justify-center gap-8 mb-16">
-            {navigation
-              .filter((n) => n.href !== "/")
-              .map((item) => (
-                <Link
-                  key={item.href}
-                  href={`/${locale}${item.href}/`}
-                  className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-cream/40 hover:text-gold transition-colors duration-300"
+  return (
+    <footer className="ge-night bg-night">
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pt-20">
+        {/* Marque + tagline */}
+        <div className="mb-14 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="flex items-center gap-4">
+                <img
+              src={`${basePath}/images/logo/logo-white.png`}
+              alt="Lac Hôtel Sahambavy"
+              className="h-20 w-auto opacity-90 md:h-24"
+            />
+            <div className="leading-none">
+              <p className="font-[family-name:var(--font-display)] text-[20px] font-extralight tracking-[0.18em] text-linen">
+                LAC HÔTEL
+              </p>
+              <p className="mt-1.5 text-[9.5px] font-semibold uppercase tracking-[0.3em] text-night-body">
+                Sahambavy · Madagascar
+              </p>
+            </div>
+          </div>
+          <p className="max-w-sm font-[family-name:var(--font-serif)] text-lg italic text-champagne/80">
+            {dict.footer.tagline}
+          </p>
+        </div>
+
+        {/* Plan du site — arborescence Maggie */}
+        <nav aria-label="Plan du site" className="mb-14">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
+            {columns.map((item) => (
+              <div key={item.href}>
+                <a
+                  href={`${basePath}${localizeHref(item.href, locale)}`}
+                  className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-linen transition-colors hover:text-champagne"
                 >
                   {item.label[locale]}
-                </Link>
-              ))}
+                </a>
+                {item.children && (
+                  <ul className="space-y-2">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <a
+                          href={`${basePath}${localizeHref(child.href, locale)}`}
+                          className="text-[13px] leading-snug text-night-body transition-colors hover:text-champagne"
+                        >
+                          {child.label[locale]}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
           </div>
+        </nav>
 
-          {/* Contact info — minimal row */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-16 text-sm">
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="text-cream/50 hover:text-gold transition-colors"
-            >
+        <hr className="ge-hairline" />
+
+        {/* Contacts + secondaires + réseaux */}
+        <div className="flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-2 text-[13.5px] text-night-body md:flex-row md:items-center md:gap-6">
+            <a href={`mailto:${siteConfig.email}`} className="transition-colors hover:text-champagne">
               {siteConfig.email}
             </a>
-            <span className="hidden md:block w-[1px] h-4 bg-cream/15" />
-            <a
-              href={`tel:${siteConfig.whatsapp}`}
-              className="text-cream/50 hover:text-gold transition-colors"
-            >
+            <a href={`tel:${siteConfig.whatsapp}`} className="transition-colors hover:text-champagne">
               {siteConfig.phone}
             </a>
-            <span className="hidden md:block w-[1px] h-4 bg-cream/15" />
-            <span className="text-cream/55 text-center">{siteConfig.address}</span>
+            <span>{siteConfig.address}</span>
           </div>
-
-          {/* Social icons */}
-          <div className="flex justify-center gap-6 mb-16">
+          <div className="flex items-center gap-5">
             <a
               href={siteConfig.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/50 hover:text-gold transition-colors"
               aria-label="Facebook"
+              className="text-night-body transition-colors hover:text-champagne"
             >
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4Z" />
               </svg>
             </a>
             <a
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/50 hover:text-gold transition-colors"
               aria-label="Instagram"
+              className="text-night-body transition-colors hover:text-champagne"
             >
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4.2" />
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
               </svg>
             </a>
             <a
               href={siteConfig.social.tripadvisor}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/50 hover:text-gold transition-colors"
               aria-label="TripAdvisor"
+              className="text-night-body transition-colors hover:text-champagne"
             >
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 004.04 10.43 5.976 5.976 0 004.015-1.536L12.006 20l1.988-2.323a5.997 5.997 0 008.055-8.894L24 6.648h-4.35a13.573 13.573 0 00-7.644-2.353zM6.003 17.213a3.997 3.997 0 11.002-7.994 3.997 3.997 0 01-.002 7.994zm11.994 0a3.997 3.997 0 110-7.994 3.997 3.997 0 010 7.994zM6.003 11.219a1.998 1.998 0 100 3.996 1.998 1.998 0 000-3.996zm11.994 0a1.998 1.998 0 100 3.996 1.998 1.998 0 000-3.996z" />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+                <circle cx="7.5" cy="13.5" r="3.2" />
+                <circle cx="16.5" cy="13.5" r="3.2" />
+                <circle cx="7.5" cy="13.5" r="0.9" fill="currentColor" stroke="none" />
+                <circle cx="16.5" cy="13.5" r="0.9" fill="currentColor" stroke="none" />
+                <path d="M3.5 10.5C5 8.8 8.3 7.5 12 7.5s7 1.3 8.5 3M12 7.5l-1.5-2h3L12 7.5Z" />
               </svg>
             </a>
           </div>
+        </div>
 
-          {/* Divider */}
-          <div className="h-[1px] bg-cream/8 mb-8" />
+        <hr className="ge-hairline" />
 
-          {/* Legal links row — booking conditions, privacy, etc. */}
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6 text-[0.65rem] text-cream/40 uppercase tracking-[0.15em]">
-            <Link
-              href={`/${locale}/conditions-reservation/`}
-              className="hover:text-gold transition-colors"
-            >
-              {dict.footer.bookingConditions}
-            </Link>
-          </div>
-
-          {/* Bottom bar — minimal */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[0.6rem] text-cream/25 uppercase tracking-wider">
-            <p>&copy; {year} {dict.footer.copyright}</p>
-            <p>RCS {siteConfig.legal.rcs}</p>
+        {/* Légal */}
+        <div className="flex flex-col gap-3 pt-6 text-[12px] text-night-body/70 md:flex-row md:items-center md:justify-between">
+          <p>
+            © {year} Lac Hôtel Sahambavy · RCS {siteConfig.legal.rcs} · {dict.footer.copyright}
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {secondary.map((item) => (
+              <a
+                key={item.href}
+                href={`${basePath}${localizeHref(item.href, locale)}`}
+                className="transition-colors hover:text-champagne"
+              >
+                {item.label[locale]}
+              </a>
+            ))}
           </div>
         </div>
       </div>

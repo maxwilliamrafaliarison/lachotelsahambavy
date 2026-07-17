@@ -1,17 +1,107 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
+import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
-import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import TheicoleBookingForm from "./TheicoleBookingForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
+
+/* Textes nouveaux de la refonte — fallbacks locaux en attendant la fusion
+   des deltas dictionnaire (scratchpad/dict-deltas/plantation.json). Si la
+   clé existe déjà dans dict.plantation, elle est prioritaire. */
+const extraTexts = {
+  fr: {
+    heroKicker:
+      "520 hectares de théiers ondulent entre le lac et les collines. La deuxième boisson la plus consommée au monde après l'eau pousse ici — et nulle part ailleurs à Madagascar.",
+    factsTitle: "La plantation en un regard",
+    factsRows: [
+      { label: "Superficie", value: "520 hectares" },
+      { label: "Thés produits", value: "Noir & vert" },
+      { label: "Cueillette", value: "Manuelle, à la main" },
+      { label: "Visite guidée", value: "½ journée" },
+    ],
+    factsFootnote: "L'unique plantation de thé de Madagascar, aux portes de l'hôtel.",
+    timelineLabel: "Chronologie",
+    timelineTitle: "Les grandes dates",
+    womenLabel: "Le thé à Madagascar",
+    womenTitle: "Sahambavy, « champs des femmes »",
+    cinematicCaption: "Cueilleuses au petit matin — chaque feuille est encore récoltée à la main.",
+    excursionIntro:
+      "Quatre heures pour tout comprendre : l'usine et les étapes de fabrication du thé, la dégustation des différentes qualités, puis la promenade à travers les rangées de théiers, à la rencontre des cueilleuses. Réservation auprès de la réception.",
+    stepsTitle: "Déroulé de la visite",
+    infoDurationLabel: "Durée",
+    infoBookingLabel: "Réservation",
+    infoElevationLabel: "Dénivelé",
+    infoDifficultyLabel: "Difficulté",
+    infoWalkingLabel: "Marche",
+    soapTitle: "Savons artisanaux 100 % naturels",
+    bookIntro:
+      "Indiquez-nous vos dates : la réception organise votre visite et vous la confirme par e-mail.",
+  },
+  en: {
+    heroKicker:
+      "520 hectares of tea bushes roll between the lake and the hills. The world's second most consumed drink after water grows here — and nowhere else in Madagascar.",
+    factsTitle: "The plantation at a glance",
+    factsRows: [
+      { label: "Area", value: "520 hectares" },
+      { label: "Teas produced", value: "Black & green" },
+      { label: "Harvest", value: "Picked by hand" },
+      { label: "Guided visit", value: "Half day" },
+    ],
+    factsFootnote: "Madagascar's only tea plantation, right on the hotel's doorstep.",
+    timelineLabel: "Timeline",
+    timelineTitle: "Key dates",
+    womenLabel: "Tea in Madagascar",
+    womenTitle: "Sahambavy, 'women's fields'",
+    cinematicCaption: "Tea pickers in the early morning — every leaf is still harvested by hand.",
+    excursionIntro:
+      "Four hours to see it all: the factory and each stage of tea making, a tasting of the different grades, then a walk through the rows of tea bushes to meet the pickers. Book at the hotel reception.",
+    stepsTitle: "Visit itinerary",
+    infoDurationLabel: "Duration",
+    infoBookingLabel: "Booking",
+    infoElevationLabel: "Elevation",
+    infoDifficultyLabel: "Difficulty",
+    infoWalkingLabel: "Walking",
+    soapTitle: "100% natural handmade soaps",
+    bookIntro: "Tell us your dates — reception arranges your visit and confirms by email.",
+  },
+  es: {
+    heroKicker:
+      "520 hectáreas de té ondulan entre el lago y las colinas. La segunda bebida más consumida del mundo después del agua crece aquí — y en ningún otro lugar de Madagascar.",
+    factsTitle: "La plantación de un vistazo",
+    factsRows: [
+      { label: "Superficie", value: "520 hectáreas" },
+      { label: "Tés producidos", value: "Negro y verde" },
+      { label: "Cosecha", value: "Recogida a mano" },
+      { label: "Visita guiada", value: "Medio día" },
+    ],
+    factsFootnote: "La única plantación de té de Madagascar, a las puertas del hotel.",
+    timelineLabel: "Cronología",
+    timelineTitle: "Fechas clave",
+    womenLabel: "El té en Madagascar",
+    womenTitle: "Sahambavy, « campos de las mujeres »",
+    cinematicCaption: "Recolectoras al amanecer — cada hoja se cosecha todavía a mano.",
+    excursionIntro:
+      "Cuatro horas para verlo todo: la fábrica y las etapas de elaboración del té, la degustación de las distintas calidades y un paseo entre las hileras de té al encuentro de las recolectoras. Reserva en la recepción del hotel.",
+    stepsTitle: "Itinerario de la visita",
+    infoDurationLabel: "Duración",
+    infoBookingLabel: "Reserva",
+    infoElevationLabel: "Desnivel",
+    infoDifficultyLabel: "Dificultad",
+    infoWalkingLabel: "Caminata",
+    soapTitle: "Jabones artesanales 100 % naturales",
+    bookIntro:
+      "Indíquenos sus fechas: la recepción organiza su visita y se la confirma por correo electrónico.",
+  },
+};
+
+type ExtraTexts = (typeof extraTexts)["fr"];
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -26,26 +116,39 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default async function PlantationPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
+  const p = dict.plantation;
+
+  /* Clé du dict si déjà fusionnée, sinon fallback local (même texte). */
+  const pAny = p as Record<string, unknown>;
+  const xt = Object.fromEntries(
+    Object.entries(extraTexts[loc]).map(([k, v]) => [
+      k,
+      pAny[k] !== undefined && typeof pAny[k] === typeof v ? pAny[k] : v,
+    ]),
+  ) as ExtraTexts;
+
+  /* Alt localisé — helper local pour alléger les ternaires. */
+  const alt = (fr: string, en: string, es: string) =>
+    loc === "fr" ? fr : loc === "es" ? es : en;
 
   const attractionPlantation = touristAttractionSchema({
     locale: loc,
     slug: "plantation-de-the",
-    name: dict.plantation.heroTitle as string,
-    description: dict.plantation.heroSubtitle as string,
+    name: p.heroTitle as string,
+    description: p.heroSubtitle as string,
     image: "/images/tea/plantation-drone-overhead.jpg",
   });
 
-  const excursionInfoItems = [
-    { icon: "clock", label: locale === "fr" ? "Durée" : locale === "en" ? "Duration" : "Duración", value: dict.plantation.excursionInfo.duration },
-    { icon: "clipboard", label: locale === "fr" ? "Réservation" : locale === "en" ? "Booking" : "Reserva", value: dict.plantation.excursionInfo.travel },
-    { icon: "mountain", label: locale === "fr" ? "Dénivelé" : locale === "en" ? "Elevation" : "Desnivel", value: dict.plantation.excursionInfo.elevation },
-    { icon: "difficulty", label: locale === "fr" ? "Difficulté" : locale === "en" ? "Difficulty" : "Dificultad", value: dict.plantation.excursionInfo.difficulty },
-    { icon: "hike", label: locale === "fr" ? "Marche" : locale === "en" ? "Walking" : "Caminata", value: dict.plantation.excursionInfo.walking },
+  const excursionInfoRows = [
+    { label: xt.infoDurationLabel, value: p.excursionInfo.duration },
+    { label: xt.infoBookingLabel, value: p.excursionInfo.travel },
+    { label: xt.infoElevationLabel, value: p.excursionInfo.elevation },
+    { label: xt.infoDifficultyLabel, value: p.excursionInfo.difficulty },
+    { label: xt.infoWalkingLabel, value: p.excursionInfo.walking },
   ];
 
   return (
@@ -56,175 +159,256 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
           breadcrumbSchema(buildBreadcrumb(loc, "plantation")),
         ]}
       />
-      <PageHero
-        title={dict.plantation.heroTitle}
-        subtitle={dict.plantation.heroSubtitle}
+
+      {/* Hero Panorama — rangées de théiers vues du ciel (graphique) */}
+      <PanoramaHero
         image={`${basePath}/images/tea/plantation-drone-overhead.jpg`}
+        imageAlt={alt(
+          "Vue aérienne graphique des rangées de théiers de la plantation de Sahambavy",
+          "Overhead aerial view of the tea rows at the Sahambavy plantation",
+          "Vista aérea cenital de las hileras de té de la plantación de Sahambavy",
+        )}
+        label={p.heroSubtitle}
+        title={p.heroTitle}
+        kicker={xt.heroKicker}
+        cta={{ href: "#reserver", label: p.bookLabel }}
       />
 
-      {/* History - Legend & Madagascar */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-4">
-          <SectionHeader
-            label={dict.plantation.historyLabel}
-            title={dict.plantation.historyTitle}
-          />
-          <ScrollReveal>
-            <div className="space-y-6 text-text-muted leading-relaxed">
-              <p>{dict.plantation.historyIntro}</p>
-              <p>{dict.plantation.historyMadagascar}</p>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="relative">
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-brown-deep/20 hidden md:block" />
-            <div className="space-y-12 md:space-y-0">
-              {(dict.plantation.historyTimeline as { year: string; text: string }[]).map((item: any, i: number) => (
-                <ScrollReveal key={item.year} delay={i * 100}>
-                  <div className={`md:flex items-center gap-8 md:mb-16 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
-                    <div className={`md:w-5/12 ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                      <span className="inline-block text-3xl font-bold text-brown-deep font-[family-name:var(--font-heading)]">{item.year}</span>
-                      <p className="mt-2 text-text-muted leading-relaxed">{item.text}</p>
-                    </div>
-                    <div className="hidden md:flex md:w-2/12 justify-center">
-                      <div className="w-4 h-4 rounded-full bg-brown-deep ring-4 ring-cream" />
-                    </div>
-                    <div className="md:w-5/12" />
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Excursion Info — carte liquid-glass avec infos en amenity-chips
-          et itinéraire numéroté dans un container séparé */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader label={dict.plantation.excursionLabel} title={dict.plantation.excursionTitle} />
-          <ScrollReveal>
-            <div className="room-price p-7 md:p-10 max-w-3xl mx-auto">
-              {/* Infos clés — grille de amenity-chips, 5 colonnes sur desktop */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-10">
-                {excursionInfoItems.map((info) => (
-                  <div key={info.label} className="amenity-chip flex-col text-center !py-4">
-                    <Icon
-                      name={info.icon}
-                      size={22}
-                      weight="regular"
-                      className="text-gold mb-1.5"
-                    />
-                    <span className="block text-[0.65rem] uppercase tracking-wider text-text-muted mb-0.5">
-                      {info.label}
-                    </span>
-                    <span className="block text-sm font-semibold text-brown-deep">
-                      {info.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Filet doré séparateur — signature éditoriale */}
-              <div className="flex items-center gap-3 mb-6">
-                <span className="h-px flex-1 bg-gold/20" />
-                <span className="text-[0.7rem] font-semibold text-gold uppercase tracking-[0.28em]">
-                  {locale === "fr" ? "Déroulé de la visite" : locale === "en" ? "Visit itinerary" : "Itinerario de la visita"}
-                </span>
-                <span className="h-px flex-1 bg-gold/20" />
-              </div>
-
-              <div className="space-y-4">
-                {(dict.plantation.excursionSteps as string[]).map((step: string, i: number) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brown-deep to-gold text-cream flex items-center justify-center text-xs font-bold shrink-0 shadow-md">
-                      {i + 1}
-                    </div>
-                    <p className="text-text-body leading-relaxed pt-1 text-sm md:text-base">{step}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Boutique - Mami Bio Shop — grille repos-feature premium */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #F8F5F0 0%, #FBFAF6 50%, #F8F5F0 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -left-32 w-[400px] h-[400px] rounded-full bg-gold/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <SectionHeader label={dict.plantation.shopLabel} title={dict.plantation.shopTitle} />
-          <ScrollReveal>
-            <p className="text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12">
-              {dict.plantation.shopIntro}
-            </p>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 max-w-[900px] mx-auto mb-8">
-            {(dict.plantation.shopItems as { name: string; desc: string }[]).map((item: any, i: number) => (
-              <ScrollReveal key={item.name} delay={i * 100}>
-                <div className="repos-feature h-full p-6 md:p-7 text-center">
-                  <div className="repos-feature__badge mx-auto mb-4">
-                    <Icon name="leaf" size={22} weight="regular" />
-                  </div>
-                  <h3 className="text-base md:text-lg text-text-dark mb-2 leading-tight">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-text-muted leading-relaxed">{item.desc}</p>
+      {/* Histoire — légende chinoise + faits clés à filets fins */}
+      <section id="histoire" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-7">
+              <ScrollReveal>
+                <span className="ge-label mb-4">{p.historyLabel}</span>
+                <h2 className="max-w-[24ch]" style={{ textWrap: "balance" }}>
+                  {p.historyTitle}
+                </h2>
+                <div className="ge-measure mt-6 space-y-4 text-[15px] leading-relaxed text-body md:text-base">
+                  <p>{p.historyIntro}</p>
                 </div>
               </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal delay={200}>
-            <div className="repos-feature p-7 md:p-9 max-w-2xl mx-auto text-center">
-              <div className="flex items-center gap-3 justify-center mb-4">
-                <Icon name="soap" size={24} weight="regular" className="text-gold" />
-                <h3 className="text-lg md:text-xl text-text-dark">
-                  {locale === "fr" ? "Savons artisanaux 100 % naturels" : locale === "en" ? "100% Natural Handmade Soaps" : "Jabones artesanales 100 % naturales"}
-                </h3>
-              </div>
-              <p className="text-text-muted text-sm md:text-base leading-relaxed">
-                {dict.plantation.shopSoap}
-              </p>
             </div>
-          </ScrollReveal>
-
-          <div className="text-center mt-10">
-            <Link href={`/${locale}/contact/`} className="btn btn--outline">
-              {dict.plantation.shopCta}
-            </Link>
+            <div className="lg:col-span-4 lg:col-start-9 lg:pt-14">
+              <ScrollReveal>
+                <RecapRows
+                  title={xt.factsTitle}
+                  rows={xt.factsRows}
+                  footnote={xt.factsFootnote}
+                />
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Booking Form */}
-      <section className="py-14 md:py-24 bg-brown-deep text-white">
-        <div className="max-w-[800px] mx-auto px-4">
-          <SectionHeader light label={dict.plantation.bookLabel} title={dict.plantation.bookTitle} />
-          <TheicoleBookingForm dict={dict} />
+      {/* Chronologie — rows hairline, année en accent thé */}
+      <section className="border-y border-hairline bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="mx-auto max-w-2xl">
+            <ScrollReveal>
+              <span className="ge-label mb-3">{xt.timelineLabel}</span>
+              <h2 className="mb-8">{xt.timelineTitle}</h2>
+              <div className="ge-rows">
+                {(p.historyTimeline as { year: string; text: string }[]).map((item) => (
+                  <div
+                    key={item.year}
+                    className="grid gap-x-8 gap-y-1 border-b border-hairline py-4 md:grid-cols-[150px_1fr]"
+                  >
+                    <span className="text-sm font-semibold tabular-nums text-tea">
+                      {item.year}
+                    </span>
+                    <p className="text-[15px] leading-relaxed text-body">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Le thé à Madagascar — « champs des femmes » */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/tea/cueilleuse-the-panier-brume.jpg`}
+            imageAlt={alt(
+              "Cueilleuse de thé avec son panier dans la brume matinale à Sahambavy",
+              "Tea picker with her basket in the morning mist at Sahambavy",
+              "Recolectora de té con su cesta en la bruma matinal de Sahambavy",
+            )}
+            label={xt.womenLabel}
+            title={xt.womenTitle}
+          >
+            <p>{p.historyMadagascar}</p>
+          </EditorialSplit>
+        </div>
+      </section>
+
+      {/* Pleine page — cueilleuses, lumière éditoriale */}
+      <section>
+        <figure>
+          { }
+          <img
+            src={`${basePath}/images/tea/plantation-cinematic.jpg`}
+            alt={alt(
+              "Cueilleuses de thé au travail dans la plantation de Sahambavy, lumière du matin",
+              "Tea pickers at work in the Sahambavy plantation in morning light",
+              "Recolectoras de té trabajando en la plantación de Sahambavy con luz matinal",
+            )}
+            loading="lazy"
+            className="h-[52vh] min-h-[360px] w-full object-cover md:h-[64vh]"
+          />
+          <figcaption className="mx-auto max-w-7xl px-6 py-4 text-xs text-muted md:px-10">
+            {xt.cinematicCaption}
+          </figcaption>
+        </figure>
+      </section>
+
+      {/* Excursion — visite plantation & usine, infos + déroulé */}
+      <section id="visite" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            reverse
+            image={`${basePath}/images/tea/tea-picker.jpg`}
+            imageAlt={alt(
+              "Cueilleuse récoltant les jeunes feuilles de thé à la main",
+              "Tea picker harvesting young tea leaves by hand",
+              "Recolectora cosechando a mano las hojas jóvenes de té",
+            )}
+            label={p.excursionLabel}
+            title={p.excursionTitle}
+            cta={{ href: "#reserver", label: p.bookLabel }}
+          >
+            <p>{xt.excursionIntro}</p>
+            <div className="border-t border-hairline">
+              {excursionInfoRows.map((row) => (
+                <div
+                  key={row.label}
+                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-0.5 border-b border-hairline py-3"
+                >
+                  <span className="text-sm text-muted">{row.label}</span>
+                  <span className="text-right text-sm font-semibold text-tea">
+                    {row.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </EditorialSplit>
+
+          {/* Déroulé de la visite — liste numérotée à filets fins */}
+          <div className="mx-auto mt-12 max-w-2xl md:mt-16">
+            <ScrollReveal>
+              <p className="ge-label mb-5">{xt.stepsTitle}</p>
+              <ol className="ge-rows">
+                {(p.excursionSteps as string[]).map((step, i) => (
+                  <li
+                    key={step}
+                    className="flex items-baseline gap-5 border-b border-hairline py-4"
+                  >
+                    <span className="text-sm font-semibold tabular-nums text-tea">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[15px] leading-relaxed text-body">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Diptyque photo — les rangées de théiers, du sol et du ciel */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="grid gap-2 md:grid-cols-2">
+            <ScrollReveal>
+              <div className="aspect-[4/3] overflow-hidden rounded-[3px]">
+                { }
+                <img
+                  src={`${basePath}/images/tea/plantation-the-rangees-vue-aerienne.jpg`}
+                  alt={alt(
+                    "Rangées de théiers vues du ciel, plantation de Sahambavy",
+                    "Rows of tea bushes seen from above, Sahambavy plantation",
+                    "Hileras de té vistas desde el cielo, plantación de Sahambavy",
+                  )}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={120}>
+              <div className="aspect-[4/3] overflow-hidden rounded-[3px]">
+                { }
+                <img
+                  src={`${basePath}/images/tea/plantation-the-sahambavy-rangees-velos.jpg`}
+                  alt={alt(
+                    "Vélos colorés le long des rangées de théiers de Sahambavy",
+                    "Colourful bicycles along the tea rows of Sahambavy",
+                    "Bicicletas de colores junto a las hileras de té de Sahambavy",
+                  )}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Boutique — Mami Bio Shop, produits Vita Malagasy */}
+      <section id="boutique" className="scroll-mt-24 border-y border-hairline bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <EditorialSplit
+            image={`${basePath}/images/tea/plantation.jpg`}
+            imageAlt={alt(
+              "Collines de théiers de la plantation de Sahambavy",
+              "Tea-covered hills of the Sahambavy plantation",
+              "Colinas de té de la plantación de Sahambavy",
+            )}
+            label={p.shopLabel}
+            title={p.shopTitle}
+            cta={{ href: `/${locale}/contact/`, label: p.shopCta }}
+          >
+            <p>{p.shopIntro}</p>
+            <div className="border-t border-hairline">
+              {(p.shopItems as { name: string; desc: string }[]).map((item) => (
+                <div
+                  key={item.name}
+                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-0.5 border-b border-hairline py-3"
+                >
+                  <span className="text-[15px] text-ink">{item.name}</span>
+                  <span className="text-sm text-muted">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+          </EditorialSplit>
+
+          {/* Savons maison — note artisanale */}
+          <div className="mx-auto mt-12 max-w-2xl text-center md:mt-16">
+            <ScrollReveal>
+              <h3 className="mb-4">{xt.soapTitle}</h3>
+              <p className="text-[15px] leading-relaxed text-body">{p.shopSoap}</p>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Réservation — formulaire existant, panneau encre */}
+      <section id="reserver" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="mx-auto max-w-2xl">
+            <ScrollReveal>
+              <div className="text-center">
+                <span className="ge-label mb-3">{p.bookLabel}</span>
+                <h2 className="mb-4">{p.bookTitle}</h2>
+                <p className="mb-10 text-[15px] leading-relaxed text-body">{xt.bookIntro}</p>
+              </div>
+              <div className="rounded-[3px] bg-ink p-6 md:p-10">
+                <TheicoleBookingForm dict={dict} />
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
     </>

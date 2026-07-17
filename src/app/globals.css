@@ -1,24 +1,54 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-white: #FFFFFF;
-  --color-cream: #F8F5F0;
-  --color-cream-dark: #EDE8E0;
-  --color-brown-deep: #2C1810;
-  --color-brown-brand: #695353;
-  --color-gold: #C4962A;
-  --color-gold-light: #D4A84B;
-  --color-green-tea: #4A7A5A;
-  --color-lake-blue: #5B8FA8;
-  --color-text-dark: #1A1A1A;
-  --color-text-body: #3A3A3A;
-  --color-text-muted: #7A7A7A;
-  --color-text-light: #AAAAAA;
-  --color-border: rgba(105, 83, 83, 0.15);
+  /* ============================================================
+     Direction artistique « Panorama + Nuit sur le lac » (16/07/2026)
+     Socle clair transposé de la grammaire Glacier Express :
+     papier presque blanc, encre chaude, UN accent vert thé.
+     Canvas « nuit » réservé aux pages signature (Pilotis Nuptial,
+     Wagon Nuptial, Mariages) : noir chaud + or champagne.
+     ============================================================ */
 
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-sub: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* — Panorama (socle clair) — */
+  --color-white: #FFFFFF;
+  --color-paper: #FBFAF7;
+  --color-ink: #1B1B17;
+  --color-body: #4A4A44;
+  --color-muted: #726E64; /* WCAG AA (≥4.5) sur papier, blanc et mist-bg */
+  --color-hairline: #E7E4DC;
+  --color-tea: #2F5D46;
+  --color-tea-deep: #234838;
+  --color-mist: #9DB5A5;
+  --color-mist-bg: #F0F3EF;
+  --color-gold: #C8A254;
+
+  /* — Nuit sur le lac (canvas sombre signature) — */
+  --color-night: #14110D;
+  --color-night-soft: #1C1812;
+  --color-night-hairline: #2C2619;
+  --color-champagne: #D8B77A;
+  --color-linen: #F3EAD8;
+  --color-night-body: #BFB4A0;
+  --color-copper: #8A4B2E;
+
+  /* — Alias hérités (LEGACY — à supprimer une fois la migration finie).
+       Mappés sur le nouveau monde pour que les composants non migrés
+       restent cohérents visuellement pendant la transition.
+       Consommateurs restants : BookingBar, BookingForm, TopBar,
+       CookieNotice (+ les blocs .booking-bar__* / .cookie-notice ici). — */
+  --color-cream: #FBFAF7;
+  --color-brown-deep: #1B1B17;
+  --color-gold-light: #D8B77A;
+  --color-text-dark: #1B1B17;
+  --color-text-muted: #726E64;
+
+  /* — Fontes (chargées dans src/app/layout.tsx via next/font, variables
+       sources --font-inter-tight / --font-cormorant / --font-inter) — */
+  --font-heading: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-sub: var(--font-cormorant), Baskerville, Georgia, serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-serif: var(--font-cormorant), Baskerville, Georgia, serif;
 
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
@@ -35,8 +65,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text-body);
-  background: var(--color-cream);
+  color: var(--color-body);
+  background: var(--color-paper);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -55,34 +85,146 @@ body {
  * force every coloured heading to use `!text-white` or an inline `style`.
  */
 @layer base {
+  /* Titrage « Panorama » : ultra-light, interlettrage resserré, très grand.
+     Le poids 200-300 exige un contraste strict sur photo (voile sombre). */
   h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    color: var(--color-text-dark);
-    line-height: 1.2;
-    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    line-height: 1.08;
+    font-weight: 250;
+    letter-spacing: -0.015em;
   }
 
-  h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-  h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
-  h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
-  h4 { font-size: 1.2rem; }
+  h1 { font-size: clamp(2.6rem, 6vw, 5.25rem); font-weight: 200; }
+  h2 { font-size: clamp(2rem, 3.6vw, 3.1rem); }
+  h3 { font-size: clamp(1.45rem, 2.4vw, 1.9rem); font-weight: 300; }
+  h4 { font-size: 1.2rem; font-weight: 400; letter-spacing: -0.008em; }
+}
+
+/* Pont pour le CSS brut : garantit que var(--font-heading) & co résolvent
+   même hors utilitaires Tailwind, sans dépendre de l'émission @theme. */
+:root {
+  --font-heading: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-sub: var(--font-cormorant), Baskerville, Georgia, serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
+  --font-serif: var(--font-cormorant), Baskerville, Georgia, serif;
+}
+
+/* ============================================================
+   SYSTÈME « GE » — composants de la refonte Panorama / Nuit.
+   Namespace .ge-* : aucune collision avec les classes historiques,
+   qui seront supprimées à la fin de la migration.
+   ============================================================ */
+
+/* Label uppercase (eyebrow) — micro-typo signature du système */
+.ge-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-tea);
+}
+.ge-night .ge-label { color: var(--color-champagne); }
+
+/* Boutons */
+.ge-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.9rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--color-tea);
+  color: #fff;
+  border: 1px solid var(--color-tea);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.ge-cta:hover { background: var(--color-tea-deep); border-color: var(--color-tea-deep); transform: translateY(-1px); }
+.ge-cta--ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: currentColor;
+}
+.ge-cta--ghost:hover { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
+.ge-cta--onphoto {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+.ge-cta--onphoto:hover { background: #fff; border-color: #fff; color: var(--color-ink); }
+.ge-cta--night {
+  background: transparent;
+  border-color: var(--color-champagne);
+  color: var(--color-champagne);
+}
+.ge-cta--night:hover { background: var(--color-champagne); border-color: var(--color-champagne); color: var(--color-night); }
+
+/* Récapitulatifs à filets fins (pattern « Aperçu » Glacier Express) */
+.ge-rows { border-top: 1px solid var(--color-hairline); }
+.ge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.8rem 0.125rem;
+  border-bottom: 1px solid var(--color-hairline);
+  font-size: 0.9rem;
+}
+.ge-row > :last-child {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-tea);
+  font-weight: 600;
+}
+.ge-night .ge-rows { border-color: var(--color-night-hairline); }
+.ge-night .ge-row { border-color: var(--color-night-hairline); }
+.ge-night .ge-row > :last-child { color: var(--color-champagne); }
+
+/* Canvas « Nuit sur le lac » — monde sombre des pages signature */
+.ge-night {
+  background: var(--color-night);
+  color: var(--color-night-body);
+}
+.ge-night h1, .ge-night h2, .ge-night h3, .ge-night h4 {
+  font-family: var(--font-serif);
+  color: var(--color-linen);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+.ge-night em { font-style: italic; color: var(--color-champagne); }
+
+/* Filet fin autonome */
+.ge-hairline { border: 0; border-top: 1px solid var(--color-hairline); }
+.ge-night .ge-hairline { border-color: var(--color-night-hairline); }
+
+/* Mesure de lecture */
+.ge-measure { max-width: 65ch; }
+
+/* Révélation au scroll (sobre, désactivée si reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .ge-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ge-reveal.is-visible { opacity: 1; transform: none; }
 }
 
 /* ===== ANIMATIONS ===== */
 
-@keyframes kenburns {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
 }
 
 @keyframes scrollDown {
@@ -106,24 +248,6 @@ body {
   animation: testimonialCard 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes scrollLine {
-  0% { top: -100%; height: 100%; }
-  50% { top: 0; height: 100%; }
-  100% { top: 100%; height: 100%; }
-}
-
-.animate-scrollLine {
-  animation: scrollLine 2s ease-in-out infinite;
-}
-
-.animate-kenburns {
-  animation: kenburns 20s ease-in-out infinite alternate;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
 /* ===== SCROLL REVEAL ===== */
 
 [data-reveal] {
@@ -138,50 +262,23 @@ body {
   transform: translateY(0);
 }
 
-/* ===== HERO SLIDER ===== */
-
-.hero-slide {
-  opacity: 0;
-  transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-  position: absolute;
-  inset: 0;
-}
-
-.hero-slide.active {
-  opacity: 1;
-}
-
-.hero-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.hero-dot.active {
-  width: 24px;
-  background: var(--color-gold);
-}
-
 /* ===== SECTION LABEL ===== */
 
 .section-label {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--color-gold);
+  letter-spacing: 0.24em;
+  color: var(--color-tea);
   margin-bottom: 0.75rem;
 }
 
 .section-divider {
-  width: 60px;
-  height: 2px;
-  background: var(--color-gold);
+  width: 44px;
+  height: 1px;
+  background: var(--color-hairline);
   margin: 1.25rem auto 0;
 }
 
@@ -208,14 +305,15 @@ body {
 }
 
 .btn--primary {
-  background: var(--color-gold);
+  background: var(--color-tea);
   color: var(--color-white);
-  border: 1.5px solid var(--color-gold);
+  border: 1.5px solid var(--color-tea);
 }
 
 .btn--primary:hover {
-  background: transparent;
-  color: var(--color-gold);
+  background: var(--color-tea-deep);
+  border-color: var(--color-tea-deep);
+  color: var(--color-white);
 }
 
 .btn--outline {
@@ -227,18 +325,6 @@ body {
 .btn--outline:hover {
   background: var(--color-brown-deep);
   color: var(--color-white);
-}
-
-.btn--outline-white {
-  background: transparent;
-  color: var(--color-white);
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
-}
-
-.btn--outline-white:hover {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .btn--cta {
@@ -304,401 +390,6 @@ body {
   transform: translateX(4px);
 }
 
-.btn--minimal--light {
-  color: var(--color-white);
-}
-
-.btn--minimal--light:hover {
-  color: var(--color-gold-light);
-}
-
-/* ===== CARDS =====
- *
- * L'ancienne famille `.glass*` comportait 6 variantes (`.glass`, `.glass-
- * subtle`, `.glass-dark`, `.glass-card`, `.liquid-glass` + `.btn--glass`)
- * qui partageaient le même effet frosted-glass iOS 16. C'est beau sur un
- * fond photo (d'où le maintien de `.btn--glass` sur le hero), mais empilé
- * sur des sections plates (cream / blanc / brown-deep) c'est du bruit :
- * `backdrop-filter` sur un fond uni = coût GPU pour un rendu visuellement
- * identique à `background: white`.
- *
- * PR C garde les deux *noms* de classe (`.glass-card` et `.glass-dark`)
- * pour ne pas casser les 12 call-sites, mais leur implémentation devient
- * une carte éditoriale plate, dans la lignée de Aman / Belmond / Rosewood
- * (white on cream, hairline shadow, coins juste arrondis).
- *
- * Les variantes orphelines (`.glass`, `.glass-subtle`, `.liquid-glass`)
- * sont supprimées — elles n'étaient appelées nulle part.
- */
-
-.glass-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.glass-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-}
-
-.glass-dark {
-  background: var(--color-brown-deep);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-  color: var(--color-white);
-}
-
-/* ===== ROOM CARD ===== */
-
-.room-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.room-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-}
-
-/* ===== ACTIVITY CARD ===== */
-
-.activity-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 1.25rem;
-  padding: 2rem;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.3s ease;
-}
-
-.activity-card:hover {
-  background: rgba(44, 24, 16, 0.85);
-  backdrop-filter: blur(20px);
-  color: var(--color-gold-light);
-  border-color: rgba(255, 255, 255, 0.05);
-}
-
-.activity-card:hover h3,
-.activity-card:hover p {
-  color: var(--color-cream);
-}
-
-/* ===== TARIFF CARD (Apple liquid-glass) =====
- *
- * Utilisé sur /hebergements pour remplacer l'ancien tableau récapitulatif
- * "brut". Une vignette photo par type de chambre avec un panneau en verre
- * dépoli en bas — ancre vers la section détaillée (#pilotis, #wagon…).
- *
- * L'effet frosted-glass (backdrop-blur 24 + saturate 180 + highlight inner)
- * est celui d'iOS 26 : le panneau se pose SUR la photo et laisse transparaître
- * les couleurs dominantes. Hover : légère élévation + glow doré + zoom image.
- *
- * Le highlight `inset 0 1px 0 rgba(255,255,255,.25)` simule la réfraction
- * apple — c'est ce détail qui distingue du simple rgba(white, 0.1).
- */
-
-.tariff-card {
-  position: relative;
-  display: block;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tariff-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 60px -12px rgba(196, 150, 42, 0.3),
-              0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-.tariff-card__image {
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tariff-card:hover .tariff-card__image {
-  transform: scale(1.06);
-}
-
-.tariff-card__glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-              0 8px 24px rgba(0, 0, 0, 0.2);
-  transition: background 0.4s ease, border-color 0.4s ease;
-}
-
-.tariff-card:hover .tariff-card__glass {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.32);
-}
-
-.tariff-card__arrow {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.3s ease;
-}
-
-.tariff-card:hover .tariff-card__arrow {
-  transform: translateX(4px);
-  color: var(--color-gold-light);
-}
-
-/* ===== ECO PILLAR CARD (Apple Store liquid-glass avec filigrane) =====
- *
- * Utilisé sur /hotel pour la section "Engagement éco-responsable". Chaque
- * pilier RSE = une carte avec une GROSSE icône Phosphor en filigrane
- * derrière le texte (opacity 0.08) + un picto net en haut à gauche + titre
- * et description.
- *
- * Le principe Apple Store : le filigrane porte l'émotion, le texte porte
- * l'information. Les deux cohabitent sans se gêner grâce à l'opacité
- * et au positionnement absolu.
- *
- * Hover : la carte s'illumine (background passe de cream/50 à white/80),
- * le filigrane gagne en présence (opacity 0.08 → 0.15), et le picto du
- * haut passe au gold plein.
- */
-
-.eco-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 1.5rem;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
-              0 4px 24px rgba(74, 122, 90, 0.06);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.4s ease,
-              border-color 0.4s ease,
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.eco-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(196, 150, 42, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-              0 20px 50px -10px rgba(74, 122, 90, 0.2),
-              0 0 0 1px rgba(196, 150, 42, 0.1);
-}
-
-/* Grande icône en filigrane — positionnée bottom-right, à moitié sortie.
-   Sur mobile on la réduit pour ne pas écraser la carte (390 px de large). */
-.eco-card__watermark {
-  position: absolute;
-  bottom: -12px;
-  right: -12px;
-  width: 120px;
-  height: 120px;
-  color: var(--color-green-tea);
-  opacity: 0.08;
-  pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@media (min-width: 768px) {
-  .eco-card__watermark {
-    bottom: -16px;
-    right: -16px;
-    width: 180px;
-    height: 180px;
-  }
-}
-
-/* Force l'SVG Phosphor à remplir son conteneur — on laisse le container
-   piloter la taille, pas le size={} hardcodé côté JSX. */
-.eco-card__watermark svg {
-  width: 100%;
-  height: 100%;
-}
-
-.eco-card:hover .eco-card__watermark {
-  opacity: 0.16;
-  transform: scale(1.08) rotate(-4deg);
-  color: var(--color-gold);
-}
-
-/* Picto net top-left avec halo subtil */
-.eco-card__icon {
-  color: var(--color-green-tea);
-  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.eco-card:hover .eco-card__icon {
-  color: var(--color-gold);
-  transform: scale(1.1);
-}
-
-/* ===== REPOS FEATURE & PRICE CARDS (Apple liquid-glass premium) =====
- *
- * Utilisés sur /le-repos. Deux variantes :
- *   - .repos-feature   : carte feature au-dessus d'un fond cream ; verre
- *                        dépoli blanc translucide, picto en haut, titre +
- *                        description en dessous. Hover léger lift + glow.
- *   - .repos-price     : carte prix qui "flotte" sur une photo hero ; verre
- *                        dépoli épais (blur 32) avec highlight apple iOS 26,
- *                        centrée avec CTA.
- */
-
-.repos-feature {
-  position: relative;
-  /* Sur fond cream, le backdrop-blur n'a rien à flouter ; on passe à un
-     "faux glass" : blanc dense + highlight interne + bordure dorée
-     translucide qui simulent la réfraction iOS 26 sans dépendre du
-     blur réel (qui ne fonctionne que sur un fond coloré / une photo). */
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(196, 150, 42, 0.15);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
-              inset 0 -1px 0 rgba(44, 24, 16, 0.03),
-              0 10px 32px -8px rgba(44, 24, 16, 0.08),
-              0 2px 6px rgba(44, 24, 16, 0.04);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.4s ease,
-              border-color 0.4s ease,
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.repos-feature:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(196, 150, 42, 0.45);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1),
-              0 20px 48px -10px rgba(196, 150, 42, 0.22),
-              0 4px 12px rgba(44, 24, 16, 0.08);
-}
-
-.repos-feature__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(74, 122, 90, 0.12) 0%, rgba(196, 150, 42, 0.10) 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8),
-              0 2px 8px rgba(74, 122, 90, 0.08);
-  color: var(--color-green-tea);
-  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.repos-feature:hover .repos-feature__badge {
-  color: var(--color-gold);
-  transform: scale(1.08);
-}
-
-/* Price card — liquid-glass apple iOS 26, flotte sur une photo */
-.repos-price {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 1.75rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
-              0 24px 60px -12px rgba(0, 0, 0, 0.35),
-              0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* Bordure dorée intérieure sur les photos "produit" — touche luxe discrète
-   qui signe la mise en scène. Réutilisé partout où un produit (chambre,
-   pilotis, villa, le-repos, restaurant…) est présenté avec sa photo.
-   Pattern d'origine : /hotel > figures fondatrices Maggie/Sergi. */
-.repos-photo,
-.product-photo {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1.25rem;
-  box-shadow: 0 10px 40px -8px rgba(44, 24, 16, 0.15),
-              0 2px 8px rgba(44, 24, 16, 0.06);
-}
-
-.repos-photo::after,
-.product-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0.5rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(196, 150, 42, 0.18);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Amenity-chip — pastille equipment pour les sections chambres détaillées.
-   Faux glass blanc + bordure dorée translucide pour harmoniser avec le
-   ton premium du site. */
-.amenity-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(196, 150, 42, 0.15);
-  border-radius: 0.625rem;
-  font-size: 0.8125rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7),
-              0 1px 3px rgba(44, 24, 16, 0.04);
-  transition: background 0.3s ease, border-color 0.3s ease,
-              transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.amenity-chip:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(196, 150, 42, 0.35);
-  transform: translateY(-1px);
-}
-
-/* Carte prix "chambre" — liquid-glass sur fond cream/blanc, avec filet
-   doré discret en haut. Hiérarchie : nombre en Playfair, unité en
-   Cormorant italique. Utilisé sur les sections détaillées de /hebergements. */
-.room-price {
-  position: relative;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(196, 150, 42, 0.2);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9),
-              inset 0 -1px 0 rgba(196, 150, 42, 0.08),
-              0 12px 36px -8px rgba(44, 24, 16, 0.1),
-              0 3px 8px rgba(44, 24, 16, 0.04);
-}
-
-.room-price::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%);
-  opacity: 0.6;
-}
-
 /* ===== WHATSAPP FLOAT ===== */
 
 .whatsapp-float {
@@ -753,19 +444,6 @@ body {
   .masonry-grid {
     columns: 1;
   }
-}
-
-/* ===== LIGHTBOX ===== */
-
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(20px);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* ===== COOKIE NOTICE ===== */
@@ -826,10 +504,10 @@ body {
   border-radius: 1rem 1rem 0 0;
   margin-bottom: 0;
   padding: 0.75rem 1.5rem;
-  background: var(--color-gold);
+  background: var(--color-tea);
   color: white;
-  border-color: var(--color-gold);
-  box-shadow: 0 -4px 24px rgba(196, 150, 42, 0.3);
+  border-color: var(--color-tea);
+  box-shadow: 0 -4px 24px rgba(47, 93, 70, 0.3);
 }
 
 .booking-bar-fixed__toggle:hover {
@@ -837,7 +515,7 @@ body {
 }
 
 .booking-bar-fixed--minimized .booking-bar-fixed__toggle:hover {
-  background: var(--color-gold-light);
+  background: var(--color-tea-deep);
 }
 
 @keyframes slideUpBar {
@@ -1043,7 +721,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.125rem 2.25rem;
-  background: var(--color-gold);
+  background: var(--color-tea);
   color: white;
   font-size: 0.8125rem;
   font-weight: 700;

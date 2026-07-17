@@ -60,6 +60,8 @@ export const rooms: Room[] = [
       "/images/rooms/pilotis-01.jpg",
       "/images/rooms/pilotis-02.jpg",
       "/images/rooms/pilotis-03.jpg",
+      "/images/rooms/pilotis-lake-view.jpg",
+      "/images/rooms/lit-baldaquin-linge-brode-cygnes.jpg",
     ],
     featured: true,
     category: "hotel",
@@ -85,7 +87,7 @@ export const rooms: Room[] = [
     longDescription: {
       fr: "Construites récemment, les Superior Lake View Rooms offrent un confort européen haut de gamme avec vue imprenable sur la piscine et le lac. Chaque chambre dispose d'un superbe parquet en bois précieux, d'une salle de bain privative avec eau chaude et d'une terrasse privée avec vue sur le lac.\n\nFace à la piscine en ardoise à eau salée, ces chambres combinent confort moderne et cadre naturel exceptionnel.",
       en: "Recently built, the Superior Lake View Rooms offer high-end European comfort with stunning views of the pool and lake. Each room features beautiful precious wood parquet, a private bathroom with hot water and a private terrace with lake views.\n\nFacing the saltwater slate pool, these rooms combine modern comfort with an exceptional natural setting.",
-      es: "Construidas recientemente, las Superior Lake View Rooms ofrecen confort europeo de alta gama con vistas impresionantes a la piscina y el lago. Cada habitación cuenta con parquet de madera preciosa, baño privado con agua caliente y terraza privada con vistas al lago.",
+      es: "Construidas recientemente, las Superior Lake View Rooms ofrecen confort europeo de alta gama con vistas impresionantes a la piscina y el lago. Cada habitación cuenta con parquet de madera preciosa, baño privado con agua caliente y terraza privada con vistas al lago.\n\nFrente a la piscina de pizarra de agua salada, estas habitaciones combinan confort moderno y un entorno natural excepcional.",
     },
     units: 8,
     capacity: "2",
@@ -104,6 +106,7 @@ export const rooms: Room[] = [
     images: [
       "/images/rooms/superior-01.jpg",
       "/images/rooms/superior-02.jpg",
+      "/images/rooms/terrasse-chambre-vue-piscine-jardins.jpg",
     ],
     category: "hotel",
   },
@@ -129,7 +132,7 @@ export const rooms: Room[] = [
     longDescription: {
       fr: "Dormez dans un authentique wagon suisse de 1930 entièrement rénové en suite nuptiale de luxe. Avec ses 30 mètres de longueur, ce wagon unique en son genre vous transporte dans une autre époque tout en vous offrant le confort moderne.\n\nService en chambre, mini-bar, terrasse privée fleurie et vue sur le lac. Une nuit dans ce wagon est une expérience inoubliable — idéale pour un voyage de noces ou une célébration.",
       en: "Sleep in an authentic 1930 Swiss wagon fully renovated into a luxury honeymoon suite. At 30 metres long, this one-of-a-kind wagon transports you to another era while offering modern comfort.\n\nRoom service, mini-bar, private flowered terrace and lake view. A night in this wagon is an unforgettable experience — ideal for a honeymoon or celebration.",
-      es: "Duerma en un auténtico vagón suizo de 1930 completamente renovado en suite nupcial de lujo. Con sus 30 metros de longitud, este vagón único le transporta a otra época ofreciendo confort moderno.",
+      es: "Duerma en un auténtico vagón suizo de 1930 completamente renovado en suite nupcial de lujo. Con sus 30 metros de longitud, este vagón único le transporta a otra época ofreciendo confort moderno.\n\nServicio de habitaciones, minibar, terraza privada florida y vista al lago. Una noche en este vagón es una experiencia inolvidable — ideal para una luna de miel o una celebración.",
     },
     units: 1,
     capacity: "2",
@@ -148,6 +151,8 @@ export const rooms: Room[] = [
     images: [
       "/images/rooms/wagon-01.jpg",
       "/images/rooms/wagon-02.jpg",
+      "/images/rooms/wagon-exterior.jpg",
+      "/images/rooms/wagon-bedroom.jpg",
     ],
     category: "hotel",
   },
@@ -209,14 +214,14 @@ export const rooms: Room[] = [
     longDescription: {
       fr: "Nos bungalows standards sont disséminés dans un jardin tropical luxuriant. Construits en matériaux locaux, ils offrent un confort authentique et chaleureux en harmonie totale avec la nature malgache.\n\nDisponibles en version double, twin ou single, ils conviennent aussi bien aux voyageurs solo qu'aux couples. Chaque bungalow est équipé d'une salle de bain privative avec eau chaude et d'une télévision.",
       en: "Our standard bungalows are scattered throughout a lush tropical garden. Built with local materials, they offer authentic and warm comfort in total harmony with Malagasy nature.\n\nAvailable in double, twin or single, they suit solo travellers and couples alike. Each bungalow has a private bathroom with hot water and a television.",
-      es: "Nuestros bungalows estándar están diseminados en un exuberante jardín tropical. Construidos con materiales locales, ofrecen un confort auténtico y cálido en armonía total con la naturaleza malgache.",
+      es: "Nuestros bungalows estándar están diseminados en un exuberante jardín tropical. Construidos con materiales locales, ofrecen un confort auténtico y cálido en armonía total con la naturaleza malgache.\n\nDisponibles en versión doble, twin o single, convienen tanto a viajeros en solitario como a parejas. Cada bungalow dispone de baño privado con agua caliente y televisión.",
     },
     units: 26,
     capacity: "1-2",
     surface: "16m²",
-    priceEUR: null,
+    priceEUR: 28,
     priceAR: 140000,
-    priceTOEUR: undefined,
+    priceTOEUR: 28,
     amenities: [
       { icon: "bed", label: { fr: "Double, twin ou single", en: "Double, twin or single", es: "Doble, twin o single" } },
       { icon: "ruler", label: { fr: "16m²", en: "16m²", es: "16m²" } },
@@ -281,7 +286,7 @@ export const rooms: Room[] = [
     },
     units: 4,
     capacity: "5",
-    priceEUR: null,
+    priceEUR: 50,
     priceAR: 250000,
     amenities: [
       { icon: "house", label: { fr: "Duplex 2 étages", en: "2-storey duplex", es: "Dúplex 2 plantas" } },

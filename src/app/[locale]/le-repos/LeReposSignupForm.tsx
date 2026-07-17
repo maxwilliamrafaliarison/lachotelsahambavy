@@ -21,7 +21,7 @@ export default function LeReposSignupForm({ dict }: { dict: any }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className="block text-text-muted text-sm mb-2">
+        <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
           {dict.repos.formNameLabel}
         </label>
         <input
@@ -29,26 +29,25 @@ export default function LeReposSignupForm({ dict }: { dict: any }) {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-brown-deep/20 bg-white text-brown-deep placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-brown-deep/30"
+          className="w-full rounded-[3px] border border-hairline bg-paper px-4 py-3 text-ink placeholder:text-muted/60 focus:border-tea focus:outline-none focus:ring-1 focus:ring-tea"
           placeholder={dict.repos.formNamePlaceholder}
         />
       </div>
       <div>
-        <label className="block text-text-muted text-sm mb-2">Email</label>
+        <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
+          Email
+        </label>
         <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-brown-deep/20 bg-white text-brown-deep placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-brown-deep/30"
+          className="w-full rounded-[3px] border border-hairline bg-paper px-4 py-3 text-ink placeholder:text-muted/60 focus:border-tea focus:outline-none focus:ring-1 focus:ring-tea"
           placeholder={dict.repos.formEmailPlaceholder}
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full py-4 bg-brown-deep text-cream font-semibold rounded-lg hover:bg-brown-deep/90 transition-colors duration-300"
-      >
+      <button type="submit" className="ge-cta w-full">
         {dict.repos.formSubmit}
       </button>
     </form>

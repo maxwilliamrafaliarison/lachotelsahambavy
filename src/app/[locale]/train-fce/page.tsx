@@ -1,16 +1,43 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
-import PageHero from "@/components/ui/PageHero";
+import PanoramaHero from "@/components/ui/PanoramaHero";
+import EditorialSplit from "@/components/ui/EditorialSplit";
+import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Icon } from "@/components/ui/Icon";
 import { siteConfig } from "@/data/site";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, touristAttractionSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
-import { Icon } from "@/components/ui/Icon";
 
 const basePath = getBasePath();
+
+/**
+ * Clés ajoutées au dictionnaire via le protocole de deltas
+ * (scratchpad/dict-deltas/train.json) — optionnelles tant que la fusion
+ * n'a pas eu lieu, avec repli français inline.
+ */
+type TrainExtras = {
+  infoLabels?: {
+    route: string;
+    distance: string;
+    duration: string;
+    altitude: string;
+    station: string;
+    booking: string;
+  };
+  stationCaption?: string;
+  routesLabel?: string;
+  routesTitle?: string;
+  routeNotes?: string[];
+  departuresLabel?: string;
+  departuresValue?: string;
+  ratesLabel?: string;
+  ratesValue?: string;
+  projectLabel?: string;
+  projectTitle?: string;
+};
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -25,7 +52,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default async function TrainFCEPage({
   params,
 }: {
@@ -34,17 +60,48 @@ export default async function TrainFCEPage({
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
+  const t = dict.train as typeof dict.train & TrainExtras;
 
   const attractionTrain = touristAttractionSchema({
     locale: loc,
     slug: "train-fce",
     name: dict.train.heroTitle as string,
     description: dict.train.heroSubtitle as string,
-    image: "/images/train/train-hotel.jpg",
+    image: "/images/train/draisine-rails-gare-sahambavy.jpg",
   });
 
-  // Mapping options train → icônes
-  const optionIcons = ["train", "boat", "house"];
+  // Mapping options train → icônes (Micheline / Draisine privée / Train classique)
+  const optionIcons = ["train", "people", "culture"];
+
+  const infoLabels = t.infoLabels ?? {
+    route: "Trajet",
+    distance: "Distance",
+    duration: "Durée",
+    altitude: "Altitude",
+    station: "Gare",
+    booking: "Réservation",
+  };
+
+  const routeNotes = t.routeNotes ?? [
+    "Vers le corridor de forêt primaire",
+    "Au cœur de la ligne FCE",
+    "Jusqu'à l'océan Indien",
+  ];
+
+  const routeRows = [
+    ...dict.train.draisineRoutes.map((route, i) => ({
+      label: route,
+      value: routeNotes[i] ?? "",
+    })),
+    {
+      label: t.departuresLabel ?? "Départs",
+      value: t.departuresValue ?? "Fianarantsoa ou Sahambavy, en face de l'hôtel",
+    },
+    {
+      label: t.ratesLabel ?? "Tarifs",
+      value: t.ratesValue ?? "Sur demande",
+    },
+  ];
 
   return (
     <>
@@ -52,189 +109,162 @@ export default async function TrainFCEPage({
         schemas={[attractionTrain, breadcrumbSchema(buildBreadcrumb(loc, "train-fce"))]}
       />
 
-      <PageHero
+      <PanoramaHero
+        image={`${basePath}/images/train/draisine-rails-gare-sahambavy.jpg`}
+        imageAlt="Draisine sur les rails de la ligne FCE, en gare de Sahambavy"
+        label={dict.train.introLabel}
         title={dict.train.heroTitle}
-        subtitle={dict.train.heroSubtitle}
-        image={`${basePath}/images/train/train-hotel.jpg`}
+        kicker={dict.train.heroSubtitle}
+        cta={{ href: "#draisine", label: dict.train.draisineLabel }}
       />
 
-      {/* ──── INTRO ──── */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-            <ScrollReveal className="lg:col-span-6">
-              <span className="section-label">{dict.train.introLabel}</span>
-              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.train.introTitle}</h2>
-              <p className="text-text-muted leading-[1.8] mb-5">{dict.train.introP1}</p>
-              <p className="text-text-muted leading-[1.8] mb-6">{dict.train.introP2}</p>
-              <div className="flex items-center gap-3 mt-2">
-                <span className="h-px w-10 bg-gold" />
-                <span className="text-[0.7rem] tracking-[0.28em] uppercase text-gold font-medium">
-                  {loc === "fr"
-                    ? "Gare à 2 min de l'hôtel"
-                    : loc === "en"
-                      ? "Station 2 min from the hotel"
-                      : "Estación a 2 min del hotel"}
-                </span>
-                <span className="h-px flex-1 bg-gold/30" />
+      {/* ──── #ligne-fce — la ligne Fianarantsoa–Côte Est ──── */}
+      <section id="ligne-fce" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          {/* Intro éditoriale */}
+          <ScrollReveal>
+            <div className="grid gap-8 md:grid-cols-12 md:gap-14">
+              <div className="md:col-span-5">
+                <span className="ge-label mb-3">{dict.train.introLabel}</span>
+                <h2 style={{ textWrap: "balance" }}>{dict.train.introTitle}</h2>
               </div>
-            </ScrollReveal>
+              <div className="md:col-span-7">
+                <div className="ge-measure space-y-4 text-[15px] leading-relaxed text-body md:text-base">
+                  <p>{dict.train.introP1}</p>
+                  <p>{dict.train.introP2}</p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
 
-            <ScrollReveal delay={180} className="lg:col-span-6">
-              <div className="product-photo aspect-[4/3]">
+          {/* Bande photo — l'hôtel face à la gare */}
+          <ScrollReveal className="mt-14 md:mt-20">
+            <figure>
+              <div className="overflow-hidden rounded-[3px] border border-hairline">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${basePath}/images/train/train-hotel.jpg`}
-                  alt={dict.train.heroTitle}
-                  className="w-full h-full object-cover"
+                  alt="Le train FCE marquant l'arrêt en gare de Sahambavy, face au Lac Hôtel"
                   loading="lazy"
+                  className="aspect-[16/7] w-full object-cover"
                 />
               </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+              <figcaption className="mt-3 text-xs text-muted">
+                {t.stationCaption ??
+                  "Le Lac Hôtel Sahambavy, à deux minutes à pied de la gare de Sahambavy — le point de départ idéal sur la ligne FCE."}
+              </figcaption>
+            </figure>
+          </ScrollReveal>
 
-      {/* ──── 3 OPTIONS — Micheline / Draisine / Train classique ──── */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <SectionHeader
-            label={dict.train.optionsLabel}
-            title={dict.train.optionsTitle}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-            {(dict.train.options as { name: string; desc: string }[]).map(
-              (opt: any, i: number) => (
-                <ScrollReveal key={opt.name} delay={i * 120}>
-                  <div className="repos-feature h-full p-7 md:p-8">
-                    <div className="repos-feature__badge mb-5">
-                      <Icon name={optionIcons[i] || "train"} size={26} weight="regular" />
-                    </div>
-                    <h3 className="text-lg md:text-xl text-text-dark mb-3 leading-tight">
-                      {opt.name}
-                    </h3>
-                    <p className="text-text-muted text-sm leading-relaxed">{opt.desc}</p>
+          {/* Trois façons de vivre le rail */}
+          <div className="mt-16 md:mt-24">
+            <ScrollReveal>
+              <span className="ge-label mb-3">{dict.train.optionsLabel}</span>
+              <h2 style={{ textWrap: "balance" }}>{dict.train.optionsTitle}</h2>
+            </ScrollReveal>
+            <div className="mt-10 grid gap-5 md:grid-cols-3 md:gap-6">
+              {dict.train.options.map((opt, i) => (
+                <ScrollReveal key={opt.name} delay={i * 120} className="h-full">
+                  <div className="flex h-full flex-col rounded-[3px] border border-hairline bg-white p-7 md:p-8">
+                    <Icon
+                      name={optionIcons[i] ?? "train"}
+                      size={26}
+                      weight="light"
+                      className="text-tea"
+                    />
+                    <h3 className="mt-5 mb-3 text-ink">{opt.name}</h3>
+                    <p className="text-[15px] leading-relaxed text-body">{opt.desc}</p>
                   </div>
                 </ScrollReveal>
-              )
-            )}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ──── DRAISINE PRIVATIVE — section signature ──── */}
-      <section id="draisine" className="py-14 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background: "linear-gradient(180deg, #FFFFFF 0%, #FBFAF6 50%, #FFFFFF 100%)",
-          }}
-        />
-        <div className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full bg-green-tea/5 blur-3xl -z-10" />
-
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-            <ScrollReveal className="lg:col-span-6">
-              <div className="product-photo aspect-[4/3]">
+      {/* ──── Informations pratiques — Aperçu à filets fins ──── */}
+      <section className="bg-mist-bg py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+            <ScrollReveal>
+              <span className="ge-label mb-3">{dict.train.infoLabel}</span>
+              <h2 style={{ textWrap: "balance" }}>{dict.train.infoTitle}</h2>
+              <div className="mt-8 overflow-hidden rounded-[3px] border border-hairline">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`${basePath}/images/train/draisine.jpg`}
-                  alt={dict.train.draisineTitle}
-                  className="w-full h-full object-cover"
+                  src={`${basePath}/images/train/micheline-bleue-quai-gare.jpg`}
+                  alt="La Micheline bleue à quai, autorail historique de la ligne FCE"
                   loading="lazy"
+                  className="aspect-[4/3] w-full object-cover"
                 />
               </div>
             </ScrollReveal>
-
-            <ScrollReveal delay={180} className="lg:col-span-6">
-              <span className="section-label">{dict.train.draisineLabel}</span>
-              <h2 className="mt-2 mb-6 leading-[1.15]">{dict.train.draisineTitle}</h2>
-              <p className="text-text-muted leading-[1.8] mb-5">{dict.train.draisineP}</p>
-              <p className="text-text-muted leading-[1.8] italic mb-8">
-                {dict.train.draisineProject}
-              </p>
-
-              <div className="flex items-center gap-3 mb-4">
-                <span className="h-px w-8 bg-gold" />
-                <span className="text-[0.7rem] font-semibold text-gold uppercase tracking-[0.28em]">
-                  {loc === "fr"
-                    ? "Itinéraires proposés"
-                    : loc === "en"
-                      ? "Suggested routes"
-                      : "Itinerarios propuestos"}
-                </span>
-              </div>
-              <ul className="space-y-2.5 mb-6">
-                {(dict.train.draisineRoutes as string[]).map((route: string) => (
-                  <li
-                    key={route}
-                    className="flex items-start gap-3 text-text-body text-sm"
-                  >
-                    <Icon
-                      name="arrow"
-                      size={14}
-                      weight="regular"
-                      className="text-gold mt-1 flex-shrink-0"
-                    />
-                    <span>{route}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <p className="text-xs text-text-muted leading-relaxed">
-                {dict.train.draisineContact}
-              </p>
+            <ScrollReveal delay={120}>
+              <RecapRows
+                rows={[
+                  { label: infoLabels.route, value: dict.train.infoItems.route },
+                  { label: infoLabels.distance, value: dict.train.infoItems.distance },
+                  { label: infoLabels.duration, value: dict.train.infoItems.duration },
+                  { label: infoLabels.altitude, value: dict.train.infoItems.altitude },
+                  { label: infoLabels.station, value: dict.train.infoItems.station },
+                  { label: infoLabels.booking, value: dict.train.infoItems.booking },
+                ]}
+              />
             </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ──── INFOS PRATIQUES — grille 6 cellules ──── */}
-      <section className="py-14 md:py-24 bg-cream">
-        <div className="max-w-[1100px] mx-auto px-5 md:px-6">
-          <SectionHeader label={dict.train.infoLabel} title={dict.train.infoTitle} />
+      {/* ──── #draisine — location privative de la draisine ──── */}
+      <section id="draisine" className="scroll-mt-24 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="space-y-6 md:space-y-8">
+            <EditorialSplit
+              image={`${basePath}/images/train/draisine-fce-embarquement-voyageurs.jpg`}
+              imageAlt="Voyageurs embarquant à bord de la draisine privative sur la ligne FCE"
+              label={dict.train.draisineLabel}
+              title={dict.train.draisineTitle}
+              cta={{ href: `${basePath}/${locale}/contact/`, label: dict.train.cta }}
+            >
+              <p>{dict.train.draisineP}</p>
+            </EditorialSplit>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {[
-              { icon: "location", label: loc === "fr" ? "Trajet" : loc === "en" ? "Route" : "Trayecto", value: dict.train.infoItems.route },
-              { icon: "ruler", label: loc === "fr" ? "Distance" : loc === "en" ? "Distance" : "Distancia", value: dict.train.infoItems.distance },
-              { icon: "clock", label: loc === "fr" ? "Durée" : loc === "en" ? "Duration" : "Duración", value: dict.train.infoItems.duration },
-              { icon: "mountain", label: loc === "fr" ? "Altitude" : loc === "en" ? "Altitude" : "Altitud", value: dict.train.infoItems.altitude },
-              { icon: "train", label: loc === "fr" ? "Gare" : loc === "en" ? "Station" : "Estación", value: dict.train.infoItems.station },
-              { icon: "info", label: loc === "fr" ? "Réservation" : loc === "en" ? "Booking" : "Reserva", value: dict.train.infoItems.booking },
-            ].map((it, i) => (
-              <ScrollReveal key={it.label} delay={i * 70}>
-                <div className="repos-feature h-full p-5 md:p-6 flex flex-col items-center text-center">
-                  <div className="repos-feature__badge mb-3" style={{ width: "2.5rem", height: "2.5rem" }}>
-                    <Icon name={it.icon} size={18} weight="regular" />
-                  </div>
-                  <span className="text-[0.6rem] uppercase tracking-[0.22em] text-gold font-medium mb-1.5">
-                    {it.label}
-                  </span>
-                  <span className="text-sm font-semibold text-brown-deep leading-tight">
-                    {it.value}
-                  </span>
-                </div>
-              </ScrollReveal>
-            ))}
+            <EditorialSplit
+              reverse
+              image={`${basePath}/images/train/train-fce-foret-corridor.jpg`}
+              imageAlt="La ligne FCE traversant le corridor de forêt primaire vers Andrambovato"
+              label={t.projectLabel ?? "Projet de préservation"}
+              title={t.projectTitle ?? "Andrambovato, corridor de forêt primaire"}
+            >
+              <p>{dict.train.draisineProject}</p>
+            </EditorialSplit>
+          </div>
+
+          {/* Trajets en location privative */}
+          <div className="mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-16">
+            <ScrollReveal className="md:col-span-5">
+              <span className="ge-label mb-3">{t.routesLabel ?? "Trajets"}</span>
+              <h2 style={{ textWrap: "balance" }}>
+                {t.routesTitle ?? "Trois itinéraires au départ de Sahambavy"}
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal delay={120} className="md:col-span-7">
+              <RecapRows rows={routeRows} footnote={dict.train.draisineContact} />
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ──── CTA ──── */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center -z-10"
-          style={{ backgroundImage: `url(${basePath}/images/hero/hero-drone-sunrise.jpg)` }}
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
-
-        <div className="max-w-[600px] mx-auto px-5 md:px-6 relative text-center">
+      {/* ──── CTA final ──── */}
+      <section className="border-t border-hairline py-16 md:py-24">
+        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
           <ScrollReveal>
-            <h2 className="mb-4" style={{ color: "#FFFFFF" }}>
-              {dict.train.ctaTitle}
-            </h2>
-            <p className="text-white/85 mb-8 leading-relaxed">{dict.train.ctaP}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={`/${locale}/contact/`} className="btn btn--primary">
+            <h2 style={{ textWrap: "balance" }}>{dict.train.ctaTitle}</h2>
+            <p className="mx-auto mt-4 max-w-[52ch] text-[15px] leading-relaxed text-body md:text-base">
+              {dict.train.ctaP}
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link href={`/${locale}/contact/`} className="ge-cta">
                 {dict.train.cta}
               </Link>
               <a
@@ -247,7 +277,7 @@ export default async function TrainFCEPage({
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn--glass"
+                className="ge-cta ge-cta--ghost"
               >
                 WhatsApp
               </a>

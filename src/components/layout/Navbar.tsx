@@ -1,311 +1,401 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { type Locale, getBasePath } from "@/lib/utils";
-import { navigation, siteConfig } from "@/data/site";
+import { usePathname } from "next/navigation";
+import { navigation, siteConfig, type NavItem } from "@/data/site";
+import { getBasePath, locales, type Locale } from "@/lib/utils";
 
 const basePath = getBasePath();
 
-/**
- * Plages de scroll :
- *  - 0 → SCROLL_START : navbar 100 % transparente, logo blanc, texte clair.
- *  - SCROLL_START → SCROLL_END : opacité/flou augmentent progressivement.
- *  - > SCROLL_END : état "scrolled" complet (glass blanc, logo brun).
- *
- * Le seuil visuel (couleur de texte / logo) bascule à SCROLL_THRESHOLD,
- * légèrement plus tôt pour éviter d'avoir du texte blanc illisible sur fond
- * devenu trop laiteux.
- */
-const SCROLL_START = 20;
+/** Fin de la plage du glass progressif (px de scroll) — valeur éprouvée. */
 const SCROLL_END = 180;
-const SCROLL_THRESHOLD = 110;
+
+/**
+ * Localise un href interne : "/hotel#philosophie" → "/fr/hotel/#philosophie".
+ * Trailing slash obligatoire (config trailingSlash: true).
+ */
+function localizeHref(href: string, locale: string): string {
+  const [path, hash] = href.split("#");
+  const normalized = path === "/" ? `/${locale}/` : `/${locale}${path}/`;
+  return hash ? `${normalized}#${hash}` : normalized;
+}
+
+/** Remplace le segment de locale du chemin courant (sélecteur de langue). */
+function replaceLocale(pathname: string, code: string): string {
+  const segments = pathname.split("/");
+  if (segments.length > 1 && (locales as readonly string[]).includes(segments[1])) {
+    segments[1] = code;
+    const joined = segments.join("/") || `/${code}/`;
+    return joined.endsWith("/") ? joined : `${joined}/`;
+  }
+  return `/${code}/`;
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
+  const pathname = usePathname();
   const [ratio, setRatio] = useState(0);
-  const [topbarHidden, setTopbarHidden] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const rafRef = useRef<number | null>(null);
-  const router = useRouter();
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
 
+  /* — Scroll : ratio 0 (transparent sur hero) → 1 (papier opaque) — */
   useEffect(() => {
+    let raf = 0;
     const onScroll = () => {
-      if (rafRef.current !== null) return;
-      rafRef.current = requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const r = Math.max(0, Math.min((y - SCROLL_START) / (SCROLL_END - SCROLL_START), 1));
-        setRatio(r);
-        setTopbarHidden(y > 60);
-        rafRef.current = null;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        setRatio(Math.min(1, Math.max(0, window.scrollY / SCROLL_END)));
       });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
-  const scrolled = ratio >= 1;
-  const darkText = ratio > SCROLL_THRESHOLD / SCROLL_END;
+  /* — Verrou scroll body quand l'overlay mobile est ouvert — */
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
-  // Hero-top mode — show the FULL lockup (logo gris + tagline "The natural
-  // choice") à grande taille tant que l'utilisateur n'a pas commencé à
-  // scroller, sur TOUTES les pages (accueil, L'Hôtel, Hébergements, etc.).
-  // Dès qu'il scroll, morph vers le mark compact. Toutes les pages du site
-  // ont un <PageHero> (70 vh min 500 px), donc l'espace est suffisant pour
-  // que le lockup respire sans chevaucher le titre de la page.
-  const heroBrandMode = ratio < 0.08;
+  const closeAll = useCallback(() => {
+    setOpenMenu(null);
+    setMobileOpen(false);
+  }, []);
 
-  // Typographic locale switcher — emoji flags read as DIY, a two-letter
-  // code in uppercase tracking sits better next to nav-links of the same
-  // weight (cf. Le Bristol, La Mamounia).
-  const localeLinks = [
-    { code: "fr" as const },
-    { code: "en" as const },
-    { code: "es" as const },
-  ];
+  /* — Fermeture au clic extérieur / Échap — */
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenMenu(null);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenMenu(null);
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
 
-  function handleNav(href: string) {
-    setMenuOpen(false);
-    router.push(href);
-  }
+  const scheduleClose = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 160);
+  }, []);
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }, []);
 
-  // Progressive glass — eases cubically for a more natural feel
-  const eased = ratio * ratio * (3 - 2 * ratio);
-  const navStyle = {
-    top: topbarHidden ? 0 : 36,
-    background: `rgba(255, 255, 255, ${0.6 * eased})`,
-    backdropFilter: eased > 0.02 ? `blur(${24 * eased}px) saturate(${100 + 80 * eased}%)` : "none",
-    WebkitBackdropFilter: eased > 0.02 ? `blur(${24 * eased}px) saturate(${100 + 80 * eased}%)` : "none",
-    borderBottom: `1px solid rgba(255, 255, 255, ${0.3 * eased})`,
-    boxShadow:
-      eased > 0.05
-        ? `0 4px 30px rgba(0, 0, 0, ${0.06 * eased}), inset 0 1px 0 rgba(255, 255, 255, ${0.5 * eased})`
-        : "none",
-    transition:
-      "top 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s linear, backdrop-filter 0.15s linear, -webkit-backdrop-filter 0.15s linear, border-color 0.15s linear, box-shadow 0.15s linear",
-  } as React.CSSProperties;
+  const eased = ratio * ratio * (3 - 2 * ratio); // smoothstep
+  const solid = openMenu !== null; // panneau ouvert → barre opaque immédiate
+  const bg = solid ? 1 : eased;
+  const darkText = bg > 0.55;
+
+  const primaryItems = navigation.filter((n) => n.primary !== false);
+  const mobileItems = navigation;
+
+  const itemColor = darkText ? "text-ink" : "text-white";
+  const itemShadow = darkText ? undefined : { textShadow: "0 1px 8px rgba(0,0,0,0.35)" };
 
   return (
-    <nav className="fixed left-0 right-0 z-[1000]" style={navStyle}>
-      {/* Main nav */}
-      <div className="py-4 px-6">
-        <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Logo — mobile (<md) : TOUJOURS le mark compact, quelle que soit
-              la page ou le scroll. Le full lockup avec tagline écrase le hero
-              sur un écran 390×844 et chevauche le titre de la page. Sur tablet+
-              (md+) : full lockup en hero-top, morph vers le mark compact au
-              scroll. Couleur : blanc tant qu'on est sur la photo, brun dès que
-              la navbar passe en glass. */}
-          <Link href={`/${locale}/`} className="flex items-center gap-2">
-            {/* Version mobile — mark compact, petit et discret */}
-            <img
-              src={`${basePath}/images/logo/${
-                darkText ? "logo-mark-dark" : "logo-mark-white"
-              }.png`}
-              alt="Lac Hôtel Sahambavy"
-              className="md:hidden w-auto h-14 transition-opacity duration-500"
-            />
-            {/* Version tablet+ — full lockup en hero-top, mark compact au scroll.
-                Échelle ×2 par rapport à la v1 : 256/320 px en hero, 80/96 px en
-                navbar scrollée. Reste fonctionnel : la navbar scrollée ne
-                déborde pas, le hero affirme la marque sans écraser le titre. */}
-            <img
-              src={`${basePath}/images/logo/${
-                heroBrandMode
-                  ? "logo-color"
-                  : darkText
-                  ? "logo-mark-dark"
-                  : "logo-mark-white"
-              }.png`}
-              alt="Lac Hôtel Sahambavy — The natural choice"
-              className={`hidden md:block w-auto transition-all duration-500 ${
-                heroBrandMode
-                  ? "md:h-64 lg:h-80"
-                  : darkText
-                  ? "md:h-20"
-                  : "md:h-24"
-              }`}
-            />
-          </Link>
-
-          {/* Desktop menu — minimal.
-              Hors scroll, le texte est blanc sur fond hero — on ajoute un
-              text-shadow doux pour que les items restent lisibles même
-              quand la photo/vidéo montre un ciel clair ou un feuillage
-              vert pâle derrière (gros problème signalé sur /fr avec la
-              nouvelle vidéo drone). Scrolled : shadow neutralisé puisque
-              le fond devient blanc glass. */}
-          <div
-            className="hidden lg:flex items-center gap-10"
-            style={{
-              textShadow: darkText ? "none" : "0 1px 3px rgba(0,0,0,0.55), 0 0 20px rgba(0,0,0,0.30)",
-            }}
-          >
-            {navigation
-              .filter((n) => n.href !== "/" && n.href !== "/contact" && n.primary !== false)
-              .map((item) => (
-                <Link
-                  key={item.href}
-                  href={`/${locale}${item.href}/`}
-                  className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${
-                    darkText ? "text-text-body" : "text-white"
-                  }`}
-                >
-                  {item.label[locale]}
-                </Link>
-              ))}
-
-            {/* Locale switcher */}
-            <div className="flex items-center gap-3 ml-2">
-              {localeLinks.map((l, i) => (
-                <span key={l.code} className="flex items-center gap-3">
-                  {i > 0 && (
-                    <span
-                      aria-hidden="true"
-                      className={`inline-block w-px h-3 ${darkText ? "bg-brown-deep/20" : "bg-white/40"}`}
-                    />
-                  )}
-                  <Link
-                    href={`/${l.code}/`}
-                    className={`text-[0.65rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${
-                      locale === l.code
-                        ? darkText ? "text-gold" : "text-white"
-                        : darkText ? "text-text-body/50 hover:text-gold" : "text-white/70 hover:text-white"
-                    }`}
-                    aria-current={locale === l.code ? "page" : undefined}
-                  >
-                    {l.code.toUpperCase()}
-                  </Link>
-                </span>
-              ))}
-            </div>
-
-            {/* Book CTA.
-                Hors scroll : fond dark glass (au lieu de white/15 qui
-                disparaissait sur la vidéo) → encadre clairement le CTA. */}
-            <Link
-              href={`/${locale}/contact/`}
-              style={{ textShadow: "none" }}
-              className={`text-[0.7rem] font-semibold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full transition-all duration-300 ${
-                scrolled
-                  ? "bg-gold text-white hover:bg-brown-deep"
-                  : "bg-black/35 backdrop-blur-md text-white border border-white/40 hover:bg-black/50"
-              }`}
-            >
-              {dict.nav.book}
-            </Link>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
-          >
-            <span
-              className={`block w-6 h-0.5 transition-all duration-300 ${
-                darkText ? "bg-brown-deep" : "bg-white"
-              } ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-            />
-            <span
-              className={`block w-6 h-0.5 transition-all duration-300 ${
-                darkText ? "bg-brown-deep" : "bg-white"
-              } ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block w-6 h-0.5 transition-all duration-300 ${
-                darkText ? "bg-brown-deep" : "bg-white"
-              } ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-            />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu — glass overlay (covers TopBar too) */}
-      {menuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 top-0 z-[1200] overflow-y-auto"
+    <>
+      <header
+        ref={navRef}
+        className="fixed inset-x-0 z-[1000] transition-[top] duration-300"
+        style={{ top: ratio > 0.33 ? 0 : 36 }}
+        onMouseLeave={scheduleClose}
+      >
+        <nav
+          aria-label="Navigation principale"
+          className="relative"
           style={{
-            background: "rgba(248, 245, 240, 0.92)",
-            backdropFilter: "blur(30px)",
-            WebkitBackdropFilter: "blur(30px)",
+            background: `rgba(251, 250, 247, ${0.94 * bg})`,
+            backdropFilter: bg > 0.05 ? `blur(${18 * bg}px) saturate(${100 + 60 * bg}%)` : undefined,
+            WebkitBackdropFilter:
+              bg > 0.05 ? `blur(${18 * bg}px) saturate(${100 + 60 * bg}%)` : undefined,
+            borderBottom: `1px solid rgba(231, 228, 220, ${bg})`,
           }}
         >
-          <div className="flex justify-between items-center p-6">
-            <img
-              src={`${basePath}/images/logo/logo-dark.png`}
-              alt="Lac Hôtel Sahambavy"
-              className="h-32 w-auto"
-            />
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="p-2 text-brown-deep"
-              aria-label="Fermer le menu"
+          <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-4 px-5 md:px-8">
+            {/* Marque — mark + lockup typographique */}
+            <Link
+              href={`/${locale}/`}
+              className={`flex shrink-0 items-center gap-3 ${itemColor}`}
+              style={itemShadow}
+              aria-label="Lac Hôtel Sahambavy — Accueil"
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                <path d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            </button>
-          </div>
-          <div className="flex flex-col px-8 py-6 gap-1">
-            {navigation.map((item) => (
-              <button
-                key={item.href}
-                onClick={() =>
-                  handleNav(`/${locale}${item.href === "/" ? "" : item.href}/`)
-                }
-                className="text-2xl font-[family-name:var(--font-heading)] font-medium text-brown-deep hover:text-gold transition-colors py-4 text-left"
-              >
-                {item.label[locale]}
-              </button>
-            ))}
-            <div className="flex items-center gap-4 pt-6 mt-4 border-t border-brown-deep/10">
-              {localeLinks.map((l, i) => (
-                <span key={l.code} className="flex items-center gap-4">
-                  {i > 0 && <span aria-hidden="true" className="inline-block w-px h-4 bg-brown-deep/20" />}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${basePath}/images/logo/${darkText ? "logo-mark-dark" : "logo-mark-white"}.png`}
+                alt=""
+                className="h-9 w-auto"
+              />
+              <span className="hidden flex-col leading-none xl:flex">
+                <span className="font-[family-name:var(--font-display)] text-[17px] font-light tracking-[0.18em]">
+                  LAC HÔTEL
+                </span>
+                <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.3em] opacity-80">
+                  Sahambavy · Madagascar
+                </span>
+              </span>
+            </Link>
+
+            {/* Menu desktop */}
+            <ul className="ml-auto hidden items-center gap-0.5 lg:flex">
+              {primaryItems.map((item) => (
+                <li key={item.href}>
+                  {item.children ? (
+                    <button
+                      type="button"
+                      aria-expanded={openMenu === item.href}
+                      aria-haspopup="true"
+                      onMouseEnter={() => {
+                        cancelClose();
+                        setOpenMenu(item.href);
+                      }}
+                      onFocus={() => setOpenMenu(item.href)}
+                      onClick={() => setOpenMenu(openMenu === item.href ? null : item.href)}
+                      className={`flex items-center gap-1.5 whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
+                        darkText ? "hover:text-tea" : "hover:text-white/75"
+                      }`}
+                      style={itemShadow}
+                    >
+                      {(item.shortLabel ?? item.label)[locale]}
+                      <svg
+                        width="9"
+                        height="6"
+                        viewBox="0 0 9 6"
+                        fill="none"
+                        aria-hidden="true"
+                        className={`transition-transform duration-200 ${openMenu === item.href ? "rotate-180" : ""}`}
+                      >
+                        <path
+                          d="M1 1l3.5 3.5L8 1"
+                          stroke="currentColor"
+                          strokeWidth="1.4"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </button>
+                  ) : (
+                    <Link
+                      href={localizeHref(item.href, locale)}
+                      className={`block whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
+                        darkText ? "hover:text-tea" : "hover:text-white/75"
+                      }`}
+                      style={itemShadow}
+                    >
+                      {(item.shortLabel ?? item.label)[locale]}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {/* Sélecteur de langue — préserve la page courante */}
+            <div
+              className={`hidden items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] lg:flex ${itemColor}`}
+              style={itemShadow}
+            >
+              {locales.map((code, i) => (
+                <span key={code} className="flex items-center gap-1.5">
+                  {i > 0 && <span className="opacity-35">·</span>}
                   <Link
-                    href={`/${l.code}/`}
-                    className={`text-sm font-medium uppercase tracking-[0.25em] transition-colors ${
-                      locale === l.code ? "text-gold" : "text-brown-deep/60 hover:text-gold"
-                    }`}
-                    aria-current={locale === l.code ? "page" : undefined}
-                    onClick={() => setMenuOpen(false)}
+                    href={replaceLocale(pathname, code)}
+                    aria-current={code === locale ? "page" : undefined}
+                    className={
+                      code === locale
+                        ? darkText
+                          ? "text-tea underline underline-offset-4"
+                          : "underline underline-offset-4"
+                        : "opacity-65 transition-opacity hover:opacity-100"
+                    }
                   >
-                    {l.code.toUpperCase()}
+                    {code.toUpperCase()}
                   </Link>
                 </span>
               ))}
             </div>
-            <button
-              onClick={() => handleNav(`/${locale}/contact/`)}
-              className="btn btn--primary mt-6 text-center"
-            >
-              {dict.nav.book}
-            </button>
 
-            {/* Contact info in mobile menu */}
-            <div className="mt-8 pt-6 border-t border-brown-deep/10 space-y-2 text-sm text-text-muted">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="block hover:text-gold"
-              >
+            {/* CTA Réserver */}
+            <Link href={`/${locale}/contact/`} className="ge-cta hidden !px-5 !py-2.5 !text-[11.5px] lg:inline-flex">
+              {dict.nav.book}
+            </Link>
+
+            {/* Burger mobile */}
+            <button
+              type="button"
+              aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen((v) => !v)}
+              className={`ml-auto flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden ${mobileOpen ? "text-ink" : itemColor}`}
+              style={mobileOpen ? undefined : itemShadow}
+            >
+              <span
+                className={`h-[1.5px] w-6 bg-current transition-transform duration-300 ${mobileOpen ? "translate-y-[6.5px] rotate-45" : ""}`}
+              />
+              <span
+                className={`h-[1.5px] w-6 bg-current transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`h-[1.5px] w-6 bg-current transition-transform duration-300 ${mobileOpen ? "-translate-y-[6.5px] -rotate-45" : ""}`}
+              />
+            </button>
+          </div>
+
+          {/* Méga-menu desktop */}
+          {primaryItems.map(
+            (item) =>
+              item.children &&
+              openMenu === item.href && (
+                <div
+                  key={`panel-${item.href}`}
+                  onMouseEnter={cancelClose}
+                  onMouseLeave={scheduleClose}
+                  className="absolute inset-x-0 top-full hidden border-b border-hairline bg-paper/[0.97] backdrop-blur-xl lg:block"
+                >
+                  <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-10 gap-y-1 px-10 py-7 xl:grid-cols-3">
+                    <Link
+                      href={localizeHref(item.href, locale)}
+                      onClick={closeAll}
+                      className="col-span-full mb-2 flex items-baseline gap-3 text-ink transition-colors hover:text-tea"
+                    >
+                      <span className="font-[family-name:var(--font-display)] text-[22px] font-extralight tracking-[-0.01em]">
+                        {item.label[locale]}
+                      </span>
+                      <span className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-tea">
+                        {locale === "fr" ? "Voir la page" : locale === "es" ? "Ver la página" : "View page"}
+                      </span>
+                    </Link>
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={localizeHref(child.href, locale)}
+                        onClick={closeAll}
+                        className="group flex items-center gap-2.5 rounded px-2 py-2 text-[14px] text-body transition-colors hover:text-tea"
+                      >
+                        <span className="h-px w-4 bg-hairline transition-all duration-200 group-hover:w-6 group-hover:bg-tea" />
+                        {child.label[locale]}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+        </nav>
+      </header>
+
+      {/* Overlay mobile */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[900] overflow-y-auto bg-paper/[0.97] backdrop-blur-2xl lg:hidden">
+          <div className="flex min-h-full flex-col px-6 pb-12 pt-24">
+            <ul className="flex flex-col">
+              <li>
+                <Link
+                  href={`/${locale}/`}
+                  className="block border-b border-hairline py-4 font-[family-name:var(--font-display)] text-[22px] font-extralight text-ink"
+                  onClick={closeAll}
+                >
+                  {locale === "fr" ? "Accueil" : locale === "es" ? "Inicio" : "Home"}
+                </Link>
+              </li>
+              {mobileItems.map((item: NavItem) => (
+                <li key={item.href} className="border-b border-hairline">
+                  <div className="flex items-center">
+                    <Link
+                      href={localizeHref(item.href, locale)}
+                      className="grow py-4 font-[family-name:var(--font-display)] text-[22px] font-extralight text-ink"
+                      onClick={closeAll}
+                    >
+                      {item.label[locale]}
+                    </Link>
+                    {item.children && (
+                      <button
+                        type="button"
+                        aria-label={`${item.label[locale]} — sous-menu`}
+                        aria-expanded={mobileSection === item.href}
+                        onClick={() => setMobileSection(mobileSection === item.href ? null : item.href)}
+                        className="flex h-11 w-11 shrink-0 items-center justify-center text-muted"
+                      >
+                        <svg
+                          width="12"
+                          height="8"
+                          viewBox="0 0 9 6"
+                          fill="none"
+                          aria-hidden="true"
+                          className={`transition-transform duration-200 ${mobileSection === item.href ? "rotate-180" : ""}`}
+                        >
+                          <path
+                            d="M1 1l3.5 3.5L8 1"
+                            stroke="currentColor"
+                            strokeWidth="1.2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  {item.children && mobileSection === item.href && (
+                    <ul className="pb-4 pl-1">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={localizeHref(child.href, locale)}
+                            className="block py-2 text-[14.5px] text-body"
+                            onClick={closeAll}
+                          >
+                            {child.label[locale]}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 flex items-center gap-4 text-[13px] font-semibold tracking-[0.14em]">
+              {locales.map((code) => (
+                <Link
+                  key={code}
+                  href={replaceLocale(pathname, code)}
+                  aria-current={code === locale ? "page" : undefined}
+                  className={code === locale ? "text-tea underline underline-offset-4" : "text-muted"}
+                >
+                  {code.toUpperCase()}
+                </Link>
+              ))}
+            </div>
+
+            <Link href={`/${locale}/contact/`} className="ge-cta mt-8 self-start">
+              {dict.nav.book}
+            </Link>
+
+            <div className="mt-8 flex flex-col gap-2 text-[13.5px] text-body">
+              <a href={`mailto:${siteConfig.email}`} className="hover:text-tea">
                 {siteConfig.email}
               </a>
-              <a
-                href={`tel:${siteConfig.whatsapp}`}
-                className="block hover:text-gold"
-              >
+              <a href={`tel:${siteConfig.whatsapp}`} className="hover:text-tea">
                 {siteConfig.phone}
               </a>
             </div>
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }

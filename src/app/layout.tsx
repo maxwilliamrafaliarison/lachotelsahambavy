@@ -1,24 +1,34 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Cormorant_Garamond } from "next/font/google";
+import { Inter_Tight, Inter, Cormorant_Garamond } from "next/font/google";
 import { Plausible } from "@/components/seo/Plausible";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+/**
+ * Direction artistique « Panorama + Nuit sur le lac » (validée 16/07/2026) :
+ * - Inter Tight (200-300) : titrage géant ultra-fin, transposition Glacier Express
+ * - Cormorant Garamond : serif éditorial des canvases « Nuit » (pages signature)
+ * - Inter : texte courant
+ * Les variables gardent leurs noms historiques (--font-heading/--font-sub/--font-body)
+ * pour ne casser aucun composant pendant la migration.
+ */
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-inter-tight",
+  weight: ["200", "300", "400", "600"],
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-inter",
   display: "swap",
 });
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-sub",
+  variable: "--font-cormorant",
   weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -73,7 +83,8 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${playfair.variable} ${inter.variable} ${cormorant.variable}`}
+      data-scroll-behavior="smooth"
+      className={`${interTight.variable} ${inter.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col">
