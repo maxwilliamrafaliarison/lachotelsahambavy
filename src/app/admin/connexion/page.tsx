@@ -5,6 +5,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { signIn } from "next-auth/react";
 
+/**
+ * N'autorise qu'une destination interne (chemin relatif same-origin) : bloque
+ * l'open redirect via ?callbackUrl=https://evil.com ou //evil.com (phishing
+ * post-connexion). Cf. revue sécurité 16/07/2026.
+ */
+function safeCallback(cb: string | null): string {
+  if (cb && cb.startsWith("/") && !cb.startsWith("//") && !cb.startsWith("/\\")) return cb;
+  return "/admin";
+}
+
 function LoginForm() {
   const router = useRouter();
   const params = useSearchParams();
@@ -23,7 +33,7 @@ function LoginForm() {
       setError("E-mail ou mot de passe incorrect.");
       return;
     }
-    router.push(params.get("callbackUrl") || "/admin");
+    router.push(safeCallback(params.get("callbackUrl")));
     router.refresh();
   }
 

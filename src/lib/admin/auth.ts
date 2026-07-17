@@ -1,6 +1,17 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { compare } from "bcryptjs";
+import { compare, hashSync } from "bcryptjs";
+import { hashIp, extractIp } from "@/lib/booking/hash-ip";
+import { loginAttemptAllowed } from "@/lib/admin/rate-limit";
+
+/**
+ * Hash bcrypt VALIDE (cost 12) précalculé une fois au chargement du module.
+ * Sert de repli quand l'e-mail est inconnu : compare() effectue alors le même
+ * travail cryptographique (~200 ms) que pour un compte réel → pas d'oracle
+ * temporel d'énumération d'e-mails. Un hash malformé serait rejeté en < 1 ms
+ * par bcryptjs, rétablissant l'oracle. Cf. revue sécurité 16/07/2026.
+ */
+const DUMMY_HASH = hashSync("timing-attack-mitigation", 12);
 
 /**
  * Authentification de l'espace admin (Phase 2 — simulateur proforma).
@@ -53,17 +64,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: { label: "E-mail", type: "email" },
         password: { label: "Mot de passe", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, request) {
         const email = String(credentials?.email ?? "")
           .trim()
           .toLowerCase();
         const password = String(credentials?.password ?? "");
         if (!email || !password) return null;
 
+        // Rate-limit par IP hachée + e-mail : bloque le brute-force / le
+        // credential-stuffing avant même la comparaison bcrypt.
+        const ip = extractIp(request.headers);
+        const allowed = await loginAttemptAllowed(`${hashIp(ip)}:${email}`);
+        if (!allowed) return null;
+
         const user = loadUsers().find((u) => u.email.toLowerCase() === email);
-        // compare() même si l'utilisateur n'existe pas → temps constant-ish,
-        // pas d'oracle d'énumération d'e-mails.
-        const ok = await compare(password, user?.hash ?? "$2a$12$invalidinvalidinvalidinvalidinvalid");
+        // compare() contre un hash VALIDE même si l'utilisateur n'existe pas
+        // → même coût cryptographique, pas d'oracle d'énumération d'e-mails.
+        const ok = await compare(password, user?.hash ?? DUMMY_HASH);
         if (!user || !ok) return null;
         return { email: user.email, name: user.name };
       },
