@@ -14,7 +14,7 @@
   --color-paper: #FBFAF7;
   --color-ink: #1B1B17;
   --color-body: #4A4A44;
-  --color-muted: #8A867C;
+  --color-muted: #726E64; /* WCAG AA (≥4.5) sur papier, blanc et mist-bg */
   --color-hairline: #E7E4DC;
   --color-tea: #2F5D46;
   --color-tea-deep: #234838;
@@ -40,7 +40,7 @@
   --color-brown-deep: #1B1B17;
   --color-gold-light: #D8B77A;
   --color-text-dark: #1B1B17;
-  --color-text-muted: #8A867C;
+  --color-text-muted: #726E64;
 
   /* — Fontes (chargées dans src/app/layout.tsx via next/font, variables
        sources --font-inter-tight / --font-cormorant / --font-inter) — */
