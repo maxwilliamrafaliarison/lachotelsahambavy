@@ -385,36 +385,25 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         </div>
       </section>
 
-      {/* Bungalow Tarzan — aucune photo disponible : carte textuelle */}
-      <section id="bungalow-tarzan" className="scroll-mt-24 py-16 md:py-24">
+      {/* Bungalow Tarzan sur arbre */}
+      <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <ScrollReveal>
-            <div className="rounded-[3px] border border-hairline bg-white px-6 py-12 md:px-16 md:py-16">
-              <div className="mx-auto max-w-2xl text-center">
-                <div className="mb-5 flex justify-center">
-                  <Icon name="tree" size={40} weight="regular" className="text-tea" />
-                </div>
-                <p className="ge-label mb-3">{arbre.type[loc]}</p>
-                <h3 className="mb-4" style={{ textWrap: "balance" }}>
-                  {arbre.name[loc]}
-                </h3>
-                <p className="text-[15px] leading-relaxed text-body">{arbre.description[loc]}</p>
-                <p className="mt-3 text-[15px] leading-relaxed text-body">{rx.tarzanText}</p>
-                <div className="mx-auto mt-8 max-w-sm text-left">
-                  <RecapRows
-                    rows={[
-                      { label: rx.rowRate, value: price(arbre) },
-                      { label: rx.rowCapacity, value: `${arbre.capacity} ${rx.persons}` },
-                      { label: rx.rowUnits, value: String(arbre.units) },
-                    ]}
-                  />
-                </div>
-                <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted">
-                  {rx.comingSoon}
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
+          <EditorialSplit
+            id="bungalow-tarzan"
+            reverse
+            image={`${basePath}/images/rooms/bungalow-tarzan-cabane-arbre.jpg`}
+            imageAlt="Bungalow Tarzan : cabane en bois sculpté perchée dans les arbres du jardin tropical, avec escalier en colimaçon"
+            label={arbre.type[loc]}
+            title={arbre.name[loc]}
+            rows={[
+              { label: rx.rowRate, value: price(arbre) },
+              { label: rx.rowCapacity, value: `${arbre.capacity} ${rx.persons}` },
+              { label: rx.rowUnits, value: String(arbre.units) },
+            ]}
+          >
+            <p>{arbre.description[loc]}</p>
+            <p>{rx.tarzanText}</p>
+          </EditorialSplit>
         </div>
       </section>
 
