@@ -2,6 +2,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
+import RoomGallery from "@/components/rooms/RoomGallery";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Icon } from "@/components/ui/Icon";
@@ -22,6 +23,9 @@ type RoomsPageStrings = {
   pilotisTagline: string;
   wagonTagline: string;
   comingSoon: string;
+  galPrev: string;
+  galNext: string;
+  galOf: string;
   discoverRepos: string;
   extrasTitle: string;
   currencyNote: string;
@@ -47,6 +51,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     wagonTagline:
       "Dormir dans un wagon centenaire de la ligne FCE, face au lac — une expérience introuvable ailleurs.",
     comingSoon: "En images prochainement",
+    galPrev: "Photo précédente",
+    galNext: "Photo suivante",
+    galOf: "photo {n}",
     discoverRepos: "Découvrir Le Repos",
     extrasTitle: "Suppléments & services",
     currencyNote: "Taux de référence : 1 € = 4 900 Ar",
@@ -73,6 +80,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     wagonTagline:
       "Sleep in a century-old carriage from the FCE railway line, facing the lake — an experience found nowhere else.",
     comingSoon: "Photos coming soon",
+    galPrev: "Previous photo",
+    galNext: "Next photo",
+    galOf: "photo {n}",
     discoverRepos: "Discover Le Repos",
     extrasTitle: "Extras & services",
     currencyNote: "Reference rate: €1 = 4,900 Ar",
@@ -99,6 +109,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     wagonTagline:
       "Dormir en un vagón centenario de la línea FCE, frente al lago — una experiencia que no existe en ningún otro lugar.",
     comingSoon: "Próximamente en imágenes",
+    galPrev: "Foto anterior",
+    galNext: "Foto siguiente",
+    galOf: "foto {n}",
     discoverRepos: "Descubrir Le Repos",
     extrasTitle: "Suplementos y servicios",
     currencyNote: "Tipo de cambio de referencia: 1 € = 4900 Ar",
@@ -157,6 +170,24 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
   const wagon = byId("wagon");
   const arbre = byId("arbre");
   const villaRepos = byId("villa-repos");
+
+  /**
+   * Galerie d'une chambre, façon « Types de chambre » de Radisson Blu : le
+   * visiteur voit d'emblée combien de vues l'attendent et feuillette sur
+   * place. Une seule photo par hébergement n'en donnait aucune idée.
+   *
+   * `prioritaire` n'est vrai que pour la première chambre de la page : au
+   * -delà, les galeries se chargent paresseusement.
+   */
+  const galerie = (room: Room, prioritaire = false) => (
+    <RoomGallery
+      images={room.images.map((src) => `${basePath}${src}`)}
+      nom={room.name[loc]}
+      prioritaire={prioritaire}
+      remplir
+      libelles={{ precedent: rx.galPrev, suivant: rx.galNext, sur: rx.galOf }}
+    />
+  );
 
   const nf = new Intl.NumberFormat(loc === "en" ? "en-GB" : loc === "es" ? "es-ES" : "fr-FR");
   const ar = (n: number) => `${nf.format(n)} Ar`;
@@ -252,6 +283,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <EditorialSplit
             night
             id="pilotis-nuptial"
+            media={galerie(pilotis, true)}
             image={`${basePath}/images/rooms/pilotis-crepuscule-rose-lac.jpg`}
             imageAlt="Les bungalows sur pilotis se reflétant dans le lac Sahambavy au crépuscule"
             label={rx.nightOnLake}
@@ -282,6 +314,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <EditorialSplit
             reverse
             id="superior-lake-view"
+            media={galerie(superior)}
             image={`${basePath}/images/gallery/gallery-lake-view-interior.jpg`}
             imageAlt="Superior Lake View Room : baie vitrée grand angle ouverte sur le lac et les bambous"
             label={superior.type[loc]}
@@ -304,6 +337,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             id="bungalow-standard"
+            media={galerie(standard)}
             image={`${basePath}/images/rooms/bungalows-colores-annexe.jpg`}
             imageAlt="Bungalows standard aux façades colorées, dans les jardins paysagers du Lac Hôtel"
             label={standard.type[loc]}
@@ -367,6 +401,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             night
             reverse
             id="wagon-nuptial"
+            media={galerie(wagon)}
             image={`${basePath}/images/rooms/wagon-exterior.jpg`}
             imageAlt="Wagon Nuptial 1930 de la ligne FCE posé face au lac Sahambavy"
             label={rx.nightOnLake}
@@ -392,6 +427,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             id="bungalow-tarzan"
+            media={galerie(arbre)}
             reverse
             image={`${basePath}/images/rooms/bungalow-tarzan-cabane-arbre.jpg`}
             imageAlt="Bungalow Tarzan : cabane en bois sculpté perchée dans les arbres du jardin tropical, avec escalier en colimaçon"
@@ -414,6 +450,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             id="familles"
+            media={galerie(familial)}
             image={`${basePath}/images/rooms/le-repos-exterior.jpg`}
             imageAlt="Maisons en duplex de l'extension Le Repos, entourées de verdure"
             label={rx.familyLabel}

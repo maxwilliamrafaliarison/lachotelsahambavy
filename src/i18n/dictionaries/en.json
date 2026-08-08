@@ -103,7 +103,10 @@
     "tarzanText": "Perched in the trees of the tropical garden, our two “Tarzan” bungalows are reserved for children — single or double, for a night of adventure just steps from their parents' bungalow.",
     "ecoTitle": "Eco-Conscious Living",
     "ecoP": "As part of our commitment to sustainability, we provide guests with handcrafted organic soaps made right here at the hotel using the traditional cold-process method. Made from 100% natural, plant-based ingredients, our soaps are fully biodegradable and gentle on both your skin and the environment.",
-    "pilotisName": "Bridal Suite on Stilts"
+    "pilotisName": "Bridal Suite on Stilts",
+    "galPrev": "Previous photo",
+    "galNext": "Next photo",
+    "galOf": "photo {n}"
   },
   "philosophy": {
     "label": "Our philosophy",

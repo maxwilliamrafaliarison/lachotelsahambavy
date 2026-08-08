@@ -14,6 +14,9 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 type EditorialSplitProps = {
   image: string;
   imageAlt?: string;
+  /** Remplace la photo fixe par un média libre — une galerie, par exemple.
+   *  `image` reste requis et sert de repli si `media` n'est pas fourni. */
+  media?: ReactNode;
   label?: string;
   title: ReactNode;
   children?: ReactNode;
@@ -27,6 +30,7 @@ type EditorialSplitProps = {
 export default function EditorialSplit({
   image,
   imageAlt = "",
+  media,
   label,
   title,
   children,
@@ -46,13 +50,15 @@ export default function EditorialSplit({
       <div
         className={`relative min-h-[260px] md:min-h-[420px] ${reverse ? "md:order-2" : ""}`}
       >
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover"
-        />
+        {media ?? (
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+          />
+        )}
       </div>
       <div className={`flex flex-col justify-center px-6 py-10 md:px-11 md:py-14 ${reverse ? "md:order-1" : ""}`}>
         <ScrollReveal>

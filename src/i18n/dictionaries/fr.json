@@ -103,7 +103,10 @@
     "tarzanText": "Perchés dans les arbres du jardin tropical, nos deux bungalows « Tarzan » sont réservés aux enfants — en single ou en double, pour une nuit d’aventure à quelques pas du bungalow des parents.",
     "ecoTitle": "Un quotidien éco-responsable",
     "ecoP": "Dans une démarche respectueuse de l’environnement, notre hôtel met à disposition de ses clients des savons bio. Nous fabriquons nos propres savons selon la méthode traditionnelle de saponification à froid. Nos savons sont élaborés de manière artisanale, dans une démarche écologique et respectueuse de l’environnement. Entièrement biodégradables, ils sont conçus à partir d’ingrédients simples, naturels et d’origine végétale.",
-    "pilotisName": "Pilotis Nuptial"
+    "pilotisName": "Pilotis Nuptial",
+    "galPrev": "Photo précédente",
+    "galNext": "Photo suivante",
+    "galOf": "photo {n}"
   },
   "philosophy": {
     "label": "Notre philosophie",

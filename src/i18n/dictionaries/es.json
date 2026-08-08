@@ -103,7 +103,10 @@
     "tarzanText": "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños — en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
     "ecoTitle": "Un día a día ecorresponsable",
     "ecoP": "Dentro de un enfoque respetuoso con el medio ambiente, nuestro hotel pone a disposición de sus huéspedes jabones ecológicos. Fabricamos nuestros propios jabones según el método tradicional de saponificación en frío. Nuestros jabones se elaboran de forma artesanal, con un planteamiento ecológico y respetuoso con el medio ambiente. Totalmente biodegradables, están concebidos a partir de ingredientes sencillos, naturales y de origen vegetal.",
-    "pilotisName": "Suite Nupcial sobre Pilotes"
+    "pilotisName": "Suite Nupcial sobre Pilotes",
+    "galPrev": "Foto anterior",
+    "galNext": "Foto siguiente",
+    "galOf": "foto {n}"
   },
   "philosophy": {
     "label": "Nuestra filosofía",
