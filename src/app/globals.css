@@ -983,14 +983,17 @@ body {
 
   /* ---------- LES PASTILLES ---------- */
 
+  /* `stretch` : toutes les pastilles adoptent la même largeur. Le plateau
+     étant en `width: max-content`, cette largeur commune est celle du
+     libellé le plus long — rien n'est tronqué, rien ne flotte. */
   .lh-pastilles {
     display: flex; flex-direction: column;
-    align-items: flex-start;   /* chaque pastille épouse son libellé */
+    align-items: stretch;
     gap: 5px;
   }
 
   .lh-pastille {
-    display: inline-flex; align-items: center;
+    display: flex; align-items: center;
     min-height: 38px; padding: 8px 16px;
     border-radius: 999px;                      /* la pastille */
     font-family: var(--font-body);
