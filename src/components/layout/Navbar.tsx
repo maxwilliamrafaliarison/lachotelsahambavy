@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation, siteConfig, type NavItem } from "@/data/site";
-import { getBasePath, locales, type Locale } from "@/lib/utils";
+import { getBasePath, type Locale } from "@/lib/utils";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const basePath = getBasePath();
 
@@ -19,17 +20,6 @@ function localizeHref(href: string, locale: string): string {
   const [path, hash] = href.split("#");
   const normalized = path === "/" ? `/${locale}/` : `/${locale}${path}/`;
   return hash ? `${normalized}#${hash}` : normalized;
-}
-
-/** Remplace le segment de locale du chemin courant (sélecteur de langue). */
-function replaceLocale(pathname: string, code: string): string {
-  const segments = pathname.split("/");
-  if (segments.length > 1 && (locales as readonly string[]).includes(segments[1])) {
-    segments[1] = code;
-    const joined = segments.join("/") || `/${code}/`;
-    return joined.endsWith("/") ? joined : `${joined}/`;
-  }
-  return `/${code}/`;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -250,30 +240,14 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               ))}
             </ul>
 
-            {/* Sélecteur de langue — préserve la page courante */}
-            <div
-              className={`hidden items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] lg:flex ${itemColor}`}
-              style={itemShadow}
-            >
-              {locales.map((code, i) => (
-                <span key={code} className="flex items-center gap-1.5">
-                  {i > 0 && <span className="opacity-35">·</span>}
-                  <Link
-                    href={replaceLocale(pathname, code)}
-                    aria-current={code === locale ? "page" : undefined}
-                    className={
-                      code === locale
-                        ? darkText
-                          ? "text-tea underline underline-offset-4"
-                          : "underline underline-offset-4"
-                        : "opacity-65 transition-opacity hover:opacity-100"
-                    }
-                  >
-                    {code.toUpperCase()}
-                  </Link>
-                </span>
-              ))}
-            </div>
+            {/* Sélecteur de langue à drapeaux — préserve la page courante */}
+            <LanguageSwitcher
+              locale={locale}
+              pathname={pathname}
+              onDark={!darkText}
+              size="bar"
+              className="hidden lg:flex"
+            />
 
             {/* CTA Réserver */}
             <Link href={`/${locale}/contact/`} className="ge-cta hidden !px-5 !py-2.5 !text-[11.5px] lg:inline-flex">
@@ -412,18 +386,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               ))}
             </ul>
 
-            <div className="mt-8 flex items-center gap-4 text-[13px] font-semibold tracking-[0.14em]">
-              {locales.map((code) => (
-                <Link
-                  key={code}
-                  href={replaceLocale(pathname, code)}
-                  aria-current={code === locale ? "page" : undefined}
-                  className={code === locale ? "text-tea underline underline-offset-4" : "text-muted"}
-                >
-                  {code.toUpperCase()}
-                </Link>
-              ))}
-            </div>
+            <LanguageSwitcher
+              locale={locale}
+              pathname={pathname}
+              size="mobile"
+              className="mt-8"
+            />
 
             <Link href={`/${locale}/contact/`} className="ge-cta mt-8 self-start">
               {dict.nav.book}
