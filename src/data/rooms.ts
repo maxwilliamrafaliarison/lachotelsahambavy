@@ -11,14 +11,76 @@ export interface Room {
   surface?: string;
   priceEUR: number | null;
   priceAR: number;
-  priceTOEUR?: number;
   amenities: { icon: string; label: { fr: string; en: string; es: string } }[];
   images: string[];
   featured?: boolean;
   category?: "hotel" | "repos";
+  /**
+   * Ordre d'affichage voulu par la direction (08/08/2026) : les hébergements
+   * courants d'abord, du plus cher au moins cher, puis les deux hébergements
+   * d'exception, puis l'extension Le Repos.
+   */
+  groupe?: "courant" | "exception" | "repos";
+  /**
+   * Tarif agence HT (« PRIX AGV HT » des tarifs officiels). Conservé pour la
+   * facturation interne — il n'est JAMAIS affiché sur le site public, seul le
+   * tarif public l'est (arbitrage direction du 08/08/2026).
+   */
+  priceARTO?: number;
 }
 
 export const rooms: Room[] = [
+  {
+    /* Catégorie créée au tarif 2027 : deux Pilotis (chambres 11 et 13) sont
+       montés en Lake Suite. Le parc Pilotis Nuptial passe donc de 9 à 7. */
+    id: "lake-suite",
+    slug: "lake-suite-nuptial",
+    name: {
+      fr: "Lake Suite Nuptial Pilotis",
+      en: "Honeymoon Lake Suite — Overwater",
+      es: "Lake Suite Nupcial sobre Pilotes",
+    },
+    type: {
+      fr: "Double King Size 2 m × 2,20 m",
+      en: "Double King Size 2 m × 2.20 m",
+      es: "Doble King Size 2 m × 2,20 m",
+    },
+    badge: "Suite",
+    description: {
+      fr: "Les deux suites nuptiales les plus vastes de l'hôtel, chambres 11 et 13, avancées sur le lac. Lit King Size de 2 m × 2,20 m, salle de bain privative avec eau chaude, terrasse face à l'eau.",
+      en: "The hotel's two largest honeymoon suites, rooms 11 and 13, extending over the lake. King Size bed 2 m × 2.20 m, private bathroom with hot water, terrace facing the water.",
+      es: "Las dos suites nupciales más amplias del hotel, habitaciones 11 y 13, sobre el lago. Cama King Size de 2 m × 2,20 m, baño privado con agua caliente, terraza frente al agua.",
+    },
+    longDescription: {
+      fr: "Chambres 11 et 13 : les deux plus belles adresses du ponton. Elles reprennent tout ce qui fait le Pilotis Nuptial — le bois précieux, les sculptures d'artisans betsileo, l'eau sous le plancher — avec l'espace en plus.\n\nLa terrasse privative donne plein lac, sans vis-à-vis. C'est la catégorie que nous réservons aux voyages de noces et aux séjours d'exception.",
+      en: "Rooms 11 and 13: the two finest addresses on the pontoon. They offer everything that defines the Honeymoon Overwater Bungalow — precious wood, Betsileo artisan carvings, water beneath the floor — with more space.\n\nThe private terrace opens straight onto the lake, with no facing neighbour. This is the category we keep for honeymoons and special occasions.",
+      es: "Habitaciones 11 y 13: las dos mejores direcciones del pontón. Ofrecen todo lo que define al Bungalow Nupcial sobre Pilotes — madera preciosa, esculturas de artesanos betsileo, el agua bajo el suelo — con más espacio.\n\nLa terraza privada da de lleno al lago, sin vecinos enfrente. Es la categoría que reservamos a las lunas de miel y las estancias excepcionales.",
+    },
+    units: 2,
+    capacity: "2",
+    priceEUR: 60,
+    priceAR: 420000,
+    priceARTO: 300000,
+    amenities: [
+      { icon: "bed", label: { fr: "Lit King Size 2 m × 2,20 m", en: "King Size bed 2 m × 2.20 m", es: "Cama King Size 2 m × 2,20 m" } },
+      { icon: "water", label: { fr: "Sur l'eau", en: "Overwater", es: "Sobre el agua" } },
+      { icon: "bath", label: { fr: "Salle de bain privée · Eau chaude", en: "Private bathroom · Hot water", es: "Baño privado · Agua caliente" } },
+      { icon: "tv", label: { fr: "Télévision", en: "Television", es: "Televisión" } },
+      { icon: "house", label: { fr: "Terrasse privative face au lac", en: "Private lake-facing terrace", es: "Terraza privada frente al lago" } },
+    ],
+    groupe: "courant",
+    images: [
+      "/images/rooms/pilotis-chambre-baldaquin-vue-lac.jpg",
+      "/images/rooms/pilotis-lit-vue.jpg",
+      "/images/rooms/pilotis-chambre-meridienne-mur-ocre.jpg",
+      "/images/rooms/lit-baldaquin-linge-brode-cygnes.jpg",
+      "/images/rooms/pilotis-salle-de-bain-bois.jpg",
+      "/images/rooms/pilotis-lake-view.jpg",
+      "/images/rooms/pilotis-crepuscule-rose-lac.jpg",
+    ],
+    featured: true,
+    category: "hotel",
+  },
   {
     id: "pilotis",
     slug: "pilotis-nuptial",
@@ -43,11 +105,11 @@ export const rooms: Room[] = [
       en: "Our honeymoon overwater bungalows are the most immersive experience at Lac Hôtel Sahambavy. Built with precious wood, they extend directly over the lake, offering breathtaking panoramic views of the water and mountains.\n\nEach bungalow is decorated with materials and artisan sculptures crafted by local Malagasy artisans. Rooms are equipped with a television. Wi-Fi is available in the restaurant area.",
       es: "Nuestros bungalows nupciales sobre pilotes son la experiencia más inmersiva del Lac Hôtel Sahambavy. Construidos en madera preciosa, se adentran directamente en el lago, ofreciendo un panorama impresionante del agua y las montañas.\n\nCada bungalow está decorado con materiales y esculturas artesanales de artesanos malgaches locales. Las habitaciones disponen de televisión. El Wi-Fi está disponible en el restaurante.",
     },
-    units: 9,
+    units: 7,
     capacity: "2",
-    priceEUR: 72,
+    priceEUR: 50,
     priceAR: 360000,
-    priceTOEUR: 72,
+    priceARTO: 250000,
     amenities: [
       { icon: "bed", label: { fr: "Lit 2,20 × 2,20 m", en: "Bed 2.20 × 2.20 m", es: "Cama 2,20 × 2,20 m" } },
       { icon: "water", label: { fr: "Sur l'eau", en: "Overwater", es: "Sobre el agua" } },
@@ -56,6 +118,7 @@ export const rooms: Room[] = [
       { icon: "house", label: { fr: "Terrasse vue lac", en: "Lake view terrace", es: "Terraza vista lago" } },
       { icon: "wifi", label: { fr: "Wi-Fi au restaurant", en: "Wi-Fi at restaurant", es: "Wi-Fi en restaurante" } },
     ],
+    groupe: "courant",
     images: [
       "/images/rooms/pilotis-01.jpg",
       "/images/rooms/pilotis-chambre-baldaquin-vue-lac.jpg",
@@ -108,9 +171,9 @@ export const rooms: Room[] = [
     units: 8,
     capacity: "2",
     surface: "25m²",
-    priceEUR: 60,
+    priceEUR: 42,
     priceAR: 300000,
-    priceTOEUR: 60,
+    priceARTO: 210000,
     amenities: [
       { icon: "bed", label: { fr: "Lit 2,20 × 2,20 m", en: "Bed 2.20 × 2.20 m", es: "Cama 2,20 × 2,20 m" } },
       { icon: "pool", label: { fr: "Vue piscine & lac", en: "Pool & lake view", es: "Vista piscina y lago" } },
@@ -119,6 +182,7 @@ export const rooms: Room[] = [
       { icon: "tv", label: { fr: "Télévision", en: "Television", es: "Televisión" } },
       { icon: "wifi", label: { fr: "Wi-Fi au restaurant", en: "Wi-Fi at restaurant", es: "Wi-Fi en restaurante" } },
     ],
+    groupe: "courant",
     images: [
       "/images/rooms/superior-chambre-01.jpg",
       "/images/rooms/superior-chambre-02.jpg",
@@ -165,9 +229,9 @@ export const rooms: Room[] = [
     units: 1,
     capacity: "2",
     surface: "30m linéaires",
-    priceEUR: 72,
-    priceAR: 360000,
-    priceTOEUR: 72,
+    priceEUR: 60,
+    priceAR: 420000,
+    priceARTO: 300000,
     amenities: [
       { icon: "train", label: { fr: "Wagon suisse 1930, 30 m", en: "1930 Swiss wagon, 30 m", es: "Vagón suizo 1930, 30 m" } },
       { icon: "bed", label: { fr: "Lit double", en: "Double bed", es: "Cama doble" } },
@@ -176,6 +240,7 @@ export const rooms: Room[] = [
       { icon: "utensils", label: { fr: "Service en chambre", en: "Room service", es: "Servicio de habitaciones" } },
       { icon: "water", label: { fr: "Vue sur le lac", en: "Lake view", es: "Vista al lago" } },
     ],
+    groupe: "exception",
     images: [
       "/images/rooms/wagon-01.jpg",
       "/images/rooms/wagon-chambre-interieur.jpg",
@@ -206,11 +271,11 @@ export const rooms: Room[] = [
       en: "Spacious overwater bungalow for families. Spacious bed, private bathroom, terrace with lake view.",
       es: "Bungalow sobre pilotes espacioso para familias. Cama amplia, baño privado, terraza con vistas al lago.",
     },
-    units: 2,
+    units: 7, // configuration du Pilotis Nuptial, pas un parc distinct
     capacity: "4",
-    priceEUR: 80,
-    priceAR: 400000,
-    priceTOEUR: 80,
+    priceEUR: 50,
+    priceAR: 360000,
+    priceARTO: 250000,
     amenities: [
       { icon: "family", label: { fr: "Jusqu'à 4 personnes", en: "Up to 4 people", es: "Hasta 4 personas" } },
       { icon: "water", label: { fr: "Sur l'eau", en: "Overwater", es: "Sobre el agua" } },
@@ -253,9 +318,9 @@ export const rooms: Room[] = [
     units: 26,
     capacity: "1-2",
     surface: "16m²",
-    priceEUR: 28,
-    priceAR: 140000,
-    priceTOEUR: 28,
+    priceEUR: 18,
+    priceAR: 150000,
+    priceARTO: 90000,
     amenities: [
       { icon: "bed", label: { fr: "Double, twin ou single", en: "Double, twin or single", es: "Doble, twin o single" } },
       { icon: "ruler", label: { fr: "16m²", en: "16m²", es: "16m²" } },
@@ -263,6 +328,7 @@ export const rooms: Room[] = [
       { icon: "bath", label: { fr: "Salle de bain privée · Eau chaude", en: "Private bathroom · Hot water", es: "Baño privado · Agua caliente" } },
       { icon: "tv", label: { fr: "Télévision", en: "Television", es: "Televisión" } },
     ],
+    groupe: "courant",
     images: [
       "/images/rooms/standard-01.jpg",
       "/images/rooms/standard-bungalow-deux-personnes.jpg",
@@ -295,10 +361,12 @@ export const rooms: Room[] = [
     capacity: "1-2",
     priceEUR: null,
     priceAR: 150000,
+    priceARTO: 90000,
     amenities: [
       { icon: "tree", label: { fr: "Dans les arbres", en: "In the trees", es: "En los árboles" } },
       { icon: "baby", label: { fr: "Pour enfants", en: "For kids", es: "Para niños" } },
     ],
+    groupe: "exception",
     images: [
       "/images/rooms/bungalow-tarzan-cabane-arbre.jpg",
     ],
@@ -317,7 +385,7 @@ export const rooms: Room[] = [
       en: "\"Le Repos\" Extension",
       es: "Extensión « Le Repos »",
     },
-    badge: "Le Repos",
+    badge: "Extension Le Repos",
     description: {
       fr: "4 maisons en duplex entièrement équipées pour les longs séjours. Kitchenette avec plaque de cuisson, réfrigérateur et vaisselle. Idéal pour les familles.",
       en: "4 fully equipped duplex houses for extended stays. Kitchenette with hob, fridge and crockery. Ideal for families.",
@@ -325,14 +393,16 @@ export const rooms: Room[] = [
     },
     units: 4,
     capacity: "5",
-    priceEUR: 50,
+    priceEUR: 34,
     priceAR: 250000,
+    priceARTO: 170000,
     amenities: [
       { icon: "house", label: { fr: "Duplex 2 étages", en: "2-storey duplex", es: "Dúplex 2 plantas" } },
       { icon: "cooking", label: { fr: "Kitchenette complète", en: "Full kitchenette", es: "Cocina americana completa" } },
       { icon: "family", label: { fr: "Jusqu'à 5 personnes", en: "Up to 5 people", es: "Hasta 5 personas" } },
       { icon: "bath", label: { fr: "Salle de bain privée", en: "Private bathroom", es: "Baño privado" } },
     ],
+    groupe: "repos",
     images: [
       "/images/rooms/le-repos-chambre-01.jpg",
       "/images/rooms/le-repos-chambre-02.jpg",
@@ -349,8 +419,35 @@ export const extras = {
   breakfast: { priceAR: 40000, label: { fr: "Petit-déjeuner complet", en: "Full breakfast", es: "Desayuno completo" } },
   menu: { priceAR: 70000, label: { fr: "Menu", en: "Menu", es: "Menú" } },
   picnic: { priceAR: 40000, label: { fr: "Pique-nique complet", en: "Full picnic", es: "Picnic completo" } },
-  transfer: { priceAR: 120000, label: { fr: "Transfert 4×4 Fianarantsoa", en: "4×4 transfer Fianarantsoa", es: "Traslado 4×4 Fianarantsoa" } },
-  camping: { priceAR: 250000, label: { fr: "Camping — 1 hectare privatif", en: "Camping — 1 private hectare", es: "Camping — 1 hectárea privada" } },
-  conference: { priceAR: 350000, label: { fr: "Salle de conférence (80 pax)", en: "Conference room (80 pax)", es: "Sala de conferencias (80 pax)" } },
-  draisine: { priceAR: 3200000, label: { fr: "Location Draisine", en: "Draisine rental", es: "Alquiler Dresina" } },
+  transfer: { priceAR: 130000, label: { fr: "Transfert privé 4×4 — Fianarantsoa (1 trajet)", en: "Private 4×4 transfer — Fianarantsoa (one way)", es: "Traslado privado 4×4 — Fianarantsoa (un trayecto)" } },
+  transferAmbalakely: { priceAR: 120000, label: { fr: "Transfert privé 4×4 — Ambalakely Bifurcation (1 trajet)", en: "Private 4×4 transfer — Ambalakely junction (one way)", es: "Traslado privado 4×4 — Bifurcación Ambalakely (un trayecto)" } },
+  camping: { priceAR: 250000, label: { fr: "Camping — 1 hectare privatif, pour 3 tentes", en: "Camping — 1 private hectare, for 3 tents", es: "Camping — 1 hectárea privada, para 3 tiendas" } },
+  conference: { priceAR: 350000, label: { fr: "Salle de conférence (40 personnes)", en: "Conference room (40 people)", es: "Sala de conferencias (40 personas)" } },
+  draisine: { priceAR: 3200000, label: { fr: "Location draisine — Fianarantsoa ↔ Manakara, la journée", en: "Draisine hire — Fianarantsoa ↔ Manakara, per day", es: "Alquiler de dresina — Fianarantsoa ↔ Manakara, por día" } },
+  repasGuide: { priceAR: 8000, label: { fr: "Repas guide (chauffeur : gratuité)", en: "Guide meal (driver: complimentary)", es: "Comida del guía (chófer: gratuita)" } },
 };
+
+/**
+ * Ordre d'affichage du parc, fixé par la direction le 08/08/2026 :
+ *
+ *   1. les hébergements courants, DU PLUS CHER AU MOINS CHER
+ *      (Lake Suite → Pilotis → Superior Lake View → Bungalow Standard)
+ *   2. les deux hébergements d'exception (Wagon Nuptial, Bungalow Tarzan)
+ *   3. l'extension Le Repos (villa basse)
+ *
+ * Le tri se fait sur le tarif PUBLIC en ariary, seule référence commune :
+ * l'euro est indicatif et le parc n'a pas de prix « à partir de ».
+ *
+ * « Pilotis Familial » n'apparaît pas ici — les tarifs officiels n'en font
+ * pas une catégorie mais une configuration du Pilotis Nuptial (lit
+ * supplémentaire à 30 000 Ar/personne). Il reste dans `rooms` pour le
+ * formulaire de réservation.
+ */
+const RANG_GROUPE: Record<string, number> = { courant: 0, exception: 1, repos: 2 };
+
+export const roomsAffichees: Room[] = rooms
+  .filter((r) => r.groupe)
+  .sort(
+    (a, b) =>
+      RANG_GROUPE[a.groupe!] - RANG_GROUPE[b.groupe!] || b.priceAR - a.priceAR,
+  );

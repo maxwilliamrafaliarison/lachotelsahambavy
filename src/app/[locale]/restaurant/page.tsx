@@ -12,8 +12,12 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
-/* Taux de conversion indicatif validé (tarifs 2026) : 1 € = 4 900 Ar */
-const AR_PER_EUR = 4900;
+/* Taux implicite de la carte des tarifs officiels : 70 000 Ar = 14 €,
+   40 000 Ar = 8 €, 8 000 Ar = 1,6 € — soit exactement 5 000 Ar/€.
+   À noter : ce n'est PAS le taux de la grille d'hébergement du même
+   document, qui tourne entre 7 000 et 8 300 Ar/€. On respecte ici le
+   chiffre publié pour la restauration plutôt que d'imposer un taux unique. */
+const AR_PER_EUR = 5000;
 const ar = (v: number) => `${v.toLocaleString("fr-FR")} Ar`;
 const eur = (v: number) => `${Math.round(v / AR_PER_EUR)} €`;
 
@@ -37,7 +41,7 @@ const extraTexts = {
       "Jus de fruits frais, cocktails et thé de Sahambavy se savourent au bar ou sur nos terrasses ombragées, quand le soleil descend sur le lac.",
     pricesLabel: "Tarifs",
     pricesTitle: "Nos formules",
-    pricesFootnote: "Prix par personne. Taux indicatif : 1 € ≈ 4 900 Ar.",
+    pricesFootnote: "Prix par personne. Montants en euros indicatifs : conversion au taux du jour du paiement.",
     glassBottlesP: "Dans les chambres, elle vous attend en bouteilles de verre.",
   },
   en: {
@@ -56,7 +60,7 @@ const extraTexts = {
       "Fresh fruit juices, cocktails and Sahambavy tea are best enjoyed at the bar or on our shaded terraces, as the sun sinks over the lake.",
     pricesLabel: "Rates",
     pricesTitle: "Our dining options",
-    pricesFootnote: "Prices per person. Indicative rate: €1 ≈ 4,900 Ar.",
+    pricesFootnote: "Prices per person. Euro amounts are indicative: conversion at the rate on the day of payment.",
     glassBottlesP: "In the rooms, it awaits you in glass bottles.",
   },
   es: {
@@ -75,7 +79,7 @@ const extraTexts = {
       "Zumos de fruta fresca, cócteles y té de Sahambavy se disfrutan en el bar o en nuestras terrazas sombreadas, mientras el sol desciende sobre el lago.",
     pricesLabel: "Tarifas",
     pricesTitle: "Nuestras fórmulas",
-    pricesFootnote: "Precios por persona. Tipo indicativo: 1 € ≈ 4 900 Ar.",
+    pricesFootnote: "Precios por persona. Importes en euros orientativos: conversión al tipo del día del pago.",
     glassBottlesP: "En las habitaciones, le espera en botellas de vidrio.",
   },
 } as const;

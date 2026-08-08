@@ -56,8 +56,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     galOf: "photo {n}",
     discoverRepos: "Découvrir Le Repos",
     extrasTitle: "Suppléments & services",
-    currencyNote: "Taux de référence : 1 € = 4 900 Ar",
-    rowRate: "Tarif 2026",
+    currencyNote:
+      "Tarifs publics en ariary, vignette touristique en sus. Les montants en euros sont donnés à titre indicatif : la conversion s’applique au taux en vigueur le jour du paiement.",
+    rowRate: "Tarif 2027",
     rowBeds: "Lits",
     rowCapacity: "Capacité",
     rowUnits: "Unités",
@@ -85,8 +86,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     galOf: "photo {n}",
     discoverRepos: "Discover Le Repos",
     extrasTitle: "Extras & services",
-    currencyNote: "Reference rate: €1 = 4,900 Ar",
-    rowRate: "2026 rate",
+    currencyNote:
+      "Public rates in ariary, tourist levy not included. Euro amounts are indicative only: conversion applies at the rate in force on the day of payment.",
+    rowRate: "2027 rate",
     rowBeds: "Beds",
     rowCapacity: "Capacity",
     rowUnits: "Units",
@@ -114,8 +116,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     galOf: "foto {n}",
     discoverRepos: "Descubrir Le Repos",
     extrasTitle: "Suplementos y servicios",
-    currencyNote: "Tipo de cambio de referencia: 1 € = 4900 Ar",
-    rowRate: "Tarifa 2026",
+    currencyNote:
+      "Tarifas públicas en ariary, tasa turística no incluida. Los importes en euros son orientativos: la conversión se aplica al tipo vigente el día del pago.",
+    rowRate: "Tarifa 2027",
     rowBeds: "Camas",
     rowCapacity: "Capacidad",
     rowUnits: "Unidades",
@@ -450,7 +453,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             id="familles"
-            media={galerie(familial)}
+            media={galerie(villaRepos)}
             image={`${basePath}/images/rooms/le-repos-exterior.jpg`}
             imageAlt="Maisons en duplex de l'extension Le Repos, entourées de verdure"
             label={rx.familyLabel}

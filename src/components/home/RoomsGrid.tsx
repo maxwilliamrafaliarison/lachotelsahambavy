@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RoomGallery from "@/components/rooms/RoomGallery";
-import { rooms, type Room } from "@/data/rooms";
+import { roomsAffichees, type Room } from "@/data/rooms";
 import { siteConfig } from "@/data/site";
 import { type Locale, getBasePath } from "@/lib/utils";
 
@@ -32,7 +32,12 @@ function formatScore(n: number, locale: Locale): string {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale }) {
-  const displayRooms = rooms.filter((r) => r.priceEUR && r.category !== "repos");
+  /* L'ordre et la sélection viennent de `roomsAffichees` (cf. src/data/rooms.ts) :
+     hébergements courants du plus cher au moins cher, puis les deux
+     hébergements d'exception, puis l'extension Le Repos. On n'exclut plus
+     Le Repos — la direction veut la villa basse dans la grille, signalée par
+     sa pastille de localisation. */
+  const displayRooms = roomsAffichees;
 
   const ratings = [
     { name: "Booking.com", score: `${formatScore(siteConfig.ratings.booking.score, locale)}/10`, url: siteConfig.social.booking },
@@ -153,9 +158,13 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
             <span className="block text-[10px] uppercase tracking-[0.2em] text-muted">
               {dict.rooms.from}
             </span>
+            {/* Le bungalow Tarzan n'a pas d'équivalent en euros dans la grille
+                officielle : sans cette garde, on affichait « 150 000 Ar ·  € ». */}
             <span className="text-[15px] font-semibold text-ink">
               {formatAr(room.priceAR)}&nbsp;Ar
-              <span className="font-normal text-muted"> · {room.priceEUR}&nbsp;€ / {night}</span>
+              <span className="font-normal text-muted">
+                {room.priceEUR ? ` · ${room.priceEUR} € / ${night}` : ` / ${night}`}
+              </span>
             </span>
           </div>
           <Link
