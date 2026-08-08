@@ -201,7 +201,7 @@ export default async function LocalisationPage({
                   href={siteConfig.social.google}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-semibold uppercase tracking-[0.18em] text-tea hover:underline"
+                  className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta hover:underline"
                 >
                   {t.map.openLink}
                 </a>

@@ -82,7 +82,7 @@ export default async function TableauDeBord({
                 key={a}
                 href={`/admin/tableau-de-bord?annee=${a}`}
                 className={`rounded-full px-3.5 py-1.5 text-[13px] font-semibold transition-colors ${
-                  a === annee ? "bg-tea text-white" : "border border-hairline text-body hover:border-tea hover:text-tea"
+                  a === annee ? "bg-lake text-white" : "border border-hairline text-body hover:border-lake hover:text-lake"
                 }`}
               >
                 {a}
@@ -116,7 +116,7 @@ export default async function TableauDeBord({
               return (
                 <div key={m.mois} className="flex flex-1 flex-col items-center justify-end gap-2" title={`${MOIS_FR[moisNum]} : ${fmtAr(m.ca)} · ${m.sejours} séjours · ${m.pax} pax`}>
                   <span className="text-[10px] font-semibold text-muted tabular-nums">{fmtM(m.ca).replace(" Ar", "")}</span>
-                  <div className="w-full rounded-t-[4px] bg-tea transition-all" style={{ height: h }} />
+                  <div className="w-full rounded-t-[4px] bg-lake transition-all" style={{ height: h }} />
                   <span className="text-[11px] text-muted">{MOIS_FR[moisNum]}</span>
                 </div>
               );
@@ -141,7 +141,7 @@ export default async function TableauDeBord({
                     <span className="shrink-0 text-[11.5px] text-muted tabular-nums">{a.docs} doc · {a.pax} pax</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-hairline">
-                    <div className="h-full rounded-full bg-tea" style={{ width: `${(a.ca / maxCaAgence) * 100}%` }} />
+                    <div className="h-full rounded-full bg-lake" style={{ width: `${(a.ca / maxCaAgence) * 100}%` }} />
                   </div>
                 </div>
                 <span className="w-28 text-right text-[13.5px] font-semibold text-ink tabular-nums">{fmtM(a.ca)}</span>

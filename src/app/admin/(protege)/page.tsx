@@ -21,7 +21,7 @@ export default async function AdminHome() {
       <div className="grid gap-5 sm:grid-cols-2">
         <Link
           href="/admin/tableau-de-bord"
-          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-tea"
+          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-lake"
         >
           <p className="ge-label mb-2">Activité</p>
           <h2 className="mb-2 !text-[24px]">Tableau de bord</h2>
@@ -29,14 +29,14 @@ export default async function AdminHome() {
             Chiffre d&apos;affaires, agences les plus actives, saisonnalité — à partir
             de l&apos;historique des factures.
           </p>
-          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-tea">
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-terracotta">
             Ouvrir →
           </span>
         </Link>
 
         <Link
           href="/admin/proforma"
-          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-tea"
+          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-lake"
         >
           <p className="ge-label mb-2">Devis séjour</p>
           <h2 className="mb-2 !text-[24px]">Facture proforma</h2>
@@ -44,14 +44,14 @@ export default async function AdminHome() {
             Composez le séjour (nuitées, repas, suppléments), appliquez une remise,
             générez le PDF logoté numéroté — prêt à envoyer.
           </p>
-          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-tea">
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-terracotta">
             Ouvrir →
           </span>
         </Link>
 
         <Link
           href="/admin/aide"
-          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-tea"
+          className="group rounded-[3px] border border-hairline bg-white p-7 transition-colors hover:border-lake"
         >
           <p className="ge-label mb-2">Documentation</p>
           <h2 className="mb-2 !text-[24px]">Aide — mode d&apos;emploi</h2>
@@ -59,7 +59,7 @@ export default async function AdminHome() {
             Le guide d&apos;une page pour l&apos;équipe : créer une proforma, appliquer
             la remise, retrouver la numérotation, changer le taux euro.
           </p>
-          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-tea">
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-terracotta">
             Consulter →
           </span>
         </Link>

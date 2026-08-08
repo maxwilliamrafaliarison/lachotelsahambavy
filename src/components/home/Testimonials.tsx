@@ -277,13 +277,13 @@ function SourceColumn({
         href={source.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group text-center mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tea/40 rounded-sm p-2 -m-2"
+        className="group text-center mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lake/40 rounded-sm p-2 -m-2"
         aria-label={`${VIEW_ON[locale]} ${source.name} — ${scoreDisplay}${scoreSuffix}, ${source.total} ${REVIEW_NOUN[locale]}`}
       >
-        <span className="ge-label mb-3 transition-colors duration-300 group-hover:text-tea-deep">
+        <span className="ge-label mb-3 transition-colors duration-300 group-hover:text-lake-deep">
           {source.name}
         </span>
-        <span className="block text-3xl md:text-4xl font-light text-ink group-hover:text-tea tabular-nums transition-colors duration-300 [font-variant-numeric:lining-nums_proportional-nums]">
+        <span className="block text-3xl md:text-4xl font-light text-ink group-hover:text-lake tabular-nums transition-colors duration-300 [font-variant-numeric:lining-nums_proportional-nums]">
           {scoreDisplay}
           <span className="text-base text-muted font-normal">
             {scoreSuffix}
@@ -295,7 +295,7 @@ function SourceColumn({
             return (
               <span
                 key={j}
-                className={`text-[0.7rem] ${filled ? "text-tea" : "text-ink/15"}`}
+                className={`text-[0.7rem] ${filled ? "text-terracotta" : "text-ink/15"}`}
                 aria-hidden="true"
               >
                 ★
@@ -345,7 +345,7 @@ function SourceColumn({
           type="button"
           onClick={() => advance(-1)}
           aria-label={NAV_PREV[locale]}
-          className="text-ink/40 hover:text-tea transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tea/40 rounded-full p-1"
+          className="text-ink/40 hover:text-lake transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lake/40 rounded-full p-1"
         >
           <svg
             width="14"
@@ -368,7 +368,7 @@ function SourceColumn({
           type="button"
           onClick={() => advance(1)}
           aria-label={NAV_NEXT[locale]}
-          className="text-ink/40 hover:text-tea transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tea/40 rounded-full p-1"
+          className="text-ink/40 hover:text-lake transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lake/40 rounded-full p-1"
         >
           <svg
             width="14"
@@ -410,7 +410,7 @@ function ReviewCard({
           return (
             <span
               key={j}
-              className={`text-[0.75rem] ${filled ? "text-tea" : "text-ink/15"}`}
+              className={`text-[0.75rem] ${filled ? "text-terracotta" : "text-ink/15"}`}
               aria-hidden="true"
             >
               ★
@@ -424,7 +424,7 @@ function ReviewCard({
       </blockquote>
 
       <div className="flex items-center gap-2.5 pt-1 mt-auto">
-        <span className="block w-5 h-px bg-tea/60 shrink-0" />
+        <span className="block w-5 h-px bg-terracotta/60 shrink-0" />
         <span className="text-xs font-semibold text-ink shrink-0">
           {review.name}
         </span>

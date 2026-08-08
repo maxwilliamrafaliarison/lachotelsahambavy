@@ -201,14 +201,14 @@ export default function LanguageSwitcher({
         const state = active
           ? onDark
             ? "bg-white/20 text-white"
-            : "bg-tea/10 text-tea"
+            : "bg-lake/10 text-lake"
           : onDark
             ? "text-white/85 hover:bg-white/12 hover:text-white"
             : "text-ink/70 hover:bg-ink/5 hover:text-ink";
 
         const focus = onDark
           ? "focus-visible:ring-white/80"
-          : "focus-visible:ring-tea/60";
+          : "focus-visible:ring-lake/60";
 
         return (
           <Link

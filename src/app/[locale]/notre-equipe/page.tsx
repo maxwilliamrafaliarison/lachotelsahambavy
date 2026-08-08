@@ -135,7 +135,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
             {(dict.equipe.rseItems as string[]).map((item, i) => (
               <ScrollReveal key={i} delay={i * 60} className="h-full">
                 <div className="flex h-full items-start gap-4 bg-white p-6 md:p-7">
-                  <span className="mt-0.5 flex-shrink-0 text-tea">
+                  <span className="mt-0.5 flex-shrink-0 text-terracotta">
                     <Icon name={RSE_ICONS[i % RSE_ICONS.length]} size={22} weight="regular" />
                   </span>
                   <p className="text-sm leading-relaxed text-body">{item}</p>

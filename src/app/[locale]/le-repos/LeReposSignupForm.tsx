@@ -29,7 +29,7 @@ export default function LeReposSignupForm({ dict }: { dict: any }) {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-[3px] border border-hairline bg-paper px-4 py-3 text-ink placeholder:text-muted/60 focus:border-tea focus:outline-none focus:ring-1 focus:ring-tea"
+          className="w-full rounded-[3px] border border-hairline bg-paper px-4 py-3 text-ink placeholder:text-muted/60 focus:border-lake focus:outline-none focus:ring-1 focus:ring-lake"
           placeholder={dict.repos.formNamePlaceholder}
         />
       </div>
@@ -42,7 +42,7 @@ export default function LeReposSignupForm({ dict }: { dict: any }) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-[3px] border border-hairline bg-paper px-4 py-3 text-ink placeholder:text-muted/60 focus:border-tea focus:outline-none focus:ring-1 focus:ring-tea"
+          className="w-full rounded-[3px] border border-hairline bg-paper px-4 py-3 text-ink placeholder:text-muted/60 focus:border-lake focus:outline-none focus:ring-1 focus:ring-lake"
           placeholder={dict.repos.formEmailPlaceholder}
         />
       </div>

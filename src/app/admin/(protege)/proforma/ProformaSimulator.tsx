@@ -175,7 +175,7 @@ export default function ProformaSimulator() {
   }
 
   const inputCls =
-    "w-full rounded border border-hairline bg-white px-3 py-2 text-[14px] text-ink outline-none transition-colors focus:border-tea";
+    "w-full rounded border border-hairline bg-white px-3 py-2 text-[14px] text-ink outline-none transition-colors focus:border-lake";
   const labelCls = "mb-1 block text-[11px] font-semibold uppercase tracking-[0.14em] text-muted";
 
   return (
@@ -208,7 +208,7 @@ export default function ProformaSimulator() {
             </div>
             <div className="flex items-end pb-2 text-[13px] text-body">
               {nuits > 0 ? (
-                <span><strong className="text-tea">{nuits} nuit{nuits > 1 ? "s" : ""}</strong> · les quantités s&apos;ajustent automatiquement</span>
+                <span><strong className="text-terracotta">{nuits} nuit{nuits > 1 ? "s" : ""}</strong> · les quantités s&apos;ajustent automatiquement</span>
               ) : (
                 <span className="text-muted">Renseignez les dates pour calculer les nuits</span>
               )}
@@ -228,7 +228,7 @@ export default function ProformaSimulator() {
                     key={item.id}
                     type="button"
                     onClick={() => ajouterCatalogue(item)}
-                    className="rounded-full border border-hairline bg-paper px-3.5 py-1.5 text-[12.5px] text-body transition-colors hover:border-tea hover:text-tea"
+                    className="rounded-full border border-hairline bg-paper px-3.5 py-1.5 text-[12.5px] text-body transition-colors hover:border-lake hover:text-lake"
                     title={`${formatAr(item.prixAr)} / ${item.unite}${estSoumisTva(item) ? " · TTC" : " · hors TVA"}`}
                   >
                     + {item.label.replace(" (double/twin/single)", "")}
@@ -237,7 +237,7 @@ export default function ProformaSimulator() {
               </div>
             </div>
           ))}
-          <button type="button" onClick={ajouterLigneLibre} className="mt-1 rounded-full border border-dashed border-hairline px-3.5 py-1.5 text-[12.5px] text-muted transition-colors hover:border-tea hover:text-tea">
+          <button type="button" onClick={ajouterLigneLibre} className="mt-1 rounded-full border border-dashed border-hairline px-3.5 py-1.5 text-[12.5px] text-muted transition-colors hover:border-lake hover:text-lake">
             + Ligne libre (prestation sur mesure)
           </button>
 
@@ -276,7 +276,7 @@ export default function ProformaSimulator() {
                           aria-label="Ligne soumise à la TVA"
                           checked={l.soumisTva}
                           onChange={(e) => modifierLigne(l.id, { soumisTva: e.target.checked })}
-                          className="h-4 w-4 accent-[var(--color-tea)]"
+                          className="h-4 w-4 accent-[var(--color-lake)]"
                         />
                       </td>
                       <td className="py-2 text-right font-semibold tabular-nums text-ink">{formatAr(l.qte * l.prixAr)}</td>
@@ -346,7 +346,7 @@ export default function ProformaSimulator() {
               </div>
               <p className="mt-1.5 text-[11.5px] leading-snug text-muted">
                 {remisePct <= SEUIL_RECEPTION ? (
-                  <span className="text-tea">Marge confortable — la réception peut accorder cette remise.</span>
+                  <span className="text-terracotta">Marge confortable — la réception peut accorder cette remise.</span>
                 ) : remisePct <= SEUIL_DIRECTION ? (
                   <span className="text-gold">Remise importante — à confirmer selon l&apos;accord agence.</span>
                 ) : (
@@ -362,7 +362,7 @@ export default function ProformaSimulator() {
               type="checkbox"
               checked={exoneration}
               onChange={(e) => setExoneration(e.target.checked)}
-              className="mt-0.5 h-4 w-4 accent-[var(--color-tea)]"
+              className="mt-0.5 h-4 w-4 accent-[var(--color-lake)]"
             />
             <span className="text-[13.5px] leading-snug text-body">
               <span className="font-semibold text-ink">Exonération de TVA</span> — les
@@ -407,7 +407,7 @@ export default function ProformaSimulator() {
             )}
             <div className="ge-row"><span>dont HT</span><span>{formatAr(t.ht)}</span></div>
             {exoneration ? (
-              <div className="ge-row"><span>TVA</span><span className="!text-tea">Exonéré</span></div>
+              <div className="ge-row"><span>TVA</span><span className="!text-terracotta">Exonéré</span></div>
             ) : (
               <div className="ge-row"><span>dont TVA 20 %</span><span>{formatAr(t.tva)}</span></div>
             )}
@@ -431,7 +431,7 @@ export default function ProformaSimulator() {
             {busy ? "Génération…" : "Générer le PDF"}
           </button>
           {pdfUrl && (
-            <a href={pdfUrl} download={pdfNom} className="mt-3 block text-center text-[13px] text-tea underline underline-offset-4">
+            <a href={pdfUrl} download={pdfNom} className="mt-3 block text-center text-[13px] text-terracotta underline underline-offset-4">
               Re-télécharger « {pdfNom} »
             </a>
           )}

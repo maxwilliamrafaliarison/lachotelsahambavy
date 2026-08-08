@@ -112,8 +112,8 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
                 aria-pressed={activeFilter === f.key}
                 className={`rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 md:px-5 md:py-2.5 ${
                   activeFilter === f.key
-                    ? "border-tea bg-tea text-white"
-                    : "border-hairline bg-white text-muted hover:border-tea hover:text-tea"
+                    ? "border-lake bg-lake text-white"
+                    : "border-hairline bg-white text-muted hover:border-lake hover:text-lake"
                 }`}
               >
                 {f.label}

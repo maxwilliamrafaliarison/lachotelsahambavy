@@ -156,7 +156,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             {ecoPillars.map((pillar, i) => (
               <ScrollReveal key={pillar.icon} delay={i * 60} className="h-full">
                 <div className="flex h-full flex-col bg-paper p-6 md:p-8">
-                  <span className="mb-5 text-tea">
+                  <span className="mb-5 text-terracotta">
                     <Icon name={pillar.icon} size={28} weight="light" />
                   </span>
                   <h4 className="mb-2">{pillar.title}</h4>
@@ -231,7 +231,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
               <p className="text-[15px] leading-relaxed text-body">{dict.equipe.economyP}</p>
 
               {/* Restauration : trois menus seulement, contre le gaspillage */}
-              <div className="mt-9 border-l-2 border-tea pl-5 md:pl-6">
+              <div className="mt-9 border-l-2 border-terracotta pl-5 md:pl-6">
                 <span className="ge-label mb-2">{threeMenusLabel}</span>
                 <p className="text-[15px] leading-relaxed text-body">{threeMenus}</p>
               </div>
@@ -242,7 +242,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
               <ul className="border-t border-hairline">
                 {(dict.equipe.rseItems as string[]).map((item, i) => (
                   <li key={i} className="flex items-baseline gap-4 border-b border-hairline py-3.5">
-                    <span className="text-xs font-semibold tabular-nums text-tea">
+                    <span className="text-xs font-semibold tabular-nums text-terracotta">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[15px] leading-relaxed text-body">{item}</span>

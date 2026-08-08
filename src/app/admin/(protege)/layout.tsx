@@ -15,18 +15,18 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
             <span className="font-[family-name:var(--font-display)] text-[15px] font-light tracking-[0.16em]">
               LAC HÔTEL
             </span>
-            <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-tea">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-terracotta">
               Espace équipe
             </span>
           </Link>
           <nav className="ml-auto flex items-center gap-5 text-[13px] text-body">
-            <Link href="/admin/tableau-de-bord" className="transition-colors hover:text-tea">
+            <Link href="/admin/tableau-de-bord" className="transition-colors hover:text-lake">
               Tableau de bord
             </Link>
-            <Link href="/admin/proforma" className="transition-colors hover:text-tea">
+            <Link href="/admin/proforma" className="transition-colors hover:text-lake">
               Facture proforma
             </Link>
-            <Link href="/admin/aide" className="transition-colors hover:text-tea">
+            <Link href="/admin/aide" className="transition-colors hover:text-lake">
               Aide
             </Link>
             <span className="hidden items-center gap-2 sm:flex">
@@ -34,7 +34,7 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
               <span
                 className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${
                   session.user.role === "admin"
-                    ? "bg-tea/10 text-tea"
+                    ? "bg-lake/10 text-lake"
                     : "bg-hairline/60 text-body"
                 }`}
               >
@@ -49,7 +49,7 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
             >
               <button
                 type="submit"
-                className="rounded-full border border-hairline px-3.5 py-1.5 text-[12px] text-body transition-colors hover:border-tea hover:text-tea"
+                className="rounded-full border border-hairline px-3.5 py-1.5 text-[12px] text-body transition-colors hover:border-lake hover:text-lake"
               >
                 Déconnexion
               </button>

@@ -112,12 +112,12 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
                   <ul className="flex-1 space-y-3">
                     {(circuit.items as string[]).map((item: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-body">
-                        <span className="mt-[0.55rem] h-1 w-1 flex-shrink-0 rounded-full bg-tea" />
+                        <span className="mt-[0.55rem] h-1 w-1 flex-shrink-0 rounded-full bg-lake" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 border-t border-hairline pt-4 text-[13px] font-medium text-tea">
+                  <p className="mt-6 border-t border-hairline pt-4 text-[13px] font-medium text-terracotta">
                     {circuit.ideal}
                   </p>
                 </article>
@@ -177,7 +177,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
               <ol className="ge-rows">
                 {(dict.loisirs.aventureProgram as string[]).map((step: string, i: number) => (
                   <li key={i} className="flex items-baseline gap-5 border-b border-hairline py-4">
-                    <span className="text-xs font-semibold tabular-nums text-tea">
+                    <span className="text-xs font-semibold tabular-nums text-terracotta">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[15px] leading-relaxed text-body">{step}</span>
@@ -235,7 +235,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
                           key={i}
                           className="flex items-baseline gap-4 border-t border-hairline py-3"
                         >
-                          <span className="text-xs font-semibold tabular-nums text-tea">
+                          <span className="text-xs font-semibold tabular-nums text-terracotta">
                             {String(i + 1).padStart(2, "0")}
                           </span>
                           <span className="text-sm leading-relaxed text-body">{item}</span>
@@ -259,7 +259,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
               />
             </ScrollReveal>
             <ScrollReveal delay={120}>
-              <p className="border-l-2 border-tea bg-mist-bg p-5 text-sm leading-relaxed text-body">
+              <p className="border-l-2 border-terracotta bg-mist-bg p-5 text-sm leading-relaxed text-body">
                 {dict.loisirs.trekkingAdvice}
               </p>
             </ScrollReveal>

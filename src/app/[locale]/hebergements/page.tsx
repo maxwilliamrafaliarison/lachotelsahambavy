@@ -234,7 +234,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                 <a
                   key={a.href}
                   href={a.href}
-                  className="text-tea underline decoration-hairline underline-offset-4 transition-colors hover:decoration-tea"
+                  className="text-terracotta underline decoration-hairline underline-offset-4 transition-colors hover:decoration-lake"
                 >
                   {a.label}
                 </a>
@@ -438,7 +438,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <div className="grid gap-12 md:grid-cols-2 md:gap-16">
             <ScrollReveal>
               <div className="mb-4">
-                <Icon name="camping" size={32} weight="regular" className="text-tea" />
+                <Icon name="camping" size={32} weight="regular" className="text-terracotta" />
               </div>
               <h2 className="mb-4" style={{ textWrap: "balance" }}>
                 {dict.rooms.camping}

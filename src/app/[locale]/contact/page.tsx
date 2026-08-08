@@ -55,7 +55,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
               </p>
               <div className="mt-8 border-t border-hairline pt-6">
                 <p className="ge-measure text-[15px] leading-relaxed text-body">
-                  <span className="font-semibold text-tea">{dict.contact.offerReminder}</span>
+                  <span className="font-semibold text-terracotta">{dict.contact.offerReminder}</span>
                   {" — "}
                   {dict.contact.offerReminderDetail}
                 </p>
@@ -71,7 +71,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
                     value: (
                       <a
                         href={`mailto:${siteConfig.email}`}
-                        className="transition-colors hover:text-tea-deep"
+                        className="transition-colors hover:text-lake-deep"
                       >
                         {siteConfig.email}
                       </a>
@@ -84,7 +84,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
                         href={whatsappHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition-colors hover:text-tea-deep"
+                        className="transition-colors hover:text-lake-deep"
                       >
                         {siteConfig.phone}
                       </a>
@@ -97,7 +97,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
                         href={siteConfig.social.google}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition-colors hover:text-tea-deep"
+                        className="transition-colors hover:text-lake-deep"
                       >
                         {siteConfig.address}
                       </a>

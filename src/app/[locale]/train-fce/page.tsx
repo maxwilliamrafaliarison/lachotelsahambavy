@@ -170,7 +170,7 @@ export default async function TrainFCEPage({
                       name={optionIcons[i] ?? "train"}
                       size={26}
                       weight="light"
-                      className="text-tea"
+                      className="text-terracotta"
                     />
                     <h3 className="mt-5 mb-3 text-ink">{opt.name}</h3>
                     <p className="text-[15px] leading-relaxed text-body">{opt.desc}</p>

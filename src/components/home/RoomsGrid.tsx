@@ -71,12 +71,12 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-baseline gap-2.5 rounded-full border border-hairline bg-white px-5 py-2.5 transition-colors hover:border-tea"
+                className="inline-flex items-baseline gap-2.5 rounded-full border border-hairline bg-white px-5 py-2.5 transition-colors hover:border-lake"
               >
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
                   {r.name}
                 </span>
-                <span className="text-sm font-semibold tabular-nums text-tea">{r.score}</span>
+                <span className="text-sm font-semibold tabular-nums text-terracotta">{r.score}</span>
               </a>
             ))}
           </div>
@@ -125,7 +125,7 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
         </div>
 
         <h3 className="text-[1.35rem]">
-          <Link href={href} className="transition-colors hover:text-tea">
+          <Link href={href} className="transition-colors hover:text-lake">
             {room.name[locale]}
           </Link>
         </h3>
@@ -147,7 +147,7 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
           </div>
           <Link
             href={href}
-            className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-tea transition-colors hover:text-tea-deep"
+            className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta transition-colors hover:text-lake-deep"
           >
             {dict.rooms.book}
           </Link>

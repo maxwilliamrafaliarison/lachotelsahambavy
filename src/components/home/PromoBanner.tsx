@@ -7,7 +7,7 @@
 export default function PromoBanner({ dict }: { dict: any }) {
   return (
     <div className="border-b border-hairline bg-mist-bg px-4 py-3 text-center">
-      <p className="text-[11px] uppercase tracking-[0.22em] text-tea">
+      <p className="text-[11px] uppercase tracking-[0.22em] text-terracotta">
         <span className="text-muted">{dict.promo.prefix}</span>{" "}
         <strong className="font-semibold">{dict.promo.text}</strong>{" "}
         <span className="text-muted">{dict.promo.suffix}</span>

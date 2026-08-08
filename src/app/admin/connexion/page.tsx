@@ -59,7 +59,7 @@ function LoginForm() {
         autoComplete="username"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="mb-5 w-full rounded border border-hairline bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors focus:border-tea"
+        className="mb-5 w-full rounded border border-hairline bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors focus:border-lake"
       />
 
       <label
@@ -76,7 +76,7 @@ function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded border border-hairline bg-white py-2.5 pl-3.5 pr-12 text-[15px] text-ink outline-none transition-colors focus:border-tea"
+          className="w-full rounded border border-hairline bg-white py-2.5 pl-3.5 pr-12 text-[15px] text-ink outline-none transition-colors focus:border-lake"
         />
         {/* Affichage en clair — standard des formulaires de connexion : le
             mot de passe saisi à l'aveugle est la première cause d'échec.
@@ -87,7 +87,7 @@ function LoginForm() {
           aria-label={visible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
           aria-pressed={visible}
           title={visible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-          className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-muted transition-colors hover:text-tea focus-visible:text-tea"
+          className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-muted transition-colors hover:text-lake focus-visible:text-lake"
         >
           {visible ? (
             /* Œil barré */

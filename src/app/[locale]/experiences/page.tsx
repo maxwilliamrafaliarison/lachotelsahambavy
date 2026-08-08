@@ -359,7 +359,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
               <ol className="ge-rows">
                 {(dict.loisirs.aventureProgram as string[]).map((step, i) => (
                   <li key={i} className="flex items-baseline gap-5 border-b border-hairline py-4">
-                    <span className="text-xs font-semibold tabular-nums text-tea">
+                    <span className="text-xs font-semibold tabular-nums text-terracotta">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[15px] leading-relaxed text-body">{step}</span>

@@ -160,7 +160,7 @@ export default async function JardinsPage({
             {collections.map((c, i) => (
               <ScrollReveal key={c.title} delay={i * 80} className="h-full">
                 <div className="flex h-full flex-col bg-white p-7 md:p-8">
-                  <span className="mb-4 text-tea">
+                  <span className="mb-4 text-terracotta">
                     <Icon name={c.icon} size={26} weight="regular" />
                   </span>
                   <h3 className="mb-2 text-lg md:text-xl">{c.title}</h3>

@@ -218,7 +218,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             <ul className="space-y-2.5 pt-1">
               {(rs.specialties as string[]).map((dish: string) => (
                 <li key={dish} className="flex items-start gap-3">
-                  <span className="mt-[9px] h-1 w-1 flex-shrink-0 rounded-full bg-tea" />
+                  <span className="mt-[9px] h-1 w-1 flex-shrink-0 rounded-full bg-lake" />
                   <span>{dish}</span>
                 </li>
               ))}

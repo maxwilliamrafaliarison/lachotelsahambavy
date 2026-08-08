@@ -204,7 +204,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                       onFocus={() => setOpenMenu(item.href)}
                       onClick={() => setOpenMenu(openMenu === item.href ? null : item.href)}
                       className={`flex items-center gap-1.5 whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
-                        darkText ? "hover:text-tea" : "hover:text-white/75"
+                        darkText ? "hover:text-lake" : "hover:text-white/75"
                       }`}
                       style={itemShadow}
                     >
@@ -229,7 +229,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     <Link
                       href={localizeHref(item.href, locale)}
                       className={`block whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
-                        darkText ? "hover:text-tea" : "hover:text-white/75"
+                        darkText ? "hover:text-lake" : "hover:text-white/75"
                       }`}
                       style={itemShadow}
                     >
@@ -290,12 +290,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     <Link
                       href={localizeHref(item.href, locale)}
                       onClick={closeAll}
-                      className="col-span-full mb-2 flex items-baseline gap-3 text-ink transition-colors hover:text-tea"
+                      className="col-span-full mb-2 flex items-baseline gap-3 text-ink transition-colors hover:text-lake"
                     >
                       <span className="font-[family-name:var(--font-display)] text-[22px] font-extralight tracking-[-0.01em]">
                         {item.label[locale]}
                       </span>
-                      <span className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-tea">
+                      <span className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-terracotta">
                         {locale === "fr" ? "Voir la page" : locale === "es" ? "Ver la página" : "View page"}
                       </span>
                     </Link>
@@ -304,9 +304,9 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                         key={child.href}
                         href={localizeHref(child.href, locale)}
                         onClick={closeAll}
-                        className="group flex items-center gap-2.5 rounded px-2 py-2 text-[14px] text-body transition-colors hover:text-tea"
+                        className="group flex items-center gap-2.5 rounded px-2 py-2 text-[14px] text-body transition-colors hover:text-lake"
                       >
-                        <span className="h-px w-4 bg-hairline transition-all duration-200 group-hover:w-6 group-hover:bg-tea" />
+                        <span className="h-px w-4 bg-hairline transition-all duration-200 group-hover:w-6 group-hover:bg-lake" />
                         {child.label[locale]}
                       </Link>
                     ))}
@@ -398,10 +398,10 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             </Link>
 
             <div className="mt-8 flex flex-col gap-2 text-[13.5px] text-body">
-              <a href={`mailto:${siteConfig.email}`} className="hover:text-tea">
+              <a href={`mailto:${siteConfig.email}`} className="hover:text-lake">
                 {siteConfig.email}
               </a>
-              <a href={`tel:${siteConfig.whatsapp}`} className="hover:text-tea">
+              <a href={`tel:${siteConfig.whatsapp}`} className="hover:text-lake">
                 {siteConfig.phone}
               </a>
             </div>

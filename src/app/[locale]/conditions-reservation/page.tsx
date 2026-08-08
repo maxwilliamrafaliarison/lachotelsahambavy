@@ -73,7 +73,7 @@ function Linkify({ text }: { text: string }) {
             <a
               key={i}
               href={`mailto:${part.value}`}
-              className="text-ink underline decoration-tea/50 underline-offset-2 transition-colors hover:decoration-tea"
+              className="text-ink underline decoration-lake/50 underline-offset-2 transition-colors hover:decoration-lake"
             >
               {part.value}
             </a>
@@ -86,7 +86,7 @@ function Linkify({ text }: { text: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ink underline decoration-tea/50 underline-offset-2 transition-colors hover:decoration-tea"
+            className="text-ink underline decoration-lake/50 underline-offset-2 transition-colors hover:decoration-lake"
           >
             {part.value}
           </a>
@@ -137,7 +137,7 @@ export default async function ConditionsPage({
                   <a
                     key={i}
                     href={`#sec-${i + 1}`}
-                    className="block border-b border-hairline py-3 text-sm text-body transition-colors hover:text-tea"
+                    className="block border-b border-hairline py-3 text-sm text-body transition-colors hover:text-lake"
                   >
                     {section.title}
                   </a>
@@ -168,7 +168,7 @@ export default async function ConditionsPage({
                     <ul className="space-y-4">
                       {section.items.map((item, j) => (
                         <li key={j} className="flex gap-4 text-[15px] leading-relaxed text-body">
-                          <span className="mt-[0.65em] h-1 w-1 flex-shrink-0 rounded-full bg-tea" />
+                          <span className="mt-[0.65em] h-1 w-1 flex-shrink-0 rounded-full bg-lake" />
                           <span>
                             <Linkify text={item} />
                           </span>

@@ -2,11 +2,27 @@
 
 @theme inline {
   /* ============================================================
-     Direction artistique « Panorama + Nuit sur le lac » (16/07/2026)
-     Socle clair transposé de la grammaire Glacier Express :
-     papier presque blanc, encre chaude, UN accent vert thé.
-     Canvas « nuit » réservé aux pages signature (Pilotis Nuptial,
-     Wagon Nuptial, Mariages) : noir chaud + or champagne.
+     Direction artistique « Panorama + Nuit sur le lac » (16/07/2026),
+     enrichie « Terre & Eau » (direction B, 08/08/2026).
+
+     Toutes les couleurs d'accent sont MESURÉES dans les photos du site
+     (66 photos, quantification median-cut + passe chromatique), et non
+     choisies à la mode. Chaque valeur passe WCAG AA sur papier ET porte
+     du texte blanc en aplat.
+
+     RÈGLE D'EMPLOI DES DEUX ACCENTS — s'y tenir :
+       • --color-lake  (bleu du lac) → ce qui est CLIQUABLE : boutons,
+         liens, anneau de focus, état actif. Le bleu = action, convention
+         universelle, et c'est la teinte que partagent toutes les photos
+         d'eau à toute heure.
+       • --color-terracotta (terre cuite) → ce qui est ÉDITORIAL : labels
+         de rubrique, valeurs de tarifs, chiffres. C'est la chaleur des
+         murs en pisé et de la salle à manger.
+       • --color-tea → réservé aux contenus NATURE (plantation, jardins,
+         démarche écologique). Corrigé : l'ancien #2F5D46 était un vert
+         sapin absent des photos ; les rangées de thé mesurent #26471B.
+       • or / champagne → inchangés (façade du restaurant, lumière du lac),
+         touches et monde « Nuit ».
      ============================================================ */
 
   /* — Panorama (socle clair) — */
@@ -16,8 +32,20 @@
   --color-body: #4A4A44;
   --color-muted: #726E64; /* WCAG AA (≥4.5) sur papier, blanc et mist-bg */
   --color-hairline: #E7E4DC;
-  --color-tea: #2F5D46;
-  --color-tea-deep: #234838;
+
+  /* Accent 1 — action / interactif. Papier 5,62:1 · blanc dessus 5,86:1 */
+  --color-lake: #1768A8;
+  --color-lake-deep: #12547F;
+  --color-lake-bg: #EFF5FA;
+
+  /* Accent 2 — éditorial / chaleur. Papier 5,77:1 · blanc dessus 6,03:1 */
+  --color-terracotta: #A64517;
+  --color-terracotta-deep: #85360F;
+  --color-terracotta-bg: #FBF1EC;
+
+  /* Nature — vert réel des théiers. Papier 10,06:1 */
+  --color-tea: #26471B;
+  --color-tea-deep: #1B3513;
   --color-mist: #9DB5A5;
   --color-mist-bg: #F0F3EF;
   --color-gold: #C8A254;
@@ -129,7 +157,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--color-tea);
+    color: var(--color-terracotta);
   }
   .ge-night .ge-label { color: var(--color-champagne); }
 
@@ -146,12 +174,12 @@ body {
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: var(--color-tea);
+    background: var(--color-lake);
     color: #fff;
-    border: 1px solid var(--color-tea);
+    border: 1px solid var(--color-lake);
     transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
   }
-  .ge-cta:hover { background: var(--color-tea-deep); border-color: var(--color-tea-deep); transform: translateY(-1px); }
+  .ge-cta:hover { background: var(--color-lake-deep); border-color: var(--color-lake-deep); transform: translateY(-1px); }
   .ge-cta--ghost {
     background: transparent;
     color: var(--color-ink);
@@ -186,7 +214,7 @@ body {
   .ge-row > :last-child {
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
-    color: var(--color-tea);
+    color: var(--color-terracotta);
     font-weight: 600;
   }
   .ge-night .ge-rows { border-color: var(--color-night-hairline); }
@@ -277,7 +305,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.24em;
-  color: var(--color-tea);
+  color: var(--color-terracotta);
   margin-bottom: 0.75rem;
 }
 
@@ -311,14 +339,14 @@ body {
 }
 
 .btn--primary {
-  background: var(--color-tea);
+  background: var(--color-lake);
   color: var(--color-white);
-  border: 1.5px solid var(--color-tea);
+  border: 1.5px solid var(--color-lake);
 }
 
 .btn--primary:hover {
-  background: var(--color-tea-deep);
-  border-color: var(--color-tea-deep);
+  background: var(--color-lake-deep);
+  border-color: var(--color-lake-deep);
   color: var(--color-white);
 }
 
@@ -510,9 +538,9 @@ body {
   border-radius: 1rem 1rem 0 0;
   margin-bottom: 0;
   padding: 0.75rem 1.5rem;
-  background: var(--color-tea);
+  background: var(--color-lake);
   color: white;
-  border-color: var(--color-tea);
+  border-color: var(--color-lake);
   box-shadow: 0 -4px 24px rgba(47, 93, 70, 0.3);
 }
 
@@ -521,7 +549,7 @@ body {
 }
 
 .booking-bar-fixed--minimized .booking-bar-fixed__toggle:hover {
-  background: var(--color-tea-deep);
+  background: var(--color-lake-deep);
 }
 
 @keyframes slideUpBar {
@@ -727,7 +755,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.125rem 2.25rem;
-  background: var(--color-tea);
+  background: var(--color-lake);
   color: white;
   font-size: 0.8125rem;
   font-weight: 700;
