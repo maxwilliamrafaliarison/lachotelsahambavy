@@ -65,11 +65,15 @@ export default function RoomGallery({
   className = "",
 }: Props) {
   const [index, setIndex] = useState(0);
+  const [feuillete, setFeuillete] = useState(false);
   const conteneur = useRef<HTMLDivElement>(null);
   const total = images.length;
 
   const aller = useCallback(
-    (delta: number) => setIndex((i) => (i + delta + total) % total),
+    (delta: number) => {
+      setFeuillete(true);
+      setIndex((i) => (i + delta + total) % total);
+    },
     [total],
   );
 
@@ -91,10 +95,26 @@ export default function RoomGallery({
 
   if (total === 0) return null;
 
-  /** Ne monte que les images voisines : une galerie de 21 vues ne doit pas
-   *  provoquer 21 requêtes pour qui ne la feuillette pas. */
-  const montee = (i: number) =>
-    i === 0 || Math.abs(i - index) <= 1 || (index === 0 && i === total - 1) || (index === total - 1 && i === 0);
+  /**
+   * Quelles vues sont réellement montées dans le DOM.
+   *
+   * TANT QU'ON N'A PAS FEUILLETÉ : la première, et elle seule. C'est ce qui
+   * permet de poser ces galeries sur la page d'accueil — six cartes y
+   * coexistent, et pré-charger leurs voisines aurait triplé le poids d'une
+   * page qui n'affichait qu'une photo par chambre.
+   *
+   * DÈS LE PREMIER CLIC : la vue courante et ses deux voisines, pour que la
+   * suivante soit déjà là quand on y arrive. Le coût n'est alors payé que
+   * par un visiteur qui a manifesté son intérêt.
+   */
+  const montee = (i: number) => {
+    if (!feuillete) return i === 0;
+    return (
+      Math.abs(i - index) <= 1 ||
+      (index === 0 && i === total - 1) ||
+      (index === total - 1 && i === 0)
+    );
+  };
 
   return (
     <div

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import RoomGallery from "@/components/rooms/RoomGallery";
 import { rooms, type Room } from "@/data/rooms";
 import { siteConfig } from "@/data/site";
 import { type Locale, getBasePath } from "@/lib/utils";
@@ -101,20 +102,32 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
 // -----------------------------------------------------------------------------
 
 function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Locale }) {
-  const img = room.images[0] ?? "/images/hero/hero-pilotis.jpg";
+  const images = room.images.length ? room.images : ["/images/hero/hero-pilotis.jpg"];
   const href = `/${locale}/hebergements/`;
   const night = String(dict.rooms.night).replace(/^\s*\/\s*/, "");
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[3px] border border-hairline bg-white">
-      <Link href={href} className="block overflow-hidden" aria-label={room.name[locale]}>
-        <img
-          src={`${basePath}${img}`}
-          alt={room.name[locale]}
-          className="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-          loading="lazy"
+      {/* La photo n'est PLUS enveloppée dans un lien : les flèches de la
+          galerie se trouveraient à l'intérieur, et chaque changement de vue
+          déclencherait une navigation. Le nom de la chambre, juste dessous,
+          porte déjà le lien.
+
+          Le rapport est posé par ce conteneur et la galerie le remplit :
+          passer `aspect-[3/2]` en classe à la galerie se heurterait à
+          l'ordre des couches Tailwind (cf. la prop `remplir`). */}
+      <div className="relative aspect-[3/2] w-full overflow-hidden">
+        <RoomGallery
+          images={images.map((src) => `${basePath}${src}`)}
+          nom={room.name[locale]}
+          remplir
+          libelles={{
+            precedent: dict.rooms.galPrev ?? "Photo précédente",
+            suivant: dict.rooms.galNext ?? "Photo suivante",
+            sur: dict.rooms.galOf ?? "photo {n}",
+          }}
         />
-      </Link>
+      </div>
 
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
