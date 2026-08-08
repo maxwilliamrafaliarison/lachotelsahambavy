@@ -34,10 +34,10 @@
     "label": "Bienvenido al Lac Hôtel",
     "title": "Un eco-lodge de excepción frente al lago Sahambavy",
     "subtitle": "Encanto y confort en plena naturaleza y en la única plantación de té de Madagascar",
-    "intro": "Si existe un paraíso en la tierra, está aquí… 5 000 km de costas donde las olas verdes y azules del océano Índico y del Canal de Mozambique rompen en espuma plateada. El país del « mora mora » invita a tomarse su tiempo y descubrir la hospitalidad y la amabilidad legendaria de los malgaches.",
-    "p1": "Parada imprescindible de su viaje, idealmente situado a medio camino entre el norte y el sur de Madagascar (ruta RN7), el Lac Hôtel le acoge en un entorno natural excepcional. Enclavado a orillas del Lago Sahambavy y al pie de colinas verdes, ofrece una vista incomparable de la única plantación de té de la isla, que se extiende por más de 520 hectáreas.",
-    "p2": "Alójese en encantadores bungalows típicos sobre pilotes, repartidos en un exuberante jardín tropical donde confort y autenticidad se encuentran. El Lac Hôtel seduce por su atmósfera apacible, la belleza de sus espacios exteriores y la calidad de un servicio atento y personalizado.",
-    "p3": "Punto de partida ideal para explorar las riquezas del entorno, el establecimiento le invita también a descubrir las tradiciones de la cultura Betsileo.",
+    "intro": "Si existe un paraíso en la tierra, está aquí… 5 000 km de costas donde vienen a romper en espuma de plata las olas verdes y azules del océano Índico y del Canal de Mozambique. El país del « mora mora » invita a tomarse su tiempo y a acercarse a la hospitalidad y a la amabilidad legendaria de los malgaches. Madagascar, el más bello enigma del mundo, nos abre su corazón. Resuena como un encantamiento mágico, un nombre mezclado de perfumes exóticos y de colores que avivan los sentidos y estimulan la imaginación.",
+    "p1": "Etapa imprescindible de su viaje, idealmente situado a medio camino entre el norte y el sur de Madagascar (ruta RN7), el Lac Hôtel le acoge en un entorno natural excepcional. Situado a orillas del Lago Sahambavy y al pie de las verdes colinas, ofrece una vista incomparable de la única plantación de té de la isla, que se extiende por más de 520 hectáreas.",
+    "p2": "Alójese en encantadores bungalows típicos sobre pilotes, repartidos en el corazón de un exuberante jardín tropical. El Lac Hôtel seduce por su atmósfera apacible, la belleza de sus espacios exteriores y la calidad de un servicio atento y personalizado. Aquí, cada detalle cuenta. En nuestro hotel familiar, ponemos todo nuestro empeño en ofrecerle mucho más que una simple estancia: una verdadera experiencia como en casa. Desde su llegada, le recibimos con atención y amabilidad, como si estuviera en su propia casa.",
+    "p3": "Punto de partida ideal para explorar las riquezas del entorno, el establecimiento le invita también a descubrir las tradiciones de la cultura « Betsileo ».",
     "stat1": "Bungalows con encanto",
     "stat1Value": "50+",
     "stat2": "Plantación de té",
@@ -49,8 +49,8 @@
   "ourHouse": {
     "label": "Nuestra casa",
     "title": "Una historia familiar, hecha lugar de acogida",
-    "paragraph": "En 1998, Kim y Olga Leong compraron un terreno a orillas del lago Sahambavy para levantar una sencilla cabaña de retiro. Olga, poco a poco, lo convirtió en un jardín del Edén. Los viajeros del tren, intrigados, se detenían creyendo haber encontrado una posada de paso — y así nació la idea de un hotel. Veintiocho años después, su hija Maggie ha regresado del Canadá con su esposo Sergi; juntos han hecho del lugar lo que es hoy: una cincuentena de bungalows acurrucados en una naturaleza preservada, y un equipo de más de cincuenta aldeanos para quienes cada huésped es un vecino.",
-    "quote": "« Y la pequeña historia aún no ha terminado. »",
+    "paragraph": "Fue el azar el que, un día, condujo a Leong y a Olga hasta las orillas del Lago Sahambavy, en 1998. Su proyecto era sencillo: adquirir un terreno a orillas del lago y construir en él una modesta cabaña para disfrutar de un retiro apacible. Pero, bajo el impulso de Olga, aquel lugar se convirtió muy pronto en un verdadero jardín del Edén. Con el tiempo, los viajeros del tren que hacían escala en Sahambavy se detenían, intrigados por la belleza del paraje, pensando encontrar allí un albergue de etapa… Así nació la idea de abrir las puertas de este rincón de paraíso y convertirlo en un hotel. El destino reunió después a las generaciones cuando su hija mayor, Maggie Leong, regresó de Canadá para tomar el relevo de la aventura familiar. En casi 28 años, la propiedad ha crecido hasta acoger hoy medio centenar de bungalows, enclavados en el corazón de una naturaleza preservada.",
+    "quote": "« Y la aventura está lejos de haber terminado… »",
     "signature": "— La familia Leong",
     "captions": {
       "garden": "El jardín",
@@ -64,7 +64,7 @@
     "label": "Alojamientos · Tarifas 2026",
     "title": "Nuestras habitaciones y bungalows",
     "subtitle": "Del bungalow estándar a la experiencia sobre el agua — unos cincuenta alojamientos para todos los viajes",
-    "intro": "Nuestras habitaciones están diseñadas para garantizar el confort y la tranquilidad de nuestros huéspedes: cama amplia de 2,20 m × 2,20 m, baños privados con agua caliente, terraza con vistas al lago y televisión. El Wi-Fi está disponible en el restaurante y cada baño cuenta con jabones ecológicos de saponificación en frío.",
+    "intro": "Nuestras habitaciones están diseñadas para garantizar el confort y la tranquilidad de nuestros huéspedes: una cama personalizada de 2,20 m × 2,20 m, que ofrece un confort superior a las dimensiones estándar, un baño privado con agua caliente y una terraza con vistas al lago. Cada habitación dispone de televisión; el acceso al Wi-Fi está disponible únicamente en el restaurante.",
     "from": "desde",
     "night": "/ noche",
     "viewAll": "Todos los alojamientos",
@@ -93,17 +93,20 @@
     "rowServices": "Prestaciones",
     "persons": "personas",
     "familyLabel": "Extensión «Le Repos»",
-    "familyTitle": "Familias y estancias largas",
-    "familyDesc": "La extensión «Le Repos» cuenta con cuatro casas dúplex totalmente equipadas para estancias prolongadas: cocina americana con placa de cocción, nevera y vajilla completa. La dirección ideal para familias y viajeros sin prisa.",
+    "familyTitle": "Estancias en familia",
+    "familyDesc": "Disponemos de 4 casas dúplex (de dos plantas), totalmente equipadas para las estancias prolongadas. Cuentan con una cocina americana con placa de cocción, nevera y vajilla, que ofrecen todo el confort necesario para una estancia con total autonomía.",
     "craftTitle": "El detalle artesanal",
     "craftText": "Puertas de madera tallada, ropa de cama bordada a mano, lavabos y baños creados por artesanos de la región — y, en cada baño, jabones ecológicos de saponificación en frío.",
-    "tarzanText": "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños — en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres."
+    "tarzanText": "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños — en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
+    "ecoTitle": "Un día a día ecorresponsable",
+    "ecoP": "Dentro de un enfoque respetuoso con el medio ambiente, nuestro hotel pone a disposición de sus huéspedes jabones ecológicos. Fabricamos nuestros propios jabones según el método tradicional de saponificación en frío. Nuestros jabones se elaboran de forma artesanal, con un planteamiento ecológico y respetuoso con el medio ambiente. Totalmente biodegradables, están concebidos a partir de ingredientes sencillos, naturales y de origen vegetal.",
+    "pilotisName": "Suite Nupcial sobre Pilotes"
   },
   "philosophy": {
     "label": "Nuestra filosofía",
-    "title": "The Natural Choice",
-    "p1": "En el Lac Hôtel, nos comprometemos activamente a promover el desarrollo de la economía rural valorizando la mano de obra local y las riquezas agrícolas del pueblo de Sahambavy.",
-    "p2": "En un enfoque auténtico y responsable, producimos nosotros mismos gran parte de lo que ofrecemos: productos lácteos, miel, pan, mermeladas caseras, así como frutas y verduras cultivadas en el lugar. Todos nuestros productos son biológicos, caseros e issus de nuestra propia producción, respetando los ciclos naturales y el medio ambiente.",
+    "title": "Turismo responsable y equitativo",
+    "p1": "En el Lac Hôtel, nos comprometemos activamente a reducir los impactos ecológicos y a mejorar los impactos sociales, así como a promover el desarrollo de la economía rural valorizando la mano de obra local y las riquezas agrícolas del pueblo de Sahambavy.",
+    "p2": "En un enfoque auténtico y responsable, producimos nosotros mismos gran parte de lo que ofrecemos: productos lácteos (quesos, yogures), miel de flores, pan, mermeladas caseras, así como frutas y verduras cultivadas en el lugar, en particular en el corazón de nuestros limoneros. Este enfoque nos permite garantizar a nuestros huéspedes productos frescos, sanos y de gran calidad. Todos nuestros productos son biológicos, caseros y procedentes de nuestra propia producción, respetando los ciclos naturales y el medio ambiente.",
     "pillar1": "Eco-responsable",
     "pillar1Desc": "Productos biológicos cultivados en nuestro huerto de 2 hectáreas.",
     "pillar2": "Artesanía local",
@@ -117,12 +120,12 @@
     "label": "Gastronomía",
     "title": "Despierte sus papilas",
     "subtitle": "Cocina malgache e internacional, productos del terreno",
-    "p1": "Para quienes desean saborear los sabores locales, se les servirá cocina malgache junto con una carta de platos europeos y parrilladas. Disfrute de nuestros platos en nuestro restaurante panorámico o en nuestras terrazas sombreadas junto al lago.",
-    "p2": "Todos nuestros platos se preparan con productos frescos orgánicos de calidad. Disponemos de un huerto de dos hectáreas y nuestros panes, yogures y quesos son caseros.",
+    "p1": "Para quienes desean descubrir los sabores locales, servimos cocina malgache junto a una selección de platos europeos y parrilladas. Podrá degustarlos en nuestro restaurante panorámico o en nuestras terrazas sombreadas a orillas del lago.",
+    "p2": "Todos nuestros platos se elaboran con productos frescos, biológicos y cuidadosamente seleccionados. ¿Y el resto? Panes, yogures, quesos, mermeladas, miel… todo es casero.",
     "specialties": [
-      "Pato salvaje cazado por el fundador Kim",
-      "Tilapia del lago al jengibre, nuestro plato estrella",
-      "Quesos, yogures y mermeladas caseras",
+      "Pato salvaje cazado por el propietario Kim",
+      "Tilapia del lago al jengibre, la imprescindible",
+      "Quesos, yogures y mermeladas caseros",
       "Frutas y verduras biológicas de nuestro huerto"
     ],
     "breakfast": "Desayuno",
@@ -155,11 +158,11 @@
     ],
     "waterRefillLabel": "Cero plástico",
     "waterRefillTitle": "Agua filtrada a voluntad",
-    "waterRefillP": "Recarga gratuita de agua filtrada a cualquier hora — nuestro compromiso contra el plástico de un solo uso.",
-    "sourcingP": "Nuestras frutas, verduras y hierbas aromáticas proceden del huerto del hotel, completadas con las cosechas de los agricultores del pueblo de Sahambavy.",
+    "waterRefillP": "En el restaurante ponemos a su disposición, de forma gratuita, una recarga de agua filtrada, dentro de un compromiso ecorresponsable para limitar el uso del plástico.",
+    "sourcingP": "Nuestras hierbas aromáticas proceden directamente de nuestro huerto; el resto nos lo suministran los agricultores del pueblo.",
     "signaturesLabel": "Nuestras especialidades",
     "signaturesTitle": "Pato salvaje y tilapia del lago",
-    "signaturesP": "Dos platos cuentan Sahambavy mejor que nada: el pato salvaje cazado por Kim, el fundador, y la tilapia del lago realzada con jengibre fresco.",
+    "signaturesP": "Nuestra especialidad sigue siendo el pato salvaje cazado por Kim, el propietario, o la imprescindible tilapia del lago al jengibre.",
     "breakfastTitle": "Mañanas junto al agua",
     "breakfastP": "Panes, yogures, quesos, mermeladas y miel son de elaboración propia, servidos en el desayuno frente al lago o junto a la piscina.",
     "barLabel": "El bar",
@@ -168,50 +171,51 @@
     "pricesLabel": "Tarifas",
     "pricesTitle": "Nuestras fórmulas",
     "pricesFootnote": "Precios por persona. Tipo indicativo: 1 € ≈ 4 900 Ar.",
-    "glassBottlesP": "En las habitaciones, le espera en botellas de vidrio."
+    "glassBottlesP": "En las habitaciones encontrará también botellas de vidrio con agua filtrada.",
+    "flavorsTitle": "Sabores locales e internacionales",
+    "ecoTitle": "Una hospitalidad ecorresponsable"
   },
   "loisirs": {
     "heroTitle": "Actividades y Ocio",
     "heroSubtitle": "Naturaleza, relax y exploración alrededor del Lac Hôtel",
     "introLabel": "Sus actividades",
     "introTitle": "Una multitud de experiencias le espera",
-    "introP": "Alrededor y en el Lac Hôtel Sahambavy, una multitud de actividades le esperan, entre naturaleza, relax y exploración.",
-    "circuitsLabel": "Circuitos de Naturaleza",
-    "circuitsTitle": "Circuitos alrededor de Sahambavy",
+    "introP": "En el Lac Hôtel Sahambavy y sus alrededores le espera una multitud de actividades, entre naturaleza, relax y exploración, ideales tanto para estancias cortas como largas.",
+    "circuitsLabel": "Ocio y actividades",
+    "circuitsTitle": "Naturaleza, relax y exploración",
     "discovery": {
-      "title": "Circuito Descubrimiento (½ día)",
+      "title": "Excursiones guiadas y descubrimientos culturales",
       "items": [
-        "Vuelta al lago: 8 km señalizados, 2 horas de paseo seguro entre paisajes verdes",
-        "Visita a la plantación y fábrica de té (4 horas)",
-        "Paseo por los pueblos de los alrededores (2 horas)"
-      ],
-      "ideal": "Ideal para estancias cortas"
-    },
-    "cultural": {
-      "title": "Circuito Cultural y Local",
-      "items": [
-        "Encuentro con los artesanos de Sahambavy",
-        "Visita a la granja de la Abuela Olga",
-        "Descubrimiento de las tradiciones Betsileo"
+        "Plantación y fábrica de té TAF (4 h): única en Madagascar — visita de la fábrica y degustación de té.",
+        "Vuelta al lago (2 h): un paseo seguro y señalizado de 8 km alrededor del lago.",
+        "Pueblos cercanos (2 h): paseo y encuentro con los artesanos de Sahambavy — bordado, cestería…",
+        "Granja y huerto de Mamie Olga: la granja y el huerto del hotel, un auténtico lugar de vida."
       ],
       "ideal": "Experiencia inmersiva y humana"
     },
-    "leisure": {
-      "title": "Circuito Relax y Ocio",
+    "cultural": {
+      "title": "Ocio y deportes al aire libre",
       "items": [
-        "Canoa y hidropedales en el lago",
-        "Bicicleta para explorar los alrededores",
-        "Momentos de relax junto a la piscina",
-        "Ping-pong, billar y tenis"
+        "Deportes náuticos: canoa e hidropedales en el lago.",
+        "Bicicleta: paseos para explorar los alrededores a su ritmo.",
+        "Deportes y juegos en el hotel: tenis, ping-pong y futbolín."
+      ],
+      "ideal": "En el hotel, a su ritmo"
+    },
+    "leisure": {
+      "title": "Relajación y bienestar",
+      "items": [
+        "Junto a la piscina: momentos de relax o de meditación en un entorno apacible.",
+        "Masajes: un momento de puro relax con una de nuestras terapeutas formadas, con aceites esenciales locales como el katrafay."
       ],
       "ideal": "Para una estancia relajante"
     },
     "poolLabel": "Piscina",
     "poolTitle": "Piscina de pizarra con agua salada",
-    "poolP": "Disfrute de un momento de relax en nuestra piscina de pizarra con agua salada, armoniosamente integrada en su entorno natural. Su diseño elegante y sus materiales auténticos ofrecen un marco apacible. El agua salada, suave para la piel, proporciona confort limitando el uso de productos químicos.",
+    "poolP": "Disfrute de un momento de relax en nuestra piscina de pizarra con agua salada. Suave para la piel, el agua salada proporciona una sensación de confort y limita el uso de productos químicos, para una experiencia de baño más natural y agradable.",
     "massageLabel": "Bienestar",
     "massageTitle": "Masajes y Bienestar",
-    "massageP": "Regálese un momento de puro relax con nuestros masajes relajantes. Espalda, pies o cuerpo entero… nuestros tratamientos están pensados para aliviar tensiones, liberar el estrés y revitalizar cuerpo y mente. Nuestros masajes se realizan con aceites caseros de katrafay, ravintsara y romero.",
+    "massageP": "Regálese un momento de puro relax con nuestros masajes relajantes. Espalda, pies o cuerpo entero… nuestros tratamientos están pensados para aliviar las tensiones, liberar el estrés y revitalizar el cuerpo y la mente. Nuestros masajes se realizan con nuestros aceites caseros de katrafay, ravintsara, romero… para una experiencia olfativa y relajante.",
     "aventureLabel": "Aventura",
     "aventureTitle": "Circuito Aventura — Descenso del río Matsiatra",
     "aventureP": "Parta para un día de inmersión en el corazón del país Betsileo. Este paseo en piragua tradicional por el río Matsiatra, el tercer río más grande de Madagascar, le permitirá descubrir la vida cotidiana de los aldeanos y la historia de los antiguos reinos.",
@@ -249,7 +253,7 @@
     "trekkingExcludes": "No incluido: bebidas, actividades no mencionadas",
     "trekkingAdvice": "Consejos: ropa impermeable, botas de senderismo con buena suela, repelente de insectos, protector solar y ¡mucho buen humor!",
     "cta": "Reservar una actividad",
-    "poolP2": "Un rincón zen, tumbonas y vistas a los jardines: el borde de la piscina invita tanto al baño como a la meditación.",
+    "poolP2": "Armoniosamente integrada en su entorno natural, la piscina le invita, con su espacio zen, a relajarse y refrescarse: le esperan tumbonas para sus aperitivos y sus momentos de descanso.",
     "ctaTitle": "Componga sus días junto al lago"
   },
   "destinations": {
@@ -341,52 +345,52 @@
     "heroSubtitle": "Encanto y confort en plena naturaleza",
     "historyLabel": "La pequeña historia",
     "historyTitle": "Un sueño nacido junto al lago",
-    "historyP1": "Fue el azar el que un día guió a Leong y Olga hasta las orillas del Lago Sahambavy en 1998. Su proyecto era sencillo: adquirir un terreno junto al lago y construir una modesta cabaña para disfrutar de un retiro apacible. Pero bajo el impulso de Olga, este lugar se convirtió rápidamente en un verdadero jardín del Edén.",
-    "historyP2": "Con el tiempo, los viajeros del tren que hacían escala en Sahambavy se detenían, intrigados por la belleza del lugar, pensando encontrar un albergue… Así nació la idea de abrir las puertas de este rincón de paraíso y convertirlo en un hotel.",
-    "historyP3": "El destino reunió después a las generaciones cuando su hija mayor, Maggie Leong, regresó de Canadá con su marido Sergi Formentin para retomar la aventura familiar. La alianza de juventud y experiencia transformó este lugar en un pequeño paraíso verde.",
-    "historyP4": "Día tras día, la historia del Lac Hôtel sigue escribiéndose. En cerca de 28 años, el dominio se ha desarrollado para acoger hoy unos cincuenta bungalows, enclavados en plena naturaleza preservada. Y la aventura está lejos de terminar…",
+    "historyP1": "Fue el azar el que un día guió a Leong y Olga hasta las orillas del Lago Sahambavy en 1998. Su proyecto era sencillo: adquirir un terreno junto al lago y construir una modesta cabaña para disfrutar allí de un retiro apacible. Pero, bajo el impulso de Olga, aquel lugar se convirtió muy pronto en un verdadero jardín del Edén.",
+    "historyP2": "Con el tiempo, los viajeros que bajaban del tren en Sahambavy se detenían, intrigados por la belleza del lugar, creyendo encontrar allí un albergue de etapa… Así nació la idea de abrir las puertas de este rincón de paraíso y convertirlo en un hotel.",
+    "historyP3": "El destino reunió después a las generaciones cuando su hija mayor, Maggie Leong, regresó de Canadá para retomar la aventura familiar. La alianza entre juventud y experiencia permitió transformar este lugar en un pequeño paraíso verde.",
+    "historyP4": "Día tras día, la historia del Lac Hôtel sigue escribiéndose. En cerca de 28 años, la finca ha crecido hasta acoger hoy una cincuentena de bungalows, enclavados en plena naturaleza preservada. Y la aventura está lejos de haber terminado… Bienvenido al Lac Hôtel.",
     "philosophyLabel": "Nuestra filosofía",
-    "philosophyTitle": "The Natural Choice",
-    "philosophyP1": "En el Lac Hôtel, nos comprometemos activamente a promover el desarrollo de la economía rural valorizando la mano de obra local y las riquezas agrícolas del pueblo de Sahambavy.",
-    "philosophyP2": "En un enfoque auténtico y responsable, producimos nosotros mismos gran parte de lo que ofrecemos: productos lácteos (quesos, yogures), miel, pan, mermeladas caseras, así como frutas y verduras cultivadas en el lugar, especialmente en nuestros naranjales. Todos nuestros productos son biológicos y de nuestra propia producción.",
+    "philosophyTitle": "Turismo responsable y equitativo",
+    "philosophyP1": "En el Lac Hôtel, nos comprometemos activamente a reducir los impactos ecológicos y a mejorar los impactos sociales, así como a promover el desarrollo de la economía rural valorizando la mano de obra local y la riqueza agrícola del pueblo de Sahambavy.",
+    "philosophyP2": "Con un enfoque auténtico y responsable, producimos nosotros mismos gran parte de lo que ofrecemos: productos lácteos (quesos, yogures), pan, mermeladas caseras, miel de flores, así como frutas y verduras cultivadas aquí mismo, especialmente entre nuestros limoneros. Este planteamiento nos permite garantizar a nuestros clientes productos frescos, sanos y de gran calidad. Todos nuestros productos son ecológicos, caseros y de nuestra propia producción, respetando los ciclos naturales y el medio ambiente.",
     "ecoLabel": "Compromiso eco-responsable",
     "ecoTitle": "Por Madagascar, de Madagascar",
-    "ecoP1": "El Lac Hôtel se inscribe plenamente en una política de responsabilidad social empresarial (RSE) y desarrollo sostenible. Contribuye activamente a la resiliencia de la comunidad local priorizando la contratación local, incluso para puestos de dirección.",
+    "ecoP1": "El Lac Hôtel se inscribe plenamente en una política de responsabilidad social empresarial (RSE) y de desarrollo sostenible. Contribuye activamente a la resiliencia de la comunidad local privilegiando la contratación local.",
     "ecoPillars": [
       {
         "icon": "bio",
-        "title": "Huerto bio de 2 hectáreas",
-        "desc": "Frutas, verduras y hierbas cultivadas en el lugar — en el corazón de nuestros naranjales, sin insumos químicos."
+        "title": "Huerto ecológico de 2 hectáreas",
+        "desc": "Frutas, verduras y hierbas cultivadas aquí mismo, entre nuestros limoneros, sin insumos químicos."
       },
       {
         "icon": "hiring",
-        "title": "Contratación local al 100 %",
-        "desc": "Un equipo enteramente del pueblo — incluyendo los puestos de dirección."
+        "title": "Contratación local privilegiada",
+        "desc": "Un equipo formado en su mayoría por jóvenes de Sahambavy y de las aldeas vecinas."
       },
       {
         "icon": "shortSupply",
         "title": "Circuito corto prioritario",
-        "desc": "Carnes, quesos, frutas y pescados comprados directamente a productores de Sahambavy."
+        "desc": "Compras maximizadas a los productores locales, en especial a los campesinos del pueblo."
       },
       {
         "icon": "bees",
         "title": "Apicultura responsable",
-        "desc": "Nuestras colmenas producen miel y polinización — un gesto por las colonias de abejas de la región."
+        "desc": "Producción de miel para apoyar a las colonias de abejas de la región."
       },
       {
         "icon": "soap",
         "title": "Jabones artesanales naturales",
-        "desc": "Hechos en el lugar con miel, leche y aceites esenciales. Sin sulfatos ni aditivos petroquímicos."
+        "desc": "Elaborados aquí mismo con miel, leche y aceites esenciales. Sin sulfatos ni aditivos petroquímicos."
       },
       {
         "icon": "forest",
         "title": "Corredor Ranomafana–Andringitra",
-        "desc": "Preservación activa del último corredor de bosque primario entre estos dos parques nacionales."
+        "desc": "Preservación activa del corredor de bosque primario que une estos dos parques nacionales."
       },
       {
         "icon": "zeroWaste",
         "title": "Cero desperdicio en cocina",
-        "desc": "Tres menús fijos por servicio para cocinar lo justo y transformar las sobras en compost."
+        "desc": "Solo tres menús por servicio, para limitar eficazmente el desperdicio alimentario."
       }
     ],
     "equipeCta": "Conozca al equipo",
@@ -541,15 +545,15 @@
       }
     ],
     "draisineLabel": "Alquiler de Dresina",
-    "draisineTitle": "Alquiler privado de Dresina",
+    "draisineTitle": "Alquiler privado de la dresina",
     "draisineP": "Regálese una experiencia única alquilando una dresina en privado para recorrer los raíles a su ritmo. Entre paisajes espectaculares e inmersión total en la naturaleza, este medio de transporte insólito le promete un momento inolvidable.",
-    "draisineProject": "Apoyamos un proyecto de desarrollo en Andrambovato (tercera estación después de Sahambavy), con el objetivo de preservar el corredor de bosque primario que conecta el Parque Nacional de Ranomafana con el Parque Nacional de Andringitra.",
+    "draisineProject": "Impulsamos un proyecto de desarrollo en Andrambovato (tercera estación después de Sahambavy), destinado a preservar el corredor de bosque primario que une el Parque Nacional de Ranomafana con el Parque Nacional de Andringitra. Una iniciativa que responde a nuestra voluntad de contribuir activamente a la protección de la biodiversidad local.",
     "draisineRoutes": [
       "Sahambavy – Andrambovato",
       "Sahambavy – Manapatrana",
       "Sahambavy – Manakara"
     ],
-    "draisineContact": "Para más información y tarifas, escriba a booking@lachotel.com.",
+    "draisineContact": "Cada trayecto ofrece una inmersión única en el corazón de los paisajes malgaches, entre naturaleza preservada, pueblos auténticos y panoramas espectaculares. Para más información y tarifas, escriba a booking@lachotel.com. Nuestro equipo estará encantado de responderle y de organizar su experiencia.",
     "infoLabel": "Información práctica",
     "infoTitle": "Prepare su viaje",
     "infoItems": {
@@ -572,8 +576,8 @@
       "booking": "Reserva"
     },
     "stationCaption": "El Lac Hôtel Sahambavy, a dos minutos a pie de la estación de Sahambavy: el punto de partida ideal en la línea FCE.",
-    "routesLabel": "Trayectos",
-    "routesTitle": "Tres itinerarios con salida desde Sahambavy",
+    "routesLabel": "Trayectos disponibles",
+    "routesTitle": "Tres itinerarios emblemáticos con salida desde Sahambavy",
     "routeNotes": [
       "Hacia el corredor de bosque primario",
       "En el corazón de la línea FCE",
@@ -588,24 +592,24 @@
   },
   "repos": {
     "heroTitle": "Le Repos",
-    "heroSubtitle": "A 800 metros del edificio principal, una extensión dedicada a la calma, el yoga y la reconexión: el lujo discreto de la sencillez malgache.",
+    "heroSubtitle": "Situada a 800 metros del edificio principal, la extensión del hotel ofrece una experiencia diferente: aquí, el lujo se vuelve discreto en favor de lo esencial.",
     "introLabel": "El espíritu del lugar",
     "introTitle": "El arte de bajar el ritmo",
-    "introP": "Le Repos es un lugar aparte, deliberadamente aislado, donde los días siguen la luz. Se viene por el yoga al amanecer, los largos paseos bajo los pinos y el silencio: un lujo discreto, hecho de espacios depurados abiertos a la naturaleza.",
+    "introP": "Aquí, el lujo se vuelve discreto en favor de lo esencial: espacios depurados, abiertos a la naturaleza, propicios para la meditación y el recogimiento.",
     "features": [
       {
         "icon": "house",
         "title": "4 casas dúplex",
-        "desc": "Independientes, de dos plantas, a 800 metros del edificio principal — tranquilas, en el jardín."
+        "desc": "De dos plantas, totalmente equipadas para estancias prolongadas, a 800 metros del edificio principal."
       },
       {
         "icon": "cooking",
         "title": "Cocina americana completa",
-        "desc": "Placa, nevera y vajilla incluidas — cocine cuando y como quiera."
+        "desc": "Placa de cocción, nevera y vajilla: todo el confort necesario para una estancia con total autonomía."
       },
       {
         "icon": "family",
-        "title": "Familiar & larga estancia",
+        "title": "Familiar y larga estancia",
         "desc": "Hasta 5 personas por casa. Pensado para familias y viajeros que se quedan varias noches."
       },
       {
@@ -623,16 +627,16 @@
     "cta": "Reservar en Le Repos",
     "whatsappCta": "¿Preguntas? Contáctenos",
     "heroLabel": "Extensión del hotel",
-    "heroKicker": "A 800 metros del edificio principal, un claro dedicado a la calma, el yoga y la reconexión.",
+    "heroKicker": "Situada a 800 metros del edificio principal, la extensión del hotel ofrece una experiencia diferente.",
     "heroCta": "Descubrir el espíritu del lugar",
     "spiritLabel": "Para quién",
     "spiritTitle": "Ecoviajeros, ciclistas, amantes de la calma",
-    "spiritP1": "Le Repos está pensado para quienes buscan aislamiento y un ambiente zen: viajeros respetuosos con la naturaleza, ciclistas de larga distancia, parejas en busca de tranquilidad.",
+    "spiritP1": "Le Repos es ideal para los amantes del yoga en busca de calma y reconexión, los ecoviajeros, los ciclistas, las parejas y quienes buscan un ambiente zen y aislamiento.",
     "spiritP2": "Sin programa ni horarios. La meditación sustituye al reloj; el bosque hace el resto.",
     "bungalowsLabel": "Los bungalós",
     "bungalowsTitle": "La sencillez malgache",
-    "bungalowsP1": "Construidos al estilo malgache, los bungalós de Le Repos apuestan por la sencillez y la funcionalidad: lo esencial, bien pensado, a un coste moderado.",
-    "bungalowsP2": "El Wi-Fi está disponible para quien lo necesite; también es libre de dejarlo de lado.",
+    "bungalowsP1": "Los bungalós, de estilo malgache, combinan sencillez y funcionalidad, y ofrecen todo lo necesario a un coste reducido.",
+    "bungalowsP2": "También hay conexión Wi-Fi disponible, que le permite seguir conectado mientras disfruta del entorno.",
     "bungalowsRowStyleLabel": "Estilo",
     "bungalowsRowStyleValue": "Malgache: sencillez y funcionalidad",
     "bungalowsRowWifiLabel": "Wi-Fi",
@@ -643,7 +647,7 @@
     "natureP2": "El yoga y la meditación se practican al aire libre; se camina, se respira: la reconexión empieza aquí.",
     "ratesLabel": "Tarifa",
     "ratesTitle": "Una tarifa suave, con toda sencillez",
-    "ratesP": "Alojarse en Le Repos es elegir lo esencial, y la tarifa sigue la misma filosofía.",
+    "ratesP": "Más accesible que el establecimiento principal, esta alternativa permite vivir una estancia reconfortante a una tarifa moderada, sin renunciar al confort esencial.",
     "ratesRecapTitle": "De un vistazo",
     "ratesRowNightLabel": "La noche, por bungaló",
     "ratesRowNightValue": "250 000 Ar · 50 €",
@@ -672,33 +676,33 @@
     "heroSubtitle": "RSE y Desarrollo Sostenible",
     "introLabel": "El equipo del Lac Hôtel",
     "introTitle": "Mujeres y hombres comprometidos",
-    "introP": "El Lac Hôtel se inscribe plenamente en una política de responsabilidad social empresarial (RSE) y desarrollo sostenible. Contribuye activamente a la resiliencia de la comunidad local priorizando la contratación local, incluso para puestos directivos.",
+    "introP": "El Lac Hôtel se inscribe plenamente en una política de responsabilidad social empresarial (RSE) y de desarrollo sostenible. Contribuye activamente a la resiliencia de la comunidad local privilegiando la contratación local.",
     "rseLabel": "Nuestro compromiso RSE",
-    "rseTitle": "Responsabilidad Social y Desarrollo Sostenible",
+    "rseTitle": "Responsabilidad social empresarial y desarrollo sostenible",
     "rseItems": [
-      "Contratación local prioritaria, incluyendo puestos directivos",
-      "Compras en circuito corto a productores y campesinos locales",
-      "Colaboración con ONG (atención dental comunitaria)",
+      "Contratación local privilegiada, al servicio de la resiliencia de la comunidad",
+      "Compras maximizadas a los productores locales, en especial a los campesinos",
+      "Marco adaptado y condiciones ventajosas para determinadas ONG (atención dental)",
       "Producción de miel para apoyar a las abejas",
-      "Fabricación de jabones artesanales biodegradables",
-      "Valorización de especies florísticas etiquetadas",
-      "Tres menús para limitar el desperdicio alimentario",
-      "Cadena de suministro en circuito corto para reducir la huella ambiental"
+      "Fabricación de jabón artesanal",
+      "Valorización de las especies florísticas etiquetadas",
+      "Solo tres menús para limitar el desperdicio alimentario",
+      "Abastecimiento en circuito corto: frescura de los productos y huella reducida"
     ],
     "economyLabel": "Economía circular",
     "economyTitle": "Un impacto positivo en la comunidad",
-    "economyP": "En una lógica de economía circular, el establecimiento maximiza sus compras a productores locales, especialmente campesinos, favoreciendo así el desarrollo socioeconómico del pueblo. Ofreciendo un marco adaptado a ciertas ONG, contribuye a la mejora de la salud comunitaria y la calidad de vida de los habitantes.",
+    "economyP": "Con una lógica de economía circular, el establecimiento maximiza sus compras a los productores locales, en especial a los campesinos, favoreciendo así el desarrollo socioeconómico del pueblo. Además, al ofrecer un marco adaptado y condiciones ventajosas a determinadas ONG —como en el caso de las iniciativas de atención dental—, contribuye a mejorar la salud comunitaria y la calidad de vida de sus habitantes.",
     "teamLabel": "El equipo",
     "teamTitle": "Nuestros rostros",
     "personnel": {
       "label": "Nuestro personal",
       "title": "Jóvenes del pueblo, acompañados cada día",
-      "p1": "Nuestro equipo está formado en su mayoría por jóvenes del pueblo de Sahambavy y de las aldeas vecinas. Acompañados y formados a diario, desarrollan sus competencias y crecen profesionalmente en el hotel.",
-      "p2": "Este compromiso responsable y solidario — empleo local y transmisión de saberes — está en el corazón de la identidad del Lac Hôtel.",
+      "p1": "Nuestro equipo está formado en su mayoría por jóvenes del pueblo y de las aldeas vecinas, a quienes acompañamos y formamos a diario.",
+      "p2": "Este planteamiento permite a cada uno desarrollar sus competencias y crecer profesionalmente.",
       "welcomeLabel": "La bienvenida",
       "welcomeTitle": "Una acogida cálida y respetuosa",
-      "welcomeP1": "El francés no es la lengua principal de nuestros equipos, pero comprenden sus necesidades y ponen todo su empeño en atenderlas con esmero.",
-      "welcomeP2": "Será recibido con la calidez y el respeto que dan fama a la hospitalidad betsileo.",
+      "welcomeP1": "Aunque el español no sea su lengua principal, comprenden sus necesidades y ponen todo su corazón en ofrecerle una acogida cálida y respetuosa.",
+      "welcomeP2": "A través de este compromiso, contribuimos activamente a un planteamiento responsable y solidario, valorizando el empleo local y el intercambio de saberes.",
       "welcomeAlt": "Un miembro del equipo del Lac Hôtel recibe a los viajeros",
       "economyAlt": "El equipo del Lac Hôtel en los jardines del hotel",
       "cta": "Escríbanos",
@@ -707,7 +711,7 @@
   },
   "conference": {
     "title": "Sala de conferencias",
-    "p1": "Combinando confort, funcionalidad y serenidad, nuestra sala de conferencias puede acoger hasta 80 personas. Totalmente modular, se adapta a todos sus formatos de eventos profesionales: reuniones, seminarios, formaciones o talleres.",
+    "p1": "Nuestra sala de conferencias puede acoger hasta 80 personas. Totalmente modulable, se adapta a todos sus formatos de eventos profesionales: reuniones, seminarios, formaciones o talleres.",
     "p2": "Inmersa en un entorno tranquilo y propicio para la reflexión, ofrece un marco ideal para favorecer la concentración, la creatividad y la calidad de los intercambios.",
     "equipment": [
       "Conexión Wi-Fi",
@@ -723,14 +727,15 @@
     "configValue": "Totalmente modular",
     "includedValue": "Incluido",
     "footnote": "Reuniones, seminarios, formaciones o talleres — presupuesto a medida.",
-    "ctaLabel": "Organizar un seminario"
+    "ctaLabel": "Organizar un seminario",
+    "equipmentP": "La sala está equipada con conexión Wi-Fi, micrófono, proyector y pizarra blanca, para garantizar el buen desarrollo de sus presentaciones."
   },
   "wedding": {
     "title": "Bodas y Celebraciones",
     "subtitle": "Celebre su amor en un marco excepcional",
-    "p1": "En el Lac Hôtel, cada boda es una historia única que nos apasiona realzar.",
-    "p2": "En un marco encantador, entre las orillas apacibles del Lago Sahambavy y la dulzura de un jardín florido, le acompañamos en la organización de ese día tan preciado. La naturaleza, la luz y la armonía del lugar crean una atmósfera íntima e inolvidable.",
-    "p3": "Nuestro equipo pone todo su saber hacer a su servicio para crear una recepción a su imagen. El salón se decora con esmero según sus deseos.",
+    "p1": "En el Lac Hôtel, cada boda es una historia única que ponemos todo nuestro empeño en realzar.",
+    "p2": "En un marco encantador, entre las orillas apacibles del Lago Sahambavy y la dulzura de un jardín florido, le acompañamos en la organización de ese día tan preciado. Aquí, la naturaleza, la luz y la armonía del lugar crean una atmósfera íntima e inolvidable.",
+    "p3": "Nuestro equipo pone todo su saber hacer a su servicio para concebir una recepción a su imagen. El salón se decora por completo con esmero, según sus deseos, para crear un universo que le refleje.",
     "heroLabel": "Eventos y celebraciones",
     "heroTitle": "Bodas y seminarios",
     "heroTitleEm": "a orillas del lago",
@@ -1001,12 +1006,12 @@
     "eden": {
       "label": "Un jardín del Edén",
       "title": "Toda la riqueza vegetal de Madagascar",
-      "p1": "Flores de colores vivos, árboles del viajero, orquídeas, cactus y bonsáis: a lo largo de sus senderos, los jardines del Lac Hôtel reúnen toda la riqueza vegetal de Madagascar — un auténtico jardín del Edén a orillas del lago.",
-      "p2": "Concebido y cuidado con respeto por el medio ambiente, el jardín invita a la serenidad. Cada paseo se convierte en una inmersión sensorial en una biodiversidad preservada: aromas, colores, cantos de aves.",
+      "p1": "El jardín de nuestro hotel es una auténtica invitación a descubrir la riqueza vegetal de Madagascar. Reúne una gran diversidad de flores, árboles del viajero, orquídeas, cactus y bonsáis…",
+      "p2": "Este jardín, concebido con respeto por el medio ambiente, es un espacio de serenidad donde la naturaleza y la biodiversidad se encuentran, e invita a cada visitante a una inmersión sensorial inolvidable.",
       "heroAlt": "Los jardines floridos del Lac Hôtel a orillas del lago Sahambavy",
       "orchidsLabel": "La colección insignia",
       "orchidsTitle": "Las orquídeas, protagonistas",
-      "orchidsP1": "Estrellas del jardín, las orquídeas despliegan aquí sus variedades, formas y colores: delicadas especies malgaches que nuestros jardineros cultivan con paciencia bajo invernaderos sombreados.",
+      "orchidsP1": "Entre todas estas especies, las orquídeas ocupan un lugar privilegiado. Delicadas y fascinantes, se despliegan en numerosas variedades de formas y colores únicos, y ofrecen un espectáculo natural refinado a lo largo de las estaciones.",
       "orchidsP2": "Con cada estación llega una floración distinta: una nueva sorpresa en cada estancia.",
       "orchidsAlt": "Orquídea atigrada en flor en los jardines del Lac Hôtel",
       "flowersLabel": "Entre los macizos",
@@ -1134,15 +1139,15 @@
     "train": {
       "label": "En tren",
       "title": "A 2 minutos de la estación de Sahambavy",
-      "p1": "El Lac Hôtel se encuentra a 2 minutos de la estación de Sahambavy, en la mítica línea Fianarantsoa–Manakara (FCE).",
+      "p1": "El Lac Hôtel se encuentra a solo 2 minutos a pie de la estación de Sahambavy, en la histórica línea Fianarantsoa–Manakara (FCE).",
       "p2": "Baje al andén: el hotel le espera a orillas del lago, a solo unos pasos. Una llegada como las de antaño, al ritmo del tren de las tierras altas.",
       "alt": "La Micheline azul en el andén de la estación de Sahambavy"
     },
     "route": {
       "label": "Por carretera",
       "title": "A 40 minutos de Fianarantsoa",
-      "p1": "El hotel está a 40 minutos del centro de Fianarantsoa. Desde Antananarivo, siga la RN7 y gire a la izquierda en el pueblo de Ambalakely (gasolinera Shell): la carretera le lleva directamente a Sahambavy.",
-      "p2": "El hotel dispone de una lanzadera de pago, así como de un traslado privado en 4x4 entre el Lac Hôtel y Fianarantsoa (120 000 Ar · 25 €).",
+      "p1": "Desde Fianarantsoa: el hotel está a 40 minutos del centro de la ciudad. Desde Antananarivo (por la RN7): siga la carretera nacional 7 en dirección sur y gire a la izquierda en el pueblo de Ambalakely (junto a la gasolinera Shell).",
+      "p2": "El hotel dispone de una lanzadera de pago para su transporte: contacte con la recepción para organizar su recogida. También se ofrece un traslado privado en 4x4 entre el Lac Hôtel y Fianarantsoa (120 000 Ar · 25 €).",
       "alt": "Vista aérea del Lac Hôtel y su entorno verde a orillas del lago",
       "cta": "Organizar mi traslado"
     },

@@ -142,22 +142,6 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* ──── MASSAGES & BIEN-ÊTRE ──── */}
-      <section id="massage" className="scroll-mt-24 py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <EditorialSplit
-            image={`${basePath}/images/activities/salon-detente-vue-lac.jpg`}
-            imageAlt="Salon de détente ouvert sur le lac Sahambavy, fauteuils et terrasse au bord de l'eau"
-            label={dict.loisirs.massageLabel}
-            title={dict.loisirs.massageTitle}
-            cta={{ href: `/${locale}/contact/`, label: dict.loisirs.cta }}
-            reverse
-          >
-            <p>{dict.loisirs.massageP}</p>
-          </EditorialSplit>
-        </div>
-      </section>
-
       {/* ──── CIRCUIT AVENTURE — RIVIÈRE MATSIATRA ──── */}
       <section id="riviere-matsiatra" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
