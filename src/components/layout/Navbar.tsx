@@ -29,6 +29,35 @@ function estActif(pathname: string, href: string, locale: string): boolean {
   return pathname.startsWith(`/${locale}${cible}`);
 }
 
+/**
+ * Teinte des pastilles, par rubrique.
+ *
+ * Elle n'est pas décorative : chaque rubrique prend la couleur de ce
+ * qu'elle contient — la terre cuite des murs en pisé et des bungalows sur
+ * pilotis, le bleu de l'eau pour les activités nautiques, le vert des
+ * théiers pour les jardins et la plantation. Le visiteur apprend la
+ * correspondance sans qu'on la lui explique.
+ *
+ * Deux triplets par teinte : le fond de la pastille (couleur vive, posée
+ * à 12 % d'opacité) et son encre (variante foncée, seule à porter du
+ * texte). Les ratios sont calculés dans l'en-tête du bloc CSS.
+ */
+const TEINTES: Record<string, { fond: string; encre: string }> = {
+  "/hotel": { fond: "166 69 23", encre: "133 54 15" }, // terre cuite — murs en pisé
+  "/hebergements": { fond: "166 69 23", encre: "133 54 15" }, // bungalows ocre
+  "/experiences": { fond: "23 104 168", encre: "18 84 127" }, // lac — canoë, pédalos
+  "/train-fce": { fond: "166 69 23", encre: "133 54 15" }, // wagon 1930, ocre
+  "/jardins": { fond: "38 71 27", encre: "27 53 19" }, // thé — jardins, plantation
+};
+
+const TEINTE_DEFAUT = { fond: "166 69 23", encre: "133 54 15" };
+
+/** Variables CSS de teinte, à poser sur le plateau ou la feuille. */
+function styleTeinte(href: string): React.CSSProperties {
+  const t = TEINTES[href.split("#")[0]] ?? TEINTE_DEFAUT;
+  return { "--lh-past": t.fond, "--lh-past-ink": t.encre } as React.CSSProperties;
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
   const pathname = usePathname();
@@ -191,7 +220,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 98 px à 288 px, soit près de trois fois plus grand, sans
                 dépasser sa définition native (406 × 420 px, plafond de la
                 source fournie par l'hôtel). */}
-            {brand > 0.01 && (
+            {/* `!mobileOpen` : l'en-tête est au-dessus de la feuille mobile
+                (z-1000 contre z-900, pour que le bouton de fermeture reste
+                cliquable). Sans cette garde, l'emblème géant traversait le
+                verre et se superposait aux rubriques. */}
+            {brand > 0.01 && !mobileOpen && (
               <div
                 aria-hidden="true"
                 /* top-[86px] : l'emblème est désormais recadré au plus juste,
@@ -224,8 +257,13 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               {primaryItems.map((item, i) => (
                 <li key={item.href} className="relative">
                   {item.children ? (
-                    <button
-                      type="button"
+                    /* La rubrique est un LIEN, plus un bouton. C'est ce qui
+                       permet de supprimer la mention « Voir la page » du
+                       panneau : la page de section se rejoint en cliquant
+                       son propre intitulé, ce qui est plus court et plus
+                       naturel. Le survol continue d'ouvrir le panneau. */
+                    <Link
+                      href={localizeHref(item.href, locale)}
                       aria-expanded={openMenu === item.href}
                       aria-haspopup="true"
                       /* Le doigt n'a pas de survol : on ignore le `pointerenter`
@@ -241,19 +279,20 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                       }}
                       onFocus={() => setOpenMenu(item.href)}
                       onClick={(e) => {
-                        // detail === 0 → activation clavier (Entrée / Espace),
-                        // aucun `pointerdown` ne l'a précédée.
-                        const clavier = e.detail === 0;
-                        if (!clavier && pointerType.current === "mouse") {
-                          // Souris : le survol gouverne l'ouverture et la
-                          // fermeture. Le clic ne referme jamais — il sert
-                          // seulement à rouvrir si Échap a fermé le panneau
-                          // sans que la souris ait bougé.
-                          setOpenMenu(item.href);
+                        // Doigt : le premier appui OUVRE (on retient la
+                        // navigation), le second suit le lien. Sans cela le
+                        // sous-menu serait inatteignable au tactile.
+                        if (pointerType.current !== "mouse" && e.detail !== 0) {
+                          if (openMenu !== item.href) {
+                            e.preventDefault();
+                            setOpenMenu(item.href);
+                          }
                           return;
                         }
-                        // Doigt et clavier : bascule franche.
-                        setOpenMenu(openMenu === item.href ? null : item.href);
+                        // Souris et clavier : on laisse le lien naviguer, et
+                        // on referme pour que le panneau ne survive pas au
+                        // changement de page.
+                        closeAll();
                       }}
                       className={`group/nav relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
                       style={itemShadow}
@@ -282,7 +321,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                           strokeLinecap="round"
                         />
                       </svg>
-                    </button>
+                    </Link>
                   ) : null}
 
                   {/* Panneau — ancré dans son <li> et non après </ul>.
@@ -295,33 +334,24 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     <div
                       onMouseEnter={cancelClose}
                       onMouseLeave={scheduleClose}
-                      className={`lh-panneau hidden min-[1280px]:block ${
-                        i >= primaryItems.length - 2 ? "lh-panneau--fin" : ""
+                      style={styleTeinte(item.href)}
+                      className={`lh-plateau hidden min-[1280px]:block ${
+                        i >= primaryItems.length - 2 ? "lh-plateau--fin" : ""
                       }`}
                     >
-                      <span aria-hidden="true" className="lh-panneau__reflet" />
-                      <Link
-                        href={localizeHref(item.href, locale)}
-                        onClick={closeAll}
-                        className="lh-panneau__tete"
-                      >
-                        <span className="lh-panneau__titre">{item.label[locale]}</span>
-                        <span className="lh-panneau__voir">
-                          {locale === "fr" ? "Voir la page" : locale === "es" ? "Ver la página" : "View page"}
-                        </span>
-                      </Link>
-                      <div aria-hidden="true" className="lh-panneau__filet" />
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={localizeHref(child.href, locale)}
-                          onClick={closeAll}
-                          className="lh-ligne"
-                        >
-                          <span aria-hidden="true" className="lh-ligne__tiret" />
-                          {child.label[locale]}
-                        </Link>
-                      ))}
+                      <span aria-hidden="true" className="lh-plateau__reflet" />
+                      <div className="lh-pastilles">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={localizeHref(child.href, locale)}
+                            onClick={closeAll}
+                            className="lh-pastille"
+                          >
+                            {child.label[locale]}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
 
@@ -385,26 +415,27 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
         </nav>
       </header>
 
-      {/* Overlay mobile */}
+      {/* Feuille mobile — même verre clair, mêmes pastilles que le desktop */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[900] overflow-y-auto bg-paper/[0.97] backdrop-blur-2xl min-[1280px]:hidden">
+        <div className="lh-feuille fixed inset-0 z-[900] overflow-y-auto min-[1280px]:hidden">
           <div className="flex min-h-full flex-col px-6 pb-12 pt-24">
-            <ul className="flex flex-col">
+            <ul className="flex flex-col gap-3">
               <li>
                 <Link
                   href={`/${locale}/`}
-                  className="block border-b border-hairline py-4 font-[family-name:var(--font-display)] text-[22px] font-extralight text-ink"
+                  style={styleTeinte("/hotel")}
+                  className="lh-feuille__rubrique"
                   onClick={closeAll}
                 >
                   {locale === "fr" ? "Accueil" : locale === "es" ? "Inicio" : "Home"}
                 </Link>
               </li>
               {mobileItems.map((item: NavItem) => (
-                <li key={item.href} className="border-b border-hairline">
-                  <div className="flex items-center">
+                <li key={item.href} style={styleTeinte(item.href)}>
+                  <div className="flex items-center gap-2">
                     <Link
                       href={localizeHref(item.href, locale)}
-                      className="grow py-4 font-[family-name:var(--font-display)] text-[22px] font-extralight text-ink"
+                      className="lh-feuille__rubrique"
                       onClick={closeAll}
                     >
                       {item.label[locale]}
@@ -415,7 +446,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                         aria-label={`${item.label[locale]} — sous-menu`}
                         aria-expanded={mobileSection === item.href}
                         onClick={() => setMobileSection(mobileSection === item.href ? null : item.href)}
-                        className="flex h-11 w-11 shrink-0 items-center justify-center text-muted"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[rgb(var(--lh-past-ink))] transition-colors hover:bg-[rgb(var(--lh-past)/0.12)]"
                       >
                         <svg
                           width="12"
@@ -436,19 +467,18 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     )}
                   </div>
                   {item.children && mobileSection === item.href && (
-                    <ul className="pb-4 pl-1">
+                    <div className="lh-pastilles mt-3 pb-2 pl-3">
                       {item.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={localizeHref(child.href, locale)}
-                            className="block py-2 text-[14.5px] text-body"
-                            onClick={closeAll}
-                          >
-                            {child.label[locale]}
-                          </Link>
-                        </li>
+                        <Link
+                          key={child.href}
+                          href={localizeHref(child.href, locale)}
+                          className="lh-pastille"
+                          onClick={closeAll}
+                        >
+                          {child.label[locale]}
+                        </Link>
                       ))}
-                    </ul>
+                    </div>
                   )}
                 </li>
               ))}
