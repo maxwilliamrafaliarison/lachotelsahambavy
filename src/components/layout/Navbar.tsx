@@ -22,6 +22,13 @@ function localizeHref(href: string, locale: string): string {
   return hash ? `${normalized}#${hash}` : normalized;
 }
 
+/** La rubrique correspond-elle à la page affichée ? (pour le filet actif) */
+function estActif(pathname: string, href: string, locale: string): boolean {
+  const cible = href.split("#")[0];
+  if (cible === "/") return pathname === `/${locale}/`;
+  return pathname.startsWith(`/${locale}${cible}`);
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
   const pathname = usePathname();
@@ -150,17 +157,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 className="h-9 w-auto transition-opacity duration-200"
                 style={{ opacity: markOpacity }}
               />
-              <span
-                className="hidden flex-col leading-none xl:flex"
-                style={{ opacity: markOpacity }}
-              >
-                <span className="font-[family-name:var(--font-display)] text-[17px] font-light tracking-[0.18em]">
-                  LAC HÔTEL
-                </span>
-                <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.3em] opacity-80">
-                  Sahambavy · Madagascar
-                </span>
-              </span>
             </Link>
 
             {/* Lockup géant — accueil, haut de page. Décoratif (la marque
@@ -189,7 +185,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             )}
 
             {/* Menu desktop */}
-            <ul className="ml-auto hidden items-center gap-0.5 lg:flex">
+            <ul className="ml-auto hidden items-center gap-0.5 min-[1280px]:flex">
               {primaryItems.map((item) => (
                 <li key={item.href}>
                   {item.children ? (
@@ -203,12 +199,18 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                       }}
                       onFocus={() => setOpenMenu(item.href)}
                       onClick={() => setOpenMenu(openMenu === item.href ? null : item.href)}
-                      className={`flex items-center gap-1.5 whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
-                        darkText ? "hover:text-lake" : "hover:text-white/75"
-                      }`}
+                      className={`group/nav relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
                       style={itemShadow}
                     >
                       {(item.shortLabel ?? item.label)[locale]}
+                      <span
+                        aria-hidden="true"
+                        className={`pointer-events-none absolute inset-x-2 bottom-0.5 h-[2px] origin-left rounded-full bg-terracotta transition-transform duration-300 ease-out ${
+                          estActif(pathname, item.href, locale) || openMenu === item.href
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover/nav:scale-x-100"
+                        }`}
+                      />
                       <svg
                         width="9"
                         height="6"
@@ -228,12 +230,18 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   ) : (
                     <Link
                       href={localizeHref(item.href, locale)}
-                      className={`block whitespace-nowrap rounded px-1.5 py-2 text-[11px] font-medium uppercase tracking-[0.09em] transition-colors ${itemColor} ${
-                        darkText ? "hover:text-lake" : "hover:text-white/75"
-                      }`}
+                      className={`group/nav relative block whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
                       style={itemShadow}
                     >
                       {(item.shortLabel ?? item.label)[locale]}
+                      <span
+                        aria-hidden="true"
+                        className={`pointer-events-none absolute inset-x-2 bottom-0.5 h-[2px] origin-left rounded-full bg-terracotta transition-transform duration-300 ease-out ${
+                          estActif(pathname, item.href, locale)
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover/nav:scale-x-100"
+                        }`}
+                      />
                     </Link>
                   )}
                 </li>
@@ -246,11 +254,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               pathname={pathname}
               onDark={!darkText}
               size="bar"
-              className="hidden lg:flex"
+              hideCode
+              className="hidden min-[1280px]:flex"
             />
 
             {/* CTA Réserver */}
-            <Link href={`/${locale}/contact/`} className="ge-cta hidden !px-5 !py-2.5 !text-[11.5px] lg:inline-flex">
+            <Link href={`/${locale}/contact/`} className="ge-cta hidden !px-6 !py-3 !text-[12.5px] min-[1280px]:inline-flex">
               {dict.nav.book}
             </Link>
 
@@ -260,7 +269,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
-              className={`ml-auto flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden ${mobileOpen ? "text-ink" : itemColor}`}
+              className={`ml-auto flex h-11 w-11 flex-col items-center justify-center gap-[5px] min-[1280px]:hidden ${mobileOpen ? "text-ink" : itemColor}`}
               style={mobileOpen ? undefined : itemShadow}
             >
               <span
@@ -284,7 +293,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   key={`panel-${item.href}`}
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
-                  className="absolute inset-x-0 top-full hidden border-b border-hairline bg-paper/[0.97] backdrop-blur-xl lg:block"
+                  className="absolute inset-x-0 top-full hidden border-b border-hairline bg-paper/[0.97] backdrop-blur-xl min-[1280px]:block"
                 >
                   <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-10 gap-y-1 px-10 py-7 xl:grid-cols-3">
                     <Link
@@ -319,7 +328,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
 
       {/* Overlay mobile */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[900] overflow-y-auto bg-paper/[0.97] backdrop-blur-2xl lg:hidden">
+        <div className="fixed inset-0 z-[900] overflow-y-auto bg-paper/[0.97] backdrop-blur-2xl min-[1280px]:hidden">
           <div className="flex min-h-full flex-col px-6 pb-12 pt-24">
             <ul className="flex flex-col">
               <li>
