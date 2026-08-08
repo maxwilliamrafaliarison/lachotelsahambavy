@@ -74,12 +74,11 @@ export default function HeroHome({ dict }: { dict: any }) {
 
       <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-24 md:px-12 md:pb-36 lg:px-20">
         <div className="max-w-4xl">
-          <span
-            className="mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.26em] text-white/90 md:mb-5"
-            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.35)" }}
-          >
-            {dict.hero.eyebrow}
-          </span>
+          {/* Le sur-titre « Sahambavy · Madagascar » a été retiré : l'emblème
+              géant, juste au-dessus, écrit déjà « Sahambavy - Fianarantsoa /
+              Madagascar ». La clé dict.hero.eyebrow reste en place, elle sert
+              encore de label au hero de la page « L'Hôtel », où l'emblème
+              géant ne s'affiche pas. */}
           <h1
             className="mb-5 md:mb-6"
             style={{
@@ -123,13 +122,6 @@ export default function HeroHome({ dict }: { dict: any }) {
         </div>
       </div>
 
-      {/* Signature discrète bas-gauche */}
-      <div className="absolute bottom-8 left-6 z-10 flex items-center gap-3 md:bottom-10 md:left-12 lg:left-20">
-        <span className="h-px w-8 bg-white/40" />
-        <span className="text-[0.6rem] uppercase tracking-[0.25em] text-white/60 tabular-nums">
-          Sahambavy
-        </span>
-      </div>
     </section>
   );
 }

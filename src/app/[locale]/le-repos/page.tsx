@@ -4,7 +4,6 @@ import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { siteConfig } from "@/data/site";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
@@ -74,7 +73,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.repos.heroTitle} — ${siteConfig.name}`,
+    title: dict.repos.heroTitle,
     description: dict.repos.heroSubtitle,
   };
 }

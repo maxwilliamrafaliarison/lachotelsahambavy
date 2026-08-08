@@ -27,21 +27,16 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
       <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pt-20">
         {/* Marque + tagline */}
         <div className="mb-14 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="flex items-center gap-4">
-                <img
-              src={`${basePath}/images/logo/logo-white.png`}
-              alt="Lac Hôtel Sahambavy"
-              className="h-20 w-auto opacity-90 md:h-24"
-            />
-            <div className="leading-none">
-              <p className="font-[family-name:var(--font-display)] text-[20px] font-extralight tracking-[0.18em] text-linen">
-                LAC HÔTEL
-              </p>
-              <p className="mt-1.5 text-[9.5px] font-semibold uppercase tracking-[0.3em] text-night-body">
-                Sahambavy · Madagascar
-              </p>
-            </div>
-          </div>
+          {/* Emblème seul. Le lockup typographique qui l'accompagnait
+              (« LAC HÔTEL » + « Sahambavy · Madagascar ») répétait ce que
+              l'emblème écrit déjà ; le lieu reste porté par l'adresse
+              complète juste en dessous et par la ligne de copyright.
+              L'alt conserve le nom pour les lecteurs d'écran. */}
+          <img
+            src={`${basePath}/images/logo/logo-embleme-white.png`}
+            alt="Lac Hôtel Sahambavy"
+            className="h-24 w-auto opacity-90 md:h-28"
+          />
           <p className="max-w-sm font-[family-name:var(--font-serif)] text-lg italic text-champagne/80">
             {dict.footer.tagline}
           </p>

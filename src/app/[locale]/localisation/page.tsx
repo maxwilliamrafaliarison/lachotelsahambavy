@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   const ld = (dict as any).localisation ?? {};
   return {
-    title: `${ld.metaTitle ?? FR.metaTitle} — ${siteConfig.name}`,
+    title: ld.metaTitle ?? FR.metaTitle,
     description: ld.metaDescription ?? FR.metaDescription,
   };
 }

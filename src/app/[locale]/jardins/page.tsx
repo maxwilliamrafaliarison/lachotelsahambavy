@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.jardins.heroTitle} — ${siteConfig.name}`,
+    title: dict.jardins.heroTitle,
     description: dict.jardins.heroSubtitle,
   };
 }

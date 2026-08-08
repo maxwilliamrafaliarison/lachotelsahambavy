@@ -19,7 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: dict.meta.title,
+    // `absolute` court-circuite le gabarit racine : dict.meta.title porte
+    // déjà « Lac Hôtel Sahambavy » en tête, le suffixe l'aurait répété.
+    title: { absolute: dict.meta.title },
     description: dict.meta.description,
     alternates: {
       languages: {

@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.train.heroTitle} — ${siteConfig.name}`,
+    title: dict.train.heroTitle,
     description: dict.train.heroSubtitle,
   };
 }

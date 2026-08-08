@@ -4,7 +4,6 @@ import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { siteConfig } from "@/data/site";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
@@ -106,7 +105,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   const ex = mergeSection(EX_FR, (dict as any).experiences);
   return {
-    title: `${locale === "fr" ? "Expériences" : locale === "en" ? "Experiences" : "Experiencias"} — ${siteConfig.name}`,
+    title: locale === "fr" ? "Expériences" : locale === "en" ? "Experiences" : "Experiencias",
     description: ex.heroKicker ?? dict.loisirs.heroSubtitle,
   };
 }

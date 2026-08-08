@@ -162,15 +162,24 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`${basePath}/images/logo/${darkText ? "logo-mark-dark" : "logo-mark-white"}.png`}
+                src={`${basePath}/images/logo/${darkText ? "logo-embleme-dark" : "logo-embleme-white"}.png`}
                 alt=""
                 className="h-9 w-auto transition-opacity duration-200"
                 style={{ opacity: markOpacity }}
               />
             </Link>
 
-            {/* Lockup géant — accueil, haut de page. Décoratif (la marque
-                compacte au-dessous porte déjà le lien et le libellé). */}
+            {/* Emblème géant — accueil, haut de page. Décoratif (la marque
+                compacte au-dessous porte déjà le lien et le libellé).
+
+                On affiche l'emblème SEUL, sans le bloc de signature
+                « Lac Hotel Sahambavy / The Natural choice » ni les deux
+                filets du cadre d'origine : le nom du lieu était écrit
+                quatre fois sur ce seul écran. Débarrassé de sa signature,
+                l'emblème récupère toute la hauteur — il passe d'environ
+                98 px à 288 px, soit près de trois fois plus grand, sans
+                dépasser sa définition native (406 × 420 px, plafond de la
+                source fournie par l'hôtel). */}
             {brand > 0.01 && (
               <div
                 aria-hidden="true"
@@ -187,9 +196,9 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`${basePath}/images/logo/logo-white.png`}
+                  src={`${basePath}/images/logo/logo-embleme-white.png`}
                   alt=""
-                  className="h-40 w-auto sm:h-52 md:h-64 lg:h-72"
+                  className="h-48 w-auto sm:h-56 md:h-64 lg:h-72"
                 />
               </div>
             )}

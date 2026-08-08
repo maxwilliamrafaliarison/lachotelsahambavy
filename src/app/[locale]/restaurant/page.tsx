@@ -88,7 +88,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.restaurantSection.heroTitle} — Lac Hôtel Sahambavy`,
+    // Idem hébergements : le gabarit racine appose déjà la marque.
+    title: dict.restaurantSection.heroTitle,
     description: dict.restaurantSection.subtitle,
   };
 }

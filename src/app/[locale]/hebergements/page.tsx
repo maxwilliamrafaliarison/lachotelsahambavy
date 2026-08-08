@@ -129,7 +129,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.rooms.title} — Lac Hôtel Sahambavy`,
+    // Le gabarit racine (« %s · Lac Hôtel Sahambavy ») ajoute déjà la marque :
+    // l'écrire ici la faisait apparaître deux fois dans le même onglet.
+    title: dict.rooms.title,
     description: dict.rooms.subtitle,
   };
 }

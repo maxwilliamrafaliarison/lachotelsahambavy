@@ -4,7 +4,6 @@ import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Icon } from "@/components/ui/Icon";
-import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
@@ -63,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
   return {
-    title: `${dict.equipe.heroTitle} — ${siteConfig.name}`,
+    title: dict.equipe.heroTitle,
     description: dict.equipe.heroSubtitle,
   };
 }

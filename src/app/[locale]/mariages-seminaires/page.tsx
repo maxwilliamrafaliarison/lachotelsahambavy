@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         ? `${dict.wedding.subtitle} — ${dict.conference.title} for up to ${dict.conference.capacity}.`
         : `${dict.wedding.subtitle} — ${dict.conference.title} hasta ${dict.conference.capacity}.`;
   return {
-    title: `${title} — ${siteConfig.name}`,
+    title: title,
     description,
   };
 }
