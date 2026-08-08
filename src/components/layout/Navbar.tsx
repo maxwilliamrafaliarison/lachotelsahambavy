@@ -38,6 +38,16 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   const [mobileSection, setMobileSection] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  /**
+   * Type de pointeur de la dernière interaction (souris / doigt / stylet).
+   *
+   * Sans cette distinction, le clic se battait avec le survol : le navigateur
+   * ouvre le panneau sur `mouseenter`, puis le `click` qui suit le refermait
+   * aussitôt. À la souris c'était un clignotement ; au doigt c'était bloquant,
+   * car le tactile synthétise un `mouseenter` avant le `click` — le panneau
+   * ne pouvait jamais rester ouvert sur les écrans tactiles ≥ 1280 px.
+   */
+  const pointerType = useRef<string>("");
 
   /* — Scroll : ratio 0 (transparent sur hero) → 1 (papier opaque) — */
   useEffect(() => {
@@ -193,12 +203,33 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                       type="button"
                       aria-expanded={openMenu === item.href}
                       aria-haspopup="true"
-                      onMouseEnter={() => {
+                      /* Le doigt n'a pas de survol : on ignore le `pointerenter`
+                         que le tactile synthétise, sinon il ouvre le panneau
+                         juste avant que le `click` ne le referme. */
+                      onPointerEnter={(e) => {
+                        if (e.pointerType !== "mouse") return;
                         cancelClose();
                         setOpenMenu(item.href);
                       }}
+                      onPointerDown={(e) => {
+                        pointerType.current = e.pointerType;
+                      }}
                       onFocus={() => setOpenMenu(item.href)}
-                      onClick={() => setOpenMenu(openMenu === item.href ? null : item.href)}
+                      onClick={(e) => {
+                        // detail === 0 → activation clavier (Entrée / Espace),
+                        // aucun `pointerdown` ne l'a précédée.
+                        const clavier = e.detail === 0;
+                        if (!clavier && pointerType.current === "mouse") {
+                          // Souris : le survol gouverne l'ouverture et la
+                          // fermeture. Le clic ne referme jamais — il sert
+                          // seulement à rouvrir si Échap a fermé le panneau
+                          // sans que la souris ait bougé.
+                          setOpenMenu(item.href);
+                          return;
+                        }
+                        // Doigt et clavier : bascule franche.
+                        setOpenMenu(openMenu === item.href ? null : item.href);
+                      }}
                       className={`group/nav relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
                       style={itemShadow}
                     >
