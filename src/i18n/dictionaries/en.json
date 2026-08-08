@@ -44,7 +44,10 @@
     "stat2Value": "520 ha",
     "stat3": "Family hospitality",
     "stat3Value": "28 yrs",
-    "cta": "View accommodation"
+    "cta": "View accommodation",
+    "videoLegende": "Flying over the hotel, gardens and pool",
+    "videoLire": "Play video",
+    "videoPause": "Pause video"
   },
   "ourHouse": {
     "label": "Our house",

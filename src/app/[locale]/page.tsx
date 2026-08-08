@@ -10,6 +10,8 @@ import DestinationsTeaser from "@/components/home/DestinationsTeaser";
 import Testimonials from "@/components/home/Testimonials";
 import ContactSection from "@/components/home/ContactSection";
 import BookingBar from "@/components/home/BookingBar";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { videoObjectSchema } from "@/lib/schema-org";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -39,6 +41,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
+      {/* Émis ici et pas dans le layout : seule l'accueil porte la vidéo,
+          et un VideoObject sur une page qui n'en contient pas est une
+          donnée structurée invalide. */}
+      <JsonLd schemas={[videoObjectSchema(locale as Locale)]} />
       <HeroHome dict={dict} />
       <PromoBanner dict={dict} />
       <Welcome dict={dict} locale={locale as Locale} />

@@ -391,17 +391,25 @@ export function imageGallerySchema(args: {
 }
 
 // =====================================================
-// VideoObject (hero d'accueil — plan drone Sahambavy)
+// VideoObject (section « Bienvenue » de l'accueil)
 // =====================================================
 
 /**
- * Schema VideoObject pour la vidéo hero de la homepage. Google peut
- * indexer cette entrée dans les résultats vidéo enrichis (rich snippets)
- * si les attributs requis sont présents : name, description, thumbnailUrl,
- * uploadDate. Les attributs recommandés (contentUrl, duration, embedUrl)
- * améliorent le taux d'éligibilité.
+ * Schema VideoObject de la vidéo d'ambiance de la page d'accueil. Google
+ * peut en tirer un résultat enrichi vidéo si les attributs requis sont
+ * présents : name, description, thumbnailUrl, uploadDate. Les attributs
+ * recommandés (contentUrl, duration) améliorent l'éligibilité.
  *
- * Durée = PT24S (palindrome 12 s × 2 aller-retour côté ffmpeg).
+ * ATTENTION — ce schéma décrivait jusqu'au 08/08/2026 la vidéo drone du
+ * hero, remplacée depuis par une photographie : il annonçait donc une
+ * vidéo absente de la page. Il n'était heureusement émis nulle part, mais
+ * un balisage qui ne correspond à aucun contenu visible est une donnée
+ * structurée invalide, sanctionnée par Google. Il pointe désormais sur la
+ * vidéo réellement présente dans la section « Bienvenue », et il est émis
+ * depuis src/app/[locale]/page.tsx — l'accueil uniquement, jamais les
+ * pages intérieures qui ne portent pas cette vidéo.
+ *
+ * Durée = PT30S (29,84 s mesurées après réencodage).
  *
  * Réf : https://developers.google.com/search/docs/appearance/structured-data/video
  */
@@ -413,25 +421,25 @@ export function videoObjectSchema(locale: Locale): SchemaType {
   };
   const DESCRIPTIONS: Record<Locale, string> = {
     fr:
-      "Survol cinématique du Lac Hôtel Sahambavy à Madagascar. Bungalows sur pilotis au bord du lac, collines verdoyantes et plantation de thé — la seule de Madagascar — en arrière-plan. Filmé au drone.",
+      "Survol du Lac Hôtel Sahambavy à Madagascar : le bâtiment principal aux teintes de terre cuite, les jardins tropicaux, la piscine et, à l’arrière-plan, les collines de l’unique plantation de thé de Madagascar. Filmé au drone.",
     en:
-      "Cinematic drone flight over Lac Hôtel Sahambavy in Madagascar. Overwater pilotis bungalows on the lake, green hills and tea plantation — the only one in Madagascar — in the background.",
+      "Flying over Lac Hôtel Sahambavy in Madagascar: the terracotta-toned main building, tropical gardens, swimming pool and, in the background, the hills of Madagascar's only tea plantation. Shot by drone.",
     es:
-      "Vuelo cinematográfico con dron sobre el Lac Hôtel Sahambavy en Madagascar. Bungalows sobre pilotes al borde del lago, colinas verdes y plantación de té — la única de Madagascar — al fondo.",
+      "Sobrevuelo del Lac Hôtel Sahambavy en Madagascar: el edificio principal en tonos de terracota, los jardines tropicales, la piscina y, al fondo, las colinas de la única plantación de té de Madagascar. Filmado con dron.",
   };
 
   return {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    "@id": `${siteConfig.url}/${locale}/#hero-video`,
+    "@id": `${siteConfig.url}/${locale}/#video-bienvenue`,
     name: TITLES[locale],
     description: DESCRIPTIONS[locale],
-    thumbnailUrl: `${siteConfig.url}/videos/hero-drone-poster.jpg`,
-    contentUrl: `${siteConfig.url}/videos/hero-drone.mp4`,
-    uploadDate: "2026-04-17",
-    duration: "PT24S",
-    width: 1600,
-    height: 900,
+    thumbnailUrl: `${siteConfig.url}/videos/bienvenue-lac-hotel.jpg`,
+    contentUrl: `${siteConfig.url}/videos/bienvenue-lac-hotel.mp4`,
+    uploadDate: "2026-08-08",
+    duration: "PT30S",
+    width: 480,
+    height: 854,
     encodingFormat: "video/mp4",
     inLanguage: locale,
     isFamilyFriendly: true,

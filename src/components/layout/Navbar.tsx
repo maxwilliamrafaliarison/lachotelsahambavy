@@ -108,8 +108,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
   }, []);
 
   const eased = ratio * ratio * (3 - 2 * ratio); // smoothstep
-  const solid = openMenu !== null; // panneau ouvert → barre opaque immédiate
-  const bg = solid ? 1 : eased;
+  /* La barre ne se rend plus opaque à l'ouverture d'un panneau. C'était une
+     béquille du bandeau papier : un panneau blanc pleine largeur au-dessous
+     d'une barre transparente donnait une marche visible. Le panneau étant
+     désormais une carte de verre sombre détachée, la barre garde son état
+     de défilement — transparente sur la photo, papier une fois descendue. */
+  const bg = eased;
   const darkText = bg > 0.55;
 
   const primaryItems = navigation.filter((n) => n.primary !== false);
@@ -141,17 +145,24 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
         style={{ top: ratio > 0.33 ? 0 : 36 }}
         onMouseLeave={scheduleClose}
       >
-        <nav
-          aria-label="Navigation principale"
-          className="relative"
-          style={{
-            background: `rgba(251, 250, 247, ${0.94 * bg})`,
-            backdropFilter: bg > 0.05 ? `blur(${18 * bg}px) saturate(${100 + 60 * bg}%)` : undefined,
-            WebkitBackdropFilter:
-              bg > 0.05 ? `blur(${18 * bg}px) saturate(${100 + 60 * bg}%)` : undefined,
-            borderBottom: `1px solid rgba(231, 228, 220, ${bg})`,
-          }}
-        >
+        {/* Le verre de la barre est posé dans un calque enfant, jamais sur
+            <nav> : un élément qui porte backdrop-filter devient un
+            « backdrop root », et ses descendants ne floutent plus que lui.
+            Tant que le filtre vivait ici, le flou du méga-menu — qui en
+            descend — ne floutait rien du tout. */}
+        <nav aria-label="Navigation principale" className="lh-barre">
+          <div
+            aria-hidden="true"
+            className="lh-barre__verre"
+            style={{
+              background: `rgba(251, 250, 247, ${0.94 * bg})`,
+              backdropFilter: bg > 0.05 ? `blur(${18 * bg}px) saturate(${100 + 60 * bg}%)` : undefined,
+              WebkitBackdropFilter:
+                bg > 0.05 ? `blur(${18 * bg}px) saturate(${100 + 60 * bg}%)` : undefined,
+              borderBottom: `1px solid rgba(231, 228, 220, ${bg})`,
+            }}
+          />
+
           <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-4 px-5 md:px-8">
             {/* Marque — mark + lockup typographique */}
             <Link
@@ -183,7 +194,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             {brand > 0.01 && (
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-4 top-3 origin-top-left md:left-7"
+                /* top-[86px] : l'emblème est désormais recadré au plus juste,
+                   sans la marge interne du cadre d'origine. Laissé à top-3 il
+                   remontait dans la rangée du menu et passait sous « L'Hôtel »
+                   et « Hébergements ». On le pose donc sous la barre (68 px)
+                   plutôt que de le rapetisser pour éviter la collision. */
+                className="pointer-events-none absolute left-5 top-[86px] origin-top-left md:left-8"
                 style={{
                   opacity: brand,
                   transform: `scale(${0.32 + 0.68 * brand})`,
@@ -198,15 +214,15 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 <img
                   src={`${basePath}/images/logo/logo-embleme-white.png`}
                   alt=""
-                  className="h-48 w-auto sm:h-56 md:h-64 lg:h-72"
+                  className="h-28 w-auto sm:h-36 md:h-44 lg:h-52"
                 />
               </div>
             )}
 
             {/* Menu desktop */}
             <ul className="ml-auto hidden items-center gap-0.5 min-[1280px]:flex">
-              {primaryItems.map((item) => (
-                <li key={item.href}>
+              {primaryItems.map((item, i) => (
+                <li key={item.href} className="relative">
                   {item.children ? (
                     <button
                       type="button"
@@ -267,7 +283,49 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                         />
                       </svg>
                     </button>
-                  ) : (
+                  ) : null}
+
+                  {/* Panneau — ancré dans son <li> et non après </ul>.
+                      Outre le fait qu'il devient une carte posée sous sa
+                      rubrique au lieu d'un bandeau pleine largeur, cela
+                      corrige l'ordre de tabulation : rendu après la liste,
+                      il envoyait le focus vers le sélecteur de langue au
+                      lieu d'entrer dans le sous-menu. */}
+                  {item.children && openMenu === item.href && (
+                    <div
+                      onMouseEnter={cancelClose}
+                      onMouseLeave={scheduleClose}
+                      className={`lh-panneau hidden min-[1280px]:block ${
+                        i >= primaryItems.length - 2 ? "lh-panneau--fin" : ""
+                      }`}
+                    >
+                      <span aria-hidden="true" className="lh-panneau__reflet" />
+                      <Link
+                        href={localizeHref(item.href, locale)}
+                        onClick={closeAll}
+                        className="lh-panneau__tete"
+                      >
+                        <span className="lh-panneau__titre">{item.label[locale]}</span>
+                        <span className="lh-panneau__voir">
+                          {locale === "fr" ? "Voir la page" : locale === "es" ? "Ver la página" : "View page"}
+                        </span>
+                      </Link>
+                      <div aria-hidden="true" className="lh-panneau__filet" />
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={localizeHref(child.href, locale)}
+                          onClick={closeAll}
+                          className="lh-ligne"
+                        >
+                          <span aria-hidden="true" className="lh-ligne__tiret" />
+                          {child.label[locale]}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+
+                  {!item.children && (
                     <Link
                       href={localizeHref(item.href, locale)}
                       className={`group/nav relative block whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
@@ -324,45 +382,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             </button>
           </div>
 
-          {/* Méga-menu desktop */}
-          {primaryItems.map(
-            (item) =>
-              item.children &&
-              openMenu === item.href && (
-                <div
-                  key={`panel-${item.href}`}
-                  onMouseEnter={cancelClose}
-                  onMouseLeave={scheduleClose}
-                  className="absolute inset-x-0 top-full hidden border-b border-hairline bg-paper/[0.97] backdrop-blur-xl min-[1280px]:block"
-                >
-                  <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-10 gap-y-1 px-10 py-7 xl:grid-cols-3">
-                    <Link
-                      href={localizeHref(item.href, locale)}
-                      onClick={closeAll}
-                      className="col-span-full mb-2 flex items-baseline gap-3 text-ink transition-colors hover:text-lake"
-                    >
-                      <span className="font-[family-name:var(--font-display)] text-[22px] font-extralight tracking-[-0.01em]">
-                        {item.label[locale]}
-                      </span>
-                      <span className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-terracotta">
-                        {locale === "fr" ? "Voir la page" : locale === "es" ? "Ver la página" : "View page"}
-                      </span>
-                    </Link>
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={localizeHref(child.href, locale)}
-                        onClick={closeAll}
-                        className="group flex items-center gap-2.5 rounded px-2 py-2 text-[14px] text-body transition-colors hover:text-lake"
-                      >
-                        <span className="h-px w-4 bg-hairline transition-all duration-200 group-hover:w-6 group-hover:bg-lake" />
-                        {child.label[locale]}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )
-          )}
         </nav>
       </header>
 

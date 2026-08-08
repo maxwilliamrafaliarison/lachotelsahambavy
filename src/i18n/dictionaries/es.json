@@ -44,7 +44,10 @@
     "stat2Value": "520 ha",
     "stat3": "Hospitalidad familiar",
     "stat3Value": "28 años",
-    "cta": "Ver alojamientos"
+    "cta": "Ver alojamientos",
+    "videoLegende": "Sobrevuelo del hotel, los jardines y la piscina",
+    "videoLire": "Reproducir vídeo",
+    "videoPause": "Pausar vídeo"
   },
   "ourHouse": {
     "label": "Nuestra casa",

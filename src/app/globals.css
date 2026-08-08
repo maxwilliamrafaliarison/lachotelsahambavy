@@ -137,6 +137,16 @@ body {
   --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
   --font-serif: var(--font-cormorant), Baskerville, Georgia, serif;
+
+  /* — Verre de nuit (méga-menu). rgba() ne sait pas consommer une variable
+       hexadécimale : c'est le triplet qui porte la matière. — */
+  --lh-nuit-rgb: 20 17 13;          /* = --color-night #14110D */
+  --lh-verre-flou: 28px;
+  --lh-verre-alpha: 0.74;           /* plancher de contraste — voir en-tête .lh-panneau */
+  --lh-verre-chaine: saturate(190%) brightness(0.5);
+  --lh-verre-rayon: 14px;
+  --lh-verre-col: 336px;            /* « La Plantation de thé de Sahambavy » = 33 signes */
+  --lh-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ============================================================
@@ -856,5 +866,237 @@ body {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
+  }
+}
+
+/* ============================================================
+   MÉGA-MENU « VERRE DE NUIT »
+   Remplace le bandeau papier opaque pleine largeur (08/08/2026).
+
+   POURQUOI SOMBRE ET PAS IVOIRE
+   Le grief était « la bande blanche énorme […] pas moderne ». Un verre
+   clair sur un site à fond papier redonne une carte blanche sur fond
+   blanc : le défaut revient par la fenêtre. Le registre « Nuit sur le
+   lac » du design system est déjà validé, et c'est aussi la matière
+   d'Apple — barre et menus translucides sombres.
+
+   D'OÙ VIENT LA COULEUR
+   D'aucun aplat. `saturate(190%)` exalte la chroma de ce qui passe
+   derrière, `brightness(0.5)` la ramène sous le plancher de lisibilité.
+   Le panneau est donc chaud au-dessus des bungalows ocre, froid
+   au-dessus du lac, vert au-dessus du feuillage. La teinte est celle de
+   la page, pas une couleur plaquée.
+
+   LE PLANCHER DE CONTRASTE
+   Le pire cas est un ciel blanc : 255 → brightness(0.5) → 127, puis
+   composé sous nuit #14110D à 0,74 → rgb(74,70,62) une fois les deux
+   halos ajoutés. Mesuré sur ce pire pixel :
+     lin #F3EAD8       7,86:1   titres
+     champagne #D8B77A 4,91:1   labels et accents
+     nuit-body #BFB4A0 4,58:1   liens
+   AA tenu sur les six fonds testés (ciel, eau, ocre, sable, feuillage).
+   Les deux halos sont les SEULES couches éclaircissantes : le pire pixel
+   du panneau est donc bien celui qui est mesuré ici, pas un pixel choisi.
+
+   L'ACCENT INTÉRIEUR EST CHAMPAGNE, PAS TERRE CUITE
+   Le terre cuite #A64517 tombe sous 2:1 sur ce verre — inutilisable en
+   texte. Il reste là où il a été demandé et où il fonctionne : le filet
+   animé sous la rubrique, sur la barre. Le champagne est son pendant
+   nocturne dans la charte.
+   ============================================================ */
+@layer components {
+
+  /* Le verre de la BARRE vit dans ce calque dédié, jamais sur <nav>.
+     Un élément qui porte backdrop-filter devient un « backdrop root » :
+     ses descendants ne floutent plus que lui, pas la page. Le panneau
+     étant un descendant de <nav>, son flou n'a jamais rien flouté tant
+     que <nav> portait le filtre. */
+  .lh-barre { position: relative; }
+
+  .lh-barre__verre {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* ---------- LE PANNEAU ---------- */
+
+  .lh-panneau {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: -14px;
+    z-index: 40;
+    width: var(--lh-verre-col);
+    padding: 14px 14px 12px;
+    border-radius: var(--lh-verre-rayon);
+
+    /* Repli OPAQUE par défaut : c'est l'état sûr, le verre n'est qu'un
+       enrichissement. On n'utilise pas `@supports not`, mal analysé par
+       les anciens WebKit. */
+    background: #191510;
+
+    /* box-shadow et NON border : sous un backdrop-filter, la bordure
+       laisse fuir le fond non filtré dans son épaisseur. */
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.16),
+      inset 0 0 0 1px rgb(255 255 255 / 0.07),
+      0 2px 8px -2px rgb(0 0 0 / 0.30),
+      0 18px 36px -14px rgb(0 0 0 / 0.42),
+      0 40px 72px -30px rgb(0 0 0 / 0.55);
+
+    /* forced-colors force box-shadow à none : sans ceci la carte perd
+       tout contour en mode contraste élevé. */
+    border: 1px solid transparent;
+  }
+
+  /* Les deux dernières rubriques à sous-menu s'ancrent à droite.
+     Règle statique connue au build : aucune mesure JS, aucun listener. */
+  .lh-panneau--fin { left: auto; right: -14px; }
+
+  /* Pont de survol : comble les 10 px d'air sous le bouton, sinon la
+     temporisation de fermeture se déclenche pendant la traversée.
+     Ne peint rien. */
+  .lh-panneau::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -10px;
+    height: 10px;
+  }
+
+  @supports (backdrop-filter: blur(28px) saturate(190%) brightness(0.5))
+         or (-webkit-backdrop-filter: blur(28px) saturate(190%) brightness(0.5)) {
+    .lh-panneau {
+      -webkit-backdrop-filter: blur(var(--lh-verre-flou)) var(--lh-verre-chaine);
+              backdrop-filter: blur(var(--lh-verre-flou)) var(--lh-verre-chaine);
+      background:
+        /* halo champagne, lumière chaude en haut à gauche */
+        radial-gradient(120% 76% at 12% -10%,
+          rgb(216 183 122 / 0.10) 0%, rgb(216 183 122 / 0) 60%),
+        /* réverbération froide du lac, en bas à droite */
+        radial-gradient(104% 64% at 94% 110%,
+          rgb(220 234 242 / 0.06) 0%, rgb(220 234 242 / 0) 62%),
+        /* plancher de contraste — la seule couche mesurée */
+        rgb(var(--lh-nuit-rgb) / var(--lh-verre-alpha));
+    }
+  }
+
+  /* Reflet spéculaire sur l'arête haute. Inset horizontal : un ::after de
+     1 px voit son rayon de bord réduit à ~0 par la règle de chevauchement
+     des coins, il déborderait des angles arrondis. */
+  .lh-panneau__reflet {
+    position: absolute;
+    inset: 0 14px auto;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+      rgb(255 255 255 / 0) 0%,
+      rgb(255 255 255 / 0.55) 28%,
+      rgb(255 255 255 / 0.18) 64%,
+      rgb(255 255 255 / 0) 100%);
+  }
+
+  /* ---------- CONTENU DU PANNEAU ---------- */
+
+  .lh-panneau__tete { display: block; padding: 2px 10px 12px; }
+
+  .lh-panneau__titre {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 300;
+    letter-spacing: -0.012em;
+    line-height: 1.15;
+    color: var(--color-linen);
+  }
+
+  .lh-panneau__voir {
+    display: block;
+    margin-top: 5px;
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--color-champagne);
+  }
+
+  .lh-panneau__filet {
+    height: 1px;
+    margin: 0 2px 6px;
+    background: rgb(255 255 255 / 0.10);
+  }
+
+  .lh-ligne {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--color-night-body);
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+
+  .lh-ligne__tiret {
+    flex: none;
+    width: 16px;
+    height: 1px;
+    background: rgb(255 255 255 / 0.28);
+    transition: width 200ms var(--lh-ease), background-color 200ms ease;
+  }
+
+  /* Le survol ne peut QUE monter le contraste : jamais de couleur
+     d'accent basse en texte. */
+  .lh-ligne:hover,
+  .lh-ligne:focus-visible {
+    background: rgb(255 255 255 / 0.07);
+    color: var(--color-linen);
+  }
+
+  .lh-ligne:hover .lh-ligne__tiret,
+  .lh-ligne:focus-visible .lh-ligne__tiret {
+    width: 24px;
+    background: var(--color-champagne);
+  }
+
+  .lh-ligne:focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 2px;
+  }
+
+  /* ---------- ENTRÉE ---------- */
+
+  @keyframes lh-panneau-entree {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lh-panneau { animation: lh-panneau-entree 220ms var(--lh-ease) both; }
+
+  /* ---------- REPLIS ---------- */
+
+  /* Transparence réduite : on renonce au verre, pas à la lisibilité. */
+  @media (prefers-reduced-transparency: reduce) {
+    .lh-panneau {
+      -webkit-backdrop-filter: none;
+              backdrop-filter: none;
+      background: #191510;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lh-panneau { animation: none; }
+    .lh-ligne, .lh-ligne__tiret { transition: none; }
+  }
+
+  /* Contraste élevé : box-shadow est ignoré, on rend la bordure visible. */
+  @media (forced-colors: active) {
+    .lh-panneau { border-color: CanvasText; background: Canvas; }
   }
 }
