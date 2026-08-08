@@ -64,7 +64,7 @@
     "ctaLabel": "Rencontrer l’équipe"
   },
   "rooms": {
-    "label": "Hébergements · Tarifs 2026",
+    "label": "Hébergements · Tarifs",
     "title": "Nos chambres & bungalows",
     "subtitle": "Du bungalow standard à l’expérience sur l’eau — une cinquantaine de logements pour tous les voyages",
     "intro": "Les chambres de l’hôtel sont conçues pour garantir le confort et la quiétude de nos hôtes : un lit personnalisé spacieux de 2,20 m × 2,20 m, offrant un confort supérieur aux dimensions standards, une salle de bains privative avec eau chaude et une terrasse avec vue sur le lac. Chaque chambre est équipée d’une télévision ; l’accès au Wi-Fi est disponible uniquement dans la salle de restauration.",
@@ -88,7 +88,7 @@
     "discoverRepos": "Découvrir Le Repos",
     "extrasTitle": "Suppléments & services",
     "currencyNote": "Tarifs publics en ariary, vignette touristique en sus. Les montants en euros sont donnés à titre indicatif : la conversion s’applique au taux en vigueur le jour du paiement.",
-    "rowRate": "Tarif 2027",
+    "rowRate": "Tarif",
     "rowBeds": "Lits",
     "rowCapacity": "Capacité",
     "rowUnits": "Unités",
@@ -106,7 +106,8 @@
     "pilotisName": "Pilotis Nuptial",
     "galPrev": "Photo précédente",
     "galNext": "Photo suivante",
-    "galOf": "photo {n}"
+    "galOf": "photo {n}",
+    "restaurationTitle": "Restauration"
   },
   "philosophy": {
     "label": "Notre philosophie",
@@ -897,7 +898,7 @@
     "heroSubtitle": "Droits et engagements — voyageurs de l’Union européenne",
     "intro": "Les présentes conditions encadrent toute demande de réservation passée sur lachotel.com. Elles respectent le cadre légal applicable aux voyageurs de l’Union européenne (Directive 2011/83/UE et Règlement 524/2013). En soumettant le formulaire de réservation, vous reconnaissez en avoir pris connaissance.",
     "lastUpdated": "Dernière mise à jour",
-    "lastUpdatedDate": "16 avril 2026",
+    "lastUpdatedDate": "8 août 2026",
     "sections": [
       {
         "title": "1 · Réservation et paiement",
@@ -958,6 +959,22 @@
           "Check-out : avant 11 h 00. Départ tardif sur demande et sous réserve de disponibilité (jusqu’à 15 h, gratuit ; au-delà, nuit supplémentaire facturée).",
           "Heure d’arrivée estimée : à communiquer dans le formulaire de réservation afin que l’équipe puisse préparer votre accueil.",
           "En cas de retard imprévu, merci de nous prévenir par WhatsApp au (+261) 34 99 161 76."
+        ]
+      },
+      {
+        "title": "7 · Partenaires — tour-opérateurs et agences réceptives",
+        "intro": "Les conditions ci-dessous s’appliquent aux professionnels du voyage. Le Lac Hôtel Sahambavy collabore avec les opérateurs disposant d’un NIF et d’un STAT en cours de validité.",
+        "items": [
+          "Réservations : aucune réservation n’est prise par téléphone. Toute demande doit parvenir par courriel à booking@lachotel.com ou lachotelsahambavy@gmail.com.",
+          "Confirmation : une réservation confirmée donne lieu à l’émission immédiate d’une facture pro forma, réglée en totalité avant l’arrivée des clients. Passé le délai imparti sans confirmation, la réservation est annulée automatiquement.",
+          "Allotements : nous privilégions les réservations confirmées, notre structure étant de petite taille. Aucune date de fin d’option n’est appliquée, mais dès qu’une autre demande se confirme nous vous invitons à libérer les chambres. Un allotement est maintenu si le nombre d’inscrits nous est communiqué chaque mois.",
+          "Vouchers et post-paiement ne sont plus acceptés.",
+          "Règlement : en espèces ou par chèque sur place, ou par virement bancaire avant l’arrivée. Merci de nous adresser l’avis de crédit en précisant le numéro de facture ou de pro forma.",
+          "Chauffeur : hébergement offert, repas du chauffeur à 8 000 Ar.",
+          "Guide : 50 % sur les prestations — hébergement facturé au client, 50 % sur la restauration.",
+          "Tour leader : gratuité de l’hébergement en catégorie standard pour un groupe de 10 voyageurs et plus, et 50 % sur la restauration. En deçà de 10 voyageurs, hébergement et restauration sont facturés à 50 %.",
+          "Éductours : hébergement offert ; repas et boissons à la charge du client à 50 %.",
+          "Annulation : le barème de l’article 2 s’applique également aux réservations passées par une agence."
         ]
       }
     ],

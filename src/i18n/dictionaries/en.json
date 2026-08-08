@@ -64,7 +64,7 @@
     "ctaLabel": "Meet the team"
   },
   "rooms": {
-    "label": "Accommodation · 2026 Rates",
+    "label": "Accommodation · Rates",
     "title": "Our rooms & bungalows",
     "subtitle": "From standard bungalow to overwater experience — around fifty units for every journey",
     "intro": "Our rooms are designed to offer total comfort, privacy, and tranquility. Each room features an extra-large custom bed (2.20 m × 2.20 m)—far exceeding standard sizes—along with a private en-suite bathroom with hot water and a private terrace overlooking the lake. To help you unwind, in-room televisions are provided, while Wi-Fi access is available exclusively in the dining area to encourage a peaceful in-room experience.",
@@ -88,7 +88,7 @@
     "discoverRepos": "Discover Le Repos",
     "extrasTitle": "Extras & services",
     "currencyNote": "Public rates in ariary, tourist levy not included. Euro amounts are indicative only: conversion applies at the rate in force on the day of payment.",
-    "rowRate": "2027 rate",
+    "rowRate": "Rate",
     "rowBeds": "Beds",
     "rowCapacity": "Capacity",
     "rowUnits": "Units",
@@ -106,7 +106,8 @@
     "pilotisName": "Bridal Suite on Stilts",
     "galPrev": "Previous photo",
     "galNext": "Next photo",
-    "galOf": "photo {n}"
+    "galOf": "photo {n}",
+    "restaurationTitle": "Dining"
   },
   "philosophy": {
     "label": "Our philosophy",
@@ -897,7 +898,7 @@
     "heroSubtitle": "Rights and commitments — travellers from the European Union",
     "intro": "These conditions govern any booking request made on lachotel.com. They comply with the legal framework applicable to travellers from the European Union (Directive 2011/83/EU and Regulation 524/2013). By submitting the booking form, you acknowledge having read them.",
     "lastUpdated": "Last updated",
-    "lastUpdatedDate": "16 April 2026",
+    "lastUpdatedDate": "8 August 2026",
     "sections": [
       {
         "title": "1 · Booking and payment",
@@ -958,6 +959,22 @@
           "Check-out: before 11:00 AM. Late check-out on request and subject to availability (until 3:00 PM, free; beyond, additional night charged).",
           "Estimated arrival time: to be communicated in the booking form so the team can prepare your welcome.",
           "In case of unexpected delay, please notify us via WhatsApp at (+261) 34 99 161 76."
+        ]
+      },
+      {
+        "title": "7 · Partners — tour operators and inbound agencies",
+        "intro": "The conditions below apply to travel trade professionals. Lac Hôtel Sahambavy works with operators holding a valid NIF and STAT registration.",
+        "items": [
+          "Bookings: no reservation is taken by telephone. All requests must reach us by email at booking@lachotel.com or lachotelsahambavy@gmail.com.",
+          "Confirmation: a confirmed booking is followed immediately by a pro forma invoice, payable in full before the guests arrive. If no confirmation reaches us within the stated time, the booking is cancelled automatically.",
+          "Allotments: we favour confirmed bookings, our property being small. No option deadline is applied, but as soon as another request is confirmed we will ask you to release the rooms. An allotment is held if the number of registered travellers is sent to us monthly.",
+          "Vouchers and post-payment are no longer accepted.",
+          "Payment: cash or cheque on site, or bank transfer before arrival. Please send us the credit advice quoting the invoice or pro forma number.",
+          "Driver: accommodation complimentary, driver's meal at 8,000 Ar.",
+          "Guide: 50% on services — accommodation billed to the client, 50% on meals.",
+          "Tour leader: complimentary accommodation in standard category for groups of 10 travellers or more, and 50% on meals. Below 10 travellers, accommodation and meals are billed at 50%.",
+          "Educational tours: accommodation complimentary; meals and drinks charged to the client at 50%.",
+          "Cancellation: the scale in article 2 applies equally to agency bookings."
         ]
       }
     ],

@@ -68,7 +68,7 @@ export default async function TrainFCEPage({
     slug: "train-fce",
     name: dict.train.heroTitle as string,
     description: dict.train.heroSubtitle as string,
-    image: "/images/train/draisine-rails-gare-sahambavy.jpg",
+    image: "/images/train/train-classique-corridor-foret.jpg",
   });
 
   // Mapping options train → icônes (Micheline / Draisine privée / Train classique)
@@ -110,9 +110,13 @@ export default async function TrainFCEPage({
         schemas={[attractionTrain, breadcrumbSchema(buildBreadcrumb(loc, "train-fce"))]}
       />
 
+      {/* Le train dans le corridor de forêt primaire, voyageurs aux
+          fenêtres — bien plus parlant que la draisine à quai qui tenait
+          cette place : c'est le trajet qu'on vient chercher, pas le
+          matériel. La draisine reste illustrée dans sa propre section. */}
       <PanoramaHero
-        image={`${basePath}/images/train/draisine-rails-gare-sahambavy.jpg`}
-        imageAlt="Draisine sur les rails de la ligne FCE, en gare de Sahambavy"
+        image={`${basePath}/images/train/train-classique-corridor-foret.jpg`}
+        imageAlt="Le train classique de la ligne FCE longeant le corridor de forêt primaire, voyageurs accoudés aux fenêtres"
         label={dict.train.introLabel}
         title={dict.train.heroTitle}
         kicker={dict.train.heroSubtitle}

@@ -22,6 +22,14 @@ export interface Room {
    */
   groupe?: "courant" | "exception" | "repos";
   /**
+   * Localisation à signaler explicitement — pastille posée SUR la photo.
+   * La villa basse n'est pas dans l'enceinte principale mais à l'annexe
+   * « Le Repos », à 800 m : un client qui réserve sans le savoir découvre
+   * la marche à l'arrivée. La pastille éditoriale sous la photo ne suffit
+   * pas, elle se lit comme un label de gamme.
+   */
+  localisation?: { fr: string; en: string; es: string };
+  /**
    * Tarif agence HT (« PRIX AGV HT » des tarifs officiels). Conservé pour la
    * facturation interne — il n'est JAMAIS affiché sur le site public, seul le
    * tarif public l'est (arbitrage direction du 08/08/2026).
@@ -32,7 +40,11 @@ export interface Room {
 export const rooms: Room[] = [
   {
     /* Catégorie créée au tarif 2027 : deux Pilotis (chambres 11 et 13) sont
-       montés en Lake Suite. Le parc Pilotis Nuptial passe donc de 9 à 7. */
+       montés en Lake Suite, et le parc Pilotis passe de 9 à 7.
+       PAS ENCORE AFFICHÉE — la direction publie la grille 2026 (arbitrage
+       du 08/08/2026). D'où l'absence de `groupe` : la fiche est prête, il
+       suffira de lui rendre `groupe: "courant"`, de remonter le wagon à
+       420 000 / 60 € et les Pilotis à 7 unités le jour du basculement. */
     id: "lake-suite",
     slug: "lake-suite-nuptial",
     name: {
@@ -68,7 +80,6 @@ export const rooms: Room[] = [
       { icon: "tv", label: { fr: "Télévision", en: "Television", es: "Televisión" } },
       { icon: "house", label: { fr: "Terrasse privative face au lac", en: "Private lake-facing terrace", es: "Terraza privada frente al lago" } },
     ],
-    groupe: "courant",
     images: [
       "/images/rooms/pilotis-chambre-baldaquin-vue-lac.jpg",
       "/images/rooms/pilotis-lit-vue.jpg",
@@ -105,7 +116,7 @@ export const rooms: Room[] = [
       en: "Our honeymoon overwater bungalows are the most immersive experience at Lac Hôtel Sahambavy. Built with precious wood, they extend directly over the lake, offering breathtaking panoramic views of the water and mountains.\n\nEach bungalow is decorated with materials and artisan sculptures crafted by local Malagasy artisans. Rooms are equipped with a television. Wi-Fi is available in the restaurant area.",
       es: "Nuestros bungalows nupciales sobre pilotes son la experiencia más inmersiva del Lac Hôtel Sahambavy. Construidos en madera preciosa, se adentran directamente en el lago, ofreciendo un panorama impresionante del agua y las montañas.\n\nCada bungalow está decorado con materiales y esculturas artesanales de artesanos malgaches locales. Las habitaciones disponen de televisión. El Wi-Fi está disponible en el restaurante.",
     },
-    units: 7,
+    units: 9,
     capacity: "2",
     priceEUR: 50,
     priceAR: 360000,
@@ -229,9 +240,9 @@ export const rooms: Room[] = [
     units: 1,
     capacity: "2",
     surface: "30m linéaires",
-    priceEUR: 60,
-    priceAR: 420000,
-    priceARTO: 300000,
+    priceEUR: 50,
+    priceAR: 360000,
+    priceARTO: 250000,
     amenities: [
       { icon: "train", label: { fr: "Wagon suisse 1930, 30 m", en: "1930 Swiss wagon, 30 m", es: "Vagón suizo 1930, 30 m" } },
       { icon: "bed", label: { fr: "Lit double", en: "Double bed", es: "Cama doble" } },
@@ -271,7 +282,7 @@ export const rooms: Room[] = [
       en: "Spacious overwater bungalow for families. Spacious bed, private bathroom, terrace with lake view.",
       es: "Bungalow sobre pilotes espacioso para familias. Cama amplia, baño privado, terraza con vistas al lago.",
     },
-    units: 7, // configuration du Pilotis Nuptial, pas un parc distinct
+    units: 9, // configuration du Pilotis Nuptial, pas un parc distinct
     capacity: "4",
     priceEUR: 50,
     priceAR: 360000,
@@ -402,6 +413,11 @@ export const rooms: Room[] = [
       { icon: "family", label: { fr: "Jusqu'à 5 personnes", en: "Up to 5 people", es: "Hasta 5 personas" } },
       { icon: "bath", label: { fr: "Salle de bain privée", en: "Private bathroom", es: "Baño privado" } },
     ],
+    localisation: {
+      fr: "Annexe Le Repos · 800 m",
+      en: "Le Repos annexe · 800 m",
+      es: "Anexo Le Repos · 800 m",
+    },
     groupe: "repos",
     images: [
       "/images/rooms/le-repos-chambre-01.jpg",

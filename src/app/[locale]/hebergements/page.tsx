@@ -28,6 +28,7 @@ type RoomsPageStrings = {
   galOf: string;
   discoverRepos: string;
   extrasTitle: string;
+  restaurationTitle: string;
   currencyNote: string;
   rowRate: string;
   rowBeds: string;
@@ -56,9 +57,10 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     galOf: "photo {n}",
     discoverRepos: "Découvrir Le Repos",
     extrasTitle: "Suppléments & services",
+    restaurationTitle: "Restauration",
     currencyNote:
       "Tarifs publics en ariary, vignette touristique en sus. Les montants en euros sont donnés à titre indicatif : la conversion s’applique au taux en vigueur le jour du paiement.",
-    rowRate: "Tarif 2027",
+    rowRate: "Tarif",
     rowBeds: "Lits",
     rowCapacity: "Capacité",
     rowUnits: "Unités",
@@ -86,9 +88,10 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     galOf: "photo {n}",
     discoverRepos: "Discover Le Repos",
     extrasTitle: "Extras & services",
+    restaurationTitle: "Dining",
     currencyNote:
       "Public rates in ariary, tourist levy not included. Euro amounts are indicative only: conversion applies at the rate in force on the day of payment.",
-    rowRate: "2027 rate",
+    rowRate: "Rate",
     rowBeds: "Beds",
     rowCapacity: "Capacity",
     rowUnits: "Units",
@@ -116,9 +119,10 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     galOf: "foto {n}",
     discoverRepos: "Descubrir Le Repos",
     extrasTitle: "Suplementos y servicios",
+    restaurationTitle: "Restauración",
     currencyNote:
       "Tarifas públicas en ariary, tasa turística no incluida. Los importes en euros son orientativos: la conversión se aplica al tipo vigente el día del pago.",
-    rowRate: "Tarifa 2027",
+    rowRate: "Tarifa",
     rowBeds: "Camas",
     rowCapacity: "Capacidad",
     rowUnits: "Unidades",
@@ -497,16 +501,32 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                 ]}
               />
             </ScrollReveal>
+            {/* Restauration et services connexes, repris de la grille
+                officielle 2027. Les euros affichés sont ceux que le
+                document publie — ils ne sont pas recalculés : `eur()` ne
+                fait que mettre en forme. Là où la grille ne donne pas
+                d'équivalent (transferts, salle, draisine), on n'en invente
+                pas et l'ariary reste seul. */}
             <ScrollReveal delay={120}>
               <RecapRows
+                title={rx.restaurationTitle}
+                rows={[
+                  { label: extras.breakfast.label[loc], value: `${ar(extras.breakfast.priceAR)} · ${eur(8)}` },
+                  { label: extras.menu.label[loc], value: `${ar(extras.menu.priceAR)} · ${eur(14)}` },
+                  { label: extras.picnic.label[loc], value: `${ar(extras.picnic.priceAR)} · ${eur(8)}` },
+                  { label: extras.repasGuide.label[loc], value: `${ar(extras.repasGuide.priceAR)} · ${eur(1.6)}` },
+                ]}
+              />
+              <RecapRows
+                className="mt-10"
                 title={rx.extrasTitle}
                 rows={[
                   { label: extras.taxeSejour.label[loc], value: `${ar(extras.taxeSejour.priceAR)} · ${eur(1)}` },
-                  { label: extras.breakfast.label[loc], value: `${ar(extras.breakfast.priceAR)} · ${eur(8)}` },
-                  { label: extras.menu.label[loc], value: `${ar(extras.menu.priceAR)} · ${eur(14)}` },
-                  { label: extras.picnic.label[loc], value: ar(extras.picnic.priceAR) },
                   { label: extras.extraBed.label[loc], value: ar(extras.extraBed.priceAR) },
-                  { label: extras.transfer.label[loc], value: `${ar(extras.transfer.priceAR)} · ${eur(25)}` },
+                  { label: extras.transfer.label[loc], value: ar(extras.transfer.priceAR) },
+                  { label: extras.transferAmbalakely.label[loc], value: ar(extras.transferAmbalakely.priceAR) },
+                  { label: extras.conference.label[loc], value: ar(extras.conference.priceAR) },
+                  { label: extras.draisine.label[loc], value: ar(extras.draisine.priceAR) },
                 ]}
                 footnote={`${dict.rooms.taxeSejour} · ${rx.currencyNote}`}
               />

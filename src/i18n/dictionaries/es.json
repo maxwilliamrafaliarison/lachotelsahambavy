@@ -64,7 +64,7 @@
     "ctaLabel": "Conocer al equipo"
   },
   "rooms": {
-    "label": "Alojamientos · Tarifas 2026",
+    "label": "Alojamientos · Tarifas",
     "title": "Nuestras habitaciones y bungalows",
     "subtitle": "Del bungalow estándar a la experiencia sobre el agua — unos cincuenta alojamientos para todos los viajes",
     "intro": "Nuestras habitaciones están diseñadas para garantizar el confort y la tranquilidad de nuestros huéspedes: una cama personalizada de 2,20 m × 2,20 m, que ofrece un confort superior a las dimensiones estándar, un baño privado con agua caliente y una terraza con vistas al lago. Cada habitación dispone de televisión; el acceso al Wi-Fi está disponible únicamente en el restaurante.",
@@ -88,7 +88,7 @@
     "discoverRepos": "Descubrir Le Repos",
     "extrasTitle": "Suplementos y servicios",
     "currencyNote": "Tarifas públicas en ariary, tasa turística no incluida. Los importes en euros son orientativos: la conversión se aplica al tipo vigente el día del pago.",
-    "rowRate": "Tarifa 2027",
+    "rowRate": "Tarifa",
     "rowBeds": "Camas",
     "rowCapacity": "Capacidad",
     "rowUnits": "Unidades",
@@ -106,7 +106,8 @@
     "pilotisName": "Suite Nupcial sobre Pilotes",
     "galPrev": "Foto anterior",
     "galNext": "Foto siguiente",
-    "galOf": "foto {n}"
+    "galOf": "foto {n}",
+    "restaurationTitle": "Restauración"
   },
   "philosophy": {
     "label": "Nuestra filosofía",
@@ -897,7 +898,7 @@
     "heroSubtitle": "Derechos y compromisos — viajeros de la Unión Europea",
     "intro": "Estas condiciones rigen toda solicitud de reserva realizada en lachotel.com. Cumplen con el marco legal aplicable a los viajeros de la Unión Europea (Directiva 2011/83/UE y Reglamento 524/2013). Al enviar el formulario de reserva, usted reconoce haberlas leído.",
     "lastUpdated": "Última actualización",
-    "lastUpdatedDate": "16 de abril de 2026",
+    "lastUpdatedDate": "8 de agosto de 2026",
     "sections": [
       {
         "title": "1 · Reserva y pago",
@@ -958,6 +959,22 @@
           "Check-out: antes de las 11:00. Salida tardía bajo petición y sujeta a disponibilidad (hasta las 15:00, gratuita; más allá, noche adicional facturada).",
           "Hora estimada de llegada: a comunicar en el formulario de reserva para que el equipo pueda preparar su recepción.",
           "En caso de retraso imprevisto, avísenos por WhatsApp al (+261) 34 99 161 76."
+        ]
+      },
+      {
+        "title": "7 · Socios — turoperadores y agencias receptivas",
+        "intro": "Las condiciones siguientes se aplican a los profesionales del viaje. El Lac Hôtel Sahambavy colabora con operadores que dispongan de NIF y STAT en vigor.",
+        "items": [
+          "Reservas: no se acepta ninguna reserva por teléfono. Toda solicitud debe llegarnos por correo a booking@lachotel.com o lachotelsahambavy@gmail.com.",
+          "Confirmación: una reserva confirmada da lugar a la emisión inmediata de una factura pro forma, abonada íntegramente antes de la llegada de los clientes. Transcurrido el plazo sin confirmación, la reserva se anula automáticamente.",
+          "Cupos: privilegiamos las reservas confirmadas, dado el tamaño reducido de nuestro establecimiento. No aplicamos fecha de fin de opción, pero en cuanto se confirme otra solicitud le pediremos que libere las habitaciones. Se mantiene un cupo si nos comunica mensualmente el número de inscritos.",
+          "No se aceptan ya vales (vouchers) ni pago posterior.",
+          "Pago: en efectivo o con cheque in situ, o por transferencia bancaria antes de la llegada. Le rogamos nos envíe el aviso de abono indicando el número de factura o de pro forma.",
+          "Chófer: alojamiento gratuito, comida del chófer a 8 000 Ar.",
+          "Guía: 50 % sobre las prestaciones — alojamiento facturado al cliente, 50 % sobre la restauración.",
+          "Tour leader: alojamiento gratuito en categoría estándar para grupos de 10 viajeros o más, y 50 % sobre la restauración. Por debajo de 10 viajeros, alojamiento y restauración se facturan al 50 %.",
+          "Viajes de familiarización: alojamiento gratuito; comidas y bebidas a cargo del cliente al 50 %.",
+          "Anulación: el baremo del artículo 2 se aplica igualmente a las reservas de agencia."
         ]
       }
     ],

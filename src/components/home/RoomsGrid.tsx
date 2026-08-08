@@ -132,6 +132,25 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
             sur: dict.rooms.galOf ?? "photo {n}",
           }}
         />
+        {/* Pastille de localisation, posée SUR la photo — donc lue avant le
+            nom et le prix. La villa basse est à l'annexe Le Repos, à 800 m
+            du bâtiment principal : un client qui l'ignore découvre la marche
+            à l'arrivée. Le label sous la photo ne suffisait pas, il se lit
+            comme une mention de gamme. */}
+        {room.localisation && (
+          <span className="pointer-events-none absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-night/80 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-linen backdrop-blur-md">
+            <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true">
+              <path
+                d="M5 .8a3.6 3.6 0 0 0-3.6 3.6c0 2.7 3.6 6.8 3.6 6.8s3.6-4.1 3.6-6.8A3.6 3.6 0 0 0 5 .8Z"
+                stroke="currentColor"
+                strokeWidth="1.1"
+                strokeLinejoin="round"
+              />
+              <circle cx="5" cy="4.3" r="1.25" fill="currentColor" />
+            </svg>
+            {room.localisation[locale]}
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6 md:p-7">
