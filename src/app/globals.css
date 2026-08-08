@@ -141,7 +141,8 @@ body {
   /* — Menus « verre clair & pastilles ». rgba() ne sait pas consommer une
        variable hexadécimale : ce sont les triplets qui portent la teinte.
        --lh-past / --lh-past-ink sont posés par rubrique dans Navbar.tsx. — */
-  --lh-past: 166 69 23;             /* teinte par défaut = terre cuite #A64517 */
+  --lh-past: 166 69 23;             /* teinte vive = terre cuite #A64517 (survol) */
+  --lh-past-pale: 247 227 214;      /* teinte claire de la pastille au repos */
   --lh-past-ink: 133 54 15;         /* encre lisible = terracotta-deep #85360F */
   --lh-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -878,28 +879,32 @@ body {
    bungalows ocre, bleu pour l'eau et les activités nautiques, vert pour
    les jardins et la plantation.
 
-   POURQUOI LA LUMINANCE DU FOND EST BORNÉE
-   Un verre CLAIR sur photo est bien plus difficile qu'un verre sombre :
-   au-dessus d'un feuillage à l'ombre, il s'assombrit et le texte foncé
-   décroche. `contrast(0.30)` comprime le fond vers le gris moyen —
-   quelle que soit la photo, la sortie tient dans une bande étroite —
-   puis `brightness(1.75)` la relève. Le verre est donc TOUJOURS clair,
-   par construction, et pas par espoir.
+   OÙ VIT LA GARANTIE DE CONTRASTE — sur les PASTILLES, pas sur le plateau.
+   C'est ce qui permet au plateau d'être vraiment transparent. Une première
+   version bornait la luminance du fond au niveau du plateau
+   (`contrast(0.30) brightness(1.75)`) : le contraste était garanti, mais la
+   photo s'écrasait en une bande blanchâtre — « je n'aime pas ce blanc
+   derrière ». En déplaçant la garantie sur les pastilles, qui seules
+   portent du texte, le plateau n'a plus qu'à voiler légèrement.
 
-   `saturate(200%)` est appliqué AVANT la compression : la chroma du
-   paysage est exaltée puis conservée. Le plateau est bleuté sous le
-   ciel, chaud au-dessus des bungalows, verdi sous le feuillage.
+   Le plateau ne comprime donc presque plus (contrast 0.82, brightness 1.06,
+   plancher à 0,24) : la photo le traverse et le colore pour de bon.
+     derrière                 plateau rendu
+     noir                     (80, 78, 75)
+     eau sombre               (80, 110, 138)
+     ciel bleu                (122, 195, 244)
+     bungalow ocre            (248, 137, 75)
+   `saturate(190%)` passe avant : la chroma du paysage est exaltée.
 
-   CONTRASTES, calculés sur le pire pixel de chaque fond, pastille
-   comprise (teinte 12 % par-dessus le verre) :
-     fond            verre          terre   lac    thé
-     noir absolu     (217,212,206)   4,75   4,64   7,45
-     ombre feuillage (221,221,207)   5,07   4,96   7,96
-     eau sombre      (217,222,225)   5,11   5,01   8,04
-     ciel bleu       (229,248,243)   6,21   6,09   9,79
-     bungalow ocre   (255,230,206)   5,73   5,58   8,99
-     papier          (255,250,243)   6,57   6,43  10,35
-   Pire cas 4,64:1 — AA tenu, y compris sur du noir absolu.
+   Les pastilles portent une teinte CLAIRE de leur couleur à 0,84 — assez
+   couvrante pour que l'encre foncée ne dépende plus de la photo. Pire
+   ratio tous fonds confondus : 5,20:1. Au survol la pastille se remplit
+   de sa couleur vive et l'encre passe au blanc.
+
+   Attention : le plateau portant un backdrop-filter, il devient un
+   « backdrop root ». Une pastille ne peut donc PAS filtrer la page à son
+   tour — elle ne compose que par-dessus le rendu du plateau. C'est
+   pourquoi sa garantie doit venir de son alpha, pas d'un filtre.
 
    CE QUI A ÉTÉ RETIRÉ (demande du 08/08)
    - le titre du panneau, qui répétait la rubrique déjà lue au-dessus ;
@@ -954,20 +959,20 @@ body {
     left: 0; right: 0; top: -12px; height: 12px;
   }
 
-  @supports (backdrop-filter: blur(26px) saturate(200%) contrast(0.3) brightness(1.75))
-         or (-webkit-backdrop-filter: blur(26px) saturate(200%) contrast(0.3) brightness(1.75)) {
+  @supports (backdrop-filter: blur(22px) saturate(190%) contrast(0.82) brightness(1.06))
+         or (-webkit-backdrop-filter: blur(22px) saturate(190%) contrast(0.82) brightness(1.06)) {
     .lh-plateau {
-      -webkit-backdrop-filter: blur(26px) saturate(200%) contrast(0.3) brightness(1.75);
-              backdrop-filter: blur(26px) saturate(200%) contrast(0.3) brightness(1.75);
+      -webkit-backdrop-filter: blur(22px) saturate(190%) contrast(0.82) brightness(1.06);
+              backdrop-filter: blur(22px) saturate(190%) contrast(0.82) brightness(1.06);
       background:
         /* lumière chaude rasante, en haut à gauche */
         radial-gradient(120% 78% at 10% -12%,
-          rgb(255 233 200 / 0.55) 0%, rgb(255 233 200 / 0) 62%),
+          rgb(255 233 200 / 0.20) 0%, rgb(255 233 200 / 0) 62%),
         /* réverbération froide du lac, en bas à droite */
         radial-gradient(105% 66% at 96% 112%,
-          rgb(206 230 242 / 0.45) 0%, rgb(206 230 242 / 0) 64%),
-        /* plancher de contraste — la seule couche mesurée */
-        rgb(255 247 236 / 0.62);
+          rgb(206 230 242 / 0.16) 0%, rgb(206 230 242 / 0) 64%),
+        /* simple voile chaud : le plateau ne porte plus le contraste */
+        rgb(255 247 236 / 0.24);
     }
   }
 
@@ -1000,8 +1005,8 @@ body {
     font-size: 14px; line-height: 1.3; letter-spacing: 0.004em;
     white-space: nowrap;
     color: rgb(var(--lh-past-ink));
-    background: rgb(var(--lh-past) / 0.14);
-    box-shadow: inset 0 0 0 1px rgb(var(--lh-past) / 0.16);
+    background: rgb(var(--lh-past-pale) / 0.84);
+    box-shadow: inset 0 0 0 1px rgb(var(--lh-past) / 0.20);
     transition: background-color 160ms var(--lh-ease),
                 color 160ms var(--lh-ease),
                 box-shadow 160ms var(--lh-ease),
@@ -1045,17 +1050,21 @@ body {
   .lh-feuille {
     background: #FFF7EC;
   }
-  @supports (backdrop-filter: blur(30px) saturate(200%) contrast(0.3) brightness(1.75))
-         or (-webkit-backdrop-filter: blur(30px) saturate(200%) contrast(0.3) brightness(1.75)) {
+  @supports (backdrop-filter: blur(30px) saturate(190%) contrast(0.82) brightness(1.06))
+         or (-webkit-backdrop-filter: blur(30px) saturate(190%) contrast(0.82) brightness(1.06)) {
     .lh-feuille {
-      -webkit-backdrop-filter: blur(30px) saturate(200%) contrast(0.3) brightness(1.75);
-              backdrop-filter: blur(30px) saturate(200%) contrast(0.3) brightness(1.75);
+      -webkit-backdrop-filter: blur(30px) saturate(190%) contrast(0.82) brightness(1.06);
+              backdrop-filter: blur(30px) saturate(190%) contrast(0.82) brightness(1.06);
+      /* Plancher plus dense que le plateau (0,78 contre 0,24) : la feuille
+         porte aussi du texte courant — courriel, téléphone — qui n'a pas de
+         pastille pour garantir son contraste. Mesuré sur fond noir :
+         rgb(200,195,188), body #4A4A44 à 4,96:1. */
       background:
         radial-gradient(90% 40% at 8% 0%,
-          rgb(255 233 200 / 0.50) 0%, rgb(255 233 200 / 0) 60%),
+          rgb(255 233 200 / 0.30) 0%, rgb(255 233 200 / 0) 60%),
         radial-gradient(85% 45% at 100% 100%,
-          rgb(206 230 242 / 0.42) 0%, rgb(206 230 242 / 0) 62%),
-        rgb(255 247 236 / 0.74);
+          rgb(206 230 242 / 0.24) 0%, rgb(206 230 242 / 0) 62%),
+        rgb(255 247 236 / 0.78);
     }
   }
 

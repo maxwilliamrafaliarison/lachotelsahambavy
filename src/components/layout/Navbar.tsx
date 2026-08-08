@@ -42,20 +42,30 @@ function estActif(pathname: string, href: string, locale: string): boolean {
  * à 12 % d'opacité) et son encre (variante foncée, seule à porter du
  * texte). Les ratios sont calculés dans l'en-tête du bloc CSS.
  */
-const TEINTES: Record<string, { fond: string; encre: string }> = {
-  "/hotel": { fond: "166 69 23", encre: "133 54 15" }, // terre cuite — murs en pisé
-  "/hebergements": { fond: "166 69 23", encre: "133 54 15" }, // bungalows ocre
-  "/experiences": { fond: "23 104 168", encre: "18 84 127" }, // lac — canoë, pédalos
-  "/train-fce": { fond: "166 69 23", encre: "133 54 15" }, // wagon 1930, ocre
-  "/jardins": { fond: "38 71 27", encre: "27 53 19" }, // thé — jardins, plantation
+type Teinte = { fond: string; pale: string; encre: string };
+
+const TERRE: Teinte = { fond: "166 69 23", pale: "247 227 214", encre: "133 54 15" };
+const LAC: Teinte = { fond: "23 104 168", pale: "220 234 244", encre: "18 84 127" };
+const THE: Teinte = { fond: "38 71 27", pale: "223 232 218", encre: "27 53 19" };
+
+const TEINTES: Record<string, Teinte> = {
+  "/hotel": TERRE, // les murs en pisé
+  "/hebergements": TERRE, // les bungalows ocre sur pilotis
+  "/experiences": LAC, // canoë, pédalos, l'eau
+  "/train-fce": TERRE, // le wagon 1930
+  "/jardins": THE, // les jardins et la plantation
 };
 
-const TEINTE_DEFAUT = { fond: "166 69 23", encre: "133 54 15" };
+const TEINTE_DEFAUT = TERRE;
 
 /** Variables CSS de teinte, à poser sur le plateau ou la feuille. */
 function styleTeinte(href: string): React.CSSProperties {
   const t = TEINTES[href.split("#")[0]] ?? TEINTE_DEFAUT;
-  return { "--lh-past": t.fond, "--lh-past-ink": t.encre } as React.CSSProperties;
+  return {
+    "--lh-past": t.fond,
+    "--lh-past-pale": t.pale,
+    "--lh-past-ink": t.encre,
+  } as React.CSSProperties;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
