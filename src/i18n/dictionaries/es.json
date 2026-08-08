@@ -594,7 +594,10 @@
     "ratesLabel": "Tarifas",
     "ratesValue": "Bajo petición",
     "projectLabel": "Proyecto de conservación",
-    "projectTitle": "Andrambovato, corredor de bosque primario"
+    "projectTitle": "Andrambovato, corredor de bosque primario",
+    "avisPastille": "Circulación suspendida",
+    "avisTexte": "La circulación de la línea Fianarantsoa–Costa Este está actualmente suspendida, y con ella el alquiler de dresina. Seguimos de cerca la reanudación: escríbanos o llame a recepción y le diremos en qué punto está la línea, y organizaremos su trayecto en cuanto vuelva a circular.",
+    "avisLien": "Consúltenos"
   },
   "repos": {
     "heroTitle": "Le Repos",

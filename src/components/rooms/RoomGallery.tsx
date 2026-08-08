@@ -135,7 +135,11 @@ export default function RoomGallery({
         <div
           key={src}
           aria-hidden={i !== index}
-          className={`absolute inset-0 transition-opacity duration-500 ${
+          /* Fondu long (900 ms) sur une courbe douce plutôt que les 500 ms
+             linéaires d'origine : à cette durée les deux vues se
+             superposent assez pour qu'on lise un enchaînement, pas une
+             substitution. */
+          className={`absolute inset-0 transition-opacity duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${
             i === index ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
         >
@@ -147,7 +151,16 @@ export default function RoomGallery({
               height={1200}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
               {...(i === 0 && prioritaire ? { preload: true } : { loading: "lazy" as const })}
-              className="h-full w-full object-cover"
+              /* Travelling avant très lent sur la vue affichée — 4 %
+                 d'échelle en 9 s. Le fondu seul donnait un diaporama de
+                 borne d'accueil : une image se pose, s'arrête net, une
+                 autre la remplace. Cette dérive continue est ce qui fait la
+                 différence entre « des photos qui défilent » et une
+                 séquence. Elle repart de zéro à chaque changement de vue,
+                 puisque la classe change avec `index`. */
+              className={`h-full w-full object-cover transition-transform duration-[9000ms] ease-linear motion-reduce:transition-none motion-reduce:scale-100 ${
+                i === index ? "scale-[1.04]" : "scale-100"
+              }`}
             />
           )}
         </div>

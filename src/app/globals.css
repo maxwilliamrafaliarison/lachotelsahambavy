@@ -59,6 +59,14 @@
   --color-night-body: #BFB4A0;
   --color-copper: #8A4B2E;
 
+  /* Avis de service — troisième registre, distinct de l'action (lac) et de
+     l'éditorial (terre cuite). L'ambre est à 20,6° de teinte de la terre
+     cuite, donc lisible comme « autre chose » ; le cuivre n'en était qu'à
+     0,9° et se confondait. Encre sur fond : 6,98:1. */
+  --color-avis: #6B4E12;
+  --color-avis-bg: #FBF3E2;
+  --color-avis-hairline: #E8D9B4;
+
   /* — Alias hérités (LEGACY — à supprimer une fois la migration finie).
        Mappés sur le nouveau monde pour que les composants non migrés
        restent cohérents visuellement pendant la transition.

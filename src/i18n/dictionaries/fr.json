@@ -594,7 +594,10 @@
     "ratesLabel": "Tarifs",
     "ratesValue": "Sur demande",
     "projectLabel": "Projet de préservation",
-    "projectTitle": "Andrambovato, corridor de forêt primaire"
+    "projectTitle": "Andrambovato, corridor de forêt primaire",
+    "avisPastille": "Circulation suspendue",
+    "avisTexte": "La circulation de la ligne Fianarantsoa–Côte Est est actuellement suspendue, et avec elle la location de draisine. Nous suivons la reprise de près : écrivez-nous ou appelez la réception, nous vous dirons où en est la ligne et organiserons votre trajet dès qu'elle roulera de nouveau.",
+    "avisLien": "Nous consulter"
   },
   "repos": {
     "heroTitle": "Le Repos",

@@ -1,6 +1,7 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PanoramaHero from "@/components/ui/PanoramaHero";
+import AvisService from "@/components/ui/AvisService";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -117,6 +118,21 @@ export default async function TrainFCEPage({
         kicker={dict.train.heroSubtitle}
         cta={{ href: "#draisine", label: dict.train.draisineLabel }}
       />
+
+      {/* Avis de service — posé juste sous le hero, avant toute lecture du
+          contenu. La page reste entière et consultable : le visiteur doit
+          pouvoir se projeter sur le trajet, il doit simplement savoir
+          d'emblée qu'il faut nous consulter avant de compter dessus. */}
+      <section className="pt-8 md:pt-10">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <AvisService pastille={dict.train.avisPastille}>
+            <p>
+              {dict.train.avisTexte}{" "}
+              <Link href={`/${locale}/contact/`}>{dict.train.avisLien}</Link>.
+            </p>
+          </AvisService>
+        </div>
+      </section>
 
       {/* ──── #ligne-fce — la ligne Fianarantsoa–Côte Est ──── */}
       <section id="ligne-fce" className="scroll-mt-24 py-16 md:py-24">

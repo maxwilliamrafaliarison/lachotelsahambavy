@@ -594,7 +594,10 @@
     "ratesLabel": "Rates",
     "ratesValue": "On request",
     "projectLabel": "Conservation Focus",
-    "projectTitle": "Andrambovato, a primary forest corridor"
+    "projectTitle": "Andrambovato, a primary forest corridor",
+    "avisPastille": "Services suspended",
+    "avisTexte": "Services on the Fianarantsoa–East Coast line are currently suspended, and with them draisine hire. We are following the resumption closely: write to us or call reception and we will tell you where the line stands, and arrange your journey as soon as it runs again.",
+    "avisLien": "Contact us"
   },
   "repos": {
     "heroTitle": "Le Repos",
