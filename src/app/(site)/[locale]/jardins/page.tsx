@@ -29,8 +29,8 @@ const EDEN_FR = {
   flowersTitle: "Couleurs du jardin",
   flowers: [
     { caption: "Zinnia et butineuse", alt: "Zinnia orange visité par une abeille dans le jardin" },
-    { caption: "Gaillarde", alt: "Gaillarde rouge et jaune dans les massifs du jardin" },
     { caption: "Bougainvillier", alt: "Bougainvillier violet en fleur dans le jardin" },
+    { caption: "Gaillarde", alt: "Gaillarde rouge et jaune dans les massifs du jardin" },
   ],
   philosophyAlt: "Statue de chérubin parmi les fougères du jardin",
 };
@@ -58,10 +58,15 @@ const VILLAGE_FR = {
   ],
 };
 
+/* Le bougainvillier au centre : c'est la floraison la plus haute et la plus
+   massive des trois, elle tient le milieu du triptyque et laisse les deux
+   fleurs de massif l'encadrer. Ordre voulu par la direction (09/08/2026).
+   Cette liste et le tableau `flowers` ci-dessus se lisent en parallèle :
+   les réordonner ensemble, sinon la légende change de photo. */
 const FLOWER_IMAGES = [
   "zinnia-orange-abeille-jardin.jpg",
-  "gaillarde-rouge-jaune-jardin.jpg",
   "bougainvillier-violet-jardin.jpg",
+  "gaillarde-rouge-jaune-jardin.jpg",
 ];
 
 const MOMENT_IMAGES = [
