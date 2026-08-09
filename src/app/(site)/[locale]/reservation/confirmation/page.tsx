@@ -1,59 +1,50 @@
-"use client";
-
 /**
- * Page de confirmation post-submission.
- * Cf. Phase 7 §7.7 — Onboarding post-booking.
+ * Page de confirmation post-envoi — COMPOSANT SERVEUR.
  *
- * - noindex (via metadata client) — pas de valeur SEO, contenu dynamique.
- * - Lit les query params pour afficher un récap personnalisé.
- * - Fire-event Plausible (déjà dispatch côté form — no double count).
+ * Dernière page du site à rester cliente : son HTML ne contenait aucun
+ * titre, et le visiteur voyait « … » le temps que le dictionnaire arrive.
+ * Sur l'écran qui suit immédiatement une demande de réservation, c'était
+ * le pire moment pour un blanc.
+ *
+ * Rien n'imposait le client : les paramètres d'URL se lisent en prop
+ * `searchParams` côté serveur, et le noindex passe par generateMetadata
+ * au lieu d'une balise injectée à la main dans le <head>.
  */
 
-import { use, useEffect, useState, Suspense } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getDictionary } from "@/i18n/getDictionary";
-import { type Locale } from "@/lib/utils";
+import { locales, type Locale } from "@/lib/utils";
 import { siteConfig } from "@/data/site";
+import RecapSejour from "@/components/booking/RecapSejour";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-function formatDate(iso: string | null, locale: string): string {
-  if (!iso) return "—";
-  try {
-    return new Date(iso).toLocaleDateString(locale, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  } catch {
-    return iso;
-  }
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  return {
+    title: dict.booking?.confirmation?.title ?? "Demande reçue",
+    /* Le noindex venait d'une balise créée à la main dans un useEffect,
+       parce que l'API metadata ne s'applique pas aux pages clientes.
+       La page étant redevenue serveur, il repasse par l'API. */
+    robots: { index: false, follow: false },
+  };
 }
 
 function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
-  const params = useSearchParams();
-  const name = params.get("name") || "";
-  const checkin = params.get("checkin");
-  const checkout = params.get("checkout");
   const c = dict.booking?.confirmation ?? {};
 
-  useEffect(() => {
-    // Set noindex explicitly (for client-render pages, metadata API doesn't apply)
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
-    return () => {
-      document.head.removeChild(meta);
-    };
-  }, []);
-
-  const stayInfoTpl = c.stayInfo || "Séjour : {checkin} → {checkout}";
-  const stayInfo = stayInfoTpl
-    .replace("{checkin}", formatDate(checkin, locale))
-    .replace("{checkout}", formatDate(checkout, locale));
-  const subtitle = (c.subtitle || "Merci {name}").replace("{name}", name || "");
 
   return (
     <main className="min-h-[80vh] bg-paper flex items-center justify-center px-4 py-24">
@@ -77,12 +68,17 @@ function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
         <h1 className="text-3xl md:text-4xl text-ink mb-3 font-normal">
           {c.title || "Demande reçue !"}
         </h1>
-        <p className="text-base md:text-lg text-muted mb-2">{subtitle}</p>
-        {checkin && checkout ? (
-          <p className="text-sm text-ink font-medium mb-10">{stayInfo}</p>
-        ) : (
-          <div className="mb-10" />
-        )}
+        {/* Suspense OBLIGATOIRE : `useSearchParams` dans une page prérendue
+            fait échouer le prérendu sans lui — « couldn't be rendered
+            statically ». Le repli réserve la même hauteur que les deux
+            lignes qu'il remplace, pour que rien ne saute à l'hydratation. */}
+        <Suspense fallback={<div className="mb-10 h-[3.5rem]" />}>
+          <RecapSejour
+            locale={locale}
+            gabaritSousTitre={c.subtitle || "Merci {name}"}
+            gabaritSejour={c.stayInfo || "Séjour : {checkin} → {checkout}"}
+          />
+        </Suspense>
 
         {/* Next-steps card */}
         <div className="bg-white rounded-[3px] p-6 md:p-8 text-left shadow-sm border border-ink/5 space-y-4">
@@ -116,35 +112,12 @@ function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
   );
 }
 
-export default function ReservationConfirmationPage({
+export default async function ReservationConfirmationPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = use(params);
-  const [dict, setDict] = useState<any>(null);
-
-  useEffect(() => {
-    getDictionary(locale as Locale).then(setDict);
-  }, [locale]);
-
-  if (!dict) {
-    return (
-      <main className="min-h-[80vh] flex items-center justify-center">
-        <div className="text-muted text-sm">…</div>
-      </main>
-    );
-  }
-
-  return (
-    <Suspense
-      fallback={
-        <main className="min-h-[80vh] flex items-center justify-center">
-          <div className="text-muted text-sm">…</div>
-        </main>
-      }
-    >
-      <ConfirmationContent locale={locale as Locale} dict={dict} />
-    </Suspense>
-  );
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  return <ConfirmationContent locale={locale as Locale} dict={dict} />;
 }
