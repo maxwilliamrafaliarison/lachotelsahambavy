@@ -7,7 +7,15 @@ export const siteConfig = {
   whatsapp: "+261349916176",
   whatsappDisplay: "(+261) 034 99 161 76",
   address: "Sahambavy, Fianarantsoa 301, Madagascar",
-  geo: { lat: -21.0667, lng: 47.25 },
+  /* Relevées sur la fiche Google de l'hôtel (CID 9763325951372533936), le
+     09/08/2026. Les précédentes — -21,0667 / 47,25 — plaçaient l'hôtel
+     42 km trop au nord, en pleine brousse : elles partaient dans le
+     LocalBusiness, le TouristAttraction et les deux cartes intégrées. */
+  geo: { lat: -21.446602, lng: 47.259014 },
+  /* Identifiant de la fiche Google, relevé sur le lien court officiel
+     (`!1s0x21e7c50ea76bb167:0x877e4d3975e9a0b0`, seconde valeur en décimal).
+     Sert au bouton « donner un avis » et aux cartes intégrées. */
+  googleCid: "9763325951372533936",
   social: {
     facebook: "https://www.facebook.com/lachotelsahambavy/",
     instagram: "https://www.instagram.com/lachotelsahambavy",
@@ -39,7 +47,8 @@ export const siteConfig = {
   },
   ratings: {
     booking: { score: 9.0, total: 34, label: "Fabuleux" },
-    google: { score: 4.6, total: 157 },
+    // 177 avis relevés sur la fiche Google le 09/08/2026 (157 auparavant).
+    google: { score: 4.6, total: 177 },
     tripadvisor: { score: 4.5, total: 229 },
   },
   specialOffer: {
@@ -48,6 +57,21 @@ export const siteConfig = {
     es: "50 % en la 2.ª noche para cualquier reserva de 2 noches consecutivas",
   },
 };
+
+/**
+ * Carte Google intégrée, centrée sur la FICHE de l'hôtel et non sur un
+ * point quelconque.
+ *
+ * Les deux cartes du site portaient un `pb` bricolé — `!1s0x0%3A0x0!2sSahambavy`
+ * — qui posait une simple étiquette « Sahambavy » sur des coordonnées
+ * fausses de 42 km. En passant le CID, Google renvoie la fiche elle-même :
+ * le nom de l'hôtel, ses photos et son itinéraire. La langue de la carte
+ * suit celle de la page.
+ */
+export function carteEmbed(locale: string): string {
+  const l = ["fr", "en", "es"].includes(locale) ? locale : "fr";
+  return `https://www.google.com/maps/embed?pb=!1m4!3m2!1m1!4s${siteConfig.googleCid}!6i15!3m1!1s${l}!5m1!1s${l}`;
+}
 
 /**
  * Navigation globale du site — arborescence du document de référence de

@@ -18,7 +18,7 @@ import PanoramaHero from "@/components/ui/PanoramaHero";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import BookingForm from "@/components/booking/BookingForm";
-import { siteConfig } from "@/data/site";
+import { siteConfig, carteEmbed } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
@@ -164,7 +164,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <h2 className="mb-8">{dict.contact.mapTitle}</h2>
             <div className="overflow-hidden rounded-[3px] border border-hairline">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.5!2d47.25!3d-21.0667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSahambavy!5e0!3m2!1sfr!2smg!4v1"
+                src={carteEmbed(locale)}
                 width="100%"
                 height="450"
                 style={{ border: 0, display: "block" }}
