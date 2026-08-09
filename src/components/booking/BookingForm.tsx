@@ -698,7 +698,13 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
     track("booking_form_started", { locale });
 
     try {
-      const res = await fetch("/api/booking", {
+      /* Barre oblique finale obligatoire : `trailingSlash: true` fait
+         répondre 308 à /api/booking, et chaque envoi payait donc un
+         aller-retour de plus. Le 308 préserve bien la méthode et le corps
+         — rien n'était cassé — mais certains proxys d'entreprise
+         rétrogradent un POST redirigé en GET, et la demande se perdrait
+         sans message d'erreur. */
+      const res = await fetch("/api/booking/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

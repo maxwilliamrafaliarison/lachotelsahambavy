@@ -25,6 +25,26 @@ function both(source: string, destination: string): Redirect[] {
   ];
 }
 
+/**
+ * Comme `both`, mais SANS l'attrape-tout des sous-chemins.
+ *
+ * À réserver aux segments hérités qui portent aujourd'hui une vraie page
+ * enfant. Cas vécu : `/fr/reservation` redirigeait vers `/fr/contact/`
+ * avec son `:rest*`, lequel avalait `/fr/reservation/confirmation/` — la
+ * page vers laquelle le formulaire pousse après envoi. Le client validait
+ * sa demande et atterrissait sur le formulaire de contact au lieu de sa
+ * confirmation, en français comme en anglais. L'espagnol fonctionnait,
+ * faute de redirection équivalente : c'est ce qui a mis la puce à
+ * l'oreille.
+ *
+ * Les redirections Next sont évaluées AVANT le routage : on ne peut pas
+ * compter sur la page pour « gagner » contre le motif. Il faut donc que
+ * le motif ne corresponde pas.
+ */
+function racineSeule(source: string, destination: string): Redirect[] {
+  return [{ source, destination, permanent: true }];
+}
+
 export const wordpressRedirects: Redirect[] = [
   // ─── WordPress assets / admin ───────────────────────────────
   ...both("/wp-content", "/"),
@@ -55,7 +75,7 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/fr/photos", "/fr/galerie/"),
   ...both("/fr/contact-us", "/fr/contact/"),
   ...both("/fr/reserver", "/fr/contact/"),
-  ...both("/fr/reservation", "/fr/contact/"),
+  ...racineSeule("/fr/reservation", "/fr/contact/"), // page enfant : /reservation/confirmation/
   ...both("/fr/booking", "/fr/contact/"),
 
   // ─── Anciennes URLs EN ──────────────────────────────────────
@@ -81,7 +101,7 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/en/gallery", "/en/galerie/"),
   ...both("/en/contact-us", "/en/contact/"),
   ...both("/en/booking", "/en/contact/"),
-  ...both("/en/reservation", "/en/contact/"),
+  ...racineSeule("/en/reservation", "/en/contact/"), // page enfant : /reservation/confirmation/
 
   // ─── Anciennes URLs ES ──────────────────────────────────────
   ...both("/es/habitaciones", "/es/hebergements/"),

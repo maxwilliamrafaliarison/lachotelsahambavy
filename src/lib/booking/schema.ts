@@ -16,6 +16,11 @@ import { locales, type Locale } from "@/lib/utils";
 export const RATES = ["standard", "to", "promo"] as const;
 export const PENSIONS = ["room-only", "bb", "half-board", "full-board"] as const;
 export const TRANSFERS = ["none", "fianarantsoa-4x4", "ambalakely"] as const;
+/* « familial » n'est PAS une catégorie du parc : les tarifs officiels en
+   font une configuration du Pilotis Nuptial (lit supplémentaire à
+   30 000 Ar/personne). Il reste proposé ici — c'est une demande légitime
+   — mais libellé comme une configuration, pour ne pas promettre une
+   chambre que le catalogue n'affiche pas. */
 export const ROOM_IDS = [
   "pilotis",
   "superior",
@@ -193,7 +198,7 @@ export const LABELS: LabelsShape = {
       pilotis: "Bungalow sur Pilotis Nuptial",
       superior: "Superior Lake View Room",
       wagon: "Wagon Nuptial 1930",
-      familial: "Pilotis Familial",
+      familial: "Pilotis Nuptial — configuration familiale",
       standard: "Bungalow Standard",
       arbre: "Bungalow Tarzan sur Arbre",
       "villa-repos": "Villa avec kitchenette (Le Repos)",
@@ -203,7 +208,7 @@ export const LABELS: LabelsShape = {
       pilotis: "Honeymoon Overwater Bungalow",
       superior: "Superior Lake View Room",
       wagon: "1930 Honeymoon Wagon",
-      familial: "Family Overwater Bungalow",
+      familial: "Honeymoon Overwater Bungalow — family setup",
       standard: "Standard Bungalow",
       arbre: "Tarzan Treehouse Bungalow",
       "villa-repos": "Villa with kitchenette (Le Repos)",
@@ -213,7 +218,7 @@ export const LABELS: LabelsShape = {
       pilotis: "Bungalow Nupcial sobre Pilotes",
       superior: "Habitación Superior Vista al Lago",
       wagon: "Vagón Nupcial 1930",
-      familial: "Bungalow Familiar sobre Pilotes",
+      familial: "Bungalow Nupcial sobre Pilotes — configuración familiar",
       standard: "Bungalow Estándar",
       arbre: "Bungalow Tarzán en el Árbol",
       "villa-repos": "Villa con cocina (Le Repos)",

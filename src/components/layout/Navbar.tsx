@@ -13,6 +13,13 @@ const basePath = getBasePath();
 const SCROLL_END = 180;
 
 /**
+ * Pages qui n'ouvrent PAS sur une photo sombre : la barre doit y être
+ * opaque dès le chargement, sinon son texte blanc se pose sur du papier.
+ * Fragments de chemin, comparés sans la locale.
+ */
+const SANS_HERO = ["/reservation/confirmation"];
+
+/**
  * Localise un href interne : "/hotel#philosophie" → "/fr/hotel/#philosophie".
  * Trailing slash obligatoire (config trailingSlash: true).
  */
@@ -152,7 +159,20 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
      d'une barre transparente donnait une marche visible. Le panneau étant
      désormais une carte de verre sombre détachée, la barre garde son état
      de défilement — transparente sur la photo, papier une fois descendue. */
-  const bg = eased;
+
+  /* La barre est transparente à texte blanc en haut de page, parce que
+     toutes les pages ouvrent sur une photo sombre. TOUTES SAUF UNE : la
+     page de confirmation de réservation, qui commence sur fond papier.
+     Le menu y sortait blanc sur crème — 1,03:1, purement invisible, et
+     précisément sur l'écran qu'un client voit juste après avoir réservé.
+
+     On force donc l'état opaque quand la page n'a pas de hero. La liste
+     est explicite plutôt que déduite du DOM : c'est un cas unique
+     aujourd'hui, et une détection à l'exécution imposerait un `setState`
+     dans un effet, ce que la règle react-hooks/set-state-in-effect
+     interdit. Toute nouvelle page sans hero doit être ajoutée ici. */
+  const sansHero = SANS_HERO.some((r) => pathname.includes(r));
+  const bg = sansHero ? 1 : eased;
   const darkText = bg > 0.55;
 
   const primaryItems = navigation.filter((n) => n.primary !== false);
