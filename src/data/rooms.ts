@@ -70,7 +70,7 @@ export const rooms: Room[] = [
     },
     units: 2,
     capacity: "2",
-    priceEUR: 60,
+    priceEUR: 84,
     priceAR: 420000,
     priceARTO: 300000,
     amenities: [
@@ -118,7 +118,7 @@ export const rooms: Room[] = [
     },
     units: 9,
     capacity: "2",
-    priceEUR: 50,
+    priceEUR: 72,
     priceAR: 360000,
     priceARTO: 250000,
     amenities: [
@@ -182,7 +182,7 @@ export const rooms: Room[] = [
     units: 8,
     capacity: "2",
     surface: "25m²",
-    priceEUR: 42,
+    priceEUR: 60,
     priceAR: 300000,
     priceARTO: 210000,
     amenities: [
@@ -240,7 +240,7 @@ export const rooms: Room[] = [
     units: 1,
     capacity: "2",
     surface: "30m linéaires",
-    priceEUR: 50,
+    priceEUR: 72,
     priceAR: 360000,
     priceARTO: 250000,
     amenities: [
@@ -284,7 +284,7 @@ export const rooms: Room[] = [
     },
     units: 9, // configuration du Pilotis Nuptial, pas un parc distinct
     capacity: "4",
-    priceEUR: 50,
+    priceEUR: 72,
     priceAR: 360000,
     priceARTO: 250000,
     amenities: [
@@ -329,7 +329,7 @@ export const rooms: Room[] = [
     units: 26,
     capacity: "1-2",
     surface: "16m²",
-    priceEUR: 18,
+    priceEUR: 30,
     priceAR: 150000,
     priceARTO: 90000,
     amenities: [
@@ -370,7 +370,7 @@ export const rooms: Room[] = [
     },
     units: 2,
     capacity: "1-2",
-    priceEUR: null,
+    priceEUR: 30,
     priceAR: 150000,
     priceARTO: 90000,
     amenities: [
@@ -404,7 +404,7 @@ export const rooms: Room[] = [
     },
     units: 4,
     capacity: "5",
-    priceEUR: 34,
+    priceEUR: 50,
     priceAR: 250000,
     priceARTO: 170000,
     amenities: [

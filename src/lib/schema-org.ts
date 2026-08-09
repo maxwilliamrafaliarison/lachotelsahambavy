@@ -124,10 +124,15 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
     name: siteConfig.name,
     description: description[locale],
     url: `${siteConfig.url}/${locale}/`,
+    /* Ces trois URL renvoyaient 404 — le préfixe « hero- » manquait. Le bloc
+       étant injecté depuis [locale]/layout.tsx, l'erreur portait sur les
+       ~51 pages du site, et `image` est un attribut REQUIS pour les
+       résultats enrichis hôtel : le balisage était donc invalide partout.
+       Repointé sur les vues réellement servies par le hero défilant. */
     image: [
-      `${siteConfig.url}/images/hero/pilotis.jpg`,
-      `${siteConfig.url}/images/hero/sunset.jpg`,
-      `${siteConfig.url}/images/hero/lake.jpg`,
+      `${siteConfig.url}/images/hero/hotel-vu-du-lac-bungalows-pilotis.jpg`,
+      `${siteConfig.url}/images/hero/hero-lever-de-soleil-lac.jpg`,
+      `${siteConfig.url}/images/hero/hero-piscine-jardins.jpg`,
     ],
     logo: `${siteConfig.url}/images/logo/logo-color.png`,
     telephone: siteConfig.phone,

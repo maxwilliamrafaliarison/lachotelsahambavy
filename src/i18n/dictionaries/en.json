@@ -87,7 +87,7 @@
     "comingSoon": "Photos coming soon",
     "discoverRepos": "Discover Le Repos",
     "extrasTitle": "Extras & services",
-    "currencyNote": "Public rates in ariary, tourist levy not included. Euro amounts are indicative only: conversion applies at the rate in force on the day of payment.",
+    "currencyNote": "Public rates in ariary, tourist levy not included. Euro amounts are indicative, converted at 5,000 Ar to €1; payment is settled at the rate in force on the day.",
     "rowRate": "Rate",
     "rowBeds": "Beds",
     "rowCapacity": "Capacity",
@@ -721,7 +721,7 @@
   },
   "conference": {
     "title": "Conference Room",
-    "p1": "Our conference room can accommodate up to 80 people. Fully flexible, it can be adapted to all types of professional events: meetings, seminars, training sessions, or workshops.",
+    "p1": "Our conference room can accommodate up to 40 people. Fully flexible, it can be adapted to all types of professional events: meetings, seminars, training sessions, or workshops.",
     "p2": "Surrounded by a tranquil environment that encourages reflection, it offers the ideal setting to foster concentration, creativity, and the quality of exchanges.",
     "equipment": [
       "Wi-Fi access",
@@ -729,7 +729,7 @@
       "Projector",
       "Whiteboard"
     ],
-    "capacity": "Up to 80 people",
+    "capacity": "Up to 40 people",
     "label": "Seminars & Conferences",
     "recapTitle": "The room at a glance",
     "capacityLabel": "Capacity",

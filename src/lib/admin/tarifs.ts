@@ -30,7 +30,7 @@ export const CATALOGUE: CatalogueItem[] = [
   { id: "pilotis-nuptial", label: "Pilotis Nuptial (double/twin/single)", prixAr: 360_000, unite: "nuit", groupe: "Hébergement" },
   { id: "superior-lake-view", label: "Superior Lake View Room (double/twin/single)", prixAr: 300_000, unite: "nuit", groupe: "Hébergement" },
   { id: "wagon-nuptial", label: "Wagon Nuptial", prixAr: 360_000, unite: "nuit", groupe: "Hébergement" },
-  { id: "standard", label: "Bungalow standard (double/twin/single)", prixAr: 140_000, unite: "nuit", groupe: "Hébergement" },
+  { id: "standard", label: "Bungalow standard (double/twin/single)", prixAr: 150_000, unite: "nuit", groupe: "Hébergement" },
   { id: "le-repos", label: "Bungalow traditionnel — Extension « Le Repos »", prixAr: 250_000, unite: "nuit", groupe: "Hébergement" },
   // — Restauration (TTC) —
   { id: "petit-dejeuner", label: "Petit-déjeuner", prixAr: 40_000, unite: "pers./nuit", groupe: "Restauration" },
@@ -38,7 +38,8 @@ export const CATALOGUE: CatalogueItem[] = [
   // — Suppléments —
   { id: "vignette-touristique", label: "Vignette touristique", prixAr: 5_000, unite: "pers./nuit", groupe: "Suppléments", tva: false },
   { id: "lit-supplementaire", label: "Lit supplémentaire", prixAr: 30_000, unite: "nuit", groupe: "Suppléments" },
-  { id: "transfert-4x4", label: "Transfert privé 4×4 Lac Hôtel ↔ Fianarantsoa", prixAr: 120_000, unite: "trajet", groupe: "Suppléments" },
+  { id: "transfert-4x4", label: "Transfert privé 4×4 Lac Hôtel ↔ Fianarantsoa", prixAr: 130_000, unite: "trajet", groupe: "Suppléments" },
+  { id: "transfert-ambalakely", label: "Transfert privé 4×4 Lac Hôtel ↔ Ambalakely Bifurcation", prixAr: 120_000, unite: "trajet", groupe: "Suppléments" },
 ];
 
 /** Un item du catalogue est-il soumis à TVA ? (défaut oui) */

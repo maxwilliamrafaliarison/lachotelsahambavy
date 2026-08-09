@@ -6,7 +6,7 @@ import RoomGallery from "@/components/rooms/RoomGallery";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Icon } from "@/components/ui/Icon";
-import { rooms, extras, type Room } from "@/data/rooms";
+import { rooms, roomsAffichees, extras, type Room } from "@/data/rooms";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { hotelRoomSchema, breadcrumbSchema } from "@/lib/schema-org";
@@ -223,14 +223,20 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
     { href: "#familles", label: rx.familyTitle },
   ];
 
-  // JSON-LD : ItemList de HotelRoom (un item par type d'hébergement)
+  /* JSON-LD : ItemList de HotelRoom (un item par type d'hébergement).
+     Bâtie sur `roomsAffichees` et NON sur `rooms` : ce dernier contient les
+     catégories non publiées. La Lake Suite y était servie avec son tarif
+     2027 (420 000 Ar, availability InStock) sur les trois locales, dans le
+     format même que Google reprend en résultat enrichi — alors que la
+     direction a décidé de publier la grille 2026. On ne balise que ce que
+     la page montre. */
   const roomsItemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": `${siteConfig.url}/${loc}/hebergements/#rooms-list`,
     name: dict.rooms.title,
-    numberOfItems: rooms.length,
-    itemListElement: rooms.map((room, index) => ({
+    numberOfItems: roomsAffichees.length,
+    itemListElement: roomsAffichees.map((room, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: hotelRoomSchema(room, loc),

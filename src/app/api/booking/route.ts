@@ -114,9 +114,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   // ─── 6. Envoi emails via Resend ──────────────────────────
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
-    // Mode dev — pas de clé configurée → on log et on retourne succès factice
+    /* Pas de clé configurée → succès factice, sans e-mail.
+       Le payload n'est journalisé QU'EN DÉVELOPPEMENT : il contient le nom,
+       l'adresse, le téléphone et les dates de séjour du client. La branche
+       se déclenche dès que RESEND_API_KEY manque — y compris sur une
+       production mal configurée, ce qui n'a rien de théorique puisque
+       .env.example livre la clé commentée. Ces données seraient alors
+       parties en clair dans les journaux Vercel. La ligne voisine gardait
+       déjà son `debug` derrière NODE_ENV ; celle-ci ne le faisait pas. */
     console.warn("[booking] RESEND_API_KEY missing — skipping email dispatch");
-    console.log("[booking] Payload:", JSON.stringify(data, null, 2));
+    if (process.env.NODE_ENV === "development") {
+      console.log("[booking] Payload:", JSON.stringify(data, null, 2));
+    }
     return NextResponse.json({
       success: true,
       code: "ok-dev-noemail",

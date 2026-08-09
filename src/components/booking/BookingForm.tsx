@@ -21,6 +21,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, FormProvider, useFormContext, type FieldError } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { rooms } from "@/data/rooms";
+import { ROOM_IDS } from "@/lib/booking/schema";
 import { siteConfig } from "@/data/site";
 import { track } from "@/lib/analytics";
 import type { Locale } from "@/lib/utils";
@@ -337,14 +338,23 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
           required
           error={translateError(errors.room, dict)}
         >
+          {/* On n'itère PLUS sur `rooms` : ce tableau contient aussi les
+              catégories non publiées — la Lake Suite y figure, prête pour la
+              grille 2027. Elle apparaissait donc en tête du menu, alors que
+              `ROOM_IDS` ne la connaît pas : le client la choisissait et le
+              passage à l'étape suivante échouait sur une erreur Zod brute,
+              en anglais, exposant les identifiants internes. Réservation
+              impossible. On ne propose donc que ce que le schéma accepte. */}
           <select className={inputClass} {...register("room")}>
             <option value="">—</option>
-            {rooms.map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.name[locale]}
-                {r.priceEUR ? ` — ${r.priceEUR} €` : ""}
-              </option>
-            ))}
+            {rooms
+              .filter((r) => (ROOM_IDS as readonly string[]).includes(r.id))
+              .map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.name[locale]}
+                  {r.priceEUR ? ` — ${r.priceEUR} €` : ""}
+                </option>
+              ))}
             <option value="any">{b?.anyRoom || "Je fais confiance à l'hôtel"}</option>
           </select>
         </Field>

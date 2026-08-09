@@ -87,7 +87,7 @@
     "comingSoon": "Próximamente en imágenes",
     "discoverRepos": "Descubrir Le Repos",
     "extrasTitle": "Suplementos y servicios",
-    "currencyNote": "Tarifas públicas en ariary, tasa turística no incluida. Los importes en euros son orientativos: la conversión se aplica al tipo vigente el día del pago.",
+    "currencyNote": "Tarifas públicas en ariary, tasa turística no incluida. Los importes en euros son orientativos, convertidos a 5000 Ar por 1 €; el pago se liquida al tipo vigente ese día.",
     "rowRate": "Tarifa",
     "rowBeds": "Camas",
     "rowCapacity": "Capacidad",
@@ -721,7 +721,7 @@
   },
   "conference": {
     "title": "Sala de conferencias",
-    "p1": "Nuestra sala de conferencias puede acoger hasta 80 personas. Totalmente modulable, se adapta a todos sus formatos de eventos profesionales: reuniones, seminarios, formaciones o talleres.",
+    "p1": "Nuestra sala de conferencias puede acoger hasta 40 personas. Totalmente modulable, se adapta a todos sus formatos de eventos profesionales: reuniones, seminarios, formaciones o talleres.",
     "p2": "Inmersa en un entorno tranquilo y propicio para la reflexión, ofrece un marco ideal para favorecer la concentración, la creatividad y la calidad de los intercambios.",
     "equipment": [
       "Conexión Wi-Fi",
@@ -729,7 +729,7 @@
       "Proyector",
       "Pizarra blanca"
     ],
-    "capacity": "Hasta 80 personas",
+    "capacity": "Hasta 40 personas",
     "label": "Seminarios y Conferencias",
     "recapTitle": "La sala de un vistazo",
     "capacityLabel": "Capacidad",
@@ -1173,7 +1173,7 @@
       "label": "Por carretera",
       "title": "A 40 minutos de Fianarantsoa",
       "p1": "Desde Fianarantsoa: el hotel está a 40 minutos del centro de la ciudad. Desde Antananarivo (por la RN7): siga la carretera nacional 7 en dirección sur y gire a la izquierda en el pueblo de Ambalakely (junto a la gasolinera Shell).",
-      "p2": "El hotel dispone de una lanzadera de pago para su transporte: contacte con la recepción para organizar su recogida. También se ofrece un traslado privado en 4x4 entre el Lac Hôtel y Fianarantsoa (120 000 Ar · 25 €).",
+      "p2": "El hotel dispone de una lanzadera de pago para su transporte: contacte con la recepción para organizar su recogida. También se ofrece un traslado privado en 4x4 entre el Lac Hôtel y Fianarantsoa (130 000 Ar).",
       "alt": "Vista aérea del Lac Hôtel y su entorno verde a orillas del lago",
       "cta": "Organizar mi traslado"
     },
@@ -1203,7 +1203,7 @@
         },
         {
           "label": "Traslado privado 4x4 Lac Hôtel / Fianarantsoa",
-          "value": "120 000 Ar · 25 €"
+          "value": "130 000 Ar"
         }
       ],
       "footnote": "Contacte con la recepción para organizar su lanzadera o su traslado."
