@@ -1,9 +1,20 @@
-"use client";
+/**
+ * Page Contact — COMPOSANT SERVEUR.
+ *
+ * Elle était en "use client" avec `if (!dict) return null` : le HTML servi
+ * se réduisait à `<main class="flex-1"></main>`. Zéro h1, zéro formulaire,
+ * aucun JSON-LD, et le <title> générique du layout racine. Sur la page de
+ * conversion du site, c'était le pire endroit possible pour ne rien rendre
+ * côté serveur.
+ *
+ * Le dictionnaire est désormais attendu au rendu, et seul le formulaire —
+ * qui a besoin d'état — reste un îlot client.
+ */
 
 import Link from "next/link";
-import { Suspense, useEffect, useState, use } from "react";
+import { Suspense } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
-import { type Locale, getBasePath } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -17,16 +28,23 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
-export default function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = use(params);
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  return {
+    title: dict.contact.heroTitle,
+    description: dict.contact.heroSubtitle ?? dict.meta.description,
+  };
+}
+
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const loc = locale as Locale;
-  const [dict, setDict] = useState<any>(null);
-
-  useEffect(() => {
-    getDictionary(loc).then(setDict);
-  }, [loc]);
-
-  if (!dict) return null;
+  const dict = await getDictionary(loc);
 
   const whatsappHref = `https://wa.me/${siteConfig.whatsapp.replace(/^\+/, "")}`;
 

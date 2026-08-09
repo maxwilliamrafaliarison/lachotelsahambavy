@@ -179,18 +179,18 @@ export const LABELS: LabelsShape = {
   transfer: {
     fr: {
       none: "Pas de transfert",
-      "fianarantsoa-4x4": "Transfert privé 4×4 depuis Fianarantsoa (120 000 AR)",
-      ambalakely: "Transfert depuis Ambalakely (110 000 AR)",
+      "fianarantsoa-4x4": "Transfert privé 4×4 depuis Fianarantsoa (130 000 AR)",
+      ambalakely: "Transfert depuis Ambalakely (120 000 AR)",
     },
     en: {
       none: "No transfer",
-      "fianarantsoa-4x4": "Private 4×4 transfer from Fianarantsoa (120,000 AR)",
-      ambalakely: "Transfer from Ambalakely (110,000 AR)",
+      "fianarantsoa-4x4": "Private 4×4 transfer from Fianarantsoa (130,000 AR)",
+      ambalakely: "Transfer from Ambalakely (120,000 AR)",
     },
     es: {
       none: "Sin traslado",
-      "fianarantsoa-4x4": "Traslado privado 4×4 desde Fianarantsoa (120 000 AR)",
-      ambalakely: "Traslado desde Ambalakely (110 000 AR)",
+      "fianarantsoa-4x4": "Traslado privado 4×4 desde Fianarantsoa (130 000 AR)",
+      ambalakely: "Traslado desde Ambalakely (120 000 AR)",
     },
   },
   room: {

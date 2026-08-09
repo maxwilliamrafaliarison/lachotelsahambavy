@@ -317,8 +317,8 @@
       "transfer": "Transfert depuis Fianarantsoa ?",
       "transferOptions": [
         "Non merci",
-        "Oui — Transfert privé 4×4 (120 000 AR aller simple)",
-        "Oui — Depuis Ambalakely (110 000 AR)"
+        "Oui — Transfert privé 4×4 (130 000 AR aller simple)",
+        "Oui — Depuis Ambalakely (120 000 AR)"
       ],
       "message": "Message / Demandes spéciales",
       "nationality": "Nationalité / Pays de résidence",
@@ -781,7 +781,8 @@
     "heroLabel": "Lac Hôtel Sahambavy",
     "village": "Village",
     "jardins": "Jardins",
-    "boutique": "Boutique"
+    "boutique": "Boutique",
+    "openPhoto": "Ouvrir {alt}"
   },
   "footer": {
     "brand": "Lac Hôtel Sahambavy",
@@ -852,8 +853,8 @@
     },
     "transfers": {
       "none": "Non merci",
-      "fianarantsoa-4x4": "Transfert 4×4 depuis Fianarantsoa (120 000 AR)",
-      "ambalakely": "Depuis Ambalakely (110 000 AR)"
+      "fianarantsoa-4x4": "Transfert 4×4 depuis Fianarantsoa (130 000 AR)",
+      "ambalakely": "Depuis Ambalakely (120 000 AR)"
     },
     "errors": {
       "required": "Ce champ est requis.",

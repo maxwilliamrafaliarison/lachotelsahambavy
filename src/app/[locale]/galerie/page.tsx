@@ -1,12 +1,24 @@
-"use client";
+/**
+ * Page Galerie — COMPOSANT SERVEUR.
+ *
+ * Elle était en "use client" avec `if (!dict) return null` : le HTML servi
+ * ne contenait ni titre, ni photo, ni métadonnée propre. Une galerie que
+ * les moteurs ne voyaient pas.
+ *
+ * Les photos et les libellés de filtre partent maintenant du serveur ;
+ * seul GalleryGrid — filtres, grille, visionneuse — reste un îlot client,
+ * parce qu'il porte de l'état.
+ */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useEffect, useState, use } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
-import { type Locale, getBasePath } from "@/lib/utils";
+import { locales, type Locale, getBasePath } from "@/lib/utils";
 import PanoramaHero from "@/components/ui/PanoramaHero";
-import GalleryLightbox from "@/components/gallery/GalleryLightbox";
+import GalleryGrid from "@/components/gallery/GalleryGrid";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
@@ -59,19 +71,25 @@ const photos: Photo[] = [
   { src: `${basePath}/images/boutique/savon-fleur-marguerite-artisanal.jpg`, alt: "Savon artisanal à la fleur de marguerite", category: "boutique" },
 ];
 
-export default function GalleryPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = use(params);
-  const [dict, setDict] = useState<any>(null);
-  const [activeFilter, setActiveFilter] = useState<Category>("all");
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
-  useEffect(() => {
-    getDictionary(locale as Locale).then(setDict);
-  }, [locale]);
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  return {
+    title: dict.gallery.heroTitle,
+    description: dict.gallery.heroSubtitle,
+  };
+}
 
-  if (!dict) return null;
+export default async function GalleryPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const loc = locale as Locale;
+  const dict = await getDictionary(loc);
 
-  const filters: { key: Category; label: string }[] = [
+  const filtres = [
     { key: "all", label: dict.gallery.all },
     { key: "rooms", label: dict.gallery.rooms },
     { key: "restaurant", label: dict.gallery.restaurant },
@@ -83,12 +101,10 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
     { key: "boutique", label: dict.gallery.boutique ?? "Boutique" },
   ];
 
-  const filtered = activeFilter === "all"
-    ? photos
-    : photos.filter((p) => p.category === activeFilter);
-
   return (
     <>
+      <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "galerie"))]} />
+
       <PanoramaHero
         image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
         imageAlt={dict.gallery.heroSubtitle}
@@ -97,61 +113,15 @@ export default function GalleryPage({ params }: { params: Promise<{ locale: stri
         kicker={dict.gallery.heroSubtitle}
       />
 
-      {/* ──── Filtres + grille masonry — grammaire Panorama ──── */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          {/* Filtres — pastilles hairline, accent thé unique */}
-          <div className="mb-10 flex flex-wrap gap-2 md:mb-14 md:gap-3">
-            {filters.map((f) => (
-              <button
-                key={f.key}
-                onClick={() => {
-                  setActiveFilter(f.key);
-                  setLightboxIndex(null);
-                }}
-                aria-pressed={activeFilter === f.key}
-                className={`rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 md:px-5 md:py-2.5 ${
-                  activeFilter === f.key
-                    ? "border-lake bg-lake text-white"
-                    : "border-hairline bg-white text-muted hover:border-lake hover:text-lake"
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Grille masonry — vignettes hairline, zoom discret au survol */}
-          <div className="masonry-grid">
-            {filtered.map((photo, i) => (
-              <button
-                key={photo.src}
-                className="group block w-full cursor-pointer overflow-hidden rounded-[3px] border border-hairline bg-white text-left"
-                onClick={() => setLightboxIndex(i)}
-                aria-label={`Ouvrir ${photo.alt}`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  loading="lazy"
-                  className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                />
-              </button>
-            ))}
-          </div>
+          <GalleryGrid
+            photos={photos}
+            filtres={filtres}
+            ouvrirLabel={dict.gallery.openPhoto ?? "Ouvrir {alt}"}
+          />
         </div>
       </section>
-
-      {/* Lightbox avec swipe Apple-style */}
-      {lightboxIndex !== null && (
-        <GalleryLightbox
-          photos={filtered}
-          index={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onIndexChange={setLightboxIndex}
-        />
-      )}
     </>
   );
 }
