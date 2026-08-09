@@ -8,20 +8,25 @@ import type { ReactNode } from "react";
  * Le design system n'en avait que deux : le bleu du lac pour ce qui est
  * cliquable, la terre cuite pour l'éditorial. Un avis n'est ni l'un ni
  * l'autre — il n'appelle pas au clic et ne raconte pas l'hôtel, il
- * informe. D'où l'ambre, choisi pour être lisible comme « autre chose » :
- * 20,6° de teinte d'écart avec la terre cuite. Le cuivre, testé d'abord,
- * n'en était qu'à 0,9° et se confondait. Encre sur fond : 6,98:1.
+ * informe.
  *
- * PAS DE ROUGE, PAS D'ICÔNE D'ALERTE
- * Une ligne ferroviaire à l'arrêt n'est pas une panne du site. Le rouge
- * et le triangle d'avertissement diraient au visiteur qu'il a un problème
- * à régler, alors qu'on lui donne une information de service. L'ambre et
- * la pastille disent « à vérifier avec nous », ce qui est exactement le
- * message.
+ * ROUGE, sur décision de la direction (08/08/2026). La première version
+ * était ambre : une ligne ferroviaire à l'arrêt n'est pas une panne du
+ * site, et l'ambre disait « à vérifier avec nous » plutôt que « vous avez
+ * un problème ». La direction veut que l'information accroche l'œil —
+ * c'est un arbitrage éditorial qui lui revient. Le rouge est donc pris
+ * pur (teinte 0,0°), à 19,3° de la terre cuite pour rester impossible à
+ * confondre avec le registre éditorial. Encre sur fond : 7,37:1.
+ *
+ * TOUJOURS PAS DE TRIANGLE D'AVERTISSEMENT. La couleur suffit à alerter ;
+ * l'iconographie de l'erreur système ferait basculer le message vers
+ * « quelque chose est cassé », alors qu'il s'agit d'une information de
+ * service assortie d'une invitation à nous joindre.
  *
  * `role="status"` plutôt que `role="alert"` : l'avis est présent au
  * chargement, il n'interrompt rien. `alert` forcerait le lecteur d'écran
- * à couper sa lecture.
+ * à couper sa lecture — et ce n'est pas parce que le bloc est devenu
+ * rouge qu'il faut couper la parole au visiteur.
  */
 export default function AvisService({
   pastille,

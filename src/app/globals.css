@@ -60,12 +60,25 @@
   --color-copper: #8A4B2E;
 
   /* Avis de service — troisième registre, distinct de l'action (lac) et de
-     l'éditorial (terre cuite). L'ambre est à 20,6° de teinte de la terre
-     cuite, donc lisible comme « autre chose » ; le cuivre n'en était qu'à
-     0,9° et se confondait. Encre sur fond : 6,98:1. */
-  --color-avis: #6B4E12;
-  --color-avis-bg: #FBF3E2;
-  --color-avis-hairline: #E8D9B4;
+     l'éditorial (terre cuite).
+
+     ROUGE, sur décision de la direction (08/08/2026) : l'avis doit
+     accrocher l'œil. La version précédente était ambre, au motif qu'une
+     ligne ferroviaire à l'arrêt n'est pas une panne du site — mais c'est
+     bien l'attention qui est recherchée ici, et c'est un arbitrage
+     éditorial, pas technique.
+
+     Le rouge est pris pur (teinte 0,0°) et non rabattu vers l'orange :
+     à 19,3° d'écart de la terre cuite, il ne peut pas être confondu avec
+     le registre éditorial de l'hôtel. Encre sur fond : 7,37:1 (AAA).
+     Le liseré est à 3,02:1 sur le papier de la page — le seuil WCAG
+     1.4.11 pour un contour porteur de sens. Le rose pâle d'abord retenu
+     n'était qu'à 1,47:1 : le fond de l'avis étant lui-même presque de la
+     même clarté que le papier, le bloc ne se détachait pas du tout. Pour
+     un avis censé accrocher l'œil, c'était le point faible. */
+  --color-avis: #9B1C1C;
+  --color-avis-bg: #FCF1F0;
+  --color-avis-hairline: #D2786F;
 
   /* — Alias hérités (LEGACY — à supprimer une fois la migration finie).
        Mappés sur le nouveau monde pour que les composants non migrés
