@@ -59,8 +59,8 @@ const VUES = [
     alt: "Un bungalow sur pilotis au bout de son ponton, dans la brume du matin",
   },
   {
-    src: "/images/hero/hero-bio-mami-shop.jpg",
-    alt: "La boutique Bio Mami Shop de l'hôtel, sous son flamboyant",
+    src: "/images/hero/hero-sunset.jpg",
+    alt: "Coucher de soleil sur le lac Sahambavy, un bungalow sur pilotis au fil de l'eau",
   },
 ];
 
@@ -95,6 +95,48 @@ export default function HeroHome({ dict }: { dict: any }) {
   const bgRef = useRef<HTMLDivElement>(null);
   const [vue, setVue] = useState(0);
   const anime = useMouvementAutorise();
+  const ctrl = dict.hero.controls;
+
+  /* Les vues déjà montées. L'ensemble ne fait que croître : quand on saute
+     d'un repère à l'autre, la vue de destination doit être dans le DOM
+     AVANT que le fondu ne commence, sinon on enchaîne sur un cadre vide le
+     temps du téléchargement. On monte donc la cible et ses deux voisines,
+     et on ne démonte jamais — une image déjà en cache ne coûte rien. */
+  const [montees, setMontees] = useState<number[]>([0]);
+  /* Le défilement est-il en marche ? Une bande qui bouge toute seule doit
+     pouvoir être arrêtée (WCAG 2.2.2) — et le visiteur qui prend la main
+     sur les flèches ne veut pas que le minuteur le double trois secondes
+     plus tard. */
+  const [enMarche, setEnMarche] = useState(true);
+  /* Incrémenté à chaque geste : relance le minuteur à zéro pour laisser la
+     vue choisie s'afficher pleinement. */
+  const [reprise, setReprise] = useState(0);
+  /* Le minuteur lit la vue courante ici : sans cela il faudrait le
+     reconstruire à chaque changement de vue, et le compte à rebours
+     repartirait de zéro à chaque fondu automatique. */
+  const vueRef = useRef(0);
+
+  const aller = useCallback((i: number) => {
+    const n = VUES.length;
+    const cible = ((i % n) + n) % n;
+    vueRef.current = cible;
+    setVue(cible);
+    setMontees((deja) => {
+      const ajouts = [cible, (cible + 1) % n, (cible - 1 + n) % n].filter(
+        (k) => !deja.includes(k),
+      );
+      return ajouts.length ? [...deja, ...ajouts] : deja;
+    });
+  }, []);
+
+  /** Navigation à la main : on va à la vue et on relance le compte à rebours. */
+  const allerManuel = useCallback(
+    (i: number) => {
+      aller(i);
+      setReprise((r) => r + 1);
+    },
+    [aller],
+  );
 
   /* — Parallaxe douce, inchangée — */
   useEffect(() => {
@@ -122,12 +164,12 @@ export default function HeroHome({ dict }: { dict: any }) {
 
   /* — Défilement — */
   useEffect(() => {
-    if (!anime) return;
+    if (!anime || !enMarche) return;
 
     let timer: ReturnType<typeof setInterval> | null = null;
     const demarrer = () => {
       if (timer) return;
-      timer = setInterval(() => setVue((v) => (v + 1) % VUES.length), DUREE_VUE);
+      timer = setInterval(() => aller(vueRef.current + 1), DUREE_VUE);
     };
     const arreter = () => {
       if (timer) clearInterval(timer);
@@ -141,15 +183,34 @@ export default function HeroHome({ dict }: { dict: any }) {
       arreter();
       document.removeEventListener("visibilitychange", onVisibilite);
     };
-  }, [anime]);
+  }, [anime, enMarche, reprise, aller]);
 
-  const monter = useCallback(
-    (i: number) => i === 0 || Math.abs(i - vue) <= 1 || (vue === VUES.length - 1 && i === 0),
-    [vue],
-  );
+  /* Balayage tactile. Sur téléphone, trois pastilles de 36 px dans un coin
+     ne sont pas le geste naturel : on fait glisser la photo. On ne retient
+     que les gestes franchement horizontaux, pour ne pas confisquer le
+     défilement vertical de la page. */
+  const depart = useRef<{ x: number; y: number } | null>(null);
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse") return;
+    depart.current = { x: e.clientX, y: e.clientY };
+  };
+  const onPointerUp = (e: React.PointerEvent) => {
+    const d = depart.current;
+    depart.current = null;
+    if (!d) return;
+    const dx = e.clientX - d.x;
+    const dy = e.clientY - d.y;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    allerManuel(dx < 0 ? vue + 1 : vue - 1);
+  };
 
   return (
-    <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden md:min-h-[700px]">
+    <section
+      className="relative h-[100svh] min-h-[560px] w-full overflow-hidden md:min-h-[700px]"
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerCancel={() => (depart.current = null)}
+    >
       <div
         ref={bgRef}
         className="absolute inset-0 will-change-transform"
@@ -163,10 +224,10 @@ export default function HeroHome({ dict }: { dict: any }) {
               i === vue ? "opacity-100" : "opacity-0"
             }`}
           >
-            {monter(i) && (
+            {montees.includes(i) && (
               <Image
                 src={`${basePath}${v.src}`}
-                alt={i === 0 ? v.alt : ""}
+                alt={v.alt}
                 fill
                 sizes="100vw"
                 {...(i === 0 ? { preload: true } : { loading: "lazy" as const })}
@@ -245,22 +306,41 @@ export default function HeroHome({ dict }: { dict: any }) {
         </div>
       </div>
 
-      {/* Repères de vue — discrets, en bas à droite pour ne pas concurrencer
-          le titrage. Ce ne sont pas des points décoratifs : un fond qui
-          change tout seul doit pouvoir être repris en main, et le visiteur
-          qui a aperçu une vue doit pouvoir y revenir. */}
-      {anime && (
-        <div
-          role="group"
-          aria-label="Vues de l’hôtel"
-          className="absolute bottom-8 right-6 z-20 flex items-center gap-2 md:bottom-10 md:right-12 lg:right-20"
+      {/* Commandes du diaporama — en bas à droite pour ne pas concurrencer le
+          titrage, et regroupées en un seul bloc plutôt qu'en deux grosses
+          flèches posées au milieu des bords, qui datent la page.
+
+          Elles s'affichent TOUJOURS, y compris sous prefers-reduced-motion :
+          c'est justement le visiteur privé de défilement automatique qui a
+          le plus besoin de tourner les vues à la main. Seul le bouton
+          pause/lecture disparaît alors — il n'y a rien à suspendre.
+
+          PLACEMENT — la bulle WhatsApp est fixée en bas à droite (56 px,
+          marge 24). Les anciens repères passaient dessous ; des boutons,
+          eux, doivent rester cliquables. Sur mobile le bloc est donc centré
+          sous les boutons d'appel, à gauche de la bulle ; à partir de md il
+          reste à droite mais remonte au-dessus d'elle. */}
+      <div
+        role="group"
+        aria-label={ctrl.diaporama}
+        className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 md:bottom-24 md:left-auto md:right-12 md:translate-x-0 lg:right-20"
+      >
+        <button
+          type="button"
+          onClick={() => allerManuel(vue - 1)}
+          aria-label={ctrl.precedente}
+          className={CLASSE_BOUTON}
         >
+          <Chevron sens="gauche" />
+        </button>
+
+        <div className="mx-1.5 flex items-center gap-2 md:mx-2">
           {VUES.map((v, i) => (
             <button
               key={v.src}
               type="button"
-              onClick={() => setVue(i)}
-              aria-label={`Vue ${i + 1} sur ${VUES.length}`}
+              onClick={() => allerManuel(i)}
+              aria-label={ctrl.vue.replace("{n}", String(i + 1)).replace("{total}", String(VUES.length))}
               aria-current={i === vue ? "true" : undefined}
               className={`h-1.5 rounded-full transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
                 i === vue ? "w-7 bg-white/90" : "w-1.5 bg-white/45 hover:bg-white/70"
@@ -268,7 +348,61 @@ export default function HeroHome({ dict }: { dict: any }) {
             />
           ))}
         </div>
-      )}
+
+        <button
+          type="button"
+          onClick={() => allerManuel(vue + 1)}
+          aria-label={ctrl.suivante}
+          className={CLASSE_BOUTON}
+        >
+          <Chevron sens="droite" />
+        </button>
+
+        {anime && (
+          <button
+            type="button"
+            onClick={() => setEnMarche((m) => !m)}
+            aria-label={enMarche ? ctrl.pause : ctrl.lecture}
+            aria-pressed={!enMarche}
+            className={`${CLASSE_BOUTON} ml-1.5`}
+          >
+            {enMarche ? (
+              <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" fill="currentColor">
+                <rect x="2" y="1.5" width="2.6" height="9" rx="0.6" />
+                <rect x="7.4" y="1.5" width="2.6" height="9" rx="0.6" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" fill="currentColor">
+                <path d="M3 1.6l7 4.4-7 4.4z" />
+              </svg>
+            )}
+          </button>
+        )}
+      </div>
     </section>
+  );
+}
+
+/* Verre translucide : le même vocabulaire que les pastilles du menu, mais
+   décliné en blanc — le fond est ici une photo, pas la page crème. */
+const CLASSE_BOUTON =
+  "flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white/90 backdrop-blur-md transition-colors duration-300 hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 md:h-9 md:w-9";
+
+function Chevron({ sens }: { sens: "gauche" | "droite" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={sens === "gauche" ? "-ml-px" : "ml-px"}
+    >
+      <path d={sens === "gauche" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} />
+    </svg>
   );
 }

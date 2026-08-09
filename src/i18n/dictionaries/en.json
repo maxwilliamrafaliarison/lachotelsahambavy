@@ -23,7 +23,15 @@
     "titleEm": "in the Heart of Nature",
     "subtitle": "Madagascar's only tea plantation, overwater bungalows, and pristine nature awaiting you.",
     "cta1": "Discover our rooms",
-    "cta2": "Book now"
+    "cta2": "Book now",
+    "controls": {
+      "diaporama": "Views of the hotel",
+      "precedente": "Previous view",
+      "suivante": "Next view",
+      "vue": "View {n} of {total}",
+      "pause": "Pause the slideshow",
+      "lecture": "Resume the slideshow"
+    }
   },
   "welcome": {
     "label": "Welcome to Lac Hôtel",

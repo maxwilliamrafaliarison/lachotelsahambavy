@@ -23,7 +23,15 @@
     "titleEm": "en plena naturaleza",
     "subtitle": "La única plantación de té de Madagascar, bungalows sobre el agua y una naturaleza preservada que le espera.",
     "cta1": "Descubrir nuestras habitaciones",
-    "cta2": "Reservar ahora"
+    "cta2": "Reservar ahora",
+    "controls": {
+      "diaporama": "Vistas del hotel",
+      "precedente": "Vista anterior",
+      "suivante": "Vista siguiente",
+      "vue": "Vista {n} de {total}",
+      "pause": "Pausar la presentación",
+      "lecture": "Reanudar la presentación"
+    }
   },
   "welcome": {
     "label": "Bienvenido al Lac Hôtel",

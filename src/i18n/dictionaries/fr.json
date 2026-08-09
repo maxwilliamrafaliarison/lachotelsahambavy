@@ -23,7 +23,15 @@
     "titleEm": "au cœur de la nature",
     "subtitle": "L’unique plantation de thé de Madagascar, des pilotis sur l’eau, et une nature préservée qui vous attend.",
     "cta1": "Découvrir nos chambres",
-    "cta2": "Réserver maintenant"
+    "cta2": "Réserver maintenant",
+    "controls": {
+      "diaporama": "Vues de l’hôtel",
+      "precedente": "Vue précédente",
+      "suivante": "Vue suivante",
+      "vue": "Vue {n} sur {total}",
+      "pause": "Suspendre le défilement",
+      "lecture": "Reprendre le défilement"
+    }
   },
   "welcome": {
     "label": "Bienvenue au Lac Hôtel",
