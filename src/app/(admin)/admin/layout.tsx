@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RootShell from "@/app/root-shell";
 
 /**
  * Chrome commun de l'espace équipe (français uniquement — outil interne).
@@ -10,6 +11,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+/** Layout RACINE de l'espace équipe : il rend son propre <html>, l'outil
+ *  étant hors du segment [locale]. Français uniquement, comme l'interface. */
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-screen bg-paper">{children}</div>;
+  return (
+    <RootShell lang="fr">
+      <div className="min-h-screen bg-paper">{children}</div>
+    </RootShell>
+  );
 }
