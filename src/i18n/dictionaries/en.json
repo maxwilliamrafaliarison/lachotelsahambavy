@@ -33,6 +33,13 @@
       "lecture": "Resume the slideshow"
     }
   },
+  "reviewsCta": {
+    "label": "Your review",
+    "title": "Have you stayed with us?",
+    "subtitle": "A few lines about your stay help travellers who are still hesitating — and mean a great deal to a family-run house like ours.",
+    "action": "Write a review",
+    "reviews": "{n} reviews"
+  },
   "welcome": {
     "label": "Welcome to Lac Hôtel",
     "title": "An exceptional eco-lodge facing Lake Sahambavy",

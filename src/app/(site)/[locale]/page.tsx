@@ -3,6 +3,7 @@ import { locales, type Locale, getBasePath } from "@/lib/utils";
 import HeroHome from "@/components/home/HeroHome";
 import Welcome from "@/components/home/Welcome";
 import OurHouse from "@/components/home/OurHouse";
+import AvisPlateformes from "@/components/home/AvisPlateformes";
 import RoomsGrid from "@/components/home/RoomsGrid";
 import RestaurantTeaser from "@/components/home/RestaurantTeaser";
 import DestinationsTeaser from "@/components/home/DestinationsTeaser";
@@ -47,6 +48,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <HeroHome dict={dict} />
       <Welcome dict={dict} locale={locale as Locale} />
       <OurHouse dict={dict} locale={locale as Locale} />
+      <AvisPlateformes dict={dict} locale={locale as Locale} />
       <RoomsGrid dict={dict} locale={locale as Locale} />
       <DestinationsTeaser dict={dict} locale={locale as Locale} />
       <RestaurantTeaser dict={dict} locale={locale as Locale} />

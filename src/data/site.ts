@@ -17,6 +17,20 @@ export const siteConfig = {
     // URL canonique (langue-neutre) — Booking.com négocie automatiquement la
     // locale du visiteur (fr / en / es …). Confirmée en recherche Google.
     booking: "https://www.booking.com/hotel/mg/lac-sahambavy.html",
+
+    /* Destinations « laisser un avis ». Séparées des liens ci-dessus, qui
+       servent à LIRE les avis (pied de page, témoignages). */
+
+    // Formulaire de rédaction TripAdvisor : mêmes identifiants g/d que la
+    // fiche, préfixe UserReviewEdit.
+    tripadvisorAvis:
+      "https://www.tripadvisor.fr/UserReviewEdit-g298271-d649892-Lac_Hotel-Fianarantsoa_Fianarantsoa_Province.html",
+    /* Fiche Google par son CID (0x877e4d3975e9a0b0, relevé sur le lien court
+       officiel ci-dessus) : « Rédiger un avis » y est à un clic. À remplacer
+       par le lien court que Google Business fournit dans « Demander des
+       avis » — le lien direct writereview exige le Place ID, qui n'était pas
+       vérifiable sans compte connecté. */
+    googleAvis: "https://www.google.com/maps?cid=9763325951372533936",
   },
   legal: {
     rcs: "2004-B-013",

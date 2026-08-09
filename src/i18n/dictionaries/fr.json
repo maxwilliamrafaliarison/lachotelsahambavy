@@ -33,6 +33,13 @@
       "lecture": "Reprendre le défilement"
     }
   },
+  "reviewsCta": {
+    "label": "Votre avis",
+    "title": "Vous avez séjourné chez nous ?",
+    "subtitle": "Quelques lignes sur votre séjour aident les voyageurs qui hésitent encore — et font beaucoup pour une maison familiale comme la nôtre.",
+    "action": "Donner mon avis",
+    "reviews": "{n} avis"
+  },
   "welcome": {
     "label": "Bienvenue au Lac Hôtel",
     "title": "Un éco-lodge d’exception face au lac Sahambavy",
