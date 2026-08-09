@@ -141,6 +141,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       <section id="philosophie" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
+            as="h2"
             image={`${basePath}/images/hotel/hotel-gardens.jpg`}
             imageAlt="Jardins et cultures biologiques du Lac Hôtel à Sahambavy"
             label={dict.hotel.philosophyLabel}
@@ -158,7 +159,9 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
                   <span className="mb-5 text-terracotta">
                     <Icon name={pillar.icon} size={28} weight="light" />
                   </span>
-                  <h4 className="mb-2">{pillar.title}</h4>
+                  {/* h3 et non h4 : ces piliers dépendent du h2 « Tourisme
+                      responsable », il n'y a pas de niveau intermédiaire. */}
+                  <h3 className="mb-2 !text-[1.2rem] !font-normal">{pillar.title}</h3>
                   <p className="text-sm leading-relaxed text-body">{pillar.desc}</p>
                 </div>
               </ScrollReveal>
@@ -174,6 +177,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       <section id="histoire" className="scroll-mt-24 pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
+            as="h2"
             image={`${basePath}/images/hero/hero-pilotis.jpg`}
             imageAlt="Allée des chambres sur pilotis du Lac Hôtel au bord du lac de Sahambavy"
             label={dict.hotel.historyLabel}

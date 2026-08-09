@@ -25,6 +25,17 @@ type EditorialSplitProps = {
   reverse?: boolean;
   night?: boolean;
   id?: string;
+  /**
+   * Niveau du titre. `h3` par défaut, parce que le composant est presque
+   * toujours appelé DANS une section déjà coiffée d'un h2.
+   *
+   * /hotel était la seule des douze pages à l'appeler juste après le h1 :
+   * la page enchaînait h1 → h3, puis sept h4 imbriqués sous ce h3
+   * illégitime, et ne posait son premier h2 qu'en onzième position sur
+   * quatorze. Un lecteur d'écran qui navigue par titres y perdait la
+   * structure de la page.
+   */
+  as?: "h2" | "h3";
 };
 
 export default function EditorialSplit({
@@ -39,6 +50,7 @@ export default function EditorialSplit({
   reverse = false,
   night = false,
   id,
+  as: Titre = "h3",
 }: EditorialSplitProps) {
   return (
     <div
@@ -63,12 +75,12 @@ export default function EditorialSplit({
       <div className={`flex flex-col justify-center px-6 py-10 md:px-11 md:py-14 ${reverse ? "md:order-1" : ""}`}>
         <ScrollReveal>
           {label && <span className="ge-label mb-3">{label}</span>}
-          <h3
+          <Titre
             className={`mb-4 ${night ? "" : "text-ink"}`}
             style={{ textWrap: "balance" }}
           >
             {title}
-          </h3>
+          </Titre>
           <div className={`space-y-4 text-[15px] leading-relaxed ${night ? "text-night-body" : "text-body"}`}>
             {children}
           </div>
