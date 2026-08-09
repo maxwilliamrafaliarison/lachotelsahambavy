@@ -378,7 +378,12 @@ export const rooms: Room[] = [
     ],
     groupe: "exception",
     images: [
-      "/images/rooms/bungalow-tarzan-cabane-arbre.jpg",
+      "/images/rooms/tarzan-cabane-ciel-bleu.jpg",
+      "/images/rooms/tarzan-toit-chaume-sculptures.jpg",
+      "/images/rooms/tarzan-cabane-lumiere-doree.jpg",
+      "/images/rooms/tarzan-interieur-bambou.jpg",
+      "/images/rooms/tarzan-escalier-colimacon.jpg",
+      "/images/rooms/tarzan-porte-sculptee-terrasse.jpg",
     ],
     category: "hotel",
   },
