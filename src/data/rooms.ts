@@ -339,13 +339,12 @@ export const rooms: Room[] = [
       { icon: "tv", label: { fr: "Télévision", en: "Television", es: "Televisión" } },
     ],
     groupe: "courant",
+    /* Deux vues seulement, retenues par la direction le 09/08/2026 : les
+       quatre autres montraient des bungalows qui ne sont plus dans cet
+       état, ou faisaient doublon. */
     images: [
-      "/images/rooms/standard-01.jpg",
-      "/images/rooms/standard-bungalow-deux-personnes.jpg",
       "/images/rooms/standard-annexe-kim-0047.jpg",
       "/images/rooms/bungalows-colores-annexe.jpg",
-      "/images/rooms/annexe-colorful.jpg",
-      "/images/rooms/bungalow-exterieur-jardin-tropical.jpg",
     ],
     category: "hotel",
   },
@@ -423,11 +422,17 @@ export const rooms: Room[] = [
       es: "Anexo Le Repos · 800 m",
     },
     groupe: "repos",
+    /* Reportage Mamiarisolo commandé par l'hôtel (dossier « Repos et Lac
+       Hotel »). Le filigrane d'auteur a été retiré avec l'accord de la
+       direction : le photographe a été rémunéré et la cession des droits
+       figure au contrat. */
     images: [
-      "/images/rooms/le-repos-chambre-01.jpg",
-      "/images/rooms/le-repos-chambre-02.jpg",
-      "/images/rooms/le-repos-exterior.jpg",
-      "/images/rooms/le-repos-nature.jpg",
+      "/images/rooms/villa-basse-facade-fenetres-cintrees.jpg",
+      "/images/rooms/villa-basse-chambre-trois-lits.jpg",
+      "/images/rooms/villa-basse-chambre-moustiquaire.jpg",
+      "/images/rooms/villa-basse-kitchenette-coin-repas.jpg",
+      "/images/rooms/villa-basse-kitchenette-refrigerateur.jpg",
+      "/images/rooms/le-repos-vue-aerienne-lac.jpg",
     ],
     category: "repos",
   },
