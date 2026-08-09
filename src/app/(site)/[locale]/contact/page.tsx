@@ -11,7 +11,6 @@
  * qui a besoin d'état — reste un îlot client.
  */
 
-import Link from "next/link";
 import { Suspense } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
@@ -156,36 +155,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Conditions de réservation & annulation — résumé à filets */}
-      <section id="conditions" className="scroll-mt-24 py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <div className="mx-auto max-w-[780px]">
-            <ScrollReveal>
-              <h2 className="mb-8" style={{ textWrap: "balance" }}>
-                {dict.contact.cancellation}
-              </h2>
-              <ul className="border-t border-hairline">
-                {dict.contact.cancellationRules.map((rule: string, i: number) => (
-                  <li
-                    key={i}
-                    className="border-b border-hairline py-3.5 text-[15px] leading-relaxed text-body"
-                  >
-                    {rule}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8">
-                <Link
-                  href={`/${loc}/${dict.conditions?.slug || "conditions-reservation"}/`}
-                  className="ge-cta ge-cta--ghost"
-                >
-                  {dict.conditions?.viewFull || "Voir les conditions complètes"}
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
 
       {/* Carte — Google Maps */}
       <section className="bg-mist-bg py-16 md:py-24">

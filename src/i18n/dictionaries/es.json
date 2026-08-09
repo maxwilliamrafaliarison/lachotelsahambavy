@@ -25,11 +25,6 @@
     "cta1": "Descubrir nuestras habitaciones",
     "cta2": "Reservar ahora"
   },
-  "promo": {
-    "prefix": "Oferta especial:",
-    "text": "50 % en la 2.ª noche",
-    "suffix": "para cualquier reserva de 2 noches consecutivas"
-  },
   "welcome": {
     "label": "Bienvenido al Lac Hôtel",
     "title": "Un eco-lodge de excepción frente al lago Sahambavy",
@@ -331,17 +326,6 @@
     },
     "offerReminder": "2 noches = 50 % en la 2.ª",
     "offerReminderDetail": "Para cualquier reserva de 2 noches consecutivas, el hotel ofrece 50 % de descuento en la 2.ª noche.",
-    "cancellation": "Condiciones de reserva y cancelación",
-    "cancellationRules": [
-      "La reserva se confirma tras la recepción de un correo electrónico de confirmación del hotel.",
-      "El pago se realiza a la llegada, en efectivo (Ariary, Euros) o por transferencia bancaria previa.",
-      "Cancelación de 60 a 15 días antes de la llegada: se cobrará el 20 % del importe total.",
-      "Cancelación de 15 a 5 días antes de la llegada: se cobrará el 70 % del importe total.",
-      "Cancelación a menos de 3 días de la llegada: se cobrará el 100 % del importe total.",
-      "No presentación (no-show) o salida anticipada: se cobrará el 100 % del importe total.",
-      "Los cambios de fechas están sujetos a disponibilidad y deben comunicarse por correo electrónico.",
-      "Check-in a partir de las 14:00 — Check-out antes de las 11:00."
-    ],
     "heroTitle": "Planifique su estancia",
     "heroSubtitle": "Respondemos en 24 h · Sin comisión · Pago a la llegada",
     "mapTitle": "Encuéntrenos",
