@@ -112,11 +112,11 @@ export const navigation: NavItem[] = [
         label: { fr: "Bungalow standard", en: "Standard bungalow", es: "Bungaló estándar" },
       },
       {
-        href: "/hebergements#wagon-nuptial",
+        href: "/hebergements#wagon-nuptial-1930",
         label: { fr: "Wagon Nuptial", en: "Wagon Nuptial", es: "Wagon Nuptial" },
       },
       {
-        href: "/hebergements#bungalow-tarzan",
+        href: "/hebergements#bungalow-sur-arbre",
         label: {
           fr: "Bungalow Tarzan sur arbre",
           en: "Tarzan tree bungalow",

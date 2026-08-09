@@ -121,14 +121,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
   // JSON-LD : 3 TouristAttractions clés (restaurant, plantation thé, train FCE)
   const attractionRestaurant = touristAttractionSchema({
     locale: loc,
-    slug: "restaurant",
+    chemin: "restaurant",
     name: dict.restaurantSection.title as string,
     description: dict.restaurantSection.subtitle as string,
     image: "/images/restaurant/salle-restaurant-tables-dressees.jpg",
   });
   const attractionPlantation = touristAttractionSchema({
     locale: loc,
-    slug: "plantation-de-the",
+    chemin: "plantation-de-the",
     name: loc === "fr" ? "Plantation de thé de Sahambavy" : loc === "en" ? "Sahambavy Tea Plantation" : "Plantación de té de Sahambavy",
     description: loc === "fr"
       ? "La seule plantation de thé de Madagascar — visite guidée, cueillette et dégustation à 5 min de l'hôtel."
@@ -139,7 +139,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
   });
   const attractionTrain = touristAttractionSchema({
     locale: loc,
-    slug: "train-fce",
+    chemin: "train-fce",
     name: loc === "fr" ? "Train FCE Fianarantsoa–Manakara" : loc === "en" ? "FCE Train Fianarantsoa–Manakara" : "Tren FCE Fianarantsoa–Manakara",
     description: loc === "fr"
       ? "Ligne ferroviaire légendaire de 170 km reliant les hauts plateaux à la côte est. La gare de Sahambavy est à 2 min de l'hôtel."

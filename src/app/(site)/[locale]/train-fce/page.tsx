@@ -65,7 +65,7 @@ export default async function TrainFCEPage({
 
   const attractionTrain = touristAttractionSchema({
     locale: loc,
-    slug: "train-fce",
+    chemin: "train-fce",
     name: dict.train.heroTitle as string,
     description: dict.train.heroSubtitle as string,
     image: "/images/train/train-classique-corridor-foret.jpg",

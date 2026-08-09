@@ -179,14 +179,27 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
 // HotelRoom (page chambre individuelle)
 // =====================================================
 
+/**
+ * Les hébergements n'ont PAS de page propre : ils sont tous présentés sur
+ * /hebergements/, chacun dans sa section ancrée. On balise donc l'ancre
+ * réelle, `…/hebergements/#pilotis-nuptial`, et non une URL par chambre —
+ * celle-ci renvoyait 404, si bien que Google suivait le lien d'une fiche
+ * qu'il venait de lire et tombait sur une page d'erreur. Les `id` des
+ * sections de la page valent exactement `room.slug` : les deux doivent
+ * être changés ensemble.
+ */
+function ancreChambre(room: Room, locale: Locale): string {
+  return `${siteConfig.url}/${locale}/hebergements/#${room.slug}`;
+}
+
 export function hotelRoomSchema(room: Room, locale: Locale): SchemaType {
   return {
     "@context": "https://schema.org",
     "@type": "HotelRoom",
-    "@id": `${siteConfig.url}/${locale}/hebergements/${room.slug}/#room`,
+    "@id": ancreChambre(room, locale),
     name: room.name[locale],
     description: room.description[locale],
-    url: `${siteConfig.url}/${locale}/hebergements/${room.slug}/`,
+    url: ancreChambre(room, locale),
     image: room.images.map((img) => `${siteConfig.url}${img}`),
     occupancy: {
       "@type": "QuantitativeValue",
@@ -269,20 +282,31 @@ export function restaurantSchema(locale: Locale): SchemaType {
 // TouristAttraction (page expérience)
 // =====================================================
 
+/**
+ * `chemin` est le segment de la page qui présente réellement l'attraction —
+ * « restaurant », « plantation-de-the », « train-fce » — et non un slug
+ * imaginaire sous /experiences/, qui n'a jamais existé et renvoyait 404.
+ *
+ * L'`@id` est construit sur ce même chemin : c'est voulu. La plantation et
+ * le train sont balisés à la fois sur /experiences/ et sur leur propre
+ * page ; le même identifiant des deux côtés dit à Google qu'il s'agit
+ * d'une seule et même entité vue depuis deux pages, ce qui est le cas.
+ */
 export function touristAttractionSchema(args: {
   locale: Locale;
-  slug: string;
+  chemin: string;
   name: string;
   description: string;
   image?: string;
 }): SchemaType {
+  const url = `${siteConfig.url}/${args.locale}/${args.chemin}/`;
   return {
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
-    "@id": `${siteConfig.url}/${args.locale}/experiences/${args.slug}/#attraction`,
+    "@id": `${url}#attraction`,
     name: args.name,
     description: args.description,
-    url: `${siteConfig.url}/${args.locale}/experiences/${args.slug}/`,
+    url,
     image: args.image ? `${siteConfig.url}${args.image}` : undefined,
     geo: {
       "@type": "GeoCoordinates",

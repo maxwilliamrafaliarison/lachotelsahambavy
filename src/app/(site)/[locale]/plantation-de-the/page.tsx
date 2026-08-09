@@ -136,7 +136,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
 
   const attractionPlantation = touristAttractionSchema({
     locale: loc,
-    slug: "plantation-de-the",
+    chemin: "plantation-de-the",
     name: p.heroTitle as string,
     description: p.heroSubtitle as string,
     image: "/images/tea/plantation-drone-overhead.jpg",

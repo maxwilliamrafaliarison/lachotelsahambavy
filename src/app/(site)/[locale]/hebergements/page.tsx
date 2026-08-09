@@ -214,14 +214,36 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
 
   const contactHref = `${basePath}/${locale}/contact/`;
 
-  const anchors: { href: string; label: string }[] = [
-    { href: "#pilotis-nuptial", label: pilotis.name[loc] },
-    { href: "#superior-lake-view", label: superior.name[loc] },
-    { href: "#bungalow-standard", label: standard.name[loc] },
-    { href: "#wagon-nuptial", label: wagon.name[loc] },
-    { href: "#bungalow-tarzan", label: arbre.name[loc] },
-    { href: "#familles", label: rx.familyTitle },
+  /* Les hébergements présentés par la page, dans l'ordre où ils y figurent.
+     Chaque section porte `room.slug` comme id : faute de route de détail,
+     c'est cette ancre que le JSON-LD publie en `url` et en `@id` (cf.
+     hotelRoomSchema) et que le méga-menu de src/data/site.ts vise. Une seule
+     source, donc, pour le sommaire, les id de sections et le balisage.
+
+     Publier un hébergement sans lui donner de section reviendrait à baliser
+     une ancre qui n'existe pas — exactement l'incohérence que la page vient
+     de corriger. Le cas se posera le jour où la Lake Suite recevra son
+     `groupe` (cf. src/data/rooms.ts) : mieux vaut casser le build que servir
+     des données structurées fausses sur les trois locales. */
+  const sections: { room: Room; label: string }[] = [
+    { room: pilotis, label: pilotis.name[loc] },
+    { room: superior, label: superior.name[loc] },
+    { room: standard, label: standard.name[loc] },
+    { room: wagon, label: wagon.name[loc] },
+    { room: arbre, label: arbre.name[loc] },
+    { room: villaRepos, label: rx.familyTitle },
   ];
+
+  const sansSection = roomsAffichees.filter((r) => !sections.some((s) => s.room.id === r.id));
+  if (sansSection.length > 0) {
+    throw new Error(
+      `Hébergements publiés sans section sur /hebergements : ${sansSection
+        .map((r) => r.id)
+        .join(", ")} — le JSON-LD pointerait sur une ancre inexistante.`,
+    );
+  }
+
+  const anchors = sections.map((s) => ({ href: `#${s.room.slug}`, label: s.label }));
 
   /* JSON-LD : ItemList de HotelRoom (un item par type d'hébergement).
      Bâtie sur `roomsAffichees` et NON sur `rooms` : ce dernier contient les
@@ -295,7 +317,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             night
-            id="pilotis-nuptial"
+            id={pilotis.slug}
             media={galerie(pilotis, true)}
             image={`${basePath}/images/rooms/pilotis-crepuscule-rose-lac.jpg`}
             imageAlt="Les bungalows sur pilotis se reflétant dans le lac Sahambavy au crépuscule"
@@ -326,7 +348,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             reverse
-            id="superior-lake-view"
+            id={superior.slug}
             media={galerie(superior)}
             image={`${basePath}/images/gallery/gallery-lake-view-interior.jpg`}
             imageAlt="Superior Lake View Room : baie vitrée grand angle ouverte sur le lac et les bambous"
@@ -349,7 +371,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <section className="pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
-            id="bungalow-standard"
+            id={standard.slug}
             media={galerie(standard)}
             image={`${basePath}/images/rooms/bungalows-colores-annexe.jpg`}
             imageAlt="Bungalows standard aux façades colorées, dans les jardins paysagers du Lac Hôtel"
@@ -413,7 +435,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
           <EditorialSplit
             night
             reverse
-            id="wagon-nuptial"
+            id={wagon.slug}
             media={galerie(wagon)}
             image={`${basePath}/images/rooms/wagon-exterior.jpg`}
             imageAlt="Wagon Nuptial 1930 de la ligne FCE posé face au lac Sahambavy"
@@ -439,7 +461,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
-            id="bungalow-tarzan"
+            id={arbre.slug}
             media={galerie(arbre)}
             reverse
             image={`${basePath}/images/rooms/bungalow-tarzan-cabane-arbre.jpg`}
@@ -462,7 +484,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <section className="pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
-            id="familles"
+            id={villaRepos.slug}
             media={galerie(villaRepos)}
             image={`${basePath}/images/rooms/le-repos-exterior.jpg`}
             imageAlt="Maisons en duplex de l'extension Le Repos, entourées de verdure"

@@ -108,7 +108,12 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
 
 function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Locale }) {
   const images = room.images.length ? room.images : ["/images/hero/hero-pilotis.jpg"];
-  const href = `/${locale}/hebergements/`;
+  /* Chaque carte mène à la section de la chambre, pas au haut de la page :
+     faute de route de détail, l'ancre `room.slug` EST l'adresse publique de
+     l'hébergement — celle que le JSON-LD publie et que vise le méga-menu.
+     Sans elle, le visiteur qui clique « Pilotis Nuptial » atterrissait sur
+     le hero et devait retrouver la chambre à la main. */
+  const href = `/${locale}/hebergements/#${room.slug}`;
   const night = String(dict.rooms.night).replace(/^\s*\/\s*/, "");
 
   return (
