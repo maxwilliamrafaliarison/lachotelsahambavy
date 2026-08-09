@@ -19,7 +19,7 @@ const EX_FR = {
   heroLabel: "Lac Hôtel Sahambavy",
   heroTitle: "Expériences",
   heroKicker:
-    "Entre le lac, les collines de thé et les villages betsileo, chaque journée invite à une découverte différente — au départ direct de l'hôtel.",
+    "Entre le lac, les collines de thé et les villages betsileo, chaque journée invite à une découverte différente, au départ direct de l'hôtel.",
   introLabel: "Vivre Sahambavy",
   introTitle: "Un territoire d'expériences",
   introP:
@@ -27,12 +27,12 @@ const EX_FR = {
   loisirs: {
     label: "Loisirs",
     title: "Le lac comme terrain de jeu",
-    p: "Le tour du lac — 8 km balisés, environ 2 heures de marche — donne le ton : ici, tout se découvre en douceur. La plantation et l'usine de thé TAF se visitent en 4 heures, les villages alentour en 2 heures de balade, entre ateliers de broderie et de vannerie, ferme et potager de Mamie Olga.",
+    p: "Le tour du lac (8 km balisés, environ 2 heures de marche) donne le ton : ici, tout se découvre en douceur. La plantation et l'usine de thé TAF se visitent en 4 heures, les villages alentour en 2 heures de balade, entre ateliers de broderie et de vannerie, ferme et potager de Mamie Olga.",
     items: [
-      "Tour du Lac — 8 km balisés, 2 h",
-      "Visite de la plantation & de l'usine de thé TAF — 4 h",
-      "Balade dans les villages alentour — 2 h",
-      "Rencontre des artisans — broderie, vannerie",
+      "Tour du Lac (8 km balisés, 2 h)",
+      "Visite de la plantation & de l'usine de thé TAF (4 h)",
+      "Balade dans les villages alentour (2 h)",
+      "Rencontre des artisans (broderie, vannerie)",
       "Ferme & potager de Mamie Olga",
       "Canoë et pédalo sur le lac",
       "Vélo autour du lac",
@@ -52,7 +52,7 @@ const EX_FR = {
   mamiShop: {
     label: "Boutique",
     title: "Mami Bio Shop, le savoir-faire de Sahambavy",
-    p1: "La boutique de l'hôtel met à l'honneur le savoir-faire des artisans de Sahambavy — et en premier lieu le travail des femmes du village.",
+    p1: "La boutique de l'hôtel met à l'honneur le savoir-faire des artisans de Sahambavy, et en premier lieu le travail des femmes du village.",
     p2: "Huiles essentielles et huiles de massage, grades de thés de la plantation, savons bio saponifiés à froid, broderies et paniers tressés dans les roseaux du lac : chaque pièce raconte le territoire.",
   },
   riviere: {
@@ -63,7 +63,7 @@ const EX_FR = {
     rowNavigation: "Navigation",
     navigationValue: "2 h de pirogue traditionnelle",
     rowWalk: "Marche",
-    walkValue: "1 h 30 — villages, rizières, champs de thé",
+    walkValue: "1 h 30 (villages, rizières, champs de thé)",
     rowLunch: "Déjeuner",
     lunchValue: "Pique-nique au pied d'une cascade",
     included: "Inclus",
@@ -131,10 +131,10 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
     chemin: "plantation-de-the",
     name: loc === "fr" ? "Plantation de thé de Sahambavy" : loc === "en" ? "Sahambavy Tea Plantation" : "Plantación de té de Sahambavy",
     description: loc === "fr"
-      ? "La seule plantation de thé de Madagascar — visite guidée, cueillette et dégustation à 5 min de l'hôtel."
+      ? "La seule plantation de thé de Madagascar : visite guidée, cueillette et dégustation à 5 min de l'hôtel."
       : loc === "en"
-        ? "The only tea plantation in Madagascar — guided tour, picking and tasting 5 min from the hotel."
-        : "La única plantación de té de Madagascar — visita guiada, recolección y degustación a 5 min del hotel.",
+        ? "The only tea plantation in Madagascar: guided tour, picking and tasting 5 min from the hotel."
+        : "La única plantación de té de Madagascar: visita guiada, recolección y degustación a 5 min del hotel.",
     image: "/images/tea/plantation-drone-overhead.jpg",
   });
   const attractionTrain = touristAttractionSchema({

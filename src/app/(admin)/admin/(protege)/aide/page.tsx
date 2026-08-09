@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CATALOGUE, formatAr } from "@/lib/admin/tarifs";
 
-export const metadata: Metadata = { title: "Aide — mode d'emploi" };
+export const metadata: Metadata = { title: "Aide : mode d'emploi" };
 
 /**
  * Le mode d'emploi d'une page pour l'équipe (livrable Phase 2).
@@ -34,7 +34,7 @@ export default function AidePage() {
         <li className="rounded-[3px] border border-hairline bg-white p-5">
           <strong className="text-ink">3 · Remise, exonération & PDF.</strong> Choisissez la
           remise (en % ou en montant) : la <strong>jauge</strong> passe du vert à l&apos;orange
-          puis au rouge selon son ampleur — au-delà de 30 %, prévenez la Direction. Cochez
+          puis au rouge selon son ampleur. Au-delà de 30 %, prévenez la Direction. Cochez
           <strong> Exonération de TVA</strong> si le client y a droit (le total baisse de
           20 % sur les prestations taxées). Vérifiez le récapitulatif à droite, puis
           <strong> Générer le PDF</strong> : il se télécharge immédiatement, prêt à envoyer.
@@ -46,7 +46,7 @@ export default function AidePage() {
         <li>
           <strong className="text-ink">Numérotation.</strong> Le numéro (PRO-2026-001,
           002…) s&apos;incrémente automatiquement sur ce poste après chaque PDF. Vous
-          pouvez le corriger à la main — l&apos;outil retiendra le plus grand numéro.
+          pouvez le corriger à la main : l&apos;outil retiendra le plus grand numéro.
         </li>
         <li>
           <strong className="text-ink">Taux euro.</strong> 1 € = 5 000 Ar par défaut
@@ -55,13 +55,13 @@ export default function AidePage() {
         </li>
         <li>
           <strong className="text-ink">La proforma n&apos;est pas une facture
-          définitive</strong> — la mention légale figure automatiquement en pied de
+          définitive.</strong> La mention légale figure automatiquement en pied de
           page, avec RCS, STAT et NIF de l&apos;hôtel.
         </li>
         <li>
           <strong className="text-ink">Profils.</strong> « Direction » (Maggie, Max) et
           « Réception » (Toky, Tata) ont aujourd&apos;hui exactement le même accès à
-          l&apos;outil — le profil sert à savoir qui est connecté. Votre profil
+          l&apos;outil : le profil sert à savoir qui est connecté. Votre profil
           s&apos;affiche en haut à droite.
         </li>
         <li>

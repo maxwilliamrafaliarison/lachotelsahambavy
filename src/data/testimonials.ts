@@ -54,9 +54,9 @@ export const bookingReviews: Review[] = [
     location: "Suisse",
     rating: 5,
     text: {
-      fr: "Nous avons adoré le caractère unique de notre hébergement — nous avons séjourné dans le Wagon. Le personnel, surtout la dame qui nous a accueillis, était super chaleureux et heureux de partager des conseils sur la cuisine locale.",
-      en: "We loved how unique our accommodation was — we stayed in the Train Wagon. The staff, especially the lady who received us, was super welcoming and happy to share tips on what local food we should try for dinner.",
-      es: "Nos encantó lo único de nuestro alojamiento — nos quedamos en el Vagón. El personal, sobre todo la señora que nos recibió, fue muy acogedor y encantado de compartir consejos sobre la cocina local.",
+      fr: "Nous avons adoré le caractère unique de notre hébergement : nous avons séjourné dans le Wagon. Le personnel, surtout la dame qui nous a accueillis, était super chaleureux et heureux de partager des conseils sur la cuisine locale.",
+      en: "We loved how unique our accommodation was: we stayed in the Train Wagon. The staff, especially the lady who received us, was super welcoming and happy to share tips on what local food we should try for dinner.",
+      es: "Nos encantó lo único de nuestro alojamiento: nos quedamos en el Vagón. El personal, sobre todo la señora que nos recibió, fue muy acogedor y encantado de compartir consejos sobre la cocina local.",
     },
   },
   {
@@ -105,7 +105,7 @@ export const bookingReviews: Review[] = [
     rating: 4,
     text: {
       fr: "Cadre exceptionnel, rapport qualité-prix excellent. La chambre standard est confortable et bien tenue. Seul bémol : le wifi un peu capricieux, mais on vient justement ici pour se déconnecter.",
-      en: "Exceptional setting, excellent value for money. The standard room is comfortable and well kept. Only downside: the wifi is a bit fickle, but that's exactly why you come here — to disconnect.",
+      en: "Exceptional setting, excellent value for money. The standard room is comfortable and well kept. Only downside: the wifi is a bit fickle, but disconnecting is exactly why you come here.",
       es: "Entorno excepcional, excelente relación calidad-precio. La habitación estándar es cómoda y bien cuidada. Única pega: el wifi un poco caprichoso, pero precisamente se viene aquí para desconectar.",
     },
   },
@@ -114,9 +114,9 @@ export const bookingReviews: Review[] = [
     location: "Autriche",
     rating: 5,
     text: {
-      fr: "Arrivée en train FCE depuis Manakara, accueil à la gare de Sahambavy — quelle magie après ces huit heures de paysages. La chambre nous attendait avec du thé local.",
-      en: "Arrived by FCE train from Manakara, welcomed at Sahambavy station — what magic after those eight hours of landscapes. The room was waiting for us with local tea.",
-      es: "Llegamos en el tren FCE desde Manakara, recibidos en la estación de Sahambavy — qué magia tras esas ocho horas de paisajes. La habitación nos esperaba con té local.",
+      fr: "Arrivée en train FCE depuis Manakara, accueil à la gare de Sahambavy. Quelle magie après ces huit heures de paysages ! La chambre nous attendait avec du thé local.",
+      en: "Arrived by FCE train from Manakara, welcomed at Sahambavy station. What magic after those eight hours of landscapes! The room was waiting for us with local tea.",
+      es: "Llegamos en el tren FCE desde Manakara, recibidos en la estación de Sahambavy. ¡Qué magia tras esas ocho horas de paisajes! La habitación nos esperaba con té local.",
     },
   },
   {
@@ -134,9 +134,9 @@ export const bookingReviews: Review[] = [
     location: "Norvège",
     rating: 5,
     text: {
-      fr: "Week-end anniversaire surprise. Le personnel a décoré la chambre pendant le dîner — gâteau, pétales, bouteille de vin. Attention rare, souvenir impérissable.",
-      en: "Surprise birthday weekend. Staff decorated the room during dinner — cake, petals, bottle of wine. Rare attention, unforgettable memory.",
-      es: "Fin de semana de cumpleaños sorpresa. El personal decoró la habitación durante la cena — pastel, pétalos, botella de vino. Atención rara, recuerdo inolvidable.",
+      fr: "Week-end anniversaire surprise. Le personnel a décoré la chambre pendant le dîner : gâteau, pétales, bouteille de vin. Attention rare, souvenir impérissable.",
+      en: "Surprise birthday weekend. Staff decorated the room during dinner: cake, petals, bottle of wine. Rare attention, unforgettable memory.",
+      es: "Fin de semana de cumpleaños sorpresa. El personal decoró la habitación durante la cena: pastel, pétalos, botella de vino. Atención rara, recuerdo inolvidable.",
     },
   },
   {
@@ -154,9 +154,9 @@ export const bookingReviews: Review[] = [
     location: "Japon",
     rating: 5,
     text: {
-      fr: "Photographe, j'ai passé une semaine à capturer la lumière sur le lac — levers, couchers, brumes matinales. L'hôtel est un paradis pour quiconque aime la photographie.",
-      en: "As a photographer, I spent a week capturing the light on the lake — sunrises, sunsets, morning mists. The hotel is a paradise for anyone who loves photography.",
-      es: "Como fotógrafo, pasé una semana capturando la luz del lago — amaneceres, atardeceres, nieblas matutinas. El hotel es un paraíso para quienes amamos la fotografía.",
+      fr: "Photographe, j'ai passé une semaine à capturer la lumière sur le lac. Levers, couchers, brumes matinales. L'hôtel est un paradis pour quiconque aime la photographie.",
+      en: "As a photographer, I spent a week capturing the light on the lake. Sunrises, sunsets, morning mists. The hotel is a paradise for anyone who loves photography.",
+      es: "Como fotógrafo, pasé una semana capturando la luz del lago. Amaneceres, atardeceres, nieblas matutinas. El hotel es un paraíso para quienes amamos la fotografía.",
     },
   },
   {
@@ -164,9 +164,9 @@ export const bookingReviews: Review[] = [
     location: "Brésil",
     rating: 4,
     text: {
-      fr: "Tour du lac en pédalo au coucher du soleil — inoubliable. Petit bémol : la route depuis l'aéroport est un peu longue, prévoir des arrêts. L'arrivée fait vite oublier.",
-      en: "Pedal boat around the lake at sunset — unforgettable. Small downside: the drive from the airport is a bit long, plan some stops. The arrival quickly makes up for it.",
-      es: "Hidropedal por el lago al atardecer — inolvidable. Pequeña pega: el trayecto desde el aeropuerto es un poco largo, planificar paradas. La llegada lo compensa rápido.",
+      fr: "Tour du lac en pédalo au coucher du soleil, inoubliable. Petit bémol : la route depuis l'aéroport est un peu longue, prévoir des arrêts. L'arrivée fait vite oublier.",
+      en: "Pedal boat around the lake at sunset, unforgettable. Small downside: the drive from the airport is a bit long, plan some stops. The arrival quickly makes up for it.",
+      es: "Hidropedal por el lago al atardecer, inolvidable. Pequeña pega: el trayecto desde el aeropuerto es un poco largo, planificar paradas. La llegada lo compensa rápido.",
     },
   },
 ];
@@ -230,9 +230,9 @@ export const googleReviews: Review[] = [
     location: "États-Unis",
     rating: 5,
     text: {
-      fr: "Nous sommes arrivés par le train FCE depuis Manakara — l'hôtel nous attendait à la gare. Quelle belle surprise après ce voyage ! Accueil parfait, chambre magnifique.",
-      en: "We arrived by the FCE train from Manakara — the hotel picked us up at the station. What a lovely surprise after that journey! Perfect welcome, beautiful room.",
-      es: "Llegamos en el tren FCE desde Manakara — el hotel nos recogió en la estación. ¡Qué sorpresa tan agradable después de ese viaje! Acogida perfecta, habitación magnífica.",
+      fr: "Nous sommes arrivés par le train FCE depuis Manakara et l'hôtel nous attendait à la gare. Quelle belle surprise après ce voyage ! Accueil parfait, chambre magnifique.",
+      en: "We arrived by the FCE train from Manakara and the hotel picked us up at the station. What a lovely surprise after that journey! Perfect welcome, beautiful room.",
+      es: "Llegamos en el tren FCE desde Manakara y el hotel nos recogió en la estación. ¡Qué sorpresa tan agradable después de ese viaje! Acogida perfecta, habitación magnífica.",
     },
   },
   {
@@ -250,9 +250,9 @@ export const googleReviews: Review[] = [
     location: "Pays-Bas",
     rating: 5,
     text: {
-      fr: "Parfaite harmonie entre nature, gastronomie et confort. Le potager biologique, le lac, les collines de thé — tout concourt à la beauté du lieu.",
-      en: "Perfect harmony between nature, gastronomy and comfort. The organic garden, the lake, the tea hills — everything contributes to the beauty of the place.",
-      es: "Perfecta armonía entre naturaleza, gastronomía y confort. El huerto ecológico, el lago, las colinas de té — todo contribuye a la belleza del lugar.",
+      fr: "Parfaite harmonie entre nature, gastronomie et confort. Le potager biologique, le lac, les collines de thé : tout concourt à la beauté du lieu.",
+      en: "Perfect harmony between nature, gastronomy and comfort. The organic garden, the lake, the tea hills: everything contributes to the beauty of the place.",
+      es: "Perfecta armonía entre naturaleza, gastronomía y confort. El huerto ecológico, el lago, las colinas de té: todo contribuye a la belleza del lugar.",
     },
   },
   {
@@ -280,9 +280,9 @@ export const googleReviews: Review[] = [
     location: "Suisse",
     rating: 5,
     text: {
-      fr: "Noël dans la suite nuptiale — cheminée allumée, décoration subtile, dîner de gala face au lac. Le personnel a transformé une soirée en véritable conte.",
-      en: "Christmas in the nuptial suite — lit fireplace, subtle decoration, gala dinner facing the lake. The staff transformed an evening into a real fairytale.",
-      es: "Navidad en la suite nupcial — chimenea encendida, decoración sutil, cena de gala frente al lago. El personal transformó una velada en un verdadero cuento.",
+      fr: "Noël dans la suite nuptiale : cheminée allumée, décoration subtile, dîner de gala face au lac. Le personnel a transformé une soirée en véritable conte.",
+      en: "Christmas in the nuptial suite: lit fireplace, subtle decoration, gala dinner facing the lake. The staff transformed an evening into a real fairytale.",
+      es: "Navidad en la suite nupcial: chimenea encendida, decoración sutil, cena de gala frente al lago. El personal transformó una velada en un verdadero cuento.",
     },
   },
   {
@@ -291,7 +291,7 @@ export const googleReviews: Review[] = [
     rating: 5,
     text: {
       fr: "Ornithologue amateur, j'ai identifié plus de trente espèces en trois jours rien qu'autour du lac. L'hôtel est idéalement placé pour les passionnés de nature.",
-      en: "Amateur ornithologist — I identified over thirty species in three days just around the lake. The hotel is ideally located for nature enthusiasts.",
+      en: "As an amateur ornithologist, I identified over thirty species in three days just around the lake. The hotel is ideally located for nature enthusiasts.",
       es: "Ornitólogo aficionado, identifiqué más de treinta especies en tres días solo alrededor del lago. El hotel está idealmente situado para los amantes de la naturaleza.",
     },
   },
@@ -300,9 +300,9 @@ export const googleReviews: Review[] = [
     location: "Italie",
     rating: 5,
     text: {
-      fr: "Le Wagon 1930 est une pépite — bois patiné, détails d'époque, confort moderne. On dort bercé par les sons du lac. À essayer absolument au moins une fois.",
-      en: "The 1930 Wagon is a gem — patinated wood, period details, modern comfort. You sleep rocked by the sounds of the lake. An absolute must at least once.",
-      es: "El Vagón 1930 es una joya — madera patinada, detalles de época, confort moderno. Se duerme acunado por los sonidos del lago. Imprescindible al menos una vez.",
+      fr: "Le Wagon 1930 est une pépite : bois patiné, détails d'époque, confort moderne. On dort bercé par les sons du lac. À essayer absolument au moins une fois.",
+      en: "The 1930 Wagon is a gem: patinated wood, period details, modern comfort. You sleep rocked by the sounds of the lake. An absolute must at least once.",
+      es: "El Vagón 1930 es una joya: madera patinada, detalles de época, confort moderno. Se duerme acunado por los sonidos del lago. Imprescindible al menos una vez.",
     },
   },
   {
@@ -320,9 +320,9 @@ export const googleReviews: Review[] = [
     location: "Finlande",
     rating: 5,
     text: {
-      fr: "Piscine à débordement face au lac, transats à l'ombre des eucalyptus, service en bord de bassin — tout y est pour se croire ailleurs. Rare à Madagascar.",
-      en: "Infinity pool facing the lake, loungers in the shade of eucalyptus trees, poolside service — everything is there to feel elsewhere. Rare in Madagascar.",
-      es: "Piscina infinita frente al lago, tumbonas a la sombra de los eucaliptos, servicio junto a la piscina — todo está ahí para sentirse en otro lugar. Raro en Madagascar.",
+      fr: "Piscine à débordement face au lac, transats à l'ombre des eucalyptus, service en bord de bassin. Tout y est pour se croire ailleurs. Rare à Madagascar.",
+      en: "Infinity pool facing the lake, loungers in the shade of eucalyptus trees, poolside service. Everything is there to feel elsewhere. Rare in Madagascar.",
+      es: "Piscina infinita frente al lago, tumbonas a la sombra de los eucaliptos, servicio junto a la piscina. Todo está ahí para sentirse en otro lugar. Raro en Madagascar.",
     },
   },
 ];
@@ -406,9 +406,9 @@ export const tripadvisorReviews: Review[] = [
     location: "Royaume-Uni",
     rating: 5,
     text: {
-      fr: "Excursion en draisine le long de la voie ferrée, puis vélos autour du lac — l'hôtel propose des activités originales et bien organisées. Bravo.",
-      en: "Rail trolley excursion along the railway, then bicycles around the lake — the hotel offers original and well-organized activities. Well done.",
-      es: "Excursión en dresina por la vía férrea, luego bicicletas alrededor del lago — el hotel ofrece actividades originales y bien organizadas. Enhorabuena.",
+      fr: "Excursion en draisine le long de la voie ferrée, puis vélos autour du lac. L'hôtel propose des activités originales et bien organisées. Bravo.",
+      en: "Rail trolley excursion along the railway, then bicycles around the lake. The hotel offers original and well-organized activities. Well done.",
+      es: "Excursión en dresina por la vía férrea, luego bicicletas alrededor del lago. El hotel ofrece actividades originales y bien organizadas. Enhorabuena.",
     },
   },
   {
@@ -467,7 +467,7 @@ export const tripadvisorReviews: Review[] = [
     rating: 5,
     text: {
       fr: "Nomade numérique, j'ai prolongé mon séjour d'une semaine. Wifi correct dans les chambres proches du bâtiment principal, cadre inspirant, nourriture saine. Parfait pour travailler.",
-      en: "Digital nomad — I extended my stay by a week. Decent wifi in rooms close to the main building, inspiring setting, healthy food. Perfect for working.",
+      en: "As a digital nomad, I extended my stay by a week. Decent wifi in rooms close to the main building, inspiring setting, healthy food. Perfect for working.",
       es: "Nómada digital, prolongué mi estancia una semana. Wifi decente en habitaciones cercanas al edificio principal, entorno inspirador, comida saludable. Perfecto para trabajar.",
     },
   },
@@ -476,9 +476,9 @@ export const tripadvisorReviews: Review[] = [
     location: "France",
     rating: 5,
     text: {
-      fr: "Les jardins botaniques méritent à eux seuls le détour — orchidées, frangipaniers, vieilles espèces endémiques. Le jardinier a pris le temps de nous guider une matinée.",
-      en: "The botanical gardens alone are worth the trip — orchids, frangipani, old endemic species. The gardener took the time to guide us one morning.",
-      es: "Los jardines botánicos por sí solos merecen la visita — orquídeas, franchipanes, viejas especies endémicas. El jardinero nos dedicó una mañana para guiarnos.",
+      fr: "Les jardins botaniques méritent à eux seuls le détour : orchidées, frangipaniers, vieilles espèces endémiques. Le jardinier a pris le temps de nous guider une matinée.",
+      en: "The botanical gardens alone are worth the trip: orchids, frangipani, old endemic species. The gardener took the time to guide us one morning.",
+      es: "Los jardines botánicos por sí solos merecen la visita: orquídeas, franchipanes, viejas especies endémicas. El jardinero nos dedicó una mañana para guiarnos.",
     },
   },
 ];

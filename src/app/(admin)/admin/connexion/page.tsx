@@ -43,7 +43,7 @@ function LoginForm() {
       <p className="ge-label mb-2">Espace équipe</p>
       <h1 className="mb-2 !text-[34px]">Connexion</h1>
       <p className="mb-8 text-[14px] text-muted">
-        Outil interne du Lac Hôtel Sahambavy — accès réservé à l&apos;équipe.
+        Outil interne du Lac Hôtel Sahambavy. Accès réservé à l&apos;équipe.
       </p>
 
       <label

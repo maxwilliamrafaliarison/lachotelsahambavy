@@ -151,7 +151,7 @@ export async function importFactures(db: Db, records: FactureRecord[]) {
           documentId: doc.id,
           ordre: i,
           nombre: rnd(l.nombre),
-          designation: l.designation || "—",
+          designation: l.designation || "…",
           pu: rnd(l.pu),
           nuitees: rnd(l.nuitees),
           total: rnd(l.total),

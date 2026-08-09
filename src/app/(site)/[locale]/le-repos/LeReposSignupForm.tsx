@@ -11,7 +11,7 @@ export default function LeReposSignupForm({ dict }: { dict: any }) {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const subject = encodeURIComponent("Le Repos — Inscription avant-première");
+    const subject = encodeURIComponent("Le Repos, inscription avant-première");
     const body = encodeURIComponent(
       `${dict.repos.formNameLabel ?? "Nom"}: ${name}\nEmail: ${email}`
     );

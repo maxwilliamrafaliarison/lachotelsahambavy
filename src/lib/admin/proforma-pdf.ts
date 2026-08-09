@@ -48,7 +48,7 @@ export async function genererProformaPdf(devis: Devis, logoUrl: string): Promise
   const helv = await doc.embedFont(StandardFonts.Helvetica);
   const helvBold = await doc.embedFont(StandardFonts.HelveticaBold);
 
-  doc.setTitle(`Facture proforma ${devis.numero} — Lac Hôtel Sahambavy`);
+  doc.setTitle(`Facture proforma ${devis.numero} · Lac Hôtel Sahambavy`);
   doc.setAuthor("Lac Hôtel Sahambavy");
   doc.setSubject("Facture proforma");
 
@@ -113,9 +113,9 @@ export async function genererProformaPdf(devis: Devis, logoUrl: string): Promise
   text(page, "ADRESSÉE À", MARGE, y, { font: helvBold, size: 8, color: MUTED });
   text(page, "SÉJOUR", 330, y, { font: helvBold, size: 8, color: MUTED });
   y -= 16;
-  text(page, devis.client.nom || "—", MARGE, y, { font: helvBold, size: 11, color: INK });
-  const arrivee = devis.sejour.arrivee ? formatDateFr(devis.sejour.arrivee) : "—";
-  const depart = devis.sejour.depart ? formatDateFr(devis.sejour.depart) : "—";
+  text(page, devis.client.nom || "…", MARGE, y, { font: helvBold, size: 11, color: INK });
+  const arrivee = devis.sejour.arrivee ? formatDateFr(devis.sejour.arrivee) : "…";
+  const depart = devis.sejour.depart ? formatDateFr(devis.sejour.depart) : "…";
   text(page, `Du ${arrivee} au ${depart}`, 330, y, { size: 10, color: INK });
   y -= 15;
   if (devis.client.contact) text(page, devis.client.contact, MARGE, y, { size: 9.5 });
@@ -196,7 +196,7 @@ export async function genererProformaPdf(devis: Devis, logoUrl: string): Promise
   text(page, fmtEur(t.totalEur), COL.total, y, { font: helvBold, size: 10.5, color: TEA, align: "right" });
   y -= 20;
   if (devis.exoneration) {
-    text(page, "Exonere de TVA — a confirmer selon le regime applicable.", MARGE, y, { size: 8, color: MUTED });
+    text(page, "Exonere de TVA, a confirmer selon le regime applicable.", MARGE, y, { size: 8, color: MUTED });
     y -= 14;
   }
   y -= 10;
@@ -226,7 +226,7 @@ export async function genererProformaPdf(devis: Devis, logoUrl: string): Promise
     );
     text(
       p,
-      "Facture proforma établie à titre indicatif — elle ne vaut pas facture définitive.",
+      "Facture proforma établie à titre indicatif : elle ne vaut pas facture définitive.",
       MARGE,
       30,
       { size: 7.5, color: MUTED }

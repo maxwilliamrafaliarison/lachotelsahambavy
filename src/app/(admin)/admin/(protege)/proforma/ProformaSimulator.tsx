@@ -159,7 +159,7 @@ export default function ProformaSimulator() {
       const blob = new Blob([ab], { type: "application/pdf" });
       if (pdfUrl) URL.revokeObjectURL(pdfUrl);
       const url = URL.createObjectURL(blob);
-      const nomFichier = `${numero} — ${nom.trim().replace(/[\\/:*?"<>|]/g, "")}.pdf`;
+      const nomFichier = `${numero} · ${nom.trim().replace(/[\\/:*?"<>|]/g, "")}.pdf`;
       setPdfUrl(url);
       setPdfNom(nomFichier);
       const a = document.createElement("a");
@@ -346,11 +346,11 @@ export default function ProformaSimulator() {
               </div>
               <p className="mt-1.5 text-[11.5px] leading-snug text-muted">
                 {remisePct <= SEUIL_RECEPTION ? (
-                  <span className="text-terracotta">Marge confortable — la réception peut accorder cette remise.</span>
+                  <span className="text-terracotta">Marge confortable : la réception peut accorder cette remise.</span>
                 ) : remisePct <= SEUIL_DIRECTION ? (
-                  <span className="text-gold">Remise importante — à confirmer selon l&apos;accord agence.</span>
+                  <span className="text-gold">Remise importante, à confirmer selon l&apos;accord agence.</span>
                 ) : (
-                  <span className="text-copper">Au-delà de {SEUIL_DIRECTION} % — validation de la Direction recommandée.</span>
+                  <span className="text-copper">Au-delà de {SEUIL_DIRECTION} %, validation de la Direction recommandée.</span>
                 )}
               </p>
             </div>
@@ -365,7 +365,7 @@ export default function ProformaSimulator() {
               className="mt-0.5 h-4 w-4 accent-[var(--color-lake)]"
             />
             <span className="text-[13.5px] leading-snug text-body">
-              <span className="font-semibold text-ink">Exonération de TVA</span> — les
+              <span className="font-semibold text-ink">Exonération de TVA</span> : les
               prestations sont facturées hors taxe (le total baisse de 20 % sur les
               lignes soumises à TVA). La mention « Exonéré de TVA » apparaît sur la facture.
             </span>

@@ -17,7 +17,7 @@ const PERSONNEL_FR = {
   label: "Notre personnel",
   title: "Des jeunes du village, accompagnés au quotidien",
   p1: "Notre équipe est majoritairement composée de jeunes issus du village de Sahambavy ou des villages environnants. Accompagnés et formés au quotidien, ils développent leurs compétences et s'épanouissent professionnellement au sein de l'hôtel.",
-  p2: "Cette démarche responsable et solidaire — emploi local, partage des savoir-faire — est au cœur de l'identité du Lac Hôtel.",
+  p2: "Cette démarche responsable et solidaire, qui privilégie l'emploi local et le partage des savoir-faire, est au cœur de l'identité du Lac Hôtel.",
   welcomeLabel: "L'accueil",
   welcomeTitle: "Un accueil chaleureux et respectueux",
   welcomeP1: "Le français n'est pas la langue principale de nos équipes, mais elles comprennent vos besoins et mettent un point d'honneur à y répondre avec attention.",

@@ -128,7 +128,9 @@ export default async function ConditionsPage({
                 {dict.conditions.intro}
               </p>
               <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.24em] text-muted">
-                {dict.conditions.lastUpdated} — {dict.conditions.lastUpdatedDate}
+                {dict.conditions.lastUpdated}
+                {loc === "fr" ? " : " : ": "}
+                {dict.conditions.lastUpdatedDate}
               </p>
             </ScrollReveal>
             <ScrollReveal delay={100}>

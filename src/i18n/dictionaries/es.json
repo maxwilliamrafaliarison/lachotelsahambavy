@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Lac Hôtel Sahambavy — Encanto y confort en plena naturaleza | Madagascar",
+    "title": "Lac Hôtel Sahambavy, encanto y confort en plena naturaleza | Madagascar",
     "description": "Eco-lodge con encanto en Fianarantsoa, Madagascar. Bungalows sobre el agua, restaurante panorámico, plantación de té única. Reserve su estancia en el Lac Hôtel Sahambavy."
   },
   "nav": {
@@ -64,7 +64,7 @@
     "title": "Una historia familiar, hecha lugar de acogida",
     "paragraph": "Fue el azar el que, un día, condujo a Leong y a Olga hasta las orillas del Lago Sahambavy, en 1998. Su proyecto era sencillo: adquirir un terreno a orillas del lago y construir en él una modesta cabaña para disfrutar de un retiro apacible. Pero, bajo el impulso de Olga, aquel lugar se convirtió muy pronto en un verdadero jardín del Edén. Con el tiempo, los viajeros del tren que hacían escala en Sahambavy se detenían, intrigados por la belleza del paraje, pensando encontrar allí un albergue de etapa… Así nació la idea de abrir las puertas de este rincón de paraíso y convertirlo en un hotel. El destino reunió después a las generaciones cuando su hija mayor, Maggie Leong, regresó de Canadá para tomar el relevo de la aventura familiar. En casi 28 años, la propiedad ha crecido hasta acoger hoy medio centenar de bungalows, enclavados en el corazón de una naturaleza preservada.",
     "quote": "« Y la aventura está lejos de haber terminado… »",
-    "signature": "— La familia Leong",
+    "signature": "La familia Leong",
     "captions": {
       "garden": "El jardín",
       "welcome": "La acogida",
@@ -76,7 +76,7 @@
   "rooms": {
     "label": "Alojamientos · Tarifas",
     "title": "Nuestras habitaciones y bungalows",
-    "subtitle": "Del bungalow estándar a la experiencia sobre el agua — unos cincuenta alojamientos para todos los viajes",
+    "subtitle": "Del bungalow estándar a la experiencia sobre el agua: unos cincuenta alojamientos para todos los viajes",
     "intro": "Nuestras habitaciones están diseñadas para garantizar el confort y la tranquilidad de nuestros huéspedes: una cama personalizada de 2,20 m × 2,20 m, que ofrece un confort superior a las dimensiones estándar, un baño privado con agua caliente y una terraza con vistas al lago. Cada habitación dispone de televisión; el acceso al Wi-Fi está disponible únicamente en el restaurante.",
     "from": "desde",
     "night": "/ noche",
@@ -88,12 +88,12 @@
     "ratePublic": "Tarifa Pública",
     "extraBed": "Cama supl. +30 000 AR",
     "taxeSejour": "Tasa turística: 5 000 AR / persona / noche",
-    "camping": "Camping — Anexo privado",
+    "camping": "Camping en anexo privado",
     "campingDesc": "1 hectárea de terreno privado · Seguridad · Baños y duchas compartidos (material de camping no proporcionado)",
     "tableTitle": "Elija su estancia",
     "nightOnLake": "Noche en el lago",
     "pilotisTagline": "dormir sobre el agua",
-    "wagonTagline": "Dormir en un vagón centenario de la línea FCE, frente al lago — una experiencia que no existe en ningún otro lugar.",
+    "wagonTagline": "Dormir en un vagón centenario de la línea FCE, frente al lago: una experiencia que no existe en ningún otro lugar.",
     "comingSoon": "Próximamente en imágenes",
     "discoverRepos": "Descubrir Le Repos",
     "extrasTitle": "Suplementos y servicios",
@@ -109,8 +109,8 @@
     "familyTitle": "Estancias en familia",
     "familyDesc": "Disponemos de 4 casas dúplex (de dos plantas), totalmente equipadas para las estancias prolongadas. Cuentan con una cocina americana con placa de cocción, nevera y vajilla, que ofrecen todo el confort necesario para una estancia con total autonomía.",
     "craftTitle": "El detalle artesanal",
-    "craftText": "Puertas de madera tallada, ropa de cama bordada a mano, lavabos y baños creados por artesanos de la región — y, en cada baño, jabones ecológicos de saponificación en frío.",
-    "tarzanText": "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños — en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
+    "craftText": "Puertas de madera tallada, ropa de cama bordada a mano, lavabos y baños creados por artesanos de la región. Y, en cada baño, jabones ecológicos de saponificación en frío.",
+    "tarzanText": "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños, en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
     "ecoTitle": "Un día a día ecorresponsable",
     "ecoP": "Dentro de un enfoque respetuoso con el medio ambiente, nuestro hotel pone a disposición de sus huéspedes jabones ecológicos. Fabricamos nuestros propios jabones según el método tradicional de saponificación en frío. Nuestros jabones se elaboran de forma artesanal, con un planteamiento ecológico y respetuoso con el medio ambiente. Totalmente biodegradables, están concebidos a partir de ingredientes sencillos, naturales y de origen vegetal.",
     "pilotisName": "Suite Nupcial sobre Pilotes",
@@ -158,11 +158,11 @@
     "philosophyLac": "Del Lago",
     "philosophyLacDesc": "Tilapia fresca del lago Sahambavy y pato salvaje",
     "philosophyMaison": "Casero",
-    "philosophyMaisonDesc": "Pan, queso, yogur, mermelada, miel — de nuestra propia producción",
+    "philosophyMaisonDesc": "Pan, queso, yogur, mermelada y miel de nuestra propia producción",
     "qualityQuote": "En nuestra casa, la calidad empieza en el origen",
     "herbsLabel": "Del huerto",
     "herbsTitle": "Nuestras hierbas aromáticas",
-    "herbsIntro": "Recolectadas cada mañana por nuestro equipo — firman cada plato y cada infusión.",
+    "herbsIntro": "Recolectadas cada mañana por nuestro equipo, firman cada plato y cada infusión.",
     "herbs": [
       "Perejil",
       "Tomillo",
@@ -203,9 +203,9 @@
     "discovery": {
       "title": "Excursiones guiadas y descubrimientos culturales",
       "items": [
-        "Plantación y fábrica de té TAF (4 h): única en Madagascar — visita de la fábrica y degustación de té.",
+        "Plantación y fábrica de té TAF (4 h): única en Madagascar, con visita de la fábrica y degustación de té.",
         "Vuelta al lago (2 h): un paseo seguro y señalizado de 8 km alrededor del lago.",
-        "Pueblos cercanos (2 h): paseo y encuentro con los artesanos de Sahambavy — bordado, cestería…",
+        "Pueblos cercanos (2 h): paseo y encuentro con los artesanos de Sahambavy (bordado, cestería…).",
         "Granja y huerto de Mamie Olga: la granja y el huerto del hotel, un auténtico lugar de vida."
       ],
       "ideal": "Experiencia inmersiva y humana"
@@ -234,7 +234,7 @@
     "massageTitle": "Masajes y Bienestar",
     "massageP": "Regálese un momento de puro relax con nuestros masajes relajantes. Espalda, pies o cuerpo entero… nuestros tratamientos están pensados para aliviar las tensiones, liberar el estrés y revitalizar el cuerpo y la mente. Nuestros masajes se realizan con nuestros aceites caseros de katrafay, ravintsara, romero… para una experiencia olfativa y relajante.",
     "aventureLabel": "Aventura",
-    "aventureTitle": "Circuito Aventura — Descenso del río Matsiatra",
+    "aventureTitle": "Circuito Aventura: descenso del río Matsiatra",
     "aventureP": "Parta para un día de inmersión en el corazón del país Betsileo. Este paseo en piragua tradicional por el río Matsiatra, el tercer río más grande de Madagascar, le permitirá descubrir la vida cotidiana de los aldeanos y la historia de los antiguos reinos.",
     "aventureProgram": [
       "Salida del Lac Hôtel hacia el pueblo de Mahasoabe (45 km)",
@@ -245,15 +245,15 @@
     "aventureIncludes": "Incluido: almuerzo picnic, piragua y piragüero, guía acompañante, tasas de los pueblos",
     "aventureExcludes": "No incluido: transporte, bebidas, actividades no mencionadas",
     "trekkingLabel": "Trekking",
-    "trekkingTitle": "Circuito Acantilado Blanco — 2 días",
+    "trekkingTitle": "Circuito Acantilado Blanco (2 días)",
     "trekkingP": "Descubra una de las zonas más salvajes y auténticas de Madagascar en un trekking de 2 días hacia Andrambovato.",
     "trekkingDay1": {
       "title": "Día 1: Inmersión en tierra Tanala",
       "items": [
         "Salida en tren FCE desde Sahambavy (frente al hotel)",
         "Llegada a Andrambovato, pueblo enclavado en el acantilado",
-        "Caminata Acantilado Blanco: 2 h de ascenso por bosque primario — lémures y camaleones",
-        "Cascada de Mandriampotsy — parada fotográfica entre orquídeas",
+        "Caminata Acantilado Blanco: 2 h de ascenso por bosque primario, entre lémures y camaleones",
+        "Cascada de Mandriampotsy: parada fotográfica entre orquídeas",
         "Noche: intercambio con la etnia Antanala, alojamiento en casa de lugareños"
       ]
     },
@@ -261,7 +261,7 @@
       "title": "Día 2: Cultura y arrozales en terraza",
       "items": [
         "Desayuno local, caminata hacia el pueblo de Ambalavery",
-        "Visita protocolaria al jefe de tribu — organización social Tanala",
+        "Visita protocolaria al jefe de tribu y descubrimiento de la organización social Tanala",
         "Regreso a la estación de Andrambovato",
         "Tren de vuelta a Sahambavy"
       ]
@@ -276,8 +276,8 @@
   "destinations": {
     "train": {
       "label": "Aventura ferroviaria",
-      "title": "Tren FCE — El último tren corredor",
-      "desc": "Fianarantsoa → Manakara, 8–12 h de bosques primarios, acantilados y pueblos aislados. Micheline, Dresina o Tren clásico — nos encargamos de su reserva.",
+      "title": "Tren FCE, el último tren corredor",
+      "desc": "Fianarantsoa → Manakara, 8–12 h de bosques primarios, acantilados y pueblos aislados. Micheline, Dresina o Tren clásico: nos encargamos de su reserva.",
       "cta": "Descubrir el tren FCE"
     },
     "plantation": {
@@ -288,7 +288,7 @@
     },
     "repos": {
       "label": "Extensión hotelera",
-      "title": "Le Repos — Villas con cocina",
+      "title": "Le Repos, villas con cocina",
       "desc": "4 casas dúplex totalmente equipadas para estancias prolongadas y familias. Cocina americana, terraza y entorno natural preservado.",
       "cta": "Descubrir Le Repos"
     },
@@ -327,8 +327,8 @@
       "transfer": "¿Traslado desde Fianarantsoa?",
       "transferOptions": [
         "No, gracias",
-        "Sí — Traslado privado 4×4 (130 000 AR ida)",
-        "Sí — Desde Ambalakely (120 000 AR)"
+        "Sí, traslado privado 4×4 (130 000 AR ida)",
+        "Sí, desde Ambalakely (120 000 AR)"
       ],
       "message": "Mensaje / Solicitudes especiales",
       "nationality": "Nacionalidad / País de residencia",
@@ -428,7 +428,7 @@
       },
       {
         "year": "1969",
-        "text": "Llegada del Instituto Francés del Café y del Cacao — inicio de la investigación científica."
+        "text": "Llegada del Instituto Francés del Café y del Cacao e inicio de la investigación científica."
       },
       {
         "year": "1970",
@@ -440,11 +440,11 @@
       },
       {
         "year": "1996",
-        "text": "Vuelta al sector privado — inversores mauricianos. Nombre actual: SIDEXAM Sahambavy."
+        "text": "Vuelta al sector privado con inversores mauricianos. Nombre actual: SIDEXAM Sahambavy."
       },
       {
         "year": "Hoy",
-        "text": "520 hectáreas — la única plantación de té de Madagascar. Desarrollo del té verde y proyecto de té biológico."
+        "text": "520 hectáreas, la única plantación de té de Madagascar. Desarrollo del té verde y proyecto de té biológico."
       }
     ],
     "excursionLabel": "La excursión",
@@ -453,7 +453,7 @@
       "duration": "Medio día",
       "travel": "Reserva en recepción",
       "elevation": "Nulo",
-      "difficulty": "Fácil — accesible para todos",
+      "difficulty": "Fácil, accesible para todos",
       "walking": "1 a 3 horas en la plantación"
     },
     "excursionSteps": [
@@ -462,7 +462,7 @@
       "Degustación de las diferentes calidades de té",
       "Paseo por la inmensa plantación, encuentro con las recolectoras"
     ],
-    "shopLabel": "La Tienda — Mami Bio Shop",
+    "shopLabel": "La Tienda Mami Bio Shop",
     "shopTitle": "Artesanía local y productos Vita Malagasy",
     "shopIntro": "Encuentre productos Vita Malagasy en la tienda artesanal Mami Bio Shop, un verdadero escaparate de productos locales de calidad.",
     "shopItems": [
@@ -491,7 +491,7 @@
     "shopCta": "Descubrir nuestra tienda",
     "bookLabel": "Reservar una visita",
     "bookTitle": "Planifique su excursión",
-    "heroKicker": "520 hectáreas de té ondulan entre el lago y las colinas. La segunda bebida más consumida del mundo después del agua crece aquí — y en ningún otro lugar de Madagascar.",
+    "heroKicker": "520 hectáreas de té ondulan entre el lago y las colinas. La segunda bebida más consumida del mundo después del agua crece aquí y en ningún otro lugar de Madagascar.",
     "factsTitle": "La plantación de un vistazo",
     "factsRows": [
       {
@@ -516,7 +516,7 @@
     "timelineTitle": "Fechas clave",
     "womenLabel": "El té en Madagascar",
     "womenTitle": "Sahambavy, « campos de las mujeres »",
-    "cinematicCaption": "Recolectoras al amanecer — cada hoja se cosecha todavía a mano.",
+    "cinematicCaption": "Recolectoras al amanecer: cada hoja se cosecha todavía a mano.",
     "excursionIntro": "Cuatro horas para verlo todo: la fábrica y las etapas de elaboración del té, la degustación de las distintas calidades y un paseo entre las hileras de té al encuentro de las recolectoras. Reserva en la recepción del hotel.",
     "stepsTitle": "Itinerario de la visita",
     "infoDurationLabel": "Duración",
@@ -531,9 +531,9 @@
     "heroTitle": "Tren FCE",
     "heroSubtitle": "El último tren corredor de Madagascar",
     "introLabel": "Aventura ferroviaria",
-    "introTitle": "Fianarantsoa — Costa Este",
+    "introTitle": "Fianarantsoa–Costa Este",
     "introP1": "El tren FCE (Fianarantsoa–Costa Este) es el último tren de pasajeros aún en servicio en Madagascar. Esta línea mítica conecta Fianarantsoa con Manakara, atravesando 162 km de bosques tropicales, acantilados vertiginosos y pueblos aislados accesibles solo por ferrocarril.",
-    "introP2": "El Lac Hôtel Sahambavy está situado a solo 2 minutos a pie de la estación de Sahambavy — el punto de partida ideal para esta aventura ferroviaria única.",
+    "introP2": "El Lac Hôtel Sahambavy está situado a solo 2 minutos a pie de la estación de Sahambavy, el punto de partida ideal para esta aventura ferroviaria única.",
     "optionsLabel": "Nuestras opciones",
     "optionsTitle": "Tres formas de vivir el ferrocarril",
     "options": [
@@ -571,7 +571,7 @@
       "booking": "Reserva a través del Lac Hôtel"
     },
     "ctaTitle": "El hotel se encarga de todo",
-    "ctaP": "El Lac Hôtel Sahambavy organiza su viaje en tren. Contáctenos para reservar su plaza — Micheline, Dresina o Tren clásico.",
+    "ctaP": "El Lac Hôtel Sahambavy organiza su viaje en tren. Contáctenos para reservar su plaza en la Micheline, la Dresina o el Tren clásico.",
     "cta": "Reservar a través del hotel",
     "infoLabels": {
       "route": "Trayecto",
@@ -624,7 +624,7 @@
       {
         "icon": "leaf",
         "title": "Naturaleza preservada",
-        "desc": "Un remanso de paz en el corazón del jardín tropical — el lago a un paso, lejos del ruido."
+        "desc": "Un remanso de paz en el corazón del jardín tropical, con el lago a un paso y lejos del ruido."
       }
     ],
     "photoCaption1": "Las casas dúplex, lado jardín",
@@ -700,7 +700,7 @@
     ],
     "economyLabel": "Economía circular",
     "economyTitle": "Un impacto positivo en la comunidad",
-    "economyP": "Con una lógica de economía circular, el establecimiento maximiza sus compras a los productores locales, en especial a los campesinos, favoreciendo así el desarrollo socioeconómico del pueblo. Además, al ofrecer un marco adaptado y condiciones ventajosas a determinadas ONG —como en el caso de las iniciativas de atención dental—, contribuye a mejorar la salud comunitaria y la calidad de vida de sus habitantes.",
+    "economyP": "Con una lógica de economía circular, el establecimiento maximiza sus compras a los productores locales, en especial a los campesinos, favoreciendo así el desarrollo socioeconómico del pueblo. Además, al ofrecer un marco adaptado y condiciones ventajosas a determinadas ONG (como en el caso de las iniciativas de atención dental), contribuye a mejorar la salud comunitaria y la calidad de vida de sus habitantes.",
     "teamLabel": "El equipo",
     "teamTitle": "Nuestros rostros",
     "personnel": {
@@ -735,7 +735,7 @@
     "configLabel": "Configuración",
     "configValue": "Totalmente modular",
     "includedValue": "Incluido",
-    "footnote": "Reuniones, seminarios, formaciones o talleres — presupuesto a medida.",
+    "footnote": "Reuniones, seminarios, formaciones o talleres: presupuesto a medida.",
     "ctaLabel": "Organizar un seminario",
     "equipmentP": "La sala está equipada con conexión Wi-Fi, micrófono, proyector y pizarra blanca, para garantizar el buen desarrollo de sus presentaciones."
   },
@@ -762,7 +762,7 @@
     "rowRatesValue": "Presupuesto a medida",
     "ctaTitle": "Hablemos de",
     "ctaTitleEm": "su proyecto",
-    "ctaText": "Una boda íntima, un seminario de empresa, un aniversario excepcional — cada evento es único. Contáctenos para un presupuesto a medida.",
+    "ctaText": "Una boda íntima, un seminario de empresa, un aniversario excepcional: cada evento es único. Contáctenos para un presupuesto a medida.",
     "ctaButton": "Solicitar un presupuesto",
     "whatsappText": "Hola, me gustaría organizar un evento (boda / seminario) en el Lac Hôtel."
   },
@@ -865,12 +865,12 @@
       "emailTooLong": "El correo es demasiado largo.",
       "messageTooLong": "El mensaje es demasiado largo (máx. 2000 caracteres).",
       "guestsMin": "Al menos 1 viajero.",
-      "guestsMax": "Máximo 20 viajeros — contáctenos directamente.",
+      "guestsMax": "Máximo 20 viajeros. Contáctenos directamente.",
       "guestsMismatch": "Adultos + niños no coincide con el total.",
       "adultsMin": "Al menos 1 adulto por reserva.",
-      "childrenMax": "Máximo 10 niños — contáctenos para grupos más grandes.",
+      "childrenMax": "Máximo 10 niños. Contáctenos para grupos más grandes.",
       "roomsMin": "Al menos 1 habitación.",
-      "roomsMax": "Máximo 4 habitaciones en línea — contáctenos para grupos.",
+      "roomsMax": "Máximo 4 habitaciones en línea. Contáctenos para grupos.",
       "checkoutBeforeCheckin": "La salida debe ser posterior a la llegada.",
       "datesInPast": "Las fechas deben ser en el futuro.",
       "gdprRequired": "Debe aceptar la política de privacidad.",
@@ -884,7 +884,7 @@
       "title": "¡Solicitud recibida!",
       "subtitle": "Gracias {name}, su solicitud ha llegado correctamente a nuestra bandeja.",
       "p1": "Le hemos enviado un correo de confirmación. Nuestro equipo le responderá en 24 horas con la confirmación definitiva y los detalles prácticos.",
-      "p2": "No se requiere pago ahora — el abono se efectúa a la llegada en Ariary, Euros o por transferencia bancaria previa.",
+      "p2": "No se requiere pago ahora: el abono se efectúa a la llegada en Ariary, Euros o por transferencia bancaria previa.",
       "p3": "¿Pregunta urgente? Contáctenos directamente por WhatsApp.",
       "whatsappCta": "Contactar por WhatsApp",
       "backHome": "Volver al inicio",
@@ -895,7 +895,7 @@
     "slug": "conditions-reservation",
     "navLabel": "Condiciones",
     "heroTitle": "Condiciones de reserva",
-    "heroSubtitle": "Derechos y compromisos — viajeros de la Unión Europea",
+    "heroSubtitle": "Derechos y compromisos para los viajeros de la Unión Europea",
     "intro": "Estas condiciones rigen toda solicitud de reserva realizada en lachotel.com. Cumplen con el marco legal aplicable a los viajeros de la Unión Europea (Directiva 2011/83/UE y Reglamento 524/2013). Al enviar el formulario de reserva, usted reconoce haberlas leído.",
     "lastUpdated": "Última actualización",
     "lastUpdatedDate": "8 de agosto de 2026",
@@ -943,7 +943,7 @@
         "title": "5 · Protección de datos personales (RGPD)",
         "intro": "Los datos recopilados a través del formulario de reserva (nombre, correo, teléfono, nacionalidad, fechas de estancia) se tratan en el marco del Reglamento General de Protección de Datos (RGPD, Reglamento UE 2016/679):",
         "items": [
-          "Responsable del tratamiento: Lac Hôtel Sahambavy — Sahambavy, Haute-Matsiatra, Madagascar — booking@lachotel.com",
+          "Responsable del tratamiento: Lac Hôtel Sahambavy, Sahambavy, Haute-Matsiatra, Madagascar (booking@lachotel.com)",
           "Finalidad: tratamiento de su solicitud de reserva, envío de confirmaciones y facturación.",
           "Base legal: ejecución del contrato de alojamiento (art. 6.1.b RGPD) y obligaciones legales (contabilidad, registro hotelero).",
           "Destinatarios: equipo de recepción y administración del hotel únicamente. Sin transmisión a terceros con fines comerciales.",
@@ -962,7 +962,7 @@
         ]
       },
       {
-        "title": "7 · Socios — turoperadores y agencias receptivas",
+        "title": "7 · Socios: turoperadores y agencias receptivas",
         "intro": "Las condiciones siguientes se aplican a los profesionales del viaje. El Lac Hôtel Sahambavy colabora con operadores que dispongan de NIF y STAT en vigor.",
         "items": [
           "Reservas: no se acepta ninguna reserva por teléfono. Toda solicitud debe llegarnos por correo a booking@lachotel.com o lachotelsahambavy@gmail.com.",
@@ -971,7 +971,7 @@
           "No se aceptan ya vales (vouchers) ni pago posterior.",
           "Pago: en efectivo o con cheque in situ, o por transferencia bancaria antes de la llegada. Le rogamos nos envíe el aviso de abono indicando el número de factura o de pro forma.",
           "Chófer: alojamiento gratuito, comida del chófer a 8 000 Ar.",
-          "Guía: 50 % sobre las prestaciones — alojamiento facturado al cliente, 50 % sobre la restauración.",
+          "Guía: 50 % sobre las prestaciones (alojamiento facturado al cliente) y 50 % sobre la restauración.",
           "Tour leader: alojamiento gratuito en categoría estándar para grupos de 10 viajeros o más, y 50 % sobre la restauración. Por debajo de 10 viajeros, alojamiento y restauración se facturan al 50 %.",
           "Viajes de familiarización: alojamiento gratuito; comidas y bebidas a cargo del cliente al 50 %.",
           "Anulación: el baremo del artículo 2 se aplica igualmente a las reservas de agencia."
@@ -988,14 +988,14 @@
     "heroSubtitle": "Un eco-jardín botánico a orillas del lago",
     "introLabel": "Inmersión sensorial",
     "introTitle": "Un jardín del Edén cultivado con pasión",
-    "introP": "Desde 1998, Olga y luego Maggie componen día tras día este eco-jardín de 2 hectáreas — flores silvestres, árboles del viajero, orquídeas bajo invernadero y bonsáis tallados a mano conviven en una armonía discreta, a pocos pasos del lago.",
+    "introP": "Desde 1998, Olga y luego Maggie componen día tras día este eco-jardín de 2 hectáreas. Flores silvestres, árboles del viajero, orquídeas bajo invernadero y bonsáis tallados a mano conviven en una armonía discreta, a pocos pasos del lago.",
     "collectionsLabel": "Colecciones botánicas",
     "collectionsTitle": "Lo que encontrarás",
     "collections": [
       {
         "icon": "flower",
         "title": "Orquídeas",
-        "desc": "Una cincuentena de especies malgaches bajo invernaderos sombreados — Cymbidium, Angraecum, Eulophiella."
+        "desc": "Una cincuentena de especies malgaches bajo invernaderos sombreados: Cymbidium, Angraecum, Eulophiella."
       },
       {
         "icon": "palm",
@@ -1005,12 +1005,12 @@
       {
         "icon": "tree",
         "title": "Bonsáis",
-        "desc": "Una colección tallada a mano — algunos pies tienen más de 30 años."
+        "desc": "Una colección tallada a mano. Algunos pies tienen más de 30 años."
       },
       {
         "icon": "leaf",
         "title": "Cactus y suculentas",
-        "desc": "Especímenes endémicos del Sur — Pachypodium, Aloe, Euphorbia."
+        "desc": "Especímenes endémicos del Sur: Pachypodium, Aloe, Euphorbia."
       },
       {
         "icon": "bio",
@@ -1099,12 +1099,12 @@
     "loisirs": {
       "label": "Ocio",
       "title": "El lago como terreno de juego",
-      "p": "La vuelta al lago — 8 km señalizados, unas 2 horas de paseo — marca el tono: aquí todo se descubre con calma. La plantación y la fábrica de té TAF se visitan en 4 horas, los pueblos de los alrededores en un paseo de 2 horas, entre talleres de bordado y cestería y la granja y el huerto de Mamie Olga.",
+      "p": "La vuelta al lago (8 km señalizados, unas 2 horas de paseo) marca el tono: aquí todo se descubre con calma. La plantación y la fábrica de té TAF se visitan en 4 horas, los pueblos de los alrededores en un paseo de 2 horas, entre talleres de bordado y cestería y la granja y el huerto de Mamie Olga.",
       "items": [
-        "Vuelta al lago — 8 km señalizados, 2 h",
-        "Visita a la plantación y la fábrica de té TAF — 4 h",
-        "Paseo por los pueblos cercanos — 2 h",
-        "Encuentro con los artesanos — bordado, cestería",
+        "Vuelta al lago (8 km señalizados, 2 h)",
+        "Visita a la plantación y la fábrica de té TAF (4 h)",
+        "Paseo por los pueblos cercanos (2 h)",
+        "Encuentro con los artesanos: bordado, cestería",
         "Granja y huerto de Mamie Olga",
         "Canoa y patines de agua en el lago",
         "Bicicleta alrededor del lago",
@@ -1135,7 +1135,7 @@
       "rowNavigation": "Navegación",
       "navigationValue": "2 h en piragua tradicional",
       "rowWalk": "A pie",
-      "walkValue": "1 h 30 — pueblos, arrozales en terraza, campos de té",
+      "walkValue": "1 h 30 por pueblos, arrozales en terraza y campos de té",
       "rowLunch": "Almuerzo",
       "lunchValue": "Pícnic al pie de una cascada",
       "included": "Incluido",
@@ -1155,7 +1155,7 @@
   "localisation": {
     "heroLabel": "Cómo llegar al Lac Hôtel",
     "heroTitle": "Ubicación y acceso",
-    "heroSubtitle": "A orillas del lago de Sahambavy, entre arrozales y plantaciones de té — a 40 minutos de Fianarantsoa y a 2 minutos de la estación.",
+    "heroSubtitle": "A orillas del lago de Sahambavy, entre arrozales y plantaciones de té, a 40 minutos de Fianarantsoa y a 2 minutos de la estación.",
     "heroAlt": "Vista aérea de los arrozales en terrazas y del lago de Sahambavy",
     "metaTitle": "Ubicación y acceso",
     "metaDescription": "Cómo llegar al Lac Hôtel Sahambavy: a 2 minutos de la estación (línea Fianarantsoa–Manakara), a 40 minutos de Fianarantsoa por carretera por la RN7, lanzadera del hotel y traslado privado en 4x4 bajo petición.",
@@ -1210,7 +1210,7 @@
     },
     "map": {
       "title": "Encuéntrenos",
-      "iframeTitle": "Mapa — Lac Hôtel Sahambavy, Madagascar",
+      "iframeTitle": "Mapa del Lac Hôtel Sahambavy, Madagascar",
       "openLink": "Abrir en Google Maps"
     },
     "ctaTitle": "¿Necesita ayuda para organizar su trayecto?",

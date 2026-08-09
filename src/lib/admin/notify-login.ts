@@ -96,7 +96,7 @@ export async function notifierNouvelleConnexion(ctx: Contexte): Promise<void> {
             <td style="padding:9px 0;text-align:right">${echappe(quand)}</td></tr>
       </table>
       <p style="font-size:13px;color:#4A4A44;line-height:1.6;margin:20px 0 0">
-        Vous ne recevez cette alerte que lors d'une connexion depuis un appareil inconnu —
+        Vous ne recevez cette alerte que lors d'une connexion depuis un appareil inconnu,
         pas à chaque connexion.
       </p>
       <p style="font-size:13px;color:#4A4A44;line-height:1.6;margin:10px 0 0">
@@ -110,7 +110,7 @@ export async function notifierNouvelleConnexion(ctx: Contexte): Promise<void> {
     const { error } = await resend.emails.send({
       from: process.env.EMAIL_FROM || "Lac Hôtel <booking@lachotel.com>",
       to,
-      subject: `[Espace équipe] Nouvelle connexion — ${ctx.nom} (${appareil})`,
+      subject: `[Espace équipe] Nouvelle connexion : ${ctx.nom} (${appareil})`,
       html,
     });
     if (error) console.error("[admin] Resend a refusé l'alerte de connexion :", error);

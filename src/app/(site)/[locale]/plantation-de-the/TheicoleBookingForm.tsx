@@ -12,7 +12,7 @@ export default function TheicoleBookingForm({ dict }: { dict: any }) {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const subject = encodeURIComponent("Visite Plantation de Thé — Réservation");
+    const subject = encodeURIComponent("Réservation visite de la Plantation de Thé");
     const body = encodeURIComponent(
       `Nom: ${name}\nEmail: ${email}\nDate: ${date}\nPersonnes: ${persons}`
     );

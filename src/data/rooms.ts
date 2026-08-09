@@ -49,7 +49,7 @@ export const rooms: Room[] = [
     slug: "lake-suite-nuptial",
     name: {
       fr: "Lake Suite Nuptial Pilotis",
-      en: "Honeymoon Lake Suite — Overwater",
+      en: "Overwater Honeymoon Lake Suite",
       es: "Lake Suite Nupcial sobre Pilotes",
     },
     type: {
@@ -64,9 +64,9 @@ export const rooms: Room[] = [
       es: "Las dos suites nupciales más amplias del hotel, habitaciones 11 y 13, sobre el lago. Cama King Size de 2 m × 2,20 m, baño privado con agua caliente, terraza frente al agua.",
     },
     longDescription: {
-      fr: "Chambres 11 et 13 : les deux plus belles adresses du ponton. Elles reprennent tout ce qui fait le Pilotis Nuptial — le bois précieux, les sculptures d'artisans betsileo, l'eau sous le plancher — avec l'espace en plus.\n\nLa terrasse privative donne plein lac, sans vis-à-vis. C'est la catégorie que nous réservons aux voyages de noces et aux séjours d'exception.",
-      en: "Rooms 11 and 13: the two finest addresses on the pontoon. They offer everything that defines the Honeymoon Overwater Bungalow — precious wood, Betsileo artisan carvings, water beneath the floor — with more space.\n\nThe private terrace opens straight onto the lake, with no facing neighbour. This is the category we keep for honeymoons and special occasions.",
-      es: "Habitaciones 11 y 13: las dos mejores direcciones del pontón. Ofrecen todo lo que define al Bungalow Nupcial sobre Pilotes — madera preciosa, esculturas de artesanos betsileo, el agua bajo el suelo — con más espacio.\n\nLa terraza privada da de lleno al lago, sin vecinos enfrente. Es la categoría que reservamos a las lunas de miel y las estancias excepcionales.",
+      fr: "Chambres 11 et 13 : les deux plus belles adresses du ponton. Elles reprennent du Pilotis Nuptial le bois précieux, les sculptures d'artisans betsileo et l'eau sous le plancher, avec l'espace en plus.\n\nLa terrasse privative donne plein lac, sans vis-à-vis. C'est la catégorie que nous réservons aux voyages de noces et aux séjours d'exception.",
+      en: "Rooms 11 and 13: the two finest addresses on the pontoon. They carry over the Honeymoon Overwater Bungalow's precious wood, Betsileo artisan carvings and water beneath the floor, with more space besides.\n\nThe private terrace opens straight onto the lake, with no facing neighbour. This is the category we keep for honeymoons and special occasions.",
+      es: "Habitaciones 11 y 13: las dos mejores direcciones del pontón. Heredan del Bungalow Nupcial sobre Pilotes la madera preciosa, las esculturas de artesanos betsileo y el agua bajo el suelo, con más espacio todavía.\n\nLa terraza privada da de lleno al lago, sin vecinos enfrente. Es la categoría que reservamos a las lunas de miel y las estancias excepcionales.",
     },
     units: 2,
     capacity: "2",
@@ -233,9 +233,9 @@ export const rooms: Room[] = [
       es: "Vagón suizo de 1930 renovado, 30 m de longitud. Servicio de habitaciones, mini-bar, terraza privada y vista al lago.",
     },
     longDescription: {
-      fr: "Dormez dans un authentique wagon suisse de 1930 entièrement rénové en suite nuptiale de luxe. Avec ses 30 mètres de longueur, ce wagon unique en son genre vous transporte dans une autre époque tout en vous offrant le confort moderne.\n\nService en chambre, mini-bar, terrasse privée fleurie et vue sur le lac. Une nuit dans ce wagon est une expérience inoubliable — idéale pour un voyage de noces ou une célébration.",
-      en: "Sleep in an authentic 1930 Swiss wagon fully renovated into a luxury honeymoon suite. At 30 metres long, this one-of-a-kind wagon transports you to another era while offering modern comfort.\n\nRoom service, mini-bar, private flowered terrace and lake view. A night in this wagon is an unforgettable experience — ideal for a honeymoon or celebration.",
-      es: "Duerma en un auténtico vagón suizo de 1930 completamente renovado en suite nupcial de lujo. Con sus 30 metros de longitud, este vagón único le transporta a otra época ofreciendo confort moderno.\n\nServicio de habitaciones, minibar, terraza privada florida y vista al lago. Una noche en este vagón es una experiencia inolvidable — ideal para una luna de miel o una celebración.",
+      fr: "Dormez dans un authentique wagon suisse de 1930 entièrement rénové en suite nuptiale de luxe. Avec ses 30 mètres de longueur, ce wagon unique en son genre vous transporte dans une autre époque tout en vous offrant le confort moderne.\n\nService en chambre, mini-bar, terrasse privée fleurie et vue sur le lac. Une nuit dans ce wagon est une expérience inoubliable, idéale pour un voyage de noces ou une célébration.",
+      en: "Sleep in an authentic 1930 Swiss wagon fully renovated into a luxury honeymoon suite. At 30 metres long, this one-of-a-kind wagon transports you to another era while offering modern comfort.\n\nRoom service, mini-bar, private flowered terrace and lake view. A night in this wagon is an unforgettable experience, ideal for a honeymoon or celebration.",
+      es: "Duerma en un auténtico vagón suizo de 1930 completamente renovado en suite nupcial de lujo. Con sus 30 metros de longitud, este vagón único le transporta a otra época ofreciendo confort moderno.\n\nServicio de habitaciones, minibar, terraza privada florida y vista al lago. Una noche en este vagón es una experiencia inolvidable, ideal para una luna de miel o una celebración.",
     },
     units: 1,
     capacity: "2",
@@ -444,11 +444,11 @@ export const extras = {
   breakfast: { priceAR: 40000, label: { fr: "Petit-déjeuner complet", en: "Full breakfast", es: "Desayuno completo" } },
   menu: { priceAR: 70000, label: { fr: "Menu", en: "Menu", es: "Menú" } },
   picnic: { priceAR: 40000, label: { fr: "Pique-nique complet", en: "Full picnic", es: "Picnic completo" } },
-  transfer: { priceAR: 130000, label: { fr: "Transfert privé 4×4 — Fianarantsoa (1 trajet)", en: "Private 4×4 transfer — Fianarantsoa (one way)", es: "Traslado privado 4×4 — Fianarantsoa (un trayecto)" } },
-  transferAmbalakely: { priceAR: 120000, label: { fr: "Transfert privé 4×4 — Ambalakely Bifurcation (1 trajet)", en: "Private 4×4 transfer — Ambalakely junction (one way)", es: "Traslado privado 4×4 — Bifurcación Ambalakely (un trayecto)" } },
-  camping: { priceAR: 250000, label: { fr: "Camping — 1 hectare privatif, pour 3 tentes", en: "Camping — 1 private hectare, for 3 tents", es: "Camping — 1 hectárea privada, para 3 tiendas" } },
+  transfer: { priceAR: 130000, label: { fr: "Transfert privé 4×4 (Fianarantsoa, 1 trajet)", en: "Private 4×4 transfer (Fianarantsoa, one way)", es: "Traslado privado 4×4 (Fianarantsoa, un trayecto)" } },
+  transferAmbalakely: { priceAR: 120000, label: { fr: "Transfert privé 4×4 (Ambalakely Bifurcation, 1 trajet)", en: "Private 4×4 transfer (Ambalakely junction, one way)", es: "Traslado privado 4×4 (Bifurcación Ambalakely, un trayecto)" } },
+  camping: { priceAR: 250000, label: { fr: "Camping sur 1 hectare privatif pour 3 tentes", en: "Camping on 1 private hectare for 3 tents", es: "Camping en 1 hectárea privada para 3 tiendas" } },
   conference: { priceAR: 350000, label: { fr: "Salle de conférence (40 personnes)", en: "Conference room (40 people)", es: "Sala de conferencias (40 personas)" } },
-  draisine: { priceAR: 3200000, label: { fr: "Location draisine — Fianarantsoa ↔ Manakara, la journée", en: "Draisine hire — Fianarantsoa ↔ Manakara, per day", es: "Alquiler de dresina — Fianarantsoa ↔ Manakara, por día" } },
+  draisine: { priceAR: 3200000, label: { fr: "Location draisine Fianarantsoa ↔ Manakara, la journée", en: "Draisine hire Fianarantsoa ↔ Manakara, per day", es: "Alquiler de dresina Fianarantsoa ↔ Manakara, por día" } },
   repasGuide: { priceAR: 8000, label: { fr: "Repas guide (chauffeur : gratuité)", en: "Guide meal (driver: complimentary)", es: "Comida del guía (chófer: gratuita)" } },
 };
 

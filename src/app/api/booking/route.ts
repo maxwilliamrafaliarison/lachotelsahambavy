@@ -122,7 +122,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
        .env.example livre la clé commentée. Ces données seraient alors
        parties en clair dans les journaux Vercel. La ligne voisine gardait
        déjà son `debug` derrière NODE_ENV ; celle-ci ne le faisait pas. */
-    console.warn("[booking] RESEND_API_KEY missing — skipping email dispatch");
+    console.warn("[booking] RESEND_API_KEY missing, skipping email dispatch");
     if (process.env.NODE_ENV === "development") {
       console.log("[booking] Payload:", JSON.stringify(data, null, 2));
     }

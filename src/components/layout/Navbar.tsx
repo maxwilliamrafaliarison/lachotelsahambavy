@@ -228,7 +228,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               href={`/${locale}/`}
               className={`flex shrink-0 items-center gap-3 ${itemColor}`}
               style={itemShadow}
-              aria-label="Lac Hôtel Sahambavy — Accueil"
+              aria-label="Lac Hôtel Sahambavy, accueil"
             >
               <img
                 src={`${basePath}/images/logo/${darkText ? "logo-embleme-dark" : "logo-embleme-white"}.png`}
@@ -471,7 +471,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     {item.children && (
                       <button
                         type="button"
-                        aria-label={`${item.label[locale]} — sous-menu`}
+                        aria-label={`${item.label[locale]}, sous-menu`}
                         aria-expanded={mobileSection === item.href}
                         onClick={() => setMobileSection(mobileSection === item.href ? null : item.href)}
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[rgb(var(--lh-past-ink))] transition-colors hover:bg-[rgb(var(--lh-past)/0.12)]"

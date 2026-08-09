@@ -103,7 +103,7 @@ export default async function TableauDeBord({
       {/* Saisonnalité */}
       <section className="mb-10 rounded-[3px] border border-hairline bg-white p-6">
         <div className="mb-6 flex items-baseline justify-between">
-          <h2 className="!text-[20px]">Saisonnalité — chiffre d&apos;affaires par mois d&apos;arrivée</h2>
+          <h2 className="!text-[20px]">Saisonnalité : chiffre d&apos;affaires par mois d&apos;arrivée</h2>
           <span className="text-[12px] text-muted">en ariary</span>
         </div>
         {mois.length === 0 ? (

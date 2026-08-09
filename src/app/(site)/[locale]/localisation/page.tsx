@@ -17,7 +17,7 @@ const FR = {
   heroLabel: "Venir au Lac Hôtel",
   heroTitle: "Localisation & accès",
   heroSubtitle:
-    "Au bord du lac de Sahambavy, entre rizières et plantations de thé — à 40 minutes de Fianarantsoa et à 2 minutes de la gare.",
+    "Au bord du lac de Sahambavy, entre rizières et plantations de thé, à 40 minutes de Fianarantsoa et à 2 minutes de la gare.",
   heroAlt: "Vue aérienne des rizières en terrasses et du lac de Sahambavy",
   metaTitle: "Localisation & accès",
   metaDescription:
@@ -56,7 +56,7 @@ const FR = {
   },
   map: {
     title: "Nous trouver",
-    iframeTitle: "Carte — Lac Hôtel Sahambavy, Madagascar",
+    iframeTitle: "Carte du Lac Hôtel Sahambavy, Madagascar",
     openLink: "Ouvrir dans Google Maps",
   },
   ctaTitle: "Besoin d'aide pour organiser votre trajet ?",

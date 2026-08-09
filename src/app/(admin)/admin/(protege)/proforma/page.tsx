@@ -10,7 +10,7 @@ export default function ProformaPage() {
       <h1 className="mb-3 !text-[38px]">Facture proforma</h1>
       <p className="ge-measure mb-10 text-[15px] text-body">
         Renseignez le client et les dates, ajoutez les prestations d&apos;un clic
-        (les quantités se calculent seules), appliquez la remise éventuelle —
+        (les quantités se calculent seules), appliquez la remise éventuelle,
         puis générez le PDF. Objectif : moins de deux minutes.
       </p>
       <ProformaSimulator />

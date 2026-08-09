@@ -23,7 +23,7 @@ import { useSearchParams } from "next/navigation";
  */
 
 function formatDate(iso: string | null, locale: string): string {
-  if (!iso) return "—";
+  if (!iso) return "…";
   try {
     return new Date(iso).toLocaleDateString(locale, {
       day: "numeric",

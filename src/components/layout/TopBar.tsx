@@ -67,7 +67,7 @@ export default function TopBar() {
               href={siteConfig.social.tripadvisor}
               score={siteConfig.ratings.tripadvisor.score}
               max={5}
-              label={`Avis TripAdvisor — ${siteConfig.ratings.tripadvisor.score} sur 5`}
+              label={`Avis TripAdvisor, ${siteConfig.ratings.tripadvisor.score} sur 5`}
               Logo={LogoTripAdvisor}
             />
             <span className="w-px h-3 bg-paper/15" />
@@ -75,7 +75,7 @@ export default function TopBar() {
               href={siteConfig.social.google}
               score={siteConfig.ratings.google.score}
               max={5}
-              label={`Avis Google — ${siteConfig.ratings.google.score} sur 5`}
+              label={`Avis Google, ${siteConfig.ratings.google.score} sur 5`}
               Logo={LogoGoogle}
             />
             <span className="w-px h-3 bg-paper/15" />
@@ -83,7 +83,7 @@ export default function TopBar() {
               href={siteConfig.social.booking}
               score={siteConfig.ratings.booking.score}
               max={10}
-              label={`Note Booking — ${siteConfig.ratings.booking.score} sur 10`}
+              label={`Note Booking, ${siteConfig.ratings.booking.score} sur 10`}
               Logo={LogoBooking}
             />
           </div>

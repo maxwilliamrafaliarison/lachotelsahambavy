@@ -146,7 +146,7 @@ export default function RoomGallery({
           {montee(i) && (
             <Image
               src={src}
-              alt={i === 0 ? nom : `${nom} — ${libelles.sur.replace("{n}", String(i + 1))}`}
+              alt={i === 0 ? nom : `${nom}, ${libelles.sur.replace("{n}", String(i + 1))}`}
               width={1600}
               height={1200}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"

@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         : "Bodas y Seminarios";
   const description =
     locale === "fr"
-      ? `${dict.wedding.subtitle} — ${dict.conference.title} jusqu'à ${dict.conference.capacity}.`
+      ? `${dict.wedding.subtitle}. ${dict.conference.capacity} en salle de conférence.`
       : locale === "en"
-        ? `${dict.wedding.subtitle} — ${dict.conference.title} for up to ${dict.conference.capacity}.`
-        : `${dict.wedding.subtitle} — ${dict.conference.title} hasta ${dict.conference.capacity}.`;
+        ? `${dict.wedding.subtitle}. ${dict.conference.capacity} in the conference room.`
+        : `${dict.wedding.subtitle}. ${dict.conference.capacity} en la sala de conferencias.`;
   return {
     title: title,
     description,
@@ -60,7 +60,7 @@ const microcopy = {
       ctaTitle: "Parlons de",
       ctaTitleEm: "votre projet",
       ctaText:
-        "Mariage intimiste, séminaire d'entreprise, anniversaire d'exception — chaque événement est unique. Contactez-nous pour un devis sur mesure.",
+        "Mariage intimiste, séminaire d'entreprise ou anniversaire d'exception, chaque événement est unique. Contactez-nous pour un devis sur mesure.",
       ctaButton: "Demander un devis",
       whatsappText:
         "Bonjour, je souhaite organiser un événement (mariage / séminaire) au Lac Hôtel.",
@@ -72,7 +72,7 @@ const microcopy = {
       configLabel: "Configuration",
       configValue: "Entièrement modulable",
       includedValue: "Inclus",
-      footnote: "Réunions, séminaires, formations ou ateliers — sur devis personnalisé.",
+      footnote: "Réunions, séminaires, formations ou ateliers : sur devis personnalisé.",
       ctaLabel: "Organiser un séminaire",
     },
   },
@@ -96,7 +96,7 @@ const microcopy = {
       ctaTitle: "Let's talk about",
       ctaTitleEm: "your project",
       ctaText:
-        "An intimate wedding, a corporate seminar, a milestone birthday — every event is unique. Contact us for a tailor-made quote.",
+        "Every event is unique, whether it is an intimate wedding, a corporate seminar or a milestone birthday. Contact us for a tailor-made quote.",
       ctaButton: "Request a quote",
       whatsappText: "Hello, I would like to organise an event (wedding / seminar) at Lac Hôtel.",
     },
@@ -107,7 +107,7 @@ const microcopy = {
       configLabel: "Layout",
       configValue: "Fully modular",
       includedValue: "Included",
-      footnote: "Meetings, seminars, training sessions or workshops — tailor-made quote.",
+      footnote: "Meetings, seminars, training sessions or workshops: tailor-made quote.",
       ctaLabel: "Plan a seminar",
     },
   },
@@ -131,7 +131,7 @@ const microcopy = {
       ctaTitle: "Hablemos de",
       ctaTitleEm: "su proyecto",
       ctaText:
-        "Una boda íntima, un seminario de empresa, un aniversario excepcional — cada evento es único. Contáctenos para un presupuesto a medida.",
+        "Ya sea una boda íntima, un seminario de empresa o un aniversario excepcional, cada evento es único. Contáctenos para un presupuesto a medida.",
       ctaButton: "Solicitar un presupuesto",
       whatsappText: "Hola, me gustaría organizar un evento (boda / seminario) en el Lac Hôtel.",
     },
@@ -142,7 +142,7 @@ const microcopy = {
       configLabel: "Configuración",
       configValue: "Totalmente modular",
       includedValue: "Incluido",
-      footnote: "Reuniones, seminarios, formaciones o talleres — presupuesto a medida.",
+      footnote: "Reuniones, seminarios, formaciones o talleres: presupuesto a medida.",
       ctaLabel: "Organizar un seminario",
     },
   },

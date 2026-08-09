@@ -50,7 +50,7 @@ export function BookingConfirmation({ booking }: BookingConfirmationProps) {
   const rateLabel = LABELS.rate[locale][booking.rate];
   const transferLabel = LABELS.transfer[locale][booking.transfer];
 
-  const previewText = `${t.receivedTitle} — ${formatDate(booking.checkin, locale)} → ${formatDate(booking.checkout, locale)}`;
+  const previewText = `${t.receivedTitle} (${formatDate(booking.checkin, locale)} → ${formatDate(booking.checkout, locale)})`;
 
   return (
     <Html lang={locale}>

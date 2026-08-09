@@ -73,7 +73,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               <div className="mt-8 border-t border-hairline pt-6">
                 <p className="ge-measure text-[15px] leading-relaxed text-body">
                   <span className="font-semibold text-terracotta">{dict.contact.offerReminder}</span>
-                  {" — "}
+                  {". "}
                   {dict.contact.offerReminderDetail}
                 </p>
               </div>

@@ -142,8 +142,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const h = await headers();
         await notifierNouvelleConnexion({
-          nom: user.name ?? "—",
-          email: user.email ?? "—",
+          nom: user.name ?? "inconnu",
+          email: user.email ?? "inconnu",
           role: (user as { role?: AdminRole }).role ?? "reception",
           ip: extractIp(h),
           userAgent: h.get("user-agent"),

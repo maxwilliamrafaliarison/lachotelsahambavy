@@ -237,6 +237,12 @@ export function hotelRoomSchema(room: Room, locale: Locale): SchemaType {
 // =====================================================
 
 export function restaurantSchema(locale: Locale): SchemaType {
+  const nom: Record<Locale, string> = {
+    fr: `Restaurant du ${siteConfig.name}`,
+    en: `${siteConfig.name} Restaurant`,
+    es: `Restaurante del ${siteConfig.name}`,
+  };
+
   const description: Record<Locale, string> = {
     fr: "Cuisine malgache et internationale au bord du lac Sahambavy. Spécialités : canard, poisson du lac, rhum arrangé maison.",
     en: "Malagasy and international cuisine on the shores of Lake Sahambavy. Specialties: duck, lake fish, house-infused rum.",
@@ -247,7 +253,7 @@ export function restaurantSchema(locale: Locale): SchemaType {
     "@context": "https://schema.org",
     "@type": "Restaurant",
     "@id": `${siteConfig.url}/${locale}/restaurant/#restaurant`,
-    name: `${siteConfig.name} — Restaurant`,
+    name: nom[locale],
     description: description[locale],
     url: `${siteConfig.url}/${locale}/restaurant/`,
     image: [`${siteConfig.url}/images/restaurant/interior.jpg`],
@@ -444,9 +450,9 @@ export function imageGallerySchema(args: {
  */
 export function videoObjectSchema(locale: Locale): SchemaType {
   const TITLES: Record<Locale, string> = {
-    fr: "Lac Hôtel Sahambavy — vue drone aérienne",
-    en: "Lac Hôtel Sahambavy — aerial drone view",
-    es: "Lac Hôtel Sahambavy — vista aérea con dron",
+    fr: "Vue aérienne par drone du Lac Hôtel Sahambavy",
+    en: "Aerial drone view of Lac Hôtel Sahambavy",
+    es: "Vista aérea con dron del Lac Hôtel Sahambavy",
   };
   const DESCRIPTIONS: Record<Locale, string> = {
     fr:

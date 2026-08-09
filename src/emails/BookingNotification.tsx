@@ -46,7 +46,7 @@ export function BookingNotification({ booking, receivedAt }: BookingNotification
   return (
     <Html lang="fr">
       <Head />
-      <Preview>{`Nouvelle résa — ${booking.name} — ${booking.checkin} → ${booking.checkout} (${nights}n)`}</Preview>
+      <Preview>{`Nouvelle résa : ${booking.name} · ${booking.checkin} → ${booking.checkout} (${nights}n)`}</Preview>
       <Body style={bodyStyle}>
         <Container style={containerStyle}>
           <Section style={headerStyle}>
@@ -121,7 +121,7 @@ export function BookingNotification({ booking, receivedAt }: BookingNotification
             {/* Actions */}
             <Section style={{ textAlign: "center" }}>
               <Link
-                href={`mailto:${booking.email}?subject=${encodeURIComponent(`Re: Votre réservation au Lac Hôtel — ${booking.checkin}`)}`}
+                href={`mailto:${booking.email}?subject=${encodeURIComponent(`Re: Votre réservation au Lac Hôtel (${booking.checkin})`)}`}
                 style={ctaPrimaryStyle}
               >
                 {t.replyTo}
@@ -131,7 +131,7 @@ export function BookingNotification({ booking, receivedAt }: BookingNotification
             <Text style={footerStyle}>
               Cet email est généré automatiquement par le formulaire de réservation lachotel.com.
               <br />
-              Les données sont stockées dans le Google Sheet CRM (si configuré) — l&apos;IP du voyageur est
+              Les données sont stockées dans le Google Sheet CRM (si configuré). L&apos;IP du voyageur est
               hashée SHA-256 salée pour conformité RGPD.
             </Text>
           </Section>

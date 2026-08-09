@@ -156,7 +156,7 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${t.action} — ${nom}`}
+                    aria-label={`${t.action} (${nom})`}
                     className="group flex h-full flex-col gap-3 rounded-[3px] border border-hairline px-5 py-5 transition-colors duration-300 hover:border-terracotta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta"
                   >
                     <Logo />

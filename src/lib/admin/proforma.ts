@@ -127,7 +127,7 @@ export function libelleRemise(remise: Remise): string {
 
 /** Date française longue : 16 juillet 2026 */
 export function formatDateFr(iso: string): string {
-  if (!iso) return "—";
+  if (!iso) return "…";
   return new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",

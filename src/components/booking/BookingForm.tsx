@@ -323,7 +323,7 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
           error={translateError(errors.arrivalTime, dict)}
         >
           <select className={inputClass} {...register("arrivalTime")}>
-            <option value="">—</option>
+            <option value="">…</option>
             <option value="10:00 - 12:00">10:00 - 12:00</option>
             <option value="12:00 - 14:00">12:00 - 14:00</option>
             <option value="14:00 - 16:00">14:00 - 16:00</option>
@@ -346,13 +346,13 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
               en anglais, exposant les identifiants internes. Réservation
               impossible. On ne propose donc que ce que le schéma accepte. */}
           <select className={inputClass} {...register("room")}>
-            <option value="">—</option>
+            <option value="">…</option>
             {rooms
               .filter((r) => (ROOM_IDS as readonly string[]).includes(r.id))
               .map((r) => (
                 <option key={r.id} value={r.id}>
                   {r.name[locale]}
-                  {r.priceEUR ? ` — ${r.priceEUR} €` : ""}
+                  {r.priceEUR ? ` · ${r.priceEUR} €` : ""}
                 </option>
               ))}
             <option value="any">{b?.anyRoom || "Je fais confiance à l'hôtel"}</option>
@@ -468,7 +468,7 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
   const bb = dict.bookingBar;
   const roomLabel = useMemo(() => {
     const room = rooms.find((r) => r.id === v.room);
-    return room ? room.name[locale] : v.room === "any" ? b?.anyRoom || "—" : "—";
+    return room ? room.name[locale] : v.room === "any" ? b?.anyRoom || "…" : "…";
   }, [v.room, locale, b]);
 
   // Construit "2 adultes, 1 enfant · 2 chambres" à partir des champs décomposés.
@@ -478,7 +478,7 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
     const c = v.children;
     const r = v.rooms;
     if (a == null && c == null) {
-      return v.guests ? String(v.guests) : "—";
+      return v.guests ? String(v.guests) : "…";
     }
     const aLabel = (a ?? 0) > 1 ? bb?.adultPlural || "adultes" : bb?.adult || "adulte";
     const cLabel = (c ?? 0) > 1 ? bb?.childPlural || "enfants" : bb?.child || "enfant";
@@ -496,18 +496,18 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
       <div className="bg-white rounded-[3px] border border-ink/10 p-5 md:p-6">
         <h4 className="text-base font-semibold text-ink mb-3">{b?.review?.title || "Vérifiez votre demande"}</h4>
         <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
-          <Item label={dict.contact.form.checkin} value={v.checkin || "—"} />
-          <Item label={dict.contact.form.checkout} value={v.checkout || "—"} />
-          <Item label={b?.nights || "Nuits"} value={nights > 0 ? String(nights) : "—"} emphasis />
+          <Item label={dict.contact.form.checkin} value={v.checkin || "…"} />
+          <Item label={dict.contact.form.checkout} value={v.checkout || "…"} />
+          <Item label={b?.nights || "Nuits"} value={nights > 0 ? String(nights) : "…"} emphasis />
           <Item label={bb?.guests || dict.contact.form.guests} value={occupancyLabel} />
           <Item label={dict.contact.form.room} value={roomLabel} />
-          <Item label={dict.contact.form.pension} value={b?.pensions?.[v.pension] || v.pension || "—"} />
-          <Item label={b?.rate || "Tarif"} value={b?.rates?.[v.rate] || v.rate || "—"} />
-          <Item label={dict.contact.form.transfer} value={b?.transfers?.[v.transfer] || v.transfer || "—"} />
-          <Item label={dict.contact.form.name} value={v.name || "—"} />
-          <Item label={dict.contact.form.email} value={v.email || "—"} />
-          <Item label={dict.contact.form.phone} value={v.phone || "—"} />
-          <Item label={dict.contact.form.nationality} value={v.nationality || "—"} />
+          <Item label={dict.contact.form.pension} value={b?.pensions?.[v.pension] || v.pension || "…"} />
+          <Item label={b?.rate || "Tarif"} value={b?.rates?.[v.rate] || v.rate || "…"} />
+          <Item label={dict.contact.form.transfer} value={b?.transfers?.[v.transfer] || v.transfer || "…"} />
+          <Item label={dict.contact.form.name} value={v.name || "…"} />
+          <Item label={dict.contact.form.email} value={v.email || "…"} />
+          <Item label={dict.contact.form.phone} value={v.phone || "…"} />
+          <Item label={dict.contact.form.nationality} value={v.nationality || "…"} />
         </dl>
         {v.message ? (
           <div className="mt-4 pt-4 border-t border-ink/10">
@@ -747,7 +747,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
     } catch {
       // Fallback mailto si l'API est indisponible (ex: mode static export GH Pages)
       track("booking_failed", { code: "network", locale });
-      const subject = encodeURIComponent(`Réservation ${data.name} — ${data.checkin} → ${data.checkout}`);
+      const subject = encodeURIComponent(`Réservation ${data.name} · ${data.checkin} → ${data.checkout}`);
       const body = encodeURIComponent(buildMailtoBody(data));
       window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
     }

@@ -31,7 +31,7 @@ export const CATALOGUE: CatalogueItem[] = [
   { id: "superior-lake-view", label: "Superior Lake View Room (double/twin/single)", prixAr: 300_000, unite: "nuit", groupe: "Hébergement" },
   { id: "wagon-nuptial", label: "Wagon Nuptial", prixAr: 360_000, unite: "nuit", groupe: "Hébergement" },
   { id: "standard", label: "Bungalow standard (double/twin/single)", prixAr: 150_000, unite: "nuit", groupe: "Hébergement" },
-  { id: "le-repos", label: "Bungalow traditionnel — Extension « Le Repos »", prixAr: 250_000, unite: "nuit", groupe: "Hébergement" },
+  { id: "le-repos", label: "Bungalow traditionnel de l'extension « Le Repos »", prixAr: 250_000, unite: "nuit", groupe: "Hébergement" },
   // — Restauration (TTC) —
   { id: "petit-dejeuner", label: "Petit-déjeuner", prixAr: 40_000, unite: "pers./nuit", groupe: "Restauration" },
   { id: "menu", label: "Menu (déjeuner ou dîner)", prixAr: 70_000, unite: "personne", groupe: "Restauration" },
@@ -54,6 +54,6 @@ export function formatAr(n: number): string {
 
 /** Formatte l'équivalent euro : 72,00 € */
 export function formatEur(ar: number, taux: number): string {
-  if (!taux || taux <= 0) return "—";
+  if (!taux || taux <= 0) return "n/c";
   return `${new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(ar / taux)} €`;
 }

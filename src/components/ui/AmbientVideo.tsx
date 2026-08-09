@@ -113,7 +113,7 @@ export default function AmbientVideo({
       <button
         type="button"
         onClick={basculer}
-        aria-label={`${enLecture ? libelles.pause : libelles.lire} — ${legende}`}
+        aria-label={`${enLecture ? libelles.pause : libelles.lire}. ${legende}`}
         className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-black/35 text-white opacity-0 backdrop-blur-md transition-opacity duration-200 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 group-hover:opacity-100 max-md:opacity-100"
       >
         {enLecture ? (

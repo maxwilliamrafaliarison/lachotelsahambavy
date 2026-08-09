@@ -17,7 +17,7 @@ const basePath = getBasePath();
 const extraTexts = {
   fr: {
     heroKicker:
-      "520 hectares de théiers ondulent entre le lac et les collines. La deuxième boisson la plus consommée au monde après l'eau pousse ici — et nulle part ailleurs à Madagascar.",
+      "520 hectares de théiers ondulent entre le lac et les collines. La deuxième boisson la plus consommée au monde après l'eau pousse ici, et nulle part ailleurs à Madagascar.",
     factsTitle: "La plantation en un regard",
     factsRows: [
       { label: "Superficie", value: "520 hectares" },
@@ -30,7 +30,7 @@ const extraTexts = {
     timelineTitle: "Les grandes dates",
     womenLabel: "Le thé à Madagascar",
     womenTitle: "Sahambavy, « champs des femmes »",
-    cinematicCaption: "Cueilleuses au petit matin — chaque feuille est encore récoltée à la main.",
+    cinematicCaption: "Cueilleuses au petit matin. Chaque feuille est encore récoltée à la main.",
     excursionIntro:
       "Quatre heures pour tout comprendre : l'usine et les étapes de fabrication du thé, la dégustation des différentes qualités, puis la promenade à travers les rangées de théiers, à la rencontre des cueilleuses. Réservation auprès de la réception.",
     stepsTitle: "Déroulé de la visite",
@@ -45,7 +45,7 @@ const extraTexts = {
   },
   en: {
     heroKicker:
-      "520 hectares of tea bushes roll between the lake and the hills. The world's second most consumed drink after water grows here — and nowhere else in Madagascar.",
+      "520 hectares of tea bushes roll between the lake and the hills. The world's second most consumed drink after water grows here, and nowhere else in Madagascar.",
     factsTitle: "The plantation at a glance",
     factsRows: [
       { label: "Area", value: "520 hectares" },
@@ -58,7 +58,7 @@ const extraTexts = {
     timelineTitle: "Key dates",
     womenLabel: "Tea in Madagascar",
     womenTitle: "Sahambavy, 'women's fields'",
-    cinematicCaption: "Tea pickers in the early morning — every leaf is still harvested by hand.",
+    cinematicCaption: "Tea pickers in the early morning. Every leaf is still harvested by hand.",
     excursionIntro:
       "Four hours to see it all: the factory and each stage of tea making, a tasting of the different grades, then a walk through the rows of tea bushes to meet the pickers. Book at the hotel reception.",
     stepsTitle: "Visit itinerary",
@@ -68,11 +68,11 @@ const extraTexts = {
     infoDifficultyLabel: "Difficulty",
     infoWalkingLabel: "Walking",
     soapTitle: "100% natural handmade soaps",
-    bookIntro: "Tell us your dates — reception arranges your visit and confirms by email.",
+    bookIntro: "Tell us your dates: our reception arranges your visit and confirms it by email.",
   },
   es: {
     heroKicker:
-      "520 hectáreas de té ondulan entre el lago y las colinas. La segunda bebida más consumida del mundo después del agua crece aquí — y en ningún otro lugar de Madagascar.",
+      "520 hectáreas de té ondulan entre el lago y las colinas. La segunda bebida más consumida del mundo después del agua crece aquí, y en ningún otro lugar de Madagascar.",
     factsTitle: "La plantación de un vistazo",
     factsRows: [
       { label: "Superficie", value: "520 hectáreas" },
@@ -85,7 +85,7 @@ const extraTexts = {
     timelineTitle: "Fechas clave",
     womenLabel: "El té en Madagascar",
     womenTitle: "Sahambavy, « campos de las mujeres »",
-    cinematicCaption: "Recolectoras al amanecer — cada hoja se cosecha todavía a mano.",
+    cinematicCaption: "Recolectoras al amanecer. Cada hoja se cosecha todavía a mano.",
     excursionIntro:
       "Cuatro horas para verlo todo: la fábrica y las etapas de elaboración del té, la degustación de las distintas calidades y un paseo entre las hileras de té al encuentro de las recolectoras. Reserva en la recepción del hotel.",
     stepsTitle: "Itinerario de la visita",

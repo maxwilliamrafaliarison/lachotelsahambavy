@@ -170,7 +170,7 @@ export default async function TrainFCEPage({
               </div>
               <figcaption className="mt-3 text-xs text-muted">
                 {t.stationCaption ??
-                  "Le Lac Hôtel Sahambavy, à deux minutes à pied de la gare de Sahambavy — le point de départ idéal sur la ligne FCE."}
+                  "Le Lac Hôtel Sahambavy, à deux minutes à pied de la gare de Sahambavy : le point de départ idéal sur la ligne FCE."}
               </figcaption>
             </figure>
           </ScrollReveal>

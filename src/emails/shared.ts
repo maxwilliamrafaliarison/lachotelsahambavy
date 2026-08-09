@@ -43,7 +43,7 @@ export const EMAIL_COPY = {
     nextStepsTitle: "Et maintenant ?",
     nextSteps: [
       "Notre équipe vérifie les disponibilités et vous confirme la réservation par email sous 24 h.",
-      "Aucun paiement n'est requis maintenant — règlement à l'arrivée en Ariary, Euros ou virement.",
+      "Aucun paiement n'est requis maintenant : le règlement s'effectue à l'arrivée, en Ariary, en Euros ou par virement.",
       "Une question urgente ? Contactez-nous par WhatsApp.",
     ],
     contactWhatsapp: "Contacter par WhatsApp",
@@ -79,7 +79,7 @@ export const EMAIL_COPY = {
     nextStepsTitle: "What's next?",
     nextSteps: [
       "Our team checks availability and confirms your booking by email within 24 hours.",
-      "No payment required now — settle on arrival in Ariary, Euros or bank transfer.",
+      "No payment is required now: you settle on arrival in Ariary, Euros or by bank transfer.",
       "Urgent question? Reach us via WhatsApp.",
     ],
     contactWhatsapp: "Contact via WhatsApp",
@@ -114,7 +114,7 @@ export const EMAIL_COPY = {
     nextStepsTitle: "¿Y ahora qué?",
     nextSteps: [
       "Nuestro equipo verifica la disponibilidad y le confirma la reserva por email en 24 horas.",
-      "Sin pago ahora — abono a la llegada en Ariary, Euros o transferencia.",
+      "No hay que pagar nada ahora: el abono se realiza a la llegada, en Ariary, Euros o por transferencia.",
       "¿Pregunta urgente? Contáctenos por WhatsApp.",
     ],
     contactWhatsapp: "Contactar por WhatsApp",

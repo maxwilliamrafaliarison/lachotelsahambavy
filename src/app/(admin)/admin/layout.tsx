@@ -7,7 +7,7 @@ import RootShell from "@/app/root-shell";
  * connexion reste accessible. Espace exclu de l'export statique GitHub Pages.
  */
 export const metadata: Metadata = {
-  title: { default: "Espace équipe — Lac Hôtel Sahambavy", template: "%s · Espace équipe Lac Hôtel" },
+  title: { default: "Espace équipe · Lac Hôtel Sahambavy", template: "%s · Espace équipe Lac Hôtel" },
   robots: { index: false, follow: false },
 };
 

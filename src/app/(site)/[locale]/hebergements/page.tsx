@@ -50,7 +50,7 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     nightOnLake: "Nuit sur le lac",
     pilotisTagline: "dormir sur l'eau",
     wagonTagline:
-      "Dormir dans un wagon centenaire de la ligne FCE, face au lac — une expérience introuvable ailleurs.",
+      "Dormir dans un wagon centenaire de la ligne FCE, face au lac. Une expérience introuvable ailleurs.",
     comingSoon: "En images prochainement",
     galPrev: "Photo précédente",
     galNext: "Photo suivante",
@@ -73,15 +73,15 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
       "L'extension « Le Repos » compte quatre maisons en duplex entièrement équipées pour les longs séjours : kitchenette avec plaque de cuisson, réfrigérateur et vaisselle complète. L'adresse idéale des familles et des voyageurs qui prennent leur temps.",
     craftTitle: "Le détail artisanal",
     craftText:
-      "Portes en bois sculpté, linge brodé à la main, vasques et salles de bains façonnées par des artisans de la région — et, dans chaque salle de bains, des savons bio saponifiés à froid.",
+      "Portes en bois sculpté, linge brodé à la main, vasques et salles de bains façonnées par des artisans de la région. Dans chaque salle de bains, des savons bio saponifiés à froid.",
     tarzanText:
-      "Perchés dans les arbres du jardin tropical, nos deux bungalows « Tarzan » sont réservés aux enfants — en single ou en double, pour une nuit d'aventure à quelques pas du bungalow des parents.",
+      "Perchés dans les arbres du jardin tropical, nos deux bungalows « Tarzan » sont réservés aux enfants, en single ou en double, pour une nuit d'aventure à quelques pas du bungalow des parents.",
   },
   en: {
     nightOnLake: "A night on the lake",
     pilotisTagline: "sleeping on the water",
     wagonTagline:
-      "Sleep in a century-old carriage from the FCE railway line, facing the lake — an experience found nowhere else.",
+      "Sleep in a century-old carriage from the FCE railway line, facing the lake. An experience found nowhere else.",
     comingSoon: "Photos coming soon",
     galPrev: "Previous photo",
     galNext: "Next photo",
@@ -104,15 +104,15 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
       "The “Le Repos” extension offers four duplex houses fully equipped for extended stays: a kitchenette with hob, refrigerator and full crockery. The ideal address for families and travellers taking their time.",
     craftTitle: "Artisan details",
     craftText:
-      "Carved wooden doors, hand-embroidered linens, basins and bathrooms shaped by artisans from the region — and, in every bathroom, cold-process organic soaps.",
+      "Carved wooden doors, hand-embroidered linens, basins and bathrooms shaped by artisans from the region. In every bathroom, cold-process organic soaps.",
     tarzanText:
-      "Perched in the trees of the tropical garden, our two “Tarzan” bungalows are reserved for children — single or double, for a night of adventure just steps from their parents' bungalow.",
+      "Perched in the trees of the tropical garden, our two “Tarzan” bungalows are reserved for children. Single or double, they offer a night of adventure just steps from their parents' bungalow.",
   },
   es: {
     nightOnLake: "Noche en el lago",
     pilotisTagline: "dormir sobre el agua",
     wagonTagline:
-      "Dormir en un vagón centenario de la línea FCE, frente al lago — una experiencia que no existe en ningún otro lugar.",
+      "Dormir en un vagón centenario de la línea FCE, frente al lago. Una experiencia que no existe en ningún otro lugar.",
     comingSoon: "Próximamente en imágenes",
     galPrev: "Foto anterior",
     galNext: "Foto siguiente",
@@ -135,9 +135,9 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
       "La extensión «Le Repos» cuenta con cuatro casas dúplex totalmente equipadas para estancias prolongadas: cocina americana con placa de cocción, nevera y vajilla completa. La dirección ideal para familias y viajeros sin prisa.",
     craftTitle: "El detalle artesanal",
     craftText:
-      "Puertas de madera tallada, ropa de cama bordada a mano, lavabos y baños creados por artesanos de la región — y, en cada baño, jabones ecológicos de saponificación en frío.",
+      "Puertas de madera tallada, ropa de cama bordada a mano, lavabos y baños creados por artesanos de la región. En cada baño, jabones ecológicos de saponificación en frío.",
     tarzanText:
-      "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños — en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
+      "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños, en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
   },
 };
 
@@ -324,7 +324,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             label={rx.nightOnLake}
             title={
               <>
-                {pilotis.name[loc]} — <em>{rx.pilotisTagline}</em>
+                {pilotis.name[loc]}, <em>{rx.pilotisTagline}</em>
               </>
             }
             rows={[
@@ -357,7 +357,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             rows={[
               { label: rx.rowRate, value: price(superior) },
               { label: rx.rowCapacity, value: `${superior.capacity} ${rx.persons}` },
-              { label: rx.rowSurface, value: superior.surface ?? "—" },
+              { label: rx.rowSurface, value: superior.surface ?? "n/c" },
               { label: rx.rowUnits, value: String(superior.units) },
             ]}
             cta={{ href: contactHref, label: dict.rooms.book }}
@@ -380,7 +380,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             rows={[
               { label: rx.rowRate, value: price(standard) },
               { label: rx.rowBeds, value: standard.type[loc] },
-              { label: rx.rowSurface, value: standard.surface ?? "—" },
+              { label: rx.rowSurface, value: standard.surface ?? "n/c" },
               { label: rx.rowUnits, value: String(standard.units) },
             ]}
             cta={{ href: contactHref, label: dict.rooms.book }}
