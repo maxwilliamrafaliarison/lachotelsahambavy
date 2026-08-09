@@ -112,7 +112,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
                   <ul className="flex-1 space-y-3">
                     {(circuit.items as string[]).map((item: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-body">
-                        <span className="mt-[0.55rem] h-1 w-1 flex-shrink-0 rounded-full bg-lake" />
+                        <span className="mt-[0.55rem] h-1 w-1 flex-shrink-0 rounded-full bg-terracotta/70" />
                         <span>{item}</span>
                       </li>
                     ))}

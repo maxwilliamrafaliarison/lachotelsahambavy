@@ -431,7 +431,7 @@ export default function ProformaSimulator() {
             {busy ? "Génération…" : "Générer le PDF"}
           </button>
           {pdfUrl && (
-            <a href={pdfUrl} download={pdfNom} className="mt-3 block text-center text-[13px] text-terracotta underline underline-offset-4">
+            <a href={pdfUrl} download={pdfNom} className="mt-3 block text-center text-[13px] text-lake underline underline-offset-4">
               Re-télécharger « {pdfNom} »
             </a>
           )}

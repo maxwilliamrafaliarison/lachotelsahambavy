@@ -168,7 +168,7 @@ export default async function ConditionsPage({
                     <ul className="space-y-4">
                       {section.items.map((item, j) => (
                         <li key={j} className="flex gap-4 text-[15px] leading-relaxed text-body">
-                          <span className="mt-[0.65em] h-1 w-1 flex-shrink-0 rounded-full bg-lake" />
+                          <span className="mt-[0.65em] h-1 w-1 flex-shrink-0 rounded-full bg-terracotta/70" />
                           <span>
                             <Linkify text={item} />
                           </span>

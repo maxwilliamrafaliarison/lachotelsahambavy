@@ -76,7 +76,7 @@ export default function ContactSection({ dict }: { dict: any }) {
                         href={item.href}
                         target={item.href.startsWith("mailto:") ? undefined : "_blank"}
                         rel="noopener noreferrer"
-                        className="mt-1 inline-block text-[15px] font-medium text-terracotta transition-colors hover:text-lake-deep"
+                        className="mt-1 inline-block text-[15px] font-medium text-lake transition-colors hover:text-lake-deep"
                       >
                         {item.value}
                       </a>

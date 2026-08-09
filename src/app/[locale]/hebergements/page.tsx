@@ -274,7 +274,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
                 <a
                   key={a.href}
                   href={a.href}
-                  className="text-terracotta underline decoration-hairline underline-offset-4 transition-colors hover:decoration-lake"
+                  className="text-ink underline decoration-lake/50 underline-offset-4 transition-colors hover:decoration-lake"
                 >
                   {a.label}
                 </a>

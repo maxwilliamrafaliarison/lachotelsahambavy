@@ -27,11 +27,24 @@ export default function CookieNotice({ dict }: { dict: any }) {
     <div className={`cookie-notice ${visible ? "visible" : ""}`}>
       <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm">{dict.cookie.text}</p>
-        <div className="flex gap-3">
-          <button onClick={accept} className="btn--cta btn text-xs py-2 px-4">
+        {/* Le bouton d'acceptation était en `.btn--cta`, un vestige : fond or
+            hérité et coins à 2 px, quand tout le reste du site appelle à
+            l'action en bleu du lac et en pilule. Il apparaît sur les vingt
+            pages — c'était le bouton le plus visible du site à ne pas
+            suivre la charte. Passé en `.ge-cta`.
+
+            « Refuser » reste en lin discret : la charte veut que le choix
+            par défaut soit le plus protecteur, mais elle n'impose pas que
+            les deux options aient le même poids visuel — refuser doit
+            rester atteignable sans être un appel à l'action. */}
+        <div className="flex items-center gap-4">
+          <button onClick={accept} className="ge-cta !px-5 !py-2 !text-[11.5px]">
             {dict.cookie.accept}
           </button>
-          <button onClick={decline} className="text-xs text-cream/60 hover:text-cream transition-colors">
+          <button
+            onClick={decline}
+            className="text-xs text-linen/70 underline decoration-linen/30 underline-offset-4 transition-colors hover:text-linen hover:decoration-linen"
+          >
             {dict.cookie.decline}
           </button>
         </div>

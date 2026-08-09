@@ -188,7 +188,7 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
           </div>
           <Link
             href={href}
-            className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-terracotta transition-colors hover:text-lake-deep"
+            className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-lake transition-colors hover:text-lake-deep"
           >
             {dict.rooms.book}
           </Link>

@@ -21,6 +21,21 @@
        • --color-tea → réservé aux contenus NATURE (plantation, jardins,
          démarche écologique). Corrigé : l'ancien #2F5D46 était un vert
          sapin absent des photos ; les rangées de thé mesurent #26471B.
+
+     DEUX EXCEPTIONS ASSUMÉES, décidées par la direction — ne pas les
+     « corriger » au nom de la règle ci-dessus :
+
+       1. LE FILET DE LA NAVBAR est en terre cuite, y compris sur la
+          rubrique active, alors que la règle attribue l'état actif au lac.
+          C'est une demande explicite du 08/08/2026 : faire revenir l'ocre
+          des pilotis dans le menu. Le filet ne colore pas le texte, il le
+          souligne — la lisibilité sur photo est préservée, et l'ocre est
+          la couleur signature de l'hôtel.
+
+       2. LES PASTILLES DES SOUS-MENUS prennent la teinte de leur rubrique
+          (terre cuite, lac ou thé selon le contenu). La couleur y encode
+          une information — les murs en pisé, l'eau, les théiers — au lieu
+          de signaler l'interactivité. Voir TEINTES dans Navbar.tsx.
        • or / champagne → inchangés (façade du restaurant, lumière du lac),
          touches et monde « Nuit ».
      ============================================================ */

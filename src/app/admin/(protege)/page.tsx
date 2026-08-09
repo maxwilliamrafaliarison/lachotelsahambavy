@@ -29,7 +29,7 @@ export default async function AdminHome() {
             Chiffre d&apos;affaires, agences les plus actives, saisonnalité — à partir
             de l&apos;historique des factures.
           </p>
-          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-terracotta">
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-lake">
             Ouvrir →
           </span>
         </Link>
@@ -44,7 +44,7 @@ export default async function AdminHome() {
             Composez le séjour (nuitées, repas, suppléments), appliquez une remise,
             générez le PDF logoté numéroté — prêt à envoyer.
           </p>
-          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-terracotta">
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-lake">
             Ouvrir →
           </span>
         </Link>
@@ -59,7 +59,7 @@ export default async function AdminHome() {
             Le guide d&apos;une page pour l&apos;équipe : créer une proforma, appliquer
             la remise, retrouver la numérotation, changer le taux euro.
           </p>
-          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-terracotta">
+          <span className="mt-4 inline-block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-lake">
             Consulter →
           </span>
         </Link>
