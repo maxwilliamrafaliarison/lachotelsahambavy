@@ -230,7 +230,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               style={itemShadow}
               aria-label="Lac Hôtel Sahambavy — Accueil"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`${basePath}/images/logo/${darkText ? "logo-embleme-dark" : "logo-embleme-white"}.png`}
                 alt=""
@@ -273,7 +272,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     "drop-shadow(0 1px 2px rgba(0,0,0,0.55)) drop-shadow(0 4px 34px rgba(0,0,0,0.45))",
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${basePath}/images/logo/logo-embleme-white.png`}
                   alt=""

@@ -68,7 +68,6 @@ export default function GalleryGrid({
             onClick={() => setVisionneuse(i)}
             aria-label={ouvrirLabel.replace("{alt}", photo.alt)}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={photo.src}
               alt={photo.alt}

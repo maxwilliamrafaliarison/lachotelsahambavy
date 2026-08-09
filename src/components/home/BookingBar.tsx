@@ -82,18 +82,18 @@ function MiniCalendar({
     <div className="w-[290px] select-none" onClick={e => e.stopPropagation()}>
       <div className="flex items-center justify-between mb-3 px-1">
         <button type="button" onClick={prevMonth} disabled={!canPrev}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gold/15 transition-colors disabled:opacity-20 text-cream">
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gold/15 transition-colors disabled:opacity-20 text-paper">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <span className="text-sm font-semibold text-gold">{months[viewMonth]} {viewYear}</span>
         <button type="button" onClick={nextMonth}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gold/15 transition-colors text-cream">
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gold/15 transition-colors text-paper">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
       <div className="grid grid-cols-7 mb-1">
         {days.map(d => (
-          <div key={d} className="text-center text-[0.625rem] font-semibold text-cream/40 uppercase py-1">{d}</div>
+          <div key={d} className="text-center text-[0.625rem] font-semibold text-paper/40 uppercase py-1">{d}</div>
         ))}
       </div>
       <div className="grid grid-cols-7">
@@ -105,8 +105,8 @@ function MiniCalendar({
                 className={`w-9 h-9 rounded-full text-sm transition-all
                   ${isSelected(day) ? "bg-gold text-white font-bold shadow-md"
                     : isToday(day) ? "bg-gold/20 text-gold font-semibold"
-                    : isDisabled(day) ? "text-cream/15 cursor-not-allowed"
-                    : "text-cream/80 hover:bg-gold/15 hover:text-gold"}`}
+                    : isDisabled(day) ? "text-paper/15 cursor-not-allowed"
+                    : "text-paper/80 hover:bg-gold/15 hover:text-gold"}`}
               >{day}</button>
             ) : <span className="w-9 h-9" />}
           </div>
@@ -274,7 +274,7 @@ export default function BookingBar({ dict }: { dict: any }) {
                 {b.checkin}
               </label>
               <button type="button" onClick={() => togglePanel("checkin")} className="booking-bar__value">
-                <span className={checkin ? "text-brown-deep font-semibold" : "text-text-muted"}>
+                <span className={checkin ? "text-ink font-semibold" : "text-muted"}>
                   {formatDateDisplay(checkin)}
                 </span>
               </button>
@@ -305,7 +305,7 @@ export default function BookingBar({ dict }: { dict: any }) {
                 {b.checkout}
               </label>
               <button type="button" onClick={() => togglePanel("checkout")} className="booking-bar__value">
-                <span className={checkout ? "text-brown-deep font-semibold" : "text-text-muted"}>
+                <span className={checkout ? "text-ink font-semibold" : "text-muted"}>
                   {formatDateDisplay(checkout)}
                 </span>
               </button>
@@ -336,8 +336,8 @@ export default function BookingBar({ dict }: { dict: any }) {
                 {b.rooms} & {b.guests}
               </label>
               <button type="button" onClick={() => togglePanel("guests")} className="booking-bar__value">
-                <span className="text-brown-deep font-medium text-sm truncate">{guestsSummary}</span>
-                <svg className={`w-3.5 h-3.5 ml-auto transition-transform flex-shrink-0 text-text-muted ${openPanel === "guests" ? "rotate-180" : ""}`}
+                <span className="text-ink font-medium text-sm truncate">{guestsSummary}</span>
+                <svg className={`w-3.5 h-3.5 ml-auto transition-transform flex-shrink-0 text-muted ${openPanel === "guests" ? "rotate-180" : ""}`}
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
               </button>
               {openPanel === "guests" && (
@@ -352,18 +352,18 @@ export default function BookingBar({ dict }: { dict: any }) {
                         )}
                       </div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-cream/60">{b.adults}</span>
+                        <span className="text-sm text-paper/60">{b.adults}</span>
                         <div className="flex items-center gap-3">
                           <button type="button" onClick={() => updateRoom(i, "adults", -1)} className="booking-bar__stepper" disabled={room.adults <= 1}>-</button>
-                          <span className="text-sm font-semibold w-5 text-center text-cream">{room.adults}</span>
+                          <span className="text-sm font-semibold w-5 text-center text-paper">{room.adults}</span>
                           <button type="button" onClick={() => updateRoom(i, "adults", 1)} className="booking-bar__stepper" disabled={room.adults >= 6}>+</button>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-cream/60">{b.children}</span>
+                        <span className="text-sm text-paper/60">{b.children}</span>
                         <div className="flex items-center gap-3">
                           <button type="button" onClick={() => updateRoom(i, "children", -1)} className="booking-bar__stepper" disabled={room.children <= 0}>-</button>
-                          <span className="text-sm font-semibold w-5 text-center text-cream">{room.children}</span>
+                          <span className="text-sm font-semibold w-5 text-center text-paper">{room.children}</span>
                           <button type="button" onClick={() => updateRoom(i, "children", 1)} className="booking-bar__stepper" disabled={room.children >= 4}>+</button>
                         </div>
                       </div>
@@ -371,7 +371,7 @@ export default function BookingBar({ dict }: { dict: any }) {
                   ))}
                   {rooms.length < 4 && (
                     <button type="button" onClick={() => setRooms(p => [...p, { adults: 2, children: 0 }])}
-                      className="w-full text-sm text-gold hover:text-gold-light font-medium py-2.5 border-t border-gold/15 mt-1 transition-colors">
+                      className="w-full text-sm text-gold hover:text-champagne font-medium py-2.5 border-t border-gold/15 mt-1 transition-colors">
                       + {b.addRoom}
                     </button>
                   )}
@@ -390,8 +390,8 @@ export default function BookingBar({ dict }: { dict: any }) {
                 {b.rate}
               </label>
               <button type="button" onClick={() => togglePanel("rate")} className="booking-bar__value">
-                <span className="text-brown-deep font-medium text-sm truncate">{rateLabels[rate]}</span>
-                <svg className={`w-3.5 h-3.5 ml-auto transition-transform flex-shrink-0 text-text-muted ${openPanel === "rate" ? "rotate-180" : ""}`}
+                <span className="text-ink font-medium text-sm truncate">{rateLabels[rate]}</span>
+                <svg className={`w-3.5 h-3.5 ml-auto transition-transform flex-shrink-0 text-muted ${openPanel === "rate" ? "rotate-180" : ""}`}
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
               </button>
               {openPanel === "rate" && (
@@ -399,8 +399,8 @@ export default function BookingBar({ dict }: { dict: any }) {
                   {(["standard", "to", "promo"] as const).map(r => (
                     <button key={r} type="button"
                       onClick={() => { setRate(r); setOpenPanel(null); }}
-                      className={`block w-full text-left px-4 py-3 text-sm transition-colors rounded-lg ${
-                        rate === r ? "bg-gold/20 text-gold font-semibold" : "text-cream/80 hover:bg-gold/10 hover:text-gold"}`}>
+                      className={`block w-full text-left px-4 py-3 text-sm transition-colors rounded-[3px] ${
+                        rate === r ? "bg-gold/20 text-gold font-semibold" : "text-paper/80 hover:bg-gold/10 hover:text-gold"}`}>
                       {rateLabels[r]}
                       {r === "promo" && <span className="ml-2 text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">-50%</span>}
                     </button>

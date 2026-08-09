@@ -59,7 +59,7 @@ function LoginForm() {
         autoComplete="username"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="mb-5 w-full rounded border border-hairline bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors focus:border-lake"
+        className="mb-5 w-full rounded-[3px] border border-hairline bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors focus:border-lake"
       />
 
       <label
@@ -76,7 +76,7 @@ function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded border border-hairline bg-white py-2.5 pl-3.5 pr-12 text-[15px] text-ink outline-none transition-colors focus:border-lake"
+          className="w-full rounded-[3px] border border-hairline bg-white py-2.5 pl-3.5 pr-12 text-[15px] text-ink outline-none transition-colors focus:border-lake"
         />
         {/* Affichage en clair — standard des formulaires de connexion : le
             mot de passe saisi à l'aveugle est la première cause d'échec.
@@ -107,7 +107,7 @@ function LoginForm() {
       </div>
 
       {error && (
-        <p role="alert" className="mb-5 rounded border border-copper/40 bg-copper/10 px-3.5 py-2.5 text-[13px] text-copper">
+        <p role="alert" className="mb-5 rounded-[3px] border border-copper/40 bg-copper/10 px-3.5 py-2.5 text-[13px] text-copper">
           {error}
         </p>
       )}

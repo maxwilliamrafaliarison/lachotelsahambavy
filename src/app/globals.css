@@ -22,6 +22,9 @@
          démarche écologique). Corrigé : l'ancien #2F5D46 était un vert
          sapin absent des photos ; les rangées de thé mesurent #26471B.
 
+       • or / champagne → inchangés (façade du restaurant, lumière du lac),
+         touches et monde « Nuit ».
+
      DEUX EXCEPTIONS ASSUMÉES, décidées par la direction — ne pas les
      « corriger » au nom de la règle ci-dessus :
 
@@ -36,8 +39,6 @@
           (terre cuite, lac ou thé selon le contenu). La couleur y encode
           une information — les murs en pisé, l'eau, les théiers — au lieu
           de signaler l'interactivité. Voir TEINTES dans Navbar.tsx.
-       • or / champagne → inchangés (façade du restaurant, lumière du lac),
-         touches et monde « Nuit ».
      ============================================================ */
 
   /* — Panorama (socle clair) — */
@@ -95,18 +96,8 @@
   --color-avis-bg: #FCF1F0;
   --color-avis-hairline: #D2786F;
 
-  /* — Alias hérités (LEGACY — à supprimer une fois la migration finie).
-       Mappés sur le nouveau monde pour que les composants non migrés
-       restent cohérents visuellement pendant la transition.
-       Consommateurs restants : BookingBar, BookingForm, TopBar,
-       CookieNotice (+ les blocs .booking-bar__* / .cookie-notice ici). — */
-  --color-cream: #FBFAF7;
-  --color-brown-deep: #1B1B17;
-  --color-gold-light: #D8B77A;
-  --color-text-dark: #1B1B17;
-  --color-text-muted: #726E64;
 
-  /* — Fontes (chargées dans src/app/layout.tsx via next/font, variables
+  /* — Fontes (chargées dans src/app/root-shell.tsx via next/font, variables
        sources --font-inter-tight / --font-cormorant / --font-inter) — */
   --font-heading: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
   --font-sub: var(--font-cormorant), Baskerville, Georgia, serif;
@@ -141,7 +132,7 @@ body {
  *
  * NOTE: These rules live in `@layer base` — this guarantees that Tailwind
  * utility classes (text-white, text-cream, text-gold, …) *beat* the default
- * `color: var(--color-text-dark)` when an author drops a heading onto a dark
+ * `color: var(--color-ink)` when an author drops a heading onto a dark
  * section (e.g. `<h2 className="text-white">` inside `bg-brown-deep`).
  *
  * Without the layer, the raw element selector sits in the normal cascade
@@ -342,16 +333,6 @@ body {
 
 /* ===== SECTION LABEL ===== */
 
-.section-label {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  color: var(--color-terracotta);
-  margin-bottom: 0.75rem;
-}
 
 .section-divider {
   width: 44px;
@@ -382,28 +363,9 @@ body {
   text-decoration: none;
 }
 
-.btn--primary {
-  background: var(--color-lake);
-  color: var(--color-white);
-  border: 1.5px solid var(--color-lake);
-}
 
-.btn--primary:hover {
-  background: var(--color-lake-deep);
-  border-color: var(--color-lake-deep);
-  color: var(--color-white);
-}
 
-.btn--outline {
-  background: transparent;
-  color: var(--color-brown-deep);
-  border: 1.5px solid var(--color-brown-deep);
-}
 
-.btn--outline:hover {
-  background: var(--color-brown-deep);
-  color: var(--color-white);
-}
 
 .btn--cta {
   background: var(--color-gold);
@@ -414,59 +376,15 @@ body {
 }
 
 .btn--cta:hover {
-  background: var(--color-gold-light);
-  border-color: var(--color-gold-light);
+  background: var(--color-champagne);
+  border-color: var(--color-champagne);
 }
 
-.btn--glass {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  color: var(--color-white);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  /* inherits border-radius from .btn */
-}
 
-.btn--glass:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
-}
 
-/* Minimal CTA — text + hairline underline + arrow qui glisse à droite.
-   Pattern éditorial classique (Rosewood, Belmond, Le Bristol). À adopter
-   en lieu et place des btn--outline quand on veut de la discrétion. */
-.btn--minimal {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 4px 0;
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--color-brown-deep);
-  background: none;
-  border: 0;
-  border-bottom: 1px solid currentColor;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
 
-.btn--minimal::after {
-  content: "→";
-  display: inline-block;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
 
-.btn--minimal:hover {
-  color: var(--color-gold);
-}
 
-.btn--minimal:hover::after {
-  transform: translateX(4px);
-}
 
 /* ===== WHATSAPP FLOAT ===== */
 
@@ -536,7 +454,7 @@ body {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--color-cream);
+  color: var(--color-paper);
   padding: 1rem 2rem;
   transform: translateY(100%);
   transition: transform 0.4s ease;
@@ -572,7 +490,7 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 1rem 1rem 0 0;
-  color: var(--color-brown-deep);
+  color: var(--color-ink);
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
@@ -645,7 +563,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-brown-deep);
+  color: var(--color-ink);
   margin-bottom: 0.5rem;
 }
 
@@ -673,7 +591,7 @@ body {
 
 .booking-bar__divider {
   width: 1px;
-  background: var(--color-brown-deep);
+  background: var(--color-ink);
   opacity: 0.06;
   align-self: stretch;
   margin: 0.875rem 0;
@@ -696,7 +614,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   overflow: hidden;
   z-index: 50;
-  color: var(--color-cream);
+  color: var(--color-paper);
 }
 
 /* Default: open downward */
@@ -737,7 +655,7 @@ body {
 /* ── Calendar dark theme ── */
 .booking-bar__dropdown .text-sm,
 .booking-bar__dropdown .text-brown-deep {
-  color: var(--color-cream) !important;
+  color: var(--color-paper) !important;
 }
 
 .booking-bar__dropdown .text-text-muted,
@@ -746,7 +664,7 @@ body {
 }
 
 .booking-bar__dropdown button:not(:disabled):not(.bg-gold) {
-  color: var(--color-cream);
+  color: var(--color-paper);
 }
 
 .booking-bar__dropdown button:hover:not(:disabled):not(.bg-gold) {
@@ -816,7 +734,7 @@ body {
 }
 
 .booking-bar__submit:hover {
-  background: var(--color-brown-deep);
+  background: var(--color-ink);
   letter-spacing: 0.15em;
 }
 

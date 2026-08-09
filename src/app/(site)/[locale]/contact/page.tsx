@@ -24,7 +24,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 const basePath = getBasePath();
 

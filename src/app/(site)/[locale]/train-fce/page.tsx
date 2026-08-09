@@ -161,7 +161,6 @@ export default async function TrainFCEPage({
           <ScrollReveal className="mt-14 md:mt-20">
             <figure>
               <div className="overflow-hidden rounded-[3px] border border-hairline">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${basePath}/images/train/train-hotel.jpg`}
                   alt="Le train FCE marquant l'arrêt en gare de Sahambavy, face au Lac Hôtel"
@@ -210,7 +209,6 @@ export default async function TrainFCEPage({
               <span className="ge-label mb-3">{dict.train.infoLabel}</span>
               <h2 style={{ textWrap: "balance" }}>{dict.train.infoTitle}</h2>
               <div className="mt-8 overflow-hidden rounded-[3px] border border-hairline">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${basePath}/images/train/micheline-bleue-quai-gare.jpg`}
                   alt="La Micheline bleue à quai, autorail historique de la ligne FCE"

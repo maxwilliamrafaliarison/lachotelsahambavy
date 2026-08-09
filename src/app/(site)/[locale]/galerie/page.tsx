@@ -10,7 +10,7 @@
  * parce qu'il porte de l'état.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";

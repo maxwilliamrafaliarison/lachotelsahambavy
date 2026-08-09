@@ -91,7 +91,7 @@ function TermsConsentLabel({ dict, locale }: { dict: Dict; locale: Locale }) {
         href={`/${locale}/${slug}/`}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-brown-deep underline decoration-gold/60 hover:decoration-gold"
+        className="text-ink underline decoration-gold/60 hover:decoration-gold"
       >
         {matched}
       </Link>
@@ -120,8 +120,8 @@ function StepIndicator({
                 done
                   ? "bg-gold text-white"
                   : active
-                  ? "bg-brown-deep text-white ring-4 ring-gold/20"
-                  : "bg-white text-text-muted border border-brown-deep/20"
+                  ? "bg-ink text-white ring-4 ring-gold/20"
+                  : "bg-white text-muted border border-ink/20"
               }`}
               aria-current={active ? "step" : undefined}
             >
@@ -129,7 +129,7 @@ function StepIndicator({
             </div>
             <span
               className={`ml-2 text-xs md:text-sm font-medium hidden sm:block ${
-                active || done ? "text-brown-deep" : "text-text-muted"
+                active || done ? "text-ink" : "text-muted"
               }`}
             >
               {labels[i]}
@@ -137,7 +137,7 @@ function StepIndicator({
             {n < 3 ? (
               <div
                 className={`flex-1 h-0.5 mx-2 md:mx-3 transition-colors ${
-                  done ? "bg-gold" : "bg-brown-deep/15"
+                  done ? "bg-gold" : "bg-ink/15"
                 }`}
                 aria-hidden
               />
@@ -165,11 +165,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-text-dark mb-1.5">
+      <label className="block text-sm font-medium text-ink mb-1.5">
         {label} {required ? <span className="text-gold">*</span> : null}
       </label>
       {children}
-      {hint ? <p className="text-xs text-text-muted/80 mt-1">{hint}</p> : null}
+      {hint ? <p className="text-xs text-muted/80 mt-1">{hint}</p> : null}
       {error ? (
         <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
           <span aria-hidden>⚠</span> {error}
@@ -180,7 +180,7 @@ function Field({
 }
 
 const inputClass =
-  "w-full bg-white border border-brown-deep/20 rounded-lg px-4 py-3 text-sm text-text-dark placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
+  "w-full bg-white border border-ink/20 rounded-[3px] px-4 py-3 text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
 
 // ─── Occupancy stepper (rooms / adults / children) ─────────
 function OccupancyStepper({
@@ -201,10 +201,10 @@ function OccupancyStepper({
   const canDec = value > min;
   const canInc = value < max;
   return (
-    <div className="flex items-center justify-between bg-white border border-brown-deep/15 rounded-lg px-4 py-3">
+    <div className="flex items-center justify-between bg-white border border-ink/15 rounded-[3px] px-4 py-3">
       <div className="flex flex-col">
-        <span className="text-sm text-text-dark font-medium">{label}</span>
-        {hint ? <span className="text-[0.7rem] text-text-muted/70">{hint}</span> : null}
+        <span className="text-sm text-ink font-medium">{label}</span>
+        {hint ? <span className="text-[0.7rem] text-muted/70">{hint}</span> : null}
       </div>
       <div className="flex items-center gap-3">
         <button
@@ -212,11 +212,11 @@ function OccupancyStepper({
           onClick={() => canDec && onChange(value - 1)}
           disabled={!canDec}
           aria-label={`− ${label}`}
-          className="w-11 h-11 rounded-full border border-brown-deep/25 text-brown-deep text-lg leading-none flex items-center justify-center hover:bg-brown-deep/5 active:bg-brown-deep/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="w-11 h-11 rounded-full border border-ink/25 text-ink text-lg leading-none flex items-center justify-center hover:bg-ink/5 active:bg-ink/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
           −
         </button>
-        <span className="text-base font-semibold w-7 text-center tabular-nums text-brown-deep">
+        <span className="text-base font-semibold w-7 text-center tabular-nums text-ink">
           {value}
         </span>
         <button
@@ -493,8 +493,8 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
   return (
     <div className="space-y-6">
       {/* Récap */}
-      <div className="bg-white rounded-xl border border-brown-deep/10 p-5 md:p-6">
-        <h4 className="text-base font-semibold text-brown-deep mb-3">{b?.review?.title || "Vérifiez votre demande"}</h4>
+      <div className="bg-white rounded-[3px] border border-ink/10 p-5 md:p-6">
+        <h4 className="text-base font-semibold text-ink mb-3">{b?.review?.title || "Vérifiez votre demande"}</h4>
         <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
           <Item label={dict.contact.form.checkin} value={v.checkin || "—"} />
           <Item label={dict.contact.form.checkout} value={v.checkout || "—"} />
@@ -510,25 +510,25 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
           <Item label={dict.contact.form.nationality} value={v.nationality || "—"} />
         </dl>
         {v.message ? (
-          <div className="mt-4 pt-4 border-t border-brown-deep/10">
+          <div className="mt-4 pt-4 border-t border-ink/10">
             <p className="text-xs uppercase tracking-wider text-gold font-semibold mb-1">
               {dict.contact.form.message}
             </p>
-            <p className="text-sm text-text-muted whitespace-pre-wrap">{v.message}</p>
+            <p className="text-sm text-muted whitespace-pre-wrap">{v.message}</p>
           </div>
         ) : null}
       </div>
 
       {/* Consentements */}
-      <div className="space-y-4 bg-white rounded-xl p-5 border border-brown-deep/10">
+      <div className="space-y-4 bg-white rounded-[3px] p-5 border border-ink/10">
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
             required
-            className="mt-1 w-4 h-4 rounded border-brown-deep/30 text-gold focus:ring-gold/40 flex-shrink-0"
+            className="mt-1 w-4 h-4 rounded-[3px] border-ink/30 text-gold focus:ring-gold/40 flex-shrink-0"
             {...register("gdpr")}
           />
-          <span className="text-xs text-text-muted leading-relaxed">
+          <span className="text-xs text-muted leading-relaxed">
             {dict.contact.form.gdprConsent} <span className="text-gold">*</span>
           </span>
         </label>
@@ -540,10 +540,10 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
           <input
             type="checkbox"
             required
-            className="mt-1 w-4 h-4 rounded border-brown-deep/30 text-gold focus:ring-gold/40 flex-shrink-0"
+            className="mt-1 w-4 h-4 rounded-[3px] border-ink/30 text-gold focus:ring-gold/40 flex-shrink-0"
             {...register("terms")}
           />
-          <span className="text-xs text-text-muted leading-relaxed">
+          <span className="text-xs text-muted leading-relaxed">
             <TermsConsentLabel dict={dict} locale={locale} />{" "}
             <span className="text-gold">*</span>
           </span>
@@ -575,9 +575,9 @@ function Item({
 }) {
   return (
     <div className="flex justify-between gap-4 py-1">
-      <dt className="text-text-muted">{label}</dt>
+      <dt className="text-muted">{label}</dt>
       <dd
-        className={`text-right break-words ${emphasis ? "text-gold font-semibold" : "text-text-dark font-medium"}`}
+        className={`text-right break-words ${emphasis ? "text-gold font-semibold" : "text-ink font-medium"}`}
       >
         {value}
       </dd>
@@ -770,7 +770,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
       >
         {/* Pre-fill indicator */}
         {prefill.checkin ? (
-          <div className="bg-gold/10 border border-gold/20 rounded-xl p-4 text-sm text-brown-deep text-center">
+          <div className="bg-gold/10 border border-gold/20 rounded-[3px] p-4 text-sm text-ink text-center">
             <span className="font-semibold">✓ </span>
             {b?.prefilledNotice ||
               (locale === "fr"
@@ -788,7 +788,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
         {step === 3 ? <ReviewStep dict={dict} locale={locale} /> : null}
 
         {serverError ? (
-          <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 text-sm">
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-[3px] p-4 text-sm">
             <strong>⚠ </strong>
             {serverError}
           </div>
@@ -801,7 +801,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
               <button
                 type="button"
                 onClick={goBack}
-                className="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium border border-brown-deep/20 text-brown-deep hover:bg-brown-deep/5 transition-colors"
+                className="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium border border-ink/20 text-ink hover:bg-ink/5 transition-colors"
               >
                 ← {b?.steps?.back || "Retour"}
               </button>
@@ -812,7 +812,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
               <button
                 type="button"
                 onClick={goNext}
-                className="w-full sm:w-auto bg-brown-deep text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-brown-deep/90 transition-colors shadow-md"
+                className="w-full sm:w-auto bg-ink text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-ink/90 transition-colors shadow-md"
               >
                 {b?.steps?.next || "Suivant"} →
               </button>
@@ -820,7 +820,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto bg-gold text-white px-10 py-4 rounded-full text-sm font-semibold hover:bg-gold-light transition-colors shadow-md disabled:opacity-60 uppercase tracking-wider"
+                className="w-full sm:w-auto bg-gold text-white px-10 py-4 rounded-full text-sm font-semibold hover:bg-champagne transition-colors shadow-md disabled:opacity-60 uppercase tracking-wider"
               >
                 {isSubmitting
                   ? dict.contact.form.sending
@@ -830,7 +830,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
           </div>
         </div>
 
-        <p className="text-center text-xs text-text-muted/70">
+        <p className="text-center text-xs text-muted/70">
           * {dict.contact.form.required}
         </p>
       </form>

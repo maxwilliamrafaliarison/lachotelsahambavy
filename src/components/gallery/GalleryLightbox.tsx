@@ -181,7 +181,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
                 src={p.src}
                 alt={p.alt}
                 draggable={false}
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl pointer-events-none"
+                className="max-w-full max-h-full object-contain rounded-[3px] shadow-2xl pointer-events-none"
                 style={{
                   // Petite mise en échelle des photos hors écran pour un
                   // effet de profondeur subtil au swipe (Apple Photos).

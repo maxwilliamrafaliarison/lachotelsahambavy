@@ -277,7 +277,7 @@ function SourceColumn({
         href={source.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group text-center mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lake/40 rounded-sm p-2 -m-2"
+        className="group text-center mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lake/40 rounded-[3px] p-2 -m-2"
         aria-label={`${VIEW_ON[locale]} ${source.name} — ${scoreDisplay}${scoreSuffix}, ${source.total} ${REVIEW_NOUN[locale]}`}
       >
         <span className="ge-label mb-3 transition-colors duration-300 group-hover:text-lake-deep">

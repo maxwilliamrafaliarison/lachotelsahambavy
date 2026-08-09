@@ -56,7 +56,7 @@ function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
   const subtitle = (c.subtitle || "Merci {name}").replace("{name}", name || "");
 
   return (
-    <main className="min-h-[80vh] bg-cream flex items-center justify-center px-4 py-24">
+    <main className="min-h-[80vh] bg-paper flex items-center justify-center px-4 py-24">
       <div className="max-w-[640px] w-full text-center">
         {/* Success badge */}
         <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-gold/15 flex items-center justify-center">
@@ -74,21 +74,21 @@ function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
           </svg>
         </div>
 
-        <h1 className="text-3xl md:text-4xl text-brown-deep mb-3 font-normal">
+        <h1 className="text-3xl md:text-4xl text-ink mb-3 font-normal">
           {c.title || "Demande reçue !"}
         </h1>
-        <p className="text-base md:text-lg text-text-muted mb-2">{subtitle}</p>
+        <p className="text-base md:text-lg text-muted mb-2">{subtitle}</p>
         {checkin && checkout ? (
-          <p className="text-sm text-brown-deep font-medium mb-10">{stayInfo}</p>
+          <p className="text-sm text-ink font-medium mb-10">{stayInfo}</p>
         ) : (
           <div className="mb-10" />
         )}
 
         {/* Next-steps card */}
-        <div className="bg-white rounded-2xl p-6 md:p-8 text-left shadow-sm border border-brown-deep/5 space-y-4">
-          <p className="text-sm text-text-muted leading-relaxed">{c.p1 || ""}</p>
-          <p className="text-sm text-text-muted leading-relaxed">{c.p2 || ""}</p>
-          <p className="text-sm text-text-muted leading-relaxed">{c.p3 || ""}</p>
+        <div className="bg-white rounded-[3px] p-6 md:p-8 text-left shadow-sm border border-ink/5 space-y-4">
+          <p className="text-sm text-muted leading-relaxed">{c.p1 || ""}</p>
+          <p className="text-sm text-muted leading-relaxed">{c.p2 || ""}</p>
+          <p className="text-sm text-muted leading-relaxed">{c.p3 || ""}</p>
         </div>
 
         {/* CTA */}
@@ -106,7 +106,7 @@ function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
           </a>
           <Link
             href={`/${locale}`}
-            className="inline-flex items-center gap-2 border border-brown-deep/20 text-brown-deep px-7 py-3 rounded-full text-sm font-medium hover:bg-brown-deep/5 transition-colors"
+            className="inline-flex items-center gap-2 border border-ink/20 text-ink px-7 py-3 rounded-full text-sm font-medium hover:bg-ink/5 transition-colors"
           >
             {c.backHome || "Retour à l'accueil"}
           </Link>
@@ -131,7 +131,7 @@ export default function ReservationConfirmationPage({
   if (!dict) {
     return (
       <main className="min-h-[80vh] flex items-center justify-center">
-        <div className="text-text-muted text-sm">…</div>
+        <div className="text-muted text-sm">…</div>
       </main>
     );
   }
@@ -140,7 +140,7 @@ export default function ReservationConfirmationPage({
     <Suspense
       fallback={
         <main className="min-h-[80vh] flex items-center justify-center">
-          <div className="text-text-muted text-sm">…</div>
+          <div className="text-muted text-sm">…</div>
         </main>
       }
     >

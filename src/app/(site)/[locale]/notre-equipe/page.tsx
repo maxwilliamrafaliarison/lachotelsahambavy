@@ -175,7 +175,6 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
             {teamPhotos.map((photo, i) => (
               <ScrollReveal key={photo.src} delay={i * 50} className="h-full">
                 <figure className="group h-full overflow-hidden bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`${basePath}${photo.src}`}
                     alt={photo.alt}

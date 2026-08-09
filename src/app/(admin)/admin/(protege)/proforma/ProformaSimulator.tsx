@@ -422,7 +422,7 @@ export default function ProformaSimulator() {
           </div>
 
           {erreur && (
-            <p role="alert" className="mt-4 rounded border border-copper/40 bg-copper/10 px-3 py-2.5 text-[13px] text-copper">
+            <p role="alert" className="mt-4 rounded-[3px] border border-copper/40 bg-copper/10 px-3 py-2.5 text-[13px] text-copper">
               {erreur}
             </p>
           )}

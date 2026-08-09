@@ -196,7 +196,6 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
               {founders.map((p) => (
                 <figure key={p.name}>
                   <div className="overflow-hidden border border-hairline">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={p.src}
                       alt={p.alt}

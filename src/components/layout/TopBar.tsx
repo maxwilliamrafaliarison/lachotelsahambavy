@@ -39,7 +39,7 @@ export default function TopBar() {
     >
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 h-9 flex items-center justify-between gap-4">
         {/* Left — Contact */}
-        <div className="flex items-center gap-3 md:gap-5 text-cream/60 text-[0.6875rem] tracking-[0.15em] uppercase font-medium">
+        <div className="flex items-center gap-3 md:gap-5 text-paper/60 text-[0.6875rem] tracking-[0.15em] uppercase font-medium">
           <a
             href={`tel:${siteConfig.whatsapp}`}
             className="flex items-center gap-1.5 hover:text-gold transition-colors"
@@ -48,7 +48,7 @@ export default function TopBar() {
             <IconPhone />
             <span>{siteConfig.phone}</span>
           </a>
-          <span className="hidden md:block w-px h-3 bg-cream/15" />
+          <span className="hidden md:block w-px h-3 bg-paper/15" />
           <a
             href={`mailto:${siteConfig.email}`}
             className="hidden md:flex items-center gap-1.5 hover:text-gold transition-colors normal-case tracking-normal text-[0.75rem]"
@@ -70,7 +70,7 @@ export default function TopBar() {
               label={`Avis TripAdvisor — ${siteConfig.ratings.tripadvisor.score} sur 5`}
               Logo={LogoTripAdvisor}
             />
-            <span className="w-px h-3 bg-cream/15" />
+            <span className="w-px h-3 bg-paper/15" />
             <RatingLink
               href={siteConfig.social.google}
               score={siteConfig.ratings.google.score}
@@ -78,7 +78,7 @@ export default function TopBar() {
               label={`Avis Google — ${siteConfig.ratings.google.score} sur 5`}
               Logo={LogoGoogle}
             />
-            <span className="w-px h-3 bg-cream/15" />
+            <span className="w-px h-3 bg-paper/15" />
             <RatingLink
               href={siteConfig.social.booking}
               score={siteConfig.ratings.booking.score}
@@ -88,7 +88,7 @@ export default function TopBar() {
             />
           </div>
 
-          <span className="hidden lg:block w-px h-3 bg-cream/15" />
+          <span className="hidden lg:block w-px h-3 bg-paper/15" />
 
           {/* Social */}
           <div className="flex items-center gap-3">
@@ -96,7 +96,7 @@ export default function TopBar() {
               href={siteConfig.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/50 hover:text-gold transition-colors"
+              className="text-paper/50 hover:text-gold transition-colors"
               aria-label="Facebook"
             >
               <IconFacebook />
@@ -105,7 +105,7 @@ export default function TopBar() {
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream/50 hover:text-gold transition-colors"
+              className="text-paper/50 hover:text-gold transition-colors"
               aria-label="Instagram"
             >
               <IconInstagram />
@@ -140,11 +140,11 @@ function RatingLink({
       aria-label={label}
       className="group flex items-center gap-1.5"
     >
-      <IconStar className="text-cream/50 transition-colors duration-300 group-hover:text-gold" />
-      <span className="tabular-nums text-cream/70 transition-colors duration-300 group-hover:text-gold">
+      <IconStar className="text-paper/50 transition-colors duration-300 group-hover:text-gold" />
+      <span className="tabular-nums text-paper/70 transition-colors duration-300 group-hover:text-gold">
         {score.toFixed(1)}
       </span>
-      <span className="text-cream/30 transition-colors duration-300 group-hover:text-gold/70">
+      <span className="text-paper/30 transition-colors duration-300 group-hover:text-gold/70">
         /{max}
       </span>
       <Logo className="ml-1 grayscale opacity-55 brightness-125 transition-[filter,opacity] duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100" />

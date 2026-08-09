@@ -247,7 +247,6 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
       {/* Pleine page — cueilleuses, lumière éditoriale */}
       <section>
         <figure>
-          { }
           <img
             src={`${basePath}/images/tea/plantation-cinematic.jpg`}
             alt={alt(
@@ -323,7 +322,6 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
           <div className="grid gap-2 md:grid-cols-2">
             <ScrollReveal>
               <div className="aspect-[4/3] overflow-hidden rounded-[3px]">
-                { }
                 <img
                   src={`${basePath}/images/tea/plantation-the-rangees-vue-aerienne.jpg`}
                   alt={alt(
@@ -338,7 +336,6 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
             </ScrollReveal>
             <ScrollReveal delay={120}>
               <div className="aspect-[4/3] overflow-hidden rounded-[3px]">
-                { }
                 <img
                   src={`${basePath}/images/tea/plantation-the-sahambavy-rangees-velos.jpg`}
                   alt={alt(

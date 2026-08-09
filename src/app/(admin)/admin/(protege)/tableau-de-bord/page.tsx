@@ -116,7 +116,7 @@ export default async function TableauDeBord({
               return (
                 <div key={m.mois} className="flex flex-1 flex-col items-center justify-end gap-2" title={`${MOIS_FR[moisNum]} : ${fmtAr(m.ca)} · ${m.sejours} séjours · ${m.pax} pax`}>
                   <span className="text-[10px] font-semibold text-muted tabular-nums">{fmtM(m.ca).replace(" Ar", "")}</span>
-                  <div className="w-full rounded-t-[4px] bg-lake transition-all" style={{ height: h }} />
+                  <div className="w-full rounded-t-[3px] bg-lake transition-all" style={{ height: h }} />
                   <span className="text-[11px] text-muted">{MOIS_FR[moisNum]}</span>
                 </div>
               );

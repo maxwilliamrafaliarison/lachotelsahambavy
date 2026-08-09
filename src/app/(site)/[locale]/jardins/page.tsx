@@ -186,7 +186,6 @@ export default async function JardinsPage({
             {eden.flowers.map((f, i) => (
               <ScrollReveal key={f.caption} delay={i * 100} className="h-full">
                 <figure className="flex h-full flex-col bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`${basePath}/images/jardins/${FLOWER_IMAGES[i]}`}
                     alt={f.alt}
@@ -258,7 +257,6 @@ export default async function JardinsPage({
             {village.moments.map((m, i) => (
               <ScrollReveal key={m.caption} delay={i * 100} className="h-full">
                 <figure className="flex h-full flex-col bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`${basePath}/images/village/${MOMENT_IMAGES[i]}`}
                     alt={m.alt}
