@@ -3,7 +3,7 @@ import { siteConfig } from "@/data/site";
 
 /**
  * Robots.txt généré dynamiquement.
- * Cf. Phase 5 §5.6 — SEO technique.
+ * Cf. Phase 5 §5.6 (SEO technique).
  *
  * `force-static` requis pour le mode `output: export` (GitHub Pages).
  */

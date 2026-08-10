@@ -128,7 +128,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "hotel"))]} />
 
-      {/* 1 — Hero Panorama : lever de soleil au drone, LE plan d'ensemble du domaine */}
+      {/* 1. Hero Panorama : lever de soleil au drone, LE plan d'ensemble du domaine */}
       <PanoramaHero
         image={`${basePath}/images/hero/hero-drone-sunrise.jpg`}
         imageAlt="Vue aérienne du Lac Hôtel et du lac de Sahambavy au lever du soleil"
@@ -137,7 +137,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         kicker={dict.hotel.heroSubtitle}
       />
 
-      {/* 2 — Notre philosophie : tourisme responsable, production maison */}
+      {/* 2. Notre philosophie : tourisme responsable, production maison */}
       <section id="philosophie" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -151,7 +151,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             <p>{dict.hotel.philosophyP2}</p>
           </EditorialSplit>
 
-          {/* Les 7 piliers éco-responsables — grille à filets fins */}
+          {/* Les 7 piliers éco-responsables, en grille à filets fins */}
           <div className="mt-10 grid grid-cols-1 gap-px border border-hairline bg-hairline sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
             {ecoPillars.map((pillar, i) => (
               <ScrollReveal key={pillar.icon} delay={i * 60} className="h-full">
@@ -173,7 +173,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      {/* 3 — La petite histoire : de la cabane de retraite au jardin d'Éden */}
+      {/* 3. La petite histoire : de la cabane de retraite au jardin d'Éden */}
       <section id="histoire" className="scroll-mt-24 pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -190,7 +190,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             {dict.hotel.historyP4 && <p className="font-medium text-ink">{dict.hotel.historyP4}</p>}
           </EditorialSplit>
 
-          {/* Maggie & Sergi — la génération qui poursuit l'aventure */}
+          {/* Maggie & Sergi, la génération qui poursuit l'aventure */}
           <ScrollReveal className="mx-auto mt-12 max-w-xl md:mt-16">
             <div className="grid grid-cols-2 gap-6 md:gap-8">
               {founders.map((p) => (
@@ -213,7 +213,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      {/* 4 — RSE : recrutement local, économie circulaire, engagements concrets */}
+      {/* 4. RSE : recrutement local, économie circulaire, engagements concrets */}
       <section id="rse" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -256,7 +256,7 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      {/* 5 — Teaser équipe + bande réservation */}
+      {/* 5. Teaser équipe + bande réservation */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit

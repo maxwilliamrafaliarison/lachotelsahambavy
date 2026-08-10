@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * TopBar — Barre utilitaire fine en haut de page.
+ * TopBar : barre utilitaire fine en haut de page.
  *
  * S'inspire des codes des hôtels de luxe (Le Bristol Paris, La Mamounia,
  * Rosewood, Four Seasons) : typographie compressée, ton sombre discret,
@@ -38,7 +38,7 @@ export default function TopBar() {
       style={{ background: "#14110D" }}
     >
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 h-9 flex items-center justify-between gap-4">
-        {/* Left — Contact */}
+        {/* Left: Contact */}
         <div className="flex items-center gap-3 md:gap-5 text-paper/60 text-[0.6875rem] tracking-[0.15em] uppercase font-medium">
           <a
             href={`tel:${siteConfig.whatsapp}`}
@@ -59,9 +59,9 @@ export default function TopBar() {
           </a>
         </div>
 
-        {/* Right — Ratings + Social */}
+        {/* Right: Ratings + Social */}
         <div className="flex items-center gap-3 md:gap-5 text-[0.6875rem] tracking-[0.12em] uppercase font-medium">
-          {/* Ratings — desktop only */}
+          {/* Ratings: desktop only */}
           <div className="hidden lg:flex items-center gap-4">
             <RatingLink
               href={siteConfig.social.tripadvisor}
@@ -117,7 +117,7 @@ export default function TopBar() {
   );
 }
 
-/* ── Rating link — star + score /max + brand logo, colorizes on hover ─── */
+/* ── Rating link: star + score /max + brand logo, colorizes on hover ─── */
 
 function RatingLink({
   href,
@@ -152,7 +152,7 @@ function RatingLink({
   );
 }
 
-/* ── Inline icons — minimal line-style ───────────────────────── */
+/* ── Inline icons: minimal line-style ───────────────────────── */
 
 function IconPhone() {
   return (
@@ -186,7 +186,7 @@ function IconStar({ className }: { className?: string }) {
   );
 }
 
-/* ── Brand logo marks — rendered in brand colors, desaturated by CSS ─── */
+/* ── Brand logo marks: rendered in brand colors, desaturated by CSS ─── */
 
 function LogoTripAdvisor({ className }: { className?: string }) {
   return (
@@ -198,7 +198,7 @@ function LogoTripAdvisor({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      {/* Official owl mark — two eyes + body, in TripAdvisor green */}
+      {/* Official owl mark: two eyes + body, in TripAdvisor green */}
       <g fill="#34E0A1">
         <path d="M64 0C49.7 0 36 3.3 23.7 9.6H0l12 12.9C4.8 29 .5 38.5.5 49c0 16.4 13.3 29.7 29.7 29.7 7.8 0 14.9-3 20.2-7.9L64 78.7l13.6-7.9c5.3 4.9 12.4 7.9 20.2 7.9 16.4 0 29.7-13.3 29.7-29.7 0-10.5-4.3-20-11.4-26.5l11.9-12.9h-23.8C91.9 3.3 78.3 0 64 0zM30.2 71.7c-12.5 0-22.7-10.2-22.7-22.7s10.2-22.7 22.7-22.7 22.7 10.2 22.7 22.7S42.7 71.7 30.2 71.7zm33.8-3.9c-3.1-6.2-9.2-10.5-16.5-11.2 5-5.3 8.1-12.4 8.1-20.2 0-11-6.2-20.5-15.3-25.3 7.9-3.5 16.6-5.5 23.7-5.5s15.8 2 23.7 5.5c-9.1 4.8-15.3 14.3-15.3 25.3 0 7.8 3.1 14.9 8.1 20.2-7.3.7-13.4 5-16.5 11.2zm33.8 3.9c-12.5 0-22.7-10.2-22.7-22.7s10.2-22.7 22.7-22.7 22.7 10.2 22.7 22.7-10.2 22.7-22.7 22.7z" />
         <circle cx="30.2" cy="49" r="11.1" fill="#000" />
@@ -248,7 +248,7 @@ function LogoBooking({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      {/* Booking.com "B." lettermark — navy square, white B + dot */}
+      {/* Booking.com "B." lettermark: navy square, white B + dot */}
       <rect width="32" height="32" rx="5" fill="#003580" />
       <path
         fill="#ffffff"

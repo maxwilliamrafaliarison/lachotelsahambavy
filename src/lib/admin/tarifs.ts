@@ -1,14 +1,14 @@
 /**
- * Tarifs 2026 officiels — source : « TExte proposition de Maggie » (16/07/2026)
+ * Tarifs 2026 officiels. Source : « TExte proposition de Maggie » (16/07/2026)
  * et grilles TO-PUBLIC. Base du simulateur de facture proforma.
  *
  * Décisions 17/07/2026 (Max) confirmées par l'analyse des vraies factures :
  *  - Prix catalogue = TTC (ce que le client paie, TVA 20 % comprise).
  *    La facture EXTRAIT la TVA (HT = TTC / 1,20). Voir proforma.ts.
- *  - « Vignette touristique » (et non « taxe de séjour ») — HORS base TVA.
+ *  - « Vignette touristique » (et non « taxe de séjour ») : HORS base TVA.
  *  - Taux € par défaut = 5 000 Ar (les grilles 2026/2027 sont bâties à 5 000 :
  *    360 000/72, 300 000/60, 70 000/14…). Modifiable à chaque facture.
- *  - Exonération de TVA possible en option (ex. TO export) — voir Devis.
+ *  - Exonération de TVA possible en option (ex. TO export). Voir Devis.
  */
 
 export const TAUX_EUR_DEFAUT = 5000; // 1 € = 5 000 Ar (grilles TO-PUBLIC)
@@ -26,16 +26,16 @@ export type CatalogueItem = {
 };
 
 export const CATALOGUE: CatalogueItem[] = [
-  // — Hébergement (TTC, par nuit, double/twin/single) —
+  // Hébergement (TTC, par nuit, double/twin/single)
   { id: "pilotis-nuptial", label: "Pilotis Nuptial (double/twin/single)", prixAr: 360_000, unite: "nuit", groupe: "Hébergement" },
   { id: "superior-lake-view", label: "Superior Lake View Room (double/twin/single)", prixAr: 300_000, unite: "nuit", groupe: "Hébergement" },
   { id: "wagon-nuptial", label: "Wagon Nuptial", prixAr: 360_000, unite: "nuit", groupe: "Hébergement" },
   { id: "standard", label: "Bungalow standard (double/twin/single)", prixAr: 150_000, unite: "nuit", groupe: "Hébergement" },
   { id: "le-repos", label: "Bungalow traditionnel de l'extension « Le Repos »", prixAr: 250_000, unite: "nuit", groupe: "Hébergement" },
-  // — Restauration (TTC) —
+  // Restauration (TTC)
   { id: "petit-dejeuner", label: "Petit-déjeuner", prixAr: 40_000, unite: "pers./nuit", groupe: "Restauration" },
   { id: "menu", label: "Menu (déjeuner ou dîner)", prixAr: 70_000, unite: "personne", groupe: "Restauration" },
-  // — Suppléments —
+  // Suppléments
   { id: "vignette-touristique", label: "Vignette touristique", prixAr: 5_000, unite: "pers./nuit", groupe: "Suppléments", tva: false },
   { id: "lit-supplementaire", label: "Lit supplémentaire", prixAr: 30_000, unite: "nuit", groupe: "Suppléments" },
   { id: "transfert-4x4", label: "Transfert privé 4×4 Lac Hôtel ↔ Fianarantsoa", prixAr: 130_000, unite: "trajet", groupe: "Suppléments" },

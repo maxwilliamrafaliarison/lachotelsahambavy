@@ -1,6 +1,6 @@
 /**
  * Rate-limiting via Upstash Redis (10 req / 10 min par IP hashée).
- * Cf. Phase 7 §7.6.2 — Anti-abus.
+ * Cf. Phase 7 §7.6.2 (Anti-abus).
  *
  * Si UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN ne sont pas définis,
  * on retourne un "allow all" silencieux (mode dev / preview GitHub Pages).
@@ -38,7 +38,7 @@ function getLimiter(): Ratelimit | null {
 export async function rateLimitCheck(identifier: string): Promise<RateLimitResult> {
   const rl = getLimiter();
   if (!rl) {
-    // Mode dev — pas de limiter configuré → on laisse passer.
+    // Mode dev : pas de limiter configuré → on laisse passer.
     return { success: true, limit: 10, remaining: 10, reset: Date.now() + 600_000 };
   }
   try {

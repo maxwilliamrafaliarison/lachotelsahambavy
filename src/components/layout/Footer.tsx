@@ -2,7 +2,7 @@ import { type Locale, getBasePath } from "@/lib/utils";
 import { navigation, siteConfig } from "@/data/site";
 
 /**
- * Footer « Nuit sur le lac » — le monde sombre C clôt chaque page.
+ * Footer « Nuit sur le lac » : le monde sombre C clôt chaque page.
  * Plan du site en colonnes fidèle à l'arborescence de Maggie (une colonne
  * par grande rubrique, sous-items dessous), pattern footer Glacier Express.
  */
@@ -42,7 +42,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           </p>
         </div>
 
-        {/* Plan du site — arborescence Maggie */}
+        {/* Plan du site : arborescence Maggie */}
         <nav aria-label="Plan du site" className="mb-14">
           <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
             {columns.map((item) => (

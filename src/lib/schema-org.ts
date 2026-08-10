@@ -1,6 +1,6 @@
 /**
  * Générateurs JSON-LD Schema.org pour le Lac Hôtel Sahambavy.
- * Cf. Phase 5 §5.6 — SEO technique trilingue.
+ * Cf. Phase 5 §5.6 (SEO technique trilingue).
  *
  * Tous les helpers retournent un objet sérialisable à injecter via <JsonLd>.
  *
@@ -124,7 +124,7 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
     name: siteConfig.name,
     description: description[locale],
     url: `${siteConfig.url}/${locale}/`,
-    /* Ces trois URL renvoyaient 404 — le préfixe « hero- » manquait. Le bloc
+    /* Ces trois URL renvoyaient 404 : le préfixe « hero- » manquait. Le bloc
        étant injecté depuis [locale]/layout.tsx, l'erreur portait sur les
        ~51 pages du site, et `image` est un attribut REQUIS pour les
        résultats enrichis hôtel : le balisage était donc invalide partout.
@@ -182,7 +182,7 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
 /**
  * Les hébergements n'ont PAS de page propre : ils sont tous présentés sur
  * /hebergements/, chacun dans sa section ancrée. On balise donc l'ancre
- * réelle, `…/hebergements/#pilotis-nuptial`, et non une URL par chambre —
+ * réelle, `…/hebergements/#pilotis-nuptial`, et non une URL par chambre :
  * celle-ci renvoyait 404, si bien que Google suivait le lien d'une fiche
  * qu'il venait de lire et tombait sur une page d'erreur. Les `id` des
  * sections de la page valent exactement `room.slug` : les deux doivent
@@ -289,8 +289,8 @@ export function restaurantSchema(locale: Locale): SchemaType {
 // =====================================================
 
 /**
- * `chemin` est le segment de la page qui présente réellement l'attraction —
- * « restaurant », « plantation-de-the », « train-fce » — et non un slug
+ * `chemin` est le segment de la page qui présente réellement l'attraction
+ * (« restaurant », « plantation-de-the », « train-fce ») et non un slug
  * imaginaire sous /experiences/, qui n'a jamais existé et renvoyait 404.
  *
  * L'`@id` est construit sur ce même chemin : c'est voulu. La plantation et
@@ -435,13 +435,13 @@ export function imageGallerySchema(args: {
  * présents : name, description, thumbnailUrl, uploadDate. Les attributs
  * recommandés (contentUrl, duration) améliorent l'éligibilité.
  *
- * ATTENTION — ce schéma décrivait jusqu'au 08/08/2026 la vidéo drone du
+ * ATTENTION : ce schéma décrivait jusqu'au 08/08/2026 la vidéo drone du
  * hero, remplacée depuis par une photographie : il annonçait donc une
  * vidéo absente de la page. Il n'était heureusement émis nulle part, mais
  * un balisage qui ne correspond à aucun contenu visible est une donnée
  * structurée invalide, sanctionnée par Google. Il pointe désormais sur la
  * vidéo réellement présente dans la section « Bienvenue », et il est émis
- * depuis src/app/[locale]/page.tsx — l'accueil uniquement, jamais les
+ * depuis src/app/[locale]/page.tsx : l'accueil uniquement, jamais les
  * pages intérieures qui ne portent pas cette vidéo.
  *
  * Durée = PT30S (29,84 s mesurées après réencodage).

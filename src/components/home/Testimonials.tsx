@@ -18,19 +18,19 @@ import {
 import type { Locale } from "@/lib/utils";
 
 /**
- * Section Témoignages — version éditoriale 3 colonnes.
+ * Section Témoignages : version éditoriale 3 colonnes.
  *
  * Chaque colonne (Booking / Google / TripAdvisor) affiche EN PERMANENCE
  * deux cartes (jamais de tuile vide : les avis défilent en boucle par
  * arithmétique modulaire sur l'index). Auto-rotation toutes les 6.5 s,
  * mise en pause 15 s après toute interaction manuelle. Glissement
  * horizontal carte-par-carte (drag → ±1 avis, pas ±2) via Pointer
- * Events — touch + souris unifiés.
+ * Events (touch + souris unifiés).
  *
  * Les cartes ont une hauteur fixe : la grille reste parfaitement
  * régulière même si les textes varient, et on privilégie le fixed-
  * height + line-clamp à un lien « Lire la suite » (Belmond, Aman,
- * Rosewood procèdent ainsi — discrétion éditoriale). Un drapeau du
+ * Rosewood procèdent ainsi, par discrétion éditoriale). Un drapeau du
  * pays accompagne la localisation pour souligner la dimension
  * internationale des avis.
  *
@@ -109,7 +109,7 @@ const NAV_NEXT: Record<Locale, string> = {
   es: "Reseña siguiente",
 };
 
-// Drapeaux Unicode (paires région-indicateur) — clé = nom de pays
+// Drapeaux Unicode (paires région-indicateur) : clé = nom de pays
 // en français tel que stocké dans testimonials.ts. Discret, lisible,
 // zéro dépendance externe. Fallback = rien si pays inconnu.
 const COUNTRY_FLAGS: Record<string, string> = {
@@ -156,7 +156,7 @@ export default function Testimonials({
           </ScrollReveal>
         </div>
 
-        {/* 3 source columns — stack on mobile, 3-up on md+ */}
+        {/* 3 source columns: stack on mobile, 3-up on md+ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-12">
           {sources.map((src, i) => (
             <ScrollReveal key={src.id} delay={i * 120}>
@@ -222,7 +222,7 @@ function SourceColumn({
     [N, pauseThenResume]
   );
 
-  // ── Drag handlers (Pointer Events — touch + mouse unified) ───────────
+  // ── Drag handlers (Pointer Events: touch + mouse unified) ───────────
   const handlePointerDown = useCallback(
     (e: ReactPointerEvent<HTMLDivElement>) => {
       pointerDownX.current = e.clientX;
@@ -255,7 +255,7 @@ function SourceColumn({
     [advance]
   );
 
-  // Toujours DEUX cartes — modulo N garantit qu'il n'y a jamais de tuile
+  // Toujours DEUX cartes : le modulo N garantit qu'il n'y a jamais de tuile
   // vide, même si on « dépasse » la fin de la liste.
   const topIdx = ((index % N) + N) % N;
   const bottomIdx = (topIdx + 1) % N;
@@ -267,12 +267,12 @@ function SourceColumn({
   const scoreDisplay = source.score.toFixed(1);
   const scoreSuffix = source.scale === 10 ? "/10" : "/5";
 
-  // Compteur tabulaire « 03 / 15 » — plus lisible que 15 dots.
+  // Compteur tabulaire « 03 / 15 », plus lisible que 15 dots.
   const counter = `${String(topIdx + 1).padStart(2, "0")} / ${String(N).padStart(2, "0")}`;
 
   return (
     <div className="flex flex-col h-full">
-      {/* Clickable header — name + score + stars + count all link to source */}
+      {/* Clickable header: name + score + stars + count all link to source */}
       <a
         href={source.url}
         target="_blank"
@@ -308,7 +308,7 @@ function SourceColumn({
         </span>
       </a>
 
-      {/* Two cards — drag-able, auto-rotating, always populated */}
+      {/* Two cards: drag-able, auto-rotating, always populated */}
       <div
         className="flex-1 touch-pan-y cursor-grab active:cursor-grabbing select-none"
         onPointerDown={handlePointerDown}
@@ -339,7 +339,7 @@ function SourceColumn({
         </div>
       </div>
 
-      {/* Counter + prev/next — sobriety over dots (15 pastilles seraient illisibles) */}
+      {/* Counter + prev/next: sobriety over dots (15 pastilles seraient illisibles) */}
       <div className="flex items-center justify-center gap-4 mt-7">
         <button
           type="button"
@@ -390,7 +390,7 @@ function SourceColumn({
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-//  Review card — fixed-height editorial block with country flag
+//  Review card: fixed-height editorial block with country flag
 // ─────────────────────────────────────────────────────────────────────────
 
 function ReviewCard({

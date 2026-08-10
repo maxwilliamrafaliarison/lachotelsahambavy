@@ -1,8 +1,8 @@
 /**
  * Email interne envoyé à booking@lachotel.com (CC lachotelsahambavy@gmail.com).
- * Cf. Phase 7 §7.4 — Workflow emails.
+ * Cf. Phase 7 §7.4 (Workflow emails).
  *
- * Format : action-oriented — "Répondre directement" + "Ajouter au CRM".
+ * Format : action-oriented, avec "Répondre directement" + "Ajouter au CRM".
  * Locale = toujours FR (équipe hôtel).
  */
 

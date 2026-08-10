@@ -9,13 +9,13 @@ import { useSearchParams } from "next/navigation";
  * POURQUOI CE PETIT ÎLOT
  * La page a été repassée en composant serveur pour que son titre et sa
  * structure soient dans le HTML. Mais lire les paramètres d'URL côté
- * serveur (`await searchParams`) rend la page dynamique — et l'export
+ * serveur (`await searchParams`) rend la page dynamique, et l'export
  * statique GitHub Pages, qui prérend tout au build, refuse alors de la
  * générer : « couldn't be rendered statically because it used
  * await searchParams ».
  *
- * D'où le partage : le serveur rend tout ce qui ne dépend pas de l'URL —
- * le h1, le pictogramme, la carte des prochaines étapes, les boutons —
+ * D'où le partage : le serveur rend tout ce qui ne dépend pas de l'URL
+ * (le h1, le pictogramme, la carte des prochaines étapes, les boutons)
  * et seules ces deux lignes sont hydratées côté client.
  *
  * `suppressHydrationWarning` n'est pas nécessaire : le serveur rend le

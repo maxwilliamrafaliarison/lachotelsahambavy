@@ -8,7 +8,7 @@ import { getBasePath } from "@/lib/utils";
  * Le visiteur accepte-t-il le mouvement ?
  *
  * `useSyncExternalStore` plutôt qu'un `useState` posé depuis un effet : la
- * règle react-hooks/set-state-in-effect l'interdit, et à raison — cela
+ * règle react-hooks/set-state-in-effect l'interdit, et à raison, car cela
  * provoque un rendu de trop. L'instantané serveur vaut `false`, donc le
  * HTML sort sans animation et la première peinture est identique pour
  * tout le monde ; l'hydratation active le défilement si le système le
@@ -34,7 +34,7 @@ const basePath = getBasePath();
  *
  * La PREMIÈRE est le point d'entrée visuel du site et le LCP : elle seule
  * est préchargée. Les suivantes sont montées au fur et à mesure qu'on
- * s'en approche — un hero de six photos ne doit pas coûter six images à
+ * s'en approche : un hero de six photos ne doit pas coûter six images à
  * l'ouverture de la page.
  */
 const VUES = [
@@ -68,7 +68,7 @@ const VUES = [
 const DUREE_VUE = 7000;
 
 /**
- * Hero d'accueil — diaporama plein écran.
+ * Hero d'accueil : diaporama plein écran.
  *
  * Remplace la photo unique (demande du 08/08/2026). La photo elle-même
  * avait remplacé un hero vidéo en juillet : elle porte mieux la direction
@@ -84,7 +84,7 @@ const DUREE_VUE = 7000;
  *
  * 2. Le mouvement. Avec `prefers-reduced-motion: reduce`, le diaporama ne
  *    démarre pas du tout : la première vue reste, fixe. Ce n'est pas une
- *    dégradation — c'est le comportement attendu d'un fond animé.
+ *    dégradation, c'est le comportement attendu d'un fond animé.
  *
  * 3. L'onglet en arrière-plan. Le minuteur est suspendu quand la page
  *    n'est pas visible : sans cela on revient sur un onglet qui a défilé
@@ -101,10 +101,10 @@ export default function HeroHome({ dict }: { dict: any }) {
      d'un repère à l'autre, la vue de destination doit être dans le DOM
      AVANT que le fondu ne commence, sinon on enchaîne sur un cadre vide le
      temps du téléchargement. On monte donc la cible et ses deux voisines,
-     et on ne démonte jamais — une image déjà en cache ne coûte rien. */
+     et on ne démonte jamais : une image déjà en cache ne coûte rien. */
   const [montees, setMontees] = useState<number[]>([0]);
   /* Le défilement est-il en marche ? Une bande qui bouge toute seule doit
-     pouvoir être arrêtée (WCAG 2.2.2) — et le visiteur qui prend la main
+     pouvoir être arrêtée (WCAG 2.2.2), et le visiteur qui prend la main
      sur les flèches ne veut pas que le minuteur le double trois secondes
      plus tard. */
   const [enMarche, setEnMarche] = useState(true);
@@ -138,7 +138,7 @@ export default function HeroHome({ dict }: { dict: any }) {
     [aller],
   );
 
-  /* — Parallaxe douce, inchangée — */
+  /* Parallaxe douce, inchangée */
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mq.matches) {
@@ -162,7 +162,7 @@ export default function HeroHome({ dict }: { dict: any }) {
     };
   }, []);
 
-  /* — Défilement — */
+  /* Défilement */
   useEffect(() => {
     if (!anime || !enMarche) return;
 
@@ -245,8 +245,8 @@ export default function HeroHome({ dict }: { dict: any }) {
       </div>
 
       {/* Voile de contraste. Le ciel et les nuages (moitié haute) restent
-          lumineux ; la moitié basse — où le titrage ultra-light croise la
-          bande texturée des bungalows — est nettement assombrie. Sans cela,
+          lumineux ; la moitié basse, où le titrage ultra-light croise la
+          bande texturée des bungalows, est nettement assombrie. Sans cela,
           l'Inter Tight 200 devient illisible sur le feuillage. */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -306,16 +306,16 @@ export default function HeroHome({ dict }: { dict: any }) {
         </div>
       </div>
 
-      {/* Commandes du diaporama — en bas à droite pour ne pas concurrencer le
+      {/* Commandes du diaporama : en bas à droite pour ne pas concurrencer le
           titrage, et regroupées en un seul bloc plutôt qu'en deux grosses
           flèches posées au milieu des bords, qui datent la page.
 
           Elles s'affichent TOUJOURS, y compris sous prefers-reduced-motion :
           c'est justement le visiteur privé de défilement automatique qui a
           le plus besoin de tourner les vues à la main. Seul le bouton
-          pause/lecture disparaît alors — il n'y a rien à suspendre.
+          pause/lecture disparaît alors, puisqu'il n'y a rien à suspendre.
 
-          PLACEMENT — la bulle WhatsApp est fixée en bas à droite (56 px,
+          PLACEMENT : la bulle WhatsApp est fixée en bas à droite (56 px,
           marge 24). Les anciens repères passaient dessous ; des boutons,
           eux, doivent rester cliquables. Sur mobile le bloc est donc centré
           sous les boutons d'appel, à gauche de la bulle ; à partir de md il
@@ -384,7 +384,7 @@ export default function HeroHome({ dict }: { dict: any }) {
 }
 
 /* Verre translucide : le même vocabulaire que les pastilles du menu, mais
-   décliné en blanc — le fond est ici une photo, pas la page crème. */
+   décliné en blanc : le fond est ici une photo, pas la page crème. */
 const CLASSE_BOUTON =
   "flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white/90 backdrop-blur-md transition-colors duration-300 hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 md:h-9 md:w-9";
 

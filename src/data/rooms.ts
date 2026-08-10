@@ -22,7 +22,7 @@ export interface Room {
    */
   groupe?: "courant" | "exception" | "repos";
   /**
-   * Localisation à signaler explicitement — pastille posée SUR la photo.
+   * Localisation à signaler explicitement : pastille posée SUR la photo.
    * La villa basse n'est pas dans l'enceinte principale mais à l'annexe
    * « Le Repos », à 800 m : un client qui réserve sans le savoir découvre
    * la marche à l'arrivée. La pastille éditoriale sous la photo ne suffit
@@ -31,7 +31,7 @@ export interface Room {
   localisation?: { fr: string; en: string; es: string };
   /**
    * Tarif agence HT (« PRIX AGV HT » des tarifs officiels). Conservé pour la
-   * facturation interne — il n'est JAMAIS affiché sur le site public, seul le
+   * facturation interne : il n'est JAMAIS affiché sur le site public, seul le
    * tarif public l'est (arbitrage direction du 08/08/2026).
    */
   priceARTO?: number;
@@ -41,7 +41,7 @@ export const rooms: Room[] = [
   {
     /* Catégorie créée au tarif 2027 : deux Pilotis (chambres 11 et 13) sont
        montés en Lake Suite, et le parc Pilotis passe de 9 à 7.
-       PAS ENCORE AFFICHÉE — la direction publie la grille 2026 (arbitrage
+       PAS ENCORE AFFICHÉE : la direction publie la grille 2026 (arbitrage
        du 08/08/2026). D'où l'absence de `groupe` : la fiche est prête, il
        suffira de lui rendre `groupe: "courant"`, de remonter le wagon à
        420 000 / 60 € et les Pilotis à 7 unités le jour du basculement. */
@@ -463,7 +463,7 @@ export const extras = {
  * Le tri se fait sur le tarif PUBLIC en ariary, seule référence commune :
  * l'euro est indicatif et le parc n'a pas de prix « à partir de ».
  *
- * « Pilotis Familial » n'apparaît pas ici — les tarifs officiels n'en font
+ * « Pilotis Familial » n'apparaît pas ici : les tarifs officiels n'en font
  * pas une catégorie mais une configuration du Pilotis Nuptial (lit
  * supplémentaire à 30 000 Ar/personne). Il reste dans `rooms` pour le
  * formulaire de réservation.

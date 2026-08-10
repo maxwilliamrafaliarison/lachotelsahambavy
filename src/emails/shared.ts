@@ -1,6 +1,6 @@
 /**
  * Traductions et tokens design partagés par tous les emails.
- * Cf. Phase 7 §7.4 — Workflow emails.
+ * Cf. Phase 7 §7.4 (Workflow emails).
  */
 
 import type { Locale } from "@/lib/utils";

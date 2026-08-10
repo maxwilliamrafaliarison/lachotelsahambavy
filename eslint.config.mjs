@@ -20,12 +20,12 @@ const eslintConfig = defineConfig([
        *
        * En mode static export, `next.config.ts` force `images.unoptimized: true`,
        * ce qui fait que <Image /> se contente de rendre un <img> derrière le
-       * rideau — sans apporter le moindre bénéfice d'optimisation.
+       * rideau, sans apporter le moindre bénéfice d'optimisation.
        *
        * En mode Vercel, les <img> utilisés ici ont tous `loading="lazy"` et
        * s'insèrent dans des conteneurs à ratio fixe (aspect-*) : le gain CLS
        * de next/image serait marginal et demanderait de documenter width/height
-       * pour ~19 images — complexité supérieure au bénéfice.
+       * pour ~19 images : complexité supérieure au bénéfice.
        *
        * On désactive donc cette règle globalement. Une migration vers
        * next/image reste possible ponctuellement (hero, LCP) si besoin.

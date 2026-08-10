@@ -17,7 +17,7 @@ const basePath = getBasePath();
 
 /* Clés de dictionnaire propres à cette page. Les valeurs ci-dessous servent
    de repli tant que le delta (scratchpad/dict-deltas/hebergements.json) n'est
-   pas fusionné dans src/i18n/dictionaries — après fusion, dict.rooms.* prime. */
+   pas fusionné dans src/i18n/dictionaries. Après fusion, dict.rooms.* prime. */
 type RoomsPageStrings = {
   nightOnLake: string;
   pilotisTagline: string;
@@ -221,7 +221,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
      source, donc, pour le sommaire, les id de sections et le balisage.
 
      Publier un hébergement sans lui donner de section reviendrait à baliser
-     une ancre qui n'existe pas — exactement l'incohérence que la page vient
+     une ancre qui n'existe pas, exactement l'incohérence que la page vient
      de corriger. Le cas se posera le jour où la Lake Suite recevra son
      `groupe` (cf. src/data/rooms.ts) : mieux vaut casser le build que servir
      des données structurées fausses sur les trois locales. */
@@ -249,7 +249,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
      Bâtie sur `roomsAffichees` et NON sur `rooms` : ce dernier contient les
      catégories non publiées. La Lake Suite y était servie avec son tarif
      2027 (420 000 Ar, availability InStock) sur les trois locales, dans le
-     format même que Google reprend en résultat enrichi — alors que la
+     format même que Google reprend en résultat enrichi, alors que la
      direction a décidé de publier la grille 2026. On ne balise que ce que
      la page montre. */
   const roomsItemList = {
@@ -274,7 +274,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         ]}
       />
 
-      {/* Hero Panorama — le seul h1 de la page */}
+      {/* Hero Panorama, le seul h1 de la page */}
       <PanoramaHero
         image={`${basePath}/images/rooms/allee-pierre-bungalows-pilotis.jpg`}
         imageAlt="Allée pavée menant aux bungalows sur pilotis, au-dessus du lac Sahambavy"
@@ -312,7 +312,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         </div>
       </section>
 
-      {/* Pilotis Nuptial — monde « Nuit sur le lac » */}
+      {/* Pilotis Nuptial : monde « Nuit sur le lac » */}
       <section className="ge-night py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -429,7 +429,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         </div>
       </section>
 
-      {/* Wagon Nuptial — monde « Nuit sur le lac » */}
+      {/* Wagon Nuptial : monde « Nuit sur le lac » */}
       <section className="ge-night py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -480,7 +480,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
         </div>
       </section>
 
-      {/* Familles & longs séjours — extension Le Repos */}
+      {/* Familles & longs séjours : extension Le Repos */}
       <section className="pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -531,7 +531,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             </ScrollReveal>
             {/* Restauration et services connexes, repris de la grille
                 officielle 2027. Les euros affichés sont ceux que le
-                document publie — ils ne sont pas recalculés : `eur()` ne
+                document publie. Ils ne sont pas recalculés : `eur()` ne
                 fait que mettre en forme. Là où la grille ne donne pas
                 d'équivalent (transferts, salle, draisine), on n'en invente
                 pas et l'ariary reste seul. */}

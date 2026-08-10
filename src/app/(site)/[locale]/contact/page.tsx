@@ -1,5 +1,5 @@
 /**
- * Page Contact — COMPOSANT SERVEUR.
+ * Page Contact : COMPOSANT SERVEUR.
  *
  * Elle était en "use client" avec `if (!dict) return null` : le HTML servi
  * se réduisait à `<main class="flex-1"></main>`. Zéro h1, zéro formulaire,
@@ -7,8 +7,8 @@
  * conversion du site, c'était le pire endroit possible pour ne rien rendre
  * côté serveur.
  *
- * Le dictionnaire est désormais attendu au rendu, et seul le formulaire —
- * qui a besoin d'état — reste un îlot client.
+ * Le dictionnaire est désormais attendu au rendu, et seul le formulaire
+ * (qui a besoin d'état) reste un îlot client.
  */
 
 import { Suspense } from "react";
@@ -58,7 +58,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         kicker={dict.contact.heroSubtitle}
       />
 
-      {/* Intro + coordonnées — filets fins, monde clair */}
+      {/* Intro + coordonnées : filets fins, monde clair */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
@@ -136,7 +136,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Formulaire de réservation — inchangé, posé dans une surface sobre */}
+      {/* Formulaire de réservation inchangé, posé dans une surface sobre */}
       <section id="booking-form" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="mx-auto max-w-[880px]">
@@ -156,7 +156,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       </section>
 
 
-      {/* Carte — Google Maps */}
+      {/* Carte Google Maps */}
       <section className="bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>

@@ -1,6 +1,6 @@
 /**
  * Vérification server-side du token hCaptcha.
- * Cf. Phase 7 §7.6.1 — CAPTCHA invisible.
+ * Cf. Phase 7 §7.6.1 (CAPTCHA invisible).
  *
  * Si HCAPTCHA_SECRET n'est pas défini, on fait confiance (mode dev).
  */
@@ -19,7 +19,7 @@ export async function verifyHCaptcha(
 ): Promise<{ valid: boolean; reason?: string }> {
   const secret = process.env.HCAPTCHA_SECRET;
 
-  // Mode dev — pas de secret → on laisse passer.
+  // Mode dev : pas de secret → on laisse passer.
   if (!secret) return { valid: true };
 
   if (!token) return { valid: false, reason: "missing-token" };

@@ -4,14 +4,14 @@ import { locales, defaultLocale } from "@/lib/utils";
 
 /**
  * Sitemap généré avec hreflang FR/EN/ES + x-default.
- * Cf. Phase 5 §5.6 — SEO technique trilingue.
+ * Cf. Phase 5 §5.6 (SEO technique trilingue).
  *
  * Le `x-default` pointe vers la version FR (défaut éditorial).
  * `force-static` requis pour le mode `output: export` (GitHub Pages).
  */
 export const dynamic = "force-static";
 
-// Routes publiques du site (slugs internes — non localisés pour l'instant)
+// Routes publiques du site (slugs internes, non localisés pour l'instant)
 const publicRoutes = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
   { path: "/hotel", priority: 0.9, changeFreq: "monthly" as const },

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 /**
- * Galerie d'une chambre — repère : la fiche « Types de chambre » de
+ * Galerie d'une chambre. Repère : la fiche « Types de chambre » de
  * Radisson Blu, où chaque hébergement annonce son nombre de vues
  * (« Chambre Supérieure (29) ») et se feuillette sur place.
  *
@@ -18,7 +18,7 @@ import Image from "next/image";
  * timbres illisibles. Une pastille de progression suffit et reste dans le
  * registre du site.
  *
- * CHARGEMENT — le point délicat d'une galerie de 21 vues.
+ * CHARGEMENT : le point délicat d'une galerie de 21 vues.
  * Seule la première image est réellement chargée au rendu. Les autres ne
  * sont montées dans le DOM que lorsqu'on approche d'elles (fenêtre de ±1),
  * ce qui évite de déclencher 21 requêtes pour un visiteur qui ne
@@ -35,7 +35,7 @@ import Image from "next/image";
 type Props = {
   /** Chemins déjà préfixés du basePath par l'appelant. */
   images: string[];
-  /** Nom de la chambre — sert à composer les textes alternatifs. */
+  /** Nom de la chambre : sert à composer les textes alternatifs. */
   nom: string;
   /** Libellés localisés. */
   libelles: { precedent: string; suivant: string; sur: string };
@@ -43,7 +43,7 @@ type Props = {
   prioritaire?: boolean;
   /**
    * `true` : la galerie se cale en `absolute inset-0` sur son parent
-   * positionné — c'est le cas dans l'emplacement média d'EditorialSplit.
+   * positionné. C'est le cas dans l'emplacement média d'EditorialSplit.
    *
    * C'est une PROP et non une classe passée de l'extérieur : `relative` et
    * `absolute` vivent dans la même couche Tailwind, et c'est l'ordre de la
@@ -99,7 +99,7 @@ export default function RoomGallery({
    * Quelles vues sont réellement montées dans le DOM.
    *
    * TANT QU'ON N'A PAS FEUILLETÉ : la première, et elle seule. C'est ce qui
-   * permet de poser ces galeries sur la page d'accueil — six cartes y
+   * permet de poser ces galeries sur la page d'accueil : six cartes y
    * coexistent, et pré-charger leurs voisines aurait triplé le poids d'une
    * page qui n'affichait qu'une photo par chambre.
    *
@@ -151,7 +151,7 @@ export default function RoomGallery({
               height={1200}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
               {...(i === 0 && prioritaire ? { preload: true } : { loading: "lazy" as const })}
-              /* Travelling avant très lent sur la vue affichée — 4 %
+              /* Travelling avant très lent sur la vue affichée : 4 %
                  d'échelle en 9 s. Le fondu seul donnait un diaporama de
                  borne d'accueil : une image se pose, s'arrête net, une
                  autre la remplace. Cette dérive continue est ce qui fait la
@@ -168,7 +168,7 @@ export default function RoomGallery({
 
       {total > 1 && (
         <>
-          {/* Compteur — la promesse Radisson : on sait qu'il y a à voir. */}
+          {/* Compteur, la promesse Radisson : on sait qu'il y a à voir. */}
           <p
             aria-live="polite"
             className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/45 px-3 py-1 text-[11.5px] font-semibold tabular-nums text-white backdrop-blur-md"
@@ -198,7 +198,7 @@ export default function RoomGallery({
             </svg>
           </button>
 
-          {/* Progression — discrète, elle remplace un bandeau de vignettes
+          {/* Progression : discrète, elle remplace un bandeau de vignettes
               qui deviendrait illisible au-delà de six vues. */}
           <div
             aria-hidden="true"

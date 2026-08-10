@@ -11,7 +11,7 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
-/* ── Textes FR par défaut — remplacés par le dictionnaire dès fusion des
+/* ── Textes FR par défaut, remplacés par le dictionnaire dès fusion des
       deltas (dict-deltas/jardins.json). Garantit un rendu complet même
       avant la fusion. ── */
 const EDEN_FR = {
@@ -123,7 +123,7 @@ export default async function JardinsPage({
         kicker={dict.jardins.heroSubtitle}
       />
 
-      {/* ──── #jardins-eden — richesse végétale ──── */}
+      {/* ──── #jardins-eden : richesse végétale ──── */}
       <section id="jardins-eden" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -151,7 +151,7 @@ export default async function JardinsPage({
         </div>
       </section>
 
-      {/* ──── Collections botaniques — grille hairline ──── */}
+      {/* ──── Collections botaniques : grille hairline ──── */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -177,7 +177,7 @@ export default async function JardinsPage({
         </div>
       </section>
 
-      {/* ──── Grille photos fleurs — 3 colonnes hairline ──── */}
+      {/* ──── Grille photos fleurs sur 3 colonnes hairline ──── */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -205,7 +205,7 @@ export default async function JardinsPage({
             ))}
           </div>
 
-          {/* Démarche — jardin pour tous */}
+          {/* Démarche : jardin pour tous */}
           <div className="mt-12 md:mt-16">
             <EditorialSplit
               image={`${basePath}/images/jardins/pergola-pots-plantes-jardin.jpg`}
@@ -220,7 +220,7 @@ export default async function JardinsPage({
         </div>
       </section>
 
-      {/* ──── #village — Sahambavy, « le champ des femmes » ──── */}
+      {/* ──── #village : Sahambavy, « le champ des femmes » ──── */}
       <section id="village" className="scroll-mt-24 border-y border-hairline bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -257,7 +257,7 @@ export default async function JardinsPage({
             </EditorialSplit>
           </div>
 
-          {/* Instants du village — bande 3 colonnes hairline */}
+          {/* Instants du village : bande 3 colonnes hairline */}
           <div className="mt-12 grid gap-px overflow-hidden rounded-[3px] border border-hairline bg-hairline sm:grid-cols-3 md:mt-16">
             {village.moments.map((m, i) => (
               <ScrollReveal key={m.caption} delay={i * 100} className="h-full">

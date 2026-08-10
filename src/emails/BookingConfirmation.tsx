@@ -1,6 +1,6 @@
 /**
  * Email transactionnel envoyé au voyageur après soumission du formulaire.
- * Cf. Phase 7 §7.4 — Workflow emails.
+ * Cf. Phase 7 §7.4 (Workflow emails).
  *
  * Template React Email → HTML universellement compatible (Gmail, Outlook, iOS Mail).
  * Localisé FR/EN/ES. Pas de CTA de paiement (paiement à l'arrivée).

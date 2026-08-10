@@ -8,7 +8,7 @@ import { type Locale, getBasePath } from "@/lib/utils";
 const basePath = getBasePath();
 
 /**
- * Hébergements — grille de cartes hairline « Panorama » (id="rooms" : ancre
+ * Hébergements : grille de cartes hairline « Panorama » (id="rooms", ancre
  * du hero, scroll-mt-24 obligatoire).
  *
  * Cartes uniformes bg-white à filet fin : photo 3/2, nom, « à partir de »
@@ -16,7 +16,7 @@ const basePath = getBasePath();
  * les trois notes (Booking / Google / TripAdvisor) en chips hairline,
  * données de siteConfig.ratings.
  *
- * Server Component — le compteur/carrousel a disparu, plus besoin de client.
+ * Server Component : le compteur/carrousel a disparu, plus besoin de client.
  */
 
 /** 360000 → « 360 000 » (espace fine insécable, déterministe SSR/CSR). */
@@ -35,7 +35,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
   /* L'ordre et la sélection viennent de `roomsAffichees` (cf. src/data/rooms.ts) :
      hébergements courants du plus cher au moins cher, puis les deux
      hébergements d'exception, puis l'extension Le Repos. On n'exclut plus
-     Le Repos — la direction veut la villa basse dans la grille, signalée par
+     Le Repos : la direction veut la villa basse dans la grille, signalée par
      sa pastille de localisation. */
   const displayRooms = roomsAffichees;
 
@@ -68,7 +68,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
           ))}
         </div>
 
-        {/* ─── Réassurance — chips hairline (style Radisson) ─────────── */}
+        {/* ─── Réassurance : chips hairline (style Radisson) ─────────── */}
         <ScrollReveal>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
             {ratings.map((r) => (
@@ -102,7 +102,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
 }
 
 // -----------------------------------------------------------------------------
-// Carte chambre — photo 3/2, nom, « à partir de » AR + €, lien. Filet fin,
+// Carte chambre : photo 3/2, nom, « à partir de » AR + €, lien. Filet fin,
 // fond blanc, zéro glass / zéro ombre : la hiérarchie vient de la photo.
 // -----------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
   const images = room.images.length ? room.images : ["/images/hero/hero-pilotis.jpg"];
   /* Chaque carte mène à la section de la chambre, pas au haut de la page :
      faute de route de détail, l'ancre `room.slug` EST l'adresse publique de
-     l'hébergement — celle que le JSON-LD publie et que vise le méga-menu.
+     l'hébergement, celle que le JSON-LD publie et que vise le méga-menu.
      Sans elle, le visiteur qui clique « Pilotis Nuptial » atterrissait sur
      le hero et devait retrouver la chambre à la main. */
   const href = `/${locale}/hebergements/#${room.slug}`;
@@ -137,7 +137,7 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
             sur: dict.rooms.galOf ?? "photo {n}",
           }}
         />
-        {/* Pastille de localisation, posée SUR la photo — donc lue avant le
+        {/* Pastille de localisation, posée SUR la photo, donc lue avant le
             nom et le prix. La villa basse est à l'annexe Le Repos, à 800 m
             du bâtiment principal : un client qui l'ignore découvre la marche
             à l'arrivée. Le label sous la photo ne suffisait pas, il se lit

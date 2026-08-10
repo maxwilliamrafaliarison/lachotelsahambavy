@@ -10,7 +10,7 @@ import { breadcrumbSchema } from "@/lib/schema-org";
 
 const basePath = getBasePath();
 
-/* ── Textes FR par défaut — remplacés par le dictionnaire dès fusion des
+/* ── Textes FR par défaut, remplacés par le dictionnaire dès fusion des
       deltas (dict-deltas/localisation.json). Garantit un rendu complet même
       avant la fusion. Source : Maggie, « CONTACTEZ NOUS LOCALISATION ». ── */
 const FR = {
@@ -129,7 +129,7 @@ export default async function LocalisationPage({
         kicker={t.heroSubtitle}
       />
 
-      {/* ──── #acces — train & route ──── */}
+      {/* ──── #acces : train & route ──── */}
       <section id="acces" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -170,7 +170,7 @@ export default async function LocalisationPage({
         </div>
       </section>
 
-      {/* ──── #carte — récapitulatif accès + carte ──── */}
+      {/* ──── #carte : récapitulatif accès + carte ──── */}
       <section id="carte" className="scroll-mt-24 border-y border-hairline bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">

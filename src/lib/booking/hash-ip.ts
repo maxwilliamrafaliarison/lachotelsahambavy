@@ -1,6 +1,6 @@
 /**
- * Hash SHA-256 salé d'une IP (RGPD — pas de stockage IP en clair).
- * Cf. Phase 6 §6.3 — Gouvernance RGPD.
+ * Hash SHA-256 salé d'une IP (RGPD : pas de stockage IP en clair).
+ * Cf. Phase 6 §6.3 (Gouvernance RGPD).
  *
  * Utilisé uniquement comme identifiant anonyme pour le rate-limiting.
  * Le sel doit être défini via HASH_SALT (min 32 chars recommandé).

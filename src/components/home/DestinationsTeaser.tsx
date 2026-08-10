@@ -5,7 +5,7 @@ import { type Locale, getBasePath } from "@/lib/utils";
 const basePath = getBasePath();
 
 /**
- * Teaser destinations — trois EditorialSplit alternés (LE rythme de section
+ * Teaser destinations, trois EditorialSplit alternés (LE rythme de section
  * du site) : Plantation de thé, Train FCE, Le Repos. Textes de
  * dict.destinations, photos signature de chaque univers.
  */

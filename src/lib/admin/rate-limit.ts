@@ -1,8 +1,8 @@
 /**
- * Rate-limiting du login admin — défense brute-force / credential-stuffing.
+ * Rate-limiting du login admin : défense brute-force / credential-stuffing.
  *
  * Deux couches :
- *  1. Upstash Redis (partagé entre instances serverless) si configuré —
+ *  1. Upstash Redis (partagé entre instances serverless) si configuré :
  *     8 tentatives / 15 min par clé (IP hachée + e-mail).
  *  2. Repli mémoire best-effort (par instance) quand Upstash est absent :
  *     ne survit pas au cold-start ni au multi-instance, mais élève tout de

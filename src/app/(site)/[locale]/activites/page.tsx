@@ -142,7 +142,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* ──── CIRCUIT AVENTURE — RIVIÈRE MATSIATRA ──── */}
+      {/* ──── CIRCUIT AVENTURE : RIVIÈRE MATSIATRA ──── */}
       <section id="riviere-matsiatra" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -190,7 +190,7 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* ──── CIRCUIT TREKKING — FALAISE BLANCHE ──── */}
+      {/* ──── CIRCUIT TREKKING : FALAISE BLANCHE ──── */}
       <section id="trekking" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>

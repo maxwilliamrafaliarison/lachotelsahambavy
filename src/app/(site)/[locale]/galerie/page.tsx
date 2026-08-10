@@ -1,12 +1,12 @@
 /**
- * Page Galerie — COMPOSANT SERVEUR.
+ * Page Galerie : COMPOSANT SERVEUR.
  *
  * Elle était en "use client" avec `if (!dict) return null` : le HTML servi
  * ne contenait ni titre, ni photo, ni métadonnée propre. Une galerie que
  * les moteurs ne voyaient pas.
  *
  * Les photos et les libellés de filtre partent maintenant du serveur ;
- * seul GalleryGrid — filtres, grille, visionneuse — reste un îlot client,
+ * seul GalleryGrid (filtres, grille, visionneuse) reste un îlot client,
  * parce qu'il porte de l'état.
  */
 

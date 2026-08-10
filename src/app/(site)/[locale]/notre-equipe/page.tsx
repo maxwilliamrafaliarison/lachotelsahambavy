@@ -10,7 +10,7 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
-/* ── Textes FR par défaut — remplacés par le dictionnaire dès fusion des
+/* ── Textes FR par défaut, remplacés par le dictionnaire dès fusion des
       deltas (dict-deltas/equipe-galerie.json). Garantit un rendu complet
       même avant la fusion. ── */
 const PERSONNEL_FR = {
@@ -89,7 +89,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
         kicker={dict.equipe.heroSubtitle}
       />
 
-      {/* ──── Notre personnel — jeunes du village, formation, solidarité ──── */}
+      {/* ──── Notre personnel : jeunes du village, formation, solidarité ──── */}
       <section id="personnel" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -117,7 +117,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
-      {/* ──── Engagement RSE — grille hairline ──── */}
+      {/* ──── Engagement RSE en grille hairline ──── */}
       <section id="rse" className="scroll-mt-24 border-y border-hairline bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -161,7 +161,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
-      {/* ──── Grille portraits — hairline ──── */}
+      {/* ──── Grille portraits hairline ──── */}
       <section id="visages" className="scroll-mt-24 border-t border-hairline py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>

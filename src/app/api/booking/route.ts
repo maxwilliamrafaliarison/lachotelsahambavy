@@ -1,5 +1,5 @@
 /**
- * API Route — POST /api/booking
+ * API Route : POST /api/booking
  *
  * Cf. Phase 7 §7.3 (validation), §7.4 (emails), §7.5 (CRM), §7.6 (anti-abus).
  *
@@ -79,9 +79,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
   const data: BookingFormValues = parsed.data;
 
-  // ─── 3. Honeypot — si rempli, on simule un succès (piéger le bot) ───
+  // ─── 3. Honeypot : si rempli, on simule un succès (piéger le bot) ───
   if (data.website && data.website.length > 0) {
-    // Ne jamais révéler qu'on a détecté le bot — réponse "succès" fake
+    // Ne jamais révéler qu'on a détecté le bot : réponse "succès" fake
     return NextResponse.json({ success: true, code: "ok-decoy" }, { status: 200 });
   }
 
@@ -117,7 +117,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     /* Pas de clé configurée → succès factice, sans e-mail.
        Le payload n'est journalisé QU'EN DÉVELOPPEMENT : il contient le nom,
        l'adresse, le téléphone et les dates de séjour du client. La branche
-       se déclenche dès que RESEND_API_KEY manque — y compris sur une
+       se déclenche dès que RESEND_API_KEY manque, y compris sur une
        production mal configurée, ce qui n'a rien de théorique puisque
        .env.example livre la clé commentée. Ces données seraient alors
        parties en clair dans les journaux Vercel. La ligne voisine gardait
@@ -177,7 +177,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return errorResponse(502, "email-failed", "L'envoi de l'email a échoué. Merci de réessayer.");
   }
 
-  // ─── 7. Push Google Sheet (best effort — non bloquant) ──
+  // ─── 7. Push Google Sheet (best effort, non bloquant) ───
   await pushToGoogleSheet({
     timestamp: new Date().toISOString(),
     locale: data.locale,

@@ -1,12 +1,12 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
 /**
- * Marqueur d'appareil connu — sert à n'alerter QUE sur les connexions
+ * Marqueur d'appareil connu. Sert à n'alerter QUE sur les connexions
  * depuis un appareil/navigateur inconnu (modèle Google), plutôt qu'à chaque
  * connexion (choix de Max, 17/07/2026 : une alerte quotidienne finit ignorée).
  *
  * Sans base de données : un cookie signé HMAC-SHA256 avec AUTH_SECRET.
- * Sa simple présence — et sa signature valide — prouve que ce navigateur
+ * Sa simple présence (avec une signature valide) prouve que ce navigateur
  * s'est déjà connecté avec succès, donc qu'une alerte est déjà partie.
  * Un cookie forgé n'est pas signable sans AUTH_SECRET ; un cookie effacé
  * provoque une alerte de plus, jamais une alerte de moins.

@@ -5,13 +5,13 @@ import AmbientVideo from "@/components/ui/AmbientVideo";
 import { getBasePath, type Locale } from "@/lib/utils";
 
 /**
- * Welcome — intro éditoriale « Panorama » : la vidéo d'ambiance à gauche,
+ * Welcome : intro éditoriale « Panorama » avec la vidéo d'ambiance à gauche,
  * la prose en mesure de lecture à droite, les 3 stats en filets fins
  * (50+ bungalows · 520 ha · 28 ans) et CTA contour encre.
  *
  * LE TITRAGE A ÉTÉ REMPLACÉ PAR LA VIDÉO (demande du 08/08/2026)
  *
- * La colonne de gauche portait trois lignes — « Bienvenue au Lac Hôtel »,
+ * La colonne de gauche portait trois lignes : « Bienvenue au Lac Hôtel »,
  * « Un éco-lodge d'exception face au lac Sahambavy », « Charme & Confort au
  * cœur de la nature… ». La troisième reprenait mot pour mot le titre du
  * hero situé juste au-dessus. La vidéo verticale les remplace.
@@ -25,13 +25,13 @@ import { getBasePath, type Locale } from "@/lib/utils";
  *      pour tromper qui que ce soit : il décrit exactement la section, il
  *      est lu par les lecteurs d'écran, et il maintient la hiérarchie
  *      h1 → h2 du document. Ce que l'œil perd, la structure le garde.
- *   2. La prose de Maggie — colonne de droite — n'a pas bougé d'une ligne.
+ *   2. La prose de Maggie (colonne de droite) n'a pas bougé d'une ligne.
  *      C'est là que vit le texte indexable, et il est plus riche que les
  *      trois lignes retirées.
  *   3. Un balisage VideoObject est désormais émis sur l'accueil, ce qui
  *      rend la page éligible aux résultats enrichis vidéo. Le schéma
  *      existait dans le code mais ne décrivait aucune vidéo réellement
- *      présente — il pointe maintenant sur celle-ci. Net, l'opération fait
+ *      présente. Il pointe maintenant sur celle-ci. Net, l'opération fait
  *      gagner du référencement plutôt qu'elle n'en fait perdre.
  *
  * Server Component : la vidéo est un îlot client isolé (AmbientVideo).
@@ -50,7 +50,7 @@ export default function Welcome({ dict, locale }: { dict: any; locale: Locale })
     <section id="welcome" className="scroll-mt-24 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid gap-10 md:grid-cols-12 md:gap-14">
-          {/* Colonne vidéo — le titrage vit désormais en sr-only (cf. en-tête) */}
+          {/* Colonne vidéo : le titrage vit désormais en sr-only (cf. en-tête) */}
           <div className="md:col-span-5">
             <h2 className="sr-only">{dict.welcome.title}</h2>
             <ScrollReveal>

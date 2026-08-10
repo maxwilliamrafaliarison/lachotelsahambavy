@@ -4,7 +4,7 @@ import { useState } from "react";
 import GalleryLightbox from "@/components/gallery/GalleryLightbox";
 
 /**
- * Îlot client de la galerie — filtres, grille et visionneuse.
+ * Îlot client de la galerie : filtres, grille et visionneuse.
  *
  * La page /galerie était entièrement en "use client" avec
  * `if (!dict) return null` : le HTML servi se réduisait à
@@ -16,7 +16,7 @@ import GalleryLightbox from "@/components/gallery/GalleryLightbox";
  * parce qu'il porte réellement de l'état : la catégorie active et
  * l'index de la visionneuse.
  *
- * Les photos sont passées en props depuis le serveur — elles sont donc
+ * Les photos sont passées en props depuis le serveur : elles sont donc
  * dans le HTML d'origine, indexables, même avant hydratation.
  */
 
@@ -39,7 +39,7 @@ export default function GalleryGrid({
 
   return (
     <>
-      {/* Filtres — pastilles hairline */}
+      {/* Filtres : pastilles hairline */}
       <div className="mb-10 flex flex-wrap gap-2 md:mb-14 md:gap-3">
         {filtres.map((f) => (
           <button

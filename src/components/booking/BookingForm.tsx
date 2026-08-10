@@ -2,7 +2,7 @@
 
 /**
  * Formulaire de réservation multi-étapes.
- * Cf. Phase 7 §7.2 — Structure formulaire + §7.9 — Tracking Plausible.
+ * Cf. Phase 7 §7.2 (Structure formulaire) et §7.9 (Tracking Plausible).
  *
  * Étapes :
  *   1. Séjour (dates, voyageurs, hébergement, pension, transfert)
@@ -72,7 +72,7 @@ function translateError(err: FieldError | undefined, dict: Dict): string | undef
  * Rend la phrase de consentement CGR en transformant la portion
  * `termsConsentLinkLabel` (ex. "conditions de réservation") en lien vers la
  * page /conditions-reservation. Si le label ne figure pas dans la phrase
- * (jamais attendu — les dicts sont synchronisés), fallback plain text.
+ * (jamais attendu : les dicts sont synchronisés), fallback plain text.
  */
 function TermsConsentLabel({ dict, locale }: { dict: Dict; locale: Locale }) {
   const text: string = dict.contact.form.termsConsent;
@@ -339,7 +339,7 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
           error={translateError(errors.room, dict)}
         >
           {/* On n'itère PLUS sur `rooms` : ce tableau contient aussi les
-              catégories non publiées — la Lake Suite y figure, prête pour la
+              catégories non publiées : la Lake Suite y figure, prête pour la
               grille 2027. Elle apparaissait donc en tête du menu, alors que
               `ROOM_IDS` ne la connaît pas : le client la choisissait et le
               passage à l'étape suivante échouait sur une erreur Zod brute,
@@ -553,7 +553,7 @@ function ReviewStep({ dict, locale }: { dict: Dict; locale: Locale }) {
         ) : null}
       </div>
 
-      {/* Honeypot — invisible pour les humains, rempli par les bots */}
+      {/* Honeypot : invisible pour les humains, rempli par les bots */}
       <div aria-hidden className="hidden" tabIndex={-1} style={{ position: "absolute", left: "-9999px" }}>
         <label>
           Leave this empty
@@ -711,7 +711,7 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
       /* Barre oblique finale obligatoire : `trailingSlash: true` fait
          répondre 308 à /api/booking, et chaque envoi payait donc un
          aller-retour de plus. Le 308 préserve bien la méthode et le corps
-         — rien n'était cassé — mais certains proxys d'entreprise
+         (rien n'était cassé), mais certains proxys d'entreprise
          rétrogradent un POST redirigé en GET, et la demande se perdrait
          sans message d'erreur. */
       const res = await fetch("/api/booking/", {

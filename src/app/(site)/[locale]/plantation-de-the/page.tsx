@@ -11,7 +11,7 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 
 const basePath = getBasePath();
 
-/* Textes nouveaux de la refonte — fallbacks locaux en attendant la fusion
+/* Textes nouveaux de la refonte : fallbacks locaux en attendant la fusion
    des deltas dictionnaire (scratchpad/dict-deltas/plantation.json). Si la
    clé existe déjà dans dict.plantation, elle est prioritaire. */
 const extraTexts = {
@@ -130,7 +130,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
     ]),
   ) as ExtraTexts;
 
-  /* Alt localisé — helper local pour alléger les ternaires. */
+  /* Alt localisé : helper local pour alléger les ternaires. */
   const alt = (fr: string, en: string, es: string) =>
     loc === "fr" ? fr : loc === "es" ? es : en;
 
@@ -159,7 +159,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         ]}
       />
 
-      {/* Hero Panorama — rangées de théiers vues du ciel (graphique) */}
+      {/* Hero Panorama : rangées de théiers vues du ciel (graphique) */}
       <PanoramaHero
         image={`${basePath}/images/tea/plantation-drone-overhead.jpg`}
         imageAlt={alt(
@@ -173,7 +173,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         cta={{ href: "#reserver", label: p.bookLabel }}
       />
 
-      {/* Histoire — légende chinoise + faits clés à filets fins */}
+      {/* Histoire : légende chinoise + faits clés à filets fins */}
       <section id="histoire" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
@@ -201,7 +201,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Chronologie — rows hairline, année en accent thé */}
+      {/* Chronologie : rows hairline, année en accent thé */}
       <section className="border-y border-hairline bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="mx-auto max-w-2xl">
@@ -226,7 +226,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Le thé à Madagascar — « champs des femmes » */}
+      {/* Le thé à Madagascar : « champs des femmes » */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -244,7 +244,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Pleine page — cueilleuses, lumière éditoriale */}
+      {/* Pleine page : cueilleuses, lumière éditoriale */}
       <section>
         <figure>
           <img
@@ -263,7 +263,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </figure>
       </section>
 
-      {/* Excursion — visite plantation & usine, infos + déroulé */}
+      {/* Excursion : visite plantation & usine, infos + déroulé */}
       <section id="visite" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -294,7 +294,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
             </div>
           </EditorialSplit>
 
-          {/* Déroulé de la visite — liste numérotée à filets fins */}
+          {/* Déroulé de la visite : liste numérotée à filets fins */}
           <div className="mx-auto mt-12 max-w-2xl md:mt-16">
             <ScrollReveal>
               <p className="ge-label mb-5">{xt.stepsTitle}</p>
@@ -316,7 +316,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Diptyque photo — les rangées de théiers, du sol et du ciel */}
+      {/* Diptyque photo : les rangées de théiers, du sol et du ciel */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-2 md:grid-cols-2">
@@ -352,7 +352,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Boutique — Mami Bio Shop, produits Vita Malagasy */}
+      {/* Boutique : Mami Bio Shop, produits Vita Malagasy */}
       <section id="boutique" className="scroll-mt-24 border-y border-hairline bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -380,7 +380,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
             </div>
           </EditorialSplit>
 
-          {/* Savons maison — note artisanale */}
+          {/* Savons maison (note artisanale) */}
           <div className="mx-auto mt-12 max-w-2xl text-center md:mt-16">
             <ScrollReveal>
               <h3 className="mb-4">{xt.soapTitle}</h3>
@@ -390,7 +390,7 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Réservation — formulaire existant, panneau encre */}
+      {/* Réservation : formulaire existant, panneau encre */}
       <section id="reserver" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="mx-auto max-w-2xl">

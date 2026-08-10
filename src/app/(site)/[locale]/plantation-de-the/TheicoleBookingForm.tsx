@@ -20,7 +20,7 @@ export default function TheicoleBookingForm({ dict }: { dict: any }) {
   }
 
   /* Ce formulaire vivait encore sur les jetons hérités (cream, brown-deep)
-     et sur des rayons `rounded-[3px]` étrangers à la charte — alors qu'il est
+     et sur des rayons `rounded-[3px]` étrangers à la charte, alors qu'il est
      posé sur fond nuit, où le vocabulaire est lin / champagne / encre. Il
      n'était même pas listé parmi les consommateurs LEGACY connus. */
   return (

@@ -2,13 +2,13 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/data/site";
 
 /**
- * Bloc contact final — dernier temps clair avant le footer nuit.
+ * Bloc contact final : dernier temps clair avant le footer nuit.
  * Fond brume, coordonnées à filets fins (pas de ge-rows ici : les valeurs
- * longues — adresse, itinéraire — doivent pouvoir passer à la ligne, ce que
+ * longues (adresse, itinéraire) doivent pouvoir passer à la ligne, ce que
  * le nowrap du ge-row interdit), CTA plein thé.
  *
  * id="contact" + scroll-mt-24 : ancre ciblée depuis le hero / la navbar.
- * NB : ce composant ne reçoit pas `locale` (signature conservée) — les CTA
+ * NB : ce composant ne reçoit pas `locale` (signature conservée). Les CTA
  * pointent donc vers e-mail et WhatsApp, valables dans les trois langues.
  */
 

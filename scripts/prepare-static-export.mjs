@@ -1,9 +1,9 @@
 /**
  * Pré-build : retire les routes serveur incompatibles avec `output: export`
- * (GitHub Pages) — l'API de réservation et l'espace admin (Auth.js + Server
- * Actions). Exécuté automatiquement via le hook npm `prebuild`.
+ * (GitHub Pages), à savoir l'API de réservation et l'espace admin (Auth.js +
+ * Server Actions). Exécuté automatiquement via le hook npm `prebuild`.
  *
- * Garde stricte — n'agit QUE pendant un export statique CI :
+ * Garde stricte, qui n'agit QUE pendant un export statique CI :
  *   - process.env.CI              → vrai sur GitHub Actions (et Vercel)
  *   - process.env.NEXT_PUBLIC_BASE_PATH non vide → signal « export GitHub Pages »
  *
@@ -21,8 +21,8 @@ import { rmSync, existsSync } from "node:fs";
  * Chemins à retirer. Ils ont changé le 08/08/2026 avec le passage aux
  * layouts racines multiples : l'admin est descendu sous le groupe
  * (admin)/. Le script ne le trouvait plus, ne le retirait donc plus, et
- * l'export statique échouait sur « Server Actions are not supported »
- * — Auth.js en utilise. Le message ne nommait pas le coupable : d'où ce
+ * l'export statique échouait sur « Server Actions are not supported »,
+ * car Auth.js en utilise. Le message ne nommait pas le coupable : d'où ce
  * garde-fou, qui refuse de continuer si un chemin attendu a disparu. */
 const A_RETIRER = ["src/app/api", "src/app/(admin)"];
 

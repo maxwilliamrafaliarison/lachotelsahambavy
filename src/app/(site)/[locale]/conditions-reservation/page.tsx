@@ -1,7 +1,7 @@
 /**
  * Page /[locale]/conditions-reservation/
  *
- * Conditions générales de réservation — conformité UE.
+ * Conditions générales de réservation conformes au droit de l'UE.
  * Références légales : Directive 2011/83/UE, Règlement 524/2013 (RLL/ODR),
  * RGPD (UE 2016/679), article L221-28 12° du Code de la consommation français.
  *
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 /**
  * Linkify transforms URLs and email addresses inside a dict string
- * into anchor tags. Kept local to this page — the dict content can contain
+ * into anchor tags. Kept local to this page because the dict content can contain
  * ec.europa.eu/consumers/odr/ or booking@lachotel.com and we want them clickable.
  */
 function Linkify({ text }: { text: string }) {
@@ -150,7 +150,7 @@ export default async function ConditionsPage({
         </div>
       </section>
 
-      {/* Sections — blocs hairline, typo éditoriale */}
+      {/* Sections : blocs hairline, typo éditoriale */}
       <section className="pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="mx-auto grid max-w-[820px] gap-14 md:gap-20">
@@ -185,7 +185,7 @@ export default async function ConditionsPage({
         </div>
       </section>
 
-      {/* Contact — bande douce, monde clair */}
+      {/* Contact : bande douce, monde clair */}
       <section className="bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="mx-auto max-w-[640px] text-center">

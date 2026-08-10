@@ -5,7 +5,7 @@
  *
  * Pourquoi du SVG inline et surtout PAS d'emoji drapeau (🇫🇷) : Windows
  * (toutes versions, Chrome/Edge/Firefox) n'embarque aucune police avec les
- * glyphes de drapeaux régionaux — l'emoji se dégrade en « FR », « GB », « ES »
+ * glyphes de drapeaux régionaux. L'emoji se dégrade en « FR », « GB », « ES »
  * en lettres carrées. Inacceptable pour une clientèle européenne desktop.
  *
  * Un drapeau n'est pas une langue : le code (FR/EN/ES) reste affiché à côté
@@ -15,7 +15,7 @@
  * Les SVG n'utilisent AUCUN id / clipPath / <style> : ils sont répétés
  * plusieurs fois par page (barre desktop + overlay mobile) sans collision.
  * Le drapeau britannique est tracé en polygones explicites (pas de stroke
- * débordant, pas de clip-path) — géométrie officielle transposée en 3:2.
+ * débordant, pas de clip-path) : géométrie officielle transposée en 3:2.
  */
 
 import type { ComponentType, CSSProperties } from "react";
@@ -24,9 +24,9 @@ import { locales, type Locale } from "@/lib/utils";
 
 /* ─────────────────────────────────────────────────────────────
    Chemin : remplace le segment de locale du chemin courant.
-   Déplacé depuis Navbar.tsx (lignes 24-33) — comportement inchangé.
+   Déplacé depuis Navbar.tsx (lignes 24-33), comportement inchangé.
    `pathname` vient de usePathname() : Next retire déjà le basePath,
-   et <Link> le remet — ne PAS le préfixer ici.
+   et <Link> le remet, donc ne PAS le préfixer ici.
    ───────────────────────────────────────────────────────────── */
 export function replaceLocale(pathname: string, code: string): string {
   const segments = pathname.split("/");
@@ -39,7 +39,7 @@ export function replaceLocale(pathname: string, code: string): string {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Libellés — endonymes (chaque langue nommée dans sa langue).
+   Libellés : endonymes (chaque langue nommée dans sa langue).
    ───────────────────────────────────────────────────────────── */
 const LANGUAGE_NAME: Record<Locale, string> = {
   fr: "Français",
@@ -56,11 +56,11 @@ const GROUP_LABEL: Record<Locale, string> = {
 };
 
 /* ─────────────────────────────────────────────────────────────
-   Drapeaux — viewBox commun 0 0 45 30 (ratio 3:2 pour les trois,
+   Drapeaux : viewBox commun 0 0 45 30 (ratio 3:2 pour les trois,
    donc alignement parfait en ligne). Le drapeau britannique est
    officiellement 1:2 ; il est ici redessiné en 3:2 en conservant
    les épaisseurs relatives à la hauteur (croix blanche H/3, croix
-   rouge H/5, sautoir blanc H/5, sautoir rouge 2H/15) — c'est la
+   rouge H/5, sautoir blanc H/5, sautoir rouge 2H/15). C'est la
    convention des jeux d'icônes (variante « 3x2 »).
    ───────────────────────────────────────────────────────────── */
 
@@ -126,7 +126,7 @@ function FlagES({ width, className, style }: FlagProps) {
       aria-hidden="true"
       focusable="false"
     >
-      {/* Bandes 1:2:1 — armoiries volontairement omises (illisibles < 40 px) */}
+      {/* Bandes 1:2:1, armoiries volontairement omises (illisibles < 40 px) */}
       <rect width="45" height="30" fill="#AA151B" />
       <rect y="7.5" width="45" height="15" fill="#F1BF00" />
     </svg>

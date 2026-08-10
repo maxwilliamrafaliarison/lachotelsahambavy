@@ -1,5 +1,5 @@
 /**
- * Schéma de la base (Drizzle / PostgreSQL) — facturation & tableau de bord.
+ * Schéma de la base (Drizzle / PostgreSQL) : facturation & tableau de bord.
  *
  * Modèle dérivé de l'analyse des 200+ factures réelles 2026 (parser Excel).
  * Postgres cible : Neon (région UE, RGPD). Testé localement via PGlite.

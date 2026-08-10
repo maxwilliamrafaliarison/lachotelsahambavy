@@ -1,7 +1,7 @@
 import { TVA_TAUX } from "@/lib/admin/tarifs";
 
 /**
- * Modèle et calculs du devis proforma — partagés entre l'écran et le PDF.
+ * Modèle et calculs du devis proforma, partagés entre l'écran et le PDF.
  *
  * Règles de calcul (décisions Max 17/07/2026, conformes aux vraies factures) :
  *  - Les prix de ligne sont TTC (TVA 20 % comprise).

@@ -5,11 +5,11 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const isStaticExport = Boolean(basePath);
 
 /**
- * Configuration Next.js 16 — bi-mode :
+ * Configuration Next.js 16, bi-mode :
  *   1. Vercel (par défaut)            → SSR + headers + redirects + ISR + image optim
  *   2. GitHub Pages (NEXT_PUBLIC_BASE_PATH défini) → static export
  *
- * Cf. Phase 8 §8.3.2 — Configuration tech stack.
+ * Cf. Phase 8 §8.3.2 (Configuration tech stack).
  */
 const nextConfig: NextConfig = {
   // Mode export statique (uniquement quand basePath défini)

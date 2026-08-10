@@ -1,6 +1,6 @@
 /**
- * Helper breadcrumbs trilingue — génère un trail localisé pour chaque page.
- * Cf. Phase 5 §5.6 — SEO technique.
+ * Helper breadcrumbs trilingue : génère un trail localisé pour chaque page.
+ * Cf. Phase 5 §5.6 (SEO technique).
  *
  * Usage :
  *   import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";

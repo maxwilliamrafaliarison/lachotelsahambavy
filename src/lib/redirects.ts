@@ -1,6 +1,6 @@
 /**
  * Redirections 301 depuis l'ancien site WordPress.
- * Cf. Phase 5 §5.6 — Plan de migration SEO trilingue.
+ * Cf. Phase 5 §5.6 (Plan de migration SEO trilingue).
  *
  * Note technique Next.js 16 / path-to-regexp v8 :
  *   Le modifier `*` (repeat) ne peut pas être à la fin d'un pattern sans suffixe.
@@ -15,7 +15,7 @@ import type { NextConfig } from "next";
 type Redirect = NonNullable<Awaited<ReturnType<NonNullable<NextConfig["redirects"]>>>>[number];
 
 /**
- * Helper — crée deux redirections pour gérer la racine ET les sous-chemins.
+ * Helper qui crée deux redirections pour gérer la racine ET les sous-chemins.
  * Évite le bug path-to-regexp v8 avec `:path*` en fin de pattern.
  */
 function both(source: string, destination: string): Redirect[] {
@@ -30,8 +30,8 @@ function both(source: string, destination: string): Redirect[] {
  *
  * À réserver aux segments hérités qui portent aujourd'hui une vraie page
  * enfant. Cas vécu : `/fr/reservation` redirigeait vers `/fr/contact/`
- * avec son `:rest*`, lequel avalait `/fr/reservation/confirmation/` — la
- * page vers laquelle le formulaire pousse après envoi. Le client validait
+ * avec son `:rest*`, lequel avalait `/fr/reservation/confirmation/` (la
+ * page vers laquelle le formulaire pousse après envoi). Le client validait
  * sa demande et atterrissait sur le formulaire de contact au lieu de sa
  * confirmation, en français comme en anglais. L'espagnol fonctionnait,
  * faute de redirection équivalente : c'est ce qui a mis la puce à
@@ -68,7 +68,7 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/fr/train", "/fr/train-fce/"),
   ...both("/fr/excursions", "/fr/experiences/"),
   // NOTE : /fr/activites est une vraie page (Loisirs, sous-page d'Expériences)
-  // depuis la refonte 2026 — ne pas la rediriger.
+  // depuis la refonte 2026. Ne pas la rediriger.
   ...both("/fr/about", "/fr/hotel/"),
   ...both("/fr/a-propos", "/fr/hotel/"),
   ...both("/fr/galerie-photos", "/fr/galerie/"),

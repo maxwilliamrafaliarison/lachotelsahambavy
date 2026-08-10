@@ -10,7 +10,7 @@
      choisies à la mode. Chaque valeur passe WCAG AA sur papier ET porte
      du texte blanc en aplat.
 
-     RÈGLE D'EMPLOI DES DEUX ACCENTS — s'y tenir :
+     RÈGLE D'EMPLOI DES DEUX ACCENTS (s'y tenir) :
        • --color-lake  (bleu du lac) → ce qui est CLIQUABLE : boutons,
          liens, anneau de focus, état actif. Le bleu = action, convention
          universelle, et c'est la teinte que partagent toutes les photos
@@ -25,23 +25,23 @@
        • or / champagne → inchangés (façade du restaurant, lumière du lac),
          touches et monde « Nuit ».
 
-     DEUX EXCEPTIONS ASSUMÉES, décidées par la direction — ne pas les
+     DEUX EXCEPTIONS ASSUMÉES, décidées par la direction. Ne pas les
      « corriger » au nom de la règle ci-dessus :
 
        1. LE FILET DE LA NAVBAR est en terre cuite, y compris sur la
           rubrique active, alors que la règle attribue l'état actif au lac.
           C'est une demande explicite du 08/08/2026 : faire revenir l'ocre
           des pilotis dans le menu. Le filet ne colore pas le texte, il le
-          souligne — la lisibilité sur photo est préservée, et l'ocre est
+          souligne : la lisibilité sur photo est préservée, et l'ocre est
           la couleur signature de l'hôtel.
 
        2. LES PASTILLES DES SOUS-MENUS prennent la teinte de leur rubrique
           (terre cuite, lac ou thé selon le contenu). La couleur y encode
-          une information — les murs en pisé, l'eau, les théiers — au lieu
+          une information (les murs en pisé, l'eau, les théiers) au lieu
           de signaler l'interactivité. Voir TEINTES dans Navbar.tsx.
      ============================================================ */
 
-  /* — Panorama (socle clair) — */
+  /* Panorama (socle clair) */
   --color-white: #FFFFFF;
   --color-paper: #FBFAF7;
   --color-ink: #1B1B17;
@@ -49,24 +49,24 @@
   --color-muted: #726E64; /* WCAG AA (≥4.5) sur papier, blanc et mist-bg */
   --color-hairline: #E7E4DC;
 
-  /* Accent 1 — action / interactif. Papier 5,62:1 · blanc dessus 5,86:1 */
+  /* Accent 1 : action / interactif. Papier 5,62:1 · blanc dessus 5,86:1 */
   --color-lake: #1768A8;
   --color-lake-deep: #12547F;
   --color-lake-bg: #EFF5FA;
 
-  /* Accent 2 — éditorial / chaleur. Papier 5,77:1 · blanc dessus 6,03:1 */
+  /* Accent 2 : éditorial / chaleur. Papier 5,77:1 · blanc dessus 6,03:1 */
   --color-terracotta: #A64517;
   --color-terracotta-deep: #85360F;
   --color-terracotta-bg: #FBF1EC;
 
-  /* Nature — vert réel des théiers. Papier 10,06:1 */
+  /* Nature : vert réel des théiers. Papier 10,06:1 */
   --color-tea: #26471B;
   --color-tea-deep: #1B3513;
   --color-mist: #9DB5A5;
   --color-mist-bg: #F0F3EF;
   --color-gold: #C8A254;
 
-  /* — Nuit sur le lac (canvas sombre signature) — */
+  /* Nuit sur le lac (canvas sombre signature) */
   --color-night: #14110D;
   --color-night-soft: #1C1812;
   --color-night-hairline: #2C2619;
@@ -75,19 +75,19 @@
   --color-night-body: #BFB4A0;
   --color-copper: #8A4B2E;
 
-  /* Avis de service — troisième registre, distinct de l'action (lac) et de
+  /* Avis de service : troisième registre, distinct de l'action (lac) et de
      l'éditorial (terre cuite).
 
      ROUGE, sur décision de la direction (08/08/2026) : l'avis doit
      accrocher l'œil. La version précédente était ambre, au motif qu'une
-     ligne ferroviaire à l'arrêt n'est pas une panne du site — mais c'est
+     ligne ferroviaire à l'arrêt n'est pas une panne du site. Mais c'est
      bien l'attention qui est recherchée ici, et c'est un arbitrage
      éditorial, pas technique.
 
      Le rouge est pris pur (teinte 0,0°) et non rabattu vers l'orange :
      à 19,3° d'écart de la terre cuite, il ne peut pas être confondu avec
      le registre éditorial de l'hôtel. Encre sur fond : 7,37:1 (AAA).
-     Le liseré est à 3,02:1 sur le papier de la page — le seuil WCAG
+     Le liseré est à 3,02:1 sur le papier de la page, soit le seuil WCAG
      1.4.11 pour un contour porteur de sens. Le rose pâle d'abord retenu
      n'était qu'à 1,47:1 : le fond de l'avis étant lui-même presque de la
      même clarté que le papier, le bloc ne se détachait pas du tout. Pour
@@ -97,8 +97,8 @@
   --color-avis-hairline: #D2786F;
 
 
-  /* — Fontes (chargées dans src/app/root-shell.tsx via next/font, variables
-       sources --font-inter-tight / --font-cormorant / --font-inter) — */
+  /* Fontes (chargées dans src/app/root-shell.tsx via next/font, variables
+     sources --font-inter-tight / --font-cormorant / --font-inter) */
   --font-heading: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
   --font-sub: var(--font-cormorant), Baskerville, Georgia, serif;
   --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
@@ -130,7 +130,7 @@ body {
 /**
  * Typographic defaults.
  *
- * NOTE: These rules live in `@layer base` — this guarantees that Tailwind
+ * NOTE: These rules live in `@layer base`, which guarantees that Tailwind
  * utility classes (text-white, text-cream, text-gold, …) *beat* the default
  * `color: var(--color-ink)` when an author drops a heading onto a dark
  * section (e.g. `<h2 className="text-white">` inside `bg-brown-deep`).
@@ -165,9 +165,9 @@ body {
   --font-display: var(--font-inter-tight), "Helvetica Neue", -apple-system, sans-serif;
   --font-serif: var(--font-cormorant), Baskerville, Georgia, serif;
 
-  /* — Menus « verre clair & pastilles ». rgba() ne sait pas consommer une
-       variable hexadécimale : ce sont les triplets qui portent la teinte.
-       --lh-past / --lh-past-ink sont posés par rubrique dans Navbar.tsx. — */
+  /* Menus « verre clair & pastilles ». rgba() ne sait pas consommer une
+     variable hexadécimale : ce sont les triplets qui portent la teinte.
+     --lh-past / --lh-past-ink sont posés par rubrique dans Navbar.tsx. */
   --lh-past: 166 69 23;             /* teinte vive = terre cuite #A64517 (survol) */
   --lh-past-pale: 247 227 214;      /* teinte claire de la pastille au repos */
   --lh-past-ink: 133 54 15;         /* encre lisible = terracotta-deep #85360F */
@@ -175,16 +175,16 @@ body {
 }
 
 /* ============================================================
-   SYSTÈME « GE » — composants de la refonte Panorama / Nuit.
+   SYSTÈME « GE » : composants de la refonte Panorama / Nuit.
 
    Encapsulé dans @layer components : les utilitaires Tailwind vivent dans
    la couche `utilities`, qui gagne toujours sur `components`. Sans ce layer,
    ces règles (non layerées) passaient APRÈS les utilitaires et les
-   écrasaient — `.ge-cta hidden` restait affiché, car `display:inline-flex`
+   écrasaient : `.ge-cta hidden` restait affiché, car `display:inline-flex`
    battait `display:none`. Bug constaté sur la navbar mobile le 17/07/2026.
    ============================================================ */
 @layer components {
-  /* Label uppercase (eyebrow) — micro-typo signature du système */
+  /* Label uppercase (eyebrow) : micro-typo signature du système */
   .ge-label {
     display: inline-block;
     font-family: var(--font-body);
@@ -256,7 +256,7 @@ body {
   .ge-night .ge-row { border-color: var(--color-night-hairline); }
   .ge-night .ge-row > :last-child { color: var(--color-champagne); }
 
-  /* Canvas « Nuit sur le lac » — monde sombre des pages signature */
+  /* Canvas « Nuit sur le lac » : monde sombre des pages signature */
   .ge-night {
     background: var(--color-night);
     color: var(--color-night-body);
@@ -355,7 +355,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   /* 50 px pills feel WordPress/SaaS. Luxury hotel buttons are typically
-     square or hair-rounded — 2 px reads as a cut edge, not a chip.
+     square or hair-rounded: 2 px reads as a cut edge, not a chip.
      Cf. Aman, La Mamounia, Rosewood press ratecards. */
   border-radius: 2px;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -464,7 +464,7 @@ body {
   transform: translateY(0);
 }
 
-/* ── Booking Bar — Fixed Bottom ── */
+/* ── Booking Bar (Fixed Bottom) ── */
 .booking-bar-fixed {
   position: fixed;
   bottom: 0;
@@ -597,13 +597,13 @@ body {
   margin: 0.875rem 0;
 }
 
-/* ── Dropdown — Glass Dark Style ── */
+/* ── Dropdown (Glass Dark Style) ── */
 .booking-bar__dropdown {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   min-width: 100%;
-  /* Glass dark — transparent sombre doré */
+  /* Glass dark : transparent sombre doré */
   background: rgba(34, 22, 14, 0.88);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -822,23 +822,23 @@ body {
 }
 
 /* ============================================================
-   MENUS « VERRE CLAIR & PASTILLES »  —  08/08/2026
+   MENUS « VERRE CLAIR & PASTILLES » (08/08/2026)
    Remplace successivement le bandeau papier opaque, puis la carte de
    verre sombre (« ce gros carré noir »).
 
    LE PRINCIPE
    Un plateau de verre clair, et des PASTILLES qui portent la couleur.
    La couleur n'est pas décorative : chaque rubrique reçoit la teinte de
-   ce qu'elle contient — terre cuite pour les murs en pisé et les
+   ce qu'elle contient. Terre cuite pour les murs en pisé et les
    bungalows ocre, bleu pour l'eau et les activités nautiques, vert pour
    les jardins et la plantation.
 
-   OÙ VIT LA GARANTIE DE CONTRASTE — sur les PASTILLES, pas sur le plateau.
+   OÙ VIT LA GARANTIE DE CONTRASTE : sur les PASTILLES, pas sur le plateau.
    C'est ce qui permet au plateau d'être vraiment transparent. Une première
    version bornait la luminance du fond au niveau du plateau
    (`contrast(0.30) brightness(1.75)`) : le contraste était garanti, mais la
-   photo s'écrasait en une bande blanchâtre — « je n'aime pas ce blanc
-   derrière ». En déplaçant la garantie sur les pastilles, qui seules
+   photo s'écrasait en une bande blanchâtre (« je n'aime pas ce blanc
+   derrière »). En déplaçant la garantie sur les pastilles, qui seules
    portent du texte, le plateau n'a plus qu'à voiler légèrement.
 
    Le plateau ne comprime donc presque plus (contrast 0.82, brightness 1.06,
@@ -850,14 +850,14 @@ body {
      bungalow ocre            (248, 137, 75)
    `saturate(190%)` passe avant : la chroma du paysage est exaltée.
 
-   Les pastilles portent une teinte CLAIRE de leur couleur à 0,84 — assez
+   Les pastilles portent une teinte CLAIRE de leur couleur à 0,84, assez
    couvrante pour que l'encre foncée ne dépende plus de la photo. Pire
    ratio tous fonds confondus : 5,20:1. Au survol la pastille se remplit
    de sa couleur vive et l'encre passe au blanc.
 
    Attention : le plateau portant un backdrop-filter, il devient un
    « backdrop root ». Une pastille ne peut donc PAS filtrer la page à son
-   tour — elle ne compose que par-dessus le rendu du plateau. C'est
+   tour : elle ne compose que par-dessus le rendu du plateau. C'est
    pourquoi sa garantie doit venir de son alpha, pas d'un filtre.
 
    CE QUI A ÉTÉ RETIRÉ (demande du 08/08)
@@ -944,7 +944,7 @@ body {
 
   /* `stretch` : toutes les pastilles adoptent la même largeur. Le plateau
      étant en `width: max-content`, cette largeur commune est celle du
-     libellé le plus long — rien n'est tronqué, rien ne flotte. */
+     libellé le plus long : rien n'est tronqué, rien ne flotte. */
   .lh-pastilles {
     display: flex; flex-direction: column;
     align-items: stretch;
@@ -969,7 +969,7 @@ body {
 
   /* AU SURVOL LA PASTILLE SE REMPLIT ET L'ENCRE PASSE AU BLANC.
      Ce n'est pas un effet : c'est la seule façon de monter le contraste.
-     Densifier la teinte sous une encre déjà foncée le fait BAISSER —
+     Densifier la teinte sous une encre déjà foncée le fait BAISSER :
      mesuré à 4,18:1 pour une teinte de survol à 0,22, sous le seuil AA.
      Rempli à l'opaque, le fond ne dépend plus du tout de la photo
      derrière, et les ratios sont ceux, documentés, de la charte :
@@ -1010,7 +1010,7 @@ body {
       -webkit-backdrop-filter: blur(30px) saturate(190%) contrast(0.82) brightness(1.06);
               backdrop-filter: blur(30px) saturate(190%) contrast(0.82) brightness(1.06);
       /* Plancher plus dense que le plateau (0,78 contre 0,24) : la feuille
-         porte aussi du texte courant — courriel, téléphone — qui n'a pas de
+         porte aussi du texte courant (courriel, téléphone) qui n'a pas de
          pastille pour garantir son contraste. Mesuré sur fond noir :
          rgb(200,195,188), body #4A4A44 à 4,96:1. */
       background:

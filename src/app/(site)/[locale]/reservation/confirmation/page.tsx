@@ -1,5 +1,5 @@
 /**
- * Page de confirmation post-envoi — COMPOSANT SERVEUR.
+ * Page de confirmation post-envoi : COMPOSANT SERVEUR.
  *
  * Dernière page du site à rester cliente : son HTML ne contenait aucun
  * titre, et le visiteur voyait « … » le temps que le dictionnaire arrive.
@@ -69,9 +69,9 @@ function ConfirmationContent({ locale, dict }: { locale: Locale; dict: any }) {
           {c.title || "Demande reçue !"}
         </h1>
         {/* Suspense OBLIGATOIRE : `useSearchParams` dans une page prérendue
-            fait échouer le prérendu sans lui — « couldn't be rendered
-            statically ». Le repli réserve la même hauteur que les deux
-            lignes qu'il remplace, pour que rien ne saute à l'hydratation. */}
+            fait échouer le prérendu sans lui, avec le message « couldn't be
+            rendered statically ». Le repli réserve la même hauteur que les
+            deux lignes qu'il remplace, pour que rien ne saute à l'hydratation. */}
         <Suspense fallback={<div className="mb-10 h-[3.5rem]" />}>
           <RecapSejour
             locale={locale}

@@ -1,6 +1,6 @@
 /**
  * Wrapper de tracking client (Plausible).
- * Cf. Phase 7 §7.9 — Événements custom moteur de réservation.
+ * Cf. Phase 7 §7.9 (Événements custom moteur de réservation).
  *
  * Usage :
  *
@@ -46,6 +46,6 @@ export function track(
   try {
     window.plausible(event, props ? { props } : undefined);
   } catch {
-    // No-op — analytics ne doit JAMAIS casser l'expérience user
+    // No-op : analytics ne doit JAMAIS casser l'expérience user
   }
 }

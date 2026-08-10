@@ -5,13 +5,13 @@ import { type Locale, getBasePath } from "@/lib/utils";
 const basePath = getBasePath();
 
 /**
- * « Notre Maison » — bloc humain de la page d'accueil, version « Panorama ».
+ * « Notre Maison » : bloc humain de la page d'accueil, version « Panorama ».
  *
  * Fond brume pour marquer la respiration après l'intro éditoriale, photo
  * d'équipe en 7/5 avec la citation famille en Inter Tight light (PAS
- * d'italique serif en monde clair — réservé au monde nuit), signature en
+ * d'italique serif en monde clair, réservé au monde nuit), signature en
  * .ge-label, puis les 4 vignettes-métiers (captions conservées : elles
- * désignent des métiers, pas des personnes — pas de consentement nominal).
+ * désignent des métiers, pas des personnes, donc pas de consentement nominal).
  *
  * Server Component : aucune interaction au-delà de ScrollReveal.
  */
@@ -49,7 +49,7 @@ export default function OurHouse({ dict, locale }: { dict: any; locale: Locale }
             <p className="ge-measure mb-8 text-[15px] leading-relaxed text-body">
               {dict.ourHouse.paragraph}
             </p>
-            {/* Citation en Inter Tight light — jamais d'italique serif en monde clair */}
+            {/* Citation en Inter Tight light : jamais d'italique serif en monde clair */}
             <blockquote className="mb-4 font-[family-name:var(--font-display)] text-2xl font-light leading-snug text-ink">
               {dict.ourHouse.quote}
             </blockquote>

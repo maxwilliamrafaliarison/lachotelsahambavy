@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RootShell from "@/app/root-shell";
 
 /**
- * Chrome commun de l'espace équipe (français uniquement — outil interne).
+ * Chrome commun de l'espace équipe (français uniquement, outil interne).
  * La garde d'authentification vit dans le groupe (protege)/ ; la page de
  * connexion reste accessible. Espace exclu de l'export statique GitHub Pages.
  */

@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 /**
- * Hero « Panorama » — pleine hauteur, photo immersive, titrage géant
+ * Hero « Panorama » : pleine hauteur, photo immersive, titrage géant
  * ultra-light aligné bas-gauche (grammaire Glacier Express).
  *
  * Remplace PageHero sur toutes les pages intérieures. `image` reçoit une URL
@@ -74,8 +74,9 @@ export default function PanoramaHero({
     >
       {/* Photo de fond via next/image : AVIF/srcset optimisés sur Vercel,
           passthrough unoptimized en export GitHub Pages (src déjà préfixée
-          basePath par l'appelant — vide sur Vercel, donc correct en bi-mode).
-          Parallaxe appliquée au conteneur, désactivée si reduced-motion. */}
+          basePath par l'appelant, préfixe vide sur Vercel, donc correct en
+          bi-mode). Parallaxe appliquée au conteneur, désactivée si
+          reduced-motion. */}
       <div
         ref={bgRef}
         className="absolute inset-0 will-change-transform"
@@ -90,7 +91,7 @@ export default function PanoramaHero({
           className="object-cover object-center"
         />
       </div>
-      {/* Voile de contraste — obligatoire sous le titrage ultra-light */}
+      {/* Voile de contraste : obligatoire sous le titrage ultra-light */}
       <div
         className="absolute inset-0"
         style={{

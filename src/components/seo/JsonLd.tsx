@@ -10,7 +10,7 @@
  *   <JsonLd schemas={[lodgingBusinessSchema(locale), websiteSchema(locale)]} />
  *
  * Les objets sont sérialisés avec JSON.stringify (escape automatique).
- * Aucune logique runtime — pur composant Server Component.
+ * Aucune logique runtime : pur composant Server Component.
  */
 
 interface JsonLdProps {

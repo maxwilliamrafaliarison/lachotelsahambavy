@@ -13,7 +13,7 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 const basePath = getBasePath();
 
 /* Taux implicite de la carte des tarifs officiels : 70 000 Ar = 14 €,
-   40 000 Ar = 8 €, 8 000 Ar = 1,6 € — soit exactement 5 000 Ar/€.
+   40 000 Ar = 8 €, 8 000 Ar = 1,6 €, soit exactement 5 000 Ar/€.
    À noter : ce n'est PAS le taux de la grille d'hébergement du même
    document, qui tourne entre 7 000 et 8 300 Ar/€. On respecte ici le
    chiffre publié pour la restauration plutôt que d'imposer un taux unique. */
@@ -21,7 +21,7 @@ const AR_PER_EUR = 5000;
 const ar = (v: number) => `${v.toLocaleString("fr-FR")} Ar`;
 const eur = (v: number) => `${Math.round(v / AR_PER_EUR)} €`;
 
-/* Textes nouveaux de la refonte — fallbacks locaux en attendant la fusion
+/* Textes nouveaux de la refonte : fallbacks locaux en attendant la fusion
    des deltas dictionnaire (scratchpad/dict-deltas/restaurant.json). Si la
    clé existe déjà dans dict.restaurantSection, elle est prioritaire. */
 const extraTexts = {
@@ -128,7 +128,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         ]}
       />
 
-      {/* Hero Panorama — façade du restaurant depuis les jardins */}
+      {/* Hero Panorama : façade du restaurant depuis les jardins */}
       <PanoramaHero
         image={`${basePath}/images/restaurant/restaurant-facade.jpg`}
         imageAlt={
@@ -143,7 +143,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         kicker={rs.heroSubtitle}
       />
 
-      {/* Déclaration — « Chez nous, la qualité commence à la source » */}
+      {/* Déclaration : « Chez nous, la qualité commence à la source » */}
       <section id="philosophie" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -159,7 +159,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Blocs éditoriaux alternés — cuisine, potager, signatures, petit-déj, bar */}
+      {/* Blocs éditoriaux alternés : cuisine, potager, signatures, petit-déj, bar */}
       <section className="pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl space-y-8 px-6 md:space-y-12 md:px-10">
           <EditorialSplit
@@ -271,7 +271,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Aperçu tarifs — filets fins */}
+      {/* Aperçu tarifs, en filets fins */}
       <section id="tarifs" className="scroll-mt-24 border-y border-hairline bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="mx-auto max-w-2xl">
@@ -284,7 +284,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* Bandeau éco-responsable — eau filtrée & bouteilles en verre */}
+      {/* Bandeau éco-responsable : eau filtrée & bouteilles en verre */}
       <section id="eau-filtree" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -302,7 +302,7 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
         </div>
       </section>
 
-      {/* CTA final — vers le contact */}
+      {/* CTA final, vers le contact */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>

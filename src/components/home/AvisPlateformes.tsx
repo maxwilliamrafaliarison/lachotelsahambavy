@@ -3,7 +3,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import type { Locale } from "@/lib/utils";
 
 /**
- * « Donnez votre avis » — trois boutons vers Booking, Google et TripAdvisor,
+ * « Donnez votre avis » : trois boutons vers Booking, Google et TripAdvisor,
  * posés juste avant les types de chambres (demande de Maggie, 09/08/2026).
  *
  * POURQUOI UN ENCART ET PAS UNE BANDE
@@ -12,7 +12,7 @@ import type { Locale } from "@/lib/utils";
  * haché la page ; l'encart bordé se lit comme une respiration, pas comme
  * un étage de plus.
  *
- * OÙ MÈNENT LES BOUTONS — ce n'est pas uniforme, et c'est voulu :
+ * OÙ MÈNENT LES BOUTONS (ce n'est pas uniforme, et c'est voulu) :
  *
  *  - TripAdvisor ouvre directement le formulaire de rédaction
  *    (UserReviewEdit, mêmes identifiants g/d que la fiche).

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-/* Microcopie de la page — doublée dans dict-deltas/mariages.json ; après
+/* Microcopie de la page, doublée dans dict-deltas/mariages.json ; après
    fusion des deltas dans les dictionnaires, dict.* prend le dessus (spread). */
 const microcopy = {
   fr: {
@@ -172,7 +172,7 @@ export default async function MariagesSeminairesPage({
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "mariages-seminaires"))]} />
 
-      {/* ──── HERO « Nuit sur le lac » — piscine illuminée, titrage serif champagne ──── */}
+      {/* ──── HERO « Nuit sur le lac » : piscine illuminée, titrage serif champagne ──── */}
       <PanoramaHero
         night
         height="full"
@@ -187,7 +187,7 @@ export default async function MariagesSeminairesPage({
         kicker={W.subtitle}
       />
 
-      {/* ──── MARIAGES — récit + diptyque de vignettes (photos basse résolution) ──── */}
+      {/* ──── MARIAGES : récit + diptyque de vignettes (photos basse résolution) ──── */}
       <section id="mariages" className="ge-night scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -201,7 +201,7 @@ export default async function MariagesSeminairesPage({
             </div>
           </ScrollReveal>
 
-          {/* Diptyque — volontairement petit (sources 713 px / 817 px), cadres fins */}
+          {/* Diptyque volontairement petit (sources 713 px / 817 px), cadres fins */}
           <div className="mt-14 flex flex-col items-center gap-10 sm:flex-row sm:items-start sm:justify-center md:gap-16">
             <ScrollReveal className="w-full max-w-[340px]">
               <figure>
@@ -235,7 +235,7 @@ export default async function MariagesSeminairesPage({
             </ScrollReveal>
           </div>
 
-          {/* La réception — photo haute résolution, bloc éditorial signature */}
+          {/* La réception : photo haute résolution, bloc éditorial signature */}
           <div className="mt-16 md:mt-20">
             <EditorialSplit
               night
@@ -258,7 +258,7 @@ export default async function MariagesSeminairesPage({
         </div>
       </section>
 
-      {/* ──── SÉMINAIRES & CONFÉRENCES — bloc éditorial inversé + aperçu à filets ──── */}
+      {/* ──── SÉMINAIRES & CONFÉRENCES : bloc éditorial inversé + aperçu à filets ──── */}
       <section className="ge-night py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
@@ -286,7 +286,7 @@ export default async function MariagesSeminairesPage({
         </div>
       </section>
 
-      {/* ──── CTA FINAL — champagne sur nuit ──── */}
+      {/* ──── CTA FINAL : champagne sur nuit ──── */}
       <section className="ge-night py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <hr className="ge-hairline mb-14 md:mb-16" />

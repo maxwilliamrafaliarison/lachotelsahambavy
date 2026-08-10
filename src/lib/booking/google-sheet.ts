@@ -1,10 +1,10 @@
 /**
- * Webhook Google Apps Script — mini-CRM réservations.
- * Cf. Phase 7 §7.5 — Mini-CRM Google Sheet.
+ * Webhook Google Apps Script : mini-CRM réservations.
+ * Cf. Phase 7 §7.5 (Mini-CRM Google Sheet).
  *
  * Le script reçoit un POST JSON et append une ligne.
  * Sécurité : secret partagé (HMAC-like via query param) + HTTPS only.
- * Failure silencieuse — on ne bloque JAMAIS l'envoi d'email si le CRM fail.
+ * Failure silencieuse : on ne bloque JAMAIS l'envoi d'email si le CRM fail.
  */
 
 export interface GoogleSheetPayload {
@@ -18,7 +18,7 @@ export interface GoogleSheetPayload {
   checkout: string;
   nights: number;
   guests: number;
-  /** Décomposition optionnelle — remplie quand la demande vient de la booking bar. */
+  /** Décomposition optionnelle, remplie quand la demande vient de la booking bar. */
   adults?: number;
   children?: number;
   rooms?: number;
@@ -36,7 +36,7 @@ export async function pushToGoogleSheet(payload: GoogleSheetPayload): Promise<bo
   const url = process.env.GOOGLE_SHEET_WEBHOOK_URL;
   const secret = process.env.GOOGLE_SHEET_SECRET;
 
-  // Mode dev — pas de webhook configuré → skip silencieux.
+  // Mode dev : pas de webhook configuré → skip silencieux.
   if (!url || !secret) return false;
 
   try {

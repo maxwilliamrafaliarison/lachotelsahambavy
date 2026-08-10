@@ -9,7 +9,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 const basePath = getBasePath();
 
-/** Fin de la plage du glass progressif (px de scroll) — valeur éprouvée. */
+/** Fin de la plage du glass progressif (px de scroll), valeur éprouvée. */
 const SCROLL_END = 180;
 
 /**
@@ -39,8 +39,8 @@ function estActif(pathname: string, href: string, locale: string): boolean {
 /**
  * Teinte des pastilles, par rubrique.
  *
- * Elle n'est pas décorative : chaque rubrique prend la couleur de ce
- * qu'elle contient — la terre cuite des murs en pisé et des bungalows sur
+ * Elle n'est pas décorative. Chaque rubrique prend la couleur de ce
+ * qu'elle contient : la terre cuite des murs en pisé et des bungalows sur
  * pilotis, le bleu de l'eau pour les activités nautiques, le vert des
  * théiers pour les jardins et la plantation. Le visiteur apprend la
  * correspondance sans qu'on la lui explique.
@@ -90,12 +90,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
    * Sans cette distinction, le clic se battait avec le survol : le navigateur
    * ouvre le panneau sur `mouseenter`, puis le `click` qui suit le refermait
    * aussitôt. À la souris c'était un clignotement ; au doigt c'était bloquant,
-   * car le tactile synthétise un `mouseenter` avant le `click` — le panneau
+   * car le tactile synthétise un `mouseenter` avant le `click` : le panneau
    * ne pouvait jamais rester ouvert sur les écrans tactiles ≥ 1280 px.
    */
   const pointerType = useRef<string>("");
 
-  /* — Scroll : ratio 0 (transparent sur hero) → 1 (papier opaque) — */
+  /* Scroll : ratio 0 (transparent sur hero) → 1 (papier opaque) */
   useEffect(() => {
     let raf = 0;
     const onScroll = () => {
@@ -113,7 +113,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
     };
   }, []);
 
-  /* — Verrou scroll body quand l'overlay mobile est ouvert — */
+  /* Verrou scroll body quand l'overlay mobile est ouvert */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -126,7 +126,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
     setMobileOpen(false);
   }, []);
 
-  /* — Fermeture au clic extérieur / Échap — */
+  /* Fermeture au clic extérieur / Échap */
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenMenu(null);
@@ -158,12 +158,12 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
      béquille du bandeau papier : un panneau blanc pleine largeur au-dessous
      d'une barre transparente donnait une marche visible. Le panneau étant
      désormais une carte de verre sombre détachée, la barre garde son état
-     de défilement — transparente sur la photo, papier une fois descendue. */
+     de défilement : transparente sur la photo, papier une fois descendue. */
 
   /* La barre est transparente à texte blanc en haut de page, parce que
      toutes les pages ouvrent sur une photo sombre. TOUTES SAUF UNE : la
      page de confirmation de réservation, qui commence sur fond papier.
-     Le menu y sortait blanc sur crème — 1,03:1, purement invisible, et
+     Le menu y sortait blanc sur crème (1,03:1), purement invisible, et
      précisément sur l'écran qu'un client voit juste après avoir réservé.
 
      On force donc l'état opaque quand la page n'a pas de hero. La liste
@@ -187,7 +187,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
    * et se fond dans la marque compacte au défilement.
    *
    * `brand` va de 1 (haut de page) à 0, plus vite que le fondu de la barre :
-   * le lockup a fini de disparaître avant que la barre ne devienne claire —
+   * le lockup a fini de disparaître avant que la barre ne devienne claire,
    * sinon on verrait un logo blanc sur fond papier. Un lockup réduit à 36 px
    * serait illisible : on l'échelonne ET on le fond, la marque compacte
    * prenant le relais en fondu inverse.
@@ -207,8 +207,8 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
         {/* Le verre de la barre est posé dans un calque enfant, jamais sur
             <nav> : un élément qui porte backdrop-filter devient un
             « backdrop root », et ses descendants ne floutent plus que lui.
-            Tant que le filtre vivait ici, le flou du méga-menu — qui en
-            descend — ne floutait rien du tout. */}
+            Tant que le filtre vivait ici, le flou du méga-menu, qui en
+            descend, ne floutait rien du tout. */}
         <nav aria-label="Navigation principale" className="lh-barre">
           <div
             aria-hidden="true"
@@ -223,7 +223,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
           />
 
           <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-4 px-5 md:px-8">
-            {/* Marque — mark + lockup typographique */}
+            {/* Marque : mark + lockup typographique */}
             <Link
               href={`/${locale}/`}
               className={`flex shrink-0 items-center gap-3 ${itemColor}`}
@@ -238,14 +238,14 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               />
             </Link>
 
-            {/* Emblème géant — accueil, haut de page. Décoratif (la marque
+            {/* Emblème géant : accueil, haut de page. Décoratif (la marque
                 compacte au-dessous porte déjà le lien et le libellé).
 
                 On affiche l'emblème SEUL, sans le bloc de signature
                 « Lac Hotel Sahambavy / The Natural choice » ni les deux
                 filets du cadre d'origine : le nom du lieu était écrit
                 quatre fois sur ce seul écran. Débarrassé de sa signature,
-                l'emblème récupère toute la hauteur — il passe d'environ
+                l'emblème récupère toute la hauteur : il passe d'environ
                 98 px à 288 px, soit près de trois fois plus grand, sans
                 dépasser sa définition native (406 × 420 px, plafond de la
                 source fournie par l'hôtel). */}
@@ -352,7 +352,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     </Link>
                   ) : null}
 
-                  {/* Panneau — ancré dans son <li> et non après </ul>.
+                  {/* Panneau : ancré dans son <li> et non après </ul>.
                       Outre le fait qu'il devient une carte posée sous sa
                       rubrique au lieu d'un bandeau pleine largeur, cela
                       corrige l'ordre de tabulation : rendu après la liste,
@@ -404,7 +404,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               ))}
             </ul>
 
-            {/* Sélecteur de langue à drapeaux — préserve la page courante */}
+            {/* Sélecteur de langue à drapeaux : préserve la page courante */}
             <LanguageSwitcher
               locale={locale}
               pathname={pathname}
@@ -443,7 +443,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
         </nav>
       </header>
 
-      {/* Feuille mobile — même verre clair, mêmes pastilles que le desktop */}
+      {/* Feuille mobile : même verre clair, mêmes pastilles que le desktop */}
       {mobileOpen && (
         <div className="lh-feuille fixed inset-0 z-[900] overflow-y-auto min-[1280px]:hidden">
           <div className="flex min-h-full flex-col px-6 pb-12 pt-24">

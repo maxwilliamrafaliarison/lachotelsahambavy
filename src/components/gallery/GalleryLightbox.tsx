@@ -95,7 +95,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
   function onPointerMove(e: React.PointerEvent) {
     if (pointerId.current !== e.pointerId || !dragging) return;
     let dx = e.clientX - startX.current;
-    // Rubber band aux extrémités — résistance progressive façon iOS
+    // Rubber band aux extrémités : résistance progressive façon iOS
     if ((!canPrev && dx > 0) || (!canNext && dx < 0)) {
       dx *= RUBBER_BAND;
     }
@@ -195,7 +195,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
         </div>
       </div>
 
-      {/* Prev / Next — desktop fallback */}
+      {/* Prev / Next : fallback desktop */}
       <button
         onClick={(e) => {
           e.stopPropagation();
@@ -231,7 +231,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
         <p className="text-white/80 text-sm md:text-base font-[family-name:var(--font-sub)] italic mb-2 line-clamp-2">
           {photos[index]?.alt}
         </p>
-        {/* Hint swipe — visible uniquement sur mobile/tactile, s'estompe au 1er drag */}
+        {/* Hint swipe : visible uniquement sur mobile/tactile, s'estompe au 1er drag */}
         <div className="md:hidden flex items-center justify-center gap-2 text-white/40 text-[0.65rem] uppercase tracking-[0.25em]">
           <Icon name="arrow" size={12} weight="regular" className="rotate-180" />
           <span>Glissez pour naviguer</span>

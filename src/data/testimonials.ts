@@ -1,5 +1,5 @@
 /**
- * Témoignages clients — trilingue (fr / en / es).
+ * Témoignages clients trilingues (fr / en / es).
  *
  * Organisés par source (Booking, Google, TripAdvisor) pour permettre
  * à l'utilisateur de filtrer dans l'UI. Les 4-5 premiers avis de chaque
@@ -16,7 +16,7 @@ export interface Review {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Booking.com — 9.0/10 (Fabuleux) · 34 avis
+// Booking.com : 9.0/10 (Fabuleux) · 34 avis
 // ─────────────────────────────────────────────────────────────
 export const bookingReviews: Review[] = [
   {
@@ -172,7 +172,7 @@ export const bookingReviews: Review[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-// Google — 4.6/5 · 157 avis
+// Google : 4.6/5 · 157 avis
 // ─────────────────────────────────────────────────────────────
 export const googleReviews: Review[] = [
   {
@@ -328,7 +328,7 @@ export const googleReviews: Review[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-// TripAdvisor — 4.5/5 · 229 avis
+// TripAdvisor : 4.5/5 · 229 avis
 // ─────────────────────────────────────────────────────────────
 export const tripadvisorReviews: Review[] = [
   {
@@ -483,7 +483,7 @@ export const tripadvisorReviews: Review[] = [
   },
 ];
 
-// Légacy — conservé pour compatibilité si d'autres pages l'importent
+// Légacy : conservé pour compatibilité si d'autres pages l'importent
 export interface Testimonial extends Review {
   id: string;
   source: string;

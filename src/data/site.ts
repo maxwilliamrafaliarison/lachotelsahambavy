@@ -8,7 +8,7 @@ export const siteConfig = {
   whatsappDisplay: "(+261) 034 99 161 76",
   address: "Sahambavy, Fianarantsoa 301, Madagascar",
   /* Relevées sur la fiche Google de l'hôtel (CID 9763325951372533936), le
-     09/08/2026. Les précédentes — -21,0667 / 47,25 — plaçaient l'hôtel
+     09/08/2026. Les précédentes (-21,0667 / 47,25) plaçaient l'hôtel
      42 km trop au nord, en pleine brousse : elles partaient dans le
      LocalBusiness, le TouristAttraction et les deux cartes intégrées. */
   geo: { lat: -21.446602, lng: 47.259014 },
@@ -22,7 +22,7 @@ export const siteConfig = {
     tripadvisor:
       "https://www.tripadvisor.fr/Hotel_Review-g298271-d649892-Reviews-Lac_Hotel-Fianarantsoa_Fianarantsoa_Province.html",
     google: "https://maps.app.goo.gl/SoYLD9ifu8fVcgrt7",
-    // URL canonique (langue-neutre) — Booking.com négocie automatiquement la
+    // URL canonique (langue-neutre) : Booking.com négocie automatiquement la
     // locale du visiteur (fr / en / es …). Confirmée en recherche Google.
     booking: "https://www.booking.com/hotel/mg/lac-sahambavy.html",
 
@@ -36,7 +36,7 @@ export const siteConfig = {
     /* Fiche Google par son CID (0x877e4d3975e9a0b0, relevé sur le lien court
        officiel ci-dessus) : « Rédiger un avis » y est à un clic. À remplacer
        par le lien court que Google Business fournit dans « Demander des
-       avis » — le lien direct writereview exige le Place ID, qui n'était pas
+       avis » : le lien direct writereview exige le Place ID, qui n'était pas
        vérifiable sans compte connecté. */
     googleAvis: "https://www.google.com/maps?cid=9763325951372533936",
   },
@@ -62,8 +62,8 @@ export const siteConfig = {
  * Carte Google intégrée, centrée sur la FICHE de l'hôtel et non sur un
  * point quelconque.
  *
- * Les deux cartes du site portaient un `pb` bricolé — `!1s0x0%3A0x0!2sSahambavy`
- * — qui posait une simple étiquette « Sahambavy » sur des coordonnées
+ * Les deux cartes du site portaient un `pb` bricolé (`!1s0x0%3A0x0!2sSahambavy`)
+ * qui posait une simple étiquette « Sahambavy » sur des coordonnées
  * fausses de 42 km. En passant le CID, Google renvoie la fiche elle-même :
  * le nom de l'hôtel, ses photos et son itinéraire. La langue de la carte
  * suit celle de la page.
@@ -74,7 +74,7 @@ export function carteEmbed(locale: string): string {
 }
 
 /**
- * Navigation globale du site — arborescence du document de référence de
+ * Navigation globale du site : arborescence du document de référence de
  * Maggie (« TExte proposition de Maggie », 16/07/2026), qui fait foi.
  *
  * - Item AVEC `children` → méga-menu déroulant en desktop, accordéon en mobile.
@@ -267,7 +267,7 @@ export const navigation: NavItem[] = [
     href: "/localisation",
     label: { fr: "Localisation", en: "Location", es: "Ubicación" },
   },
-  // Secondaires — footer + menu mobile uniquement
+  // Secondaires : footer + menu mobile uniquement
   {
     href: "/galerie",
     label: { fr: "Galerie", en: "Gallery", es: "Galería" },

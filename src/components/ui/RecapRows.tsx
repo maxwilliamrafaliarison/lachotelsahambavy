@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /**
- * Récapitulatif à filets fins — pattern « Aperçu » Glacier Express.
+ * Récapitulatif à filets fins, pattern « Aperçu » Glacier Express.
  * Utilisé pour tarifs, prestations, horaires. Hérite du monde clair par
  * défaut ; posé dans un parent `.ge-night`, les filets et accents basculent
  * automatiquement (voir globals.css).

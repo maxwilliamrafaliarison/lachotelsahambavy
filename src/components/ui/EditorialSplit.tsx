@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 /**
- * Bloc éditorial alterné photo / texte — rythme de section signature de la
+ * Bloc éditorial alterné photo / texte : rythme de section signature de la
  * refonte (transposé des blocs Glacier Express).
  *
  * `image` : URL déjà préfixée basePath (convention du repo).
@@ -14,7 +14,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 type EditorialSplitProps = {
   image: string;
   imageAlt?: string;
-  /** Remplace la photo fixe par un média libre — une galerie, par exemple.
+  /** Remplace la photo fixe par un média libre : une galerie, par exemple.
    *  `image` reste requis et sert de repli si `media` n'est pas fourni. */
   media?: ReactNode;
   label?: string;

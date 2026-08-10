@@ -22,11 +22,11 @@ import { notifierNouvelleConnexion } from "@/lib/admin/notify-login";
 const DUMMY_HASH = hashSync("timing-attack-mitigation", 12);
 
 /**
- * Authentification de l'espace équipe (Phase 2 — simulateur proforma).
+ * Authentification de l'espace équipe (Phase 2 : simulateur proforma).
  *
  * Choix validé le 16/07/2026 : authentification complète par comptes
  * utilisateurs (et non mot de passe partagé). Les comptes vivent dans la
- * variable d'environnement ADMIN_USERS_JSON — pas de base de données à
+ * variable d'environnement ADMIN_USERS_JSON, sans base de données à
  * maintenir pour une poignée de comptes :
  *
  *   ADMIN_USERS_JSON='[{"email":"maggie@lachotel.com","name":"Maggie","role":"admin","hash":"$2a$12$…"}]'
@@ -34,11 +34,11 @@ const DUMMY_HASH = hashSync("timing-attack-mitigation", 12);
  * Le hash bcrypt d'un mot de passe se génère avec :
  *   node scripts/hash-admin-password.mjs "le-mot-de-passe"
  *
- * RÔLES (17/07/2026) : « admin » (direction — Maggie, Max) et « reception »
+ * RÔLES (17/07/2026) : « admin » (la direction, Maggie et Max) et « reception »
  * (Toky, Tata). À ce stade les deux rôles ont le MÊME accès : le rôle sert
  * à identifier qui est connecté et prépare les droits plus fins de la
  * Phase 3 (réservations, facturation). Ne pas inventer de restriction ici
- * sans arbitrage — décision explicite de Max.
+ * sans arbitrage (décision explicite de Max).
  *
  * L'espace admin n'existe que sur Vercel (prepare-static-export.mjs retire
  * src/app/admin et src/app/api avant l'export statique GitHub Pages).
@@ -56,7 +56,7 @@ function normalizeRole(v: unknown): AdminRole {
 function loadUsers(): AdminUser[] {
   // Deux formes acceptées :
   // - ADMIN_USERS_JSON : le JSON brut (pratique dans le dashboard Vercel) ;
-  // - ADMIN_USERS_B64  : le même JSON encodé base64 — OBLIGATOIRE dans un
+  // - ADMIN_USERS_B64  : le même JSON encodé base64, OBLIGATOIRE dans un
   //   fichier .env* local, car dotenv-expand mange les « $ » des hash bcrypt.
   //   Encoder : node -e "console.log(Buffer.from(process.argv[1]).toString('base64'))" '<json>'
   const raw =
@@ -83,7 +83,7 @@ function loadUsers(): AdminUser[] {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  session: { strategy: "jwt", maxAge: 60 * 60 * 12 }, // 12 h — journée de travail
+  session: { strategy: "jwt", maxAge: 60 * 60 * 12 }, // 12 h : une journée de travail
   pages: { signIn: "/admin/connexion" },
   trustHost: true,
   providers: [
@@ -129,7 +129,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   events: {
     /**
      * Alerte « nouvel appareil » (Max + Maggie). On ne notifie que si le
-     * navigateur ne porte pas de marqueur signé valide — sinon l'équipe
+     * navigateur ne porte pas de marqueur signé valide. Sinon, l'équipe
      * recevrait un e-mail à chaque connexion et cesserait de les lire.
      *
      * Tout est encapsulé : ni l'absence de Resend ni une panne d'envoi ne

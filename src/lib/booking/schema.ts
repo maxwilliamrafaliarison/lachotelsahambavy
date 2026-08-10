@@ -1,6 +1,6 @@
 /**
  * Schéma Zod du formulaire de réservation (3 étapes).
- * Cf. Phase 7 §7.2 — Structure formulaire + §7.3 — Validation.
+ * Cf. Phase 7 §7.2 (Structure formulaire) et §7.3 (Validation).
  *
  * Design :
  *   - Un schéma *objet* pur par étape (extensible via `.extend()`).
@@ -18,8 +18,8 @@ export const PENSIONS = ["room-only", "bb", "half-board", "full-board"] as const
 export const TRANSFERS = ["none", "fianarantsoa-4x4", "ambalakely"] as const;
 /* « familial » n'est PAS une catégorie du parc : les tarifs officiels en
    font une configuration du Pilotis Nuptial (lit supplémentaire à
-   30 000 Ar/personne). Il reste proposé ici — c'est une demande légitime
-   — mais libellé comme une configuration, pour ne pas promettre une
+   30 000 Ar/personne). Il reste proposé ici (c'est une demande légitime)
+   mais libellé comme une configuration, pour ne pas promettre une
    chambre que le catalogue n'affiche pas. */
 export const ROOM_IDS = [
   "pilotis",
@@ -54,7 +54,7 @@ const stayStepObject = z.object({
     .int()
     .min(1, "booking.errors.guestsMin")
     .max(20, "booking.errors.guestsMax"),
-  // Décomposition facultative (héritée de la booking bar) — informationnelle.
+  // Décomposition facultative et informationnelle (héritée de la booking bar).
   // `guests` reste la source de vérité côté email/CRM pour compat rétro.
   adults: z.number().int().min(1, "booking.errors.adultsMin").max(20).optional(),
   children: z.number().int().min(0).max(10, "booking.errors.childrenMax").optional(),

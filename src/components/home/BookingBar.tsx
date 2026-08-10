@@ -116,7 +116,7 @@ function MiniCalendar({
   );
 }
 
-/* ─── Booking Bar — Fixed Bottom ─── */
+/* ─── Booking Bar: Fixed Bottom ─── */
 export default function BookingBar({ dict }: { dict: any }) {
   const b = dict.bookingBar;
   const router = useRouter();
@@ -128,7 +128,7 @@ export default function BookingBar({ dict }: { dict: any }) {
   const [rooms, setRooms] = useState<RoomConfig[]>([{ adults: 2, children: 0 }]);
   const [rate, setRate] = useState("standard");
   const [visible, setVisible] = useState(false);
-  // Below `lg` (1024 px) default to minimized — the expanded 4-field bar
+  // Below `lg` (1024 px) default to minimized: the expanded 4-field bar
   // eats ~50 % of a phone viewport otherwise. Desktop keeps it expanded.
   // Safe to read `window` in the lazy initializer: the component returns
   // `null` while `visible=false`, so server and first client render both
@@ -261,7 +261,7 @@ export default function BookingBar({ dict }: { dict: any }) {
         )}
       </button>
 
-      {/* Full bar — hidden when minimized */}
+      {/* Full bar: hidden when minimized */}
       {!minimized && (
         <div className="max-w-[1100px] mx-auto px-4">
           <div className="booking-bar__inner">

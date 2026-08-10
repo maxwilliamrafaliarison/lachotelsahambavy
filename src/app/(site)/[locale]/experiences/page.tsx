@@ -12,7 +12,7 @@ import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 const basePath = getBasePath();
 
 /* ------------------------------------------------------------------ */
-/* Textes FR de secours — remplacés par dict.experiences dès que le    */
+/* Textes FR de secours, remplacés par dict.experiences dès que le     */
 /* delta scratchpad/dict-deltas/experiences.json est fusionné (fr/en/es). */
 /* ------------------------------------------------------------------ */
 const EX_FR = {
@@ -404,7 +404,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
         </div>
       </section>
 
-      {/* ──── TEASER MARIAGES — Nuit sur le lac ──── */}
+      {/* ──── TEASER MARIAGES : Nuit sur le lac ──── */}
       <section className="ge-night py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit

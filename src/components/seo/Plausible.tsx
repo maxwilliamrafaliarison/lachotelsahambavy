@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 /**
- * Plausible Analytics — cookie-less / RGPD by design.
+ * Plausible Analytics : cookie-less / RGPD by design.
  * Cf. Phase 5 §5.7 (Monitoring) + Phase 8 §8.7.2.
  *
  * Tracking automatique :

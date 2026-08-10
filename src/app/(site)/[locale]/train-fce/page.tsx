@@ -16,7 +16,7 @@ const basePath = getBasePath();
 
 /**
  * Clés ajoutées au dictionnaire via le protocole de deltas
- * (scratchpad/dict-deltas/train.json) — optionnelles tant que la fusion
+ * (scratchpad/dict-deltas/train.json), optionnelles tant que la fusion
  * n'a pas eu lieu, avec repli français inline.
  */
 type TrainExtras = {
@@ -111,7 +111,7 @@ export default async function TrainFCEPage({
       />
 
       {/* Le train dans le corridor de forêt primaire, voyageurs aux
-          fenêtres — bien plus parlant que la draisine à quai qui tenait
+          fenêtres. Bien plus parlant que la draisine à quai qui tenait
           cette place : c'est le trajet qu'on vient chercher, pas le
           matériel. La draisine reste illustrée dans sa propre section. */}
       <PanoramaHero
@@ -123,7 +123,7 @@ export default async function TrainFCEPage({
         cta={{ href: "#draisine", label: dict.train.draisineLabel }}
       />
 
-      {/* Avis de service — posé juste sous le hero, avant toute lecture du
+      {/* Avis de service : posé juste sous le hero, avant toute lecture du
           contenu. La page reste entière et consultable : le visiteur doit
           pouvoir se projeter sur le trajet, il doit simplement savoir
           d'emblée qu'il faut nous consulter avant de compter dessus. */}
@@ -138,7 +138,7 @@ export default async function TrainFCEPage({
         </div>
       </section>
 
-      {/* ──── #ligne-fce — la ligne Fianarantsoa–Côte Est ──── */}
+      {/* ──── #ligne-fce : la ligne Fianarantsoa–Côte Est ──── */}
       <section id="ligne-fce" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           {/* Intro éditoriale */}
@@ -157,7 +157,7 @@ export default async function TrainFCEPage({
             </div>
           </ScrollReveal>
 
-          {/* Bande photo — l'hôtel face à la gare */}
+          {/* Bande photo : l'hôtel face à la gare */}
           <ScrollReveal className="mt-14 md:mt-20">
             <figure>
               <div className="overflow-hidden rounded-[3px] border border-hairline">
@@ -201,7 +201,7 @@ export default async function TrainFCEPage({
         </div>
       </section>
 
-      {/* ──── Informations pratiques — Aperçu à filets fins ──── */}
+      {/* ──── Informations pratiques : aperçu à filets fins ──── */}
       <section className="bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-10 md:grid-cols-2 md:gap-16">
@@ -233,7 +233,7 @@ export default async function TrainFCEPage({
         </div>
       </section>
 
-      {/* ──── #draisine — location privative de la draisine ──── */}
+      {/* ──── #draisine : location privative de la draisine ──── */}
       <section id="draisine" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="space-y-6 md:space-y-8">

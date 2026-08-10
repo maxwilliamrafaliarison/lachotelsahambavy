@@ -4,7 +4,7 @@ import { type Locale, getBasePath } from "@/lib/utils";
 const basePath = getBasePath();
 
 /**
- * Teaser restaurant — un EditorialSplit (photo à droite : il suit les trois
+ * Teaser restaurant : un EditorialSplit (photo à droite, car il suit les trois
  * splits alternés de DestinationsTeaser, qui se terminent photo à gauche)
  * avec récapitulatif à filets fins petit-déjeuner / menu.
  */

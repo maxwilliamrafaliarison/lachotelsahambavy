@@ -30,12 +30,12 @@ export default function CookieNotice({ dict }: { dict: any }) {
         {/* Le bouton d'acceptation était en `.btn--cta`, un vestige : fond or
             hérité et coins à 2 px, quand tout le reste du site appelle à
             l'action en bleu du lac et en pilule. Il apparaît sur les vingt
-            pages — c'était le bouton le plus visible du site à ne pas
+            pages : c'était le bouton le plus visible du site à ne pas
             suivre la charte. Passé en `.ge-cta`.
 
             « Refuser » reste en lin discret : la charte veut que le choix
             par défaut soit le plus protecteur, mais elle n'impose pas que
-            les deux options aient le même poids visuel — refuser doit
+            les deux options aient le même poids visuel. Refuser doit
             rester atteignable sans être un appel à l'action. */}
         <div className="flex items-center gap-4">
           <button onClick={accept} className="ge-cta !px-5 !py-2 !text-[11.5px]">

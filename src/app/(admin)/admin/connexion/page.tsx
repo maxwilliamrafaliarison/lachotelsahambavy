@@ -78,7 +78,7 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-[3px] border border-hairline bg-white py-2.5 pl-3.5 pr-12 text-[15px] text-ink outline-none transition-colors focus:border-lake"
         />
-        {/* Affichage en clair — standard des formulaires de connexion : le
+        {/* Affichage en clair, standard des formulaires de connexion : le
             mot de passe saisi à l'aveugle est la première cause d'échec.
             type="button" pour ne pas soumettre le formulaire. */}
         <button

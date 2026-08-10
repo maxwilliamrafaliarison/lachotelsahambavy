@@ -9,7 +9,7 @@ import "./globals.css";
  * `<html lang>` doit porter la langue de la page. Or seul un layout situé
  * SOUS le segment `[locale]` connaît cette langue : un layout de groupe
  * placé au-dessus ne reçoit pas le paramètre. Tant que `app/layout.tsx`
- * existait, il était le seul à rendre `<html>` — et il annonçait « fr »
+ * existait, il était le seul à rendre `<html>`, et il annonçait « fr »
  * sur les pages anglaises et espagnoles, aux lecteurs d'écran comme aux
  * moteurs.
  *

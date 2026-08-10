@@ -1,20 +1,20 @@
 import type { ReactNode } from "react";
 
 /**
- * Avis de service — bandeau d'information sur la disponibilité d'une
+ * Avis de service : bandeau d'information sur la disponibilité d'une
  * prestation.
  *
  * POURQUOI UN TROISIÈME REGISTRE DE COULEUR
  * Le design system n'en avait que deux : le bleu du lac pour ce qui est
  * cliquable, la terre cuite pour l'éditorial. Un avis n'est ni l'un ni
- * l'autre — il n'appelle pas au clic et ne raconte pas l'hôtel, il
+ * l'autre : il n'appelle pas au clic et ne raconte pas l'hôtel, il
  * informe.
  *
  * ROUGE, sur décision de la direction (08/08/2026). La première version
  * était ambre : une ligne ferroviaire à l'arrêt n'est pas une panne du
  * site, et l'ambre disait « à vérifier avec nous » plutôt que « vous avez
- * un problème ». La direction veut que l'information accroche l'œil —
- * c'est un arbitrage éditorial qui lui revient. Le rouge est donc pris
+ * un problème ». La direction veut que l'information accroche l'œil.
+ * C'est un arbitrage éditorial qui lui revient. Le rouge est donc pris
  * pur (teinte 0,0°), à 19,3° de la terre cuite pour rester impossible à
  * confondre avec le registre éditorial. Encre sur fond : 7,37:1.
  *
@@ -25,7 +25,7 @@ import type { ReactNode } from "react";
  *
  * `role="status"` plutôt que `role="alert"` : l'avis est présent au
  * chargement, il n'interrompt rien. `alert` forcerait le lecteur d'écran
- * à couper sa lecture — et ce n'est pas parce que le bloc est devenu
+ * à couper sa lecture, et ce n'est pas parce que le bloc est devenu
  * rouge qu'il faut couper la parole au visiteur.
  */
 export default function AvisService({
@@ -33,7 +33,7 @@ export default function AvisService({
   children,
   className = "",
 }: {
-  /** Texte de la pastille — court, l'état en deux ou trois mots. */
+  /** Texte de la pastille : court, l'état en deux ou trois mots. */
   pastille: string;
   /** Le message, et ce que le visiteur peut faire. */
   children: ReactNode;

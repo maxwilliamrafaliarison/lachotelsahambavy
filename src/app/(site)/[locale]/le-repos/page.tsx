@@ -13,7 +13,7 @@ import LeReposSignupForm from "./LeReposSignupForm";
 const basePath = getBasePath();
 
 /**
- * Copie « Le Repos » — les clés proviennent du delta dictionnaire
+ * Copie « Le Repos » : les clés proviennent du delta dictionnaire
  * (dict-deltas/repos.json) fusionné dans fr/en/es.json. Le cast local permet
  * de typer la page avant fusion sans toucher aux JSON du repo.
  */
@@ -97,7 +97,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
         cta={{ href: "#esprit", label: r.heroCta }}
       />
 
-      {/* Intro — l'esprit du lieu, prose courte en mesure lisible */}
+      {/* Intro : l'esprit du lieu, prose courte en mesure lisible */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
@@ -112,7 +112,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Trois splits éditoriaux alternés — pour qui / les bungalows / la nature */}
+      {/* Trois splits éditoriaux alternés : pour qui / les bungalows / la nature */}
       <section className="pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl space-y-10 px-6 md:space-y-14 md:px-10">
           <EditorialSplit
@@ -155,7 +155,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Tarif doux — récapitulatif à filets fins + photo d'ambiance */}
+      {/* Tarif doux : récapitulatif à filets fins + photo d'ambiance */}
       <section id="tarifs" className="scroll-mt-24 bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
@@ -196,7 +196,7 @@ export default async function LeReposPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* Avant-première — le formulaire d'inscription existant, restylé */}
+      {/* Avant-première : le formulaire d'inscription existant, restylé */}
       <section id="avant-premiere" className="scroll-mt-24 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid items-start gap-10 md:grid-cols-2 md:gap-16">

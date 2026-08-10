@@ -16,7 +16,7 @@ import {
 } from "@/lib/schema-org";
 
 /**
- * LAYOUT RACINE du site public — c'est lui qui rend <html> et <body>.
+ * LAYOUT RACINE du site public : c'est lui qui rend <html> et <body>.
  *
  * Il a récupéré ce rôle de `app/layout.tsx`, supprimé : ce dernier ne
  * recevait pas le paramètre de langue et annonçait donc `lang="fr"` sur

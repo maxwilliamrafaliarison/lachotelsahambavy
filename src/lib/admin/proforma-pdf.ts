@@ -1,5 +1,5 @@
 /**
- * Génération PDF de la facture proforma — côté client, via pdf-lib (léger,
+ * Génération PDF de la facture proforma, côté client, via pdf-lib (léger,
  * pas de moteur de rendu embarqué). A4, logo, multi-pages si besoin.
  */
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
