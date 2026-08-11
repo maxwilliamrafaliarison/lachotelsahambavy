@@ -34,10 +34,14 @@ import type { Locale } from "@/lib/utils";
  * doivent produire le même ordre, sans quoi l'hydratation casse.
  *
  * QUINZE AVIS, TOUS RÉELS. Voir l'en-tête de src/data/testimonials.ts :
- * les trente témoignages rédigés en interne ont été supprimés. La
- * mention de transparence sous le ruban n'est pas décorative, elle
- * répond à l'article L.111-7-2 du Code de la consommation, qui oblige
- * tout site affichant des avis à dire s'ils sont contrôlés et comment.
+ * les trente témoignages rédigés en interne ont été supprimés.
+ *
+ * PAS DE MENTION DE TRANSPARENCE SOUS LE RUBAN : elle y figurait, la
+ * direction l'a fait retirer le 10/08/2026. L'article L.111-7-2 du Code
+ * de la consommation demande pourtant à tout site affichant des avis de
+ * dire s'ils sont contrôlés et par qui. Les libellés restent dans les
+ * dictionnaires (`testimonials.transparence`) : remettre le paragraphe
+ * est l'affaire d'une ligne.
  */
 
 type Plateforme = "booking" | "google" | "tripadvisor";
@@ -147,10 +151,6 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
             )}
             {enMarche ? t.pause : t.lecture}
           </button>
-
-          {/* Article L.111-7-2 du Code de la consommation : dire d'où
-              viennent les avis et s'ils sont contrôlés. */}
-          <p className="ge-measure text-[13px] leading-relaxed text-muted">{t.transparence}</p>
         </div>
       </div>
     </section>
