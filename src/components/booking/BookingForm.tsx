@@ -10,7 +10,7 @@
  *   3. Confirmation (consentements RGPD + CGR + hCaptcha + honeypot)
  *
  * Pré-remplissage : URL params depuis la barre de réservation homepage
- *   (?checkin=...&checkout=...&guests=N&rate=standard|to|promo)
+ *   (?checkin=...&checkout=...&guests=N&rate=standard|to)
  *
  * Sans clés (mode dev / static export) : fallback mailto gracieux.
  */

@@ -70,13 +70,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               <p className="ge-measure text-[15px] leading-relaxed text-body md:text-base">
                 {dict.contact.subtitle}
               </p>
-              <div className="mt-8 border-t border-hairline pt-6">
-                <p className="ge-measure text-[15px] leading-relaxed text-body">
-                  <span className="font-semibold text-terracotta">{dict.contact.offerReminder}</span>
-                  {". "}
-                  {dict.contact.offerReminderDetail}
-                </p>
-              </div>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>

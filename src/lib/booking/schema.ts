@@ -13,7 +13,7 @@ import { z } from "zod";
 import { locales, type Locale } from "@/lib/utils";
 
 // ─── Énums ────────────────────────────────────────────────────────
-export const RATES = ["standard", "to", "promo"] as const;
+export const RATES = ["standard", "to"] as const;
 export const PENSIONS = ["room-only", "bb", "half-board", "full-board"] as const;
 export const TRANSFERS = ["none", "fianarantsoa-4x4", "ambalakely"] as const;
 /* « familial » n'est PAS une catégorie du parc : les tarifs officiels en
@@ -152,9 +152,9 @@ type LabelsShape = {
 
 export const LABELS: LabelsShape = {
   rate: {
-    fr: { standard: "Tarif Standard", to: "Tarif Tour-Opérateur", promo: "Offre 2 nuits (-50 %)" },
-    en: { standard: "Standard rate", to: "Tour Operator rate", promo: "2-night offer (-50%)" },
-    es: { standard: "Tarifa estándar", to: "Tarifa Tour-Operador", promo: "Oferta 2 noches (-50 %)" },
+    fr: { standard: "Tarif Standard", to: "Tarif Tour-Opérateur" },
+    en: { standard: "Standard rate", to: "Tour Operator rate" },
+    es: { standard: "Tarifa estándar", to: "Tarifa Tour-Operador" },
   },
   pension: {
     fr: {

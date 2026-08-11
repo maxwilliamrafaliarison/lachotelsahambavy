@@ -340,8 +340,6 @@
       "termsConsent": "He leído y acepto las condiciones de reserva y cancelación.",
       "required": "Campos obligatorios"
     },
-    "offerReminder": "2 noches = 50 % en la 2.ª",
-    "offerReminderDetail": "Para cualquier reserva de 2 noches consecutivas, el hotel ofrece 50 % de descuento en la 2.ª noche.",
     "heroTitle": "Planifique su estancia",
     "heroSubtitle": "Respondemos en 24 h · Sin comisión · Pago a la llegada",
     "mapTitle": "Encuéntrenos",
@@ -819,7 +817,6 @@
     "rate": "Tarifas especiales",
     "rateStandard": "Tarifa estándar",
     "rateTo": "Tarifa Tour-Operador",
-    "ratePromo": "Oferta 2 noches",
     "submit": "Reservar",
     "selectDate": "Seleccionar"
   },
@@ -842,8 +839,7 @@
     },
     "rates": {
       "standard": "Tarifa estándar",
-      "to": "Tarifa Tour-Operador",
-      "promo": "Oferta 2 noches (-50 %)"
+      "to": "Tarifa Tour-Operador"
     },
     "pensions": {
       "room-only": "Solo alojamiento",
@@ -906,7 +902,7 @@
         "items": [
           "Toda solicitud de reserva se convierte en reserva firme tras la recepción de un correo de confirmación enviado por el hotel en un plazo de 24 horas.",
           "No se cobra ningún pago en línea. El abono se efectúa a la llegada, en efectivo (Ariary o Euros), con tarjeta bancaria, o mediante transferencia bancaria previa.",
-          "Las tarifas mostradas en lachotel.com están en Euros (EUR) y por habitación, impuestos incluidos. Las ofertas promocionales (ej. Oferta 2 noches –50 %) no son acumulables con otros descuentos.",
+          "Las tarifas mostradas en lachotel.com están en Euros (EUR) y por habitación, impuestos incluidos.",
           "La tasa turística, recaudada por cuenta del Estado malgache, se añade a la tarifa (aproximadamente 5 000 AR por persona y noche).",
           "El formulario en línea está limitado a 20 viajeros y 4 habitaciones. Para grupos más grandes (seminarios, bodas), contáctenos directamente."
         ]

@@ -56,11 +56,6 @@ export const siteConfig = {
        précisément ce que la directive Omnibus interdit. */
     tripadvisor: { score: 4.1, total: 230 },
   },
-  specialOffer: {
-    fr: "50 % sur la 2ᵉ nuitée pour toute réservation de 2 nuits consécutives",
-    en: "50% off the 2nd night for any booking of 2 consecutive nights",
-    es: "50 % en la 2.ª noche para cualquier reserva de 2 noches consecutivas",
-  },
 };
 
 /**

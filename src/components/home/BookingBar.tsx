@@ -185,7 +185,6 @@ export default function BookingBar({ dict }: { dict: any }) {
   const rateLabels: Record<string, string> = {
     standard: b.rateStandard,
     to: b.rateTo,
-    promo: b.ratePromo,
   };
 
   function formatDateDisplay(dateStr: string) {
@@ -396,13 +395,12 @@ export default function BookingBar({ dict }: { dict: any }) {
               </button>
               {openPanel === "rate" && (
                 <div className="booking-bar__dropdown booking-bar__dropdown--up" onClick={e => e.stopPropagation()}>
-                  {(["standard", "to", "promo"] as const).map(r => (
+                  {(["standard", "to"] as const).map(r => (
                     <button key={r} type="button"
                       onClick={() => { setRate(r); setOpenPanel(null); }}
                       className={`block w-full text-left px-4 py-3 text-sm transition-colors rounded-[3px] ${
                         rate === r ? "bg-gold/20 text-gold font-semibold" : "text-paper/80 hover:bg-gold/10 hover:text-gold"}`}>
                       {rateLabels[r]}
-                      {r === "promo" && <span className="ml-2 text-xs bg-gold/20 text-gold px-2 py-0.5 rounded-full">-50%</span>}
                     </button>
                   ))}
                 </div>

@@ -56,9 +56,6 @@ export default function ContactSection({ dict }: { dict: any }) {
                   {dict.contact.cta ?? dict.contact.title}
                 </a>
               </div>
-              {dict.contact.offerReminder && (
-                <p className="mt-6 text-sm text-terracotta">{dict.contact.offerReminder}</p>
-              )}
             </ScrollReveal>
           </div>
 

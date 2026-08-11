@@ -340,8 +340,6 @@
       "termsConsent": "J’ai lu et j’accepte les conditions de réservation et d’annulation.",
       "required": "Champs obligatoires"
     },
-    "offerReminder": "Offre 2 nuits = 50 % sur la 2ᵉ",
-    "offerReminderDetail": "Pour toute réservation de 2 nuits consécutives, l’hôtel vous offre 50 % de réduction sur la 2ᵉ nuitée.",
     "heroTitle": "Planifiez votre séjour",
     "heroSubtitle": "Nous vous répondons sous 24 h · Zéro commission · Paiement à l’arrivée",
     "mapTitle": "Nous trouver",
@@ -819,7 +817,6 @@
     "rate": "Tarifs spéciaux",
     "rateStandard": "Tarif standard",
     "rateTo": "Tarif Tour-Opérateur",
-    "ratePromo": "Offre 2 nuits",
     "submit": "Réserver",
     "selectDate": "Sélectionner"
   },
@@ -842,8 +839,7 @@
     },
     "rates": {
       "standard": "Tarif Standard",
-      "to": "Tarif Tour-Opérateur",
-      "promo": "Offre 2 nuits (-50 %)"
+      "to": "Tarif Tour-Opérateur"
     },
     "pensions": {
       "room-only": "Logement seul",
@@ -906,7 +902,7 @@
         "items": [
           "Toute demande de réservation devient une réservation ferme après réception d’un e-mail de confirmation envoyé par l’hôtel sous 24 heures.",
           "Aucun paiement n’est collecté en ligne. Le règlement s’effectue à l’arrivée, en espèces (Ariary ou Euros), par carte bancaire, ou par virement bancaire préalable.",
-          "Les tarifs affichés sur lachotel.com sont en Euros (EUR) et par chambre, taxes comprises. Les offres promotionnelles (ex. Offre 2 nuits –50 %) sont non cumulables avec d’autres remises.",
+          "Les tarifs affichés sur lachotel.com sont en Euros (EUR) et par chambre, taxes comprises.",
           "La vignette touristique, collectée pour le compte de l’État malgache, s’ajoute au tarif (environ 5 000 AR par personne et par nuit).",
           "Le formulaire en ligne limite les demandes à 20 voyageurs et 4 chambres. Pour les groupes plus importants (séminaires, mariages), merci de nous contacter directement."
         ]
