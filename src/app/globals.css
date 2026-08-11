@@ -25,20 +25,25 @@
        • or / champagne → inchangés (façade du restaurant, lumière du lac),
          touches et monde « Nuit ».
 
-     DEUX EXCEPTIONS ASSUMÉES, décidées par la direction. Ne pas les
+     UNE EXCEPTION ASSUMÉE, décidée par la direction. Ne pas la
      « corriger » au nom de la règle ci-dessus :
 
-       1. LE FILET DE LA NAVBAR est en terre cuite, y compris sur la
-          rubrique active, alors que la règle attribue l'état actif au lac.
-          C'est une demande explicite du 08/08/2026 : faire revenir l'ocre
-          des pilotis dans le menu. Le filet ne colore pas le texte, il le
-          souligne : la lisibilité sur photo est préservée, et l'ocre est
-          la couleur signature de l'hôtel.
+       LE MENU ENTIER, rubriques et sous-rubriques, est en orange brûlé
+       #CC4310, y compris pour signaler la page courante, alors que la
+       règle attribue l'état actif au lac. C'est un arbitrage du
+       10/08/2026 : la direction voulait une couleur unique, vive, et
+       reconnaissable comme celle des bungalows. Le menu forme un monde
+       clos, avec son propre fond et ses propres pastilles ; il ne
+       concurrence donc pas le bleu qui gouverne le reste des pages.
+       Les valeurs et le calcul de contraste qui borne la teinte sont
+       plus bas, dans le bloc :root.
 
-       2. LES PASTILLES DES SOUS-MENUS prennent la teinte de leur rubrique
-          (terre cuite, lac ou thé selon le contenu). La couleur y encode
-          une information (les murs en pisé, l'eau, les théiers) au lieu
-          de signaler l'interactivité. Voir TEINTES dans Navbar.tsx.
+     HISTORIQUE, pour que personne ne le rétablisse par erreur : deux
+     exceptions figuraient ici. Le filet terre cuite sous les rubriques
+     (08/08/2026) a disparu avec le passage aux pastilles, un souligné
+     sous une pastille pleine se lisant comme une rature. Et les trois
+     teintes par rubrique (terre, lac, thé), qui encodaient le contenu
+     de chaque section, ont été remplacées par la teinte unique.
      ============================================================ */
 
   /* Panorama (socle clair) */
@@ -167,10 +172,23 @@ body {
 
   /* Menus « verre clair & pastilles ». rgba() ne sait pas consommer une
      variable hexadécimale : ce sont les triplets qui portent la teinte.
-     --lh-past / --lh-past-ink sont posés par rubrique dans Navbar.tsx. */
-  --lh-past: 166 69 23;             /* teinte vive = terre cuite #A64517 (survol) */
-  --lh-past-pale: 247 227 214;      /* teinte claire de la pastille au repos */
-  --lh-past-ink: 133 54 15;         /* encre lisible = terracotta-deep #85360F */
+
+     UNE SEULE TEINTE POUR TOUT LE MENU (demande de Maggie, 10/08/2026).
+     Les trois teintes par rubrique (terre, lac, thé) ont disparu : la
+     direction voulait une couleur unique et plus vive. C'est un orange
+     brûlé, la couleur des bungalows sur pilotis, poussé aussi loin que
+     le contraste l'autorise. Saturation 85,5 % contre 75,7 % pour
+     l'ancienne terre cuite, et clarté 43 % contre 37 %.
+
+     POURQUOI PAS PLUS VIF. Le survol remplit la pastille et passe l'encre
+     au blanc ; c'est ce couple qui borne la teinte. Blanc sur #CC4310
+     donne 4,80:1, au-dessus du seuil AA de 4,5. Le cran suivant, un
+     #D14A0E, tombe à 4,47:1 et l'orange franc #E8590C à 3,58:1 : ils ne
+     seraient lisibles qu'en gros caractères. #CC4310 est donc le plus
+     vif que le menu puisse porter sans devenir illisible. */
+  --lh-past: 204 67 16;             /* orange brûlé #CC4310 (survol, page active) */
+  --lh-past-pale: 248 232 226;      /* #F8E8E2, fond de la pastille au repos */
+  --lh-past-ink: 140 44 8;          /* #8C2C08, encre lisible, 7,11:1 sur le pâle */
   --lh-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -988,6 +1006,83 @@ body {
     outline-offset: 2px;
   }
 
+  /* ---------- ONGLETS DE PREMIER NIVEAU ----------
+
+     Maggie aimait la présentation des sous-menus et voulait la même pour
+     le menu lui-même (10/08/2026). Les rubriques deviennent donc des
+     pastilles, comme leurs enfants, mais d'un cran plus grandes : c'est
+     la demande de lisibilité.
+
+     LE VRAI GAIN DE LISIBILITÉ N'EST PAS LA TAILLE, C'EST LA CASSE.
+     Les rubriques étaient en capitales, 13 px, interlettrage 0,07em. Une
+     capitale sans jambages ni hampes prive l'œil de la silhouette du mot,
+     et « Restaurant & Bar » s'y déchiffre lettre à lettre. En bas de
+     casse à 15 px, le mot se reconnaît d'un coup. On gagne donc sur les
+     deux tableaux : deux points de corps, et une forme de mot rendue.
+
+     OPACITÉ PLUS FRANCHE QUE LES PASTILLES DE SOUS-MENU (0,92 contre
+     0,84) : celles-ci reposent sur le plateau de verre, celles-là
+     flottent directement sur la photo du hero. Le fond de la pastille
+     est ce qui garantit le contraste de son texte ; il ne peut pas
+     dépendre de ce que montre la photo derrière. */
+
+  .lh-onglet {
+    display: inline-flex; align-items: center; gap: 6px;
+    min-height: 40px; padding: 9px 18px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 15px; font-weight: 500; line-height: 1.2;
+    letter-spacing: 0.005em;
+    white-space: nowrap;
+    color: rgb(var(--lh-past-ink));
+    background: rgb(var(--lh-past-pale) / 0.92);
+    box-shadow: inset 0 0 0 1px rgb(var(--lh-past) / 0.28);
+    transition: background-color 160ms var(--lh-ease),
+                color 160ms var(--lh-ease),
+                box-shadow 160ms var(--lh-ease),
+                transform 160ms var(--lh-ease);
+  }
+
+  /* Survol, panneau ouvert, page courante : la pastille se remplit et
+     l'encre passe au blanc. Même raisonnement que pour les sous-menus,
+     densifier la teinte sous une encre foncée ferait BAISSER le
+     contraste. Rempli à l'opaque, il vaut 4,80:1 quoi qu'il y ait
+     derrière.
+
+     La page courante se signale par ce même remplissage, et non plus par
+     le filet terre cuite qui soulignait la rubrique : un souligné sous
+     une pastille pleine se lit comme une rature. */
+  .lh-onglet:hover,
+  .lh-onglet:focus-visible,
+  .lh-onglet[data-actif="true"] {
+    background: rgb(var(--lh-past));
+    color: #FFFFFF;
+    box-shadow: inset 0 0 0 1px rgb(var(--lh-past)),
+                0 4px 14px -6px rgb(var(--lh-past) / 0.60);
+  }
+
+  /* Un décalage vertical, là où les sous-menus glissent latéralement :
+     dans une rangée horizontale, un mouvement de côté ferait tanguer la
+     file entière. */
+  .lh-onglet:hover { transform: translateY(-1px); }
+
+  .lh-onglet:focus-visible {
+    outline: 2px solid rgb(var(--lh-past-ink));
+    outline-offset: 2px;
+  }
+
+  /* ENTRE 1280 ET 1440 PX, LA RANGÉE NE TIENT PAS.
+     Le menu desktop apparaît à 1280 px. Sept pastilles à 18 px de marge
+     intérieure, plus les drapeaux et le bouton « Réserver », demandent
+     1 290 px pour 1 216 px disponibles : mesuré, le bouton dépassait de
+     74 px et se faisait rogner. On resserre les marges de 6 px de chaque
+     côté, ce qui rend 84 px, sans toucher au corps du texte : c'est la
+     lisibilité qui était demandée, pas l'air autour. Au-delà de 1440 px,
+     les pastilles retrouvent leur respiration. */
+  @media (max-width: 1439px) {
+    .lh-onglet { padding-inline: 10px; }
+  }
+
   /* ---------- ENTRÉE ---------- */
 
   @keyframes lh-plateau-entree {
@@ -1044,8 +1139,9 @@ body {
 
   @media (prefers-reduced-motion: reduce) {
     .lh-plateau { animation: none; }
-    .lh-pastille { transition: none; }
-    .lh-pastille:hover, .lh-pastille:focus-visible { transform: none; }
+    .lh-pastille, .lh-onglet { transition: none; }
+    .lh-pastille:hover, .lh-pastille:focus-visible,
+    .lh-onglet:hover { transform: none; }
   }
 
   @media (forced-colors: active) {

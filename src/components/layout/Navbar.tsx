@@ -37,43 +37,18 @@ function estActif(pathname: string, href: string, locale: string): boolean {
 }
 
 /**
- * Teinte des pastilles, par rubrique.
+ * UNE SEULE TEINTE POUR TOUT LE MENU.
  *
- * Elle n'est pas décorative. Chaque rubrique prend la couleur de ce
- * qu'elle contient : la terre cuite des murs en pisé et des bungalows sur
- * pilotis, le bleu de l'eau pour les activités nautiques, le vert des
- * théiers pour les jardins et la plantation. Le visiteur apprend la
- * correspondance sans qu'on la lui explique.
+ * Il y en avait trois, une par rubrique : la terre cuite des murs en pisé,
+ * le bleu de l'eau pour les activités nautiques, le vert des théiers pour
+ * les jardins. L'idée était que le visiteur apprenne la correspondance
+ * sans qu'on la lui explique. La direction a tranché autrement le
+ * 10/08/2026 : une couleur unique, et plus vive.
  *
- * Deux triplets par teinte : le fond de la pastille (couleur vive, posée
- * à 12 % d'opacité) et son encre (variante foncée, seule à porter du
- * texte). Les ratios sont calculés dans l'en-tête du bloc CSS.
+ * Les trois triplets vivent désormais dans :root (globals.css), où le
+ * calcul de contraste qui borne la teinte est documenté. Plus rien n'est
+ * posé par rubrique, d'où la disparition de styleTeinte().
  */
-type Teinte = { fond: string; pale: string; encre: string };
-
-const TERRE: Teinte = { fond: "166 69 23", pale: "247 227 214", encre: "133 54 15" };
-const LAC: Teinte = { fond: "23 104 168", pale: "220 234 244", encre: "18 84 127" };
-const THE: Teinte = { fond: "38 71 27", pale: "223 232 218", encre: "27 53 19" };
-
-const TEINTES: Record<string, Teinte> = {
-  "/hotel": TERRE, // les murs en pisé
-  "/hebergements": TERRE, // les bungalows ocre sur pilotis
-  "/experiences": LAC, // canoë, pédalos, l'eau
-  "/train-fce": TERRE, // le wagon 1930
-  "/jardins": THE, // les jardins et la plantation
-};
-
-const TEINTE_DEFAUT = TERRE;
-
-/** Variables CSS de teinte, à poser sur le plateau ou la feuille. */
-function styleTeinte(href: string): React.CSSProperties {
-  const t = TEINTES[href.split("#")[0]] ?? TEINTE_DEFAUT;
-  return {
-    "--lh-past": t.fond,
-    "--lh-past-pale": t.pale,
-    "--lh-past-ink": t.encre,
-  } as React.CSSProperties;
-}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) {
@@ -222,7 +197,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             }}
           />
 
-          <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-4 px-5 md:px-8">
+          {/* `gap-3` sous 1440 px : en espagnol, « Nuestros Jardines » et
+              « Alojamientos » ne laissaient que 17 px de marge à la rangée.
+              Reprendre ces 12 px sur les intervalles plutôt que sur les
+              pastilles, dont le confort intérieur est ce qui a été demandé. */}
+          <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-3 px-5 md:px-8 min-[1440px]:gap-4">
             {/* Marque : mark + lockup typographique */}
             <Link
               href={`/${locale}/`}
@@ -281,7 +260,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             )}
 
             {/* Menu desktop */}
-            <ul className="ml-auto hidden items-center gap-0.5 min-[1280px]:flex">
+            <ul className="ml-auto hidden items-center gap-1 min-[1280px]:flex min-[1440px]:gap-1.5">
               {primaryItems.map((item, i) => (
                 <li key={item.href} className="relative">
                   {item.children ? (
@@ -322,18 +301,17 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                         // changement de page.
                         closeAll();
                       }}
-                      className={`group/nav relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
-                      style={itemShadow}
+                      className="lh-onglet"
+                      data-actif={
+                        estActif(pathname, item.href, locale) || openMenu === item.href
+                          ? "true"
+                          : undefined
+                      }
+                      aria-current={
+                        estActif(pathname, item.href, locale) ? "page" : undefined
+                      }
                     >
                       {(item.shortLabel ?? item.label)[locale]}
-                      <span
-                        aria-hidden="true"
-                        className={`pointer-events-none absolute inset-x-2 bottom-0.5 h-[2px] origin-left rounded-full bg-terracotta transition-transform duration-300 ease-out ${
-                          estActif(pathname, item.href, locale) || openMenu === item.href
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover/nav:scale-x-100"
-                        }`}
-                      />
                       <svg
                         width="9"
                         height="6"
@@ -362,7 +340,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     <div
                       onMouseEnter={cancelClose}
                       onMouseLeave={scheduleClose}
-                      style={styleTeinte(item.href)}
                       className={`lh-plateau hidden min-[1280px]:block ${
                         i >= primaryItems.length - 2 ? "lh-plateau--fin" : ""
                       }`}
@@ -386,18 +363,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                   {!item.children && (
                     <Link
                       href={localizeHref(item.href, locale)}
-                      className={`group/nav relative block whitespace-nowrap px-2 py-2 text-[13px] font-medium uppercase tracking-[0.07em] transition-colors ${itemColor}`}
-                      style={itemShadow}
+                      className="lh-onglet"
+                      data-actif={estActif(pathname, item.href, locale) ? "true" : undefined}
+                      aria-current={estActif(pathname, item.href, locale) ? "page" : undefined}
                     >
                       {(item.shortLabel ?? item.label)[locale]}
-                      <span
-                        aria-hidden="true"
-                        className={`pointer-events-none absolute inset-x-2 bottom-0.5 h-[2px] origin-left rounded-full bg-terracotta transition-transform duration-300 ease-out ${
-                          estActif(pathname, item.href, locale)
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover/nav:scale-x-100"
-                        }`}
-                      />
                     </Link>
                   )}
                 </li>
@@ -451,7 +421,6 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
               <li>
                 <Link
                   href={`/${locale}/`}
-                  style={styleTeinte("/hotel")}
                   className="lh-feuille__rubrique"
                   onClick={closeAll}
                 >
@@ -459,7 +428,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                 </Link>
               </li>
               {mobileItems.map((item: NavItem) => (
-                <li key={item.href} style={styleTeinte(item.href)}>
+                <li key={item.href}>
                   <div className="flex items-center gap-2">
                     <Link
                       href={localizeHref(item.href, locale)}
