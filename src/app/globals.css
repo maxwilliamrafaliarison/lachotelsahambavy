@@ -1083,6 +1083,133 @@ body {
     .lh-onglet { padding-inline: 10px; }
   }
 
+  /* ============================================================
+     RUBAN DE TÉMOIGNAGES
+     ============================================================ */
+
+  /* Le masque en fondu remplace un dégradé posé par-dessus : un voile
+     opaque marcherait sur fond uni, mais la section est sur papier et
+     devrait alors connaître sa propre couleur. Le masque, lui, découpe
+     l'alpha : il fonctionne quel que soit le fond. */
+  .lh-ruban {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .lh-ruban__piste {
+    display: flex;
+    width: max-content;
+    animation: lh-ruban-defile 78s linear infinite;
+  }
+
+  /* Deux exemplaires côte à côte, translation de -50 % : au moment où
+     l'animation revient à zéro, le second occupe la place du premier.
+     Aucune couture visible. La durée est longue à dessein, un ruban qui
+     file donne le tournis et empêche de lire. */
+  @keyframes lh-ruban-defile {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+
+  .lh-ruban__lot {
+    display: flex;
+    gap: 16px;
+    padding: 4px 8px;
+    margin: 0;
+    list-style: none;
+  }
+
+  /* Pause au survol pour la souris, au focus pour le clavier : sans
+     cela, tabuler dans une carte qui défile est intenable. Le bouton
+     plus bas couvre le tactile. */
+  .lh-ruban:hover .lh-ruban__piste,
+  .lh-ruban:focus-within .lh-ruban__piste,
+  .lh-ruban[data-anime="false"] .lh-ruban__piste {
+    animation-play-state: paused;
+  }
+
+  /* ---------- LA CARTE ---------- */
+
+  /* Largeur fixe : c'est ce qui garantit que la translation de -50 %
+     tombe juste, et cela donne au ruban son rythme régulier. Hauteur
+     fixe aussi, sinon la piste ondule au gré de la longueur des textes.
+     340 px plutôt que les ~420 px de Hostinger, l'échelle demandée. */
+  .lh-avis {
+    display: flex; flex-direction: column;
+    width: 340px; height: 232px;
+    padding: 20px 22px;
+    border-radius: 4px;
+    background: var(--color-white);
+    box-shadow: inset 0 0 0 1px var(--color-hairline);
+  }
+
+  .lh-avis__source {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+    font-family: var(--font-body);
+    font-size: 12px; font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .lh-avis__note {
+    margin-left: auto;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: rgb(var(--lh-past));      /* l'orange du menu, pas un jaune de plus */
+  }
+
+  /* Quatre lignes puis coupe. Un lien « lire la suite » ouvrirait une
+     interaction au milieu d'une piste en mouvement ; la carte renvoie
+     déjà vers la plateforme, où l'avis est intégral. */
+  .lh-avis__texte {
+    flex: 1;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14px; line-height: 1.55;
+    color: var(--color-body);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .lh-avis__pied {
+    display: flex; align-items: baseline; gap: 8px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .lh-avis__nom {
+    font-family: var(--font-body);
+    font-size: 13px; font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .lh-avis__lieu {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+
+  .lh-ruban__pause {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 12px; letter-spacing: 0.02em;
+    color: rgb(var(--lh-past-ink));
+    background: rgb(var(--lh-past-pale) / 0.75);
+    box-shadow: inset 0 0 0 1px rgb(var(--lh-past) / 0.22);
+    transition: background-color 160ms var(--lh-ease);
+  }
+  .lh-ruban__pause:hover { background: rgb(var(--lh-past-pale)); }
+  .lh-ruban__pause:focus-visible {
+    outline: 2px solid rgb(var(--lh-past-ink));
+    outline-offset: 2px;
+  }
+
   /* ---------- ENTRÉE ---------- */
 
   @keyframes lh-plateau-entree {
@@ -1142,6 +1269,11 @@ body {
     .lh-pastille, .lh-onglet { transition: none; }
     .lh-pastille:hover, .lh-pastille:focus-visible,
     .lh-onglet:hover { transform: none; }
+    /* Le ruban s'immobilise : un mouvement continu est exactement ce que
+       ce réglage système demande de supprimer. Les quinze avis restent
+       lisibles, la piste se parcourt alors au doigt ou à la molette. */
+    .lh-ruban__piste { animation: none; }
+    .lh-ruban { overflow-x: auto; }
   }
 
   @media (forced-colors: active) {

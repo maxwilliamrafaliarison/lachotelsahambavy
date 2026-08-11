@@ -297,7 +297,10 @@
   },
   "testimonials": {
     "label": "Témoignages",
-    "title": "Ils ont vécu l’expérience"
+    "title": "Ils ont vécu l’expérience",
+    "pause": "Suspendre le défilement",
+    "lecture": "Reprendre le défilement",
+    "transparence": "Ces avis sont publiés tels que nos clients les ont écrits sur Booking.com, Google et TripAdvisor, sans modification ni sélection favorable. Le Lac Hôtel ne les vérifie pas lui-même : chaque plateforme applique ses propres contrôles, et l'intégralité des avis reste consultable chez elle."
   },
   "contact": {
     "label": "Contact & Réservation",

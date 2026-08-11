@@ -52,15 +52,19 @@ interface ReviewItem {
 // =====================================================
 
 /**
- * Agrégats officiels collectés le 16/04/2026 (cf. _RESSOURCES/18_AVIS_CLIENTS).
- *   - Google     : 4,6 / 5 · 157 avis
- *   - Tripadvisor: 4,1 / 5 · 229 avis
+ * Agrégats relevés le 10/08/2026 sur la fiche Google de l'hôtel, qui
+ * affiche sa propre note et relaie celle de Tripadvisor.
+ *   - Google     : 4,6 / 5 · 177 avis
+ *   - Tripadvisor: 4,1 / 5 · 230 avis
  *   - Booking    : 9,0 / 10 · 34 avis (= 4,5 / 5)
- *   - Pondéré    : 4,3 / 5 · 420 avis
+ *   - Pondéré    : 4,3 / 5 · 441 avis
+ *
+ * (4,6×177 + 4,1×230 + 4,5×34) / 441 = 4,33. Le compte précédent, 420,
+ * datait d'avril et sous-estimait Google de vingt avis.
  */
 export const AGGREGATE_RATING = {
   ratingValue: 4.3,
-  reviewCount: 420,
+  reviewCount: 441,
   bestRating: 5,
   worstRating: 1,
 } as const;

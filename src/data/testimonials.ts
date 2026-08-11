@@ -1,11 +1,27 @@
 /**
  * Témoignages clients trilingues (fr / en / es).
  *
- * Organisés par source (Booking, Google, TripAdvisor) pour permettre
- * à l'utilisateur de filtrer dans l'UI. Les 4-5 premiers avis de chaque
- * source sont tirés des vrais commentaires reçus par l'hôtel ; les
- * autres sont représentatifs du ton général des avis (thèmes : bungalows
- * sur pilotis, personnel, cuisine, plantation de thé, cadre naturel).
+ * QUINZE AVIS, TOUS AUTHENTIQUES. Cinq par plateforme, tirés des vrais
+ * commentaires reçus par l'hôtel.
+ *
+ * Le fichier en comptait quarante-cinq : trente étaient rédigés en
+ * interne, « représentatifs du ton général des avis », et attribués à des
+ * personnes nommées avec un pays, sous les logos Booking, Google et
+ * TripAdvisor. Ils ont été supprimés le 10/08/2026.
+ *
+ * NE JAMAIS EN RAJOUTER D'INVENTÉ. La directive Omnibus (UE) 2019/2161 a
+ * inscrit sur la liste noire de la directive 2005/29/CE le fait de
+ * soumettre de faux avis de consommateurs ou de présenter des avis de
+ * manière trompeuse : c'est interdit sans examen au cas par cas. En droit
+ * français, article L.121-4 du Code de la consommation, sanctionné par
+ * l'article L.132-2 jusqu'à 300 000 € et 10 % du chiffre d'affaires
+ * annuel moyen.
+ *
+ * POUR EN AJOUTER, une seule voie : les vrais commentaires, récupérés par
+ * la direction dans l'extranet Booking et la fiche Google Business, avec
+ * le nom tel que le client l'a signé. Les trois plateformes bloquent la
+ * collecte automatique, et leurs conditions encadrent la reprise de ces
+ * textes hors de leurs propres widgets.
  */
 
 export interface Review {
@@ -69,106 +85,6 @@ export const bookingReviews: Review[] = [
       es: "Bungalows sobre el lago muy cómodos. El jardín es sublime. Personal muy acogedor. La cocina estaba deliciosa, a base de productos frescos del huerto.",
     },
   },
-  {
-    name: "Thomas",
-    location: "Allemagne",
-    rating: 5,
-    text: {
-      fr: "Un lieu enchanteur, parfait pour déconnecter. Le silence du lac le matin, les oiseaux, la brume sur les collines de thé… une expérience inoubliable.",
-      en: "An enchanting place, perfect for disconnecting. The silence of the lake in the morning, the birds, the mist over the tea hills… an unforgettable experience.",
-      es: "Un lugar encantador, perfecto para desconectar. El silencio del lago por la mañana, los pájaros, la niebla sobre las colinas de té… una experiencia inolvidable.",
-    },
-  },
-  {
-    name: "Sophie",
-    location: "Belgique",
-    rating: 5,
-    text: {
-      fr: "La piscine au coucher du soleil, face au lac, est un moment magique. Les chambres sont élégantes et le service irréprochable. Un coup de cœur absolu.",
-      en: "The pool at sunset, facing the lake, is a magical moment. The rooms are elegant and the service flawless. An absolute favorite.",
-      es: "La piscina al atardecer, frente al lago, es un momento mágico. Las habitaciones son elegantes y el servicio impecable. Un favorito absoluto.",
-    },
-  },
-  {
-    name: "Jean-Marc",
-    location: "France",
-    rating: 5,
-    text: {
-      fr: "L'excursion dans la plantation de thé organisée par l'hôtel est passionnante. Rencontre avec les cueilleuses, dégustation, vue imprenable. Tout est parfaitement orchestré.",
-      en: "The tea plantation tour organized by the hotel is fascinating. Meeting the pickers, tasting, breathtaking view. Everything is perfectly orchestrated.",
-      es: "La excursión a la plantación de té organizada por el hotel es apasionante. Encuentro con las recolectoras, degustación, vista impresionante. Todo perfectamente organizado.",
-    },
-  },
-  {
-    name: "Lucía",
-    location: "Espagne",
-    rating: 4,
-    text: {
-      fr: "Cadre exceptionnel, rapport qualité-prix excellent. La chambre standard est confortable et bien tenue. Seul bémol : le wifi un peu capricieux, mais on vient justement ici pour se déconnecter.",
-      en: "Exceptional setting, excellent value for money. The standard room is comfortable and well kept. Only downside: the wifi is a bit fickle, but disconnecting is exactly why you come here.",
-      es: "Entorno excepcional, excelente relación calidad-precio. La habitación estándar es cómoda y bien cuidada. Única pega: el wifi un poco caprichoso, pero precisamente se viene aquí para desconectar.",
-    },
-  },
-  {
-    name: "Karl M.",
-    location: "Autriche",
-    rating: 5,
-    text: {
-      fr: "Arrivée en train FCE depuis Manakara, accueil à la gare de Sahambavy. Quelle magie après ces huit heures de paysages ! La chambre nous attendait avec du thé local.",
-      en: "Arrived by FCE train from Manakara, welcomed at Sahambavy station. What magic after those eight hours of landscapes! The room was waiting for us with local tea.",
-      es: "Llegamos en el tren FCE desde Manakara, recibidos en la estación de Sahambavy. ¡Qué magia tras esas ocho horas de paisajes! La habitación nos esperaba con té local.",
-    },
-  },
-  {
-    name: "Véronique L.",
-    location: "Luxembourg",
-    rating: 5,
-    text: {
-      fr: "La boutique de l'hôtel propose du miel de leurs ruches et des savons artisanaux faits sur place. Nous sommes repartis avec des souvenirs qui ont du sens.",
-      en: "The hotel boutique offers honey from their hives and handcrafted soaps made on site. We left with meaningful souvenirs.",
-      es: "La tienda del hotel ofrece miel de sus colmenas y jabones artesanales hechos in situ. Nos fuimos con recuerdos con significado.",
-    },
-  },
-  {
-    name: "Erik H.",
-    location: "Norvège",
-    rating: 5,
-    text: {
-      fr: "Week-end anniversaire surprise. Le personnel a décoré la chambre pendant le dîner : gâteau, pétales, bouteille de vin. Attention rare, souvenir impérissable.",
-      en: "Surprise birthday weekend. Staff decorated the room during dinner: cake, petals, bottle of wine. Rare attention, unforgettable memory.",
-      es: "Fin de semana de cumpleaños sorpresa. El personal decoró la habitación durante la cena: pastel, pétalos, botella de vino. Atención rara, recuerdo inolvidable.",
-    },
-  },
-  {
-    name: "Maria F.",
-    location: "Portugal",
-    rating: 5,
-    text: {
-      fr: "Nous sommes retraités et cherchions le calme. Ici nous l'avons trouvé : aucune musique forte, chambre spacieuse, service attentif sans être envahissant. Idéal.",
-      en: "We're retirees seeking calm. We found it here: no loud music, spacious room, attentive but never intrusive service. Ideal.",
-      es: "Somos jubilados buscando tranquilidad. Aquí la encontramos: sin música alta, habitación espaciosa, servicio atento sin ser invasivo. Ideal.",
-    },
-  },
-  {
-    name: "Kenji N.",
-    location: "Japon",
-    rating: 5,
-    text: {
-      fr: "Photographe, j'ai passé une semaine à capturer la lumière sur le lac. Levers, couchers, brumes matinales. L'hôtel est un paradis pour quiconque aime la photographie.",
-      en: "As a photographer, I spent a week capturing the light on the lake. Sunrises, sunsets, morning mists. The hotel is a paradise for anyone who loves photography.",
-      es: "Como fotógrafo, pasé una semana capturando la luz del lago. Amaneceres, atardeceres, nieblas matutinas. El hotel es un paraíso para quienes amamos la fotografía.",
-    },
-  },
-  {
-    name: "Pedro S.",
-    location: "Brésil",
-    rating: 4,
-    text: {
-      fr: "Tour du lac en pédalo au coucher du soleil, inoubliable. Petit bémol : la route depuis l'aéroport est un peu longue, prévoir des arrêts. L'arrivée fait vite oublier.",
-      en: "Pedal boat around the lake at sunset, unforgettable. Small downside: the drive from the airport is a bit long, plan some stops. The arrival quickly makes up for it.",
-      es: "Hidropedal por el lago al atardecer, inolvidable. Pequeña pega: el trayecto desde el aeropuerto es un poco largo, planificar paradas. La llegada lo compensa rápido.",
-    },
-  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -225,106 +141,6 @@ export const googleReviews: Review[] = [
       es: "Una parada imprescindible entre Fianarantsoa y Ranomafana. Acogida cálida, entorno tranquilo y sabrosa cocina malgache. El orgullo de nuestra región.",
     },
   },
-  {
-    name: "James H.",
-    location: "États-Unis",
-    rating: 5,
-    text: {
-      fr: "Nous sommes arrivés par le train FCE depuis Manakara et l'hôtel nous attendait à la gare. Quelle belle surprise après ce voyage ! Accueil parfait, chambre magnifique.",
-      en: "We arrived by the FCE train from Manakara and the hotel picked us up at the station. What a lovely surprise after that journey! Perfect welcome, beautiful room.",
-      es: "Llegamos en el tren FCE desde Manakara y el hotel nos recogió en la estación. ¡Qué sorpresa tan agradable después de ese viaje! Acogida perfecta, habitación magnífica.",
-    },
-  },
-  {
-    name: "Nathalie B.",
-    location: "France",
-    rating: 5,
-    text: {
-      fr: "Nous avons passé notre nuit de noces dans la suite nuptiale sur pilotis. Service aux petits soins, pétales de roses, bouteille offerte. Un souvenir impérissable.",
-      en: "We spent our wedding night in the nuptial overwater suite. Attentive service, rose petals, complimentary bottle. An unforgettable memory.",
-      es: "Pasamos nuestra noche de bodas en la suite nupcial sobre pilotes. Servicio atento, pétalos de rosa, botella de cortesía. Un recuerdo inolvidable.",
-    },
-  },
-  {
-    name: "Hans M.",
-    location: "Pays-Bas",
-    rating: 5,
-    text: {
-      fr: "Parfaite harmonie entre nature, gastronomie et confort. Le potager biologique, le lac, les collines de thé : tout concourt à la beauté du lieu.",
-      en: "Perfect harmony between nature, gastronomy and comfort. The organic garden, the lake, the tea hills: everything contributes to the beauty of the place.",
-      es: "Perfecta armonía entre naturaleza, gastronomía y confort. El huerto ecológico, el lago, las colinas de té: todo contribuye a la belleza del lugar.",
-    },
-  },
-  {
-    name: "Emma W.",
-    location: "Canada",
-    rating: 5,
-    text: {
-      fr: "Massage traditionnel en bord de lac, calme absolu, petit-déjeuner en terrasse face au lever du soleil. L'endroit parfait pour se ressourcer après les pistes malgaches.",
-      en: "Traditional massage by the lake, absolute calm, breakfast on the terrace facing the sunrise. The perfect place to recharge after the Malagasy roads.",
-      es: "Masaje tradicional junto al lago, calma absoluta, desayuno en la terraza frente al amanecer. El lugar perfecto para recargarse tras las pistas malgaches.",
-    },
-  },
-  {
-    name: "Pierre L.",
-    location: "France",
-    rating: 5,
-    text: {
-      fr: "Séjour en famille avec deux enfants. Bungalow confortable, grand jardin pour courir, pédalos sur le lac, personnel adorable avec les petits. Expérience réussie.",
-      en: "Family stay with two children. Comfortable bungalow, large garden to run in, pedal boats on the lake, staff lovely with the little ones. A successful experience.",
-      es: "Estancia en familia con dos niños. Bungalow cómodo, gran jardín para correr, hidropedales en el lago, personal adorable con los pequeños. Experiencia exitosa.",
-    },
-  },
-  {
-    name: "Sophie B.",
-    location: "Suisse",
-    rating: 5,
-    text: {
-      fr: "Noël dans la suite nuptiale : cheminée allumée, décoration subtile, dîner de gala face au lac. Le personnel a transformé une soirée en véritable conte.",
-      en: "Christmas in the nuptial suite: lit fireplace, subtle decoration, gala dinner facing the lake. The staff transformed an evening into a real fairytale.",
-      es: "Navidad en la suite nupcial: chimenea encendida, decoración sutil, cena de gala frente al lago. El personal transformó una velada en un verdadero cuento.",
-    },
-  },
-  {
-    name: "Andrew J.",
-    location: "Australie",
-    rating: 5,
-    text: {
-      fr: "Ornithologue amateur, j'ai identifié plus de trente espèces en trois jours rien qu'autour du lac. L'hôtel est idéalement placé pour les passionnés de nature.",
-      en: "As an amateur ornithologist, I identified over thirty species in three days just around the lake. The hotel is ideally located for nature enthusiasts.",
-      es: "Ornitólogo aficionado, identifiqué más de treinta especies en tres días solo alrededor del lago. El hotel está idealmente situado para los amantes de la naturaleza.",
-    },
-  },
-  {
-    name: "Francesca P.",
-    location: "Italie",
-    rating: 5,
-    text: {
-      fr: "Le Wagon 1930 est une pépite : bois patiné, détails d'époque, confort moderne. On dort bercé par les sons du lac. À essayer absolument au moins une fois.",
-      en: "The 1930 Wagon is a gem: patinated wood, period details, modern comfort. You sleep rocked by the sounds of the lake. An absolute must at least once.",
-      es: "El Vagón 1930 es una joya: madera patinada, detalles de época, confort moderno. Se duerme acunado por los sonidos del lago. Imprescindible al menos una vez.",
-    },
-  },
-  {
-    name: "Yolande D.",
-    location: "Belgique",
-    rating: 5,
-    text: {
-      fr: "Visite du potager biologique avec le chef, puis dîner préparé avec les légumes cueillis. Transparence totale, saveurs incroyables. Un concept que j'ai rarement vu.",
-      en: "Tour of the organic garden with the chef, then dinner prepared with the picked vegetables. Total transparency, incredible flavors. A concept I've rarely seen.",
-      es: "Visita al huerto ecológico con el chef, luego cena preparada con las verduras recogidas. Transparencia total, sabores increíbles. Un concepto que rara vez he visto.",
-    },
-  },
-  {
-    name: "Mika V.",
-    location: "Finlande",
-    rating: 5,
-    text: {
-      fr: "Piscine à débordement face au lac, transats à l'ombre des eucalyptus, service en bord de bassin. Tout y est pour se croire ailleurs. Rare à Madagascar.",
-      en: "Infinity pool facing the lake, loungers in the shade of eucalyptus trees, poolside service. Everything is there to feel elsewhere. Rare in Madagascar.",
-      es: "Piscina infinita frente al lago, tumbonas a la sombra de los eucaliptos, servicio junto a la piscina. Todo está ahí para sentirse en otro lugar. Raro en Madagascar.",
-    },
-  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -379,106 +195,6 @@ export const tripadvisorReviews: Review[] = [
       fr: "Petit-déjeuner exceptionnel servi face au lac, avec confitures maison, fruits frais et pâtisseries délicates. Un moment de grâce avant de reprendre la route.",
       en: "Exceptional breakfast served facing the lake, with homemade jams, fresh fruit and delicate pastries. A moment of grace before hitting the road again.",
       es: "Desayuno excepcional servido frente al lago, con mermeladas caseras, fruta fresca y pastelería delicada. Un momento de gracia antes de retomar el camino.",
-    },
-  },
-  {
-    name: "Kevin O'Brien",
-    location: "Irlande",
-    rating: 5,
-    text: {
-      fr: "Ambiance feutrée au bar, belle sélection de rhums arrangés et de vins malgaches. Une soirée détente avant de retrouver notre bungalow sur le lac.",
-      en: "Cozy atmosphere at the bar, fine selection of flavored rums and Malagasy wines. A relaxing evening before returning to our lakeside bungalow.",
-      es: "Ambiente acogedor en el bar, buena selección de rones infusionados y vinos malgaches. Una velada relajada antes de volver a nuestro bungalow sobre el lago.",
-    },
-  },
-  {
-    name: "Valérie D.",
-    location: "France",
-    rating: 5,
-    text: {
-      fr: "Service personnalisé du début à la fin. Le directeur est venu nous saluer, le chef a adapté le menu à nos allergies. Rare et précieux aujourd'hui.",
-      en: "Personalized service from start to finish. The manager came to greet us, the chef adapted the menu to our allergies. Rare and precious today.",
-      es: "Servicio personalizado de principio a fin. El director vino a saludarnos, el chef adaptó el menú a nuestras alergias. Raro y valioso hoy en día.",
-    },
-  },
-  {
-    name: "Philip M.",
-    location: "Royaume-Uni",
-    rating: 5,
-    text: {
-      fr: "Excursion en draisine le long de la voie ferrée, puis vélos autour du lac. L'hôtel propose des activités originales et bien organisées. Bravo.",
-      en: "Rail trolley excursion along the railway, then bicycles around the lake. The hotel offers original and well-organized activities. Well done.",
-      es: "Excursión en dresina por la vía férrea, luego bicicletas alrededor del lago. El hotel ofrece actividades originales y bien organizadas. Enhorabuena.",
-    },
-  },
-  {
-    name: "Martina R.",
-    location: "Allemagne",
-    rating: 4,
-    text: {
-      fr: "Séjour réussi en famille. La piscine a fait le bonheur des enfants, le restaurant propose des options adaptées aux plus jeunes. Un vrai bon plan sur la route du Sud.",
-      en: "Successful family stay. The pool delighted the children, the restaurant offers child-friendly options. A real gem on the road South.",
-      es: "Estancia familiar exitosa. La piscina hizo las delicias de los niños, el restaurante ofrece opciones adaptadas. Un auténtico descubrimiento en la ruta del sur.",
-    },
-  },
-  {
-    name: "Thomas G.",
-    location: "Pays-Bas",
-    rating: 5,
-    text: {
-      fr: "Lune de miel inoubliable dans le bungalow pilotis. Réveil face au lac, café en terrasse, silence absolu. Le personnel, discret, a deviné tous nos besoins.",
-      en: "Unforgettable honeymoon in the pilotis bungalow. Waking up facing the lake, coffee on the terrace, absolute silence. The discreet staff anticipated our every need.",
-      es: "Luna de miel inolvidable en el bungalow sobre pilotes. Despertar frente al lago, café en la terraza, silencio absoluto. El personal, discreto, adivinó todas nuestras necesidades.",
-    },
-  },
-  {
-    name: "Ingrid O.",
-    location: "Suède",
-    rating: 5,
-    text: {
-      fr: "La visite de la plantation de thé au petit matin, dans la brume, est pure poésie. Dégustation à la boutique, achat de variétés introuvables ailleurs. Un must.",
-      en: "The tea plantation visit at dawn, in the mist, is pure poetry. Tasting at the boutique, buying varieties unavailable anywhere else. A must.",
-      es: "La visita a la plantación de té al amanecer, entre la niebla, es pura poesía. Degustación en la tienda, compra de variedades únicas. Imprescindible.",
-    },
-  },
-  {
-    name: "Pablo R.",
-    location: "Espagne",
-    rating: 4,
-    text: {
-      fr: "Voyage en famille, quatre adultes plus deux ados. Bungalows côte à côte, dîner tous ensemble en terrasse. Service flexible, le chef a cuisiné un poisson pêché par les enfants.",
-      en: "Family trip, four adults plus two teenagers. Side-by-side bungalows, dinner all together on the terrace. Flexible service, the chef cooked a fish caught by the children.",
-      es: "Viaje en familia, cuatro adultos más dos adolescentes. Bungalows adyacentes, cena todos juntos en la terraza. Servicio flexible, el chef cocinó un pescado capturado por los niños.",
-    },
-  },
-  {
-    name: "Clara M.",
-    location: "Brésil",
-    rating: 5,
-    text: {
-      fr: "Piscine au coucher du soleil, ciel rose orangé réfléchi sur le lac, un cocktail à la main. J'ai rarement vécu un moment aussi cinématographique dans un hôtel.",
-      en: "Pool at sunset, pink-orange sky reflected on the lake, a cocktail in hand. I've rarely experienced such a cinematic moment in a hotel.",
-      es: "Piscina al atardecer, cielo rosa naranja reflejado en el lago, un cóctel en la mano. Pocas veces he vivido un momento tan cinematográfico en un hotel.",
-    },
-  },
-  {
-    name: "Oliver H.",
-    location: "Royaume-Uni",
-    rating: 5,
-    text: {
-      fr: "Nomade numérique, j'ai prolongé mon séjour d'une semaine. Wifi correct dans les chambres proches du bâtiment principal, cadre inspirant, nourriture saine. Parfait pour travailler.",
-      en: "As a digital nomad, I extended my stay by a week. Decent wifi in rooms close to the main building, inspiring setting, healthy food. Perfect for working.",
-      es: "Nómada digital, prolongué mi estancia una semana. Wifi decente en habitaciones cercanas al edificio principal, entorno inspirador, comida saludable. Perfecto para trabajar.",
-    },
-  },
-  {
-    name: "Anaïs T.",
-    location: "France",
-    rating: 5,
-    text: {
-      fr: "Les jardins botaniques méritent à eux seuls le détour : orchidées, frangipaniers, vieilles espèces endémiques. Le jardinier a pris le temps de nous guider une matinée.",
-      en: "The botanical gardens alone are worth the trip: orchids, frangipani, old endemic species. The gardener took the time to guide us one morning.",
-      es: "Los jardines botánicos por sí solos merecen la visita: orquídeas, franchipanes, viejas especies endémicas. El jardinero nos dedicó una mañana para guiarnos.",
     },
   },
 ];

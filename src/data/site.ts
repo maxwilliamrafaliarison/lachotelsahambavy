@@ -49,7 +49,12 @@ export const siteConfig = {
     booking: { score: 9.0, total: 34, label: "Fabuleux" },
     // 177 avis relevés sur la fiche Google le 09/08/2026 (157 auparavant).
     google: { score: 4.6, total: 177 },
-    tripadvisor: { score: 4.5, total: 229 },
+    /* 4,1 et non 4,5 : la valeur affichée contredisait celle que
+       src/lib/schema-org.ts documente depuis avril, et celle que Google
+       relaie sur la fiche de l'hôtel (« Tripadvisor 4,1/5 · 230 avis »),
+       relevé le 10/08/2026. Afficher une note supérieure à la vraie est
+       précisément ce que la directive Omnibus interdit. */
+    tripadvisor: { score: 4.1, total: 230 },
   },
   specialOffer: {
     fr: "50 % sur la 2ᵉ nuitée pour toute réservation de 2 nuits consécutives",
