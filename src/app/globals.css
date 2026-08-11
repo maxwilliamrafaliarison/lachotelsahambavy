@@ -1091,25 +1091,37 @@ body {
      opaque marcherait sur fond uni, mais la section est sur papier et
      devrait alors connaître sa propre couleur. Le masque, lui, découpe
      l'alpha : il fonctionne quel que soit le fond. */
+  /* Défilement horizontal NATIF : c'est lui qui rend le ruban saisissable
+     au doigt, à la molette et au pavé tactile. L'avance automatique se
+     fait en poussant `scrollLeft` (cf. Testimonials.tsx), jamais par
+     transformation CSS, qu'aucun geste ne pourrait interrompre.
+
+     La barre de défilement est masquée : elle doublerait le fondu des
+     bords d'un trait gris sur toute la largeur de la page. */
   .lh-ruban {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;                    /* Firefox */
+    -ms-overflow-style: none;                 /* anciens Edge */
+    overscroll-behavior-x: contain;           /* ne pas déclencher le retour arrière du navigateur */
+    cursor: grab;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
             mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .lh-ruban::-webkit-scrollbar { display: none; }
+  .lh-ruban:active { cursor: grabbing; }
+
+  /* Le focus clavier doit se voir : le ruban est désormais un conteneur
+     focalisable, on y entre à la tabulation et on le parcourt aux
+     flèches. Sans anneau, rien ne signalerait où l'on se trouve. */
+  .lh-ruban:focus-visible {
+    outline: 2px solid rgb(var(--lh-past));
+    outline-offset: 4px;
   }
 
   .lh-ruban__piste {
     display: flex;
     width: max-content;
-    animation: lh-ruban-defile 78s linear infinite;
-  }
-
-  /* Deux exemplaires côte à côte, translation de -50 % : au moment où
-     l'animation revient à zéro, le second occupe la place du premier.
-     Aucune couture visible. La durée est longue à dessein, un ruban qui
-     file donne le tournis et empêche de lire. */
-  @keyframes lh-ruban-defile {
-    from { transform: translate3d(0, 0, 0); }
-    to   { transform: translate3d(-50%, 0, 0); }
   }
 
   .lh-ruban__lot {
@@ -1118,15 +1130,6 @@ body {
     padding: 4px 8px;
     margin: 0;
     list-style: none;
-  }
-
-  /* Pause au survol pour la souris, au focus pour le clavier : sans
-     cela, tabuler dans une carte qui défile est intenable. Le bouton
-     plus bas couvre le tactile. */
-  .lh-ruban:hover .lh-ruban__piste,
-  .lh-ruban:focus-within .lh-ruban__piste,
-  .lh-ruban[data-anime="false"] .lh-ruban__piste {
-    animation-play-state: paused;
   }
 
   /* ---------- LA CARTE ---------- */
@@ -1193,22 +1196,6 @@ body {
     color: var(--color-muted);
   }
 
-  .lh-ruban__pause {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-family: var(--font-body);
-    font-size: 12px; letter-spacing: 0.02em;
-    color: rgb(var(--lh-past-ink));
-    background: rgb(var(--lh-past-pale) / 0.75);
-    box-shadow: inset 0 0 0 1px rgb(var(--lh-past) / 0.22);
-    transition: background-color 160ms var(--lh-ease);
-  }
-  .lh-ruban__pause:hover { background: rgb(var(--lh-past-pale)); }
-  .lh-ruban__pause:focus-visible {
-    outline: 2px solid rgb(var(--lh-past-ink));
-    outline-offset: 2px;
-  }
 
   /* ---------- ENTRÉE ---------- */
 
@@ -1269,11 +1256,11 @@ body {
     .lh-pastille, .lh-onglet { transition: none; }
     .lh-pastille:hover, .lh-pastille:focus-visible,
     .lh-onglet:hover { transform: none; }
-    /* Le ruban s'immobilise : un mouvement continu est exactement ce que
-       ce réglage système demande de supprimer. Les quinze avis restent
-       lisibles, la piste se parcourt alors au doigt ou à la molette. */
-    .lh-ruban__piste { animation: none; }
-    .lh-ruban { overflow-x: auto; }
+    /* Le ruban ne s'avance plus tout seul (le composant ne démarre pas
+       sa boucle), mais il reste défilable à la main : c'est exactement ce
+       que ce réglage système demande, supprimer le mouvement subi, pas la
+       possibilité de lire. */
+    .lh-ruban { scroll-behavior: auto; }
   }
 
   @media (forced-colors: active) {

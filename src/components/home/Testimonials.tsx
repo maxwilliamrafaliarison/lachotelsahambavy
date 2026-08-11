@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/data/site";
 import {
@@ -13,42 +13,49 @@ import { LogoGoogle, LogoTripAdvisor, LogoBooking } from "@/components/ui/LogosP
 import type { Locale } from "@/lib/utils";
 
 /**
- * Ruban de témoignages, en défilement continu.
+ * Ruban de témoignages, défilant et manipulable.
  *
  * POURQUOI UN RUBAN ET NON UN CARROUSEL. Un carrousel a des vues, un
  * index, des flèches : il dit « il y a quinze avis, en voici un ». Une
  * piste qui glisse sans fin dit « il y en a trop pour les compter ».
- * C'est une figure d'abondance, et c'est ce qu'on est venu chercher en
- * regardant ce que fait Hostinger.
  *
- * LE PROCÉDÉ. La liste est rendue DEUX FOIS dans la même piste, et
- * l'animation translate celle-ci de -50 % avant de repartir à zéro. À
- * l'instant du saut, le second exemplaire occupe exactement la place
- * qu'occupait le premier : l'œil ne voit aucune couture. Le doublon est
- * marqué aria-hidden, sinon un lecteur d'écran énoncerait chaque avis
- * deux fois.
+ * CE N'EST PLUS UNE ANIMATION CSS. La première version translatait la
+ * piste par keyframes, avec un bouton pour l'arrêter. La direction a
+ * demandé de retirer le bouton et de rendre le ruban saisissable
+ * (10/08/2026) : or une translation CSS ne se saisit pas, elle ignore la
+ * molette et le doigt.
  *
- * LES AVIS SONT MÊLÉS, un par plateforme à tour de rôle, et non rangés
- * par source comme dans la version précédente à trois colonnes. Le
- * mélange est calculé, jamais tiré au sort : le serveur et le client
- * doivent produire le même ordre, sans quoi l'hydratation casse.
+ * La piste est donc devenue un conteneur à défilement horizontal natif,
+ * dont on pousse `scrollLeft` image par image. Trois conséquences,
+ * toutes voulues :
+ *   - le doigt, la molette et le pavé tactile fonctionnent tels quels,
+ *     sans une ligne de code, parce que c'est du défilement natif ;
+ *   - la souris peut empoigner la piste, ce que le natif ne donne pas ;
+ *   - toucher le ruban l'arrête, et c'est ce qui remplace le bouton.
  *
- * QUINZE AVIS, TOUS RÉELS. Voir l'en-tête de src/data/testimonials.ts :
- * les trente témoignages rédigés en interne ont été supprimés.
+ * LA BOUCLE. La liste est rendue DEUX FOIS. Dès que le défilement passe
+ * la moitié de la piste, on lui retranche cette moitié : le second
+ * exemplaire occupant exactement la place du premier, l'œil ne voit
+ * aucun saut. Le doublon est marqué aria-hidden, sinon un lecteur
+ * d'écran énoncerait chaque avis deux fois.
  *
- * LA MENTION DE TRANSPARENCE TIENT EN UNE LIGNE. L'article L.111-7-2 du
- * Code de la consommation demande à tout site affichant des avis de dire
- * s'ils sont contrôlés et par qui. Le paragraphe de quatre lignes qui
- * remplissait cette obligation a été jugé trop lourd par la direction ;
- * il est remplacé par sa forme brève, qui dit la même chose : les avis
- * ne sont pas retouchés, et c'est la plateforme d'origine qui vérifie.
+ * ACCESSIBILITÉ. WCAG 2.2.2 demande qu'un mouvement de plus de cinq
+ * secondes puisse être arrêté. Le bouton explicite ayant été retiré, ce
+ * rôle revient au survol, au focus clavier et à tout geste de
+ * défilement, qui figent la piste. Sous prefers-reduced-motion elle ne
+ * démarre pas du tout : elle reste une bande que l'on parcourt à la main.
+ *
+ * QUINZE AVIS, TOUS RÉELS. Voir l'en-tête de src/data/testimonials.ts.
  */
 
 type Plateforme = "booking" | "google" | "tripadvisor";
 
 type Carte = Review & { source: Plateforme };
 
-const MARQUES: Record<Plateforme, { nom: string; href: string; Logo: (p: { taille?: number }) => React.ReactElement }> = {
+const MARQUES: Record<
+  Plateforme,
+  { nom: string; href: string; Logo: (p: { taille?: number }) => React.ReactElement }
+> = {
   booking: { nom: "Booking.com", href: siteConfig.social.booking, Logo: LogoBooking },
   google: { nom: "Google", href: siteConfig.social.google, Logo: LogoGoogle },
   tripadvisor: { nom: "TripAdvisor", href: siteConfig.social.tripadvisor, Logo: LogoTripAdvisor },
@@ -74,6 +81,15 @@ function melanger(): Carte[] {
 
 const CARTES = melanger();
 
+/** Vitesse du défilement, en pixels par seconde. Assez lent pour lire. */
+const VITESSE = 42;
+
+/** Délai avant reprise après un geste, en millisecondes. */
+const REPRISE = 2500;
+
+/** Gel long, le temps qu'un survol ou un focus dure. */
+const GEL_LONG = 600_000;
+
 // Drapeaux Unicode : discrets, lisibles, sans dépendance. Clé = pays tel
 // qu'il est écrit dans testimonials.ts. Pays inconnu, pas de drapeau.
 const DRAPEAUX: Record<string, string> = {
@@ -92,11 +108,70 @@ const DRAPEAUX: Record<string, string> = {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Testimonials({ dict, locale }: { dict: any; locale: Locale }) {
   const t = dict.testimonials;
-  /* Le défilement se met en pause au survol par CSS. Ce bouton existe
-     pour tous les autres : WCAG 2.2.2 demande qu'un mouvement qui dure
-     plus de cinq secondes puisse être arrêté, et un visiteur au clavier
-     ou sur écran tactile n'a pas de survol. */
-  const [enMarche, setEnMarche] = useState(true);
+  const pisteRef = useRef<HTMLDivElement>(null);
+  /* Instant avant lequel on ne pousse pas la piste. Un ref et non un
+     état : il change à chaque mouvement de souris, et un rendu par
+     mouvement serait ruineux. */
+  const geleJusqua = useRef(0);
+
+  const suspendre = useCallback((duree: number = REPRISE) => {
+    geleJusqua.current = performance.now() + duree;
+  }, []);
+
+  useEffect(() => {
+    const piste = pisteRef.current;
+    if (!piste) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    let precedent = performance.now();
+
+    const avancer = (maintenant: number) => {
+      // Onglet réveillé après une heure : on ne rattrape pas le retard.
+      const dt = Math.min(maintenant - precedent, 100);
+      precedent = maintenant;
+      if (maintenant >= geleJusqua.current && !document.hidden) {
+        piste.scrollLeft += (VITESSE * dt) / 1000;
+      }
+      /* Deux exemplaires dans la piste : au-delà de la moitié, on recule
+         d'une moitié. Position identique à l'œil, boucle sans fin. */
+      const moitie = piste.scrollWidth / 2;
+      if (moitie > 0 && piste.scrollLeft >= moitie) piste.scrollLeft -= moitie;
+      raf = requestAnimationFrame(avancer);
+    };
+
+    raf = requestAnimationFrame(avancer);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  /* Saisie à la souris. Le doigt et la molette n'ont besoin de rien : le
+     conteneur défile nativement. */
+  const saisie = useRef<{ x: number; depart: number } | null>(null);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    suspendre(GEL_LONG);
+    if (e.pointerType !== "mouse") return;
+    const piste = pisteRef.current;
+    if (!piste) return;
+    saisie.current = { x: e.clientX, depart: piste.scrollLeft };
+    piste.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const s = saisie.current;
+    const piste = pisteRef.current;
+    if (!s || !piste) return;
+    piste.scrollLeft = s.depart - (e.clientX - s.x);
+  };
+
+  const relacher = (e: React.PointerEvent<HTMLDivElement>) => {
+    const piste = pisteRef.current;
+    if (saisie.current && piste?.hasPointerCapture(e.pointerId)) {
+      piste.releasePointerCapture(e.pointerId);
+    }
+    saisie.current = null;
+    suspendre();
+  };
 
   return (
     <section className="overflow-hidden py-16 md:py-24">
@@ -113,7 +188,22 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
           s'arrête aux marges du contenu ne donne pas la sensation de
           continuité. Les fondus latéraux, posés en masque, évitent que
           les cartes n'apparaissent et ne disparaissent d'un coup net. */}
-      <div className="lh-ruban" data-anime={enMarche ? "true" : "false"}>
+      <div
+        ref={pisteRef}
+        className="lh-ruban"
+        role="region"
+        aria-label={t.label}
+        tabIndex={0}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={relacher}
+        onPointerCancel={relacher}
+        onMouseEnter={() => suspendre(GEL_LONG)}
+        onMouseLeave={() => suspendre(0)}
+        onFocusCapture={() => suspendre(GEL_LONG)}
+        onBlurCapture={() => suspendre(0)}
+        onWheel={() => suspendre()}
+      >
         <div className="lh-ruban__piste">
           {[0, 1].map((exemplaire) => (
             <ul
@@ -132,37 +222,15 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
       </div>
 
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mt-8 flex flex-col items-center gap-2.5 text-center md:mt-10">
-          <button
-            type="button"
-            onClick={() => setEnMarche((m) => !m)}
-            aria-pressed={!enMarche}
-            className="lh-ruban__pause"
-          >
-            {enMarche ? (
-              <svg viewBox="0 0 12 12" width="9" height="9" aria-hidden="true" fill="currentColor">
-                <rect x="2" y="1.5" width="2.6" height="9" rx="0.6" />
-                <rect x="7.4" y="1.5" width="2.6" height="9" rx="0.6" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 12 12" width="9" height="9" aria-hidden="true" fill="currentColor">
-                <path d="M3 1.6l7 4.4-7 4.4z" />
-              </svg>
-            )}
-            {enMarche ? t.pause : t.lecture}
-          </button>
-
-          {/* Article L.111-7-2 du Code de la consommation. Dite en une
-              ligne plutôt qu'en paragraphe : l'obligation porte sur
-              l'information, pas sur sa longueur. Discrète à dessein, 11 px
-              en gris de service : elle doit être lisible sans concurrencer
-              les avis, qui sont le sujet de la section. Le gris `muted`
-              tient 4,5:1 sur le papier, c'est le plancher AA, on ne peut
-              pas l'éclaircir davantage. */}
-          <p className="text-[11px] leading-relaxed tracking-[0.01em] text-muted">
-            {t.transparence}
-          </p>
-        </div>
+        {/* Article L.111-7-2 du Code de la consommation. Dite en une
+            ligne plutôt qu'en paragraphe : l'obligation porte sur
+            l'information, pas sur sa longueur. Discrète à dessein, 11 px
+            en gris de service. Ce gris tient 4,5:1 sur le papier, le
+            plancher AA : on ne peut pas l'éclaircir davantage, et une
+            mention illisible ne remplirait plus son office. */}
+        <p className="mt-7 text-center text-[11px] leading-relaxed tracking-[0.01em] text-muted md:mt-9">
+          {t.transparence}
+        </p>
       </div>
     </section>
   );
