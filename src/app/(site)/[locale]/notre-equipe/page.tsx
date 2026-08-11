@@ -7,6 +7,7 @@ import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -39,18 +40,24 @@ const RSE_ICONS = [
   "leaf",
 ];
 
+/* Photos d'ambiance : les dix portraits anonymes portent une alternative
+   vide. Ils n'ajoutent rien au titre de la section, et dix fois la même
+   phrase générique ne fait qu'encombrer le lecteur d'écran. Seules les deux
+   vues qui disent quelque chose de précis gardent leur alternative ; elles
+   restent en français sur /en et /es, faute d'entrée de dictionnaire, à
+   reprendre quand la section passera au dictionnaire. */
 const teamPhotos = [
-  { src: "/images/team/team-01.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-02.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-03.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-04.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-05.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-06.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-01.jpg", alt: "" },
+  { src: "/images/team/team-02.jpg", alt: "" },
+  { src: "/images/team/team-03.jpg", alt: "" },
+  { src: "/images/team/team-04.jpg", alt: "" },
+  { src: "/images/team/team-05.jpg", alt: "" },
+  { src: "/images/team/team-06.jpg", alt: "" },
   { src: "/images/team/team-chef.jpg", alt: "Notre chef cuisinier" },
-  { src: "/images/team/team-07.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-08.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-09.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
-  { src: "/images/team/team-10.jpg", alt: "Membre de l'équipe du Lac Hôtel" },
+  { src: "/images/team/team-07.jpg", alt: "" },
+  { src: "/images/team/team-08.jpg", alt: "" },
+  { src: "/images/team/team-09.jpg", alt: "" },
+  { src: "/images/team/team-10.jpg", alt: "" },
   { src: "/images/team/team-craft.jpg", alt: "Le savoir-faire artisanal de l'équipe" },
 ];
 
@@ -64,6 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: dict.equipe.heroTitle,
     description: dict.equipe.heroSubtitle,
+    alternates: pageAlternates(locale as Locale, "notre-equipe"),
   };
 }
 

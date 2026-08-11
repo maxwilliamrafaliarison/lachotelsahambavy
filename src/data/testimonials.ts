@@ -32,7 +32,8 @@ export interface Review {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Booking.com : 9.0/10 (Fabuleux) · 34 avis
+// Booking.com · note et nombre d'avis : voir siteConfig.ratings
+// (src/data/site.ts), seul endroit où ces chiffres doivent figurer.
 // ─────────────────────────────────────────────────────────────
 export const bookingReviews: Review[] = [
   {
@@ -88,7 +89,8 @@ export const bookingReviews: Review[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-// Google : 4.6/5 · 157 avis
+// Google · note et nombre d'avis : voir siteConfig.ratings (src/data/site.ts),
+// seul endroit où ces chiffres doivent figurer.
 // ─────────────────────────────────────────────────────────────
 export const googleReviews: Review[] = [
   {
@@ -144,7 +146,8 @@ export const googleReviews: Review[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────
-// TripAdvisor : 4.5/5 · 229 avis
+// TripAdvisor · note et nombre d'avis : voir siteConfig.ratings
+// (src/data/site.ts), seul endroit où ces chiffres doivent figurer.
 // ─────────────────────────────────────────────────────────────
 export const tripadvisorReviews: Review[] = [
   {

@@ -15,7 +15,16 @@
  * Sans clés (mode dev / static export) : fallback mailto gracieux.
  */
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  cloneElement,
+  isValidElement,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, FormProvider, useFormContext, type FieldError } from "react-hook-form";
@@ -150,28 +159,84 @@ function StepIndicator({
 }
 
 // ─── Reusable field wrapper ───────────────────────────────
+/** Attributs injectés dans le contrôle enveloppé par `Field`. */
+type ControlA11yProps = {
+  id?: string;
+  "aria-invalid"?: boolean;
+  "aria-describedby"?: string;
+};
+
+/**
+ * Enveloppe commune à tous les champs : libellé, indication, message d'erreur.
+ *
+ * Le libellé doit être RELIÉ à son contrôle. `register()` de react-hook-form
+ * ne pose jamais d'id, et un `<label>` qui se contente d'être le frère aîné du
+ * champ n'étiquette rien : les douze champs du formulaire remontaient donc
+ * sans nom accessible (échec WCAG 4.1.2, niveau A, sur la page qui porte
+ * toutes les réservations). L'id est donc généré ici et injecté dans l'enfant
+ * par clonage, puis repris par `htmlFor`.
+ *
+ * `group` : pour les ensembles de boutons (les compteurs d'occupation), qui ne
+ * sont pas des contrôles étiquetables. Le libellé devient alors un `<span>` et
+ * les enfants sont enveloppés dans un `role="group"` qui le référence.
+ */
 function Field({
   label,
   error,
   required,
   children,
   hint,
+  group,
 }: {
   label: string;
   error?: string;
   required?: boolean;
   children: React.ReactNode;
   hint?: string;
+  group?: boolean;
 }) {
+  const controlId = useId();
+  const errorId = `${controlId}-err`;
+  const labelClass = "block text-sm font-medium text-ink mb-1.5";
+  const labelContent = (
+    <>
+      {label} {required ? <span className="text-gold">*</span> : null}
+    </>
+  );
+
   return (
     <div>
-      <label className="block text-sm font-medium text-ink mb-1.5">
-        {label} {required ? <span className="text-gold">*</span> : null}
-      </label>
-      {children}
+      {group ? (
+        <span id={controlId} className={labelClass}>
+          {labelContent}
+        </span>
+      ) : (
+        <label htmlFor={controlId} className={labelClass}>
+          {labelContent}
+        </label>
+      )}
+
+      {group ? (
+        <div
+          role="group"
+          aria-labelledby={controlId}
+          aria-describedby={error ? errorId : undefined}
+        >
+          {children}
+        </div>
+      ) : isValidElement(children) ? (
+        cloneElement(children as React.ReactElement<ControlA11yProps>, {
+          id: controlId,
+          "aria-invalid": error ? true : undefined,
+          "aria-describedby": error ? errorId : undefined,
+        })
+      ) : (
+        children
+      )}
+
       {hint ? <p className="text-xs text-muted/80 mt-1">{hint}</p> : null}
       {error ? (
-        <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+        <p id={errorId} className="text-xs text-red-600 mt-1 flex items-center gap-1">
           <span aria-hidden>⚠</span> {error}
         </p>
       ) : null}
@@ -283,10 +348,13 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
         </Field>
       </div>
 
-      {/* Occupation : 3 steppers au lieu d'un champ "nombre de voyageurs" */}
+      {/* Occupation : 3 steppers au lieu d'un champ "nombre de voyageurs".
+          `group` : ce sont des boutons, pas un contrôle qu'un <label> peut
+          étiqueter. */}
       <Field
         label={bb?.guests || dict.contact.form.guests}
         required
+        group
         error={translateError(errors.guests, dict) || translateError(errors.adults, dict) || translateError(errors.children, dict) || translateError(errors.rooms, dict)}
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

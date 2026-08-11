@@ -42,8 +42,20 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           </p>
         </div>
 
-        {/* Plan du site : arborescence Maggie */}
-        <nav aria-label="Plan du site" className="mb-14">
+        {/* Plan du site : arborescence Maggie.
+
+            Libellé localisé sur place, comme le lien « Accueil » de la
+            feuille mobile : aucune clé de dictionnaire ne porte « Plan du
+            site ». `dict.nav.aria.reseaux`, un temps branchée ici, contient
+            « Réseaux sociaux » (« Social media », « Redes sociales ») et
+            annonçait donc ce bloc pour ce qu'il n'est pas. Elle sert plus
+            bas, sur les réseaux, qui sont ce qu'elle nomme. */}
+        <nav
+          aria-label={
+            locale === "fr" ? "Plan du site" : locale === "es" ? "Mapa del sitio" : "Site map"
+          }
+          className="mb-14"
+        >
           <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
             {columns.map((item) => (
               <div key={item.href}>
@@ -85,7 +97,13 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
             </a>
             <span>{siteConfig.address}</span>
           </div>
-          <div className="flex items-center gap-5">
+          {/* `nav` et non `div` : posé sur une division neutre, un
+              `aria-label` n'est annoncé par personne. Les trois liens
+              sortent du site, ils méritent leur propre repère nommé. */}
+          <nav
+            aria-label={dict.nav?.aria?.reseaux ?? "Réseaux sociaux"}
+            className="flex items-center gap-5"
+          >
             <a
               href={siteConfig.social.facebook}
               target="_blank"
@@ -125,7 +143,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
                 <path d="M3.5 10.5C5 8.8 8.3 7.5 12 7.5s7 1.3 8.5 3M12 7.5l-1.5-2h3L12 7.5Z" />
               </svg>
             </a>
-          </div>
+          </nav>
         </div>
 
         <hr className="ge-hairline" />

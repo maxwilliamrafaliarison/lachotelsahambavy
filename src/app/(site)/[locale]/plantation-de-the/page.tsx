@@ -8,6 +8,7 @@ import TheicoleBookingForm from "./TheicoleBookingForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -112,6 +113,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: dict.plantation.heroTitle,
     description: dict.plantation.heroSubtitle,
+    alternates: pageAlternates(locale as Locale, "plantation-de-the"),
   };
 }
 

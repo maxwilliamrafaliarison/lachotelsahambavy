@@ -135,7 +135,13 @@ export const navigation: NavItem[] = [
     children: [
       {
         href: "/hebergements#pilotis-nuptial",
-        label: { fr: "Pilotis Nuptial", en: "Pilotis Nuptial", es: "Pilotis Nuptial" },
+        // Noms alignés sur src/data/rooms.ts : le méga-menu et la page
+        // Hébergements doivent désigner la chambre de la même façon.
+        label: {
+          fr: "Pilotis Nuptial",
+          en: "Honeymoon Overwater Bungalow",
+          es: "Bungalow Nupcial sobre Pilotes",
+        },
       },
       {
         href: "/hebergements#superior-lake-view",
@@ -151,7 +157,7 @@ export const navigation: NavItem[] = [
       },
       {
         href: "/hebergements#wagon-nuptial-1930",
-        label: { fr: "Wagon Nuptial", en: "Wagon Nuptial", es: "Wagon Nuptial" },
+        label: { fr: "Wagon Nuptial", en: "Honeymoon Wagon", es: "Vagón Nupcial" },
       },
       {
         href: "/hebergements#bungalow-sur-arbre",

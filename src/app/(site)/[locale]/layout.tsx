@@ -37,6 +37,20 @@ export async function generateMetadata({
 
   const dict = await getDictionary(loc);
 
+  /* Image de partage, héritée par les 51 pages : sans elle, le
+     `twitter:card = summary_large_image` annoncé plus bas ne disposait
+     d'aucune illustration et les partages sortaient en vignette nue.
+     Posée ici, dans le layout, elle n'impose aucune modification aux
+     pages ; celles qui redéfiniraient `openGraph` la remplaceraient
+     (aucune ne le fait aujourd'hui). Dimensions réelles du fichier
+     servi depuis public/ : 2400 × 1350 (16/9). */
+  const partage = {
+    url: "/images/hero/hotel-vu-du-lac-bungalows-pilotis.jpg",
+    width: 2400,
+    height: 1350,
+    alt: "Le Lac Hôtel Sahambavy vu du lac, avec ses bungalows sur pilotis",
+  };
+
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://lachotel.com"),
     title: {
@@ -54,8 +68,12 @@ export async function generateMetadata({
       siteName: "Lac Hôtel Sahambavy",
       locale: OG[loc],
       alternateLocale: autres,
+      images: [partage],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      images: [partage.url],
+    },
     robots: {
       index: true,
       follow: true,

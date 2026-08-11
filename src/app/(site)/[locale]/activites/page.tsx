@@ -6,6 +6,10 @@ import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/data/site";
 import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema-org";
+import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -19,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: dict.loisirs.heroTitle,
     description: dict.loisirs.heroSubtitle,
+    alternates: pageAlternates(locale as Locale, "activites"),
   };
 }
 
@@ -39,6 +44,7 @@ function splitDayTitle(s: string): [string, string] {
 export default async function ActivitesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const loc = locale as Locale;
 
   const circuits = [
     dict.loisirs.discovery,
@@ -69,6 +75,10 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
 
   return (
     <>
+      {/* Fil d'Ariane balisé : cette page était la seule page intérieure à
+          n'en publier aucun. */}
+      <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "activites"))]} />
+
       <PanoramaHero
         image={`${basePath}/images/pool/piscine-jardin-palmiers-jour.jpg`}
         imageAlt="La piscine en ardoise du Lac Hôtel au milieu des jardins et des palmiers"

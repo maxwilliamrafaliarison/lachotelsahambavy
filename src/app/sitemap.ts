@@ -36,15 +36,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   return publicRoutes.map((route) => {
+    /* Barre finale obligatoire : le site tourne en `trailingSlash: true`,
+       et les seize URL publiées ici sans barre pointaient donc vers seize
+       redirections 308. L'accueil porte `path: ""` et non `"/"` : la barre
+       ajoutée ci-dessous est la seule, il n'y a pas de doublon. */
     // URL canonique = version par défaut (FR)
-    const canonicalUrl = `${baseUrl}/${defaultLocale}${route.path}`;
+    const canonicalUrl = `${baseUrl}/${defaultLocale}${route.path}/`;
 
     // Alternates hreflang : toutes les langues + x-default
     const languages: Record<string, string> = {
       "x-default": canonicalUrl,
     };
     for (const locale of locales) {
-      languages[locale] = `${baseUrl}/${locale}${route.path}`;
+      languages[locale] = `${baseUrl}/${locale}${route.path}/`;
     }
 
     return {

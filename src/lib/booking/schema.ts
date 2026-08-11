@@ -56,13 +56,18 @@ const stayStepObject = z.object({
     .max(20, "booking.errors.guestsMax"),
   // Décomposition facultative et informationnelle (héritée de la booking bar).
   // `guests` reste la source de vérité côté email/CRM pour compat rétro.
-  adults: z.number().int().min(1, "booking.errors.adultsMin").max(20).optional(),
+  adults: z.number().int().min(1, "booking.errors.adultsMin").max(20, "booking.errors.guestsMax").optional(),
   children: z.number().int().min(0).max(10, "booking.errors.childrenMax").optional(),
   rooms: z.number().int().min(1, "booking.errors.roomsMin").max(4, "booking.errors.roomsMax").optional(),
-  room: z.enum(ROOM_IDS),
-  pension: z.enum(PENSIONS).default("bb"),
-  rate: z.enum(RATES).default("standard"),
-  transfer: z.enum(TRANSFERS).default("none"),
+  /* Message explicite obligatoire sur chaque `z.enum` : sans lui, Zod produit
+     « Invalid option: expected one of "pilotis"|"superior"|… », c'est-à-dire
+     un texte anglais, identique dans les trois langues, qui affiche au client
+     nos identifiants internes. Les clés ci-dessous sont traduites par
+     `translateError` dans le formulaire. */
+  room: z.enum(ROOM_IDS, { message: "booking.errors.required" }),
+  pension: z.enum(PENSIONS, { message: "booking.errors.required" }).default("bb"),
+  rate: z.enum(RATES, { message: "booking.errors.required" }).default("standard"),
+  transfer: z.enum(TRANSFERS, { message: "booking.errors.required" }).default("none"),
   arrivalTime: z.string().optional(),
 });
 
@@ -77,7 +82,12 @@ const travelerStepObject = z.object({
 const consentStepObject = z.object({
   gdpr: z.literal(true, { message: "booking.errors.gdprRequired" }),
   terms: z.literal(true, { message: "booking.errors.termsRequired" }),
-  website: z.string().max(0, "booking.errors.botDetected").optional(), // honeypot
+  /* Leurre anti-robot : le champ doit tout accepter. Une contrainte
+     `max(0)` faisait échouer la validation avant que la route API ne puisse
+     tendre son piège (répondre comme si tout allait bien), et le robot
+     apprenait ainsi qu'il avait été repéré. La valeur n'est lue que par
+     src/app/api/booking/route.ts. */
+  website: z.string().optional(), // honeypot
   hcaptchaToken: z.string().optional(),
 });
 
@@ -103,7 +113,9 @@ export const consentStepSchema = consentStepObject;
 const fullObject = stayStepObject
   .extend(travelerStepObject.shape)
   .extend(consentStepObject.shape)
-  .extend({ locale: z.enum(locales).default("fr") });
+  // Champ technique, jamais saisi par le client : message explicite tout de
+  // même, pour qu'aucun `z.enum` ne renvoie le texte anglais par défaut.
+  .extend({ locale: z.enum(locales, { message: "booking.errors.required" }).default("fr") });
 
 export const bookingFormSchema = fullObject
   .refine(

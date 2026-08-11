@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import { siteConfig, carteEmbed } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -88,6 +89,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: ld.metaTitle ?? FR.metaTitle,
     description: ld.metaDescription ?? FR.metaDescription,
+    alternates: pageAlternates(locale as Locale, "localisation"),
   };
 }
 

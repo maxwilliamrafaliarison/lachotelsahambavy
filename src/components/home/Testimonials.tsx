@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { siteConfig } from "@/data/site";
 import {
   bookingReviews,
   googleReviews,
@@ -33,17 +32,21 @@ import type { Locale } from "@/lib/utils";
  *   - la souris peut empoigner la piste, ce que le natif ne donne pas ;
  *   - toucher le ruban l'arrête, et c'est ce qui remplace le bouton.
  *
- * LA BOUCLE. La liste est rendue DEUX FOIS. Dès que le défilement passe
- * la moitié de la piste, on lui retranche cette moitié : le second
- * exemplaire occupant exactement la place du premier, l'œil ne voit
- * aucun saut. Le doublon est marqué aria-hidden, sinon un lecteur
- * d'écran énoncerait chaque avis deux fois.
+ * LA BOUCLE. La liste est rendue DEUX FOIS, et le recalage joue dans les
+ * DEUX SENS : passé la moitié de la piste on retranche cette moitié,
+ * revenu au début on l'ajoute. Le second exemplaire occupant exactement
+ * la place du premier, l'œil ne voit aucun saut, et la piste n'a plus ni
+ * fin ni commencement, quel que soit le sens du geste. Le doublon est
+ * marqué aria-hidden, sinon un lecteur d'écran énoncerait chaque avis
+ * deux fois.
  *
  * ACCESSIBILITÉ. WCAG 2.2.2 demande qu'un mouvement de plus de cinq
  * secondes puisse être arrêté. Le bouton explicite ayant été retiré, ce
  * rôle revient au survol, au focus clavier et à tout geste de
- * défilement, qui figent la piste. Sous prefers-reduced-motion elle ne
- * démarre pas du tout : elle reste une bande que l'on parcourt à la main.
+ * défilement, qui figent la piste. Sous prefers-reduced-motion, seule
+ * l'avance automatique est supprimée : la boucle de recalage, elle,
+ * continue de tourner, sans quoi la piste buterait sur sa fin et le
+ * doublon masqué aux lecteurs d'écran deviendrait pleinement visible.
  *
  * QUINZE AVIS, TOUS RÉELS. Voir l'en-tête de src/data/testimonials.ts.
  */
@@ -52,13 +55,17 @@ type Plateforme = "booking" | "google" | "tripadvisor";
 
 type Carte = Review & { source: Plateforme };
 
+/* Nom et logo de la plateforme d'origine. Les cartes ne sont pas
+   cliquables : les liens vers les plateformes vivent dans la barre
+   supérieure et dans la section des notes, et un lien dans une piste qui
+   glisse serait de toute façon une cible mouvante. */
 const MARQUES: Record<
   Plateforme,
-  { nom: string; href: string; Logo: (p: { taille?: number }) => React.ReactElement }
+  { nom: string; Logo: (p: { taille?: number }) => React.ReactElement }
 > = {
-  booking: { nom: "Booking.com", href: siteConfig.social.booking, Logo: LogoBooking },
-  google: { nom: "Google", href: siteConfig.social.google, Logo: LogoGoogle },
-  tripadvisor: { nom: "TripAdvisor", href: siteConfig.social.tripadvisor, Logo: LogoTripAdvisor },
+  booking: { nom: "Booking.com", Logo: LogoBooking },
+  google: { nom: "Google", Logo: LogoGoogle },
+  tripadvisor: { nom: "TripAdvisor", Logo: LogoTripAdvisor },
 };
 
 /* Un avis de chaque plateforme à tour de rôle : le ruban alterne les
@@ -87,8 +94,43 @@ const VITESSE = 42;
 /** Délai avant reprise après un geste, en millisecondes. */
 const REPRISE = 2500;
 
-/** Gel long, le temps qu'un survol ou un focus dure. */
+/** Gel long, le temps qu'un survol à la souris ou un focus clavier dure. */
 const GEL_LONG = 600_000;
+
+/**
+ * Gel d'un geste au doigt ou au stylet, en millisecondes.
+ *
+ * La souris annonce son départ : `pointerleave` relance la piste, le gel
+ * peut donc durer tant que le curseur reste dessus. Rien n'annonce en
+ * revanche qu'un doigt s'est éloigné, et un gel long figerait le ruban
+ * pour le reste de la visite. Quarante secondes : de quoi lire deux ou trois
+ * avis posément, sans que la page paraisse morte à qui l'a effleurée.
+ */
+const GEL_TACTILE = 40_000;
+
+/** Durée du gel posé par un geste, selon ce qui l'a produit. */
+function gelDuGeste(type: string) {
+  return type === "mouse" ? GEL_LONG : GEL_TACTILE;
+}
+
+/**
+ * Replie une position de défilement dans la première moitié de la piste,
+ * celle-ci contenant deux exemplaires identiques de la liste.
+ *
+ * Le repli joue dans LES DEUX SENS : au-delà de la moitié on retranche
+ * cette moitié, revenu au début on l'ajoute. Sans ce second cas, un
+ * glissement vers la droite buterait sur le début de la piste.
+ *
+ * La comparaison haute est STRICTE, pour que la position « moitié » soit
+ * un point de repos : sinon les deux replis se renverraient la piste
+ * image après image dès qu'elle s'immobilise sur zéro.
+ */
+function recaler(position: number, moitie: number) {
+  if (moitie <= 0) return position;
+  if (position > moitie) return position - moitie;
+  if (position <= 0) return position + moitie;
+  return position;
+}
 
 // Drapeaux Unicode : discrets, lisibles, sans dépendance. Clé = pays tel
 // qu'il est écrit dans testimonials.ts. Pays inconnu, pas de drapeau.
@@ -103,6 +145,24 @@ const DRAPEAUX: Record<string, string> = {
   Madagascar: "🇲🇬",
   "Royaume-Uni": "🇬🇧",
   Suisse: "🇨🇭",
+};
+
+// Les pays sont écrits en français dans testimonials.ts, où ils servent
+// aussi de clé aux drapeaux : sans cette table ils resteraient en
+// français sur /en et /es. Mêmes clés que DRAPEAUX, à tenir à jour avec
+// lui. Pays absent de la table, on affiche le libellé français plutôt
+// que rien.
+const PAYS: Record<string, Record<Locale, string>> = {
+  Allemagne: { fr: "Allemagne", en: "Germany", es: "Alemania" },
+  Australie: { fr: "Australie", en: "Australia", es: "Australia" },
+  Belgique: { fr: "Belgique", en: "Belgium", es: "Bélgica" },
+  Espagne: { fr: "Espagne", en: "Spain", es: "España" },
+  France: { fr: "France", en: "France", es: "Francia" },
+  Italie: { fr: "Italie", en: "Italy", es: "Italia" },
+  "La Réunion": { fr: "La Réunion", en: "Réunion", es: "La Reunión" },
+  Madagascar: { fr: "Madagascar", en: "Madagascar", es: "Madagascar" },
+  "Royaume-Uni": { fr: "Royaume-Uni", en: "United Kingdom", es: "Reino Unido" },
+  Suisse: { fr: "Suisse", en: "Switzerland", es: "Suiza" },
 };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -121,7 +181,13 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
   useEffect(() => {
     const piste = pisteRef.current;
     if (!piste) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    /* Le réglage système ne suspend que l'AVANCE automatique, jamais la
+       boucle : c'est elle qui recale la piste, et une piste non recalée
+       bute sur sa fin en exposant le doublon réservé aux yeux. Lu à
+       chaque image plutôt qu'une fois pour toutes, il est donc pris en
+       compte même s'il change en cours de visite. */
+    const moinsDeMouvement = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     let raf = 0;
     let precedent = performance.now();
@@ -130,13 +196,25 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
       // Onglet réveillé après une heure : on ne rattrape pas le retard.
       const dt = Math.min(maintenant - precedent, 100);
       precedent = maintenant;
-      if (maintenant >= geleJusqua.current && !document.hidden) {
+      if (
+        !moinsDeMouvement.matches &&
+        maintenant >= geleJusqua.current &&
+        !document.hidden
+      ) {
         piste.scrollLeft += (VITESSE * dt) / 1000;
       }
-      /* Deux exemplaires dans la piste : au-delà de la moitié, on recule
-         d'une moitié. Position identique à l'œil, boucle sans fin. */
-      const moitie = piste.scrollWidth / 2;
-      if (moitie > 0 && piste.scrollLeft >= moitie) piste.scrollLeft -= moitie;
+      /* Recalage : le second exemplaire occupant exactement la place du
+         premier, le repli est invisible et la boucle n'a ni fin ni
+         commencement. Il tourne à chaque image, y compris quand l'avance
+         est suspendue, car la molette et le doigt déplacent eux aussi la
+         piste.
+
+         On n'écrit `scrollLeft` que si la valeur change : réécrire la
+         position déjà en place ne déplace rien, mais peut couper net le
+         défilement par inertie lancé au doigt sur mobile, où la boucle
+         tourne justement pendant que la piste glisse toute seule. */
+      const cible = recaler(piste.scrollLeft, piste.scrollWidth / 2);
+      if (cible !== piste.scrollLeft) piste.scrollLeft = cible;
       raf = requestAnimationFrame(avancer);
     };
 
@@ -145,15 +223,23 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
   }, []);
 
   /* Saisie à la souris. Le doigt et la molette n'ont besoin de rien : le
-     conteneur défile nativement. */
-  const saisie = useRef<{ x: number; depart: number } | null>(null);
+     conteneur défile nativement.
+
+     On ne retient que la dernière abscisse du pointeur, et le
+     déplacement appliqué est RELATIF. Une position absolue calculée
+     depuis le début du geste annulerait le recalage de boucle au
+     mouvement suivant : la piste resterait bloquée sur son début dès que
+     l'on tire vers la droite. Le repli est refait ici, et pas seulement
+     dans la boucle, sinon le navigateur bloquerait la position à zéro
+     jusqu'à l'image suivante et la saisie accrocherait au passage. */
+  const saisie = useRef<{ x: number } | null>(null);
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    suspendre(GEL_LONG);
+    suspendre(gelDuGeste(e.pointerType));
     if (e.pointerType !== "mouse") return;
     const piste = pisteRef.current;
     if (!piste) return;
-    saisie.current = { x: e.clientX, depart: piste.scrollLeft };
+    saisie.current = { x: e.clientX };
     piste.setPointerCapture(e.pointerId);
   };
 
@@ -161,16 +247,33 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
     const s = saisie.current;
     const piste = pisteRef.current;
     if (!s || !piste) return;
-    piste.scrollLeft = s.depart - (e.clientX - s.x);
+    const vise = piste.scrollLeft - (e.clientX - s.x);
+    piste.scrollLeft = recaler(vise, piste.scrollWidth / 2);
+    s.x = e.clientX;
   };
 
+  /* Gel de survol réservé à la SOURIS. Un doigt qui se pose déclenche lui
+     aussi l'entrée du pointeur, et il ne repart jamais vraiment : une
+     simple tape figeait le ruban dix minutes. Le tactile a son propre
+     gel, posé au contact, qui expire seul (voir GEL_TACTILE). */
+  const survol = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse") suspendre(GEL_LONG);
+  };
+
+  const finSurvol = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse") suspendre(0);
+  };
+
+  /* Le gel posé ici doit valoir celui du contact : un relâchement ne
+     signifie pas que l'on a fini de lire. Au doigt il expirera de
+     lui-même, à la souris c'est `pointerleave` qui relancera la piste. */
   const relacher = (e: React.PointerEvent<HTMLDivElement>) => {
     const piste = pisteRef.current;
     if (saisie.current && piste?.hasPointerCapture(e.pointerId)) {
       piste.releasePointerCapture(e.pointerId);
     }
     saisie.current = null;
-    suspendre();
+    suspendre(gelDuGeste(e.pointerType));
   };
 
   return (
@@ -198,8 +301,8 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
         onPointerMove={onPointerMove}
         onPointerUp={relacher}
         onPointerCancel={relacher}
-        onMouseEnter={() => suspendre(GEL_LONG)}
-        onMouseLeave={() => suspendre(0)}
+        onPointerEnter={survol}
+        onPointerLeave={finSurvol}
         onFocusCapture={() => suspendre(GEL_LONG)}
         onBlurCapture={() => suspendre(0)}
         onWheel={() => suspendre()}
@@ -239,6 +342,7 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
 function CarteAvis({ carte, locale }: { carte: Carte; locale: Locale }) {
   const marque = MARQUES[carte.source];
   const drapeau = DRAPEAUX[carte.location];
+  const pays = PAYS[carte.location]?.[locale] ?? carte.location;
   const { Logo } = marque;
 
   return (
@@ -257,7 +361,7 @@ function CarteAvis({ carte, locale }: { carte: Carte; locale: Locale }) {
         <span className="lh-avis__nom">{carte.name}</span>
         <span className="lh-avis__lieu">
           {drapeau && <span aria-hidden="true">{drapeau} </span>}
-          {carte.location}
+          {pays}
         </span>
       </footer>
     </article>

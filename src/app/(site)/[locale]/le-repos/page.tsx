@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 import LeReposSignupForm from "./LeReposSignupForm";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -75,6 +76,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: dict.repos.heroTitle,
     description: dict.repos.heroSubtitle,
+    alternates: pageAlternates(locale as Locale, "le-repos"),
   };
 }
 

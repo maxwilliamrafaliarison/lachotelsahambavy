@@ -18,6 +18,7 @@ export type BreadcrumbKey =
   | "hebergements"
   | "restaurant"
   | "experiences"
+  | "activites"
   | "plantation"
   | "galerie"
   | "contact"
@@ -52,6 +53,10 @@ const PAGE_LABELS: Record<BreadcrumbKey, { slug: string; label: LocalizedLabel }
   experiences: {
     slug: "experiences",
     label: { fr: "Expériences", en: "Experiences", es: "Experiencias" },
+  },
+  activites: {
+    slug: "activites",
+    label: { fr: "Activités", en: "Activities", es: "Actividades" },
   },
   plantation: {
     slug: "plantation-de-the",

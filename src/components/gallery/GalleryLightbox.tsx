@@ -35,6 +35,8 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
   const [dragging, setDragging] = useState(false);
   const [vpWidth, setVpWidth] = useState(0);
   const stripRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const pointerId = useRef<number | null>(null);
   const startX = useRef(0);
   const startIndex = useRef(index);
@@ -54,6 +56,48 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
+    };
+  }, []);
+
+  /* Gestion du focus, que réclame aria-modal : sans elle le focus clavier
+     reste sur la vignette du dessous et la tabulation parcourt la page
+     masquée au lieu de la visionneuse. On mémorise l'élément actif à
+     l'ouverture, on donne le focus au bouton « Fermer », on boucle Tab et
+     Maj+Tab sur les commandes de la boîte de dialogue, puis on rend le focus
+     à son point de départ à la fermeture. */
+  useEffect(() => {
+    const precedent = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+
+    const onTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const boite = dialogRef.current;
+      if (!boite) return;
+      const focusables = Array.from(
+        boite.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (focusables.length === 0) return;
+      const premier = focusables[0];
+      const dernier = focusables[focusables.length - 1];
+      const actif = document.activeElement;
+      const dedans = boite.contains(actif);
+      if (e.shiftKey) {
+        if (!dedans || actif === premier) {
+          e.preventDefault();
+          dernier.focus();
+        }
+      } else if (!dedans || actif === dernier) {
+        e.preventDefault();
+        premier.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onTab);
+    return () => {
+      document.removeEventListener("keydown", onTab);
+      precedent?.focus?.();
     };
   }, []);
 
@@ -124,6 +168,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-[2000] bg-black/95 backdrop-blur-xl flex flex-col"
       onClick={onClose}
       role="dialog"
@@ -138,6 +183,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
           {String(photos.length).padStart(2, "0")}
         </span>
         <button
+          ref={closeRef}
           onClick={(e) => {
             e.stopPropagation();
             onClose();

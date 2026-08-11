@@ -54,7 +54,12 @@ export default function RecapSejour({
   return (
     <>
       <p className="text-base md:text-lg text-muted mb-2">
-        {gabaritSousTitre.replace("{name}", name)}
+        {/* Sans paramètre `name` (accès direct à la page, lien partagé), une
+            substitution nue laissait « Merci , votre demande… » avec une
+            espace avant la virgule. On absorbe donc l'espace qui précède le
+            marqueur dans les trois gabarits, et on la restitue seulement
+            quand le prénom est présent. */}
+        {gabaritSousTitre.replace(" {name}", name ? ` ${name}` : "")}
       </p>
       {checkin && checkout ? (
         <p className="text-sm text-ink font-medium mb-10">

@@ -260,7 +260,10 @@ export function restaurantSchema(locale: Locale): SchemaType {
     name: nom[locale],
     description: description[locale],
     url: `${siteConfig.url}/${locale}/restaurant/`,
-    image: [`${siteConfig.url}/images/restaurant/interior.jpg`],
+    /* « interior.jpg » n'a jamais existé dans public/images/restaurant/ :
+       le seul visuel du balisage Restaurant renvoyait donc 404. Repointé
+       sur la photo de salle réellement servie par la page. */
+    image: [`${siteConfig.url}/images/restaurant/salle-restaurant-tables-dressees.jpg`],
     servesCuisine: ["Malagasy", "French", "International"],
     priceRange: "€€",
     acceptsReservations: true,
@@ -484,7 +487,11 @@ export function videoObjectSchema(locale: Locale): SchemaType {
     isFamilyFriendly: true,
     publisher: {
       "@type": "Organization",
-      "@id": `${siteConfig.url}#organization`,
+      /* Barre manquante avant le fragment : l'`@id` ne correspondait à
+         aucun nœud du graphe, l'Organization émise par le layout portant
+         « …/#organization ». Le VideoObject référençait donc un éditeur
+         inexistant. Même forme que partout ailleurs dans ce fichier. */
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",

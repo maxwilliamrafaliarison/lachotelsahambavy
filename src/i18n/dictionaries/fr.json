@@ -15,7 +15,14 @@
     "equipe": "Notre Équipe",
     "gallery": "Galerie",
     "contact": "Contact",
-    "book": "Réserver"
+    "book": "Réserver",
+    "aria": {
+      "principale": "Navigation principale",
+      "accueil": "Lac Hôtel Sahambavy, accueil",
+      "ouvrirMenu": "Ouvrir le menu",
+      "fermerMenu": "Fermer le menu",
+      "reseaux": "Plan du site"
+    }
   },
   "hero": {
     "eyebrow": "Sahambavy · Madagascar",
@@ -902,7 +909,7 @@
         "items": [
           "Toute demande de réservation devient une réservation ferme après réception d’un e-mail de confirmation envoyé par l’hôtel sous 24 heures.",
           "Aucun paiement n’est collecté en ligne. Le règlement s’effectue à l’arrivée, en espèces (Ariary ou Euros), par carte bancaire, ou par virement bancaire préalable.",
-          "Les tarifs affichés sur lachotel.com sont en Euros (EUR) et par chambre, taxes comprises.",
+          "Les tarifs affichés sur lachotel.com sont en ariary (MGA) et par chambre, taxes comprises ; les montants en euros sont indicatifs, convertis à 5 000 Ar pour 1 €.",
           "La vignette touristique, collectée pour le compte de l’État malgache, s’ajoute au tarif (environ 5 000 AR par personne et par nuit).",
           "Le formulaire en ligne limite les demandes à 20 voyageurs et 4 chambres. Pour les groupes plus importants (séminaires, mariages), merci de nous contacter directement."
         ]
@@ -914,7 +921,7 @@
           "Plus de 60 jours avant l’arrivée : annulation gratuite.",
           "De 60 à 15 jours avant l’arrivée : 20 % du montant total facturé.",
           "De 15 à 5 jours avant l’arrivée : 70 % du montant total facturé.",
-          "Moins de 3 jours avant l’arrivée : 100 % du montant total facturé.",
+          "Moins de 5 jours avant l’arrivée : 100 % du montant total facturé.",
           "Non-présentation (no-show) ou départ anticipé : 100 % du montant total facturé.",
           "Toute modification de dates est soumise à disponibilité et peut entraîner un ajustement tarifaire selon la saison.",
           "En cas de force majeure documentée (crise sanitaire, catastrophe naturelle, restrictions officielles de voyage), l’hôtel s’engage à proposer un report sans frais sur une période équivalente de 12 mois."
@@ -1170,7 +1177,7 @@
       "label": "Par la route",
       "title": "À 40 minutes de Fianarantsoa",
       "p1": "Depuis Fianarantsoa : l’hôtel se trouve à 40 minutes du centre-ville. Depuis Antananarivo (par la RN7) : suivez la nationale 7 vers le sud, puis bifurquez à gauche dans le village d’Ambalakely (station Shell).",
-      "p2": "Une navette payante de l’hôtel est disponible pour votre transport : contactez la réception pour organiser votre prise en charge. Un transfert privé en 4x4 entre le Lac Hôtel et Fianarantsoa est également proposé (120 000 Ar).",
+      "p2": "Une navette payante de l’hôtel est disponible pour votre transport : contactez la réception pour organiser votre prise en charge. Un transfert privé en 4x4 entre le Lac Hôtel et Fianarantsoa est également proposé (130 000 Ar).",
       "alt": "Vue aérienne du Lac Hôtel et de son écrin de verdure au bord du lac",
       "cta": "Organiser mon transfert"
     },

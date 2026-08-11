@@ -15,7 +15,14 @@
     "equipe": "Our Team",
     "gallery": "Gallery",
     "contact": "Contact",
-    "book": "Book Now"
+    "book": "Book Now",
+    "aria": {
+      "principale": "Main navigation",
+      "accueil": "Lac Hôtel Sahambavy, home",
+      "ouvrirMenu": "Open the menu",
+      "fermerMenu": "Close the menu",
+      "reseaux": "Site map"
+    }
   },
   "hero": {
     "eyebrow": "Sahambavy · Madagascar",
@@ -902,7 +909,7 @@
         "items": [
           "Any booking request becomes a confirmed reservation after receipt of a confirmation email sent by the hotel within 24 hours.",
           "No payment is collected online. Settlement is made on arrival in cash (Ariary or Euros), by credit card, or by prior bank transfer.",
-          "Rates displayed on lachotel.com are in Euros (EUR) and per room, taxes included.",
+          "Rates displayed on lachotel.com are in ariary (MGA) and per room, taxes included; euro amounts are indicative, converted at 5,000 Ar to €1.",
           "The tourist tax, collected on behalf of the Malagasy State, is added to the rate (approximately 5,000 AR per person per night).",
           "The online form is limited to 20 guests and 4 rooms. For larger groups (seminars, weddings), please contact us directly."
         ]
@@ -914,7 +921,7 @@
           "More than 60 days before arrival: free cancellation.",
           "From 60 to 15 days before arrival: 20 % of the total amount charged.",
           "From 15 to 5 days before arrival: 70 % of the total amount charged.",
-          "Less than 3 days before arrival: 100 % of the total amount charged.",
+          "Less than 5 days before arrival: 100 % of the total amount charged.",
           "No-show or early departure: 100 % of the total amount charged.",
           "Any date modification is subject to availability and may result in a rate adjustment depending on the season.",
           "In case of documented force majeure (health crisis, natural disaster, official travel restrictions), the hotel commits to offering a fee-free rebooking over an equivalent period within 12 months."
@@ -1170,7 +1177,7 @@
       "label": "By road",
       "title": "40 minutes from Fianarantsoa",
       "p1": "From Fianarantsoa: A scenic 40-minute drive from the city center. From Antananarivo (via RN7): Take National Road 7 south and turn left at the village of Ambalakely (marked by the Shell station).",
-      "p2": "A paid shuttle service is available for hassle-free transportation. Please contact reception to arrange your pickup. A private 4x4 transfer between Lac Hôtel and Fianarantsoa is also available (Ar 120,000 · €25).",
+      "p2": "A paid shuttle service is available for hassle-free transportation. Please contact reception to arrange your pickup. A private 4x4 transfer between Lac Hôtel and Fianarantsoa is also available (Ar 130,000 · €26).",
       "alt": "Aerial view of Lac Hôtel and its lush green setting on the lakeshore",
       "cta": "Arrange my transfer"
     },
@@ -1200,7 +1207,7 @@
         },
         {
           "label": "Private 4x4 transfer Lac Hôtel / Fianarantsoa",
-          "value": "Ar 120,000 · €25"
+          "value": "Ar 130,000 · €26"
         }
       ],
       "footnote": "Contact reception to arrange your shuttle or transfer."

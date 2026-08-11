@@ -15,7 +15,14 @@
     "equipe": "Nuestro Equipo",
     "gallery": "Galería",
     "contact": "Contacto",
-    "book": "Reservar"
+    "book": "Reservar",
+    "aria": {
+      "principale": "Navegación principal",
+      "accueil": "Lac Hôtel Sahambavy, inicio",
+      "ouvrirMenu": "Abrir el menú",
+      "fermerMenu": "Cerrar el menú",
+      "reseaux": "Mapa del sitio"
+    }
   },
   "hero": {
     "eyebrow": "Sahambavy · Madagascar",
@@ -902,7 +909,7 @@
         "items": [
           "Toda solicitud de reserva se convierte en reserva firme tras la recepción de un correo de confirmación enviado por el hotel en un plazo de 24 horas.",
           "No se cobra ningún pago en línea. El abono se efectúa a la llegada, en efectivo (Ariary o Euros), con tarjeta bancaria, o mediante transferencia bancaria previa.",
-          "Las tarifas mostradas en lachotel.com están en Euros (EUR) y por habitación, impuestos incluidos.",
+          "Las tarifas mostradas en lachotel.com están en ariary (MGA) y por habitación, impuestos incluidos; los importes en euros son orientativos, convertidos a 5 000 Ar por 1 €.",
           "La tasa turística, recaudada por cuenta del Estado malgache, se añade a la tarifa (aproximadamente 5 000 AR por persona y noche).",
           "El formulario en línea está limitado a 20 viajeros y 4 habitaciones. Para grupos más grandes (seminarios, bodas), contáctenos directamente."
         ]
@@ -914,7 +921,7 @@
           "Más de 60 días antes de la llegada: cancelación gratuita.",
           "De 60 a 15 días antes de la llegada: 20 % del importe total facturado.",
           "De 15 a 5 días antes de la llegada: 70 % del importe total facturado.",
-          "Menos de 3 días antes de la llegada: 100 % del importe total facturado.",
+          "Menos de 5 días antes de la llegada: 100 % del importe total facturado.",
           "No presentación (no-show) o salida anticipada: 100 % del importe total facturado.",
           "Cualquier modificación de fechas está sujeta a disponibilidad y puede implicar un ajuste tarifario según la temporada.",
           "En caso de fuerza mayor documentada (crisis sanitaria, catástrofe natural, restricciones oficiales de viaje), el hotel se compromete a ofrecer un aplazamiento sin cargo en un período equivalente dentro de 12 meses."

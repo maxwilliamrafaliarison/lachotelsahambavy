@@ -22,6 +22,7 @@ import { siteConfig, carteEmbed } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
  
 
@@ -37,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: dict.contact.heroTitle,
     description: dict.contact.heroSubtitle ?? dict.meta.description,
+    alternates: pageAlternates(locale as Locale, "contact"),
   };
 }
 

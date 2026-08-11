@@ -11,6 +11,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { hotelRoomSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 import { siteConfig } from "@/data/site";
 
 const basePath = getBasePath();
@@ -153,6 +154,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     // l'écrire ici la faisait apparaître deux fois dans le même onglet.
     title: dict.rooms.title,
     description: dict.rooms.subtitle,
+    alternates: pageAlternates(locale as Locale, "hebergements"),
   };
 }
 
@@ -239,7 +241,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
     throw new Error(
       `Hébergements publiés sans section sur /hebergements : ${sansSection
         .map((r) => r.id)
-        .join(", ")} — le JSON-LD pointerait sur une ancre inexistante.`,
+        .join(", ")}. Le JSON-LD pointerait sur une ancre inexistante.`,
     );
   }
 

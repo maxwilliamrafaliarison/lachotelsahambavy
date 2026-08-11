@@ -9,6 +9,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { restaurantSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -95,6 +96,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     // Idem hébergements : le gabarit racine appose déjà la marque.
     title: dict.restaurantSection.heroTitle,
     description: dict.restaurantSection.subtitle,
+    alternates: pageAlternates(locale as Locale, "restaurant"),
   };
 }
 

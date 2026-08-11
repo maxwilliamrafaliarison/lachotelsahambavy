@@ -18,6 +18,7 @@ import { siteConfig } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 type Section = {
   title: string;
@@ -37,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: dict.conditions.heroTitle,
     description: dict.conditions.heroSubtitle,
+    alternates: pageAlternates(locale as Locale, "conditions-reservation"),
     robots: { index: true, follow: true },
   };
 }

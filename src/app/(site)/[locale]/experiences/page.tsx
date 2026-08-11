@@ -8,6 +8,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { touristAttractionSchema, breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
+import { pageAlternates } from "@/lib/seo/alternates";
 
 const basePath = getBasePath();
 
@@ -107,6 +108,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: locale === "fr" ? "Expériences" : locale === "en" ? "Experiences" : "Experiencias",
     description: ex.heroKicker ?? dict.loisirs.heroSubtitle,
+    alternates: pageAlternates(locale as Locale, "experiences"),
   };
 }
 
@@ -146,7 +148,10 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       : loc === "en"
         ? "Legendary 170 km railway line connecting the highlands to the east coast. Sahambavy station is 2 min from the hotel."
         : "Línea ferroviaria legendaria de 170 km que une las tierras altas con la costa este. La estación de Sahambavy está a 2 min del hotel.",
-    image: "/images/train/train-fce.jpg",
+    /* « train-fce.jpg » n'existe pas dans public/images/train/ : l'image du
+       balisage renvoyait 404. On reprend celle que /train-fce/ publie déjà
+       pour cette même attraction, les deux pages partageant l'`@id`. */
+    image: "/images/train/train-classique-corridor-foret.jpg",
   });
 
   const conferenceRows = [

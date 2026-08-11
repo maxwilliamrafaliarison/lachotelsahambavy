@@ -44,7 +44,7 @@ export const rooms: Room[] = [
        PAS ENCORE AFFICHÉE : la direction publie la grille 2026 (arbitrage
        du 08/08/2026). D'où l'absence de `groupe` : la fiche est prête, il
        suffira de lui rendre `groupe: "courant"`, de remonter le wagon à
-       420 000 / 60 € et les Pilotis à 7 unités le jour du basculement. */
+       420 000 / 84 € et les Pilotis à 7 unités le jour du basculement. */
     id: "lake-suite",
     slug: "lake-suite-nuptial",
     name: {
@@ -399,7 +399,9 @@ export const rooms: Room[] = [
       en: "\"Le Repos\" Extension",
       es: "Extensión « Le Repos »",
     },
-    badge: "Extension Le Repos",
+    /* Pas de `badge` ici : il répétait « Extension Le Repos » en français dans
+       les trois langues, juste à côté du `type` ci-dessus qui dit la même
+       chose et qui, lui, est traduit. */
     description: {
       fr: "4 maisons en duplex entièrement équipées pour les longs séjours. Kitchenette avec plaque de cuisson, réfrigérateur et vaisselle. Idéal pour les familles.",
       en: "4 fully equipped duplex houses for extended stays. Kitchenette with hob, fridge and crockery. Ideal for families.",

@@ -184,7 +184,10 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             « backdrop root », et ses descendants ne floutent plus que lui.
             Tant que le filtre vivait ici, le flou du méga-menu, qui en
             descend, ne floutait rien du tout. */}
-        <nav aria-label="Navigation principale" className="lh-barre">
+        <nav
+          aria-label={dict.nav?.aria?.principale ?? "Navigation principale"}
+          className="lh-barre"
+        >
           <div
             aria-hidden="true"
             className="lh-barre__verre"
@@ -197,17 +200,20 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             }}
           />
 
-          {/* `gap-3` sous 1440 px : en espagnol, « Nuestros Jardines » et
+          {/* `gap-3` à toute largeur : en espagnol, « Nuestros Jardines » et
               « Alojamientos » ne laissaient que 17 px de marge à la rangée.
               Reprendre ces 12 px sur les intervalles plutôt que sur les
-              pastilles, dont le confort intérieur est ce qui a été demandé. */}
-          <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-3 px-5 md:px-8 min-[1440px]:gap-4">
+              pastilles, dont le confort intérieur est ce qui a été demandé.
+              Pas de détente au-delà de 1440 px : `max-w-7xl` plafonne le
+              conteneur à 1280 px, il ne s'élargit jamais, et la rangée y
+              débordait donc autant qu'ailleurs. */}
+          <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-3 px-5 md:px-8">
             {/* Marque : mark + lockup typographique */}
             <Link
               href={`/${locale}/`}
               className={`flex shrink-0 items-center gap-3 ${itemColor}`}
               style={itemShadow}
-              aria-label="Lac Hôtel Sahambavy, accueil"
+              aria-label={dict.nav?.aria?.accueil ?? "Lac Hôtel Sahambavy, accueil"}
             >
               <img
                 src={`${basePath}/images/logo/${darkText ? "logo-embleme-dark" : "logo-embleme-white"}.png`}
@@ -260,7 +266,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             )}
 
             {/* Menu desktop */}
-            <ul className="ml-auto hidden items-center gap-1 min-[1280px]:flex min-[1440px]:gap-1.5">
+            <ul className="ml-auto hidden items-center gap-1 min-[1280px]:flex">
               {primaryItems.map((item, i) => (
                 <li key={item.href} className="relative">
                   {item.children ? (
@@ -392,7 +398,11 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
             {/* Burger mobile */}
             <button
               type="button"
-              aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-label={
+                mobileOpen
+                  ? (dict.nav?.aria?.fermerMenu ?? "Fermer le menu")
+                  : (dict.nav?.aria?.ouvrirMenu ?? "Ouvrir le menu")
+              }
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
               className={`ml-auto flex h-11 w-11 flex-col items-center justify-center gap-[5px] min-[1280px]:hidden ${mobileOpen ? "text-ink" : itemColor}`}
@@ -440,7 +450,16 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: any }) 
                     {item.children && (
                       <button
                         type="button"
-                        aria-label={`${item.label[locale]}, sous-menu`}
+                        /* Aucune clé de dictionnaire n'a été prévue pour ce
+                           libellé : on le localise sur place, comme le lien
+                           « Accueil » quelques lignes plus haut. */
+                        aria-label={`${item.label[locale]}, ${
+                          locale === "fr"
+                            ? "sous-menu"
+                            : locale === "es"
+                              ? "submenú"
+                              : "submenu"
+                        }`}
                         aria-expanded={mobileSection === item.href}
                         onClick={() => setMobileSection(mobileSection === item.href ? null : item.href)}
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[rgb(var(--lh-past-ink))] transition-colors hover:bg-[rgb(var(--lh-past)/0.12)]"

@@ -31,7 +31,13 @@ export default function TopBar() {
 
   return (
     <div
+      /* `inert` va de pair avec `aria-hidden` : rétractée, la barre est
+         retirée de l'arbre d'accessibilité, mais ses liens restaient
+         focalisables et la tabulation entrait dans du contenu que les
+         lecteurs d'écran ne peuvent plus annoncer. `inert` les sort aussi
+         de l'ordre de tabulation. */
       aria-hidden={hidden || undefined}
+      inert={hidden || undefined}
       className={`fixed top-0 left-0 right-0 z-[1001] overflow-hidden transition-[max-height,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         hidden ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
       }`}
