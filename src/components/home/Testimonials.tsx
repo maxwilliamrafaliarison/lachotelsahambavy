@@ -36,12 +36,12 @@ import type { Locale } from "@/lib/utils";
  * QUINZE AVIS, TOUS RÉELS. Voir l'en-tête de src/data/testimonials.ts :
  * les trente témoignages rédigés en interne ont été supprimés.
  *
- * PAS DE MENTION DE TRANSPARENCE SOUS LE RUBAN : elle y figurait, la
- * direction l'a fait retirer le 10/08/2026. L'article L.111-7-2 du Code
- * de la consommation demande pourtant à tout site affichant des avis de
- * dire s'ils sont contrôlés et par qui. Les libellés restent dans les
- * dictionnaires (`testimonials.transparence`) : remettre le paragraphe
- * est l'affaire d'une ligne.
+ * LA MENTION DE TRANSPARENCE TIENT EN UNE LIGNE. L'article L.111-7-2 du
+ * Code de la consommation demande à tout site affichant des avis de dire
+ * s'ils sont contrôlés et par qui. Le paragraphe de quatre lignes qui
+ * remplissait cette obligation a été jugé trop lourd par la direction ;
+ * il est remplacé par sa forme brève, qui dit la même chose : les avis
+ * ne sont pas retouchés, et c'est la plateforme d'origine qui vérifie.
  */
 
 type Plateforme = "booking" | "google" | "tripadvisor";
@@ -132,7 +132,7 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
       </div>
 
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mt-8 flex flex-col items-center gap-4 text-center md:mt-10">
+        <div className="mt-8 flex flex-col items-center gap-2.5 text-center md:mt-10">
           <button
             type="button"
             onClick={() => setEnMarche((m) => !m)}
@@ -151,6 +151,17 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
             )}
             {enMarche ? t.pause : t.lecture}
           </button>
+
+          {/* Article L.111-7-2 du Code de la consommation. Dite en une
+              ligne plutôt qu'en paragraphe : l'obligation porte sur
+              l'information, pas sur sa longueur. Discrète à dessein, 11 px
+              en gris de service : elle doit être lisible sans concurrencer
+              les avis, qui sont le sujet de la section. Le gris `muted`
+              tient 4,5:1 sur le papier, c'est le plancher AA, on ne peut
+              pas l'éclaircir davantage. */}
+          <p className="text-[11px] leading-relaxed tracking-[0.01em] text-muted">
+            {t.transparence}
+          </p>
         </div>
       </div>
     </section>
