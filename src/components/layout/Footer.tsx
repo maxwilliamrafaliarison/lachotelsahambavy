@@ -1,4 +1,5 @@
 import { type Locale, getBasePath } from "@/lib/utils";
+import { alt } from "@/lib/alt";
 import { navigation, siteConfig } from "@/data/site";
 
 /**
@@ -44,16 +45,17 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         {/* Plan du site : arborescence Maggie.
 
-            Libellé localisé sur place, comme le lien « Accueil » de la
-            feuille mobile : aucune clé de dictionnaire ne porte « Plan du
-            site ». `dict.nav.aria.reseaux`, un temps branchée ici, contient
-            « Réseaux sociaux » (« Social media », « Redes sociales ») et
-            annonçait donc ce bloc pour ce qu'il n'est pas. Elle sert plus
-            bas, sur les réseaux, qui sont ce qu'elle nomme. */}
+            Libellé localisé sur place via `alt()`, la forme { fr, en, es }
+            du repo. La clé `dict.nav.aria.reseaux` porte bien ce texte
+            (« Plan du site », « Site map », « Mapa del sitio »), mais son
+            nom annonce les réseaux sociaux : la brancher ici, c'était
+            garantir qu'un jour on la corrigerait pour les réseaux et qu'on
+            renommerait ce bloc sans le savoir. */}
         <nav
-          aria-label={
-            locale === "fr" ? "Plan du site" : locale === "es" ? "Mapa del sitio" : "Site map"
-          }
+          aria-label={alt(
+            { fr: "Plan du site", en: "Site map", es: "Mapa del sitio" },
+            locale,
+          )}
           className="mb-14"
         >
           <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
@@ -99,9 +101,17 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           </div>
           {/* `nav` et non `div` : posé sur une division neutre, un
               `aria-label` n'est annoncé par personne. Les trois liens
-              sortent du site, ils méritent leur propre repère nommé. */}
+              sortent du site, ils méritent leur propre repère nommé.
+
+              Le libellé passait par `dict.nav.aria.reseaux`, qui contient
+              « Plan du site » : ce bloc s'annonçait donc comme le plan du
+              site, dans les trois langues, et le repli en dur ne servait
+              jamais. Nommé sur place, comme le bloc du dessus. */}
           <nav
-            aria-label={dict.nav?.aria?.reseaux ?? "Réseaux sociaux"}
+            aria-label={alt(
+              { fr: "Réseaux sociaux", en: "Social media", es: "Redes sociales" },
+              locale,
+            )}
             className="flex items-center gap-5"
           >
             <a

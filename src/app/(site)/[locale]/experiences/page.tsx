@@ -1,5 +1,6 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
+import { alt, type TexteAlternatif } from "@/lib/alt";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import RecapRows from "@/components/ui/RecapRows";
@@ -186,22 +187,40 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
     },
   ];
 
-  const shopPhotos = [
+  const shopPhotos: { src: string; alt: TexteAlternatif }[] = [
     {
       src: "/images/boutique/savon-artisanal-curcuma-natural-by-maggie.jpg",
-      alt: "Savon artisanal au curcuma « Natural by Maggie »",
+      alt: {
+        fr: "Savon artisanal au curcuma « Natural by Maggie »",
+        en: "Handmade turmeric soap, Natural by Maggie",
+        es: "Jabón artesanal de cúrcuma, Natural by Maggie",
+      },
     },
     {
       src: "/images/boutique/savon-coco-artisanal-bois-sculpte.jpg",
-      alt: "Savon artisanal à la noix de coco sur bois sculpté",
+      alt: {
+        fr: "Savon artisanal à la noix de coco sur bois sculpté",
+        en: "Handmade coconut soap resting on carved wood",
+        es: "Jabón artesanal de coco sobre madera tallada",
+      },
     },
     {
+      /* La photo montre un savon MOULÉ en marguerite, pas un savon décoré
+         d'une fleur : le texte français a été corrigé avec les traductions. */
       src: "/images/boutique/savon-fleur-marguerite-artisanal.jpg",
-      alt: "Savon artisanal décoré d'une fleur de marguerite",
+      alt: {
+        fr: "Savon artisanal moulé en fleur de marguerite",
+        en: "Handmade soap moulded in the shape of a daisy",
+        es: "Jabón artesanal moldeado en forma de margarita",
+      },
     },
     {
       src: "/images/boutique/etal-legumes-bio-mami-shop.jpg",
-      alt: "Étal de légumes bio du Mami Bio Shop",
+      alt: {
+        fr: "Étal de légumes bio du Mami Bio Shop",
+        en: "Stall of organic vegetables at the Mami Bio Shop",
+        es: "Puesto de verduras ecológicas del Mami Bio Shop",
+      },
     },
   ];
 
@@ -217,7 +236,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
       />
       <PanoramaHero
         image={`${basePath}/images/activities/canoe-aerial.jpg`}
-        imageAlt="Canoë sur le lac de Sahambavy vu du ciel"
+        imageAlt={alt(
+          {
+            fr: "Canoë sur le lac de Sahambavy vu du ciel",
+            en: "A canoe crossing Lake Sahambavy, seen from above",
+            es: "Una canoa surcando el lago Sahambavy, vista desde el aire",
+          },
+          loc
+        )}
         label={ex.heroLabel}
         title={ex.heroTitle}
         kicker={ex.heroKicker}
@@ -272,7 +298,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
           <div className="mt-14 md:mt-20">
             <EditorialSplit
               image={`${basePath}/images/pool/tete-bouddha-bord-piscine.jpg`}
-              imageAlt="Tête de Bouddha au bord de la piscine en ardoise"
+              imageAlt={alt(
+                {
+                  fr: "Tête de Bouddha au bord de la piscine en ardoise",
+                  en: "A stone Buddha head set in ferns beside the slate pool",
+                  es: "Una cabeza de Buda entre helechos junto a la piscina de pizarra",
+                },
+                loc
+              )}
               label={dict.loisirs.poolLabel}
               title={dict.loisirs.poolTitle}
               reverse
@@ -289,7 +322,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             image={`${basePath}/images/activities/salon-detente-vue-lac.jpg`}
-            imageAlt="Salon de détente ouvert sur le lac Sahambavy, fauteuils et terrasse au bord de l'eau"
+            imageAlt={alt(
+              {
+                fr: "Salon de détente ouvert sur le lac Sahambavy, fauteuils et terrasse au bord de l'eau",
+                en: "Lounge opening onto Lake Sahambavy, armchairs and a terrace at the water's edge",
+                es: "Salón de descanso abierto al lago Sahambavy, con sillones y terraza junto al agua",
+              },
+              loc
+            )}
             label={dict.loisirs.massageLabel}
             title={dict.loisirs.massageTitle}
             cta={{ href: `/${locale}/contact/`, label: dict.loisirs.cta }}
@@ -304,7 +344,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             image={`${basePath}/images/gallery/gallery-lake-view-interior.jpg`}
-            imageAlt="Salon lumineux ouvert sur le lac de Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Salon lumineux ouvert sur le lac de Sahambavy",
+                en: "Bright lounge with wide windows onto Lake Sahambavy",
+                es: "Salón luminoso con grandes ventanales al lago Sahambavy",
+              },
+              loc
+            )}
             label={ex.conference.label}
             title={dict.conference.title}
             rows={conferenceRows}
@@ -322,7 +369,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             image={`${basePath}/images/boutique/bio-mami-shop-entree-boutique.jpg`}
-            imageAlt="Entrée de la boutique Mami Bio Shop"
+            imageAlt={alt(
+              {
+                fr: "Entrée de la boutique Mami Bio Shop, sous son toit de chaume",
+                en: "Entrance to the Mami Bio Shop, under its thatched roof",
+                es: "Entrada de la tienda Mami Bio Shop, bajo su techo de paja",
+              },
+              loc
+            )}
             label={ex.mamiShop.label}
             title={ex.mamiShop.title}
           >
@@ -335,7 +389,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
               <ScrollReveal key={photo.src} delay={i * 90}>
                 <img
                   src={`${basePath}${photo.src}`}
-                  alt={photo.alt}
+                  alt={alt(photo.alt, loc)}
                   loading="lazy"
                   className="aspect-square w-full rounded-[3px] border border-hairline object-cover"
                 />
@@ -380,7 +434,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
             <ScrollReveal delay={150}>
               <img
                 src={`${basePath}/images/activities/pedalos-colores-ponton.jpg`}
-                alt="Embarcations au ponton du Lac Hôtel, point de départ des excursions"
+                alt={alt(
+                  {
+                    fr: "Embarcations au ponton du Lac Hôtel, point de départ des excursions",
+                    en: "Boats moored at the Lac Hôtel jetty, the starting point for excursions",
+                    es: "Embarcaciones en el embarcadero del Lac Hôtel, punto de partida de las excursiones",
+                  },
+                  loc
+                )}
                 loading="lazy"
                 className="aspect-[4/3] w-full rounded-[3px] border border-hairline object-cover"
               />
@@ -398,7 +459,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
           </ScrollReveal>
           <EditorialSplit
             image={`${basePath}/images/tea/plantation-cinematic.jpg`}
-            imageAlt="Cueilleuses dans la plantation de thé de Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Cueilleuses dans la plantation de thé de Sahambavy",
+                en: "Tea pickers among the rows of the Sahambavy tea plantation",
+                es: "Recolectoras de té entre las hileras de la plantación de Sahambavy",
+              },
+              loc
+            )}
             label={dict.destinations.plantation.label}
             title={dict.destinations.plantation.title}
             cta={{ href: `/${locale}/plantation-de-the/`, label: dict.destinations.plantation.cta }}
@@ -415,7 +483,14 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
           <EditorialSplit
             night
             image={`${basePath}/images/mariage/maries-coucher-soleil-lac.jpg`}
-            imageAlt="Jeunes mariés au coucher du soleil sur le lac de Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Jeunes mariés enlacés au coucher du soleil au bord du lac de Sahambavy",
+                en: "Newlyweds embracing at sunset on the shore of Lake Sahambavy",
+                es: "Recién casados abrazados al atardecer a orillas del lago Sahambavy",
+              },
+              loc
+            )}
             label={ex.teasers.mariagesLabel}
             title={
               <>

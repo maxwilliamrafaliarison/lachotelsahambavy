@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { alt } from "@/lib/alt";
 import { type Locale, getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
@@ -34,7 +35,14 @@ export default function OurHouse({ dict, locale }: { dict: any; locale: Locale }
             <div className="overflow-hidden rounded-[3px] border border-hairline">
               <img
                 src={`${basePath}/images/team/team-hero.jpg`}
-                alt="Maggie Leong et l'équipe du Lac Hôtel Sahambavy"
+                alt={alt(
+                  {
+                    fr: "Maggie Leong et deux membres de l'équipe, souriantes devant le jardin et les bungalows",
+                    en: "Maggie Leong and two team members, smiling, the garden and bungalows behind them",
+                    es: "Maggie Leong y dos integrantes del equipo sonríen, con el jardín y los bungalows al fondo",
+                  },
+                  locale,
+                )}
                 className="aspect-[4/3] w-full object-cover"
                 loading="lazy"
               />

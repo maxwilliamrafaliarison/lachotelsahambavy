@@ -4,6 +4,7 @@ import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Icon } from "@/components/ui/Icon";
+import { alt } from "@/lib/alt";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
@@ -105,22 +106,26 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
     {
       src: `${basePath}/images/founders/maggie-leong.jpg`,
       name: "Maggie Leong",
-      alt:
-        loc === "fr"
-          ? "Maggie Leong, co-dirigeante du Lac Hôtel"
-          : loc === "es"
-          ? "Maggie Leong, codirectora del Lac Hôtel"
-          : "Maggie Leong, co-manager of Lac Hôtel",
+      alt: alt(
+        {
+          fr: "Maggie Leong, co-dirigeante du Lac Hôtel",
+          en: "Maggie Leong, co-manager of Lac Hôtel",
+          es: "Maggie Leong, codirectora del Lac Hôtel",
+        },
+        loc,
+      ),
     },
     {
       src: `${basePath}/images/founders/sergi-formentin.jpg`,
       name: "Sergi Formentin",
-      alt:
-        loc === "fr"
-          ? "Sergi Formentin, co-dirigeant du Lac Hôtel"
-          : loc === "es"
-          ? "Sergi Formentin, codirector del Lac Hôtel"
-          : "Sergi Formentin, co-manager of Lac Hôtel",
+      alt: alt(
+        {
+          fr: "Sergi Formentin, co-dirigeant du Lac Hôtel",
+          en: "Sergi Formentin, co-manager of Lac Hôtel",
+          es: "Sergi Formentin, codirector del Lac Hôtel",
+        },
+        loc,
+      ),
     },
   ];
 
@@ -133,7 +138,14 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
       {/* 1. Hero Panorama : lever de soleil au drone, LE plan d'ensemble du domaine */}
       <PanoramaHero
         image={`${basePath}/images/hero/hero-drone-sunrise.jpg`}
-        imageAlt="Vue aérienne du Lac Hôtel et du lac de Sahambavy au lever du soleil"
+        imageAlt={alt(
+          {
+            fr: "Le domaine du Lac Hôtel au bord du lac Sahambavy, au lever du soleil, vu du ciel",
+            en: "The Lac Hôtel grounds beside Lake Sahambavy at sunrise, seen from the air",
+            es: "El recinto del Lac Hôtel junto al lago Sahambavy al amanecer, visto desde el aire",
+          },
+          loc,
+        )}
         label={dict.hero.eyebrow}
         title={dict.hotel.heroTitle}
         kicker={dict.hotel.heroSubtitle}
@@ -145,7 +157,14 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
           <EditorialSplit
             as="h2"
             image={`${basePath}/images/hotel/hotel-gardens.jpg`}
-            imageAlt="Jardins et cultures biologiques du Lac Hôtel à Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Le bâtiment principal au toit de chaume, dominant les jardins fleuris de l'hôtel",
+                en: "The thatched main building overlooking the hotel's flowering gardens",
+                es: "El edificio principal con techo de paja, que domina los jardines floridos del hotel",
+              },
+              loc,
+            )}
             label={dict.hotel.philosophyLabel}
             title={dict.hotel.philosophyTitle}
           >
@@ -181,7 +200,14 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
           <EditorialSplit
             as="h2"
             image={`${basePath}/images/hero/hero-pilotis.jpg`}
-            imageAlt="Allée des chambres sur pilotis du Lac Hôtel au bord du lac de Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Allée pavée bordée de bungalows sur pilotis aux toits de chaume, sur le lac Sahambavy",
+                en: "Stone walkway lined with thatched overwater bungalows on Lake Sahambavy",
+                es: "Camino empedrado entre bungalows sobre pilotes con techo de paja, en el lago Sahambavy",
+              },
+              loc,
+            )}
             label={dict.hotel.historyLabel}
             title={dict.hotel.historyTitle}
             reverse
@@ -263,7 +289,14 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             image={`${basePath}/images/team/team-staff.jpg`}
-            imageAlt="L'équipe du Lac Hôtel réunie à Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Un jardinier de l'équipe, bêche à la main, dans les jardins de l'hôtel",
+                en: "A gardener from the team, spade in hand, in the hotel gardens",
+                es: "Un jardinero del equipo, pala en mano, en los jardines del hotel",
+              },
+              loc,
+            )}
             label={dict.equipe.teamLabel}
             title={dict.equipe.introTitle}
             cta={{ href: `${basePath}/${loc}/notre-equipe/`, label: equipeCta }}

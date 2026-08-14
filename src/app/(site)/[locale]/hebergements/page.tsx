@@ -7,6 +7,7 @@ import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Icon } from "@/components/ui/Icon";
 import { rooms, roomsAffichees, extras, type Room } from "@/data/rooms";
+import { alt, type TexteAlternatif } from "@/lib/alt";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { hotelRoomSchema, breadcrumbSchema } from "@/lib/schema-org";
@@ -279,7 +280,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       {/* Hero Panorama, le seul h1 de la page */}
       <PanoramaHero
         image={`${basePath}/images/rooms/allee-pierre-bungalows-pilotis.jpg`}
-        imageAlt="Allée pavée menant aux bungalows sur pilotis, au-dessus du lac Sahambavy"
+        imageAlt={alt(
+          {
+            fr: "Allée pavée menant aux bungalows sur pilotis, au-dessus du lac Sahambavy",
+            en: "Stone causeway leading to the overwater bungalows above Lake Sahambavy",
+            es: "Camino empedrado que se adentra en el lago Sahambavy hacia los bungalows sobre pilotes",
+          },
+          loc,
+        )}
         label={dict.rooms.label}
         title={dict.rooms.title}
         kicker={dict.rooms.intro}
@@ -322,7 +330,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             id={pilotis.slug}
             media={galerie(pilotis, true)}
             image={`${basePath}/images/rooms/pilotis-crepuscule-rose-lac.jpg`}
-            imageAlt="Les bungalows sur pilotis se reflétant dans le lac Sahambavy au crépuscule"
+            imageAlt={alt(
+              {
+                fr: "Les bungalows sur pilotis se reflétant dans le lac Sahambavy au crépuscule",
+                en: "The overwater bungalows mirrored in Lake Sahambavy at dusk",
+                es: "Los bungalows sobre pilotes reflejados en el lago Sahambavy al anochecer",
+              },
+              loc,
+            )}
             label={rx.nightOnLake}
             title={
               <>
@@ -353,7 +368,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             id={superior.slug}
             media={galerie(superior)}
             image={`${basePath}/images/gallery/gallery-lake-view-interior.jpg`}
-            imageAlt="Superior Lake View Room : baie vitrée grand angle ouverte sur le lac et les bambous"
+            imageAlt={alt(
+              {
+                fr: "Superior Lake View Room : baie vitrée grand angle ouverte sur le lac et les bambous",
+                en: "Superior Lake View Room: wide picture window opening onto bamboo and the lake beyond",
+                es: "Habitación Superior Vista al Lago: gran ventanal abierto al lago y a los bambúes",
+              },
+              loc,
+            )}
             label={superior.type[loc]}
             title={superior.name[loc]}
             rows={[
@@ -376,7 +398,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             id={standard.slug}
             media={galerie(standard)}
             image={`${basePath}/images/rooms/bungalows-colores-annexe.jpg`}
-            imageAlt="Bungalows standard aux façades colorées, dans les jardins paysagers du Lac Hôtel"
+            imageAlt={alt(
+              {
+                fr: "Bungalows standard aux façades colorées, dans les jardins paysagers du Lac Hôtel",
+                en: "Standard Bungalows with brightly coloured façades in the landscaped gardens",
+                es: "Bungalows Estándar de fachadas de colores en los jardines del Lac Hôtel",
+              },
+              loc,
+            )}
             label={standard.type[loc]}
             title={standard.name[loc]}
             rows={[
@@ -402,25 +431,37 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             </p>
           </ScrollReveal>
           <div className="grid gap-4 md:grid-cols-3 md:gap-6">
-            {[
+            {([
               {
                 src: "/images/rooms/porte-bois-sculpte-heurtoir-lion.jpg",
-                alt: "Porte en bois sculpté à heurtoir de lion, artisanat malgache",
+                alt: {
+                  fr: "Porte en bois sculpté à heurtoir de lion, artisanat malgache",
+                  en: "Carved wooden door with a brass lion-head knocker, Malagasy craftsmanship",
+                  es: "Puerta de madera tallada con aldaba de cabeza de león, artesanía malgache",
+                },
               },
               {
                 src: "/images/rooms/salle-de-bain-pilotis-double-vasque.jpg",
-                alt: "Salle de bains du Pilotis Nuptial avec double vasque artisanale",
+                alt: {
+                  fr: "Salle de bains du Pilotis Nuptial : double vasque posée sur un pied en racine",
+                  en: "Honeymoon Overwater Bungalow bathroom: twin basins on a tree-root stand",
+                  es: "Baño del Bungalow Nupcial sobre Pilotes: doble lavabo sobre un pie de raíz de árbol",
+                },
               },
               {
                 src: "/images/rooms/meridienne-mur-ocre-detail-deco.jpg",
-                alt: "Méridienne devant un mur ocre, détail de décoration d'une chambre",
+                alt: {
+                  fr: "Méridienne au bois sculpté devant un mur ocre, dans une chambre",
+                  en: "Carved chaise longue set against an ochre wall in a guest room",
+                  es: "Meridiana de madera tallada ante una pared ocre, en una habitación",
+                },
               },
-            ].map((img, i) => (
+            ] satisfies { src: string; alt: TexteAlternatif }[]).map((img, i) => (
               <ScrollReveal key={img.src} delay={i * 90}>
                 <div className="overflow-hidden rounded-[3px] border border-hairline">
                   <img
                     src={`${basePath}${img.src}`}
-                    alt={img.alt}
+                    alt={alt(img.alt, loc)}
                     loading="lazy"
                     className="aspect-[4/3] w-full object-cover"
                   />
@@ -440,7 +481,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             id={wagon.slug}
             media={galerie(wagon)}
             image={`${basePath}/images/rooms/wagon-exterior.jpg`}
-            imageAlt="Wagon Nuptial 1930 de la ligne FCE posé face au lac Sahambavy"
+            imageAlt={alt(
+              {
+                fr: "Wagon Nuptial 1930, voiture verte et blanche posée sur ses rails dans le jardin fleuri",
+                en: "1930 Honeymoon Wagon, a green and white carriage on its rails in the flowered garden",
+                es: "Vagón Nupcial 1930, coche verde y blanco sobre sus raíles en el jardín florido",
+              },
+              loc,
+            )}
             label={rx.nightOnLake}
             title={wagon.name[loc]}
             rows={[
@@ -467,7 +515,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             media={galerie(arbre)}
             reverse
             image={`${basePath}/images/rooms/bungalow-tarzan-cabane-arbre.jpg`}
-            imageAlt="Bungalow Tarzan : cabane en bois sculpté perchée dans les arbres du jardin tropical, avec escalier en colimaçon"
+            imageAlt={alt(
+              {
+                fr: "Bungalow Tarzan sur Arbre : cabane en bois sculpté perchée au-dessus du jardin tropical",
+                en: "Tarzan Treehouse Bungalow: a carved wooden cabin perched above the tropical garden",
+                es: "Bungalow Tarzán en el Árbol: cabaña de madera tallada sobre el jardín tropical",
+              },
+              loc,
+            )}
             label={arbre.type[loc]}
             title={arbre.name[loc]}
             rows={[
@@ -489,7 +544,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             id={villaRepos.slug}
             media={galerie(villaRepos)}
             image={`${basePath}/images/rooms/le-repos-exterior.jpg`}
-            imageAlt="Maisons en duplex de l'extension Le Repos, entourées de verdure"
+            imageAlt={alt(
+              {
+                fr: "Maisons de l'extension Le Repos, façades ocre et toits verts, parmi les pins",
+                en: "Houses at the Le Repos extension, ochre façades and green roofs among the pines",
+                es: "Casas de la extensión Le Repos, fachadas ocres y tejados verdes entre los pinos",
+              },
+              loc,
+            )}
             label={rx.familyLabel}
             title={rx.familyTitle}
             rows={[

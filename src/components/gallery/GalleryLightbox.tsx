@@ -13,6 +13,8 @@ interface Props {
   index: number;
   onClose: () => void;
   onIndexChange: (index: number) => void;
+  /** Libellés d'accessibilité, résolus dans la langue de la page. */
+  libelles: { galerie: string; fermer: string; precedente: string; suivante: string };
 }
 
 const SWIPE_THRESHOLD = 64; // px au-delà desquels on change d'image
@@ -30,7 +32,7 @@ const RUBBER_BAND = 0.32; // résistance au drag aux extrémités (Apple)
  * × 100vw. Le delta de drag s'ajoute pendant le geste, puis se résorbe au
  * relâchement. Évite de recréer les <img> à chaque navigation (cache navigateur).
  */
-export default function GalleryLightbox({ photos, index, onClose, onIndexChange }: Props) {
+export default function GalleryLightbox({ photos, index, onClose, onIndexChange, libelles }: Props) {
   const [drag, setDrag] = useState(0); // delta en px pendant le geste
   const [dragging, setDragging] = useState(false);
   const [vpWidth, setVpWidth] = useState(0);
@@ -173,7 +175,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="Galerie photos"
+      aria-label={libelles.galerie}
     >
       {/* Header */}
       <div className="relative flex items-center justify-between px-5 md:px-8 py-4 md:py-5 z-10">
@@ -189,7 +191,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
             onClose();
           }}
           className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors flex items-center justify-center"
-          aria-label="Fermer"
+          aria-label={libelles.fermer}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 6L6 18M6 6l12 12" />
@@ -249,7 +251,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
         }}
         disabled={!canPrev}
         className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed z-10"
-        aria-label="Photo précédente"
+        aria-label={libelles.precedente}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M15 18l-6-6 6-6" />
@@ -262,7 +264,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange 
         }}
         disabled={!canNext}
         className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed z-10"
-        aria-label="Photo suivante"
+        aria-label={libelles.suivante}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 18l6-6-6-6" />

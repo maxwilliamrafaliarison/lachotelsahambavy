@@ -1,5 +1,6 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
+import { alt } from "@/lib/alt";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import RecapRows from "@/components/ui/RecapRows";
@@ -81,7 +82,14 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
 
       <PanoramaHero
         image={`${basePath}/images/pool/piscine-jardin-palmiers-jour.jpg`}
-        imageAlt="La piscine en ardoise du Lac Hôtel au milieu des jardins et des palmiers"
+        imageAlt={alt(
+          {
+            fr: "La piscine en ardoise du Lac Hôtel au milieu des jardins et des palmiers",
+            en: "The Lac Hôtel slate pool set amid the gardens and palm trees",
+            es: "La piscina de pizarra del Lac Hôtel entre los jardines y las palmeras",
+          },
+          loc,
+        )}
         label={dict.loisirs.introLabel}
         title={dict.loisirs.heroTitle}
         kicker={dict.loisirs.heroSubtitle}
@@ -142,7 +150,16 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <EditorialSplit
             image={`${basePath}/images/pool/pool-night.jpg`}
-            imageAlt="La piscine en ardoise à eau salée illuminée à la tombée de la nuit"
+            /* Ni l'ardoise ni l'eau salée ne se voient sur cette vue nocturne :
+               le titre de la section les dit déjà, l'alt décrit la photo. */
+            imageAlt={alt(
+              {
+                fr: "La piscine illuminée à la nuit tombée, transats et brasero devant le bâtiment principal",
+                en: "The pool lit up at nightfall, sun loungers and fire pit in front of the main building",
+                es: "La piscina iluminada al caer la noche, con tumbonas y brasero frente al edificio principal",
+              },
+              loc,
+            )}
             label={dict.loisirs.poolLabel}
             title={dict.loisirs.poolTitle}
           >
@@ -183,7 +200,14 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
             <ScrollReveal delay={150}>
               <img
                 src={`${basePath}/images/activities/pedalos-colores-ponton.jpg`}
-                alt="Embarcations au ponton du Lac Hôtel, point de départ des excursions"
+                alt={alt(
+                  {
+                    fr: "Pédalos et canoës colorés amarrés au ponton du Lac Hôtel, d'où partent les excursions",
+                    en: "Colourful pedalos and canoes moored at the Lac Hôtel jetty, where excursions set off",
+                    es: "Hidropedales y canoas de colores en el muelle del Lac Hôtel, de donde salen las excursiones",
+                  },
+                  loc,
+                )}
                 loading="lazy"
                 className="aspect-[4/3] w-full rounded-[3px] border border-hairline object-cover"
               />

@@ -26,11 +26,15 @@ export default function GalleryGrid({
   photos,
   filtres,
   ouvrirLabel,
+  libellesVisionneuse,
 }: {
   photos: Photo[];
   filtres: { key: string; label: string }[];
   /** Gabarit du libellé d'ouverture, « {alt} » remplacé par la légende. */
   ouvrirLabel: string;
+  /* La visionneuse est montée d'ici : ses libellés traversent donc la
+     grille, qui ne connaît pas plus la locale qu'elle. */
+  libellesVisionneuse: { galerie: string; fermer: string; precedente: string; suivante: string };
 }) {
   const [actif, setActif] = useState("all");
   const [visionneuse, setVisionneuse] = useState<number | null>(null);
@@ -84,6 +88,7 @@ export default function GalleryGrid({
           index={visionneuse}
           onClose={() => setVisionneuse(null)}
           onIndexChange={setVisionneuse}
+          libelles={libellesVisionneuse}
         />
       )}
     </>

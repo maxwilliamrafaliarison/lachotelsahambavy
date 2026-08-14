@@ -14,6 +14,7 @@
 import { Suspense } from "react";
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
+import { alt } from "@/lib/alt";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import RecapRows from "@/components/ui/RecapRows";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -53,8 +54,20 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "contact"))]} />
 
+      {/* Le héros n'avait aucun imageAlt : PanoramaHero retombe alors sur
+          `imageAlt = ""` et la photo devient muette, alors que les héros des
+          autres pages sont décrits. Silence implicite plutôt que choisi : on
+          décrit, la photo situe l'hôtel mieux que ne le fait le h1. */}
       <PanoramaHero
         image={`${basePath}/images/hero/hero-lake-sunset.jpg`}
+        imageAlt={alt(
+          {
+            fr: "Bungalows sur pilotis au toit de chaume, reflétés dans le lac Sahambavy au crépuscule",
+            en: "Thatched overwater bungalows reflected in Lake Sahambavy at dusk",
+            es: "Bungalows sobre pilotes con techo de paja reflejados en el lago Sahambavy al anochecer",
+          },
+          loc,
+        )}
         label={dict.contact.label}
         title={dict.contact.heroTitle}
         kicker={dict.contact.heroSubtitle}
@@ -166,7 +179,17 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Lac Hotel Sahambavy"
+                /* Libellé de fonction, pas description d'image : il annonce à
+                   quoi sert ce cadre, que le lecteur d'écran énonce avant de
+                   décider d'y entrer. */
+                title={alt(
+                  {
+                    fr: "Carte interactive : emplacement du Lac Hôtel Sahambavy",
+                    en: "Interactive map: location of Lac Hôtel Sahambavy",
+                    es: "Mapa interactivo: ubicación del Lac Hôtel Sahambavy",
+                  },
+                  loc,
+                )}
               />
             </div>
           </ScrollReveal>

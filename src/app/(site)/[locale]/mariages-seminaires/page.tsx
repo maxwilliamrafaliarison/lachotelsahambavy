@@ -1,5 +1,6 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
+import { alt } from "@/lib/alt";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import RecapRows from "@/components/ui/RecapRows";
@@ -174,12 +175,23 @@ export default async function MariagesSeminairesPage({
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "mariages-seminaires"))]} />
 
-      {/* ──── HERO « Nuit sur le lac » : piscine illuminée, titrage serif champagne ──── */}
+      {/* ──── HERO « Nuit sur le lac » : domaine illuminé, titrage serif champagne ──── */}
+      {/* La photo est une vue aérienne nocturne de tout le domaine : le
+          bâtiment principal éclairé sous son toit de chaume, la piscine, les
+          transats et un brasero. La décrire par la seule piscine laissait de
+          côté son sujet principal. */}
       <PanoramaHero
         night
         height="full"
         image={`${basePath}/images/pool/pool-night.jpg`}
-        imageAlt="Piscine du Lac Hôtel illuminée à la nuit tombée"
+        imageAlt={alt(
+          {
+            fr: "Le Lac Hôtel illuminé à la nuit tombée, piscine et brasero dans les jardins",
+            en: "Lac Hôtel lit up at nightfall, its pool and fire pit in the gardens",
+            es: "El Lac Hôtel iluminado al caer la noche, con la piscina y el brasero en los jardines",
+          },
+          loc,
+        )}
         label={W.heroLabel}
         title={
           <>
@@ -222,10 +234,22 @@ export default async function MariagesSeminairesPage({
             </ScrollReveal>
             <ScrollReveal delay={180} className="w-full max-w-[380px] sm:mt-12">
               <figure>
+                {/* La légende (dict.wedding.caption2) annonce « la cérémonie
+                    sous l'arche fleurie » : la photo montre le jardin en cours
+                    d'installation, chaises vides et arche de BALLONS blancs.
+                    La légende visible reste telle quelle (elle vient des
+                    dictionnaires), mais le texte alternatif décrit l'image. */}
                 <div className="border border-night-hairline bg-night-soft p-2">
                   <img
                     src={`${basePath}/images/mariage/ceremonie-arche-jardin.jpg`}
-                    alt={W.caption2}
+                    alt={alt(
+                      {
+                        fr: "Rangées de chaises face à une arche de ballons blancs, au jardin",
+                        en: "Rows of chairs facing an arch of white balloons, in the garden",
+                        es: "Filas de sillas frente a un arco de globos blancos, en el jardín",
+                      },
+                      loc,
+                    )}
                     loading="lazy"
                     className="block h-auto w-full"
                   />
@@ -242,7 +266,14 @@ export default async function MariagesSeminairesPage({
             <EditorialSplit
               night
               image={`${basePath}/images/hero/hero-suite-sunset.jpg`}
-              imageAlt="Suite éclairée au coucher du soleil sur le lac Sahambavy"
+              imageAlt={alt(
+                {
+                  fr: "Suite éclairée au coucher du soleil sur le lac Sahambavy",
+                  en: "Suite bathed in sunset light, windows opening onto Lake Sahambavy",
+                  es: "Suite bañada por la luz del atardecer, con vistas al lago Sahambavy",
+                },
+                loc,
+              )}
               label={W.receptionLabel}
               title={
                 <>
@@ -263,12 +294,22 @@ export default async function MariagesSeminairesPage({
       {/* ──── SÉMINAIRES & CONFÉRENCES : bloc éditorial inversé + aperçu à filets ──── */}
       <section className="ge-night py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
+          {/* Le texte alternatif annonçait « une salle de réception dressée pour
+              un événement » : la photo montre la salle du restaurant, tables
+              dressées et fauteuils en rotin autour de la cheminée de pierre. */}
           <EditorialSplit
             night
             reverse
             id="seminaires"
             image={`${basePath}/images/restaurant/restaurant-01.jpg`}
-            imageAlt="Salle de réception du Lac Hôtel dressée pour un événement"
+            imageAlt={alt(
+              {
+                fr: "Tables dressées et fauteuils en rotin autour de la grande cheminée en pierre",
+                en: "Laid tables and rattan armchairs around the large stone fireplace",
+                es: "Mesas puestas y sillones de ratán alrededor de la gran chimenea de piedra",
+              },
+              loc,
+            )}
             label={C.label}
             title={C.title}
             cta={{ href: `${basePath}/${loc}/contact/`, label: C.ctaLabel, night: true }}

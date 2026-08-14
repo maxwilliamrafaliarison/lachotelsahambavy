@@ -1,4 +1,5 @@
 import EditorialSplit from "@/components/ui/EditorialSplit";
+import { alt } from "@/lib/alt";
 import { type Locale, getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
@@ -18,7 +19,18 @@ export default function RestaurantTeaser({ dict, locale }: { dict: any; locale: 
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <EditorialSplit
           image={`${basePath}/images/restaurant/table-dressee-nappe-rouge.jpg`}
-          imageAlt="Table dressée à la nappe rouge au restaurant panoramique du Lac Hôtel"
+          /* La photo est un gros plan de couvert : nappe rouge, verres
+             coiffés d'une serviette pliée. Le panorama, qu'annonçait
+             l'ancien alt, n'y est pas ; le décrire, c'était promettre à un
+             aveugle une vue que l'image ne donne pas. */
+          imageAlt={alt(
+            {
+              fr: "Table dressée à la nappe rouge, serviettes pliées dans les verres à vin",
+              en: "Table laid with a red cloth, napkins folded into the wine glasses",
+              es: "Mesa puesta con mantel rojo y servilletas dobladas en las copas",
+            },
+            locale,
+          )}
           label={r.label}
           title={r.title}
           reverse

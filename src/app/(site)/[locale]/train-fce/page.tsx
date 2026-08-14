@@ -1,5 +1,6 @@
 import { getDictionary } from "@/i18n/getDictionary";
 import { locales, type Locale, getBasePath } from "@/lib/utils";
+import { alt } from "@/lib/alt";
 import PanoramaHero from "@/components/ui/PanoramaHero";
 import AvisService from "@/components/ui/AvisService";
 import EditorialSplit from "@/components/ui/EditorialSplit";
@@ -118,7 +119,14 @@ export default async function TrainFCEPage({
           matériel. La draisine reste illustrée dans sa propre section. */}
       <PanoramaHero
         image={`${basePath}/images/train/train-classique-corridor-foret.jpg`}
-        imageAlt="Le train classique de la ligne FCE longeant le corridor de forêt primaire, voyageurs accoudés aux fenêtres"
+        imageAlt={alt(
+          {
+            fr: "Le train classique de la ligne FCE longeant le corridor de forêt primaire, voyageurs accoudés aux fenêtres",
+            en: "The classic FCE train skirting the primary forest corridor, passengers leaning out of the windows",
+            es: "El tren clásico de la línea FCE bordeando el corredor de bosque primario, con viajeros asomados a las ventanillas",
+          },
+          loc
+        )}
         label={dict.train.introLabel}
         title={dict.train.heroTitle}
         kicker={dict.train.heroSubtitle}
@@ -165,7 +173,18 @@ export default async function TrainFCEPage({
               <div className="overflow-hidden rounded-[3px] border border-hairline">
                 <img
                   src={`${basePath}/images/train/train-hotel.jpg`}
-                  alt="Le train FCE marquant l'arrêt en gare de Sahambavy, face au Lac Hôtel"
+                  /* Le fichier s'appelle « train-hotel.jpg » mais aucun train
+                     n'y figure : on y voit les bungalows de l'hôtel au bord
+                     du lac, vus depuis l'eau. L'ancien texte alternatif
+                     décrivait un arrêt en gare qui n'est pas sur la photo. */
+                  alt={alt(
+                    {
+                      fr: "Les bungalows ocre du Lac Hôtel alignés au bord du lac, vus depuis l'eau",
+                      en: "The ochre bungalows of Lac Hôtel along the lakeshore, seen from the water",
+                      es: "Los bungalows ocres del Lac Hôtel a orillas del lago, vistos desde el agua",
+                    },
+                    loc
+                  )}
                   loading="lazy"
                   className="aspect-[16/7] w-full object-cover"
                 />
@@ -213,7 +232,14 @@ export default async function TrainFCEPage({
               <div className="mt-8 overflow-hidden rounded-[3px] border border-hairline">
                 <img
                   src={`${basePath}/images/train/micheline-bleue-quai-gare.jpg`}
-                  alt="La Micheline bleue à quai, autorail historique de la ligne FCE"
+                  alt={alt(
+                    {
+                      fr: "La Micheline bleue à quai, autorail historique de la ligne FCE",
+                      en: "The blue Micheline at the platform, the historic railcar of the FCE line",
+                      es: "La Micheline azul en el andén, el automotor histórico de la línea FCE",
+                    },
+                    loc
+                  )}
                   loading="lazy"
                   className="aspect-[4/3] w-full object-cover"
                 />
@@ -241,7 +267,14 @@ export default async function TrainFCEPage({
           <div className="space-y-6 md:space-y-8">
             <EditorialSplit
               image={`${basePath}/images/train/draisine-fce-embarquement-voyageurs.jpg`}
-              imageAlt="Voyageurs embarquant à bord de la draisine privative sur la ligne FCE"
+              imageAlt={alt(
+                {
+                  fr: "Voyageurs embarquant à bord de la draisine rouge et blanche aux couleurs de la FCE",
+                  en: "Passengers boarding the red and white draisine in FCE livery",
+                  es: "Viajeros subiendo a la dresina roja y blanca con los colores de la FCE",
+                },
+                loc
+              )}
               label={dict.train.draisineLabel}
               title={dict.train.draisineTitle}
               cta={{ href: `${basePath}/${locale}/contact/`, label: dict.train.cta }}
@@ -252,7 +285,14 @@ export default async function TrainFCEPage({
             <EditorialSplit
               reverse
               image={`${basePath}/images/train/train-fce-foret-corridor.jpg`}
-              imageAlt="La ligne FCE traversant le corridor de forêt primaire vers Andrambovato"
+              imageAlt={alt(
+                {
+                  fr: "La ligne FCE traversant le corridor de forêt primaire vers Andrambovato",
+                  en: "The FCE line crossing the primary forest corridor towards Andrambovato",
+                  es: "La línea FCE atravesando el corredor de bosque primario hacia Andrambovato",
+                },
+                loc
+              )}
               label={t.projectLabel ?? "Projet de préservation"}
               title={t.projectTitle ?? "Andrambovato, corridor de forêt primaire"}
             >
