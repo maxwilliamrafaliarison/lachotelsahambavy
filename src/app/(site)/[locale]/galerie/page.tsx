@@ -128,6 +128,27 @@ const photos: Photo[] = [
     },
     category: "nature",
   },
+  /* Les deux seules photos de théiers de la galerie. Sans elles, le filtre
+     « Plantation » serait vide depuis que gallery-04 l'a quitté, alors que
+     la plantation est la signature de l'hôtel. */
+  {
+    src: `${basePath}/images/tea/plantation-the-rangees-vue-aerienne.jpg`,
+    alt: {
+      fr: "Rangées de théiers de Sahambavy vues à la verticale, deux cueilleuses entre les allées",
+      en: "Rows of Sahambavy tea bushes seen from directly above, two pickers between the lanes",
+      es: "Hileras de tés de Sahambavy vistas desde arriba, dos recolectoras entre los pasillos",
+    },
+    category: "plantation",
+  },
+  {
+    src: `${basePath}/images/tea/cueilleuse-the-panier-brume.jpg`,
+    alt: {
+      fr: "Cueilleuse au panier d'osier dans les théiers, sous la brume du matin",
+      en: "A picker with her wicker basket among the tea bushes, in the morning mist",
+      es: "Recolectora con su cesta de mimbre entre los tés, bajo la bruma matinal",
+    },
+    category: "plantation",
+  },
   {
     src: `${basePath}/images/gallery/gallery-04.jpg`,
     alt: {
@@ -135,7 +156,11 @@ const photos: Photo[] = [
       en: "Sloping gardens of rounded clipped shrubs, with bungalows and the lake beyond",
       es: "Jardines en pendiente con arbustos recortados en bola, bungalós y lago al fondo",
     },
-    category: "plantation",
+    /* Rangée sous « plantation » jusqu'au 11/08/2026, alors qu'on n'y voit
+       pas un théier : ce sont les buissons taillés des jardins d'agrément,
+       les bungalows et le lac. Un visiteur qui filtrait « Plantation »
+       tombait sur cette seule photo, et elle ne montrait pas de thé. */
+    category: "jardins",
   },
   {
     src: `${basePath}/images/gallery/gallery-10.jpg`,
@@ -144,7 +169,12 @@ const photos: Photo[] = [
       en: "Thatched building with wooden balconies standing above the flowering gardens",
       es: "Edificio con techo de paja y balcones de madera sobre los jardines floridos",
     },
-    category: "train",
+    /* Rangée sous « train » jusqu'au 11/08/2026, sans le moindre rapport
+       avec la ligne FCE. Classée « jardins » plutôt que « restaurant », où
+       vit déjà la façade : ici les massifs occupent la moitié basse du
+       cadre, et qui filtre « Restaurant » cherche la salle, pas un
+       extérieur. */
+    category: "jardins",
   },
   {
     src: `${basePath}/images/train/draisine-fce-embarquement-voyageurs.jpg`,
