@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { buildBreadcrumb } from "@/lib/seo/breadcrumbs";
 import { pageAlternates } from "@/lib/seo/alternates";
+import { alt, type TexteAlternatif } from "@/lib/alt";
 
 const basePath = getBasePath();
 
@@ -42,23 +43,22 @@ const RSE_ICONS = [
 
 /* Photos d'ambiance : les dix portraits anonymes portent une alternative
    vide. Ils n'ajoutent rien au titre de la section, et dix fois la même
-   phrase générique ne fait qu'encombrer le lecteur d'écran. Seules les deux
-   vues qui disent quelque chose de précis gardent leur alternative ; elles
-   restent en français sur /en et /es, faute d'entrée de dictionnaire, à
-   reprendre quand la section passera au dictionnaire. */
-const teamPhotos = [
+   phrase générique ne ferait qu'encombrer le lecteur d'écran. Seules les
+   deux vues qui disent quelque chose de précis gardent leur alternative,
+   trilingue depuis le 14/08/2026. */
+const teamPhotos: { src: string; alt: "" | TexteAlternatif }[] = [
   { src: "/images/team/team-01.jpg", alt: "" },
   { src: "/images/team/team-02.jpg", alt: "" },
   { src: "/images/team/team-03.jpg", alt: "" },
   { src: "/images/team/team-04.jpg", alt: "" },
   { src: "/images/team/team-05.jpg", alt: "" },
   { src: "/images/team/team-06.jpg", alt: "" },
-  { src: "/images/team/team-chef.jpg", alt: "Notre chef cuisinier" },
+  { src: "/images/team/team-chef.jpg", alt: { fr: "Notre chef cuisinier", en: "Our head chef", es: "Nuestro chef" } },
   { src: "/images/team/team-07.jpg", alt: "" },
   { src: "/images/team/team-08.jpg", alt: "" },
   { src: "/images/team/team-09.jpg", alt: "" },
   { src: "/images/team/team-10.jpg", alt: "" },
-  { src: "/images/team/team-craft.jpg", alt: "Le savoir-faire artisanal de l'équipe" },
+  { src: "/images/team/team-craft.jpg", alt: { fr: "Le savoir-faire artisanal de l'équipe", en: "The team's craftsmanship", es: "La artesanía del equipo" } },
 ];
 
 export async function generateStaticParams() {
@@ -185,7 +185,7 @@ export default async function NotreEquipePage({ params }: { params: Promise<{ lo
                 <figure className="group h-full overflow-hidden bg-white">
                   <img
                     src={`${basePath}${photo.src}`}
-                    alt={photo.alt}
+                    alt={photo.alt === "" ? "" : alt(photo.alt, loc)}
                     loading="lazy"
                     className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />

@@ -200,13 +200,28 @@ export default function BookingBar({ dict }: { dict: any }) {
     return `${day} ${m[d.getMonth()]} ${d.getFullYear()}`;
   }
 
+  /* Bornes du formulaire de réservation (src/lib/booking/schema.ts) : 20
+     adultes et 10 enfants au TOTAL. La barre permettait d'en composer 24 et
+     16, quatre chambres à six adultes et quatre enfants, que le formulaire
+     ramenait ensuite sans rien dire. Le voyageur voyait son groupe rétrécir
+     entre deux écrans. On refuse donc l'incrément qui dépasserait, plutôt
+     que de le corriger après coup. */
+  const MAX_ADULTES = 20;
+  const MAX_ENFANTS = 10;
+
   function updateRoom(i: number, field: "adults" | "children", delta: number) {
-    setRooms(prev => prev.map((r, idx) => {
-      if (idx !== i) return r;
-      const val = r[field] + delta;
-      if (field === "adults") return { ...r, adults: Math.max(1, Math.min(6, val)) };
-      return { ...r, children: Math.max(0, Math.min(4, val)) };
-    }));
+    setRooms(prev => {
+      const totalAutres = prev.reduce((n, r, idx) => (idx === i ? n : n + r[field]), 0);
+      const plafondGroupe = field === "adults" ? MAX_ADULTES : MAX_ENFANTS;
+      const plafondChambre = field === "adults" ? 6 : 4;
+      const plancher = field === "adults" ? 1 : 0;
+      return prev.map((r, idx) => {
+        if (idx !== i) return r;
+        const vise = r[field] + delta;
+        const borne = Math.min(plafondChambre, plafondGroupe - totalAutres);
+        return { ...r, [field]: Math.max(plancher, Math.min(borne, vise)) };
+      });
+    });
   }
 
   function togglePanel(panel: "checkin" | "checkout" | "guests" | "rate") {
@@ -355,7 +370,7 @@ export default function BookingBar({ dict }: { dict: any }) {
                         <div className="flex items-center gap-3">
                           <button type="button" onClick={() => updateRoom(i, "adults", -1)} className="booking-bar__stepper" disabled={room.adults <= 1}>-</button>
                           <span className="text-sm font-semibold w-5 text-center text-paper">{room.adults}</span>
-                          <button type="button" onClick={() => updateRoom(i, "adults", 1)} className="booking-bar__stepper" disabled={room.adults >= 6}>+</button>
+                          <button type="button" onClick={() => updateRoom(i, "adults", 1)} className="booking-bar__stepper" disabled={room.adults >= 6 || totalAdults >= MAX_ADULTES}>+</button>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
@@ -363,7 +378,7 @@ export default function BookingBar({ dict }: { dict: any }) {
                         <div className="flex items-center gap-3">
                           <button type="button" onClick={() => updateRoom(i, "children", -1)} className="booking-bar__stepper" disabled={room.children <= 0}>-</button>
                           <span className="text-sm font-semibold w-5 text-center text-paper">{room.children}</span>
-                          <button type="button" onClick={() => updateRoom(i, "children", 1)} className="booking-bar__stepper" disabled={room.children >= 4}>+</button>
+                          <button type="button" onClick={() => updateRoom(i, "children", 1)} className="booking-bar__stepper" disabled={room.children >= 4 || totalChildren >= MAX_ENFANTS}>+</button>
                         </div>
                       </div>
                     </div>

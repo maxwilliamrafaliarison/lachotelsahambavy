@@ -373,7 +373,9 @@ function StayStep({ locale, dict }: { locale: Locale; dict: Dict }) {
             onChange={(v) => setValue("adults", v, { shouldDirty: true })}
           />
           <OccupancyStepper
-            label={bb?.child ? `${bb.child.charAt(0).toUpperCase()}${bb.child.slice(1)}s` : "Enfants"}
+            /* Le pluriel vient du dictionnaire : le fabriquer en collant un « s »
+               donnait « Childs » en anglais et « Niños » y échappait de peu. */
+            label={bb?.childPlural ? `${bb.childPlural.charAt(0).toUpperCase()}${bb.childPlural.slice(1)}` : "Enfants"}
             hint={bb?.children && bb.children.includes("(") ? bb.children.match(/\(([^)]+)\)/)?.[1] : undefined}
             value={children}
             min={0}

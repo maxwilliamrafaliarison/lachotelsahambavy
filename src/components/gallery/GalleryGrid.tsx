@@ -34,7 +34,7 @@ export default function GalleryGrid({
   ouvrirLabel: string;
   /* La visionneuse est montée d'ici : ses libellés traversent donc la
      grille, qui ne connaît pas plus la locale qu'elle. */
-  libellesVisionneuse: { galerie: string; fermer: string; precedente: string; suivante: string };
+  libellesVisionneuse: { galerie: string; fermer: string; precedente: string; suivante: string; glisser: string };
 }) {
   const [actif, setActif] = useState("all");
   const [visionneuse, setVisionneuse] = useState<number | null>(null);

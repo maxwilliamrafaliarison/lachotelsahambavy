@@ -125,8 +125,11 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
   const attractionRestaurant = touristAttractionSchema({
     locale: loc,
     chemin: "restaurant",
-    name: dict.restaurantSection.title as string,
-    description: dict.restaurantSection.subtitle as string,
+    /* Le nom de l'établissement, et non son accroche : `restaurantSection.title`
+       vaut « Éveillez vos papilles », ce qui ne désigne aucun lieu pour un
+       moteur. L'accroche rejoint la description, où elle est à sa place. */
+    name: "Restaurant du Lac Hôtel Sahambavy",
+    description: `${dict.restaurantSection.title as string}. ${dict.restaurantSection.subtitle as string}`,
     image: "/images/restaurant/salle-restaurant-tables-dressees.jpg",
   });
   const attractionPlantation = touristAttractionSchema({

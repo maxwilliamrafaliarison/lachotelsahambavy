@@ -401,6 +401,7 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
               fermer: alt({ fr: "Fermer", en: "Close", es: "Cerrar" }, loc),
               precedente: alt({ fr: "Photo précédente", en: "Previous photo", es: "Foto anterior" }, loc),
               suivante: alt({ fr: "Photo suivante", en: "Next photo", es: "Foto siguiente" }, loc),
+              glisser: alt({ fr: "Glissez pour naviguer", en: "Swipe to browse", es: "Deslice para navegar" }, loc),
             }}
           />
         </div>

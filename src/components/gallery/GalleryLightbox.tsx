@@ -14,7 +14,7 @@ interface Props {
   onClose: () => void;
   onIndexChange: (index: number) => void;
   /** Libellés d'accessibilité, résolus dans la langue de la page. */
-  libelles: { galerie: string; fermer: string; precedente: string; suivante: string };
+  libelles: { galerie: string; fermer: string; precedente: string; suivante: string; glisser: string };
 }
 
 const SWIPE_THRESHOLD = 64; // px au-delà desquels on change d'image
@@ -282,7 +282,7 @@ export default function GalleryLightbox({ photos, index, onClose, onIndexChange,
         {/* Hint swipe : visible uniquement sur mobile/tactile, s'estompe au 1er drag */}
         <div className="md:hidden flex items-center justify-center gap-2 text-white/40 text-[0.65rem] uppercase tracking-[0.25em]">
           <Icon name="arrow" size={12} weight="regular" className="rotate-180" />
-          <span>Glissez pour naviguer</span>
+          <span>{libelles.glisser}</span>
           <Icon name="arrow" size={12} weight="regular" />
         </div>
       </div>

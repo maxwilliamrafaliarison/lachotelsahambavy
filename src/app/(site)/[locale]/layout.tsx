@@ -115,7 +115,7 @@ export default async function LocaleLayout({
           lodgingBusinessSchema(typedLocale),
         ]}
       />
-      <TopBar />
+      <TopBar locale={locale as Locale} />
       <Navbar locale={typedLocale} dict={dict} />
       <main className="flex-1">{children}</main>
       <Footer locale={typedLocale} dict={dict} />

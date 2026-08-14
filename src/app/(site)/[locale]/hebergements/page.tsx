@@ -201,7 +201,13 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
 
   const nf = new Intl.NumberFormat(loc === "en" ? "en-GB" : loc === "es" ? "es-ES" : "fr-FR");
   const ar = (n: number) => `${nf.format(n)} Ar`;
-  const eur = (n: number) => (loc === "en" ? `€${n}` : `${n} €`);
+  /* Le séparateur décimal suit la langue : le repas du guide, à 1,6 €,
+     s'affichait « 1.6 € » en français et en espagnol, faute de passer par
+     un formateur. Une décimale au plus, et aucune sur les entiers. */
+  const nfEur = new Intl.NumberFormat(loc === "en" ? "en-GB" : loc === "es" ? "es-ES" : "fr-FR", {
+    maximumFractionDigits: 1,
+  });
+  const eur = (n: number) => (loc === "en" ? `€${nfEur.format(n)}` : `${nfEur.format(n)} €`);
   const price = (room: Room) =>
     room.priceEUR ? `${ar(room.priceAR)} · ${eur(room.priceEUR)}` : ar(room.priceAR);
 

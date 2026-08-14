@@ -20,7 +20,7 @@
 
 import { siteConfig } from "@/data/site";
 import type { Locale } from "@/lib/utils";
-import type { Room } from "@/data/rooms";
+import { roomsAffichees, type Room } from "@/data/rooms";
 
 // =====================================================
 // Types
@@ -175,7 +175,11 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
     checkoutTime: "11:00",
     petsAllowed: false,
     smokingAllowed: false,
-    numberOfRooms: 24,
+    /* Dérivé du parc publié, et non plus figé à 24 : les `units` de
+       rooms.ts totalisent une cinquantaine de logements, ce que la page
+       Hébergements affiche déjà catégorie par catégorie. Un chiffre en dur
+       finit toujours par mentir le jour où une catégorie bouge. */
+    numberOfRooms: roomsAffichees.reduce((n, r) => n + r.units, 0),
   };
 }
 
@@ -196,6 +200,16 @@ function ancreChambre(room: Room, locale: Locale): string {
   return `${siteConfig.url}/${locale}/hebergements/#${room.slug}`;
 }
 
+/** `{ minValue, maxValue }` à partir d'une capacité écrite « 2 » ou « 1-2 ». */
+function occupationDe(capacity: string): SchemaType {
+  const bornes = capacity.match(/\d+/g)?.map(Number) ?? [2];
+  return {
+    "@type": "QuantitativeValue",
+    minValue: bornes[0],
+    maxValue: bornes[bornes.length - 1],
+  };
+}
+
 export function hotelRoomSchema(room: Room, locale: Locale): SchemaType {
   return {
     "@context": "https://schema.org",
@@ -205,10 +219,10 @@ export function hotelRoomSchema(room: Room, locale: Locale): SchemaType {
     description: room.description[locale],
     url: ancreChambre(room, locale),
     image: room.images.map((img) => `${siteConfig.url}${img}`),
-    occupancy: {
-      "@type": "QuantitativeValue",
-      value: parseInt(room.capacity, 10) || 2,
-    },
+    /* `capacity` s'écrit « 2 » ou « 1-2 » : lire le premier nombre
+       sous-déclarait à 1 personne les deux catégories à intervalle. On
+       publie donc les deux bornes, ce que schema.org prévoit. */
+    occupancy: occupationDe(room.capacity),
     bed: {
       "@type": "BedDetails",
       typeOfBed: room.type[locale],

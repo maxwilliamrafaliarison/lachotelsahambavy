@@ -24,9 +24,23 @@ export default function robots(): MetadataRoute.Robots {
            supprimée : la page porte déjà un `robots: { index: false }`, et
            un Disallow empêcherait justement Googlebot de venir lire ce
            noindex. */
+        /* « /_next/ » a été RETIRÉ le 14/08/2026, et il ne faut pas le
+           remettre. Tout le rendu du site passe par ce préfixe : l'unique
+           feuille de styles, le JavaScript, et surtout les images, servies
+           par /_next/image (129 références sur la seule page d'accueil).
+
+           Google applique la correspondance la plus longue : « Disallow:
+           /_next/ » l'emportait sur « Allow: / » pour chacune de ces URL.
+           Googlebot lisait donc le HTML, prérendu et indexable, mais ne
+           pouvait charger ni la feuille de styles pour juger du rendu, ni
+           une seule photo. Aucune image du site ne pouvait entrer dans
+           Google Images, à commencer par les trente et une de la galerie,
+           dont c'est pourtant la seule raison d'être.
+
+           Les fichiers de /_next/static/ ne risquent rien : leurs types
+           MIME ne sont pas indexables. */
         disallow: [
           "/api/",
-          "/_next/",
           "/admin/",
           "/*?ref=*",
           "/*?utm_*",

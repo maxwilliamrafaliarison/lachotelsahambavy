@@ -18,8 +18,14 @@
 
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/site";
+import { alt } from "@/lib/alt";
+import type { Locale } from "@/lib/utils";
 
-export default function TopBar() {
+export default function TopBar({ locale }: { locale: Locale }) {
+  /* « sur 5 » se dit « out of 5 » et « sobre 5 » : la préposition change,
+     pas seulement les mots qui l'entourent. */
+  const surCinq = alt({ fr: "sur 5", en: "out of 5", es: "sobre 5" }, locale);
+  const surDix = alt({ fr: "sur 10", en: "out of 10", es: "sobre 10" }, locale);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -49,7 +55,7 @@ export default function TopBar() {
           <a
             href={`tel:${siteConfig.whatsapp}`}
             className="flex items-center gap-1.5 hover:text-gold transition-colors"
-            aria-label={`Appeler ${siteConfig.phone}`}
+            aria-label={`${alt({ fr: "Appeler", en: "Call", es: "Llamar" }, locale)} ${siteConfig.phone}`}
           >
             <IconPhone />
             <span>{siteConfig.phone}</span>
@@ -58,7 +64,7 @@ export default function TopBar() {
           <a
             href={`mailto:${siteConfig.email}`}
             className="hidden md:flex items-center gap-1.5 hover:text-gold transition-colors normal-case tracking-normal text-[0.75rem]"
-            aria-label={`Écrire à ${siteConfig.email}`}
+            aria-label={`${alt({ fr: "Écrire à", en: "Email", es: "Escribir a" }, locale)} ${siteConfig.email}`}
           >
             <IconMail />
             <span>{siteConfig.email}</span>
@@ -73,7 +79,7 @@ export default function TopBar() {
               href={siteConfig.social.tripadvisor}
               score={siteConfig.ratings.tripadvisor.score}
               max={5}
-              label={`Avis TripAdvisor, ${siteConfig.ratings.tripadvisor.score} sur 5`}
+              label={`${alt({ fr: "Avis TripAdvisor", en: "TripAdvisor rating", es: "Reseñas TripAdvisor" }, locale)}, ${siteConfig.ratings.tripadvisor.score} ${surCinq}`}
               Logo={LogoTripAdvisor}
             />
             <span className="w-px h-3 bg-paper/15" />
@@ -81,7 +87,7 @@ export default function TopBar() {
               href={siteConfig.social.google}
               score={siteConfig.ratings.google.score}
               max={5}
-              label={`Avis Google, ${siteConfig.ratings.google.score} sur 5`}
+              label={`${alt({ fr: "Avis Google", en: "Google rating", es: "Reseñas Google" }, locale)}, ${siteConfig.ratings.google.score} ${surCinq}`}
               Logo={LogoGoogle}
             />
             <span className="w-px h-3 bg-paper/15" />
@@ -89,7 +95,7 @@ export default function TopBar() {
               href={siteConfig.social.booking}
               score={siteConfig.ratings.booking.score}
               max={10}
-              label={`Note Booking, ${siteConfig.ratings.booking.score} sur 10`}
+              label={`${alt({ fr: "Note Booking", en: "Booking rating", es: "Puntuación Booking" }, locale)}, ${siteConfig.ratings.booking.score} ${surDix}`}
               Logo={LogoBooking}
             />
           </div>
