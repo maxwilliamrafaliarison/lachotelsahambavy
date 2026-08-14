@@ -1,6 +1,7 @@
 import EditorialSplit from "@/components/ui/EditorialSplit";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { type Locale, getBasePath } from "@/lib/utils";
+import { alt } from "@/lib/alt";
 
 const basePath = getBasePath();
 
@@ -17,21 +18,21 @@ export default function DestinationsTeaser({ dict, locale }: { dict: any; locale
       key: "plantation",
       data: dict.destinations.plantation,
       image: `${basePath}/images/tea/plantation-cinematic.jpg`,
-      imageAlt: "Cueilleuses dans la plantation de thé de Sahambavy",
+      imageAlt: alt({ fr: "Cueilleuses dans la plantation de thé de Sahambavy", en: "Tea pickers at work on the Sahambavy plantation", es: "Recolectoras de té trabajando en la plantación de Sahambavy" }, locale),
       href: `/${locale}/plantation-de-the/`,
     },
     {
       key: "train",
       data: dict.destinations.train,
       image: `${basePath}/images/train/draisine-fce-embarquement-voyageurs.jpg`,
-      imageAlt: "Embarquement des voyageurs sur la draisine de la ligne FCE",
+      imageAlt: alt({ fr: "Embarquement des voyageurs sur la draisine de la ligne FCE", en: "Travellers boarding the FCE line railcar", es: "Viajeros subiendo a la vagoneta de la línea FCE" }, locale),
       href: `/${locale}/train-fce/`,
     },
     {
       key: "repos",
       data: dict.destinations.repos,
       image: `${basePath}/images/repos/le-repos-allee-chalets-pins.jpg`,
-      imageAlt: "Allée de chalets sous les pins à l'extension Le Repos",
+      imageAlt: alt({ fr: "Allée de chalets sous les pins à l'extension Le Repos", en: "A row of chalets under the pines at the Le Repos annexe", es: "Hilera de chalés bajo los pinos en el anexo Le Repos" }, locale),
       href: `/${locale}/le-repos/`,
     },
   ];

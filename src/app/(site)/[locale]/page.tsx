@@ -43,7 +43,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           et un VideoObject sur une page qui n'en contient pas est une
           donnée structurée invalide. */}
       <JsonLd schemas={[videoObjectSchema(locale as Locale)]} />
-      <HeroHome dict={dict} />
+      <HeroHome dict={dict} locale={locale as Locale} />
       <Welcome dict={dict} locale={locale as Locale} />
       <OurHouse dict={dict} locale={locale as Locale} />
       <AvisPlateformes dict={dict} locale={locale as Locale} />

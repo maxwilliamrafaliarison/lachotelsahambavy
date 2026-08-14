@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { getBasePath } from "@/lib/utils";
+import { alt, type TexteAlternatif } from "@/lib/alt";
+import type { Locale } from "@/lib/utils";
 
 /**
  * Le visiteur accepte-t-il le mouvement ?
@@ -37,30 +39,30 @@ const basePath = getBasePath();
  * s'en approche : un hero de six photos ne doit pas coûter six images à
  * l'ouverture de la page.
  */
-const VUES = [
+const VUES: { src: string; alt: TexteAlternatif }[] = [
   {
     src: "/images/hero/hotel-vu-du-lac-bungalows-pilotis.jpg",
-    alt: "Les bungalows sur pilotis du Lac Hôtel vus depuis le lac Sahambavy",
+    alt: { fr: "Les bungalows sur pilotis du Lac Hôtel vus depuis le lac Sahambavy", en: "The Lac Hôtel overwater bungalows seen from Lake Sahambavy", es: "Los bungalows sobre pilotes del Lac Hôtel vistos desde el lago Sahambavy" },
   },
   {
     src: "/images/hero/hero-lever-de-soleil-lac.jpg",
-    alt: "Lever de soleil sur le Lac Hôtel Sahambavy, les bungalows sur pilotis et les collines, vus au drone",
+    alt: { fr: "Lever de soleil sur le Lac Hôtel Sahambavy, les bungalows sur pilotis et les collines, vus au drone", en: "Sunrise over Lac Hôtel Sahambavy, the overwater bungalows and the hills, seen from the air", es: "Amanecer sobre el Lac Hôtel Sahambavy, los bungalows sobre pilotes y las colinas, vistos desde el aire" },
   },
   {
     src: "/images/hero/hero-piscine-jardins.jpg",
-    alt: "La piscine et les jardins du Lac Hôtel, vus au drone depuis le bâtiment Superior",
+    alt: { fr: "La piscine et les jardins du Lac Hôtel, vus au drone depuis le bâtiment Superior", en: "The Lac Hôtel pool and gardens from above, looking out from the Superior building", es: "La piscina y los jardines del Lac Hôtel desde el aire, sobre el edificio Superior" },
   },
   {
     src: "/images/hero/hero-plantation-the-rizieres.jpg",
-    alt: "Les théiers et les rizières de Sahambavy, vus au drone",
+    alt: { fr: "Les théiers et les rizières de Sahambavy, vus au drone", en: "The tea bushes and rice paddies of Sahambavy from the air", es: "Los tés y los arrozales de Sahambavy vistos desde el aire" },
   },
   {
     src: "/images/hero/hero-pilotis-brume.jpg",
-    alt: "Un bungalow sur pilotis au bout de son ponton, dans la brume du matin",
+    alt: { fr: "Un bungalow sur pilotis au bout de son ponton, dans la brume du matin", en: "An overwater bungalow at the end of its jetty, in the morning mist", es: "Un bungalow sobre pilotes al final de su pasarela, entre la bruma matinal" },
   },
   {
     src: "/images/hero/hero-sunset.jpg",
-    alt: "Coucher de soleil sur le lac Sahambavy, un bungalow sur pilotis au fil de l'eau",
+    alt: { fr: "Coucher de soleil sur le lac Sahambavy, un bungalow sur pilotis au fil de l'eau", en: "Sunset over Lake Sahambavy, an overwater bungalow at the water's edge", es: "Atardecer sobre el lago Sahambavy, un bungalow sobre pilotes a ras del agua" },
   },
 ];
 
@@ -91,7 +93,7 @@ const DUREE_VUE = 7000;
  *    dans le vide et consommé de la batterie pour rien.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export default function HeroHome({ dict }: { dict: any }) {
+export default function HeroHome({ dict, locale }: { dict: any; locale: Locale }) {
   const bgRef = useRef<HTMLDivElement>(null);
   const [vue, setVue] = useState(0);
   const anime = useMouvementAutorise();
@@ -227,7 +229,7 @@ export default function HeroHome({ dict }: { dict: any }) {
             {montees.includes(i) && (
               <Image
                 src={`${basePath}${v.src}`}
-                alt={v.alt}
+                alt={alt(v.alt, locale)}
                 fill
                 sizes="100vw"
                 {...(i === 0 ? { preload: true } : { loading: "lazy" as const })}
