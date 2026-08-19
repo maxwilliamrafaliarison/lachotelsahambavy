@@ -41,10 +41,6 @@ const basePath = getBasePath();
  */
 const VUES: { src: string; alt: TexteAlternatif }[] = [
   {
-    src: "/images/hero/hotel-vu-du-lac-bungalows-pilotis.jpg",
-    alt: { fr: "Les bungalows sur pilotis du Lac Hôtel vus depuis le lac Sahambavy", en: "The Lac Hôtel overwater bungalows seen from Lake Sahambavy", es: "Los bungalows sobre pilotes del Lac Hôtel vistos desde el lago Sahambavy" },
-  },
-  {
     src: "/images/hero/hero-lever-de-soleil-lac.jpg",
     alt: { fr: "Lever de soleil sur le Lac Hôtel Sahambavy, les bungalows sur pilotis et les collines, vus au drone", en: "Sunrise over Lac Hôtel Sahambavy, the overwater bungalows and the hills, seen from the air", es: "Amanecer sobre el Lac Hôtel Sahambavy, los bungalows sobre pilotes y las colinas, vistos desde el aire" },
   },
@@ -63,6 +59,10 @@ const VUES: { src: string; alt: TexteAlternatif }[] = [
   {
     src: "/images/hero/hero-sunset.jpg",
     alt: { fr: "Coucher de soleil sur le lac Sahambavy, un bungalow sur pilotis au fil de l'eau", en: "Sunset over Lake Sahambavy, an overwater bungalow at the water's edge", es: "Atardecer sobre el lago Sahambavy, un bungalow sobre pilotes a ras del agua" },
+  },
+  {
+    src: "/images/hero/hotel-vu-du-lac-bungalows-pilotis.jpg",
+    alt: { fr: "Les bungalows sur pilotis du Lac Hôtel vus depuis le lac Sahambavy", en: "The Lac Hôtel overwater bungalows seen from Lake Sahambavy", es: "Los bungalows sobre pilotes del Lac Hôtel vistos desde el lago Sahambavy" },
   },
 ];
 
