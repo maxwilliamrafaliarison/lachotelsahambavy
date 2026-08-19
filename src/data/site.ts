@@ -127,6 +127,15 @@ export const navigation: NavItem[] = [
         href: "/notre-equipe",
         label: { fr: "L'équipe", en: "The team", es: "El equipo" },
       },
+      /* La galerie figure AUSSI en rubrique secondaire, plus bas : elle
+         reste dans le pied de page et le menu mobile. Elle entre ici parce
+         qu'un lien de pied de page était son seul accès depuis le bureau,
+         pour 31 photos, sur le site d'un lodge dont le cadre est
+         l'argument principal. */
+      {
+        href: "/galerie",
+        label: { fr: "Galerie photos", en: "Photo gallery", es: "Galería de fotos" },
+      },
     ],
   },
   {

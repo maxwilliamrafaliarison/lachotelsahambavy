@@ -1219,5 +1219,11 @@
     },
     "ctaTitle": "¿Necesita ayuda para organizar su trayecto?",
     "cta": "Contáctenos"
+  },
+  "galleryTeaser": {
+    "label": "En imágenes",
+    "title": "El Lac Hôtel en treinta y una fotos",
+    "subtitle": "Los bungalós sobre el agua, las habitaciones, la mesa, los jardines, la plantación de té y el pueblo de Sahambavy.",
+    "cta": "Ver todas las fotos"
   }
 }

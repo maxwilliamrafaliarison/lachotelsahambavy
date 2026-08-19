@@ -7,6 +7,7 @@ import AvisPlateformes from "@/components/home/AvisPlateformes";
 import RoomsGrid from "@/components/home/RoomsGrid";
 import RestaurantTeaser from "@/components/home/RestaurantTeaser";
 import DestinationsTeaser from "@/components/home/DestinationsTeaser";
+import GalleryTeaser from "@/components/home/GalleryTeaser";
 import Testimonials from "@/components/home/Testimonials";
 import ContactSection from "@/components/home/ContactSection";
 import BookingBar from "@/components/home/BookingBar";
@@ -50,6 +51,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <RoomsGrid dict={dict} locale={locale as Locale} />
       <DestinationsTeaser dict={dict} locale={locale as Locale} />
       <RestaurantTeaser dict={dict} locale={locale as Locale} />
+      {/* La galerie après les univers et avant les avis : le visiteur a vu
+          les chambres, la destination et la table, il peut alors avoir envie
+          de tout voir ; les clients parlent juste après. */}
+      <GalleryTeaser dict={dict} locale={locale as Locale} />
       <Testimonials dict={dict} locale={locale as Locale} />
       <ContactSection dict={dict} />
       <BookingBar dict={dict} />

@@ -1219,5 +1219,11 @@
     },
     "ctaTitle": "Besoin d’aide pour organiser votre trajet ?",
     "cta": "Contactez-nous"
+  },
+  "galleryTeaser": {
+    "label": "En images",
+    "title": "Le Lac Hôtel en trente et une photos",
+    "subtitle": "Les pilotis sur l'eau, les chambres, la table, les jardins, la plantation de thé et le village de Sahambavy.",
+    "cta": "Voir toutes les photos"
   }
 }
