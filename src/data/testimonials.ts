@@ -100,6 +100,16 @@ import type { Locale } from "@/lib/utils";
  * La graphie de la marque est « Tripadvisor », un seul mot et un seul A
  * majuscule, depuis leur refonte de 2020.
  *
+ * LES QUINZE AUTEURS ONT ÉTÉ PASSÉS EN REVUE par la direction le
+ * 21/08/2026, précisément parce que le cas « Toky R. » avait montré
+ * qu'un employé pouvait se glisser dans une fiche. Deux noms
+ * appelaient un contrôle et ont été confirmés comme de vraies
+ * clientes : « Karine R. », qui a aussi écrit sur Google sous
+ * « Karine Rajaona Razafindrakoto », et « ADA 36 », qui précise vivre
+ * dans la région. Une cliente locale et fidèle est parfaitement
+ * légitime ; ce n'est pas la proximité géographique qui pose
+ * problème, c'est le lien d'intérêt, et il n'y en a pas ici.
+ *
  * Textes relevés le 21/08/2026.
  */
 
