@@ -310,7 +310,12 @@
     "title": "They lived the experience",
     "transparence": "Reviews copied word for word from {booking} and {tripadvisor}, which verify their authors. We publish none of our own writing and do not touch up the text, spelling included. Those carrying a reservation are not reproduced here: they can be read, with all the others, on both listings.",
     "traduitDe": "Translated {langue}",
-    "noteSur": "{note} out of {bareme}"
+    "noteSur": "{note} out of {bareme}",
+    "origineAvis": {
+      "booking": "A Booking.com guest review",
+      "tripadvisor": "A Tripadvisor traveler review",
+      "google": "A Google review"
+    }
   },
   "contact": {
     "label": "Contact & Booking",

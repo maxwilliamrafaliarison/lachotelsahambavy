@@ -142,7 +142,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
               href={siteConfig.social.tripadvisor}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="TripAdvisor"
+              aria-label="Tripadvisor"
               className="text-night-body transition-colors hover:text-champagne"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">

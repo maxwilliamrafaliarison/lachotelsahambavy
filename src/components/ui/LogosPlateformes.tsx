@@ -32,6 +32,11 @@ export function LogoGoogle({ taille = 26 }: Props) {
   );
 }
 
+/* LA MARQUE S'ÉCRIT « Tripadvisor » : un seul mot, un seul A majuscule,
+   depuis leur refonte de 2020. Le nom du composant garde l'ancienne
+   graphie, parce qu'il désigne un fichier et non la marque, et que le
+   renommer toucherait cinq fichiers pour rien. Ce qui compte est le
+   libellé affiché. */
 export function LogoTripAdvisor({ taille = 26 }: Props) {
   /* La chouette : deux yeux cerclés de vert, pupilles noires, sourcil et
      bec. Même géométrie que la version monochrome du pied de page, portée

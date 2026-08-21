@@ -62,7 +62,7 @@ const MARQUES: Record<
 > = {
   booking: { nom: "Booking.com", Logo: LogoBooking },
   google: { nom: "Google", Logo: LogoGoogle },
-  tripadvisor: { nom: "TripAdvisor", Logo: LogoTripAdvisor },
+  tripadvisor: { nom: "Tripadvisor", Logo: LogoTripAdvisor },
 };
 
 /* Un avis de chaque plateforme à tour de rôle : le ruban alterne les
@@ -352,6 +352,50 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
   );
 }
 
+/**
+ * Bulles Tripadvisor, à leur norme.
+ *
+ * Leur documentation est explicite : la note d'un avis se donne en
+ * bulles, dans leur vert Moss, sur fond blanc, cinquante-cinq pixels de
+ * large au minimum, et jamais avec une icône maison. Le chiffre « 5/5 »
+ * en orange que portaient ces cartes ne respectait aucune des trois.
+ *
+ * Soixante pixels ici : cinq bulles de dix, quatre intervalles de deux et
+ * demi. Le fond blanc est celui de la carte, la règle voulant que le fond
+ * de page ne transparaisse pas au travers.
+ *
+ * Les bulles vides sont prévues alors que les sept avis cités sont tous à
+ * cinq bulles, et doivent le rester : Tripadvisor n'autorise la citation
+ * que d'un avis à cinq bulles. Elles servent de garde-fou visible si
+ * quelqu'un ajoutait un jour un 4/5 sans lire l'en-tête du fichier.
+ */
+function BullesTripadvisor({ note, etiquette }: { note: number; etiquette: string }) {
+  const D = 10;
+  const PAS = 12.5;
+  return (
+    <svg
+      width={60}
+      height={D}
+      viewBox={`0 0 ${PAS * 4 + D} ${D}`}
+      role="img"
+      aria-label={etiquette}
+      className="lh-avis__bulles"
+    >
+      {[0, 1, 2, 3, 4].map((i) => (
+        <circle
+          key={i}
+          cx={i * PAS + D / 2}
+          cy={D / 2}
+          r={D / 2 - 0.75}
+          fill={i < note ? "#00AA6C" : "none"}
+          stroke="#00AA6C"
+          strokeWidth="1.5"
+        />
+      ))}
+    </svg>
+  );
+}
+
 /* Les deux plateformes citées dans la mention de transparence deviennent
    des liens : « ils se lisent tous là-bas » n'a de valeur que si l'on
    peut y aller. Le texte reste dans les dictionnaires avec {booking} et
@@ -359,7 +403,7 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
 function avecLiens(phrase: string) {
   const cibles: Record<string, { href: string; libelle: string }> = {
     "{booking}": { href: siteConfig.social.booking, libelle: "Booking.com" },
-    "{tripadvisor}": { href: siteConfig.social.tripadvisor, libelle: "TripAdvisor" },
+    "{tripadvisor}": { href: siteConfig.social.tripadvisor, libelle: "Tripadvisor" },
   };
   return phrase.split(/(\{booking\}|\{tripadvisor\})/).map((bout, i) => {
     const cible = cibles[bout];
@@ -401,71 +445,83 @@ function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: a
   const pays = avis.pays ? (PAYS[avis.pays]?.[locale] ?? avis.pays) : null;
   const { texte, traduit } = texteAffiche(avis, locale);
 
-  /* La note est donnée DANS LE BARÈME DE SA PLATEFORME, en chiffres et
-     non en étoiles. Booking note sur dix : cinq étoiles pour un 9/10
-     arrondissaient vers le haut, ce qui est une façon de flatter la note
-     d'autrui. Le format reprend celui des gélules de la section « Votre
-     avis », pour que le site parle des notes d'une seule voix. */
   const chiffres = new Intl.NumberFormat(
     locale === "en" ? "en-GB" : locale === "es" ? "es-ES" : "fr-FR",
   );
+  const noteLue = String(t.noteSur ?? "{note} sur {bareme}")
+    .replace("{note}", chiffres.format(avis.note))
+    .replace("{bareme}", String(avis.bareme));
+
+  /* Guillemets DE LA LANGUE DU LECTEUR, et non de celle du client :
+     Tripadvisor exige que la citation soit entre guillemets, la
+     typographie française veut des chevrons avec espaces insécables, et
+     l'anglais comme l'espagnol des guillemets anglais. Ils sont posés en
+     texte plutôt qu'en `::before` CSS, pour qu'un copier-coller de la
+     citation les emporte avec elle. */
+  const [ouvre, ferme] = locale === "fr" ? ["«\u202F", "\u202F»"] : ["\u201C", "\u201D"];
+
+  /* « Avis de voyageur Tripadvisor, juillet 2026 ». Une seule ligne pour
+     deux obligations : dire que la citation vient d'un voyageur de la
+     plateforme, et donner la date de l'avis. */
+  const origine = String(t.origineAvis?.[avis.plateforme] ?? nom);
 
   return (
     <article className="lh-avis">
       <div className="lh-avis__source">
-        <Logo taille={16} />
+        {/* Vingt pixels : le minimum que Tripadvisor impose à son logo.
+            La même taille pour les trois, une carte n'ayant pas à changer
+            de proportions selon la plateforme citée. */}
+        <Logo taille={20} />
         <span>{nom}</span>
-        {/* Vu : « 9/10 ». Entendu : « 9 sur 10 ». La barre oblique se
-            lit mal, un lecteur d'écran l'annonce « slash » ou la saute
-            selon la verbosité réglée ; la version parlée est donc écrite
-            à part, dans la langue de la page. */}
-        <span className="lh-avis__note">
-          <span aria-hidden="true">
-            {chiffres.format(avis.note)}/{avis.bareme}
+        {avis.plateforme === "tripadvisor" ? (
+          <span className="lh-avis__note">
+            <BullesTripadvisor note={avis.note} etiquette={noteLue} />
           </span>
-          <span className="sr-only">
-            {String(t.noteSur ?? "{note} sur {bareme}")
-              .replace("{note}", chiffres.format(avis.note))
-              .replace("{bareme}", String(avis.bareme))}
+        ) : (
+          <span className="lh-avis__note">
+            <span aria-hidden="true">
+              {chiffres.format(avis.note)}/{avis.bareme}
+            </span>
+            <span className="sr-only">{noteLue}</span>
           </span>
-        </span>
+        )}
       </div>
 
       {/* `cite` porte la page où l'avis se lit : la référence suit la
           citation dans le document lui-même, et pas seulement dans le
           commentaire du fichier de données. */}
       <blockquote className="lh-avis__texte" cite={avis.source}>
+        {ouvre}
         {texte}
+        {ferme}
       </blockquote>
 
       <footer className="lh-avis__pied">
         <span className="lh-avis__nom">{avis.auteur}</span>
-        <span className="lh-avis__lieu">
-          {/* Le mois du séjour situe l'avis dans le temps, ce que
-              l'article L.111-7-2 demande explicitement. */}
-          <span className="lh-avis__date">{avis.sejour[locale]}</span>
-          {pays && (
-            <>
-              {drapeau && <span aria-hidden="true"> {drapeau}</span>}
-              <span className="sr-only"> </span>
-              {pays}
-            </>
-          )}
-        </span>
+        {pays && (
+          <span className="lh-avis__lieu">
+            {drapeau && <span aria-hidden="true">{drapeau} </span>}
+            {pays}
+          </span>
+        )}
       </footer>
 
-      {/* Dire que l'on traduit, comme Booking et TripAdvisor le disent
-          avec leur « voir la traduction ». Sans cette ligne, la page
-          présenterait comme les mots du client une phrase qu'il n'a pas
-          écrite, dans une langue qu'il n'a pas employée. */}
-      {traduit && (
-        <p className="lh-avis__traduit">
-          {String(t.traduitDe ?? "Traduit {langue}").replace(
-            "{langue}",
-            LANGUES[avis.langueOriginale][locale],
-          )}
-        </p>
-      )}
+      {/* Origine, date, et le cas échéant la traduction. Trois mentions
+          d'une même nature, réunies sur la ligne la plus discrète de la
+          carte plutôt qu'éparpillées : elles disent au lecteur d'où vient
+          ce qu'il lit, quand ça a été écrit, et dans quelle langue. */}
+      <p className="lh-avis__mentions">
+        {origine}, {avis.dateAvis[locale]}
+        {traduit && (
+          <>
+            {" · "}
+            {String(t.traduitDe ?? "Traduit {langue}").replace(
+              "{langue}",
+              LANGUES[avis.langueOriginale][locale],
+            )}
+          </>
+        )}
+      </p>
     </article>
   );
 }

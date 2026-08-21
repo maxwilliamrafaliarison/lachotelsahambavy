@@ -68,6 +68,22 @@ import type { Locale } from "@/lib/utils";
  * quarante-quatre avis, page par page, ce que la première lecture n'avait
  * pas obtenu.
  *
+ * RÈGLES D'AFFICHAGE DE TRIPADVISOR, lues le 21/08/2026 dans leur propre
+ * documentation. Elles engagent qui cite leurs avis :
+ *   - seuls les avis à CINQ bulles peuvent être cités, et seulement si la
+ *     note globale de l'établissement atteint 4 sur 5. Le Lac Hôtel est à
+ *     4,1 : la condition tient, mais de peu. SI LA NOTE DESCEND SOUS 4,
+ *     LES SEPT CITATIONS TRIPADVISOR DOIVENT ÊTRE RETIRÉES ;
+ *   - la date de l'avis doit figurer, d'où `dateAvis` ;
+ *   - le texte doit être entre guillemets ;
+ *   - l'origine doit être explicite (« Avis de voyageur Tripadvisor ») ;
+ *   - le logo fait au moins 20 px de haut ;
+ *   - la note se donne en BULLES à leur vert Moss #00AA6C, sur fond blanc,
+ *     55 px de large au minimum, jamais une icône ni un chiffre maison ;
+ *   - tout est aligné à gauche.
+ * La graphie de la marque est « Tripadvisor », un seul mot et un seul A
+ * majuscule, depuis leur refonte de 2020.
+ *
  * Textes relevés le 21/08/2026.
  */
 
@@ -82,8 +98,11 @@ export interface Avis {
   /** Note du client, sur le barème de SA plateforme (Booking sur 10). */
   note: number;
   bareme: 5 | 10;
-  /** Mois du séjour, tel qu'affiché sur la fiche. */
-  sejour: Record<Locale, string>;
+  /** Date de PUBLICATION de l'avis, telle qu'affichée sur la fiche.
+      Tripadvisor l'exige pour toute citation, et l'article L.111-7-2 la
+      demande aussi. C'est la date de l'avis, pas celle du séjour : les
+      deux diffèrent parfois de plusieurs mois. */
+  dateAvis: Record<Locale, string>;
   /** Langue dans laquelle le client a écrit. */
   langueOriginale: Locale;
   /** Texte exact. NE JAMAIS RETOUCHER, pas même une faute. */
@@ -113,7 +132,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 10,
     bareme: 10,
-    sejour: { fr: "juillet 2025", en: "July 2025", es: "julio de 2025" },
+    dateAvis: { fr: "25 juillet 2025", en: "25 July 2025", es: "25 de julio de 2025" },
     langueOriginale: "fr",
     original:
       "Un havre de paix, bungalows sur pilotis les pieds dans l'eau très confortables. Le personnel souriant et aux p'tits soins. Un magnifique jardin botanique bien entretenu. La piscine doit être bien agréable en été austral. Et l'on y mange très bien. Je recommande vivement cet endroit hors du temps.",
@@ -129,7 +148,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 9,
     bareme: 10,
-    sejour: { fr: "octobre 2025", en: "October 2025", es: "octubre de 2025" },
+    dateAvis: { fr: "20 octobre 2025", en: "20 October 2025", es: "20 de octubre de 2025" },
     langueOriginale: "fr",
     original:
       "Endroit magnifique, personnel très serviable et prévenant. Nous avons passé un excellent séjour. Nous avons également visité la plantation de thé grâce à Toky le réceptionniste qui a fait le nécessaire car le weekend l'usine était fermée... Grand remerciement !",
@@ -145,7 +164,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 10,
     bareme: 10,
-    sejour: { fr: "décembre 2025", en: "December 2025", es: "diciembre de 2025" },
+    dateAvis: { fr: "28 décembre 2025", en: "28 December 2025", es: "28 de diciembre de 2025" },
     langueOriginale: "fr",
     original:
       "Bungalows sur le lac très confortable.\nLe jardin est sublime.\nPersonnel très accueillant.\nLa cuisine était délicieuse.",
@@ -161,7 +180,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 9,
     bareme: 10,
-    sejour: { fr: "janvier 2025", en: "January 2025", es: "enero de 2025" },
+    dateAvis: { fr: "6 janvier 2025", en: "6 January 2025", es: "6 de enero de 2025" },
     langueOriginale: "fr",
     /* « Lhôtel » et « décoré » sont dans l'avis. On ne corrige pas. */
     original:
@@ -178,7 +197,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 10,
     bareme: 10,
-    sejour: { fr: "août 2025", en: "August 2025", es: "agosto de 2025" },
+    dateAvis: { fr: "12 août 2025", en: "12 August 2025", es: "12 de agosto de 2025" },
     langueOriginale: "en",
     original:
       "We loved how unique our accommodation was; we stayed in the Train Wagon. The staff, especially the lady who received us was super inviting and happy to share tips on what local food we should try for dinner. I had some form of stir fried vegetables which were absolutely delicious!",
@@ -194,7 +213,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 10,
     bareme: 10,
-    sejour: { fr: "avril 2025", en: "April 2025", es: "abril de 2025" },
+    dateAvis: { fr: "1er mai 2025", en: "1 May 2025", es: "1 de mayo de 2025" },
     langueOriginale: "fr",
     original: "Le personnel adorable !\nLes chambres magnifiques la vue sur le lac !!",
     traduction: {
@@ -209,7 +228,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "booking",
     note: 10,
     bareme: 10,
-    sejour: { fr: "janvier 2025", en: "January 2025", es: "enero de 2025" },
+    dateAvis: { fr: "7 janvier 2025", en: "7 January 2025", es: "7 de enero de 2025" },
     langueOriginale: "fr",
     original: "Une pépite à découvrir absolument",
     traduction: {
@@ -230,7 +249,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "juillet 2026", en: "July 2026", es: "julio de 2026" },
+    dateAvis: { fr: "juillet 2026", en: "July 2026", es: "julio de 2026" },
     langueOriginale: "fr",
     original:
       "Le cadre est top pour se ressourcer. Les chambres sur pilotis sont bien décorées et donnent une sérénité sans faille. La cuisine est excellente et l'équipe est vraiment aux petits soins durant le sejour",
@@ -245,7 +264,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "septembre 2025", en: "September 2025", es: "septiembre de 2025" },
+    dateAvis: { fr: "septembre 2025", en: "September 2025", es: "septiembre de 2025" },
     langueOriginale: "fr",
     original:
       "Le plus bel hôtel que nous ayons pu avoir durant notre road trip de 4 semaines à Madagascar.\nVéritable havre de paix avec des bungalows sur pilotis très bien équipés et très confortables, permettant de profiter de la terrasse durant les couchers de soleil sur le lac, et le tout au milieu d'un joli parc botanique où toutes les essences sont répertoriées.\nLa qualité de la prestation est excellente et le restaurant est parfait, avec des assiettes aussi variées que généreuses.\nUne mention spéciale pour le personnel attentionné, d'une grande gentillesse et très professionnel.",
@@ -261,7 +280,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "juillet 2025", en: "July 2025", es: "julio de 2025" },
+    dateAvis: { fr: "juillet 2025", en: "July 2025", es: "julio de 2025" },
     langueOriginale: "fr",
     original:
       "Très belles chambres, lits confortables, excellente cuisine, rhum arrangé excellent et, par dessus tout, un personnel aux petits soins, souriant et très bienveillant. Nos amis de Fianarantsoa, venus nous voir, ont également été très bien reçus. Le cadre est exceptionnel, avec un lac sur lequel on peut faire du pedalo et une très belle balade autour, 8km. Enfin, je conseille la visite de la plantation de thé juste à côté. Un point très fort de notre séjour !",
@@ -277,7 +296,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "novembre 2024", en: "November 2024", es: "noviembre de 2024" },
+    dateAvis: { fr: "décembre 2024", en: "December 2024", es: "diciembre de 2024" },
     langueOriginale: "fr",
     original:
       "Superbe hôtel dans un cadre enchanteur. Très bon accueil. Grand bungalow confortable, avec vue sur le lac, jolie déco, vaste salle de bains. Belle piscine. Grand parc arboré, Service irréprochable.\nTrès bon restaurant. Un excellent souvenir !",
@@ -293,7 +312,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "février 2024", en: "February 2024", es: "febrero de 2024" },
+    dateAvis: { fr: "février 2024", en: "February 2024", es: "febrero de 2024" },
     langueOriginale: "fr",
     original:
       "Weekend apaisant à côté de Fianarantsoa. De magnifiques bungalows décorés avec goût. Une vue sur le lac imprenable, des plantes, des plantes et encore des plantes, un vrai plaisir de déambuler dans l'enceinte de l'hôtel.\nDe plus, nous avons pu profiter en famille de la piscine et du pédalo sur le lac !\nL'équipe est à l'écoute et pleine d'attention pour chaque personne, le service est nickel !\nUne parenthèse sereine et de détente assurée. Merci",
@@ -309,7 +328,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "janvier 2024", en: "January 2024", es: "enero de 2024" },
+    dateAvis: { fr: "janvier 2024", en: "January 2024", es: "enero de 2024" },
     langueOriginale: "fr",
     original:
       "Voici un hôtel lacustre très agréable.\nJolies et spacieuses constructions sur pilotis pour des chambres très confortables.\nAccueil d'une grande gentillesse .\nTres bonne cuisine.\nBon rapport qualite-prix\nUne halte où vous pouvez également découvrir l'unique plantation de thé Malgache.\nJe recommande fortement",
@@ -324,7 +343,7 @@ export const avisVerifies: Avis[] = [
     plateforme: "tripadvisor",
     note: 5,
     bareme: 5,
-    sejour: { fr: "juillet 2023", en: "July 2023", es: "julio de 2023" },
+    dateAvis: { fr: "juillet 2023", en: "July 2023", es: "julio de 2023" },
     langueOriginale: "fr",
     original:
       "Magnifique hôtel, cadre de rêve.\nLe personnel est d'une extrême gentillesse et aux petits soins.\nLes bungalows sont magnifiques (nous avions pris le bungalow nuptial plus un bungalow famille). Décoration idyllique face au lac, le jardin et la partie restauration sont du même niveau.\nLes plats et boissons proposés étaient très bons, dégustés dans un très beau cadre.\nNous recommandons également la visite de la plantation de thé où nous avons été très bien reçu egalement.\nNe tardez pas vous rendre à cette adresse avec un rapport qualité prix irréprochable.",

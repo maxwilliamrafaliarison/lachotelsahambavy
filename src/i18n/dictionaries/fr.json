@@ -310,7 +310,12 @@
     "title": "Ils ont vécu l’expérience",
     "transparence": "Avis recopiés mot pour mot depuis {booking} et {tripadvisor}, qui en vérifient l’auteur. Nous n’en publions aucun de notre plume et n’en retouchons pas le texte, fautes comprises. Ceux qui portent une réserve ne sont pas repris ici : ils se lisent, avec tous les autres, sur les deux fiches.",
     "traduitDe": "Traduit {langue}",
-    "noteSur": "{note} sur {bareme}"
+    "noteSur": "{note} sur {bareme}",
+    "origineAvis": {
+      "booking": "Avis client Booking.com",
+      "tripadvisor": "Avis de voyageur Tripadvisor",
+      "google": "Avis Google"
+    }
   },
   "contact": {
     "label": "Contact & Réservation",

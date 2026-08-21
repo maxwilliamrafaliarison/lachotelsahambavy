@@ -1153,11 +1153,11 @@ body {
      340 px plutôt que les ~420 px de Hostinger, l'échelle demandée. */
   .lh-avis {
     display: flex; flex-direction: column;
-    /* 256 px et non plus 232 : la carte porte désormais une ligne de
-       plus, « traduit du français », qui n'apparaît que lorsque le
-       lecteur ne lit pas la langue du client. La hauteur est la même
+    /* 340 × 276. La carte a grandi deux fois : d'abord pour la mention
+       « traduit du français », puis pour la ligne d'origine et de date
+       qu'exigent les règles d'affichage de Tripadvisor. Hauteur identique
        pour toutes, sans quoi le ruban aurait des dents. */
-    width: 340px; height: 256px;
+    width: 340px; height: 276px;
     padding: 20px 22px;
     border-radius: 4px;
     background: var(--color-white);
@@ -1175,7 +1175,25 @@ body {
   /* La note est un CHIFFRE, dans le barème de sa plateforme, et non plus
      une file d'étoiles : Booking note sur dix, et cinq étoiles pour un
      9/10 arrondissaient la note du client vers le haut. Chasse fixe,
-     pour que la colonne des notes ne tremble pas au défilement. */
+     pour que la colonne des notes ne tremble pas au défilement.
+
+     SAUF POUR TRIPADVISOR, qui impose ses propres bulles : le chiffre
+     laisse alors place au composant BullesTripadvisor.
+
+     LE FOND BLANC N'EST PAS UNE PRÉCAUTION DE STYLE. Tripadvisor exige
+     que le fond de page ne transparaisse pas derrière les bulles, et la
+     mesure dit pourquoi : leur vert Moss #00AA6C tient 3,01:1 sur du
+     blanc, soit tout juste le seuil WCAG 1.4.11 pour un graphique
+     porteur de sens, mais il tombe à 2,89:1 sur le papier du site
+     (#FBFAF7) et passe alors sous le seuil. Leur règle de marque et
+     l'accessibilité disent ici la même chose. La couleur ne peut pas
+     être assombrie pour gagner du contraste : elle est imposée. C'est
+     donc le fond qu'il faut tenir blanc. */
+  .lh-avis__bulles {
+    display: block;
+    background: var(--color-white);
+  }
+
   .lh-avis__note {
     margin-left: auto;
     font-size: 11px;
@@ -1214,25 +1232,23 @@ body {
     color: var(--color-ink);
   }
 
-  /* Le mois du séjour, que l'article L.111-7-2 demande de faire figurer.
-     Plus pâle que le pays : c'est une précision, pas une information de
-     premier plan. */
-  .lh-avis__date {
-    color: var(--color-muted);
-  }
-  .lh-avis__date::after {
-    content: " ·";
-    opacity: 0.5;
-  }
+  /* Origine, date de l'avis, et le cas échéant la traduction. La ligne la
+     plus discrète de la carte, et pourtant celle qui porte le plus
+     d'obligations : Tripadvisor exige que la citation soit datée et que
+     son origine soit explicite, l'article L.111-7-2 demande la date, et
+     sans la mention de traduction la page donnerait pour les mots du
+     client une phrase qu'il n'a pas écrite.
 
-  /* « Traduit du français ». Volontairement la ligne la plus discrète de
-     la carte, mais présente : sans elle, la page donnerait pour les mots
-     du client une phrase qu'il n'a pas écrite. */
-  .lh-avis__traduit {
+     Elle peut passer sur deux lignes en anglais et en espagnol, où
+     « A Tripadvisor traveler review » est plus long : la hauteur de carte
+     en tient compte. On ne la coupe pas, une mention tronquée ne
+     remplissant plus son office. */
+  .lh-avis__mentions {
     margin: 8px 0 0;
     font-family: var(--font-body);
     font-size: 10px;
-    letter-spacing: 0.04em;
+    line-height: 1.45;
+    letter-spacing: 0.03em;
     color: var(--color-muted);
     opacity: 0.85;
   }

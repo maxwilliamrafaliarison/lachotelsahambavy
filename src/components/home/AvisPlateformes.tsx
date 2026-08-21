@@ -92,7 +92,7 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
     },
     {
       id: "tripadvisor",
-      nom: "TripAdvisor",
+      nom: "Tripadvisor",
       href: siteConfig.social.tripadvisorAvis,
       note: siteConfig.ratings.tripadvisor.score,
       bareme: 5,
