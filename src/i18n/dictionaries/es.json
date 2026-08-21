@@ -42,9 +42,6 @@
     }
   },
   "reviewsCta": {
-    "label": "Su opinión",
-    "title": "¿Se ha alojado con nosotros?",
-    "subtitle": "Unas líneas sobre su estancia ayudan a los viajeros que aún dudan, y significan mucho para una casa familiar como la nuestra.",
     "action": "Dejar mi opinión",
     "reviews": "{n} opiniones"
   },

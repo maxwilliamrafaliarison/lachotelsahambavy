@@ -5,44 +5,34 @@ import type { Plateforme } from "@/data/testimonials";
 import type { Locale } from "@/lib/utils";
 
 /**
- * « Donnez votre avis » : les trois plateformes, en liste.
+ * Où laisser un avis : les trois plateformes, en une bande.
  *
- * REFONTE DU 14/08/2026. La version précédente alignait trois cartes
- * bordées, chacune terminée par « Donner mon avis » et une flèche. Trois
- * encadrés, trois boutons, la même phrase répétée trois fois pour un seul
- * geste : c'était bavard, et la direction l'a jugé lourd.
+ * LA SECTION N'A PLUS NI TITRE NI CHAPÔ (direction, 21/08/2026). Elle en
+ * avait : « Votre avis », « Vous avez séjourné chez nous ? » et trois
+ * lignes d'explication, dans une colonne qui prenait le tiers de la
+ * largeur. Tout est parti. Posée juste au-dessus des types
+ * d'hébergement, la bande n'a pas besoin de se présenter : c'est la
+ * seule chose à cet endroit de la page, et les logotypes disent
+ * d'eux-mêmes de quoi il s'agit. Il reste une ligne pour annoncer
+ * l'action, et les trois plateformes.
  *
- * CE QUI A ÉTÉ RETIRÉ, et pourquoi c'est le sujet. Le luxe ici tient à ce
- * qu'on enlève, pas à ce qu'on ajoute :
- *   - les bordures. Trois cadres pour trois lignes de même nature ne
- *     séparent rien qu'un filet ne sépare mieux ;
- *   - l'encart blanc qui enveloppait le tout. La section respire sur le
- *     papier de la page, comme les autres ;
- *   - la triple répétition de l'appel à l'action. Il est énoncé UNE fois,
- *     au-dessus de la liste. Chaque ligne n'a plus besoin que de sa
- *     flèche : l'intention a déjà été dite.
+ * ELLE N'A DONC PLUS DE <h2>, et ce n'est pas un oubli : un titre de
+ * niveau deux annoncerait un chapitre, or ceci n'en est plus un. La
+ * hiérarchie des titres de la page reste continue sans lui, vérifié.
  *
- * FORME RETENUE, après une version en liste à filets : des GÉLULES, dans
- * la langue du menu (demande de la direction, 14/08/2026). Fond pâle,
- * encre orange, remplissage à l'orange vif au survol, logo de la
- * plateforme et points médians comme séparateurs.
+ * TROIS CELLULES À FILETS remplacent les gélules du 14/08. Les gélules
+ * portaient des logos dessinés à la main, faute de place pour les vrais :
+ * le logotype Booking exige 120 px de large, une gélule en faisait 230 en
+ * tout. Voir LogoPlateforme pour le détail des chartes.
  *
- * ELLES S'ENROULENT au lieu de s'empiler : trois lignes à filets prenaient
- * dix rangées de hauteur pour trois liens. La demande était que la section
- * ne prenne pas de place, et c'est ce qui la tient compacte.
- *
- * La note n'est plus le grand chiffre de la version précédente : depuis
- * que la barre du haut porte la note consolidée sur chaque page, ce n'est
- * plus ici qu'on vient la chercher. Ici on vient choisir OÙ écrire.
- *
- * L'ACCESSIBILITÉ NE PERD RIEN à cette économie : l'action ayant disparu
- * du texte visible de chaque gélule, elle est ajoutée hors écran, en tête
- * du lien. Surtout pas par `aria-label`, qui REMPLACE le contenu au lieu
- * de s'y ajouter et effaçait donc la note et le nombre d'avis.
+ * ON NE RÉPÈTE PAS L'APPEL À L'ACTION dans chaque cellule. Il est énoncé
+ * UNE fois, au-dessus : trois boutons portant la même phrase seraient
+ * bavards, et c'est ce que la direction avait reproché à la toute
+ * première version.
  *
  * OÙ MÈNENT LES LIENS (ce n'est pas uniforme, et c'est voulu) :
  *
- *  - TripAdvisor ouvre directement le formulaire de rédaction
+ *  - Tripadvisor ouvre directement le formulaire de rédaction
  *    (UserReviewEdit, mêmes identifiants g/d que la fiche).
  *  - Google ouvre la fiche de l'hôtel par son CID, d'où « Rédiger un avis »
  *    est à un clic. Le lien direct `search.google.com/local/writereview`
@@ -56,24 +46,19 @@ import type { Locale } from "@/lib/utils";
  *    envoie après le séjour. Le lien mène donc à la fiche de l'hôtel.
  *
  * LE LOGO BOOKING RESTE, sur arbitrage de la direction (21/08/2026), et
- * il ne faut pas le retirer au nom de la prudence.
- *
- * Le contrat qui lie l'hôtel est la version MALGACHE des conditions
- * générales (v2601_nE_i, servie pour cc1=mg), et elle diffère de la
- * version française : son article 4.3.3 interdit d'employer « la
- * marque/le logo Booking.com [...] à des fins de comparaison de prix ou à
- * TOUTE AUTRE FIN [...] sans accord écrit préalable », mais la même
+ * il ne faut pas le retirer au nom de la prudence. Le contrat qui lie
+ * l'hôtel est la version MALGACHE des conditions générales (v2601_nE_i),
+ * et elle diffère de la française : son article 4.3.3 interdit d'employer
+ * « la marque/le logo Booking.com [...] à des fins de comparaison de prix
+ * ou à TOUTE AUTRE FIN [...] sans accord écrit préalable », mais la même
  * clause se termine par une permission, « l'établissement peut enchérir
  * sur la marque Booking.com ou l'employer pour son propre marketing ».
  * Le site de l'hôtel est son propre marketing.
  *
  * La tension porte sur un mot : l'interdiction dit « marque/logo », la
- * permission dit « marque ». Le nom est donc couvert sans discussion, le
- * pictogramme est discutable. La direction a tranché pour le garder, un
- * lien vers la fiche apportant des réservations à Booking. Le jour où
- * quelqu'un voudra revenir là-dessus, c'est cette clause qu'il faut
- * relire, et non celle de la version française, qui ne s'applique pas
- * ici.
+ * permission dit « marque ». Le nom est couvert sans discussion, le
+ * pictogramme est discutable. Ne pas relire là-dessus la version
+ * française des conditions, qui ne s'applique pas ici.
  *
  * À NE PAS CONFONDRE avec les avis eux-mêmes : leur reprise est, elle,
  * interdite sans accord écrit, et les sept avis Booking sont en réserve
@@ -136,16 +121,22 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
     <section id="donner-un-avis" className="scroll-mt-24 py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <ScrollReveal>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start lg:gap-12">
-            <div className="lg:col-span-4">
-              <span className="ge-label mb-3">{t.label}</span>
-              <h2 className="mb-3 text-[26px] leading-tight md:text-[30px]" style={{ textWrap: "balance" }}>
-                {t.title}
-              </h2>
-              <p className="ge-measure text-[15px] leading-relaxed text-body">{t.subtitle}</p>
-            </div>
+          {/* PLUS DE TITRE NI DE CHAPÔ, sur décision de la direction
+              (21/08/2026). La section portait « Votre avis / Vous avez
+              séjourné chez nous ? » et trois lignes d'explication, dans
+              une colonne de gauche qui occupait le tiers de la largeur.
 
-            <div className="lg:col-span-8">
+              Elle se réduit désormais à ce qu'elle fait : une ligne qui
+              annonce l'action, et les trois plateformes. Posée juste
+              au-dessus des types d'hébergement, elle n'a pas besoin de se
+              présenter ; c'est la seule chose à cet endroit de la page,
+              et les logotypes disent d'eux-mêmes de quoi il s'agit.
+
+              La section n'a donc plus de <h2>. Ce n'est pas un oubli : un
+              titre de niveau deux annoncerait un chapitre, et ceci n'en
+              est plus un. La hiérarchie des titres de la page reste
+              continue sans lui. */}
+          <div>
               {/* L'appel à l'action, énoncé une seule fois pour les trois
                   lignes. C'est ce qui permet aux lignes de n'être que des
                   lignes, et non trois boutons répétant la même phrase. */}
@@ -194,7 +185,6 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
                   </li>
                 ))}
               </ul>
-            </div>
           </div>
         </ScrollReveal>
       </div>
