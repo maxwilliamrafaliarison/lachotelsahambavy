@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Lac Hôtel Sahambavy: Charm & Comfort in the Heart of Nature | Madagascar",
-    "description": "Charming eco-lodge in Fianarantsoa, Madagascar. Overwater bungalows, panoramic restaurant, unique tea plantation. Book your stay at Lac Hôtel Sahambavy."
+    "description": "Charming eco-lodge in Fianarantsoa, Madagascar. Overwater bungalows, panoramic restaurant, unique tea plantation. Book your stay at Lac Hôtel Sahambavy.",
+    "ogImageAlt": "Lac Hôtel Sahambavy seen from the lake, with its overwater bungalows"
   },
   "nav": {
     "home": "Home",
@@ -124,7 +125,8 @@
     "galPrev": "Previous photo",
     "galNext": "Next photo",
     "galOf": "photo {n}",
-    "restaurationTitle": "Dining"
+    "restaurationTitle": "Dining",
+    "metaDescription": "Rooms at Lac Hôtel Sahambavy: overwater bungalows, a 1930 honeymoon railway carriage, a tree bungalow, lake-view rooms and a villa with kitchenette."
   },
   "philosophy": {
     "label": "Our philosophy",
@@ -197,7 +199,8 @@
     "pricesFootnote": "Prices per person. Euro amounts are indicative: conversion at the rate on the day of payment.",
     "glassBottlesP": "Each guest room is also stocked with glass bottles filled with fresh filtered water throughout your stay.",
     "flavorsTitle": "Local & International Flavors",
-    "ecoTitle": "Eco-Friendly Hospitality"
+    "ecoTitle": "Eco-Friendly Hospitality",
+    "metaDescription": "The restaurant at Lac Hôtel Sahambavy: Malagasy and international cooking, local produce, a panoramic dining room and a terrace over the lake."
   },
   "loisirs": {
     "heroTitle": "Activities & Leisure",
@@ -350,11 +353,13 @@
     "heroTitle": "Plan your stay",
     "heroSubtitle": "We reply within 24 hours · Zero commission · Payment on arrival",
     "mapTitle": "Find us",
-    "cta": "Request a booking"
+    "cta": "Request a booking",
+    "metaDescription": "Book Lac Hôtel Sahambavy: commission-free enquiry, a reply within 24 hours, payment on arrival. Telephone, WhatsApp and booking form."
   },
   "hotel": {
     "heroTitle": "The Hotel",
     "heroSubtitle": "Charm and comfort in the heart of nature",
+    "metaDescription": "A lodge on the shore of Lake Sahambavy, near Fianarantsoa: overwater bungalows, restaurant, gardens and tea plantation on a ten-hectare estate.",
     "historyLabel": "Our story",
     "historyTitle": "A dream born by the lake",
     "historyP1": "It was by pure chance that Leong and Olga discovered the shores of Lake Sahambavy in 1998. Their original plan was simple: to purchase a piece of land by the lake and build a modest cottage where they could enjoy a peaceful retirement. But inspired by Olga’s vision and passion, this quiet retreat soon blossomed into a true Garden of Eden.",
@@ -419,6 +424,7 @@
   "plantation": {
     "heroTitle": "Sahambavy Tea Plantation",
     "heroSubtitle": "Madagascar's only tea plantation",
+    "metaDescription": "Madagascar's only tea plantation, at Sahambavy: walk the tea bushes, watch the picking and the processing, minutes from the hotel.",
     "historyLabel": "The history of tea",
     "historyTitle": "From Chinese legend to the hills of Sahambavy",
     "historyIntro": "If tea is a legendary drink, then its story must begin with a legend. In 2737 BC, leaves from a Camellia sinensis shrub accidentally fell into a cauldron of boiling water belonging to Chinese emperor and herbalist Shen Nong. Impressed by the resulting infusion, he quickly adopted this new beverage, which became an essential part of Chinese culture.",
@@ -536,6 +542,7 @@
   "train": {
     "heroTitle": "FCE Train",
     "heroSubtitle": "Madagascar's last corridor train",
+    "metaDescription": "The FCE train links Fianarantsoa to Manakara through the forest: Sahambavy station, timetables, and private draisine hire from the Lac Hôtel.",
     "introLabel": "Railway adventure",
     "introTitle": "Fianarantsoa–East Coast",
     "introP1": "The FCE train (Fianarantsoa–East Coast) is the last passenger train still in service in Madagascar. This mythical line connects Fianarantsoa to Manakara, crossing 162 km of tropical forests, vertiginous cliffs and remote villages accessible only by rail.",
@@ -689,6 +696,7 @@
   "equipe": {
     "heroTitle": "Our Team",
     "heroSubtitle": "CSR & Sustainable Development",
+    "metaDescription": "The Lac Hôtel Sahambavy team and its commitments: local employment, nearby sourcing, and the protection of the lake and its shoreline.",
     "introLabel": "The Lac Hôtel team",
     "introTitle": "Committed women and men",
     "introP": "Lac Hôtel is fully committed to Corporate Social Responsibility (CSR) and sustainable development. Prioritizing local hiring, we actively contribute to strengthening the resilience and well-being of the local community.",
@@ -770,11 +778,13 @@
     "ctaTitleEm": "your project",
     "ctaText": "An intimate wedding, a corporate seminar, a milestone birthday: every event is unique. Contact us for a tailor-made quote.",
     "ctaButton": "Request a quote",
-    "whatsappText": "Hello, I would like to organise an event (wedding / seminar) at Lac Hôtel."
+    "whatsappText": "Hello, I would like to organise an event (wedding / seminar) at Lac Hôtel.",
+    "metaDescription": "Weddings and seminars at Lac Hôtel Sahambavy: a ceremony by the lake, a reception in the gardens and a conference room seating up to 40 people."
   },
   "gallery": {
     "heroTitle": "Gallery",
     "heroSubtitle": "Discover Lac Hôtel in pictures",
+    "metaDescription": "Thirty-one photographs of Lac Hôtel Sahambavy: the overwater bungalows, the rooms, the restaurant, the gardens, the tea plantation and the village.",
     "all": "All",
     "rooms": "Accommodation",
     "restaurant": "Restaurant",
@@ -985,11 +995,13 @@
     "contactLead": "A question about these conditions?",
     "contactCta": "Contact us",
     "termsConsentLinkLabel": "booking conditions",
-    "viewFull": "See the full conditions"
+    "viewFull": "See the full conditions",
+    "metaDescription": "Booking conditions at Lac Hôtel Sahambavy: cancellation scale, payment on arrival, agency rates and the rights of European travellers."
   },
   "jardins": {
     "heroTitle": "Botanical Garden & Orchids",
     "heroSubtitle": "An eco-garden by the lake",
+    "metaDescription": "A botanical eco-garden on the shore of Lake Sahambavy: orchids, bougainvillea and endemic species, open to hotel guests and day visitors alike.",
     "introLabel": "A sensory escape",
     "introTitle": "An Eden cultivated with passion",
     "introP": "Since 1998, Olga and then Maggie have shaped this 2-hectare eco-garden day after day: wild flowers, traveller's trees, shaded orchids and hand-sculpted bonsai live side by side, just steps from the lake.",
@@ -1162,7 +1174,7 @@
     "heroSubtitle": "On the shores of Lake Sahambavy, amid rice paddies and tea plantations, 40 minutes from Fianarantsoa and 2 minutes from the station.",
     "heroAlt": "Aerial view of the terraced rice paddies and Lake Sahambavy",
     "metaTitle": "Location & access",
-    "metaDescription": "How to reach Lac Hôtel Sahambavy: 2 minutes from the station (Fianarantsoa–Manakara line), 40 minutes from Fianarantsoa by road via the RN7, hotel shuttle and private 4x4 transfer on request.",
+    "metaDescription": "Getting to Lac Hôtel Sahambavy: 2 minutes from the station on the FCE Fianarantsoa–Manakara line, 40 minutes from Fianarantsoa via the RN7. Shuttle available.",
     "introLabel": "How to get here",
     "introTitle": "Two ways to reach us",
     "introP": "By rail or by road, the journey to Sahambavy is already part of the experience: tea-covered hills, terraced rice paddies and Betsileo villages accompany your arrival on the lakeshore.",

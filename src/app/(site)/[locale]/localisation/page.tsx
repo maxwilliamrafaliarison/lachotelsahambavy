@@ -22,7 +22,7 @@ const FR = {
   heroAlt: "Vue aérienne des rizières en terrasses et du lac de Sahambavy",
   metaTitle: "Localisation & accès",
   metaDescription:
-    "Comment venir au Lac Hôtel Sahambavy : à 2 minutes de la gare (ligne Fianarantsoa–Manakara), à 40 minutes de Fianarantsoa par la route via la RN7, navette de l'hôtel et transfert privé 4x4 sur demande.",
+    "Venir au Lac Hôtel Sahambavy : à 2 minutes de la gare sur la ligne FCE Fianarantsoa–Manakara, à 40 minutes de Fianarantsoa par la RN7. Navette sur demande.",
   introLabel: "Comment venir",
   introTitle: "Deux façons de nous rejoindre",
   introP:

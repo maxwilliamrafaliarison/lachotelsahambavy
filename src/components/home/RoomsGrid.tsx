@@ -11,9 +11,9 @@ const basePath = getBasePath();
  * du hero, scroll-mt-24 obligatoire).
  *
  * Cartes uniformes bg-white à filet fin : photo 3/2, nom, « à partir de »
- * prix AR + €, lien. Sous la grille, bandeau de réassurance style Radisson :
- * les trois notes (Booking / Google / TripAdvisor) en chips hairline,
- * données de siteConfig.ratings.
+ * prix AR + €, lien. Rien d'autre sous la grille que le lien vers la page
+ * Hébergements : le bandeau de notes qui s'y trouvait a été retiré, pour la
+ * raison consignée plus bas, à l'endroit où il était.
  *
  * Server Component : le compteur/carrousel a disparu, plus besoin de client.
  */
@@ -23,8 +23,6 @@ function formatAr(n: number): string {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-/** 9 → « 9,0 » (fr/es) ou « 9.0 » (en). */
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale }) {
   /* L'ordre et la sélection viennent de `roomsAffichees` (cf. src/data/rooms.ts) :
@@ -33,8 +31,6 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
      Le Repos : la direction veut la villa basse dans la grille, signalée par
      sa pastille de localisation. */
   const displayRooms = roomsAffichees;
-
-
 
   return (
     <section id="rooms" className="scroll-mt-24 py-16 md:py-24">

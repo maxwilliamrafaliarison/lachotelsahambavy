@@ -21,7 +21,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   return {
     title: dict.hotel.heroTitle,
-    description: dict.hotel.heroSubtitle,
+    /* Le sous-titre du hero est une ligne d'affichage, pas un extrait de
+       résultat : il tenait en trente caractères là où Google en montre cent
+       cinquante. `metaDescription` est écrite pour la recherche ; le
+       sous-titre reste en secours si la clé manque dans une langue. */
+    description: dict.hotel.metaDescription ?? dict.hotel.heroSubtitle,
     alternates: pageAlternates(locale as Locale, "hotel"),
   };
 }

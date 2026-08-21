@@ -95,7 +95,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     // Idem hébergements : le gabarit racine appose déjà la marque.
     title: dict.restaurantSection.heroTitle,
-    description: dict.restaurantSection.subtitle,
+    /* Description écrite pour la page de résultats, et non reprise du
+       sous-titre affiché : celui-ci tenait en une demi-ligne là où Google
+       en montre cent cinquante caractères. */
+    description: dict.restaurantSection.metaDescription ?? dict.restaurantSection.subtitle,
     alternates: pageAlternates(locale as Locale, "restaurant"),
   };
 }

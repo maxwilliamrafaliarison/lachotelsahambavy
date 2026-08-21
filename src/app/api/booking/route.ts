@@ -7,8 +7,7 @@
  *   1. Honeypot check (champ `website` doit être vide)
  *   2. Rate-limit Upstash (10 req/10min par IP hashée)
  *   3. Validation Zod stricte
- *   4. hCaptcha verify server-side
- *   5. Envoi Resend × 2 (confirmation client + notification interne)
+ *   4. Envoi Resend × 2 (confirmation client + notification interne)
  *   6. Push Google Sheet (best-effort, non bloquant)
  *   7. Response JSON (success | error)
  *
@@ -16,7 +15,6 @@
  *   - Email provider down → 502 avec message localisé
  *   - Rate-limited → 429 + header Retry-After
  *   - Validation fail → 400 avec `issues[]`
- *   - CAPTCHA fail → 400 code `captcha-failed`
  *
  * Sécurité :
  *   - Aucun stockage IP en clair (hash SHA-256 salé)
@@ -30,7 +28,6 @@ import { render } from "@react-email/render";
 
 import { bookingFormSchema, type BookingFormValues } from "@/lib/booking/schema";
 import { rateLimitCheck } from "@/lib/booking/rate-limit";
-import { verifyHCaptcha } from "@/lib/booking/hcaptcha";
 import { extractIp, hashIp } from "@/lib/booking/hash-ip";
 import { pushToGoogleSheet } from "@/lib/booking/google-sheet";
 import { computeNights } from "@/lib/booking/schema";
@@ -102,14 +99,24 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  // ─── 5. hCaptcha verify ──────────────────────────────────
-  const captcha = await verifyHCaptcha(data.hcaptchaToken, rawIp ?? undefined);
-  if (!captcha.valid) {
-    return NextResponse.json(
-      { success: false, code: "captcha-failed", reason: captcha.reason },
-      { status: 400 }
-    );
-  }
+  /* PAS DE CAPTCHA, ET C'EST DÉLIBÉRÉ (14/08/2026).
+
+     Le formulaire envoyait un jeton hCaptcha qui valait toujours la chaîne
+     vide : aucun widget n'a jamais été monté côté client. La vérification
+     ne passait donc que parce que HCAPTCHA_SECRET n'est pas défini, cas où
+     hcaptcha.ts accordait sa confiance.
+
+     C'était un piège en attente : le jour où quelqu'un aurait renseigné ce
+     secret sur Vercel, en croyant activer une protection, la vérification
+     aurait rejeté TOUTES les demandes pour « missing-token ». Le formulaire
+     de réservation serait devenu inutilisable sans qu'aucun test ne le
+     signale, puisque rien n'échoue en développement.
+
+     La protection anti-abus repose donc sur les deux mécanismes qui, eux,
+     fonctionnent réellement : le leurre `website` ci-dessus, et la
+     limitation de débit par IP hachée. Pour réintroduire un CAPTCHA il
+     faudra poser le widget ET le secret dans le même changement, jamais
+     l'un sans l'autre. */
 
   // ─── 6. Envoi emails via Resend ──────────────────────────
   const resendKey = process.env.RESEND_API_KEY;

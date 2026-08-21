@@ -35,28 +35,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
   const lastModified = new Date();
 
-  return publicRoutes.map((route) => {
-    /* Barre finale obligatoire : le site tourne en `trailingSlash: true`,
-       et les seize URL publiées ici sans barre pointaient donc vers seize
-       redirections 308. L'accueil porte `path: ""` et non `"/"` : la barre
-       ajoutée ci-dessous est la seule, il n'y a pas de doublon. */
-    // URL canonique = version par défaut (FR)
-    const canonicalUrl = `${baseUrl}/${defaultLocale}${route.path}/`;
+  /* UNE ENTRÉE PAR COUPLE (LANGUE, PAGE), soit quarante-huit et non seize.
 
-    // Alternates hreflang : toutes les langues + x-default
-    const languages: Record<string, string> = {
-      "x-default": canonicalUrl,
-    };
-    for (const locale of locales) {
-      languages[locale] = `${baseUrl}/${locale}${route.path}/`;
-    }
+     Le sitemap ne déclarait que les seize URL françaises, chacune portant
+     les alternates des trois langues. C'est une lecture courante mais
+     fausse de la spécification : Google demande que CHAQUE page d'un
+     groupe linguistique ait sa propre entrée <url>, portant le jeu complet
+     d'alternates. Déclarées seulement en alternate, les trente-deux pages
+     anglaises et espagnoles n'étaient jamais soumises pour exploration ;
+     elles ne pouvaient être découvertes que par les liens du site.
 
-    return {
-      url: canonicalUrl,
+     Barre finale obligatoire : le site tourne en `trailingSlash: true`, et
+     des URL publiées sans barre pointeraient vers des redirections 308.
+     L'accueil porte `path: ""` et non `"/"` : la barre ajoutée ici est la
+     seule, il n'y a pas de doublon. */
+  return publicRoutes.flatMap((route) => {
+    const url = (locale: string) => `${baseUrl}/${locale}${route.path}/`;
+
+    /* Le même jeu d'alternates sur les trois entrées du groupe, comme
+       l'exige la spécification. x-default vise le français, langue
+       éditoriale de référence, comme dans les métadonnées des pages. */
+    const languages: Record<string, string> = { "x-default": url(defaultLocale) };
+    for (const locale of locales) languages[locale] = url(locale);
+
+    return locales.map((locale) => ({
+      url: url(locale),
       lastModified,
       changeFrequency: route.changeFreq,
-      priority: route.priority,
+      /* Le français garde la priorité annoncée, les deux autres langues
+         reçoivent un cran de moins : à contenu égal, c'est la version
+         française que l'hôtel veut voir remonter en premier. */
+      priority: locale === defaultLocale ? route.priority : Math.max(0.1, route.priority - 0.1),
       alternates: { languages },
-    };
+    }));
   });
 }

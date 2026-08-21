@@ -35,8 +35,9 @@ import type { Locale } from "@/lib/utils";
  * plus ici qu'on vient la chercher. Ici on vient choisir OÙ écrire.
  *
  * L'ACCESSIBILITÉ NE PERD RIEN à cette économie : l'action ayant disparu
- * du texte visible de chaque ligne, elle est portée par l'`aria-label`,
- * qui reste complet (« Donner mon avis (Booking.com) »).
+ * du texte visible de chaque gélule, elle est ajoutée hors écran, en tête
+ * du lien. Surtout pas par `aria-label`, qui REMPLACE le contenu au lieu
+ * de s'y ajouter et effaçait donc la note et le nombre d'avis.
  *
  * OÙ MÈNENT LES LIENS (ce n'est pas uniforme, et c'est voulu) :
  *
@@ -136,9 +137,18 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${t.action} (${nom})`}
                       className="lh-gelule"
                     >
+                      {/* L'action se dit dans le nom accessible, mais SANS
+                          aria-label : celui-ci remplaçait tout le contenu,
+                          si bien qu'un lecteur d'écran annonçait « Donner
+                          mon avis (Booking.com) » et perdait la note et le
+                          nombre d'avis. Sur téléphone, où la note
+                          consolidée de la barre du haut est masquée, la
+                          page n'annonçait plus aucun chiffre. Un texte
+                          hors écran s'AJOUTE au contenu au lieu de s'y
+                          substituer. */}
+                      <span className="sr-only">{t.action} :</span>
                       <Logo taille={16} />
                       <span>{nom}</span>
                       <span aria-hidden="true" className="lh-gelule__point">·</span>

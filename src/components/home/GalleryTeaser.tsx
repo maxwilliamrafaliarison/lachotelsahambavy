@@ -21,22 +21,48 @@ const basePath = getBasePath();
  * Le lecteur doit comprendre que la galerie couvre autre chose que des
  * chambres.
  *
- * LE COMPTE TOMBE JUSTE, et ce n'est pas un hasard. Trois colonnes, la
- * vedette sur deux colonnes et deux rangées : elle occupe quatre cases, il
- * en reste cinq pour les cinq autres photos, soit une grille de neuf sans
- * un trou. Une grille de quatre colonnes, essayée d'abord, laissait la
- * sixième photo seule sur une troisième rangée, avec trois cases vides à
- * côté d'elle.
+ * SIX TUILES ÉGALES, et non plus une vedette sur deux colonnes. La vedette
+ * occupait une case de 795 px de côté, qu'il aurait fallu servir en
+ * 1590 px sur un écran à haute densité. Or les photos de la galerie sont
+ * en 1200 × 800, et le recadrage au carré en retire encore un tiers : la
+ * vedette était donc agrandie deux fois. Aucune photo du lac assez définie
+ * n'existait pour la remplacer, la seule candidate étant déjà une vue du
+ * hero, deux sections plus haut.
  *
- * LA VEDETTE ne l'est qu'à partir de md. En dessous, les six passent en
- * deux colonnes égales : une image en vedette sur un écran de téléphone ne
- * domine rien, elle prend juste la place de deux autres.
+ * En six cases égales, chacune fait 400 px au plus : les 800 px utiles du
+ * recadrage carré suffisent, même en haute densité. La grille se remplit
+ * en trois colonnes sur deux rangées, sans trou, et la section y gagne une
+ * rangée de hauteur.
  *
  * CHARGEMENT. Six images qui ne sont pas au-dessus de la ligne de flottaison
  * n'ont aucune raison de retarder le premier rendu : toutes en paresseux,
- * aucune en priorité. Les tailles déclarées suivent la grille pour que le
- * navigateur ne télécharge pas du 2560 px pour une vignette de 200.
+ * aucune en priorité. Les tailles déclarées se calculent case par case
+ * (voir `taillesCarre`) : elles étaient sous-déclarées de 19 à 29 %, ce qui
+ * faisait choisir au navigateur une variante trop petite.
  */
+
+/**
+ * Tailles à déclarer pour une source de rapport `r` dans une case CARRÉE
+ * remplie en `object-cover`.
+ *
+ * La case fait 390 px au plus (conteneur 1280, marges 2 × 40, trois
+ * colonnes, deux gouttières de 16), 31 vw entre 768 et 1359, 47 vw en
+ * dessous sur deux colonnes. Mais ces largeurs sont celles de la CASE, pas
+ * de l'image : en `object-cover`, une photo plus large que haute est
+ * agrandie jusqu'à ce que sa hauteur couvre le carré, et déborde donc en
+ * largeur. Une source en 3/2 doit fournir une fois et demie la largeur de
+ * la case ; une source en portrait, juste sa largeur. D'où le facteur
+ * `max(1, r)`, sans lequel le navigateur choisissait une variante d'un
+ * tiers trop petite pour les photos en paysage, et une variante inutilement
+ * lourde pour celles en portrait.
+ */
+function taillesCarre(r: number): string {
+  const k = Math.max(1, r);
+  const px = Math.round(390 * k);
+  const vwMd = Math.round(31 * k);
+  const vwSm = Math.round(47 * k);
+  return `(min-width: 1360px) ${px}px, (min-width: 768px) ${vwMd}vw, ${vwSm}vw`;
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Locale }) {
@@ -45,15 +71,16 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
   const vues = [
     {
       src: "/images/gallery/gallery-01.jpg",
+      rapport: 1200 / 800,
       alt: {
         fr: "Allée de pierre entre les bungalows sur pilotis, au-dessus du lac",
         en: "Stone causeway crossing the lake between the overwater bungalows",
         es: "Pasarela de piedra que cruza el lago entre los bungalós sobre pilotes",
       },
-      vedette: true,
     },
     {
       src: "/images/gallery/gallery-02.jpg",
+      rapport: 1200 / 800,
       alt: {
         fr: "Lit à baldaquin sous moustiquaire, murs ocre et baie ouverte sur le lac",
         en: "Four-poster bed under a mosquito net, ochre walls and a window onto the lake",
@@ -62,6 +89,7 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
     },
     {
       src: "/images/gallery/gallery-09.jpg",
+      rapport: 1200 / 800,
       alt: {
         fr: "Cheminée de pierre du restaurant, bûches dans l'âtre, tables dressées",
         en: "The restaurant's stone fireplace, logs in the hearth, laid tables",
@@ -70,6 +98,7 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
     },
     {
       src: "/images/jardins/bougainvillier-violet-jardin.jpg",
+      rapport: 2000 / 1501,
       alt: {
         fr: "Bractées mauves de bougainvillier éclairées par le soleil dans le jardin",
         en: "Mauve bougainvillea bracts lit by the sun in the garden",
@@ -78,6 +107,7 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
     },
     {
       src: "/images/tea/cueilleuse-the-panier-brume.jpg",
+      rapport: 1334 / 2000,
       alt: {
         fr: "Cueilleuse au panier d'osier dans les théiers, sous la brume du matin",
         en: "A picker with her wicker basket among the tea bushes, in the morning mist",
@@ -86,6 +116,7 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
     },
     {
       src: "/images/village/scene-village-zebus-grand-arbre.jpg",
+      rapport: 1600 / 2000,
       alt: {
         fr: "Enfant menant deux zébus au village, habitants rassemblés sous un grand arbre",
         en: "A child leading two zebus through the village, people gathered under a large tree",
@@ -116,9 +147,7 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
               <Link
                 key={v.src}
                 href={`/${locale}/galerie/`}
-                className={`group relative block overflow-hidden rounded-[3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 ${
-                  v.vedette ? "md:col-span-2 md:row-span-2" : ""
-                }`}
+                className="group relative block overflow-hidden rounded-[3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2"
               >
                 <div className="aspect-square">
                   <Image
@@ -126,7 +155,7 @@ export default function GalleryTeaser({ dict, locale }: { dict: any; locale: Loc
                     alt={alt(v.alt, locale)}
                     fill
                     loading="lazy"
-                    sizes={v.vedette ? "(min-width: 768px) 44vw, 50vw" : "(min-width: 768px) 22vw, 50vw"}
+                    sizes={taillesCarre(v.rapport)}
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                   />
                 </div>

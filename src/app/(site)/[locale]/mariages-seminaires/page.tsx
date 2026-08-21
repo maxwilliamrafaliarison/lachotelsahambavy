@@ -27,12 +27,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       : locale === "en"
         ? "Weddings & Seminars"
         : "Bodas y Seminarios";
+  /* La description était assemblée à partir du sous-titre et de la
+     capacité, ce qui donnait quatre-vingt-dix caractères là où Google en
+     montre cent cinquante. Elle est désormais écrite dans chaque
+     dictionnaire ; l'assemblage reste en secours. */
   const description =
-    locale === "fr"
+    dict.wedding.metaDescription ??
+    (locale === "fr"
       ? `${dict.wedding.subtitle}. ${dict.conference.capacity} en salle de conférence.`
       : locale === "en"
         ? `${dict.wedding.subtitle}. ${dict.conference.capacity} in the conference room.`
-        : `${dict.wedding.subtitle}. ${dict.conference.capacity} en la sala de conferencias.`;
+        : `${dict.wedding.subtitle}. ${dict.conference.capacity} en la sala de conferencias.`);
   return {
     title: title,
     description,
@@ -215,7 +220,7 @@ export default async function MariagesSeminairesPage({
             </div>
           </ScrollReveal>
 
-          {/* Diptyque volontairement petit (sources 713 px / 817 px), cadres fins */}
+          {/* Diptyque volontairement petit (sources 543 px / 817 px), cadres fins */}
           <div className="mt-14 flex flex-col items-center gap-10 sm:flex-row sm:items-start sm:justify-center md:gap-16">
             <ScrollReveal className="w-full max-w-[340px]">
               <figure>

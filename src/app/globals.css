@@ -1270,6 +1270,22 @@ body {
     outline-offset: 2px;
   }
 
+  /* SUR LES TRÈS PETITS ÉCRANS, la gélule Booking débordait de 3 px en
+     espagnol : « Booking.com · 9,0/10 · 34 opiniones » est la plus longue
+     des neuf combinaisons, et 320 px moins les marges de la page ne laisse
+     que 272 px. On rogne les marges intérieures et les intervalles, ce qui
+     rend une vingtaine de pixels.
+
+     ON NE MASQUE PAS le nombre d'avis, qui serait la correction évidente.
+     C'est le chiffre qui donne son poids à la note : « 9,0/10 » seul ne
+     dit pas s'il repose sur trois séjours ou sur trois cents, et la
+     directive Omnibus demande précisément que l'assise d'une note reste
+     visible. Le masquer sur téléphone reviendrait à la retirer là où se
+     fait la majorité des consultations. */
+  @media (max-width: 340px) {
+    .lh-gelule { gap: 6px; padding-inline: 11px; font-size: 12px; }
+  }
+
   /* ---------- ENTRÉE ---------- */
 
   @keyframes lh-plateau-entree {

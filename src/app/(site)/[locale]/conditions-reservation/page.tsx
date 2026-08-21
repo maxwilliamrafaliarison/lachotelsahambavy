@@ -37,7 +37,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   return {
     title: dict.conditions.heroTitle,
-    description: dict.conditions.heroSubtitle,
+    /* Description écrite pour la page de résultats, et non reprise du
+       sous-titre affiché : celui-ci tenait en une demi-ligne là où Google
+       en montre cent cinquante caractères. */
+    description: dict.conditions.metaDescription ?? dict.conditions.heroSubtitle,
     alternates: pageAlternates(locale as Locale, "conditions-reservation"),
     robots: { index: true, follow: true },
   };

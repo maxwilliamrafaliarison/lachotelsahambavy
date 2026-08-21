@@ -38,7 +38,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   return {
     title: dict.contact.heroTitle,
-    description: dict.contact.heroSubtitle ?? dict.meta.description,
+    /* Description écrite pour la page de résultats, et non reprise du
+       sous-titre affiché : celui-ci tenait en une demi-ligne là où Google
+       en montre cent cinquante caractères. */
+    description: dict.contact.metaDescription ?? dict.meta.description,
     alternates: pageAlternates(locale as Locale, "contact"),
   };
 }
@@ -152,7 +155,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               <Suspense
                 fallback={
                   <div className="py-16 text-center text-sm text-muted">
-                    Chargement du formulaire…
+                    {alt({ fr: "Chargement du formulaire…", en: "Loading the form…", es: "Cargando el formulario…" }, loc)}
                   </div>
                 }
               >

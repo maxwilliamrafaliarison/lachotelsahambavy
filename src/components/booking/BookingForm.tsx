@@ -726,7 +726,6 @@ export function BookingForm({ locale, dict }: BookingFormProps) {
       gdpr: false as unknown as true,
       terms: false as unknown as true,
       website: "",
-      hcaptchaToken: "",
     },
   });
 

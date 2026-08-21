@@ -112,7 +112,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   return {
     title: dict.plantation.heroTitle,
-    description: dict.plantation.heroSubtitle,
+    /* Le sous-titre du hero est une ligne d'affichage, pas un extrait de
+       résultat : il tenait en trente caractères là où Google en montre cent
+       cinquante. `metaDescription` est écrite pour la recherche ; le
+       sous-titre reste en secours si la clé manque dans une langue. */
+    description: dict.plantation.metaDescription ?? dict.plantation.heroSubtitle,
     alternates: pageAlternates(locale as Locale, "plantation-de-the"),
   };
 }

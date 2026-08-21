@@ -48,7 +48,7 @@ export async function generateMetadata({
     url: "/images/hero/hotel-vu-du-lac-bungalows-pilotis.jpg",
     width: 2400,
     height: 1350,
-    alt: "Le Lac Hôtel Sahambavy vu du lac, avec ses bungalows sur pilotis",
+    alt: dict.meta.ogImageAlt as string,
   };
 
   return {

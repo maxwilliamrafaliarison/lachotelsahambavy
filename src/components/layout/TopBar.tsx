@@ -141,9 +141,6 @@ export default function TopBar({ locale }: { locale: Locale }) {
   );
 }
 
-/* ── Rating link: star + score /max + brand logo, colorizes on hover ─── */
-
-
 /* ── Inline icons: minimal line-style ───────────────────────── */
 
 function IconPhone() {
@@ -177,11 +174,6 @@ function IconStar({ className }: { className?: string }) {
     </svg>
   );
 }
-
-/* ── Brand logo marks: rendered in brand colors, desaturated by CSS ─── */
-
-
-
 
 function IconFacebook() {
   return (

@@ -88,7 +88,6 @@ const consentStepObject = z.object({
      apprenait ainsi qu'il avait été repéré. La valeur n'est lue que par
      src/app/api/booking/route.ts. */
   website: z.string().optional(), // honeypot
-  hcaptchaToken: z.string().optional(),
 });
 
 // ─── Exports finaux avec refines inlined ──────────────────────────
