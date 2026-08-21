@@ -93,6 +93,19 @@ export const AGGREGATE_RATING = {
   worstRating: 1,
 } as const;
 
+/**
+ * NON APPELÉE, ET IL NE FAUT PAS LA REBRANCHER SANS LIRE CECI.
+ *
+ * Elle a servi jusqu'au 21/08/2026 à déclarer la note agrégée dans le
+ * nœud LodgingBusiness. Elle en a été retirée parce que Google écarte
+ * des résultats enrichis les notes qu'une entreprise publie sur
+ * elle-même : au mieux le bloc est ignoré, au pire il expose à une
+ * action manuelle. La note reste AFFICHÉE (barre du haut, bande des
+ * plateformes), elle n'est simplement plus déclarée aux moteurs.
+ *
+ * Elle est conservée parce qu'elle resterait juste dans un contexte où
+ * la note ne porterait pas sur l'auteur du balisage.
+ */
 export function aggregateRatingSchema(): SchemaType {
   return {
     "@type": "AggregateRating",
@@ -424,6 +437,17 @@ export function faqSchema(items: FaqItem[]): SchemaType {
 // Review (témoignage individuel)
 // =====================================================
 
+/**
+ * NON APPELÉE, ET ELLE NE DOIT PAS L'ÊTRE POUR LES AVIS DU SITE.
+ *
+ * Baliser en Review les témoignages de la page d'accueil reviendrait à
+ * déclarer aux moteurs des avis sur soi-même, ce que Google interdit
+ * explicitement pour l'entreprise qui publie la page. C'est la même
+ * raison qui a fait retirer l'agrégat le 21/08/2026.
+ *
+ * Elle resterait valable pour baliser l'avis d'un TIERS sur autre chose
+ * que l'établissement lui-même. En dehors de ce cas, la laisser dormir.
+ */
 export function reviewSchema(review: ReviewItem): SchemaType {
   return {
     "@type": "Review",
