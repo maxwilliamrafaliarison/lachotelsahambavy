@@ -46,7 +46,10 @@ export const siteConfig = {
     nif: "3000204565",
   },
   ratings: {
-    booking: { score: 9.0, total: 34, label: "Fabuleux" },
+    /* 40 et non 34 : relevé sur la fiche le 21/08/2026, « 9,0 fabuleux
+       sur 40 expériences vécues ». Vingt-cinq portent un texte, quinze
+       sont des notes sans commentaire. */
+    booking: { score: 9.0, total: 40, label: "Fabuleux" },
     // 177 avis relevés sur la fiche Google le 09/08/2026 (157 auparavant).
     google: { score: 4.6, total: 177 },
     /* 4,1 et non 4,5 : la valeur affichée contredisait celle que

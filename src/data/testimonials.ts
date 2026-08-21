@@ -63,6 +63,11 @@ import type { Locale } from "@/lib/utils";
  * Business Profile rend les 177 avis complets à qui s'y authentifie.
  * Tant que ce n'est pas fait, aucun avis Google n'est publié.
  *
+ * QUATORZE AVIS : sept sur Booking, sept sur TripAdvisor. Le second lot
+ * s'est étoffé quand la fiche TripAdvisor a fini par livrer ses cent
+ * quarante-quatre avis, page par page, ce que la première lecture n'avait
+ * pas obtenu.
+ *
  * Textes relevés le 21/08/2026.
  */
 
@@ -90,8 +95,12 @@ export interface Avis {
 }
 
 const BOOKING = "https://www.booking.com/hotel/mg/lac-sahambavy.fr.html#tab-reviews";
-const TRIPADVISOR =
-  "https://www.tripadvisor.fr/Hotel_Review-g298271-d649892-Reviews-Lac_Hotel_Sahambavy-Fianarantsoa_Fianarantsoa_Province.html";
+/* TripAdvisor donne à chaque avis son propre permalien. On le prend
+   plutôt que l'adresse de la fiche : le lecteur qui veut vérifier tombe
+   sur l'avis lui-même, et non sur une liste de deux cent trente où le
+   retrouver relève de la chance. */
+const TA = (id: string) =>
+  `https://www.tripadvisor.fr/ShowUserReviews-g298271-d649892-r${id}-Lac_Hotel_Sahambavy-Fianarantsoa_Fianarantsoa_Province.html`;
 
 export const avisVerifies: Avis[] = [
   /* ─── Booking.com ─────────────────────────────────────────────
@@ -229,7 +238,7 @@ export const avisVerifies: Avis[] = [
       en: "The setting is perfect for recharging. The overwater rooms are nicely decorated and give off an unfailing serenity. The food is excellent and the team really looks after you throughout the stay",
       es: "El entorno es ideal para reponer fuerzas. Las habitaciones sobre pilotes están bien decoradas y transmiten una serenidad sin fisuras. La cocina es excelente y el equipo está realmente pendiente de uno durante toda la estancia",
     },
-    source: TRIPADVISOR,
+    source: TA("1069379531"),
   },
   {
     auteur: "Philippe R",
@@ -244,7 +253,7 @@ export const avisVerifies: Avis[] = [
       en: "The finest hotel we stayed in during our four-week road trip through Madagascar.\nA true haven of peace, with very well equipped and very comfortable overwater bungalows, letting you enjoy the terrace as the sun sets over the lake, all in the middle of a lovely botanical park where every species is labelled.\nThe standard is excellent and the restaurant is faultless, with plates as varied as they are generous.\nA special mention for the attentive staff, extremely kind and highly professional.",
       es: "El hotel más bonito de todos los que tuvimos durante nuestro viaje de cuatro semanas por Madagascar.\nUn verdadero remanso de paz, con bungalós sobre pilotes muy bien equipados y muy cómodos, que permiten disfrutar de la terraza durante las puestas de sol sobre el lago, y todo ello en medio de un bonito parque botánico donde todas las especies están identificadas.\nLa calidad del servicio es excelente y el restaurante es perfecto, con platos tan variados como generosos.\nMención especial para el personal atento, de una gran amabilidad y muy profesional.",
     },
-    source: TRIPADVISOR,
+    source: TA("1032015866"),
   },
   {
     auteur: "muriel e",
@@ -260,7 +269,7 @@ export const avisVerifies: Avis[] = [
       en: "Very beautiful rooms, comfortable beds, excellent food, excellent spiced rum and, above all, staff who look after everything, smiling and full of kindness. Our friends from Fianarantsoa, who came to see us, were also very well received. The setting is exceptional, with a lake you can pedal-boat on and a lovely 8 km walk around it. Finally, I recommend visiting the tea plantation right next door. A real highlight of our stay!",
       es: "Habitaciones muy bonitas, camas cómodas, excelente cocina, ron arreglado excelente y, sobre todo, un personal pendiente de todo, sonriente y muy amable. Nuestros amigos de Fianarantsoa, que vinieron a vernos, también fueron muy bien recibidos. El entorno es excepcional, con un lago en el que se puede navegar en hidropedal y un paseo precioso de 8 km a su alrededor. Por último, aconsejo visitar la plantación de té justo al lado. ¡Un momento fuerte de nuestra estancia!",
     },
-    source: TRIPADVISOR,
+    source: TA("1021688734"),
   },
   {
     auteur: "cems35",
@@ -276,7 +285,54 @@ export const avisVerifies: Avis[] = [
       en: "Superb hotel in an enchanting setting. A very warm welcome. A large, comfortable bungalow with a lake view, pretty decoration and a vast bathroom. A lovely swimming pool. A large wooded park, faultless service.\nVery good restaurant. An excellent memory!",
       es: "Hotel soberbio en un marco encantador. Muy buena acogida. Bungaló grande y cómodo, con vistas al lago, bonita decoración, amplio cuarto de baño. Bonita piscina. Gran parque arbolado, servicio impecable.\nMuy buen restaurante. ¡Un recuerdo excelente!",
     },
-    source: TRIPADVISOR,
+    source: TA("985366315"),
+  },
+  {
+    auteur: "nadjatardif",
+    pays: "Madagascar",
+    plateforme: "tripadvisor",
+    note: 5,
+    bareme: 5,
+    sejour: { fr: "février 2024", en: "February 2024", es: "febrero de 2024" },
+    langueOriginale: "fr",
+    original:
+      "Weekend apaisant à côté de Fianarantsoa. De magnifiques bungalows décorés avec goût. Une vue sur le lac imprenable, des plantes, des plantes et encore des plantes, un vrai plaisir de déambuler dans l'enceinte de l'hôtel.\nDe plus, nous avons pu profiter en famille de la piscine et du pédalo sur le lac !\nL'équipe est à l'écoute et pleine d'attention pour chaque personne, le service est nickel !\nUne parenthèse sereine et de détente assurée. Merci",
+    traduction: {
+      en: "A soothing weekend just outside Fianarantsoa. Magnificent bungalows decorated with taste. An uninterrupted view over the lake, plants, plants and more plants, a real pleasure to wander the grounds.\nWe were also able to enjoy the pool and the pedal boat on the lake as a family!\nThe team listens and is full of attention for every person, the service is spotless!\nA serene, restful parenthesis, guaranteed. Thank you",
+      es: "Un fin de semana apacible junto a Fianarantsoa. Bungalós magníficos decorados con gusto. Una vista al lago inmejorable, plantas, plantas y más plantas, un verdadero placer pasear por el recinto del hotel.\nAdemás, pudimos disfrutar en familia de la piscina y del hidropedal en el lago.\nEl equipo está atento y lleno de detalles con cada persona, ¡el servicio es impecable!\nUn paréntesis sereno y de descanso asegurado. Gracias",
+    },
+    source: TA("939971995"),
+  },
+  {
+    auteur: "pat2",
+    pays: "La Réunion",
+    plateforme: "tripadvisor",
+    note: 5,
+    bareme: 5,
+    sejour: { fr: "janvier 2024", en: "January 2024", es: "enero de 2024" },
+    langueOriginale: "fr",
+    original:
+      "Voici un hôtel lacustre très agréable.\nJolies et spacieuses constructions sur pilotis pour des chambres très confortables.\nAccueil d'une grande gentillesse .\nTres bonne cuisine.\nBon rapport qualite-prix\nUne halte où vous pouvez également découvrir l'unique plantation de thé Malgache.\nJe recommande fortement",
+    traduction: {
+      en: "Here is a very pleasant lakeside hotel.\nPretty, spacious overwater structures making for very comfortable rooms.\nA welcome of great kindness.\nVery good food.\nGood value for money\nA stop where you can also discover the only Malagasy tea plantation.\nI strongly recommend it",
+      es: "He aquí un hotel lacustre muy agradable.\nBonitas y espaciosas construcciones sobre pilotes para habitaciones muy cómodas.\nUna acogida de gran amabilidad.\nMuy buena cocina.\nBuena relación calidad-precio\nUna parada donde también puede descubrir la única plantación de té malgache.\nLo recomiendo encarecidamente",
+    },
+    source: TA("935186469"),
+  },
+  {
+    auteur: "Olivier & Perly",
+    plateforme: "tripadvisor",
+    note: 5,
+    bareme: 5,
+    sejour: { fr: "juillet 2023", en: "July 2023", es: "julio de 2023" },
+    langueOriginale: "fr",
+    original:
+      "Magnifique hôtel, cadre de rêve.\nLe personnel est d'une extrême gentillesse et aux petits soins.\nLes bungalows sont magnifiques (nous avions pris le bungalow nuptial plus un bungalow famille). Décoration idyllique face au lac, le jardin et la partie restauration sont du même niveau.\nLes plats et boissons proposés étaient très bons, dégustés dans un très beau cadre.\nNous recommandons également la visite de la plantation de thé où nous avons été très bien reçu egalement.\nNe tardez pas vous rendre à cette adresse avec un rapport qualité prix irréprochable.",
+    traduction: {
+      en: "Magnificent hotel, a dream setting.\nThe staff are extremely kind and attentive to every detail.\nThe bungalows are magnificent (we took the honeymoon bungalow plus a family bungalow). Idyllic decoration facing the lake, and the garden and the restaurant are of the same standard.\nThe dishes and drinks on offer were very good, enjoyed in a very beautiful setting.\nWe also recommend visiting the tea plantation, where we were very well received too.\nDon't wait to go to this address, with faultless value for money.",
+      es: "Hotel magnífico, un marco de ensueño.\nEl personal es de una amabilidad extrema y está pendiente de todo.\nLos bungalós son magníficos (tomamos el bungaló nupcial más un bungaló familiar). Decoración idílica frente al lago, y el jardín y la parte de restauración están al mismo nivel.\nLos platos y las bebidas eran muy buenos, degustados en un marco precioso.\nRecomendamos también la visita a la plantación de té, donde nos recibieron igual de bien.\nNo tarden en ir a esta dirección, con una relación calidad-precio impecable.",
+    },
+    source: TA("906696275"),
   },
 ];
 

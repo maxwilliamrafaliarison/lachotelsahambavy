@@ -62,9 +62,33 @@ interface ReviewItem {
  * (4,6×177 + 4,1×230 + 4,5×34) / 441 = 4,33. Le compte précédent, 420,
  * datait d'avril et sous-estimait Google de vingt avis.
  */
+/**
+ * Note agrégée des trois plateformes, CALCULÉE et non recopiée.
+ *
+ * Elle était écrite à la main, 4,3 sur 441 avis, à côté des chiffres par
+ * plateforme de siteConfig.ratings. Deux sources pour la même vérité
+ * divergent toujours : le jour où Booking est passé de 34 à 40 avis, le
+ * total ici est resté à 441 et le site a publié un compte faux. La
+ * dériver supprime la question.
+ *
+ * Booking note sur DIX : sa note est ramenée sur cinq avant d'entrer
+ * dans la moyenne, sans quoi un 9,0 pèserait comme un 9 sur 5. La
+ * moyenne est pondérée par le nombre d'avis de chaque plateforme, un
+ * établissement n'ayant pas trois réputations mais une seule, plus ou
+ * moins observée selon l'endroit.
+ */
+const SOURCES = [
+  { note: siteConfig.ratings.booking.score / 2, avis: siteConfig.ratings.booking.total },
+  { note: siteConfig.ratings.google.score, avis: siteConfig.ratings.google.total },
+  { note: siteConfig.ratings.tripadvisor.score, avis: siteConfig.ratings.tripadvisor.total },
+];
+
+const TOTAL_AVIS = SOURCES.reduce((n, s) => n + s.avis, 0);
+
 export const AGGREGATE_RATING = {
-  ratingValue: 4.3,
-  reviewCount: 441,
+  ratingValue:
+    Math.round((SOURCES.reduce((n, s) => n + s.note * s.avis, 0) / TOTAL_AVIS) * 10) / 10,
+  reviewCount: TOTAL_AVIS,
   bestRating: 5,
   worstRating: 1,
 } as const;
