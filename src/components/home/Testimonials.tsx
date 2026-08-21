@@ -101,6 +101,12 @@ type Carte = {
   date: string;
   texte: string;
   traduit: boolean;
+  /* QUI a traduit, et non sur QUELLE plateforme l'avis a été laissé. Les
+     deux ne coïncident pas : l'avis espagnol de Susana est publié sur
+     Google, mais c'est nous qui l'avons traduit, et l'annoncer « traduit
+     par Google » serait faux. Seuls les avis rendus en direct par l'API
+     portent une traduction de Google. */
+  traduitParGoogle?: boolean;
   langueOriginale?: Locale;
   /** Page publique où l'avis se lit. Porté par `cite` sur la citation. */
   source: string;
@@ -120,6 +126,7 @@ function depuisAvis(a: Avis, locale: Locale): Carte {
     date: a.dateAvis[locale],
     texte,
     traduit,
+    traduitParGoogle: false,
     langueOriginale: a.langueOriginale,
     source: a.source,
   };
@@ -138,6 +145,7 @@ function depuisGoogle(a: AvisGoogle, i: number): Carte {
     date: a.dateRelative,
     texte: a.texte,
     traduit: a.traduitParGoogle,
+    traduitParGoogle: a.traduitParGoogle,
     source: a.urlAvis ?? siteConfig.social.google,
     auteurUrl: a.auteurUrl,
     auteurPhoto: a.auteurPhoto,
@@ -264,7 +272,16 @@ export default function Testimonials({
     () =>
       melanger([
         ...avisVerifies.map((a) => depuisAvis(a, locale)),
-        ...avisGoogle.map(depuisGoogle),
+        /* GARDE ANTI-DOUBLON. Le site porte deux chemins possibles pour
+           les avis Google : ceux que la direction a relevés et qui sont
+           stockés, et ceux que l'API Places rendrait en direct si une
+           clé était un jour posée. Les deux ensemble afficheraient les
+           mêmes clients deux fois. Les avis stockés l'emportent, étant
+           traduits à la main et triés ; l'API ne parle que s'ils
+           manquent. */
+        ...(avisVerifies.some((a) => a.plateforme === "google")
+          ? []
+          : avisGoogle.map(depuisGoogle)),
       ]),
     [avisGoogle, locale],
   );
@@ -506,8 +523,9 @@ function avecLiens(phrase: string) {
   const cibles: Record<string, { href: string; libelle: string }> = {
     "{booking}": { href: siteConfig.social.booking, libelle: "Booking.com" },
     "{tripadvisor}": { href: siteConfig.social.tripadvisor, libelle: "Tripadvisor" },
+    "{google}": { href: siteConfig.social.google, libelle: "Google" },
   };
-  return phrase.split(/(\{booking\}|\{tripadvisor\})/).map((bout, i) => {
+  return phrase.split(/(\{booking\}|\{tripadvisor\}|\{google\})/).map((bout, i) => {
     const cible = cibles[bout];
     if (!cible) return <span key={i}>{bout}</span>;
     return (
@@ -644,7 +662,7 @@ function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict
         {carte.traduit && (
           <>
             {" · "}
-            {estGoogle
+            {carte.traduitParGoogle
               ? String(t.traduitParGoogle ?? "Traduit par Google")
               : String(t.traduitDe ?? "Traduit {langue}").replace(
                   "{langue}",

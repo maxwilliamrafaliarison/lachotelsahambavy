@@ -55,17 +55,31 @@ import type { Locale } from "@/lib/utils";
  * tronqués : ils sont simplement absents, et la mention de transparence
  * renvoie aux fiches où ils se lisent tous.
  *
- * GOOGLE MANQUE, et c'est délibéré. Les 177 avis Google n'ont pu être lus
- * que sur Wanderlog, un agrégateur qui les republie : une source de
- * seconde main ne vaut pas vérification. Google Maps rend ses avis en
- * JavaScript derrière un mur de consentement, inaccessible autrement. La
- * voie propre existe : la direction possède la fiche, l'API Google
- * Business Profile rend les 177 avis complets à qui s'y authentifie.
- * Tant que ce n'est pas fait, aucun avis Google n'est publié.
+ * LES AVIS GOOGLE ONT ÉTÉ RELEVÉS PAR LA DIRECTION ELLE-MÊME, le
+ * 21/08/2026, dans le panneau d'avis de sa propre fiche, puis transmis
+ * pour intégration. Ce n'est pas rien : trois autres voies avaient été
+ * fermées avant celle-là.
+ *   - Recopier depuis Wanderlog, un agrégateur qui republie les avis
+ *     Google : source de seconde main, écartée.
+ *   - Lire la fiche Google par un outil : Google sert un contrôle
+ *     anti-robot, qu'on ne franchit pas.
+ *   - L'API Places : elle facture le champ `reviews` au SKU le plus cher
+ *     de sa grille et demande une carte bancaire, ce dont la direction
+ *     n'a pas voulu.
  *
- * QUATORZE AVIS RELEVÉS, SEPT PUBLIÉS. Les sept avis Booking sont en
- * réserve : leurs conditions générales en interdisent la reprise sans
- * accord écrit. Voir CONSENTEMENT_BOOKING plus bas. Le second lot
+ * LES CONDITIONS DE GOOGLE réservent la reprise de leur contenu à une
+ * API officielle ou à une autorisation préalable. Publier ces avis est
+ * donc une décision de la direction, prise en connaissance de cause le
+ * 21/08/2026, et non une inadvertance. Elle porte sur les avis que ses
+ * propres clients ont écrits sur son propre établissement, qu'elle a
+ * lus dans son propre tableau de bord, et qui sont reproduits mot pour
+ * mot. C'est ici que quelqu'un doit venir lire s'il veut rouvrir la
+ * question.
+ *
+ * VINGT-DEUX AVIS RELEVÉS, QUINZE PUBLIÉS : sept Tripadvisor et huit
+ * Google. Les sept avis Booking restent en réserve, leurs conditions
+ * générales en interdisant la reprise sans accord écrit ; voir
+ * CONSENTEMENT_BOOKING plus bas. Le lot Tripadvisor
  * s'est étoffé quand la fiche TripAdvisor a fini par livrer ses cent
  * quarante-quatre avis, page par page, ce que la première lecture n'avait
  * pas obtenu.
@@ -116,6 +130,9 @@ export interface Avis {
 }
 
 const BOOKING = "https://www.booking.com/hotel/mg/lac-sahambavy.fr.html#tab-reviews";
+/* Google ne donne pas de lien par avis hors de son API : le renvoi se
+   fait donc vers le panneau d'avis de la fiche, où ils se lisent tous. */
+const GOOGLE_FICHE = "https://www.google.com/maps?cid=9763325951372533936";
 /* TripAdvisor donne à chaque avis son propre permalien. On le prend
    plutôt que l'adresse de la fiche : le lecteur qui veut vérifier tombe
    sur l'avis lui-même, et non sur une liste de deux cent trente où le
@@ -405,6 +422,142 @@ const tousLesAvis: Avis[] = [
       es: "Hotel magnífico, un marco de ensueño.\nEl personal es de una amabilidad extrema y está pendiente de todo.\nLos bungalós son magníficos (tomamos el bungaló nupcial más un bungaló familiar). Decoración idílica frente al lago, y el jardín y la parte de restauración están al mismo nivel.\nLos platos y las bebidas eran muy buenos, degustados en un marco precioso.\nRecomendamos también la visita a la plantación de té, donde nos recibieron igual de bien.\nNo tarden en ir a esta dirección, con una relación calidad-precio impecable.",
     },
     source: TA("906696275"),
+  },
+  /* ─── Google ──────────────────────────────────────────────────
+     Relevés par la direction elle-même, le 21/08/2026, dans le
+     panneau d'avis de sa propre fiche, puis transmis. Voir la note
+     « LES AVIS GOOGLE » en tête de fichier.
+
+     LES DATES SONT ABSOLUES alors que Google affiche du relatif. Un
+     « il y a un mois » figé dans un fichier devient un mensonge au
+     bout de six mois : chaque date est donc convertie depuis le
+     relevé du 21/08/2026. Le recoupement tient : Miora Ramampiandra
+     titre son avis « 08 Mars » et Google le datait d'« il y a
+     5 mois », ce qui tombe bien sur mars 2026.
+
+     HUIT SUR VINGT : les tronqués par « En savoir plus » sont
+     écartés faute de texte entier, et ceux qui portent une réserve
+     ne sont pas tronqués mais absents, comme pour Tripadvisor. */
+  {
+    auteur: "JM FRACHET",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "juillet 2026", en: "July 2026", es: "julio de 2026" },
+    langueOriginale: "fr",
+    original:
+      "Superbe Lac Hôtel à Sahambavy à seulement 16 kms de Fianrantsoa et 30 minutes de la RN7 : un pause idéale en circuit RN7.\nExcellent accueil. Les chambres sur pilotis sont un délice : vastes avec une literie au top et une déco raffinée...et en bonus un magnifique tableau au coucher du soleil sur l'eau.\nUne expérience inoubliable dans un lieu unique. Allez-y !",
+    traduction: {
+      en: "A superb Lac Hôtel at Sahambavy, only 16 km from Fianarantsoa and 30 minutes from the RN7: the ideal pause on an RN7 tour.\nAn excellent welcome. The overwater rooms are a delight: vast, with top-quality bedding and refined decoration... and as a bonus, a magnificent painting of the sun setting on the water.\nAn unforgettable experience in a unique place. Go!",
+      es: "Un soberbio Lac Hôtel en Sahambavy, a solo 16 km de Fianarantsoa y a 30 minutos de la RN7: la pausa ideal en un circuito por la RN7.\nExcelente acogida. Las habitaciones sobre pilotes son una delicia: amplias, con una cama excelente y una decoración refinada... y de regalo, un magnífico cuadro al atardecer sobre el agua.\nUna experiencia inolvidable en un lugar único. ¡Vayan!",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "ADA 36",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "mars 2026", en: "March 2026", es: "marzo de 2026" },
+    langueOriginale: "fr",
+    original:
+      "Un lieu paradisiaque, un endroit \"bout du monde\" dans un cadre enchanteresque. On est très bien accueilli par Maggie ou Olga et tout le personnel est d'une gentillesse extrême. Délicieuse cuisine préparée avec les légumes du jardin, balades à pied autour du lac ou dans les plantations de thé, pédalos, piscine ou repos, c'est l'endroit idéal pour se ressourcer. Je vis dans la région et c'est mon hôtel préféré ! Merci à toute l'équipe du Lac Hôtel !",
+    traduction: {
+      en: "A paradise, an \"end of the world\" place in an enchanting setting. Maggie or Olga give you a warm welcome and all the staff are extremely kind. Delicious cooking made with vegetables from the garden, walks around the lake or through the tea plantations, pedal boats, the pool or simply rest: it is the ideal place to recharge. I live in the region and it is my favourite hotel! Thank you to the whole Lac Hôtel team!",
+      es: "Un lugar paradisíaco, un rincón «del fin del mundo» en un marco encantador. Maggie u Olga le reciben de maravilla y todo el personal es de una amabilidad extrema. Cocina deliciosa preparada con las verduras del huerto, paseos a pie alrededor del lago o por las plantaciones de té, hidropedales, piscina o descanso: es el lugar ideal para reponer fuerzas. Vivo en la región y es mi hotel preferido. ¡Gracias a todo el equipo del Lac Hôtel!",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Cathy Veyrier",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "mai 2026", en: "May 2026", es: "mayo de 2026" },
+    langueOriginale: "fr",
+    original:
+      "Ce n'est pas vraiment partageable ! Chaque expérience est unique : d'abord l'accueil est très personnalisé sans être lourd , la carte est un véritable pousse au crime … mention spéciale au canard sous toutes ses formes , le canard confit au gingembre en particulier . Et puis ensuite les lieux se prêtent aussi bien à la ballade bucolique aux alentours , qu'à la contemplation et aux soins également avec une merveilleuse masseuse . Bref le Lac Hotel il faut y aller quelque soient vos désidératas l'expérience sera la vôtre !",
+    traduction: {
+      en: "It is not really shareable! Every experience is unique: first the welcome, very personal without being heavy, then the menu, a real temptation... a special mention for the duck in all its forms, the ginger duck confit in particular. And the place lends itself just as well to a bucolic walk in the surroundings as to contemplation, and to treatments too, with a wonderful masseuse. In short, the Lac Hotel: you must go, whatever your wishes, the experience will be your own!",
+      es: "¡No es algo que se pueda compartir de verdad! Cada experiencia es única: primero la acogida, muy personalizada sin resultar pesada, luego la carta, una auténtica tentación... mención especial para el pato en todas sus formas, el confit de pato al jengibre en particular. Y además el lugar se presta tanto al paseo bucólico por los alrededores como a la contemplación, y también a los cuidados, con una masajista maravillosa. En resumen, el Lac Hotel: hay que ir, sean cuales sean sus deseos, la experiencia será la suya.",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Valérie Hanchar",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "mars 2026", en: "March 2026", es: "marzo de 2026" },
+    langueOriginale: "fr",
+    original:
+      "Un paradis pas loin de Fianarantsoa! Les chambres sont vastes et confortables, le personnel très accueillant, le jardin est un enchantement de fleurs et plantes ( les botanistes en herbe vont épuiser leur appareil photo !) , les plantations de thé aux alentours sont l'occasion de marches paisibles, la piscine permet de se rafraîchir agréablement dans un cadre apaisant, et puis l'on mange délicieusement ( je vous conseille les plats à base de canard: une tuerie! Mais aussi les glaces!)… bref, ce lieu paradisiaque mérite le détour ! Je recommande vivement",
+    traduction: {
+      en: "A paradise not far from Fianarantsoa! The rooms are vast and comfortable, the staff very welcoming, the garden is an enchantment of flowers and plants (budding botanists will wear out their cameras!), the tea plantations nearby make for peaceful walks, the pool lets you cool off pleasantly in a soothing setting, and then you eat deliciously (I recommend the duck dishes: a killer! And the ice creams too!)... in short, this heavenly place is worth the detour! I warmly recommend it",
+      es: "¡Un paraíso no lejos de Fianarantsoa! Las habitaciones son amplias y cómodas, el personal muy acogedor, el jardín es un encanto de flores y plantas (¡los botánicos en ciernes agotarán su cámara!), las plantaciones de té de los alrededores invitan a paseos apacibles, la piscina permite refrescarse agradablemente en un entorno sereno, y además se come de maravilla (les aconsejo los platos de pato: ¡una locura! ¡Y también los helados!)... en resumen, ¡este lugar paradisíaco merece el desvío! Lo recomiendo vivamente",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Miora Ramampiandra",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "mars 2026", en: "March 2026", es: "marzo de 2026" },
+    langueOriginale: "fr",
+    original:
+      "On s'est régalé… Tout est très bon!\nAutant la nourriture, les jus, les vins, la sangria, et beaucoup d'autres.\nAucun endroit égal à Fianarantsoa.\nEndroit fabuleux, très bien entretenu. Grand luxe, tout le confort, magnifique déco, chambre très spacieuse, grande douche bien chaude.\nRien à redire… Cela en vaut vraiment la peine!",
+    traduction: {
+      en: "We had a feast... Everything is very good!\nThe food, the juices, the wines, the sangria, and much more.\nNowhere in Fianarantsoa comes close.\nA fabulous place, very well kept. Great luxury, every comfort, magnificent decoration, a very spacious room, a big hot shower.\nNothing to fault... It really is worth it!",
+      es: "Nos dimos un festín... ¡Todo está muy bueno!\nTanto la comida como los zumos, los vinos, la sangría y mucho más.\nNingún sitio se le iguala en Fianarantsoa.\nLugar fabuloso, muy bien cuidado. Gran lujo, todas las comodidades, decoración magnífica, habitación muy espaciosa, ducha grande y bien caliente.\nNada que objetar... ¡Vale realmente la pena!",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Florian Mugnier",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "juin 2026", en: "June 2026", es: "junio de 2026" },
+    langueOriginale: "fr",
+    original:
+      "Magnifique séjour passé au lac hôtel dans un décor délicieusement surrané. Les chambres dans les chalets sur pilotis sont splendides, tout comme le jardin. La cuisine est bonne et l'accueil chaleureux. Une parenthèse reposante et dépaysante à 1h de Fianarantsoa, et une très bonne étape accessible depuis la RN7.",
+    traduction: {
+      en: "A magnificent stay at the lac hôtel, in a deliciously old-fashioned setting. The rooms in the overwater chalets are splendid, as is the garden. The food is good and the welcome warm. A restful change of scene an hour from Fianarantsoa, and a very good stop reachable from the RN7.",
+      es: "Magnífica estancia en el lac hôtel, en un decorado deliciosamente añejo. Las habitaciones de los chalés sobre pilotes son espléndidas, igual que el jardín. La cocina es buena y la acogida cálida. Un paréntesis reposado y exótico a una hora de Fianarantsoa, y una muy buena etapa accesible desde la RN7.",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Ahidoba de Franchi",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "août 2025", en: "August 2025", es: "agosto de 2025" },
+    langueOriginale: "fr",
+    original:
+      "Le personnel de cet hôtel est particulièrement sympathique, très accueillant, très souriant, et efficace!\nLes repas sont délicieux et très généreux. En juillet il fait froid, le feu de cheminée nous a réchauffés! Les chambres sont sur pilotis face au lac, vraiment photogénique!!\nMerci à toute l'équipe!",
+    traduction: {
+      en: "The staff at this hotel are particularly friendly, very welcoming, full of smiles, and efficient!\nThe meals are delicious and very generous. In July it is cold, and the fire in the hearth warmed us up! The rooms are on stilts facing the lake, truly photogenic!!\nThank you to the whole team!",
+      es: "¡El personal de este hotel es especialmente simpático, muy acogedor, muy sonriente y eficaz!\nLas comidas son deliciosas y muy generosas. En julio hace frío, ¡y el fuego de la chimenea nos calentó! Las habitaciones están sobre pilotes frente al lago, ¡realmente fotogénicas!\n¡Gracias a todo el equipo!",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Susana Terán Martínez",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "juillet 2026", en: "July 2026", es: "julio de 2026" },
+    /* Écrit en espagnol : c'est le seul avis du site dont l'original
+       n'est ni français ni anglais, et il sert la version espagnole. */
+    langueOriginale: "es",
+    original: "Me encanta la dueña, muy amable y simpática, y los empleados! Buenísima comida!!!!",
+    traduction: {
+      fr: "J'adore la propriétaire, très aimable et sympathique, et les employés aussi ! Une nourriture excellente !",
+      en: "I love the owner, so kind and friendly, and the staff too! Wonderful food!",
+    },
+    source: GOOGLE_FICHE,
   },
 ];
 

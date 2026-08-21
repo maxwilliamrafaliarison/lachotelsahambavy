@@ -305,7 +305,7 @@
   "testimonials": {
     "label": "Testimonios",
     "title": "Vivieron la experiencia",
-    "transparence": "Reseñas copiadas palabra por palabra de {tripadvisor}, que verifica a sus autores. Las reseñas de Google las muestra Google en directo, eligiendo cinco de las más relevantes. No publicamos ninguna de nuestra pluma ni retocamos el texto. Las que contienen alguna reserva no se reproducen aquí: pueden leerse, junto con todas las demás, en las fichas del hotel.",
+    "transparence": "Reseñas copiadas palabra por palabra de {tripadvisor} y {google}, sin retoques, faltas incluidas. No publicamos ninguna de nuestra pluma. Las que contienen alguna reserva no se reproducen aquí: pueden leerse, junto con todas las demás, en las fichas del hotel.",
     "traduitDe": "Traducido {langue}",
     "noteSur": "{note} sobre {bareme}",
     "origineAvis": {

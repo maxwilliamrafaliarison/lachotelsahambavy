@@ -50,8 +50,9 @@ export const siteConfig = {
        sur 40 expériences vécues ». Vingt-cinq portent un texte, quinze
        sont des notes sans commentaire. */
     booking: { score: 9.0, total: 40, label: "Fabuleux" },
-    // 177 avis relevés sur la fiche Google le 09/08/2026 (157 auparavant).
-    google: { score: 4.6, total: 177 },
+    /* 178 le 21/08/2026, relevé sur le panneau d'avis de la fiche
+       (177 le 09/08, 157 auparavant). */
+    google: { score: 4.6, total: 178 },
     /* 4,1 et non 4,5 : la valeur affichée contredisait celle que
        src/lib/schema-org.ts documente depuis avril, et celle que Google
        relaie sur la fiche de l'hôtel (« Tripadvisor 4,1/5 · 230 avis »),
