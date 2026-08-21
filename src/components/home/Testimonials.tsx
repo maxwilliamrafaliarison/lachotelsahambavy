@@ -439,7 +439,11 @@ export default function Testimonials({
           <button
             type="button"
             onClick={basculerSuspension}
-            aria-pressed={suspendu}
+            /* PAS D'aria-pressed. Le nom accessible bascule déjà entre
+               « suspendre » et « reprendre » : ajouter l'état une seconde
+               fois faisait annoncer « Reprendre le défilement, activé »,
+               qui se contredit. Pour une commande de lecture, le libellé
+               qui change est la convention la plus claire. */
             className="lh-ruban__pause"
           >
             <span className="sr-only">
@@ -484,20 +488,30 @@ export default function Testimonials({
             <ul
               key={exemplaire}
               className="lh-ruban__lot"
-              /* ARIA-HIDDEN NE SUFFIT PAS, et c'est le piège. Il retire
-                 le doublon des lecteurs d'écran, mais laisse ses neuf
-                 liens dans l'ordre de tabulation : au clavier, on
-                 traversait neuf « Voir sur Google Maps » invisibles pour
-                 la synthèse vocale et pointant sur des avis déjà lus.
-                 `inert` retire l'un ET l'autre. Les deux attributs sont
-                 nécessaires : inert n'implique pas aria-hidden dans tous
-                 les moteurs. */
+              /* NI INERTE, NI FOCALISABLE : le juste milieu, et il a
+                 fallu deux essais pour le trouver.
+
+                 `aria-hidden` seul laissait les liens du doublon dans
+                 l'ordre de tabulation : au clavier on traversait neuf
+                 liens muets pour la synthèse vocale, pointant sur des
+                 avis déjà lus.
+
+                 `inert` corrigeait cela mais en cassait plus qu'il n'en
+                 réparait : la piste fait deux exemplaires côte à côte et
+                 la fenêtre visible en montre 1 280 px, si bien qu'aux
+                 abords du repli une partie des cartes VISIBLES vient du
+                 doublon. Inertes, leurs liens ne répondaient plus : le
+                 visiteur voyait un lien et cliquait dans le vide.
+
+                 La solution tient en un attribut sur les liens
+                 eux-mêmes, plus bas : tabIndex -1. Le doublon reste
+                 cliquable à la souris, sort de l'ordre de tabulation, et
+                 aria-hidden le tient hors des lecteurs d'écran. */
               aria-hidden={exemplaire === 1 ? "true" : undefined}
-              inert={exemplaire === 1}
             >
               {cartes.map((c) => (
                 <li key={`${exemplaire}-${c.cle}`}>
-                  <CarteAvis carte={c} locale={locale} dict={dict} />
+                  <CarteAvis carte={c} locale={locale} dict={dict} doublon={exemplaire === 1} />
                 </li>
               ))}
             </ul>
@@ -622,7 +636,18 @@ const LANGUES: Record<Locale, Record<Locale, string>> = {
 };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict: any }) {
+function CarteAvis({
+  carte,
+  locale,
+  dict,
+  doublon = false,
+}: {
+  carte: Carte;
+  locale: Locale;
+  dict: any;
+  /** Second exemplaire de la piste : cliquable, mais hors tabulation. */
+  doublon?: boolean;
+}) {
   const t = dict.testimonials;
   const nom = MARQUES[carte.plateforme];
   const drapeau = carte.pays ? DRAPEAUX[carte.pays] : undefined;
@@ -759,6 +784,7 @@ function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict
               target="_blank"
               rel="noopener noreferrer nofollow"
               className="lh-avis__lien"
+              tabIndex={doublon ? -1 : undefined}
             >
               {String(t.lireLAvis ?? "Lire l'avis")}
             </a>

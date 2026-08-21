@@ -1363,6 +1363,16 @@ body {
     outline-offset: 2px;
   }
 
+  /* SUR ÉCRAN TACTILE, ELLE EST VISIBLE D'EMBLÉE. Un doigt ne survole
+     pas : la révélation au survol ne lui offrait aucun chemin, et la
+     commande restait invisible pour toujours. Or c'est justement là que
+     WCAG 2.2.2 mord le plus, le tactile n'ayant ni survol ni focus
+     spontané. `pointer: coarse` vise les écrans tactiles sans toucher
+     aux ordinateurs. */
+  @media (pointer: coarse) {
+    .lh-ruban__pause { opacity: 1; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .lh-ruban__pause { opacity: 1; transition: none; }
   }

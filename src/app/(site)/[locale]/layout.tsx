@@ -89,6 +89,36 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * AUCUNE LANGUE HORS DE CELLES-CI, et Next refuse tout seul.
+ *
+ * `dynamicParams = false` fait rendre un 404 à tout paramètre que
+ * `generateStaticParams` n'a pas produit, SANS RENDRE LA PAGE. C'est ce
+ * qui manquait, et cela répare trois pannes d'un coup, constatées le
+ * 21/08/2026 :
+ *
+ *   - /de/hebergements/ et /de/restaurant/ rendaient un 500. La page
+ *     s'exécutait avec une locale « de », et un `Record<Locale, string>`
+ *     interrogé avec cette clé rendait `undefined`, sur lequel un
+ *     `.split()` plantait. Le layout appelait pourtant `notFound()`,
+ *     mais trop tard : dans l'App Router, la page se rend en parallèle
+ *     du layout, pas après lui.
+ *
+ *   - /tarifs/ servait 138 ko pour une page vide. Le corps HTML ne
+ *     contenait rien, tout le contenu étant dans la charge RSC : un
+ *     visiteur sans JavaScript, et un robot, voyaient une page blanche.
+ *     Contre 12,8 ko et un rendu complet pour /fr/pas-ici/.
+ *
+ *   - chaque URL inconnue à un segment faisait écrire un demi-méga-octet
+ *     de cache ISR sur le disque du serveur. Vingt requêtes suffisaient
+ *     à s'en rendre compte : c'était un moyen de remplir un disque avec
+ *     des adresses inventées.
+ *
+ * Le repli sur le français dans getDictionary reste utile pour les
+ * quelques instants où une locale douteuse traverse encore le rendu.
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
