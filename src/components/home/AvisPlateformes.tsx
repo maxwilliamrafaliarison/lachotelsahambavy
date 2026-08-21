@@ -54,6 +54,30 @@ import type { Locale } from "@/lib/utils";
  *    n'accepte un avis que d'un client identifié, via le lien qu'elle lui
  *    envoie après le séjour. Le lien mène donc à la fiche de l'hôtel.
  *
+ * LE LOGO BOOKING RESTE, sur arbitrage de la direction (21/08/2026), et
+ * il ne faut pas le retirer au nom de la prudence.
+ *
+ * Le contrat qui lie l'hôtel est la version MALGACHE des conditions
+ * générales (v2601_nE_i, servie pour cc1=mg), et elle diffère de la
+ * version française : son article 4.3.3 interdit d'employer « la
+ * marque/le logo Booking.com [...] à des fins de comparaison de prix ou à
+ * TOUTE AUTRE FIN [...] sans accord écrit préalable », mais la même
+ * clause se termine par une permission, « l'établissement peut enchérir
+ * sur la marque Booking.com ou l'employer pour son propre marketing ».
+ * Le site de l'hôtel est son propre marketing.
+ *
+ * La tension porte sur un mot : l'interdiction dit « marque/logo », la
+ * permission dit « marque ». Le nom est donc couvert sans discussion, le
+ * pictogramme est discutable. La direction a tranché pour le garder, un
+ * lien vers la fiche apportant des réservations à Booking. Le jour où
+ * quelqu'un voudra revenir là-dessus, c'est cette clause qu'il faut
+ * relire, et non celle de la version française, qui ne s'applique pas
+ * ici.
+ *
+ * À NE PAS CONFONDRE avec les avis eux-mêmes : leur reprise est, elle,
+ * interdite sans accord écrit, et les sept avis Booking sont en réserve
+ * pour cette raison (voir CONSENTEMENT_BOOKING dans testimonials.ts).
+ *
  * Server Component : trois liens, aucune interactivité.
  */
 

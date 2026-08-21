@@ -146,10 +146,24 @@ const TA = (id: string) =>
  * respectent désormais. On ne peut pas traiter les deux plateformes de la
  * même façon simplement parce qu'elles se ressemblent à l'écran.
  *
- * CE QUE BOOKING AUTORISE TOUT DE MÊME (clause 4.3.4) : employer son nom
- * « pour informer les clients potentiels que l'établissement est
- * disponible sur la plateforme », et à des fins de comparaison. La gélule
- * « Donner mon avis » et le lien vers la fiche restent donc légitimes.
+ * ATTENTION À LA VERSION DU CONTRAT. Celle qui lie l'hôtel est la
+ * version MALGACHE (v2601_nE_i, servie pour cc1=mg), et non la française.
+ * La française comporte un article 4.3.4 autorisant expressément à
+ * employer le nom « pour informer les clients potentiels que
+ * l'établissement est disponible sur la plateforme » : CET ARTICLE
+ * N'EXISTE PAS dans la version malgache, qui s'arrête à 4.3.3. Ne pas
+ * s'appuyer dessus. Ce que la version malgache autorise, à la fin de son
+ * 4.3.3, c'est d'« employer la marque Booking.com pour son propre
+ * marketing » : c'est là-dessus que reposent la gélule et le lien vers la
+ * fiche.
+ *
+ * BOOKING ACCORDE DÉJÀ CE DROIT, mais pas ici. Une page de leur espace
+ * partenaires, « Guest reviews: use and legal terms for EEA partners »,
+ * autorise les partenaires établis dans l'Espace économique européen à
+ * employer les avis, y compris à des fins promotionnelles, sous des
+ * conditions précises. Madagascar n'en fait pas partie. C'est l'argument
+ * à faire valoir en demandant l'accord écrit : le cadre existe, il suffit
+ * de l'étendre.
  *
  * LES SEPT AVIS BOOKING NE SONT PAS SUPPRIMÉS, ils sont mis en réserve.
  * Le relevé et les traductions représentent un travail réel, et la clause
