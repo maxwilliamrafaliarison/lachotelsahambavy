@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { avisVerifies, texteAffiche, type Avis, type Plateforme } from "@/data/testimonials";
+import type { AvisGoogle } from "@/lib/avis-google";
 import { siteConfig } from "@/data/site";
 import LogoPlateforme from "@/components/ui/LogoPlateforme";
 import type { Locale } from "@/lib/utils";
@@ -75,23 +76,94 @@ const MARQUES: Record<Plateforme, string> = {
    Les files sont construites depuis `avisVerifies` et non écrites à la
    main : le jour où des avis Google seront lus à leur source, ils
    entreront dans la rotation sans une ligne à changer ici. */
-function melanger(): Avis[] {
-  const files = new Map<Plateforme, Avis[]>();
-  for (const a of avisVerifies) {
-    const f = files.get(a.plateforme);
-    if (f) f.push(a);
-    else files.set(a.plateforme, [a]);
+/**
+ * Ce qu'une carte affiche, quelle que soit sa provenance.
+ *
+ * DEUX SOURCES QUI NE SE MÉLANGENT PAS EN AMONT. Les avis Tripadvisor
+ * sont relevés, traduits et stockés dans testimonials.ts ; les avis
+ * Google sont récupérés en direct et ne doivent JAMAIS être stockés,
+ * leur politique interdisant de conserver le contenu de l'API. Les deux
+ * modèles restent donc séparés jusqu'ici, et ne se rejoignent que le
+ * temps du rendu, dans cette forme commune.
+ *
+ * Les trois derniers champs n'existent que pour Google, dont les règles
+ * d'affichage imposent de créditer l'auteur avec son profil et son
+ * avatar quand la place le permet, et de donner accès à l'avis sur
+ * Google Maps.
+ */
+type Carte = {
+  cle: string;
+  plateforme: Plateforme;
+  auteur: string;
+  pays?: string;
+  note: number;
+  bareme: 5 | 10;
+  date: string;
+  texte: string;
+  traduit: boolean;
+  langueOriginale?: Locale;
+  /** Page publique où l'avis se lit. Porté par `cite` sur la citation. */
+  source: string;
+  auteurUrl?: string;
+  auteurPhoto?: string;
+};
+
+function depuisAvis(a: Avis, locale: Locale): Carte {
+  const { texte, traduit } = texteAffiche(a, locale);
+  return {
+    cle: `${a.plateforme}-${a.auteur}`,
+    plateforme: a.plateforme,
+    auteur: a.auteur,
+    pays: a.pays,
+    note: a.note,
+    bareme: a.bareme,
+    date: a.dateAvis[locale],
+    texte,
+    traduit,
+    langueOriginale: a.langueOriginale,
+    source: a.source,
+  };
+}
+
+function depuisGoogle(a: AvisGoogle, i: number): Carte {
+  return {
+    cle: `google-${i}-${a.auteur}`,
+    plateforme: "google",
+    auteur: a.auteur,
+    note: a.note,
+    bareme: 5,
+    /* Google donne « il y a un mois », déjà dans la langue demandée. On
+       ne le recalcule pas en date absolue : la sienne est celle que le
+       lecteur retrouvera sur la fiche. */
+    date: a.dateRelative,
+    texte: a.texte,
+    traduit: a.traduitParGoogle,
+    source: a.urlAvis ?? siteConfig.social.google,
+    auteurUrl: a.auteurUrl,
+    auteurPhoto: a.auteurPhoto,
+  };
+}
+
+/* Une plateforme à tour de rôle, pour que le ruban alterne les origines
+   au lieu de servir sept Tripadvisor puis cinq Google. L'ordre est
+   CALCULÉ, jamais tiré au sort : serveur et client doivent produire le
+   même, sous peine de casser l'hydratation. */
+function melanger(cartes: Carte[]): Carte[] {
+  const files = new Map<Plateforme, Carte[]>();
+  for (const c of cartes) {
+    const f = files.get(c.plateforme);
+    if (f) f.push(c);
+    else files.set(c.plateforme, [c]);
   }
   const listes = [...files.values()];
+  if (!listes.length) return [];
   const max = Math.max(...listes.map((l) => l.length));
-  const sortie: Avis[] = [];
+  const sortie: Carte[] = [];
   for (let i = 0; i < max; i++) {
     for (const liste of listes) if (liste[i]) sortie.push(liste[i]);
   }
   return sortie;
 }
-
-const CARTES = melanger();
 
 /** Vitesse du défilement, en pixels par seconde. Assez lent pour lire. */
 const VITESSE = 42;
@@ -171,8 +243,31 @@ const PAYS: Record<string, Record<Locale, string>> = {
 };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export default function Testimonials({ dict, locale }: { dict: any; locale: Locale }) {
+export default function Testimonials({
+  dict,
+  locale,
+  avisGoogle = [],
+}: {
+  dict: any;
+  locale: Locale;
+  /* Récupérés par la page, qui est un composant serveur : cette piste-ci
+     est cliente, elle ne peut pas appeler l'API elle-même. Vide par
+     défaut, et le ruban se contente alors de Tripadvisor. */
+  avisGoogle?: AvisGoogle[];
+}) {
   const t = dict.testimonials;
+
+  /* Construit une fois par rendu, et mémorisé : le mélange est
+     déterministe, mais le recalculer à chaque image de la boucle
+     d'animation serait du gaspillage. */
+  const cartes = useMemo(
+    () =>
+      melanger([
+        ...avisVerifies.map((a) => depuisAvis(a, locale)),
+        ...avisGoogle.map(depuisGoogle),
+      ]),
+    [avisGoogle, locale],
+  );
   const pisteRef = useRef<HTMLDivElement>(null);
   /* Instant avant lequel on ne pousse pas la piste. Un ref et non un
      état : il change à chaque mouvement de souris, et un rendu par
@@ -319,9 +414,9 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
               className="lh-ruban__lot"
               aria-hidden={exemplaire === 1 ? "true" : undefined}
             >
-              {CARTES.map((c) => (
-                <li key={`${exemplaire}-${c.plateforme}-${c.auteur}`}>
-                  <CarteAvis avis={c} locale={locale} dict={dict} />
+              {cartes.map((c) => (
+                <li key={`${exemplaire}-${c.cle}`}>
+                  <CarteAvis carte={c} locale={locale} dict={dict} />
                 </li>
               ))}
             </ul>
@@ -445,32 +540,28 @@ const LANGUES: Record<Locale, Record<Locale, string>> = {
 };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: any }) {
+function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict: any }) {
   const t = dict.testimonials;
-  const nom = MARQUES[avis.plateforme];
-  const drapeau = avis.pays ? DRAPEAUX[avis.pays] : undefined;
-  const pays = avis.pays ? (PAYS[avis.pays]?.[locale] ?? avis.pays) : null;
-  const { texte, traduit } = texteAffiche(avis, locale);
+  const nom = MARQUES[carte.plateforme];
+  const drapeau = carte.pays ? DRAPEAUX[carte.pays] : undefined;
+  const pays = carte.pays ? (PAYS[carte.pays]?.[locale] ?? carte.pays) : null;
 
   const chiffres = new Intl.NumberFormat(
     locale === "en" ? "en-GB" : locale === "es" ? "es-ES" : "fr-FR",
   );
   const noteLue = String(t.noteSur ?? "{note} sur {bareme}")
-    .replace("{note}", chiffres.format(avis.note))
-    .replace("{bareme}", String(avis.bareme));
+    .replace("{note}", chiffres.format(carte.note))
+    .replace("{bareme}", String(carte.bareme));
 
-  /* Guillemets DE LA LANGUE DU LECTEUR, et non de celle du client :
-     Tripadvisor exige que la citation soit entre guillemets, la
-     typographie française veut des chevrons avec espaces insécables, et
-     l'anglais comme l'espagnol des guillemets anglais. Ils sont posés en
-     texte plutôt qu'en `::before` CSS, pour qu'un copier-coller de la
-     citation les emporte avec elle. */
+  /* Guillemets DE LA LANGUE DU LECTEUR : Tripadvisor exige que la
+     citation soit entre guillemets, la typographie française veut des
+     chevrons avec espaces insécables, l'anglais et l'espagnol des
+     guillemets anglais. Posés en texte plutôt qu'en `::before` CSS, pour
+     qu'un copier-coller de la citation les emporte avec elle. */
   const [ouvre, ferme] = locale === "fr" ? ["«\u202F", "\u202F»"] : ["\u201C", "\u201D"];
 
-  /* « Avis de voyageur Tripadvisor, juillet 2026 ». Une seule ligne pour
-     deux obligations : dire que la citation vient d'un voyageur de la
-     plateforme, et donner la date de l'avis. */
-  const origine = String(t.origineAvis?.[avis.plateforme] ?? nom);
+  const origine = String(t.origineAvis?.[carte.plateforme] ?? nom);
+  const estGoogle = carte.plateforme === "google";
 
   return (
     <article className="lh-avis">
@@ -480,15 +571,15 @@ function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: a
             hauteur, et celui qui donne au logotype Booking les 120 px de
             large qu'il exige de son côté. Le nom n'est plus écrit à
             côté : le logotype le contient déjà. */}
-        <LogoPlateforme plateforme={avis.plateforme} hauteur={20} />
-        {avis.plateforme === "tripadvisor" ? (
+        <LogoPlateforme plateforme={carte.plateforme} hauteur={20} />
+        {carte.plateforme === "tripadvisor" ? (
           <span className="lh-avis__note">
-            <BullesTripadvisor note={avis.note} etiquette={noteLue} />
+            <BullesTripadvisor note={carte.note} etiquette={noteLue} />
           </span>
         ) : (
           <span className="lh-avis__note">
             <span aria-hidden="true">
-              {chiffres.format(avis.note)}/{avis.bareme}
+              {chiffres.format(carte.note)}/{carte.bareme}
             </span>
             <span className="sr-only">{noteLue}</span>
           </span>
@@ -498,14 +589,42 @@ function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: a
       {/* `cite` porte la page où l'avis se lit : la référence suit la
           citation dans le document lui-même, et pas seulement dans le
           commentaire du fichier de données. */}
-      <blockquote className="lh-avis__texte" cite={avis.source}>
+      <blockquote className="lh-avis__texte" cite={carte.source}>
         {ouvre}
-        {texte}
+        {carte.texte}
         {ferme}
       </blockquote>
 
       <footer className="lh-avis__pied">
-        <span className="lh-avis__nom">{avis.auteur}</span>
+        {/* L'AVATAR ET LE LIEN DE PROFIL sont des obligations Google, qui
+            demande de créditer l'auteur « avec toutes les ressources
+            disponibles (avatar, nom et lien de profil) quand la place le
+            permet ». Ils n'apparaissent donc que pour Google, les autres
+            plateformes n'exposant ni l'un ni l'autre. */}
+        {carte.auteurPhoto && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={carte.auteurPhoto}
+            alt=""
+            width={20}
+            height={20}
+            loading="lazy"
+            decoding="async"
+            className="lh-avis__avatar"
+          />
+        )}
+        {carte.auteurUrl ? (
+          <a
+            href={carte.auteurUrl}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="lh-avis__nom lh-avis__nom--lien"
+          >
+            {carte.auteur}
+          </a>
+        ) : (
+          <span className="lh-avis__nom">{carte.auteur}</span>
+        )}
         {pays && (
           <span className="lh-avis__lieu">
             {drapeau && <span aria-hidden="true">{drapeau} </span>}
@@ -514,19 +633,39 @@ function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: a
         )}
       </footer>
 
-      {/* Origine, date, et le cas échéant la traduction. Trois mentions
-          d'une même nature, réunies sur la ligne la plus discrète de la
-          carte plutôt qu'éparpillées : elles disent au lecteur d'où vient
-          ce qu'il lit, quand ça a été écrit, et dans quelle langue. */}
+      {/* Origine, date, traduction, et pour Google le lien vers l'avis
+          lui-même. Quatre mentions d'une même nature, réunies sur la
+          ligne la plus discrète de la carte : elles disent d'où vient ce
+          qu'on lit, quand ça a été écrit, dans quelle langue, et où le
+          vérifier. */}
       <p className="lh-avis__mentions">
-        {origine}, {avis.dateAvis[locale]}
-        {traduit && (
+        {origine}
+        {carte.date && `, ${carte.date}`}
+        {carte.traduit && (
           <>
             {" · "}
-            {String(t.traduitDe ?? "Traduit {langue}").replace(
-              "{langue}",
-              LANGUES[avis.langueOriginale][locale],
-            )}
+            {estGoogle
+              ? String(t.traduitParGoogle ?? "Traduit par Google")
+              : String(t.traduitDe ?? "Traduit {langue}").replace(
+                  "{langue}",
+                  LANGUES[carte.langueOriginale ?? "fr"][locale],
+                )}
+          </>
+        )}
+        {/* Google impose que le lecteur puisse toujours atteindre l'avis
+            sur Maps par le lien qu'il fournit. `cite` ne suffit pas :
+            aucun navigateur n'en fait un lien cliquable. */}
+        {estGoogle && carte.source && (
+          <>
+            {" · "}
+            <a
+              href={carte.source}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="lh-avis__lien"
+            >
+              {String(t.voirSurGoogle ?? "Voir sur Google Maps")}
+            </a>
           </>
         )}
       </p>

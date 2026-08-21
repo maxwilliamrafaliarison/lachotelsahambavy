@@ -14,6 +14,7 @@ import BookingBar from "@/components/home/BookingBar";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { videoObjectSchema } from "@/lib/schema-org";
 import { pageAlternates } from "@/lib/seo/alternates";
+import { recupererAvisGoogle } from "@/lib/avis-google";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -38,6 +39,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
 
+  /* Les avis Google se récupèrent ICI, dans le composant serveur : le
+     ruban est un composant client, il ne peut pas appeler l'API, et la
+     clé n'a rien à faire dans le navigateur. Sans clé configurée, la
+     fonction rend un tableau vide et la page ne change pas. */
+  const avisGoogle = await recupererAvisGoogle(locale as Locale);
+
   return (
     <>
       {/* Émis ici et pas dans le layout : seule l'accueil porte la vidéo,
@@ -55,7 +62,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           les chambres, la destination et la table, il peut alors avoir envie
           de tout voir ; les clients parlent juste après. */}
       <GalleryTeaser dict={dict} locale={locale as Locale} />
-      <Testimonials dict={dict} locale={locale as Locale} />
+      <Testimonials dict={dict} locale={locale as Locale} avisGoogle={avisGoogle} />
       <ContactSection dict={dict} />
       <BookingBar dict={dict} />
     </>

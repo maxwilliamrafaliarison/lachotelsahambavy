@@ -305,14 +305,16 @@
   "testimonials": {
     "label": "Testimonios",
     "title": "Vivieron la experiencia",
-    "transparence": "Reseñas copiadas palabra por palabra de {tripadvisor}, que verifica a sus autores. No publicamos ninguna de nuestra pluma ni retocamos el texto, faltas incluidas. Las que contienen alguna reserva no se reproducen aquí: pueden leerse, junto con todas las demás, en la ficha del hotel.",
+    "transparence": "Reseñas copiadas palabra por palabra de {tripadvisor}, que verifica a sus autores. Las reseñas de Google las muestra Google en directo, eligiendo cinco de las más relevantes. No publicamos ninguna de nuestra pluma ni retocamos el texto. Las que contienen alguna reserva no se reproducen aquí: pueden leerse, junto con todas las demás, en las fichas del hotel.",
     "traduitDe": "Traducido {langue}",
     "noteSur": "{note} sobre {bareme}",
     "origineAvis": {
       "booking": "Opinión de un cliente de Booking.com",
       "tripadvisor": "Opinión de un viajero de Tripadvisor",
       "google": "Opinión de Google"
-    }
+    },
+    "traduitParGoogle": "Traducido por Google",
+    "voirSurGoogle": "Ver en Google Maps"
   },
   "contact": {
     "label": "Contacto y Reserva",

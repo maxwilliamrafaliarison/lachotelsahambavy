@@ -1157,7 +1157,11 @@ body {
        « traduit du français », puis pour la ligne d'origine et de date
        qu'exigent les règles d'affichage de Tripadvisor. Hauteur identique
        pour toutes, sans quoi le ruban aurait des dents. */
-    width: 340px; height: 276px;
+    /* 340 × 292. La carte grandit une troisième fois : pour Google, la
+       ligne de mentions porte l'origine, la date, la traduction ET le
+       lien vers l'avis, ce qui lui fait deux à trois lignes. Hauteur
+       identique pour toutes, sans quoi le ruban aurait des dents. */
+    width: 340px; height: 292px;
     padding: 20px 22px;
     border-radius: 4px;
     background: var(--color-white);
@@ -1251,6 +1255,46 @@ body {
     letter-spacing: 0.03em;
     color: var(--color-muted);
     opacity: 0.85;
+  }
+
+  /* AVATAR DE L'AUTEUR, propre à Google, qui demande de le créditer
+     « avec toutes les ressources disponibles (avatar, nom et lien de
+     profil) quand la place le permet ». Vingt pixels : la place le
+     permet, tout juste, sur une carte de 340. */
+  .lh-avis__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    object-fit: cover;
+    flex: none;
+  }
+
+  /* Le nom devient un lien vers le profil de l'auteur, là encore parce
+     que Google l'exige. Souligné seulement au survol : une carte qui
+     défile n'a pas à se hérisser de traits bleus. */
+  .lh-avis__nom--lien {
+    text-decoration: none;
+    transition: color 160ms var(--lh-ease);
+  }
+  .lh-avis__nom--lien:hover,
+  .lh-avis__nom--lien:focus-visible {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* « Voir sur Google Maps ». Google impose que le lecteur puisse
+     toujours atteindre l'avis d'origine : un attribut `cite` ne suffit
+     pas, aucun navigateur n'en fait un lien. */
+  .lh-avis__lien {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--lh-past) / 0.45);
+    text-underline-offset: 2px;
+  }
+  .lh-avis__lien:hover,
+  .lh-avis__lien:focus-visible {
+    color: var(--color-terracotta);
   }
 
   .lh-avis__lieu {

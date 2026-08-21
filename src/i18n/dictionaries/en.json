@@ -305,14 +305,16 @@
   "testimonials": {
     "label": "Testimonials",
     "title": "They lived the experience",
-    "transparence": "Reviews copied word for word from {tripadvisor}, which verifies their authors. We publish none of our own writing and do not touch up the text, spelling included. Those carrying a reservation are not reproduced here: they can be read, with all the others, on the hotel’s listing.",
+    "transparence": "Reviews copied word for word from {tripadvisor}, which verifies their authors. The Google reviews are served live by Google, which selects five of the most relevant. We publish none of our own writing and do not touch up the text. Those carrying a reservation are not reproduced here: they can be read, with all the others, on the hotel’s listings.",
     "traduitDe": "Translated {langue}",
     "noteSur": "{note} out of {bareme}",
     "origineAvis": {
       "booking": "A Booking.com guest review",
       "tripadvisor": "A Tripadvisor traveler review",
       "google": "A Google review"
-    }
+    },
+    "traduitParGoogle": "Translated by Google",
+    "voirSurGoogle": "See on Google Maps"
   },
   "contact": {
     "label": "Contact & Booking",
