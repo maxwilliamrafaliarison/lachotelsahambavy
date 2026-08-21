@@ -396,10 +396,15 @@ function BullesTripadvisor({ note, etiquette }: { note: number; etiquette: strin
   );
 }
 
-/* Les deux plateformes citées dans la mention de transparence deviennent
-   des liens : « ils se lisent tous là-bas » n'a de valeur que si l'on
-   peut y aller. Le texte reste dans les dictionnaires avec {booking} et
-   {tripadvisor} en repères, plutôt que d'y coudre du balisage. */
+/* La plateforme citée dans la mention de transparence devient un lien :
+   « ils se lisent tous là-bas » n'a de valeur que si l'on peut y aller.
+   Le texte reste dans les dictionnaires avec {tripadvisor} en repère,
+   plutôt que d'y coudre du balisage.
+
+   Le repère {booking} est CONSERVÉ bien qu'aucune phrase ne l'emploie
+   aujourd'hui : le jour où Booking accordera son accord écrit (voir
+   CONSENTEMENT_BOOKING dans testimonials.ts), la mention le reprendra et
+   le lien fonctionnera sans qu'il faille repasser par ici. */
 function avecLiens(phrase: string) {
   const cibles: Record<string, { href: string; libelle: string }> = {
     "{booking}": { href: siteConfig.social.booking, libelle: "Booking.com" },

@@ -63,7 +63,9 @@ import type { Locale } from "@/lib/utils";
  * Business Profile rend les 177 avis complets à qui s'y authentifie.
  * Tant que ce n'est pas fait, aucun avis Google n'est publié.
  *
- * QUATORZE AVIS : sept sur Booking, sept sur TripAdvisor. Le second lot
+ * QUATORZE AVIS RELEVÉS, SEPT PUBLIÉS. Les sept avis Booking sont en
+ * réserve : leurs conditions générales en interdisent la reprise sans
+ * accord écrit. Voir CONSENTEMENT_BOOKING plus bas. Le second lot
  * s'est étoffé quand la fiche TripAdvisor a fini par livrer ses cent
  * quarante-quatre avis, page par page, ce que la première lecture n'avait
  * pas obtenu.
@@ -121,7 +123,44 @@ const BOOKING = "https://www.booking.com/hotel/mg/lac-sahambavy.fr.html#tab-revi
 const TA = (id: string) =>
   `https://www.tripadvisor.fr/ShowUserReviews-g298271-d649892-r${id}-Lac_Hotel_Sahambavy-Fianarantsoa_Fianarantsoa_Province.html`;
 
-export const avisVerifies: Avis[] = [
+/**
+ * CONSENTEMENT ÉCRIT DE BOOKING.COM : PAS ENCORE OBTENU.
+ *
+ * Les conditions générales que l'hôtel a signées en s'inscrivant sur la
+ * plateforme (General Delivery Terms, version v2601_FR_i, relevées le
+ * 21/08/2026 sur admin.booking.com) sont sans ambiguïté :
+ *
+ *   « 4.2.4 The Guest reviews are for the exclusive use of Booking.com.
+ *     The Accommodation is not entitled to directly or indirectly use the
+ *     Guest reviews in any way without the prior written consent of
+ *     Booking.com. »
+ *
+ * « De quelque manière que ce soit », directement ou indirectement : citer
+ * un avis Booking sur le site de l'hôtel entre exactement dans ce que la
+ * clause interdit. Et l'article 4.2.3 fait des manquements à cette section
+ * un motif de résiliation du contrat, c'est-à-dire la perte du canal de
+ * réservation.
+ *
+ * TRIPADVISOR DIT L'INVERSE, et c'est ce qui rend le sujet piégeux : eux
+ * AUTORISENT la citation, sous conditions précises, que les cartes
+ * respectent désormais. On ne peut pas traiter les deux plateformes de la
+ * même façon simplement parce qu'elles se ressemblent à l'écran.
+ *
+ * CE QUE BOOKING AUTORISE TOUT DE MÊME (clause 4.3.4) : employer son nom
+ * « pour informer les clients potentiels que l'établissement est
+ * disponible sur la plateforme », et à des fins de comparaison. La gélule
+ * « Donner mon avis » et le lien vers la fiche restent donc légitimes.
+ *
+ * LES SEPT AVIS BOOKING NE SONT PAS SUPPRIMÉS, ils sont mis en réserve.
+ * Le relevé et les traductions représentent un travail réel, et la clause
+ * prévoit elle-même la levée de l'interdiction : il suffit d'un accord
+ * écrit, que la direction peut demander depuis l'extranet. Le jour où il
+ * arrive, on passe ce booléen à `true` et les sept avis reviennent.
+ * Aucune autre ligne à toucher.
+ */
+const CONSENTEMENT_BOOKING = false;
+
+const tousLesAvis: Avis[] = [
   /* ─── Booking.com ─────────────────────────────────────────────
      Relevés sur la fiche de l'hôtel, dans les données de la page.
      Barème sur 10, comme Booking le donne. Aucun de ces sept avis ne
@@ -354,6 +393,11 @@ export const avisVerifies: Avis[] = [
     source: TA("906696275"),
   },
 ];
+
+/* Ce que le site publie réellement. Voir CONSENTEMENT_BOOKING ci-dessus. */
+export const avisVerifies: Avis[] = tousLesAvis.filter(
+  (a) => a.plateforme !== "booking" || CONSENTEMENT_BOOKING,
+);
 
 /**
  * Texte de l'avis dans la langue du lecteur, et s'il s'agit d'une

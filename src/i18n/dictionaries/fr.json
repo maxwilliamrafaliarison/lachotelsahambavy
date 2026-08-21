@@ -308,7 +308,7 @@
   "testimonials": {
     "label": "Témoignages",
     "title": "Ils ont vécu l’expérience",
-    "transparence": "Avis recopiés mot pour mot depuis {booking} et {tripadvisor}, qui en vérifient l’auteur. Nous n’en publions aucun de notre plume et n’en retouchons pas le texte, fautes comprises. Ceux qui portent une réserve ne sont pas repris ici : ils se lisent, avec tous les autres, sur les deux fiches.",
+    "transparence": "Avis recopiés mot pour mot depuis {tripadvisor}, qui en vérifie l’auteur. Nous n’en publions aucun de notre plume et n’en retouchons pas le texte, fautes comprises. Ceux qui portent une réserve ne sont pas repris ici : ils se lisent, avec tous les autres, sur la fiche de l’hôtel.",
     "traduitDe": "Traduit {langue}",
     "noteSur": "{note} sur {bareme}",
     "origineAvis": {
