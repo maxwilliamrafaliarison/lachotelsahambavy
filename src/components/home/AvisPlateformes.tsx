@@ -1,6 +1,7 @@
 import { siteConfig } from "@/data/site";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { LogoGoogle, LogoTripAdvisor, LogoBooking } from "@/components/ui/LogosPlateformes";
+import LogoPlateforme from "@/components/ui/LogoPlateforme";
+import type { Plateforme } from "@/data/testimonials";
 import type { Locale } from "@/lib/utils";
 
 /**
@@ -81,21 +82,24 @@ import type { Locale } from "@/lib/utils";
  * Server Component : trois liens, aucune interactivité.
  */
 
-type Plateforme = {
-  id: string;
+type Fiche = {
+  id: Plateforme;
   nom: string;
   href: string;
   note: number;
   bareme: 5 | 10;
   total: number;
-  Logo: (p: { taille?: number }) => React.ReactElement;
 };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function AvisPlateformes({ dict, locale }: { dict: any; locale: Locale }) {
   const t = dict.reviewsCta;
+  /* « 9 sur 10 » pour les lecteurs d'écran : la clé vit dans la section
+     des témoignages, qui en a besoin aussi. Une seule formulation pour
+     les deux endroits du site où une note est lue à voix haute. */
+  const noteSur: string = dict.testimonials?.noteSur ?? "{note} sur {bareme}";
 
-  const plateformes: Plateforme[] = [
+  const plateformes: Fiche[] = [
     {
       id: "booking",
       nom: "Booking.com",
@@ -103,7 +107,6 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
       note: siteConfig.ratings.booking.score,
       bareme: 10,
       total: siteConfig.ratings.booking.total,
-      Logo: LogoBooking,
     },
     {
       id: "google",
@@ -112,7 +115,6 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
       note: siteConfig.ratings.google.score,
       bareme: 5,
       total: siteConfig.ratings.google.total,
-      Logo: LogoGoogle,
     },
     {
       id: "tripadvisor",
@@ -121,7 +123,6 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
       note: siteConfig.ratings.tripadvisor.score,
       bareme: 5,
       total: siteConfig.ratings.tripadvisor.total,
-      Logo: LogoTripAdvisor,
     },
   ];
 
@@ -150,38 +151,44 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
                   lignes, et non trois boutons répétant la même phrase. */}
               <p className="mb-4 text-[11px] uppercase tracking-[0.16em] text-muted">{t.action}</p>
 
-              {/* Gélules, dans la langue du menu : fond pâle, encre
-                  orange, remplissage au survol. Elles s'enroulent au lieu
-                  de s'empiler, ce qui tient la section en trois lignes de
-                  hauteur au lieu de dix. */}
-              <ul className="flex flex-wrap gap-2.5">
-                {plateformes.map(({ id, nom, href, note, bareme, total, Logo }) => (
+              {/* UNE BANDE, ET NON PLUS TROIS GÉLULES. Les gélules
+                  portaient des logos dessinés à la main, faute de place
+                  pour les vrais : le logotype Booking exige 120 px de
+                  large, une gélule en fait 230 en tout. Trois cellules
+                  à filets laissent à chaque marque sa taille réelle sans
+                  que la section prenne beaucoup plus de hauteur.
+
+                  ALIGNÉ À GAUCHE dans chaque cellule : Tripadvisor
+                  l'impose, Booking le recommande. */}
+              <ul className="lh-plateformes">
+                {plateformes.map(({ id, nom, href, note, bareme, total }) => (
                   <li key={id}>
                     <a
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="lh-gelule"
+                      className="lh-plateforme"
                     >
                       {/* L'action se dit dans le nom accessible, mais SANS
-                          aria-label : celui-ci remplaçait tout le contenu,
-                          si bien qu'un lecteur d'écran annonçait « Donner
-                          mon avis (Booking.com) » et perdait la note et le
-                          nombre d'avis. Sur téléphone, où la note
-                          consolidée de la barre du haut est masquée, la
-                          page n'annonçait plus aucun chiffre. Un texte
-                          hors écran s'AJOUTE au contenu au lieu de s'y
-                          substituer. */}
+                          aria-label : celui-ci remplacerait tout le
+                          contenu et effacerait la note et le nombre
+                          d'avis. Le nom de la plateforme, lui, est porté
+                          par le texte alternatif du logotype. */}
                       <span className="sr-only">{t.action} :</span>
-                      <Logo taille={16} />
-                      <span>{nom}</span>
-                      <span aria-hidden="true" className="lh-gelule__point">·</span>
-                      <span className="lh-gelule__note">
-                        {nf.format(note)}/{bareme}
-                      </span>
-                      <span aria-hidden="true" className="lh-gelule__point">·</span>
-                      <span className="lh-gelule__avis">
-                        {t.reviews.replace("{n}", ni.format(total))}
+                      <LogoPlateforme plateforme={id} hauteur={20} />
+                      <span className="lh-plateforme__chiffres">
+                        <span aria-hidden="true">
+                          {nf.format(note)}/{bareme}
+                        </span>
+                        <span className="sr-only">
+                          {noteSur
+                            .replace("{note}", nf.format(note))
+                            .replace("{bareme}", String(bareme))}
+                        </span>
+                        <span aria-hidden="true" className="lh-plateforme__point">
+                          ·
+                        </span>
+                        <span>{t.reviews.replace("{n}", ni.format(total))}</span>
                       </span>
                     </a>
                   </li>

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { avisVerifies, texteAffiche, type Avis, type Plateforme } from "@/data/testimonials";
 import { siteConfig } from "@/data/site";
-import { LogoGoogle, LogoTripAdvisor, LogoBooking } from "@/components/ui/LogosPlateformes";
+import LogoPlateforme from "@/components/ui/LogoPlateforme";
 import type { Locale } from "@/lib/utils";
 
 /**
@@ -56,13 +56,15 @@ import type { Locale } from "@/lib/utils";
    cliquables : les liens vers les plateformes vivent dans la barre
    supérieure, dans la section des notes et sous le ruban, et un lien dans
    une piste qui glisse serait de toute façon une cible mouvante. */
-const MARQUES: Record<
-  Plateforme,
-  { nom: string; Logo: (p: { taille?: number }) => React.ReactElement }
-> = {
-  booking: { nom: "Booking.com", Logo: LogoBooking },
-  google: { nom: "Google", Logo: LogoGoogle },
-  tripadvisor: { nom: "Tripadvisor", Logo: LogoTripAdvisor },
+/* Le nom sert de secours à la ligne de mentions quand le dictionnaire
+   n'a pas de libellé pour la plateforme. Il n'est plus affiché à côté du
+   logo : le logotype officiel de chacune des trois contient déjà son
+   propre nom, et l'écrire une seconde fois le doublerait à l'œil comme
+   dans un lecteur d'écran, où il est porté par le texte alternatif. */
+const MARQUES: Record<Plateforme, string> = {
+  booking: "Booking.com",
+  google: "Google",
+  tripadvisor: "Tripadvisor",
 };
 
 /* Un avis de chaque plateforme à tour de rôle : le ruban alterne les
@@ -445,7 +447,7 @@ const LANGUES: Record<Locale, Record<Locale, string>> = {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: any }) {
   const t = dict.testimonials;
-  const { Logo, nom } = MARQUES[avis.plateforme];
+  const nom = MARQUES[avis.plateforme];
   const drapeau = avis.pays ? DRAPEAUX[avis.pays] : undefined;
   const pays = avis.pays ? (PAYS[avis.pays]?.[locale] ?? avis.pays) : null;
   const { texte, traduit } = texteAffiche(avis, locale);
@@ -473,11 +475,12 @@ function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: a
   return (
     <article className="lh-avis">
       <div className="lh-avis__source">
-        {/* Vingt pixels : le minimum que Tripadvisor impose à son logo.
-            La même taille pour les trois, une carte n'ayant pas à changer
-            de proportions selon la plateforme citée. */}
-        <Logo taille={20} />
-        <span>{nom}</span>
+        {/* LE LOGOTYPE OFFICIEL, servi tel quel depuis public/images/logos.
+            Vingt pixels de haut : le minimum que Tripadvisor impose en
+            hauteur, et celui qui donne au logotype Booking les 120 px de
+            large qu'il exige de son côté. Le nom n'est plus écrit à
+            côté : le logotype le contient déjà. */}
+        <LogoPlateforme plateforme={avis.plateforme} hauteur={20} />
         {avis.plateforme === "tripadvisor" ? (
           <span className="lh-avis__note">
             <BullesTripadvisor note={avis.note} etiquette={noteLue} />

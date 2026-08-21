@@ -1334,6 +1334,85 @@ body {
     .lh-gelule { gap: 6px; padding-inline: 11px; font-size: 12px; }
   }
 
+  /* ---------- BANDE DES PLATEFORMES D'AVIS ----------
+
+     Elle remplace les trois gélules du 14/08/2026, qui portaient des
+     logos dessinés à la main faute de place pour les vrais. Le logotype
+     Booking exige 120 px de large, une gélule en faisait 230 en tout :
+     il n'y avait pas d'arrangement possible.
+
+     TROIS CELLULES À FILETS, une par plateforme, de largeur égale. Les
+     logos, eux, gardent leurs largeurs propres (120, 131 et 62 px) à
+     hauteur optique commune : c'est ainsi qu'on range des marques côte à
+     côte, et les forcer à une largeur unique reviendrait à les déformer,
+     ce que les trois chartes interdisent.
+
+     ALIGNÉ À GAUCHE : Tripadvisor l'impose, Booking le recommande.
+
+     LE SURVOL NE TEINTE PAS LE FOND, et c'est délibéré : Tripadvisor
+     veut son logotype sur fond clair de SA palette, Booking veut le sien
+     sur fond blanc. Un lavis orange derrière l'un ou l'autre sortirait
+     des deux chartes. Le survol se marque donc par un filet bas, en
+     dehors de la zone du logo. */
+
+  .lh-plateformes {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-white);
+    overflow: hidden;
+  }
+
+  .lh-plateformes > li + li {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 640px) {
+    .lh-plateformes { grid-template-columns: repeat(3, 1fr); }
+    .lh-plateformes > li + li {
+      border-top: 0;
+      border-left: 1px solid var(--color-hairline);
+    }
+  }
+
+  .lh-plateforme {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+    height: 100%;
+    padding: 18px 20px;
+    box-shadow: inset 0 0 0 0 rgb(var(--lh-past));
+    transition: box-shadow 200ms var(--lh-ease);
+  }
+
+  .lh-plateforme:hover,
+  .lh-plateforme:focus-visible {
+    box-shadow: inset 0 -2px 0 0 rgb(var(--lh-past));
+  }
+
+  .lh-plateforme:focus-visible {
+    outline: 2px solid rgb(var(--lh-past-ink));
+    outline-offset: -3px;   /* peint à l'intérieur : la bande masque le débord */
+  }
+
+  .lh-plateforme__chiffres {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-muted);
+  }
+
+  .lh-plateforme__point {
+    margin: 0 6px;
+    opacity: 0.45;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lh-plateforme { transition: none; }
+  }
+
   /* ---------- ENTRÉE ---------- */
 
   @keyframes lh-plateau-entree {
