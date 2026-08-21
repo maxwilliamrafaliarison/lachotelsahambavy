@@ -32,8 +32,12 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
      sa pastille de localisation. */
   const displayRooms = roomsAffichees;
 
+  /* MARGE HAUTE RÉDUITE : la bande des plateformes se pose juste
+     au-dessus et n'a plus de marge basse, c'est donc celle-ci qui fait
+     la séparation entre les deux. La marge basse ne bouge pas : elle
+     sépare de la section suivante, qui est un vrai chapitre. */
   return (
-    <section id="rooms" className="scroll-mt-24 py-16 md:py-24">
+    <section id="rooms" className="scroll-mt-24 pt-10 pb-16 md:pt-12 md:pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         {/* ─── En-tête ───────────────────────────────────────────────── */}
         <div className="mb-12 md:mb-16">

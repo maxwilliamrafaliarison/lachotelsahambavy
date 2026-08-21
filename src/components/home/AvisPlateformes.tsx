@@ -117,8 +117,18 @@ export default function AvisPlateformes({ dict, locale }: { dict: any; locale: L
   });
   const ni = new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "es" ? "es-ES" : "fr-FR");
 
+  /* AUCUNE MARGE BASSE, et c'est le point de l'affaire. La bande fait
+     91 px de haut et flottait dans 290 px de vide : 108 au-dessus,
+     182 en dessous. Trois sections empilaient leurs marges autour d'un
+     élément qui n'est pas un chapitre.
+
+     Elle se rattache désormais à ce qu'elle annonce : sa marge basse
+     tombe à zéro, et c'est la marge haute des hébergements, réduite elle
+     aussi, qui fait toute la séparation. Le blanc au-dessus reste plus
+     grand que celui du dessous, pour que l'œil rattache la bande aux
+     chambres et non au bloc gris qui précède. */
   return (
-    <section id="donner-un-avis" className="scroll-mt-24 py-14 md:py-20">
+    <section id="donner-un-avis" className="scroll-mt-24 pt-14 pb-0 md:pt-16">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <ScrollReveal>
           {/* PLUS DE TITRE NI DE CHAPÔ, sur décision de la direction
