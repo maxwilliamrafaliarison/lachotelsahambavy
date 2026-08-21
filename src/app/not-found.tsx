@@ -29,7 +29,13 @@ import { siteConfig } from "@/data/site";
  */
 
 export const metadata = {
-  title: "Page introuvable · Lac Hôtel Sahambavy",
+  /* `absolute` NEUTRALISE LE GABARIT DE TITRE. Cette page se rend dans
+     deux contextes : sous le layout de [locale] pour /fr/inconnue/, et
+     sans aucun layout pour /tarifs/. Le premier applique son gabarit
+     « %s · Lac Hôtel Sahambavy », qui donnait « Page introuvable · Lac
+     Hôtel Sahambavy · Lac Hôtel Sahambavy ». Un titre absolu rend le
+     même libellé dans les deux cas. */
+  title: { absolute: "Page introuvable · Lac Hôtel Sahambavy" },
   robots: { index: false, follow: true },
 };
 
