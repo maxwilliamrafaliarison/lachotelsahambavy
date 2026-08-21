@@ -23,7 +23,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const dict = await getDictionary(locale as Locale);
   return {
     title: dict.loisirs.heroTitle,
-    description: dict.loisirs.heroSubtitle,
+    /* Description écrite pour la page de résultats. Le sous-titre du
+       hero, réutilisé jusqu'ici, tenait en cinquante caractères là où
+       Google en montre cent cinquante. Elle nomme aussi les activités
+       une par une, ce que ne fait pas celle d'/experiences : ces deux
+       pages se ressemblent déjà beaucoup trop (voir la note ci-dessous
+       et celle de src/lib/redirects.ts). */
+    description: dict.loisirs.metaDescription ?? dict.loisirs.heroSubtitle,
     alternates: pageAlternates(locale as Locale, "activites"),
   };
 }

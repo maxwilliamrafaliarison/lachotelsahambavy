@@ -67,8 +67,25 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/fr/the-fce", "/fr/train-fce/"),
   ...both("/fr/train", "/fr/train-fce/"),
   ...both("/fr/excursions", "/fr/experiences/"),
-  // NOTE : /fr/activites est une vraie page (Loisirs, sous-page d'Expériences)
-  // depuis la refonte 2026. Ne pas la rediriger.
+  /* NOTE : /fr/activites est une vraie page (Loisirs, sous-page
+     d'Expériences) depuis la refonte 2026. Ne pas la rediriger.
+
+     MAIS LA PRÉMISSE NE TIENT PLUS, constaté le 21/08/2026, et il faut
+     que quelqu'un tranche. Mesuré sur les pages servies : /activites et
+     /experiences sont identiques à 93 %, avec deux passages communs de
+     plus de 260 caractères. /activites n'a AUCUN lien entrant depuis le
+     site : ni le menu, ni le pied de page, ni une autre page n'y
+     renvoie. Les deux sont pourtant indexables et toutes deux au
+     sitemap : elles se font concurrence sur les mêmes requêtes.
+
+     Trois issues possibles, à la main de la direction :
+       - la relier depuis /experiences et différencier son contenu, ce
+         qui donnerait corps à la « sous-page » que cette note annonce ;
+       - lui donner une balise canonique vers /experiences et la sortir
+         du sitemap, en gardant l'URL vivante ;
+       - la rediriger malgré cette note.
+     En attendant, elle a reçu sa propre méta-description, qui nomme les
+     activités une par une là où celle d'/experiences reste générale. */
   ...both("/fr/about", "/fr/hotel/"),
   ...both("/fr/a-propos", "/fr/hotel/"),
   ...both("/fr/galerie-photos", "/fr/galerie/"),
