@@ -145,10 +145,12 @@ export async function recupererAvisGoogle(locale: Locale): Promise<AvisGoogle[]>
     const r = await fetch(url, {
       headers: {
         "X-Goog-Api-Key": cle,
-        /* Le masque limite la réponse à ce qu'on affiche. Ce n'est pas
-           qu'une économie : la facturation de l'API Places dépend des
-           champs demandés, et demander la fiche entière pour cinq avis
-           la ferait basculer dans une strate plus chère. */
+        /* Le masque limite la réponse à ce qu'on affiche, et c'est tout :
+           il NE FAIT PAS baisser la facture. Google facture « au SKU le
+           plus élevé applicable à la requête », et `reviews` EST le champ
+           le plus élevé de la grille. Demander la fiche entière coûterait
+           donc exactement le même prix que demander les seuls avis.
+           Corrigé le 21/08/2026 : ce commentaire affirmait l'inverse. */
         "X-Goog-FieldMask": "reviews",
       },
       /* Cache de rendu seulement : voir FRAICHEUR et son calcul. */
