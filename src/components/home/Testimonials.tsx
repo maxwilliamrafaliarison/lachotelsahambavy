@@ -429,7 +429,16 @@ export default function Testimonials({
             <ul
               key={exemplaire}
               className="lh-ruban__lot"
+              /* ARIA-HIDDEN NE SUFFIT PAS, et c'est le piège. Il retire
+                 le doublon des lecteurs d'écran, mais laisse ses neuf
+                 liens dans l'ordre de tabulation : au clavier, on
+                 traversait neuf « Voir sur Google Maps » invisibles pour
+                 la synthèse vocale et pointant sur des avis déjà lus.
+                 `inert` retire l'un ET l'autre. Les deux attributs sont
+                 nécessaires : inert n'implique pas aria-hidden dans tous
+                 les moteurs. */
               aria-hidden={exemplaire === 1 ? "true" : undefined}
+              inert={exemplaire === 1}
             >
               {cartes.map((c) => (
                 <li key={`${exemplaire}-${c.cle}`}>
@@ -517,7 +526,7 @@ function BullesTripadvisor({ note, etiquette }: { note: number; etiquette: strin
 
    Le repère {booking} est CONSERVÉ bien qu'aucune phrase ne l'emploie
    aujourd'hui : le jour où Booking accordera son accord écrit (voir
-   CONSENTEMENT_BOOKING dans testimonials.ts), la mention le reprendra et
+   src/data/avis-booking-reserve.ts), la mention le reprendra et
    le lien fonctionnera sans qu'il faille repasser par ici. */
 function avecLiens(phrase: string) {
   const cibles: Record<string, { href: string; libelle: string }> = {
@@ -579,7 +588,6 @@ function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict
   const [ouvre, ferme] = locale === "fr" ? ["«\u202F", "\u202F»"] : ["\u201C", "\u201D"];
 
   const origine = String(t.origineAvis?.[carte.plateforme] ?? nom);
-  const estGoogle = carte.plateforme === "google";
 
   return (
     <article className="lh-avis">
@@ -670,10 +678,25 @@ function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict
                 )}
           </>
         )}
-        {/* Google impose que le lecteur puisse toujours atteindre l'avis
-            sur Maps par le lien qu'il fournit. `cite` ne suffit pas :
-            aucun navigateur n'en fait un lien cliquable. */}
-        {estGoogle && carte.source && (
+        {/* UN LIEN SUR CHAQUE CARTE, ET PLUS SEULEMENT SUR CELLES DE
+            GOOGLE. Deux raisons se rejoignent ici.
+
+            La première est une obligation : Google exige que le lecteur
+            puisse toujours atteindre l'avis d'origine, et un attribut
+            `cite` n'y suffit pas, aucun navigateur n'en faisant un lien.
+
+            La seconde est une question d'honnêteté, et elle vaut pour
+            toutes les plateformes. La carte coupe à six lignes, et douze
+            des seize avis dépassent : certains perdent plus de la moitié
+            de leur texte. Une citation tronquée dont on ne peut pas lire
+            la suite déforme le propos de son auteur, ce que ce site
+            passe la journée à corriger. Le lien rend la troncature
+            loyale : ce qui est montré est un extrait, et le texte entier
+            est à un clic.
+
+            Il tient sur la piste qui glisse parce qu'elle s'immobilise
+            au survol comme au focus clavier. */}
+        {carte.source && (
           <>
             {" · "}
             <a
@@ -682,7 +705,7 @@ function CarteAvis({ carte, locale, dict }: { carte: Carte; locale: Locale; dict
               rel="noopener noreferrer nofollow"
               className="lh-avis__lien"
             >
-              {String(t.voirSurGoogle ?? "Voir sur Google Maps")}
+              {String(t.lireLAvis ?? "Lire l'avis")}
             </a>
           </>
         )}

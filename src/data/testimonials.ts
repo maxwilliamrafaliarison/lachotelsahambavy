@@ -79,7 +79,7 @@ import type { Locale } from "@/lib/utils";
  * VINGT-DEUX AVIS RELEVÉS, SEIZE PUBLIÉS : sept Tripadvisor et neuf
  * Google. Les sept avis Booking restent en réserve, leurs conditions
  * générales en interdisant la reprise sans accord écrit ; voir
- * CONSENTEMENT_BOOKING plus bas. Le lot Tripadvisor
+ * le fichier de réserve. Le lot Tripadvisor
  * s'est étoffé quand la fiche TripAdvisor a fini par livrer ses cent
  * quarante-quatre avis, page par page, ce que la première lecture n'avait
  * pas obtenu.
@@ -139,7 +139,6 @@ export interface Avis {
   source: string;
 }
 
-const BOOKING = "https://www.booking.com/hotel/mg/lac-sahambavy.fr.html#tab-reviews";
 /* Google ne donne pas de lien par avis hors de son API : le renvoi se
    fait donc vers le panneau d'avis de la fiche, où ils se lisent tous. */
 const GOOGLE_FICHE = "https://www.google.com/maps?cid=9763325951372533936";
@@ -151,173 +150,21 @@ const TA = (id: string) =>
   `https://www.tripadvisor.fr/ShowUserReviews-g298271-d649892-r${id}-Lac_Hotel_Sahambavy-Fianarantsoa_Fianarantsoa_Province.html`;
 
 /**
- * CONSENTEMENT ÉCRIT DE BOOKING.COM : PAS ENCORE OBTENU.
+ * LES SEPT AVIS BOOKING NE SONT PLUS ICI, et ils ne doivent pas y
+ * revenir tels quels. Ils sont dans src/data/avis-booking-reserve.ts,
+ * un module que RIEN N'IMPORTE.
  *
- * Les conditions générales que l'hôtel a signées en s'inscrivant sur la
- * plateforme (General Delivery Terms, version v2601_FR_i, relevées le
- * 21/08/2026 sur admin.booking.com) sont sans ambiguïté :
- *
- *   « 4.2.4 The Guest reviews are for the exclusive use of Booking.com.
- *     The Accommodation is not entitled to directly or indirectly use the
- *     Guest reviews in any way without the prior written consent of
- *     Booking.com. »
- *
- * « De quelque manière que ce soit », directement ou indirectement : citer
- * un avis Booking sur le site de l'hôtel entre exactement dans ce que la
- * clause interdit. Et l'article 4.2.3 fait des manquements à cette section
- * un motif de résiliation du contrat, c'est-à-dire la perte du canal de
- * réservation.
- *
- * TRIPADVISOR DIT L'INVERSE, et c'est ce qui rend le sujet piégeux : eux
- * AUTORISENT la citation, sous conditions précises, que les cartes
- * respectent désormais. On ne peut pas traiter les deux plateformes de la
- * même façon simplement parce qu'elles se ressemblent à l'écran.
- *
- * ATTENTION À LA VERSION DU CONTRAT. Celle qui lie l'hôtel est la
- * version MALGACHE (v2601_nE_i, servie pour cc1=mg), et non la française.
- * La française comporte un article 4.3.4 autorisant expressément à
- * employer le nom « pour informer les clients potentiels que
- * l'établissement est disponible sur la plateforme » : CET ARTICLE
- * N'EXISTE PAS dans la version malgache, qui s'arrête à 4.3.3. Ne pas
- * s'appuyer dessus. Ce que la version malgache autorise, à la fin de son
- * 4.3.3, c'est d'« employer la marque Booking.com pour son propre
- * marketing » : c'est là-dessus que reposent la gélule et le lien vers la
- * fiche.
- *
- * BOOKING ACCORDE DÉJÀ CE DROIT, mais pas ici. Une page de leur espace
- * partenaires, « Guest reviews: use and legal terms for EEA partners »,
- * autorise les partenaires établis dans l'Espace économique européen à
- * employer les avis, y compris à des fins promotionnelles, sous des
- * conditions précises. Madagascar n'en fait pas partie. C'est l'argument
- * à faire valoir en demandant l'accord écrit : le cadre existe, il suffit
- * de l'étendre.
- *
- * LES SEPT AVIS BOOKING NE SONT PAS SUPPRIMÉS, ils sont mis en réserve.
- * Le relevé et les traductions représentent un travail réel, et la clause
- * prévoit elle-même la levée de l'interdiction : il suffit d'un accord
- * écrit, que la direction peut demander depuis l'extranet. Le jour où il
- * arrive, on passe ce booléen à `true` et les sept avis reviennent.
- * Aucune autre ligne à toucher.
+ * L'article 4.2.4 des conditions générales que l'hôtel a signées
+ * (version malgache v2601_nE_i) interdit d'utiliser les avis « de
+ * quelque manière que ce soit » sans accord écrit préalable. Un filtre
+ * à l'exécution ne suffisait pas : le rendu était juste, mais le paquet
+ * JavaScript emportait les sept textes en clair chez chaque visiteur,
+ * dans un fragment de 56 ko. Seul un module qu'aucun chemin n'atteint
+ * garantit qu'ils ne partent pas. La marche à suivre le jour où Booking
+ * donnera son accord est en tête du fichier de réserve.
  */
-const CONSENTEMENT_BOOKING = false;
 
 const tousLesAvis: Avis[] = [
-  /* ─── Booking.com ─────────────────────────────────────────────
-     Relevés sur la fiche de l'hôtel, dans les données de la page.
-     Barème sur 10, comme Booking le donne. Aucun de ces sept avis ne
-     comporte de partie négative : c'est le critère d'entrée. */
-  {
-    auteur: "Isabelle",
-    pays: "La Réunion",
-    plateforme: "booking",
-    note: 10,
-    bareme: 10,
-    dateAvis: { fr: "25 juillet 2025", en: "25 July 2025", es: "25 de julio de 2025" },
-    langueOriginale: "fr",
-    original:
-      "Un havre de paix, bungalows sur pilotis les pieds dans l'eau très confortables. Le personnel souriant et aux p'tits soins. Un magnifique jardin botanique bien entretenu. La piscine doit être bien agréable en été austral. Et l'on y mange très bien. Je recommande vivement cet endroit hors du temps.",
-    traduction: {
-      en: "A haven of peace, with very comfortable overwater bungalows right at the water's edge. Smiling staff who look after every detail. A magnificent, well-kept botanical garden. The pool must be lovely in the southern summer. And the food is very good. I warmly recommend this timeless place.",
-      es: "Un remanso de paz, con bungalós sobre pilotes muy cómodos, a ras del agua. Personal sonriente y pendiente de todo. Un magnífico jardín botánico bien cuidado. La piscina debe de ser deliciosa en el verano austral. Y se come muy bien. Recomiendo vivamente este lugar fuera del tiempo.",
-    },
-    source: BOOKING,
-  },
-  {
-    auteur: "Michel",
-    pays: "France",
-    plateforme: "booking",
-    note: 9,
-    bareme: 10,
-    dateAvis: { fr: "20 octobre 2025", en: "20 October 2025", es: "20 de octubre de 2025" },
-    langueOriginale: "fr",
-    original:
-      "Endroit magnifique, personnel très serviable et prévenant. Nous avons passé un excellent séjour. Nous avons également visité la plantation de thé grâce à Toky le réceptionniste qui a fait le nécessaire car le weekend l'usine était fermée... Grand remerciement !",
-    traduction: {
-      en: "A magnificent place, with very helpful and thoughtful staff. We had an excellent stay. We also visited the tea plantation thanks to Toky the receptionist, who made the arrangements because the factory was closed at the weekend... Many thanks!",
-      es: "Un lugar magnífico, con un personal muy servicial y atento. Pasamos una estancia excelente. También visitamos la plantación de té gracias a Toky, el recepcionista, que se ocupó de todo porque el fin de semana la fábrica estaba cerrada... ¡Muchas gracias!",
-    },
-    source: BOOKING,
-  },
-  {
-    auteur: "Amelia",
-    pays: "France",
-    plateforme: "booking",
-    note: 10,
-    bareme: 10,
-    dateAvis: { fr: "28 décembre 2025", en: "28 December 2025", es: "28 de diciembre de 2025" },
-    langueOriginale: "fr",
-    original:
-      "Bungalows sur le lac très confortable.\nLe jardin est sublime.\nPersonnel très accueillant.\nLa cuisine était délicieuse.",
-    traduction: {
-      en: "Very comfortable bungalows on the lake.\nThe garden is sublime.\nVery welcoming staff.\nThe food was delicious.",
-      es: "Bungalós sobre el lago muy cómodos.\nEl jardín es sublime.\nPersonal muy acogedor.\nLa comida estaba deliciosa.",
-    },
-    source: BOOKING,
-  },
-  {
-    auteur: "Helene",
-    pays: "France",
-    plateforme: "booking",
-    note: 9,
-    bareme: 10,
-    dateAvis: { fr: "6 janvier 2025", en: "6 January 2025", es: "6 de enero de 2025" },
-    langueOriginale: "fr",
-    /* « Lhôtel » et « décoré » sont dans l'avis. On ne corrige pas. */
-    original:
-      "Lhôtel est un havre de paix, la chambre très spacieuse est joliment décoré, avec élégance et goût. Le personnel est adorable, aux petits soins. Le jardin est magnifique et offre un joli cadre reposant. Le petit déjeuner était succulent.",
-    traduction: {
-      en: "The hotel is a haven of peace, the very spacious room is prettily decorated, with elegance and taste. The staff are lovely and endlessly attentive. The garden is magnificent and makes for a restful setting. Breakfast was delicious.",
-      es: "El hotel es un remanso de paz, la habitación, muy espaciosa, está bonitamente decorada, con elegancia y gusto. El personal es encantador y muy atento. El jardín es magnífico y ofrece un marco reposado. El desayuno estaba delicioso.",
-    },
-    source: BOOKING,
-  },
-  {
-    auteur: "Klemm",
-    pays: "Suisse",
-    plateforme: "booking",
-    note: 10,
-    bareme: 10,
-    dateAvis: { fr: "12 août 2025", en: "12 August 2025", es: "12 de agosto de 2025" },
-    langueOriginale: "en",
-    original:
-      "We loved how unique our accommodation was; we stayed in the Train Wagon. The staff, especially the lady who received us was super inviting and happy to share tips on what local food we should try for dinner. I had some form of stir fried vegetables which were absolutely delicious!",
-    traduction: {
-      fr: "Nous avons adoré le caractère unique de notre hébergement ; nous avons séjourné dans le Wagon. Le personnel, et surtout la dame qui nous a accueillis, s'est montré très avenant et heureux de nous conseiller la cuisine locale à goûter au dîner. J'ai pris une sorte de légumes sautés, absolument délicieux !",
-      es: "Nos encantó lo singular de nuestro alojamiento; nos alojamos en el Vagón. El personal, y sobre todo la señora que nos recibió, fue muy acogedor y encantado de aconsejarnos qué cocina local probar en la cena. Tomé una especie de verduras salteadas, ¡absolutamente deliciosas!",
-    },
-    source: BOOKING,
-  },
-  {
-    auteur: "Rambelomanana",
-    pays: "France",
-    plateforme: "booking",
-    note: 10,
-    bareme: 10,
-    dateAvis: { fr: "1er mai 2025", en: "1 May 2025", es: "1 de mayo de 2025" },
-    langueOriginale: "fr",
-    original: "Le personnel adorable !\nLes chambres magnifiques la vue sur le lac !!",
-    traduction: {
-      en: "Lovely staff!\nMagnificent rooms, and the view over the lake!!",
-      es: "¡Personal encantador!\n¡Habitaciones magníficas y la vista al lago!!",
-    },
-    source: BOOKING,
-  },
-  {
-    auteur: "Madeleine",
-    pays: "La Réunion",
-    plateforme: "booking",
-    note: 10,
-    bareme: 10,
-    dateAvis: { fr: "7 janvier 2025", en: "7 January 2025", es: "7 de enero de 2025" },
-    langueOriginale: "fr",
-    original: "Une pépite à découvrir absolument",
-    traduction: {
-      en: "A gem, absolutely worth discovering",
-      es: "Una joya que hay que descubrir sin falta",
-    },
-    source: BOOKING,
-  },
-
   /* ─── TripAdvisor ─────────────────────────────────────────────
      Relevés sur la fiche PRINCIPALE (d649892, 4,1/5 sur 230 avis,
      nº 1 sur 7 hôtels à Fianarantsoa). Attention : il existe une
@@ -601,10 +448,9 @@ const tousLesAvis: Avis[] = [
   },
 ];
 
-/* Ce que le site publie réellement. Voir CONSENTEMENT_BOOKING ci-dessus. */
-export const avisVerifies: Avis[] = tousLesAvis.filter(
-  (a) => a.plateforme !== "booking" || CONSENTEMENT_BOOKING,
-);
+/* Ce que le site publie. Il n'y a plus de filtre : la liste ne contient
+   que ce qui doit être publié, les avis Booking ayant quitté le fichier. */
+export const avisVerifies: Avis[] = tousLesAvis;
 
 /**
  * Texte de l'avis dans la langue du lecteur, et s'il s'agit d'une

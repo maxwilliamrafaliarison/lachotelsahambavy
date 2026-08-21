@@ -62,7 +62,8 @@ import type { Locale } from "@/lib/utils";
  *
  * À NE PAS CONFONDRE avec les avis eux-mêmes : leur reprise est, elle,
  * interdite sans accord écrit, et les sept avis Booking sont en réserve
- * pour cette raison (voir CONSENTEMENT_BOOKING dans testimonials.ts).
+ * pour cette raison (voir src/data/avis-booking-reserve.ts, que rien
+ * n'importe).
  *
  * Server Component : trois liens, aucune interactivité.
  */

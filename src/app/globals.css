@@ -1161,7 +1161,7 @@ body {
        ligne de mentions porte l'origine, la date, la traduction ET le
        lien vers l'avis, ce qui lui fait deux à trois lignes. Hauteur
        identique pour toutes, sans quoi le ruban aurait des dents. */
-    width: 340px; height: 292px;
+    width: 340px; height: 314px;
     padding: 20px 22px;
     border-radius: 4px;
     background: var(--color-white);
@@ -1206,11 +1206,20 @@ body {
     color: rgb(var(--lh-past));      /* l'orange du menu, pas un jaune de plus */
   }
 
-  /* Cinq lignes puis coupe, ce qui remplit la hauteur fixe de la carte.
-     Pas de lien « lire la suite » : ce serait une cible de plus dans une
-     piste que l'on saisit déjà au doigt pour la faire défiler, et les
-     deux gestes se disputeraient l'appui. La carte renvoie de toute façon
-     vers la plateforme, où l'avis est intégral. */
+  /* SIX LIGNES PUIS COUPE, et un lien pour lire la suite.
+
+     La règle a changé le 21/08/2026. Elle disait cinq lignes et pas de
+     lien, au motif qu'une cible de plus se disputerait l'appui avec le
+     geste de défilement. Mais les avis se sont allongés : douze des
+     seize dépassent, certains perdant plus de la moitié de leur texte.
+     Une citation coupée dont on ne peut pas lire la suite déforme le
+     propos de son auteur.
+
+     Six lignes plutôt que cinq réduisent la coupe, et la ligne de
+     mentions porte désormais « lire l'avis » vers la plateforme. La
+     crainte du conflit de gestes ne s'est pas vérifiée : la piste
+     s'immobilise au survol et au focus, et les cartes Google portaient
+     déjà un lien sans que cela pose problème. */
   .lh-avis__texte {
     flex: 1;
     margin: 0;
@@ -1218,7 +1227,7 @@ body {
     font-size: 14px; line-height: 1.55;
     color: var(--color-body);
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -1254,7 +1263,12 @@ body {
     line-height: 1.45;
     letter-spacing: 0.03em;
     color: var(--color-muted);
-    opacity: 0.85;
+    /* PAS D'OPACITÉ ICI, et ce n'est pas une question de goût. Le gris
+       de service tient 5,08:1 sur le blanc de la carte ; atténué à 0,85
+       il vaut 3,74:1, sous le plancher AA de 4,5. Or cette ligne porte
+       l'origine de la citation, sa date et le lien vers l'avis : c'est
+       la mention la moins décorative de la carte. Pour la rendre plus
+       discrète, jouer sur la taille ou la graisse, jamais sur l'alpha. */
   }
 
   /* AVATAR DE L'AUTEUR, propre à Google, qui demande de le créditer
