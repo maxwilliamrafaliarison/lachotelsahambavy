@@ -315,7 +315,9 @@
       "google": "Opinión de Google"
     },
     "traduitParGoogle": "Traducido por Google",
-    "lireLAvis": "Leer la opinión"
+    "lireLAvis": "Leer la opinión",
+    "suspendre": "Pausar el desplazamiento de las reseñas",
+    "reprendre": "Reanudar el desplazamiento de las reseñas"
   },
   "contact": {
     "label": "Contacto y Reserva",

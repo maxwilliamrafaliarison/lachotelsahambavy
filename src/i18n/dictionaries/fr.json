@@ -315,7 +315,9 @@
       "google": "Avis Google"
     },
     "traduitParGoogle": "Traduit par Google",
-    "lireLAvis": "Lire l’avis"
+    "lireLAvis": "Lire l’avis",
+    "suspendre": "Suspendre le défilement des avis",
+    "reprendre": "Reprendre le défilement des avis"
   },
   "contact": {
     "label": "Contact & Réservation",

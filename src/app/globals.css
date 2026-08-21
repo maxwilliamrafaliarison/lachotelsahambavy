@@ -1318,6 +1318,55 @@ body {
   }
 
 
+  /* ---------- COMMANDE DE PAUSE DU RUBAN ----------
+
+     Transparente au repos, révélée quand la souris entre dans la section
+     ou quand elle reçoit le focus. Elle reste TOUJOURS dans le document
+     et dans l'ordre de tabulation : l'opacité ne retire rien à
+     l'accessibilité, ni la cible, ni l'annonce par un lecteur d'écran.
+     C'est ce qui permet de satisfaire WCAG 2.2.2 sans rendre à la section
+     le bouton encombrant que la direction avait fait retirer.
+
+     Quarante-quatre pixels de côté, conservés même invisible : la surface
+     cliquable ne dépend pas de l'opacité, et un visiteur qui la cherche
+     au survol la trouve là où elle a toujours été.
+
+     Sous prefers-reduced-motion, elle apparaît d'emblée : qui a demandé
+     moins de mouvement ne devrait pas avoir à survoler pour trouver de
+     quoi l'arrêter. */
+  .lh-ruban__pause {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    color: var(--color-muted);
+    opacity: 0;
+    transition: opacity 200ms var(--lh-ease), color 160ms var(--lh-ease);
+  }
+
+  .lh-avis-section:hover .lh-ruban__pause,
+  .lh-ruban__pause:focus-visible {
+    opacity: 1;
+  }
+
+  .lh-ruban__pause:hover {
+    color: rgb(var(--lh-past-ink));
+  }
+
+  .lh-ruban__pause:focus-visible {
+    outline: 2px solid rgb(var(--lh-past-ink));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lh-ruban__pause { opacity: 1; transition: none; }
+  }
+
   /* ---------- GÉLULES DES PLATEFORMES D'AVIS ----------
 
      Même vocabulaire que les pastilles du menu, à la demande de la

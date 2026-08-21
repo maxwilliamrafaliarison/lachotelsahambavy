@@ -119,6 +119,9 @@ export const wordpressRedirects: Redirect[] = [
   ...both("/en/contact-us", "/en/contact/"),
   ...both("/en/booking", "/en/contact/"),
   ...racineSeule("/en/reservation", "/en/contact/"), // page enfant : /reservation/confirmation/
+  /* L'espagnol manquait, et lui seul : /es/reservation/ rendait un 404 là
+     où /fr/ et /en/ menaient au formulaire. Vérifié le 21/08/2026. */
+  ...racineSeule("/es/reservation", "/es/contact/"), // page enfant : /reservation/confirmation/
 
   // ─── Anciennes URLs ES ──────────────────────────────────────
   ...both("/es/habitaciones", "/es/hebergements/"),

@@ -180,7 +180,18 @@ export function lodgingBusinessSchema(locale: Locale): SchemaType {
     },
     priceRange: "€€",
     starRating: { "@type": "Rating", ratingValue: "3" },
-    aggregateRating: aggregateRatingSchema(),
+    /* PAS D'aggregateRating ICI, et il ne faut pas le remettre.
+
+       Google écarte des résultats enrichis les notes qu'une entreprise
+       publie sur elle-même (« self-serving reviews ») : celles-ci
+       agrègent Booking, Google et Tripadvisor sur le Lac Hôtel, c'est-à-
+       dire sur l'auteur du balisage. Au mieux le bloc est ignoré, au pire
+       il expose à une action manuelle. Retiré le 21/08/2026.
+
+       CELA NE CHANGE RIEN À L'AFFICHAGE : la note consolidée reste dans
+       la barre du haut, et le détail par plateforme dans la bande
+       « Donner mon avis ». `AGGREGATE_RATING` continue de servir à cela,
+       il n'est simplement plus déclaré aux moteurs. */
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Free WiFi (restaurant)", value: true },
       { "@type": "LocationFeatureSpecification", name: "Free parking", value: true },

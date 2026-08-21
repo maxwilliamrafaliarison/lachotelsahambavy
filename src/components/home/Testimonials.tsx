@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { avisVerifies, texteAffiche, type Avis, type Plateforme } from "@/data/testimonials";
 import type { AvisGoogle } from "@/lib/avis-google";
@@ -291,6 +291,22 @@ export default function Testimonials({
      mouvement serait ruineux. */
   const geleJusqua = useRef(0);
 
+  /* SUSPENSION DÉLIBÉRÉE, distincte du gel passager posé par un geste.
+     Le gel expire ; celle-ci dure jusqu'à ce que le visiteur la lève.
+     Doublée d'un ref parce que la boucle d'animation, montée une seule
+     fois, ne verrait jamais changer une valeur d'état capturée dans sa
+     fermeture. */
+  const [suspendu, setSuspendu] = useState(false);
+  const suspenduRef = useRef(false);
+  const basculerSuspension = useCallback(() => {
+    /* Le ref est mis à jour HORS de l'updater, qui doit rester pur : React
+       peut l'appeler deux fois en mode strict, ce qui inverserait le ref
+       deux fois et laisserait la piste dans l'état contraire à ce que le
+       bouton annonce. */
+    suspenduRef.current = !suspenduRef.current;
+    setSuspendu(suspenduRef.current);
+  }, []);
+
   const suspendre = useCallback((duree: number = REPRISE) => {
     geleJusqua.current = performance.now() + duree;
   }, []);
@@ -314,6 +330,7 @@ export default function Testimonials({
       const dt = Math.min(maintenant - precedent, 100);
       precedent = maintenant;
       if (
+        !suspenduRef.current &&
         !moinsDeMouvement.matches &&
         maintenant >= geleJusqua.current &&
         !document.hidden
@@ -394,13 +411,51 @@ export default function Testimonials({
   };
 
   return (
-    <section className="overflow-hidden py-16 md:py-24">
+    <section className="lh-avis-section relative overflow-hidden py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
+        <div className="relative mx-auto mb-10 max-w-2xl text-center md:mb-14">
           <ScrollReveal>
             <span className="ge-label mb-4">{t.label}</span>
             <h2 style={{ textWrap: "balance" }}>{t.title}</h2>
           </ScrollReveal>
+
+          {/* LA COMMANDE DE PAUSE EST REVENUE, mais elle ne se voit qu'au
+              besoin. La direction avait fait retirer le bouton visible le
+              10/08/2026, le trouvant encombrant. Le survol, le focus et le
+              doigt figeaient bien la piste, mais le critère WCAG 2.2.2
+              demande un MÉCANISME EXPLICITE dès qu'un mouvement dure plus
+              de cinq secondes : un gel implicite ne se découvre pas, et
+              rien n'annonçait au visiteur qu'il pouvait arrêter le ruban.
+
+              Le compromis : elle est toujours dans le document et dans
+              l'ordre de tabulation, donc atteignable au clavier et
+              annoncée par les lecteurs d'écran, mais transparente au
+              repos. Elle apparaît quand la souris entre dans la section,
+              et dès qu'elle reçoit le focus. Au repos, la section est
+              aussi nue qu'avant.
+
+              Quarante-quatre pixels de côté : la cible reste conforme
+              même invisible, l'opacité ne changeant rien à la surface. */}
+          <button
+            type="button"
+            onClick={basculerSuspension}
+            aria-pressed={suspendu}
+            className="lh-ruban__pause"
+          >
+            <span className="sr-only">
+              {suspendu ? String(t.reprendre ?? "Reprendre le défilement") : String(t.suspendre ?? "Suspendre le défilement")}
+            </span>
+            <svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true" fill="currentColor">
+              {suspendu ? (
+                <path d="M1 1.2v11.6a.7.7 0 0 0 1.07.6l9.2-5.8a.7.7 0 0 0 0-1.2l-9.2-5.8A.7.7 0 0 0 1 1.2Z" />
+              ) : (
+                <>
+                  <rect x="1" y="1" width="3.4" height="12" rx="0.8" />
+                  <rect x="7.6" y="1" width="3.4" height="12" rx="0.8" />
+                </>
+              )}
+            </svg>
+          </button>
         </div>
       </div>
 

@@ -315,7 +315,9 @@
       "google": "A Google review"
     },
     "traduitParGoogle": "Translated by Google",
-    "lireLAvis": "Read the review"
+    "lireLAvis": "Read the review",
+    "suspendre": "Pause the scrolling reviews",
+    "reprendre": "Resume the scrolling reviews"
   },
   "contact": {
     "label": "Contact & Booking",
