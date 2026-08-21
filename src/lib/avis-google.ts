@@ -46,8 +46,37 @@ import type { Locale } from "@/lib/utils";
    conserver indéfiniment ; c'est pour cela qu'il peut figurer ici. */
 export const PLACE_ID = "ChIJZ7Frpw7F5yERsKDpdTlNfoc";
 
-/** Durée de vie du rendu, en secondes. Voir la note sur le cache plus bas. */
-const FRAICHEUR = 3600;
+/**
+ * Durée de vie du rendu, en secondes. SIX HEURES, et ce chiffre est le
+ * seul qui sépare la gratuité d'une facture de trois cent quarante-huit
+ * dollars par an.
+ *
+ * LE CALCUL, à refaire si l'un de ses termes change. Demander le champ
+ * `reviews` déclenche le SKU « Place Details Enterprise + Atmosphere »,
+ * le plus cher de la grille : 25 $ les mille appels, avec mille appels
+ * offerts par mois sur ce SKU. Le trafic n'entre pas dans le calcul,
+ * puisque le cache absorbe les visiteurs : ce qui compte est le nombre
+ * de régénérations, soit trois langues multipliées par le nombre de
+ * fenêtres dans le mois.
+ *
+ *     1 h  → 2 160 appels/mois → 1 160 facturés →  29,00 $/mois
+ *     3 h  →   720 appels/mois →     0 facturé  →      0
+ *     6 h  →   360 appels/mois →     0 facturé  →      0   ← retenu
+ *    12 h  →   180 appels/mois →     0 facturé  →      0
+ *
+ * Six heures laissent une marge de presque trois fois sous le seuil
+ * gratuit, et rafraîchissent les avis quatre fois par jour : bien plus
+ * souvent que la fiche n'en reçoit. Descendre sous trois heures fait
+ * basculer dans le payant, et vite.
+ *
+ * CE N'EST PAS QU'UNE QUESTION D'ARGENT. La politique de Google interdit
+ * de précharger, mettre en cache ou conserver le contenu de l'API. Le
+ * cache est ici un cache de RENDU, en mémoire du serveur, jamais sur
+ * disque ni en base : aucun texte d'avis n'est écrit nulle part. La
+ * lecture la plus stricte imposerait un appel par affichage de page ;
+ * mettre FRAICHEUR à 0 y ramène, au prix fort.
+ */
+const FRAICHEUR = 6 * 3600;
 
 const TexteLocalise = z.object({
   text: z.string(),
@@ -122,14 +151,7 @@ export async function recupererAvisGoogle(locale: Locale): Promise<AvisGoogle[]>
            la ferait basculer dans une strate plus chère. */
         "X-Goog-FieldMask": "reviews",
       },
-      /* UN CACHE DE RENDU D'UNE HEURE, ET RIEN D'AUTRE. La politique de
-         Google interdit de précharger, mettre en cache ou conserver le
-         contenu de l'API. La lecture la plus stricte imposerait un appel
-         par affichage de page, ce qui serait coûteux et lent sans rien
-         apporter au lecteur. Le compromis retenu : une heure de
-         fraîcheur, en mémoire du serveur de rendu, jamais sur disque et
-         jamais en base. Aucun texte d'avis n'est écrit nulle part.
-         Pour revenir à la lecture stricte, mettre FRAICHEUR à 0. */
+      /* Cache de rendu seulement : voir FRAICHEUR et son calcul. */
       next: { revalidate: FRAICHEUR },
     });
 
