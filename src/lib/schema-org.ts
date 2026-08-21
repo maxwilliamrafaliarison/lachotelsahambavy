@@ -52,18 +52,15 @@ interface ReviewItem {
 // =====================================================
 
 /**
- * Agrégats relevés le 10/08/2026 sur la fiche Google de l'hôtel, qui
- * affiche sa propre note et relaie celle de Tripadvisor.
- *   - Google     : 4,6 / 5 · 177 avis
- *   - Tripadvisor: 4,1 / 5 · 230 avis
- *   - Booking    : 9,0 / 10 · 34 avis (= 4,5 / 5)
- *   - Pondéré    : 4,3 / 5 · 441 avis
- *
- * (4,6×177 + 4,1×230 + 4,5×34) / 441 = 4,33. Le compte précédent, 420,
- * datait d'avril et sous-estimait Google de vingt avis.
- */
-/**
  * Note agrégée des trois plateformes, CALCULÉE et non recopiée.
+ *
+ * AUCUN CHIFFRE N'EST ÉCRIT ICI, et c'est délibéré. Un commentaire
+ * portait la liste des notes et le total, « 4,6 sur 177, 4,1 sur 230,
+ * 9,0 sur 34, pondéré 4,3 sur 441 ». Le jour où Booking est passé à 40
+ * avis et Google à 178, ce commentaire est devenu faux sans que rien ne
+ * le signale, et il contredisait le code juste en dessous. Les chiffres
+ * vivent dans siteConfig.ratings, à un seul endroit ; les redire ailleurs
+ * ne fait que créer une seconde vérité qui dérive.
  *
  * Elle était écrite à la main, 4,3 sur 441 avis, à côté des chiffres par
  * plateforme de siteConfig.ratings. Deux sources pour la même vérité
