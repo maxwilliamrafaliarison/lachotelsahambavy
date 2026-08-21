@@ -53,7 +53,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
  */
 function Linkify({ text }: { text: string }) {
   // Match http(s)://..., bare domains (ec.europa.eu/...), and email addresses.
-  const pattern = /(https?:\/\/[^\s]+|(?:www\.|(?:ec|mtv|cnil|aepd)\.[^\s]+?\/[^\s]*|(?:ec|mtv|cnil|aepd)\.[^\s)]+)|[\w.+-]+@[\w.-]+\.[a-z]{2,})/gi;
+  /* « www\. » N'AVAIT PAS DE SUITE, et c'est ce qui produisait deux liens
+     morts par page, dans les trois langues. La première branche de
+     l'alternance ne capturait que les quatre caractères « www. » :
+     « www.mtv.travel » donnait un lien href="https://www." dont le
+     libellé était « www. ». Idem pour la CNIL en français et en anglais,
+     l'AEPD en espagnol. Il manquait simplement de quoi consommer le
+     domaine, et la borne « ni espace ni parenthèse fermante » est
+     nécessaire : ces adresses apparaissent entre parenthèses, comme dans
+     « CNIL (France, www.cnil.fr) ». */
+  const pattern = /(https?:\/\/[^\s]+|(?:www\.[^\s)]+|(?:ec|mtv|cnil|aepd)\.[^\s]+?\/[^\s]*|(?:ec|mtv|cnil|aepd)\.[^\s)]+)|[\w.+-]+@[\w.-]+\.[a-z]{2,})/gi;
   const parts: Array<string | { kind: "url" | "email"; value: string }> = [];
   let lastIndex = 0;
   let match: RegExpExecArray | null;

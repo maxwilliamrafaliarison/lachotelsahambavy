@@ -32,8 +32,23 @@ function stripUndefined(value: unknown): unknown {
   return value;
 }
 
+/* Le vocabulaire, ajouté ICI et non dans chaque générateur.
+
+   Un bloc JSON-LD sans `@context` n'est pas du JSON-LD : les moteurs
+   l'ignorent en silence. `organizationSchema()` l'avait oublié, et son
+   bloc partait donc invalide sur les 51 pages depuis l'origine, sans que
+   rien ne le signale. Le poser au point de passage commun règle le cas
+   présent et tous ceux à venir : un générateur qui l'oublie ne peut plus
+   émettre un bloc mort.
+
+   Celui qui le déclare déjà garde le sien : on ne l'écrase pas, au cas
+   où un schéma aurait besoin d'un contexte particulier. */
+const VOCABULAIRE = "https://schema.org";
+
 export function JsonLd({ schemas }: JsonLdProps) {
-  const list = Array.isArray(schemas) ? schemas : [schemas];
+  const list = (Array.isArray(schemas) ? schemas : [schemas]).map((s) =>
+    s && typeof s === "object" && !("@context" in s) ? { "@context": VOCABULAIRE, ...s } : s,
+  );
 
   return (
     <>
