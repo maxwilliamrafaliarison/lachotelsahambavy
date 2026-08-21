@@ -1212,6 +1212,64 @@ body {
   }
 
 
+  /* ---------- GÉLULES DES PLATEFORMES D'AVIS ----------
+
+     Même vocabulaire que les pastilles du menu, à la demande de la
+     direction (14/08/2026) : fond pâle, encre orange, remplissage à
+     l'orange vif au survol. La section « Votre avis » entre ainsi dans la
+     langue graphique du site au lieu d'inventer la sienne.
+
+     LE MOUVEMENT DIFFÈRE de celui des sous-menus, et c'est voulu : ceux-ci
+     glissent latéralement parce qu'ils sont empilés en colonne. Ici les
+     gélules sont posées en ligne, un décalage de côté ferait tanguer la
+     file entière ; elles se soulèvent donc d'un pixel.
+
+     L'OPACITÉ DU SECONDAIRE (nombre d'avis) tombe à 0,8 AU REPOS
+     seulement : sur le pâle, l'encre y tient encore 4,65:1, au-dessus du
+     seuil AA. Une fois la gélule remplie, le blanc reprend son opacité
+     pleine : atténué à 0,85 il ne vaudrait que 3,88:1 sur l'orange, sous
+     le seuil. Le contraste ne se règle pas de la même façon selon le fond
+     qu'on a dessous. */
+
+  .lh-gelule {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 38px; padding: 8px 16px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 13px; line-height: 1.2; letter-spacing: 0.004em;
+    white-space: nowrap;
+    color: rgb(var(--lh-past-ink));
+    background: rgb(var(--lh-past-pale) / 0.9);
+    box-shadow: inset 0 0 0 1px rgb(var(--lh-past) / 0.24);
+    transition: background-color 160ms var(--lh-ease),
+                color 160ms var(--lh-ease),
+                box-shadow 160ms var(--lh-ease),
+                transform 160ms var(--lh-ease);
+  }
+
+  .lh-gelule__note { font-weight: 500; font-variant-numeric: tabular-nums; }
+  .lh-gelule__avis { opacity: 0.8; }
+  .lh-gelule__point { opacity: 0.45; }
+
+  .lh-gelule:hover,
+  .lh-gelule:focus-visible {
+    background: rgb(var(--lh-past));
+    color: #FFFFFF;
+    box-shadow: inset 0 0 0 1px rgb(var(--lh-past)),
+                0 4px 14px -6px rgb(var(--lh-past) / 0.6);
+    transform: translateY(-1px);
+  }
+  /* Rempli, tout revient à l'opacité pleine : voir la note ci-dessus. */
+  .lh-gelule:hover .lh-gelule__avis,
+  .lh-gelule:focus-visible .lh-gelule__avis { opacity: 1; }
+  .lh-gelule:hover .lh-gelule__point,
+  .lh-gelule:focus-visible .lh-gelule__point { opacity: 0.6; }
+
+  .lh-gelule:focus-visible {
+    outline: 2px solid rgb(var(--lh-past-ink));
+    outline-offset: 2px;
+  }
+
   /* ---------- ENTRÉE ---------- */
 
   @keyframes lh-plateau-entree {
@@ -1276,9 +1334,9 @@ body {
 
   @media (prefers-reduced-motion: reduce) {
     .lh-plateau { animation: none; }
-    .lh-pastille, .lh-onglet { transition: none; }
+    .lh-pastille, .lh-onglet, .lh-gelule { transition: none; }
     .lh-pastille:hover, .lh-pastille:focus-visible,
-    .lh-onglet:hover { transform: none; }
+    .lh-onglet:hover, .lh-gelule:hover { transform: none; }
     /* Le ruban ne s'avance plus tout seul (le composant ne démarre pas
        sa boucle), mais il reste défilable à la main : c'est exactement ce
        que ce réglage système demande, supprimer le mouvement subi, pas la
