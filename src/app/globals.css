@@ -1153,7 +1153,11 @@ body {
      340 px plutôt que les ~420 px de Hostinger, l'échelle demandée. */
   .lh-avis {
     display: flex; flex-direction: column;
-    width: 340px; height: 232px;
+    /* 256 px et non plus 232 : la carte porte désormais une ligne de
+       plus, « traduit du français », qui n'apparaît que lorsque le
+       lecteur ne lit pas la langue du client. La hauteur est la même
+       pour toutes, sans quoi le ruban aurait des dents. */
+    width: 340px; height: 256px;
     padding: 20px 22px;
     border-radius: 4px;
     background: var(--color-white);
@@ -1168,10 +1172,15 @@ body {
     color: var(--color-ink);
   }
 
+  /* La note est un CHIFFRE, dans le barème de sa plateforme, et non plus
+     une file d'étoiles : Booking note sur dix, et cinq étoiles pour un
+     9/10 arrondissaient la note du client vers le haut. Chasse fixe,
+     pour que la colonne des notes ne tremble pas au défilement. */
   .lh-avis__note {
     margin-left: auto;
     font-size: 11px;
-    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
     color: rgb(var(--lh-past));      /* l'orange du menu, pas un jaune de plus */
   }
 
@@ -1203,6 +1212,29 @@ body {
     font-family: var(--font-body);
     font-size: 13px; font-weight: 500;
     color: var(--color-ink);
+  }
+
+  /* Le mois du séjour, que l'article L.111-7-2 demande de faire figurer.
+     Plus pâle que le pays : c'est une précision, pas une information de
+     premier plan. */
+  .lh-avis__date {
+    color: var(--color-muted);
+  }
+  .lh-avis__date::after {
+    content: " ·";
+    opacity: 0.5;
+  }
+
+  /* « Traduit du français ». Volontairement la ligne la plus discrète de
+     la carte, mais présente : sans elle, la page donnerait pour les mots
+     du client une phrase qu'il n'a pas écrite. */
+  .lh-avis__traduit {
+    margin: 8px 0 0;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--color-muted);
+    opacity: 0.85;
   }
 
   .lh-avis__lieu {

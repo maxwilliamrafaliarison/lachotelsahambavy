@@ -308,7 +308,9 @@
   "testimonials": {
     "label": "Testimonials",
     "title": "They lived the experience",
-    "transparence": "Reviews published as written · verification handled by each platform"
+    "transparence": "Reviews copied word for word from {booking} and {tripadvisor}, which verify their authors. We publish none of our own writing and do not touch up the text, spelling included. Those carrying a reservation are not reproduced here: they can be read, with all the others, on both listings.",
+    "traduitDe": "Translated {langue}",
+    "noteSur": "{note} out of {bareme}"
   },
   "contact": {
     "label": "Contact & Booking",

@@ -2,12 +2,8 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import {
-  bookingReviews,
-  googleReviews,
-  tripadvisorReviews,
-  type Review,
-} from "@/data/testimonials";
+import { avisVerifies, texteAffiche, type Avis, type Plateforme } from "@/data/testimonials";
+import { siteConfig } from "@/data/site";
 import { LogoGoogle, LogoTripAdvisor, LogoBooking } from "@/components/ui/LogosPlateformes";
 import type { Locale } from "@/lib/utils";
 
@@ -48,17 +44,18 @@ import type { Locale } from "@/lib/utils";
  * continue de tourner, sans quoi la piste buterait sur sa fin et le
  * doublon masqué aux lecteurs d'écran deviendrait pleinement visible.
  *
- * QUINZE AVIS, TOUS RÉELS. Voir l'en-tête de src/data/testimonials.ts.
+ * CHAQUE AVIS EST SOURCÉ, et cité mot pour mot. La carte porte donc trois
+ * choses que la version précédente n'avait pas : la note DANS LE BARÈME DE
+ * SA PLATEFORME (Booking note sur dix, et cinq étoiles pour un 9/10 était
+ * un arrondi vers le haut), le mois du séjour, et la mention « traduit de »
+ * lorsque le lecteur ne lit pas la langue dans laquelle le client a écrit.
+ * Le détail de ce contrôle est en tête de src/data/testimonials.ts.
  */
-
-type Plateforme = "booking" | "google" | "tripadvisor";
-
-type Carte = Review & { source: Plateforme };
 
 /* Nom et logo de la plateforme d'origine. Les cartes ne sont pas
    cliquables : les liens vers les plateformes vivent dans la barre
-   supérieure et dans la section des notes, et un lien dans une piste qui
-   glisse serait de toute façon une cible mouvante. */
+   supérieure, dans la section des notes et sous le ruban, et un lien dans
+   une piste qui glisse serait de toute façon une cible mouvante. */
 const MARQUES: Record<
   Plateforme,
   { nom: string; Logo: (p: { taille?: number }) => React.ReactElement }
@@ -69,19 +66,25 @@ const MARQUES: Record<
 };
 
 /* Un avis de chaque plateforme à tour de rôle : le ruban alterne les
-   origines au lieu de servir cinq Booking puis cinq Google. */
-function melanger(): Carte[] {
-  const files: [Plateforme, Review[]][] = [
-    ["booking", bookingReviews],
-    ["google", googleReviews],
-    ["tripadvisor", tripadvisorReviews],
-  ];
-  const max = Math.max(...files.map(([, r]) => r.length));
-  const sortie: Carte[] = [];
+   origines au lieu de servir sept Booking puis quatre TripAdvisor.
+   L'ordre est CALCULÉ, jamais tiré au sort : serveur et client doivent
+   produire le même, sous peine de casser l'hydratation.
+
+   Les files sont construites depuis `avisVerifies` et non écrites à la
+   main : le jour où des avis Google seront lus à leur source, ils
+   entreront dans la rotation sans une ligne à changer ici. */
+function melanger(): Avis[] {
+  const files = new Map<Plateforme, Avis[]>();
+  for (const a of avisVerifies) {
+    const f = files.get(a.plateforme);
+    if (f) f.push(a);
+    else files.set(a.plateforme, [a]);
+  }
+  const listes = [...files.values()];
+  const max = Math.max(...listes.map((l) => l.length));
+  const sortie: Avis[] = [];
   for (let i = 0; i < max; i++) {
-    for (const [source, avis] of files) {
-      if (avis[i]) sortie.push({ ...avis[i], source });
-    }
+    for (const liste of listes) if (liste[i]) sortie.push(liste[i]);
   }
   return sortie;
 }
@@ -315,8 +318,8 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
               aria-hidden={exemplaire === 1 ? "true" : undefined}
             >
               {CARTES.map((c) => (
-                <li key={`${exemplaire}-${c.source}-${c.name}`}>
-                  <CarteAvis carte={c} locale={locale} />
+                <li key={`${exemplaire}-${c.plateforme}-${c.auteur}`}>
+                  <CarteAvis avis={c} locale={locale} dict={dict} />
                 </li>
               ))}
             </ul>
@@ -325,45 +328,144 @@ export default function Testimonials({ dict, locale }: { dict: any; locale: Loca
       </div>
 
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-        {/* Article L.111-7-2 du Code de la consommation. Dite en une
-            ligne plutôt qu'en paragraphe : l'obligation porte sur
-            l'information, pas sur sa longueur. Discrète à dessein, 11 px
-            en gris de service. Ce gris tient 4,5:1 sur le papier, le
-            plancher AA : on ne peut pas l'éclaircir davantage, et une
-            mention illisible ne remplirait plus son office. */}
-        <p className="mt-7 text-center text-[11px] leading-relaxed tracking-[0.01em] text-muted md:mt-9">
-          {t.transparence}
+        {/* Article L.111-7-2 du Code de la consommation : dire d'où
+            viennent les avis, qui en vérifie l'auteur, et comment ils
+            sont traités.
+
+            LA PHRASE A ÉTÉ REFAITE le 21/08/2026. Elle disait « avis
+            publiés tels quels », ce qui était faux de deux façons : neuf
+            des quinze n'avaient aucune source, et le texte des six
+            autres avait été retouché. Elle avoue désormais la SÉLECTION,
+            qui est le point délicat : ne sont repris que les avis sans
+            réserve, et le lecteur est envoyé là où il les lit tous, les
+            bons comme les mauvais. Taire ce tri serait précisément la
+            présentation trompeuse que vise la directive Omnibus.
+
+            Discrète à dessein, 11 px en gris de service, qui tient
+            4,5:1 sur le papier : on ne peut pas l'éclaircir davantage,
+            et une mention illisible ne remplirait plus son office. */}
+        <p className="mx-auto mt-7 max-w-2xl text-center text-[11px] leading-relaxed tracking-[0.01em] text-muted md:mt-9">
+          {avecLiens(String(t.transparence))}
         </p>
       </div>
     </section>
   );
 }
 
-function CarteAvis({ carte, locale }: { carte: Carte; locale: Locale }) {
-  const marque = MARQUES[carte.source];
-  const drapeau = DRAPEAUX[carte.location];
-  const pays = PAYS[carte.location]?.[locale] ?? carte.location;
-  const { Logo } = marque;
+/* Les deux plateformes citées dans la mention de transparence deviennent
+   des liens : « ils se lisent tous là-bas » n'a de valeur que si l'on
+   peut y aller. Le texte reste dans les dictionnaires avec {booking} et
+   {tripadvisor} en repères, plutôt que d'y coudre du balisage. */
+function avecLiens(phrase: string) {
+  const cibles: Record<string, { href: string; libelle: string }> = {
+    "{booking}": { href: siteConfig.social.booking, libelle: "Booking.com" },
+    "{tripadvisor}": { href: siteConfig.social.tripadvisor, libelle: "TripAdvisor" },
+  };
+  return phrase.split(/(\{booking\}|\{tripadvisor\})/).map((bout, i) => {
+    const cible = cibles[bout];
+    if (!cible) return <span key={i}>{bout}</span>;
+    return (
+      <a
+        key={i}
+        href={cible.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-terracotta/40 underline-offset-2 transition-colors hover:text-terracotta"
+      >
+        {cible.libelle}
+      </a>
+    );
+  });
+}
+
+/* Langue d'origine pour la mention « traduit de », dans la langue du
+   LECTEUR, qui est le seul à qui elle s'adresse.
+
+   LA PRÉPOSITION EST DANS LA TABLE, pas dans le gabarit. Un gabarit
+   « Traduit du {langue} » produisait « Traduit du anglais » : le français
+   élide devant une voyelle et l'espagnol contracte « de el » en « del ».
+   Ces variations ne se calculent pas, elles s'écrivent. Le gabarit se
+   réduit donc à « Traduit {langue} ». Première clé : la langue du client.
+   Seconde : celle du lecteur. */
+const LANGUES: Record<Locale, Record<Locale, string>> = {
+  fr: { fr: "du français", en: "from French", es: "del francés" },
+  en: { fr: "de l’anglais", en: "from English", es: "del inglés" },
+  es: { fr: "de l’espagnol", en: "from Spanish", es: "del español" },
+};
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function CarteAvis({ avis, locale, dict }: { avis: Avis; locale: Locale; dict: any }) {
+  const t = dict.testimonials;
+  const { Logo, nom } = MARQUES[avis.plateforme];
+  const drapeau = avis.pays ? DRAPEAUX[avis.pays] : undefined;
+  const pays = avis.pays ? (PAYS[avis.pays]?.[locale] ?? avis.pays) : null;
+  const { texte, traduit } = texteAffiche(avis, locale);
+
+  /* La note est donnée DANS LE BARÈME DE SA PLATEFORME, en chiffres et
+     non en étoiles. Booking note sur dix : cinq étoiles pour un 9/10
+     arrondissaient vers le haut, ce qui est une façon de flatter la note
+     d'autrui. Le format reprend celui des gélules de la section « Votre
+     avis », pour que le site parle des notes d'une seule voix. */
+  const chiffres = new Intl.NumberFormat(
+    locale === "en" ? "en-GB" : locale === "es" ? "es-ES" : "fr-FR",
+  );
 
   return (
     <article className="lh-avis">
       <div className="lh-avis__source">
         <Logo taille={16} />
-        <span>{marque.nom}</span>
-        <span className="lh-avis__note" aria-label={`${carte.rating} / 5`}>
-          {"★".repeat(carte.rating)}
+        <span>{nom}</span>
+        {/* Vu : « 9/10 ». Entendu : « 9 sur 10 ». La barre oblique se
+            lit mal, un lecteur d'écran l'annonce « slash » ou la saute
+            selon la verbosité réglée ; la version parlée est donc écrite
+            à part, dans la langue de la page. */}
+        <span className="lh-avis__note">
+          <span aria-hidden="true">
+            {chiffres.format(avis.note)}/{avis.bareme}
+          </span>
+          <span className="sr-only">
+            {String(t.noteSur ?? "{note} sur {bareme}")
+              .replace("{note}", chiffres.format(avis.note))
+              .replace("{bareme}", String(avis.bareme))}
+          </span>
         </span>
       </div>
 
-      <blockquote className="lh-avis__texte">{carte.text[locale]}</blockquote>
+      {/* `cite` porte la page où l'avis se lit : la référence suit la
+          citation dans le document lui-même, et pas seulement dans le
+          commentaire du fichier de données. */}
+      <blockquote className="lh-avis__texte" cite={avis.source}>
+        {texte}
+      </blockquote>
 
       <footer className="lh-avis__pied">
-        <span className="lh-avis__nom">{carte.name}</span>
+        <span className="lh-avis__nom">{avis.auteur}</span>
         <span className="lh-avis__lieu">
-          {drapeau && <span aria-hidden="true">{drapeau} </span>}
-          {pays}
+          {/* Le mois du séjour situe l'avis dans le temps, ce que
+              l'article L.111-7-2 demande explicitement. */}
+          <span className="lh-avis__date">{avis.sejour[locale]}</span>
+          {pays && (
+            <>
+              {drapeau && <span aria-hidden="true"> {drapeau}</span>}
+              <span className="sr-only"> </span>
+              {pays}
+            </>
+          )}
         </span>
       </footer>
+
+      {/* Dire que l'on traduit, comme Booking et TripAdvisor le disent
+          avec leur « voir la traduction ». Sans cette ligne, la page
+          présenterait comme les mots du client une phrase qu'il n'a pas
+          écrite, dans une langue qu'il n'a pas employée. */}
+      {traduit && (
+        <p className="lh-avis__traduit">
+          {String(t.traduitDe ?? "Traduit {langue}").replace(
+            "{langue}",
+            LANGUES[avis.langueOriginale][locale],
+          )}
+        </p>
+      )}
     </article>
   );
 }
