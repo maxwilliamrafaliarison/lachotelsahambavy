@@ -2,7 +2,6 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RoomGallery from "@/components/rooms/RoomGallery";
 import { roomsAffichees, type Room } from "@/data/rooms";
-import { siteConfig } from "@/data/site";
 import { type Locale, getBasePath } from "@/lib/utils";
 
 const basePath = getBasePath();
@@ -25,10 +24,6 @@ function formatAr(n: number): string {
 }
 
 /** 9 → « 9,0 » (fr/es) ou « 9.0 » (en). */
-function formatScore(n: number, locale: Locale): string {
-  const s = n.toFixed(1);
-  return locale === "en" ? s : s.replace(".", ",");
-}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale }) {
@@ -39,11 +34,7 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
      sa pastille de localisation. */
   const displayRooms = roomsAffichees;
 
-  const ratings = [
-    { name: "Booking.com", score: `${formatScore(siteConfig.ratings.booking.score, locale)}/10`, url: siteConfig.social.booking },
-    { name: "Google", score: `${formatScore(siteConfig.ratings.google.score, locale)}/5`, url: siteConfig.social.google },
-    { name: "TripAdvisor", score: `${formatScore(siteConfig.ratings.tripadvisor.score, locale)}/5`, url: siteConfig.social.tripadvisor },
-  ];
+
 
   return (
     <section id="rooms" className="scroll-mt-24 py-16 md:py-24">
@@ -68,25 +59,16 @@ export default function RoomsGrid({ dict, locale }: { dict: any; locale: Locale 
           ))}
         </div>
 
-        {/* ─── Réassurance : chips hairline (style Radisson) ─────────── */}
-        <ScrollReveal>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            {ratings.map((r) => (
-              <a
-                key={r.name}
-                href={r.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-baseline gap-2.5 rounded-full border border-hairline bg-white px-5 py-2.5 transition-colors hover:border-lake"
-              >
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-                  {r.name}
-                </span>
-                <span className="text-sm font-semibold tabular-nums text-terracotta">{r.score}</span>
-              </a>
-            ))}
-          </div>
-        </ScrollReveal>
+        {/* LA BANDE DE PASTILLES A ÉTÉ RETIRÉE (14/08/2026).
+
+            Elle répétait ici les trois notes de plateforme, que la section
+            « Votre avis » donne déjà sur la même page, et que la barre du
+            haut donnait une troisième fois. Trois fois les mêmes chiffres
+            pour un visiteur qui n'en retient aucun.
+
+            La règle désormais : la note consolidée en haut de chaque page,
+            le détail par plateforme à un seul endroit, dans « Votre avis ».
+            Ne pas réintroduire de rappel ici. */}
 
         {/* ─── Tous les hébergements ─────────────────────────────────── */}
         <div className="mt-10 text-center">

@@ -20,12 +20,17 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/site";
 import { alt } from "@/lib/alt";
 import type { Locale } from "@/lib/utils";
+import { AGGREGATE_RATING } from "@/lib/schema-org";
 
 export default function TopBar({ locale }: { locale: Locale }) {
   /* « sur 5 » se dit « out of 5 » et « sobre 5 » : la préposition change,
      pas seulement les mots qui l'entourent. */
   const surCinq = alt({ fr: "sur 5", en: "out of 5", es: "sobre 5" }, locale);
-  const surDix = alt({ fr: "sur 10", en: "out of 10", es: "sobre 10" }, locale);
+  const nfNote = new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "es" ? "es-ES" : "fr-FR", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+  const nfEntier = new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "es" ? "es-ES" : "fr-FR");
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -73,32 +78,39 @@ export default function TopBar({ locale }: { locale: Locale }) {
 
         {/* Right: Ratings + Social */}
         <div className="flex items-center gap-3 md:gap-5 text-[0.6875rem] tracking-[0.12em] uppercase font-medium">
-          {/* Ratings: desktop only */}
-          <div className="hidden lg:flex items-center gap-4">
-            <RatingLink
-              href={siteConfig.social.tripadvisor}
-              score={siteConfig.ratings.tripadvisor.score}
-              max={5}
-              label={`${alt({ fr: "Avis TripAdvisor", en: "TripAdvisor rating", es: "Reseñas TripAdvisor" }, locale)}, ${siteConfig.ratings.tripadvisor.score} ${surCinq}`}
-              Logo={LogoTripAdvisor}
-            />
-            <span className="w-px h-3 bg-paper/15" />
-            <RatingLink
-              href={siteConfig.social.google}
-              score={siteConfig.ratings.google.score}
-              max={5}
-              label={`${alt({ fr: "Avis Google", en: "Google rating", es: "Reseñas Google" }, locale)}, ${siteConfig.ratings.google.score} ${surCinq}`}
-              Logo={LogoGoogle}
-            />
-            <span className="w-px h-3 bg-paper/15" />
-            <RatingLink
-              href={siteConfig.social.booking}
-              score={siteConfig.ratings.booking.score}
-              max={10}
-              label={`${alt({ fr: "Note Booking", en: "Booking rating", es: "Puntuación Booking" }, locale)}, ${siteConfig.ratings.booking.score} ${surDix}`}
-              Logo={LogoBooking}
-            />
-          </div>
+          {/* UNE SEULE NOTE, CONSOLIDÉE (14/08/2026).
+
+              Cette barre affichait les trois notes de plateforme, que la
+              section « Votre avis » redonnait plus bas : le visiteur lisait
+              trois fois les mêmes chiffres sur la même page, et n'en
+              retenait aucun. Trois nombres sur trois barèmes différents ne
+              se comparent pas, ils s'additionnent en bruit.
+
+              Ici, en haut de CHAQUE page, une seule note : la moyenne
+              pondérée des trois plateformes, ramenée sur cinq, avec le
+              nombre total d'avis. C'est ce que font les sites d'hôtels
+              européens qui affichent leurs notes, et c'est aussi la valeur
+              que le site publie déjà dans ses données structurées, donc
+              celle que Google peut afficher : un même chiffre partout.
+
+              Le détail par plateforme reste à un seul endroit, la section
+              « Votre avis », où il est utile parce qu'on y choisit où
+              écrire. Le lien mène droit à cette section. */}
+          <a
+            href={`/${locale}/#donner-un-avis`}
+            aria-label={`${alt({ fr: "Note des voyageurs", en: "Traveller rating", es: "Valoración de los viajeros" }, locale)} : ${nfNote.format(AGGREGATE_RATING.ratingValue)} ${surCinq}, ${AGGREGATE_RATING.reviewCount} ${alt({ fr: "avis", en: "reviews", es: "opiniones" }, locale)}`}
+            className="group hidden items-center gap-2 lg:flex"
+          >
+            <IconStar className="text-gold/80 transition-colors duration-300 group-hover:text-gold" />
+            <span className="tabular-nums text-paper/85 transition-colors duration-300 group-hover:text-gold">
+              {nfNote.format(AGGREGATE_RATING.ratingValue)}
+              <span className="text-paper/45">/5</span>
+            </span>
+            <span className="normal-case tracking-normal text-paper/45">
+              {nfEntier.format(AGGREGATE_RATING.reviewCount)}{" "}
+              {alt({ fr: "avis", en: "reviews", es: "opiniones" }, locale)}
+            </span>
+          </a>
 
           <span className="hidden lg:block w-px h-3 bg-paper/15" />
 
@@ -131,38 +143,6 @@ export default function TopBar({ locale }: { locale: Locale }) {
 
 /* ── Rating link: star + score /max + brand logo, colorizes on hover ─── */
 
-function RatingLink({
-  href,
-  score,
-  max,
-  label,
-  Logo,
-}: {
-  href: string;
-  score: number;
-  max: 5 | 10;
-  label: string;
-  Logo: React.ComponentType<{ className?: string }>;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className="group flex items-center gap-1.5"
-    >
-      <IconStar className="text-paper/50 transition-colors duration-300 group-hover:text-gold" />
-      <span className="tabular-nums text-paper/70 transition-colors duration-300 group-hover:text-gold">
-        {score.toFixed(1)}
-      </span>
-      <span className="text-paper/30 transition-colors duration-300 group-hover:text-gold/70">
-        /{max}
-      </span>
-      <Logo className="ml-1 grayscale opacity-55 brightness-125 transition-[filter,opacity] duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100" />
-    </a>
-  );
-}
 
 /* ── Inline icons: minimal line-style ───────────────────────── */
 
@@ -200,76 +180,8 @@ function IconStar({ className }: { className?: string }) {
 
 /* ── Brand logo marks: rendered in brand colors, desaturated by CSS ─── */
 
-function LogoTripAdvisor({ className }: { className?: string }) {
-  return (
-    <svg
-      width="18"
-      height="11"
-      viewBox="0 0 128 79"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={className}
-    >
-      {/* Official owl mark: two eyes + body, in TripAdvisor green */}
-      <g fill="#34E0A1">
-        <path d="M64 0C49.7 0 36 3.3 23.7 9.6H0l12 12.9C4.8 29 .5 38.5.5 49c0 16.4 13.3 29.7 29.7 29.7 7.8 0 14.9-3 20.2-7.9L64 78.7l13.6-7.9c5.3 4.9 12.4 7.9 20.2 7.9 16.4 0 29.7-13.3 29.7-29.7 0-10.5-4.3-20-11.4-26.5l11.9-12.9h-23.8C91.9 3.3 78.3 0 64 0zM30.2 71.7c-12.5 0-22.7-10.2-22.7-22.7s10.2-22.7 22.7-22.7 22.7 10.2 22.7 22.7S42.7 71.7 30.2 71.7zm33.8-3.9c-3.1-6.2-9.2-10.5-16.5-11.2 5-5.3 8.1-12.4 8.1-20.2 0-11-6.2-20.5-15.3-25.3 7.9-3.5 16.6-5.5 23.7-5.5s15.8 2 23.7 5.5c-9.1 4.8-15.3 14.3-15.3 25.3 0 7.8 3.1 14.9 8.1 20.2-7.3.7-13.4 5-16.5 11.2zm33.8 3.9c-12.5 0-22.7-10.2-22.7-22.7s10.2-22.7 22.7-22.7 22.7 10.2 22.7 22.7-10.2 22.7-22.7 22.7z" />
-        <circle cx="30.2" cy="49" r="11.1" fill="#000" />
-        <circle cx="97.8" cy="49" r="11.1" fill="#000" />
-      </g>
-    </svg>
-  );
-}
 
-function LogoGoogle({ className }: { className?: string }) {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 48 48"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={className}
-    >
-      <path
-        fill="#4285F4"
-        d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"
-      />
-      <path
-        fill="#34A853"
-        d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"
-      />
-      <path
-        fill="#FBBC05"
-        d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"
-      />
-      <path
-        fill="#EA4335"
-        d="M24 9.5c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 2.69 29.93 1 24 1 15.4 1 7.96 5.93 4.34 13.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"
-      />
-    </svg>
-  );
-}
 
-function LogoBooking({ className }: { className?: string }) {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 32 32"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={className}
-    >
-      {/* Booking.com "B." lettermark: navy square, white B + dot */}
-      <rect width="32" height="32" rx="5" fill="#003580" />
-      <path
-        fill="#ffffff"
-        d="M10.4 8h6.1c3.1 0 5 1.2 5 3.9 0 1.4-.7 2.5-1.9 3.1 1.6.5 2.6 1.9 2.6 3.8 0 3.2-2.3 4.6-5.7 4.6h-6.1V8zm5.8 6.4c1.3 0 2-.5 2-1.7s-.7-1.7-2-1.7h-2.7v3.4h2.7zm.4 6.4c1.5 0 2.3-.6 2.3-2 0-1.3-.8-2-2.3-2h-3.1v4h3.1z"
-      />
-      <circle cx="25" cy="24" r="2.2" fill="#00a4f0" />
-    </svg>
-  );
-}
 
 function IconFacebook() {
   return (
