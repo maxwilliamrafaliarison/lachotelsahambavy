@@ -437,7 +437,17 @@ const tousLesAvis: Avis[] = [
 
      HUIT SUR VINGT : les tronqués par « En savoir plus » sont
      écartés faute de texte entier, et ceux qui portent une réserve
-     ne sont pas tronqués mais absents, comme pour Tripadvisor. */
+     ne sont pas tronqués mais absents, comme pour Tripadvisor.
+
+     « TOKY R. » NE DOIT JAMAIS ENTRER ICI. Son avis cinq étoiles est
+     bien sur la fiche Google, et il est tentant, mais la direction a
+     confirmé le 21/08/2026 qu'il s'agit du RÉCEPTIONNISTE de l'hôtel,
+     le même que le client « Michel » remercie nommément dans son avis
+     Booking. Un avis d'employé sur son propre établissement est un
+     avis en conflit d'intérêts : la directive Omnibus le range parmi
+     les pratiques trompeuses, et les règles de Google l'interdisent
+     aussi. Le publier serait exactement ce que le nettoyage du
+     11/08/2026 avait entrepris de défaire. */
   {
     auteur: "JM FRACHET",
     plateforme: "google",
