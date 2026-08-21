@@ -76,7 +76,7 @@ import type { Locale } from "@/lib/utils";
  * mot. C'est ici que quelqu'un doit venir lire s'il veut rouvrir la
  * question.
  *
- * VINGT-DEUX AVIS RELEVÉS, QUINZE PUBLIÉS : sept Tripadvisor et huit
+ * VINGT-DEUX AVIS RELEVÉS, SEIZE PUBLIÉS : sept Tripadvisor et neuf
  * Google. Les sept avis Booking restent en réserve, leurs conditions
  * générales en interdisant la reprise sans accord écrit ; voir
  * CONSENTEMENT_BOOKING plus bas. Le lot Tripadvisor
@@ -445,19 +445,25 @@ const tousLesAvis: Avis[] = [
      titre son avis « 08 Mars » et Google le datait d'« il y a
      5 mois », ce qui tombe bien sur mars 2026.
 
-     HUIT SUR VINGT : les tronqués par « En savoir plus » sont
+     NEUF SUR VINGT : les tronqués par « En savoir plus » sont
      écartés faute de texte entier, et ceux qui portent une réserve
      ne sont pas tronqués mais absents, comme pour Tripadvisor.
 
-     « TOKY R. » NE DOIT JAMAIS ENTRER ICI. Son avis cinq étoiles est
-     bien sur la fiche Google, et il est tentant, mais la direction a
-     confirmé le 21/08/2026 qu'il s'agit du RÉCEPTIONNISTE de l'hôtel,
-     le même que le client « Michel » remercie nommément dans son avis
-     Booking. Un avis d'employé sur son propre établissement est un
-     avis en conflit d'intérêts : la directive Omnibus le range parmi
-     les pratiques trompeuses, et les règles de Google l'interdisent
-     aussi. Le publier serait exactement ce que le nettoyage du
-     11/08/2026 avait entrepris de défaire. */
+     « TOKY R. » : SOUPÇON LEVÉ, ne pas le rouvrir. Son avis avait été
+     écarté un temps, sur la seule coïncidence de son prénom avec celui
+     du réceptionniste que le client « Michel » remercie nommément dans
+     son avis Booking. La déduction était faible : Toky est un prénom
+     malgache très répandu. Vérification faite le 21/08/2026 sur son
+     profil de contributeur Google, c'est un Local Guide de niveau 4
+     qui a aussi noté un ranch à Isalo, une crêperie à Batz-sur-Mer et
+     un salon de massage à Paris : un voyageur, pas un employé. Son
+     avis est publié.
+
+     Le principe, lui, reste entier : un avis d'employé sur son propre
+     établissement est en conflit d'intérêts, la directive Omnibus le
+     range parmi les pratiques trompeuses et les règles de Google
+     l'interdisent. Mais un soupçon se vérifie avant de retirer
+     l'avis d'un vrai client. */
   {
     auteur: "JM FRACHET",
     plateforme: "google",
@@ -560,6 +566,20 @@ const tousLesAvis: Avis[] = [
     traduction: {
       en: "The staff at this hotel are particularly friendly, very welcoming, full of smiles, and efficient!\nThe meals are delicious and very generous. In July it is cold, and the fire in the hearth warmed us up! The rooms are on stilts facing the lake, truly photogenic!!\nThank you to the whole team!",
       es: "¡El personal de este hotel es especialmente simpático, muy acogedor, muy sonriente y eficaz!\nLas comidas son deliciosas y muy generosas. En julio hace frío, ¡y el fuego de la chimenea nos calentó! Las habitaciones están sobre pilotes frente al lago, ¡realmente fotogénicas!\n¡Gracias a todo el equipo!",
+    },
+    source: GOOGLE_FICHE,
+  },
+  {
+    auteur: "Toky R.",
+    plateforme: "google",
+    note: 5,
+    bareme: 5,
+    dateAvis: { fr: "juillet 2026", en: "July 2026", es: "julio de 2026" },
+    langueOriginale: "fr",
+    original: "Véritable havre de paix. Chambres très confortables. Cuisine exquise.",
+    traduction: {
+      en: "A true haven of peace. Very comfortable rooms. Exquisite food.",
+      es: "Un verdadero remanso de paz. Habitaciones muy cómodas. Cocina exquisita.",
     },
     source: GOOGLE_FICHE,
   },
