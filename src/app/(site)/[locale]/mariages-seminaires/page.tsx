@@ -203,7 +203,12 @@ export default async function MariagesSeminairesPage({
             {W.heroTitle} <em>{W.heroTitleEm}</em>
           </>
         }
-        kicker={W.subtitle}
+        /* PAS DE CHAPÔ SOUS LE TITRE. `W.subtitle` vaut « Célébrez votre amour
+           dans un cadre d'exception », et c'est exactement le <h2> de la
+           section suivante, composé de storyTitle1 + storyTitleEm +
+           storyTitle2. La phrase se lisait deux fois à un écran d'écart. Elle
+           reste le sous-titre de la page pour les moteurs (generateMetadata),
+           où elle ne fait pas doublon. */
       />
 
       {/* ──── MARIAGES : récit + diptyque de vignettes (photos basse résolution) ──── */}
@@ -340,7 +345,8 @@ export default async function MariagesSeminairesPage({
           <hr className="ge-hairline mb-14 md:mb-16" />
           <div className="mx-auto max-w-2xl text-center">
             <ScrollReveal>
-              <span className="ge-label mb-3">{W.heroLabel}</span>
+              {/* Chapeau retiré : « Événements & célébrations » est déjà celui
+                  du hero, en haut de la même page. */}
               <h2 className="mb-5" style={{ textWrap: "balance" }}>
                 {W.ctaTitle} <em>{W.ctaTitleEm}</em>
               </h2>

@@ -17,7 +17,13 @@ export default function RecapRows({ title, rows, footnote, className = "" }: Rec
   return (
     <div className={className}>
       {title && (
-        <p className="ge-label mb-4">{title}</p>
+        /* `ge-rows__titre` ne porte AUCUN style : c'est un marqueur, et il
+           faut le garder. Il distingue le titre d'un tableau récapitulatif du
+           chapeau d'une vraie section, qui porte le même `ge-label`. Sans lui,
+           scripts/verifier-repetitions.py signalait deux tableaux « Aperçu »
+           voisins — deux excursions, deux récapitulatifs — comme une redite,
+           alors que deux chapeaux de section identiques en sont une. */
+        <p className="ge-label ge-rows__titre mb-4">{title}</p>
       )}
       <div className="ge-rows">
         {rows.map((r, i) => (

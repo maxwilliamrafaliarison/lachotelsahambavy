@@ -196,11 +196,12 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
             </div>
             <div className="lg:col-span-4 lg:col-start-9 lg:pt-14">
               <ScrollReveal>
-                <RecapRows
-                  title={xt.factsTitle}
-                  rows={xt.factsRows}
-                  footnote={xt.factsFootnote}
-                />
+                {/* SANS `factsFootnote`. Elle disait « L'unique plantation de
+                    thé de Madagascar, aux portes de l'hôtel. » — la phrase
+                    même qui coiffe le hero de la page, à trois blocs de là,
+                    et que la chronologie répétait une troisième fois. Elle
+                    reste dans les dictionnaires, elle n'est plus affichée. */}
+                <RecapRows title={xt.factsTitle} rows={xt.factsRows} />
               </ScrollReveal>
             </div>
           </div>
@@ -402,7 +403,8 @@ export default async function PlantationPage({ params }: { params: Promise<{ loc
           <div className="mx-auto max-w-2xl">
             <ScrollReveal>
               <div className="text-center">
-                <span className="ge-label mb-3">{p.bookLabel}</span>
+                {/* Chapeau retiré : « Réserver une visite » est déjà le
+                    libellé des deux boutons de la page, dont l'un mène ici. */}
                 <h2 className="mb-4">{p.bookTitle}</h2>
                 <p className="mb-10 text-[15px] leading-relaxed text-body">{xt.bookIntro}</p>
               </div>

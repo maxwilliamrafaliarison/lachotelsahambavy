@@ -97,6 +97,7 @@
     "campingDesc": "1 hectare de terrain privatif à votre disposition · Sécurité · Toilettes et douches communes (matériel de camping à votre charge)",
     "tableTitle": "Choisissez votre séjour",
     "nightOnLake": "Nuit sur le lac",
+    "gardenLabel": "Au cœur du jardin",
     "pilotisTagline": "dormir sur l’eau",
     "wagonTagline": "Dormir dans un wagon centenaire de la ligne FCE, face au lac. Une expérience introuvable ailleurs.",
     "comingSoon": "En images prochainement",
@@ -115,7 +116,7 @@
     "familyDesc": "Nous disposons de 4 maisons en duplex (à deux étages), entièrement équipées pour les longs séjours. Elles comprennent une kitchenette avec plaque de cuisson, réfrigérateur et vaisselle, offrant ainsi tout le confort nécessaire pour un séjour en toute autonomie.",
     "craftTitle": "Le détail artisanal",
     "craftText": "Portes en bois sculpté, linge brodé à la main, vasques et salles de bains façonnées par des artisans de la région. Dans chaque salle de bains, des savons bio saponifiés à froid.",
-    "tarzanText": "Perchés dans les arbres du jardin tropical, nos deux bungalows « Tarzan » sont réservés aux enfants : en single ou en double, pour une nuit d’aventure à quelques pas du bungalow des parents.",
+    "tarzanText": "Perché dans les arbres du jardin tropical, notre bungalow « Tarzan » est réservé aux enfants : en single ou en double, pour une nuit d’aventure à quelques pas du bungalow des parents.",
     "ecoTitle": "Un quotidien éco-responsable",
     "ecoP": "Dans une démarche respectueuse de l’environnement, notre hôtel met à disposition de ses clients des savons bio. Nous fabriquons nos propres savons selon la méthode traditionnelle de saponification à froid. Nos savons sont élaborés de manière artisanale, dans une démarche écologique et respectueuse de l’environnement. Entièrement biodégradables, ils sont conçus à partir d’ingrédients simples, naturels et d’origine végétale.",
     "pilotisName": "Pilotis Nuptial",
@@ -141,6 +142,7 @@
   },
   "restaurantSection": {
     "label": "Gastronomie",
+    "tableLabel": "À table",
     "title": "Éveillez vos papilles",
     "subtitle": "Cuisine malgache & internationale, produits du terroir",
     "p1": "Pour ceux qui veulent goûter aux saveurs locales, une cuisine malgache vous sera servie ainsi qu’une carte de mets européens et de grillades. Vous pourrez déguster ces plats au sein de notre restaurant panoramique ou sur nos terrasses ombragées en bordure du lac.",
@@ -185,7 +187,7 @@
     "sourcingP": "Nos herbes aromatiques viennent directement de notre potager ; l’autre partie vient directement des agriculteurs du village.",
     "signaturesLabel": "Nos signatures",
     "signaturesTitle": "Canard sauvage & tilapia du lac",
-    "signaturesP": "Notre spécialité reste le canard sauvage chassé par le propriétaire Kim, ou l’incontournable tilapia du lac au gingembre.",
+    "signaturesP": "Le premier est chassé par Kim, le propriétaire ; le second vient du lac et se sert au gingembre frais.",
     "breakfastTitle": "Les matins au bord de l’eau",
     "breakfastP": "Pains, yaourts, fromages, confitures et miel sont faits maison, servis au petit-déjeuner face au lac ou au bord de la piscine.",
     "barLabel": "Le bar",
@@ -204,9 +206,9 @@
     "heroSubtitle": "Nature, détente et exploration autour du Lac Hôtel",
     "introLabel": "Vos activités",
     "introTitle": "Une multitude d’expériences vous attend",
-    "introP": "Autour et au Lac Hôtel Sahambavy, une multitude d’activités vous attendent, entre nature, détente et exploration, idéal pour les courts et longs séjours.",
+    "introP": "Le lac, la plantation, les villages betsileo et les jardins sont à portée de marche : de quoi remplir un après-midi comme une semaine entière.",
     "circuitsLabel": "Loisirs",
-    "circuitsTitle": "Nature, détente et exploration",
+    "circuitsTitle": "Excursions, plein air et bien-être",
     "discovery": {
       "title": "Excursions guidées & découvertes culturelles",
       "items": [
@@ -236,7 +238,7 @@
     },
     "poolLabel": "Piscine",
     "poolTitle": "Piscine en ardoise à eau salée",
-    "poolP": "Profitez d’un moment de détente dans notre piscine en ardoise à eau salée. Douce pour la peau, l’eau salée procure une sensation de confort tout en limitant l’usage de produits chimiques, pour une expérience de baignade plus naturelle et agréable.",
+    "poolP": "Douce pour la peau, l’eau salée procure une sensation de confort tout en limitant l’usage de produits chimiques, pour une expérience de baignade plus naturelle et agréable.",
     "massageLabel": "Bien-être",
     "massageTitle": "Massages & Bien-être",
     "massageP": "Offrez-vous un moment de pure détente grâce à nos massages relaxants. Dos, pieds ou corps entier… nos soins sont pensés pour apaiser les tensions, libérant le stress et revitalisant le corps comme l’esprit. Nos massages sont réalisés à partir de nos huiles maison au katrafay, ravintsara, romarin… pour une expérience olfactive et relaxante.",
@@ -297,7 +299,7 @@
     "repos": {
       "label": "Extension hôtelière",
       "title": "Le Repos, villas avec kitchenette",
-      "desc": "4 maisons en duplex entièrement équipées pour les longs séjours et les familles. Kitchenette, terrasse et cadre naturel préservé.",
+      "desc": "À 800 mètres du bâtiment principal, un cadre naturel préservé et des maisons faites pour les séjours qui durent.",
       "cta": "Découvrir Le Repos"
     },
     "sectionLabel": "La destination",
@@ -465,7 +467,7 @@
       },
       {
         "year": "Auj.",
-        "text": "520 hectares, l’unique plantation de thé de Madagascar. Développement du thé vert et projet de thé biologique."
+        "text": "Développement du thé vert et projet de thé biologique."
       }
     ],
     "excursionLabel": "L’excursion",
@@ -603,7 +605,7 @@
       "station": "Gare",
       "booking": "Réservation"
     },
-    "stationCaption": "Le Lac Hôtel Sahambavy, à deux minutes à pied de la gare de Sahambavy : le point de départ idéal sur la ligne FCE.",
+    "stationCaption": "Le Lac Hôtel, au bord du lac Sahambavy, sur le parcours de la ligne FCE.",
     "routesLabel": "Trajets disponibles",
     "routesTitle": "Trois itinéraires emblématiques au départ de Sahambavy",
     "routeNotes": [
@@ -626,7 +628,7 @@
     "heroSubtitle": "Située à 800 mètres du bâtiment principal, l’extension de l’hôtel offre une expérience différente : ici, le luxe se fait discret au profit de l’essentiel.",
     "introLabel": "L’esprit du lieu",
     "introTitle": "L’art de ralentir",
-    "introP": "Ici, le luxe se fait discret au profit de l’essentiel : des espaces épurés, ouverts sur la nature, propices à la méditation et au repli sur soi.",
+    "introP": "On y vient pour méditer, pour lire, pour ne rien faire : c’est l’endroit du domaine où le temps passe le plus lentement.",
     "features": [
       {
         "icon": "house",
@@ -662,7 +664,7 @@
     "heroCta": "Découvrir l’esprit du lieu",
     "spiritLabel": "Pour qui",
     "spiritTitle": "Écolos, cyclistes, amoureux du calme",
-    "spiritP1": "Le Repos est idéal pour les amateurs de yoga en quête de calme et de reconnexion, les écolos, les cyclistes, amoureux, chercheurs d’ambiance zen et isolement.",
+    "spiritP1": "Le Repos est pensé pour les amateurs de yoga, pour les couples, et pour tous ceux qui cherchent une ambiance zen et un vrai isolement.",
     "spiritP2": "Ici, ni programme ni horaires. La méditation remplace la montre, la forêt fait le reste.",
     "bungalowsLabel": "Les bungalows",
     "bungalowsTitle": "La simplicité malgache",
@@ -708,7 +710,8 @@
     "metaDescription": "L’équipe du Lac Hôtel Sahambavy et son engagement : emploi local, approvisionnement de proximité et préservation du lac et de ses berges.",
     "introLabel": "L’équipe du Lac Hôtel",
     "introTitle": "Des femmes et des hommes engagés",
-    "introP": "Le Lac Hôtel s’inscrit pleinement dans une démarche de responsabilité sociétale des entreprises (RSE) et de développement durable. Il contribue activement à la résilience de la communauté locale en privilégiant le recrutement local.",
+    "introP": "L’établissement s’y engage sur trois fronts : qui il emploie, à qui il achète, et ce qu’il préserve. Le détail tient dans la liste ci-dessous.",
+    "teaserP": "Cuisine, jardins, service, entretien : derrière chaque séjour, une équipe recrutée sur place. Faites connaissance.",
     "rseLabel": "Notre engagement RSE",
     "rseTitle": "Responsabilité sociétale & développement durable",
     "rseItems": [
@@ -1124,7 +1127,7 @@
     "loisirs": {
       "label": "Loisirs",
       "title": "Le lac comme terrain de jeu",
-      "p": "Le tour du lac (8 km balisés, environ 2 heures de marche) donne le ton : ici, tout se découvre en douceur. La plantation et l’usine de thé TAF se visitent en 4 heures, les villages alentour en 2 heures de balade, entre ateliers de broderie et de vannerie, ferme et potager de Mamie Olga.",
+      "p": "Ici, tout se découvre en douceur, à pied ou sur l’eau. Les distances sont courtes, les chemins balisés, et rien n’oblige à choisir : le programme d’une journée tient dans un rayon de quelques kilomètres.",
       "items": [
         "Tour du Lac (8 km balisés, 2 h)",
         "Visite de la plantation & de l’usine de thé TAF (4 h)",
@@ -1190,14 +1193,14 @@
     "train": {
       "label": "Par le train",
       "title": "À 2 minutes de la gare de Sahambavy",
-      "p1": "Le Lac Hôtel se trouve à 2 minutes à pied de la gare de Sahambavy, sur la ligne historique reliant Fianarantsoa à Manakara (FCE).",
+      "p1": "La gare de Sahambavy est desservie par la ligne historique qui relie Fianarantsoa à Manakara, la FCE.",
       "p2": "Descendez sur le quai : l’hôtel vous attend au bord du lac, à quelques pas seulement. Une arrivée comme autrefois, au rythme du train des hautes terres.",
       "alt": "La micheline bleue à quai en gare de Sahambavy"
     },
     "route": {
       "label": "Par la route",
       "title": "À 40 minutes de Fianarantsoa",
-      "p1": "Depuis Fianarantsoa : l’hôtel se trouve à 40 minutes du centre-ville. Depuis Antananarivo (par la RN7) : suivez la nationale 7 vers le sud, puis bifurquez à gauche dans le village d’Ambalakely (station Shell).",
+      "p1": "Depuis Antananarivo, par la RN7 : suivez la nationale 7 vers le sud, puis bifurquez à gauche dans le village d’Ambalakely (station Shell).",
       "p2": "Une navette payante de l’hôtel est disponible pour votre transport : contactez la réception pour organiser votre prise en charge. Un transfert privé en 4x4 entre le Lac Hôtel et Fianarantsoa est également proposé (130 000 Ar).",
       "alt": "Vue aérienne du Lac Hôtel et de son écrin de verdure au bord du lac",
       "cta": "Organiser mon transfert"
@@ -1219,7 +1222,7 @@
           "value": "À 40 minutes par la route"
         },
         {
-          "label": "Depuis Tananarive",
+          "label": "Depuis Antananarivo",
           "value": "RN7, bifurcation à gauche à Ambalakely (station Shell)"
         },
         {

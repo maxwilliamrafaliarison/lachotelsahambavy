@@ -19,8 +19,6 @@ const basePath = getBasePath();
    document, qui tourne entre 7 000 et 8 300 Ar/€. On respecte ici le
    chiffre publié pour la restauration plutôt que d'imposer un taux unique. */
 const AR_PER_EUR = 5000;
-const ar = (v: number) => `${v.toLocaleString("fr-FR")} Ar`;
-const eur = (v: number) => `${Math.round(v / AR_PER_EUR)} €`;
 
 /* Textes nouveaux de la refonte : fallbacks locaux en attendant la fusion
    des deltas dictionnaire (scratchpad/dict-deltas/restaurant.json). Si la
@@ -29,10 +27,11 @@ const extraTexts = {
   fr: {
     sourcingP:
       "Nos fruits, légumes et herbes aromatiques viennent du potager de l'hôtel, complétés par les récoltes des agriculteurs du village de Sahambavy.",
+    tableLabel: "À table",
     signaturesLabel: "Nos signatures",
     signaturesTitle: "Canard sauvage & tilapia du lac",
     signaturesP:
-      "Deux plats racontent Sahambavy mieux que tout : le canard sauvage chassé par Kim, le fondateur, et le tilapia du lac relevé au gingembre frais.",
+      "Le premier est chassé par Kim, le propriétaire ; le second vient du lac et se sert au gingembre frais.",
     breakfastTitle: "Les matins au bord de l'eau",
     breakfastP:
       "Pains, yaourts, fromages, confitures et miel sont faits maison, servis au petit-déjeuner face au lac ou au bord de la piscine.",
@@ -48,10 +47,11 @@ const extraTexts = {
   en: {
     sourcingP:
       "Our fruit, vegetables and aromatic herbs come from the hotel's kitchen garden, joined by the harvests of farmers from Sahambavy village.",
+    tableLabel: "At the table",
     signaturesLabel: "Our signatures",
     signaturesTitle: "Wild duck & lake tilapia",
     signaturesP:
-      "Two dishes tell the story of Sahambavy better than any other: wild duck hunted by Kim, our founder, and lake tilapia lifted with fresh ginger.",
+      "The first is hunted by Kim, the owner; the second comes from the lake and is served with fresh ginger.",
     breakfastTitle: "Mornings by the water",
     breakfastP:
       "Breads, yoghurts, cheeses, jams and honey are all made in-house, served at breakfast facing the lake or beside the pool.",
@@ -67,10 +67,11 @@ const extraTexts = {
   es: {
     sourcingP:
       "Nuestras frutas, verduras y hierbas aromáticas proceden del huerto del hotel, completadas con las cosechas de los agricultores del pueblo de Sahambavy.",
+    tableLabel: "A la mesa",
     signaturesLabel: "Nuestras especialidades",
     signaturesTitle: "Pato salvaje y tilapia del lago",
     signaturesP:
-      "Dos platos cuentan Sahambavy mejor que nada: el pato salvaje cazado por Kim, el fundador, y la tilapia del lago realzada con jengibre fresco.",
+      "El primero lo caza Kim, el propietario; el segundo viene del lago y se sirve con jengibre fresco.",
     breakfastTitle: "Mañanas junto al agua",
     breakfastP:
       "Panes, yogures, quesos, mermeladas y miel son de elaboración propia, servidos en el desayuno frente al lago o junto a la piscina.",
@@ -117,6 +118,19 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
       typeof rsAny[k] === "string" ? (rsAny[k] as string) : v,
     ]),
   ) as { [K in keyof (typeof extraTexts)["fr"]]: string };
+
+  /* MISE EN FORME DES NOMBRES : elle suit la langue de la page.
+     Elle était figée en "fr-FR", au niveau module, hors de portée de toute
+     locale. Le même petit-déjeuner sortait donc « 40,000 Ar · €8 » sur
+     /en/hebergements et « 40 000 Ar · 8 € » sur /en/restaurant, « 40.000 Ar »
+     et « 40 000 Ar » en espagnol : mêmes données, deux graphies, deux pages
+     du même site. Corrigé le 29/08/2026, aligné sur /hebergements. */
+  const nf = new Intl.NumberFormat(loc === "en" ? "en-GB" : loc === "es" ? "es-ES" : "fr-FR");
+  const ar = (v: number) => `${nf.format(v)} Ar`;
+  const eur = (v: number) => {
+    const montant = Math.round(v / AR_PER_EUR);
+    return loc === "en" ? `€${montant}` : `${montant} €`;
+  };
 
   const priceRows = [
     { label: rs.breakfast, value: `${ar(extras.breakfast.priceAR)} · ${eur(extras.breakfast.priceAR)}` },
@@ -177,7 +191,9 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
                   ? "Sala del restaurante panorámico, mesas redondas puestas bajo la techumbre de madera"
                   : "The panoramic restaurant dining room, round tables set beneath the timber roof"
             }
-            label={rs.label}
+            /* PAS `rs.label` ICI : il vaut « Gastronomie », le chapeau même
+               du hero en haut de la page. Ce bloc a son propre chapeau. */
+            label={xt.tableLabel}
             title={rs.title}
           >
             <p>{rs.p1}</p>
@@ -198,7 +214,13 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             title={rs.herbsTitle}
           >
             <p>{rs.herbsIntro}</p>
-            <p>{xt.sourcingP}</p>
+            {/* `sourcingP` A ÉTÉ RETIRÉ D'ICI (29/08/2026), pas supprimé du
+                site : il ouvre déjà le bloc « la qualité commence à la
+                source », plus haut sur la même page. Il y est à sa place,
+                car il y apporte le fait neuf — l'autre partie vient des
+                agriculteurs du village. Sous un titre qui dit « Nos herbes
+                aromatiques », une phrase qui recommence par « Nos herbes
+                aromatiques » ne faisait que se répéter. */}
             <ul className="flex flex-wrap gap-2 pt-1">
               {(rs.herbs as string[]).map((h: string) => (
                 <li
@@ -225,14 +247,22 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             title={xt.signaturesTitle}
           >
             <p>{xt.signaturesP}</p>
-            <ul className="space-y-2.5 pt-1">
-              {(rs.specialties as string[]).map((dish: string) => (
-                <li key={dish} className="flex items-start gap-3">
-                  <span className="mt-[9px] h-1 w-1 flex-shrink-0 rounded-full bg-terracotta/70" />
-                  <span>{dish}</span>
-                </li>
-              ))}
-            </ul>
+            {/* LA LISTE `specialties` A ÉTÉ RETIRÉE D'ICI (29/08/2026).
+                Elle était posée sous le paragraphe, dans le même bloc, et
+                disait trois fois la même chose :
+
+                  titre       « Canard sauvage & tilapia du lac »
+                  paragraphe  « Notre spécialité reste le canard sauvage
+                                chassé par le propriétaire Kim, ou
+                                l'incontournable tilapia du lac au gingembre. »
+                  puce 1      « Canard sauvage chassé par le propriétaire Kim »
+                  puce 2      « Tilapia du lac au gingembre, l'incontournable »
+
+                Ses deux dernières puces ne valaient pas mieux : « Fromages,
+                yaourts et confitures faits maison » est le bloc petit-déjeuner
+                d'à côté, « Fruits et légumes biologiques de notre potager »
+                est le bloc potager. La clé reste dans les dictionnaires, elle
+                n'est plus affichée nulle part. */}
           </EditorialSplit>
 
           <EditorialSplit
@@ -248,12 +278,9 @@ export default async function RestaurantPage({ params }: { params: Promise<{ loc
             }
             label={rs.philosophyMaison}
             title={xt.breakfastTitle}
-            rows={[
-              {
-                label: rs.breakfast,
-                value: `${ar(extras.breakfast.priceAR)} · ${eur(extras.breakfast.priceAR)}`,
-              },
-            ]}
+            /* PAS DE LIGNE DE TARIF ICI. « Petit-déjeuner · 40 000 Ar · 8 € »
+               figurait mot pour mot dans « Nos formules », deux sections plus
+               bas, qui est l'endroit des prix. */
           >
             <p>{xt.breakfastP}</p>
           </EditorialSplit>

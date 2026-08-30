@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "verifier:repetitions": "python3 scripts/verifier-repetitions.py",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:import": "tsx scripts/import-2026.mts"

@@ -105,7 +105,8 @@ export default async function ActivitesPage({ params }: { params: Promise<{ loca
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <span className="ge-label mb-3">{dict.loisirs.introLabel}</span>
+            {/* Chapeau retiré : « Vos activités » est celui du hero, juste
+                au-dessus. */}
             <h2 className="max-w-[24ch]" style={{ textWrap: "balance" }}>
               {dict.loisirs.introTitle}
             </h2>

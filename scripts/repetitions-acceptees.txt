@@ -1,0 +1,68 @@
+# Répétitions examinées et ACCEPTÉES.
+#
+# scripts/verifier-repetitions.py signale tout texte que le visiteur lit deux
+# fois sur une même page. Certaines de ces répétitions sont voulues. Elles se
+# consignent ici, une par ligne, avec le motif en commentaire au-dessus.
+#
+# LA COMPARAISON EST LITTÉRALE, après normalisation de la casse, des
+# apostrophes, des guillemets et des espaces insécables. C'est délibéré : si
+# la formulation change, la tolérance tombe et le cas revient à l'examen.
+#
+# Pour une paire — « PROCHE » (deux phrases voisines) ou « INCLUS » (une
+# phrase courte contenue dans une longue) — il faut inscrire LES DEUX phrases
+# pour que la paire soit tue.
+#
+# N'inscrivez ici que ce que vous avez lu à l'écran et décidé de garder. Une
+# ligne ajoutée pour faire taire le contrôle sans l'avoir regardé vaut moins
+# que pas de contrôle du tout.
+#
+# ---------------------------------------------------------------------------
+
+# /localisation — le chapô du hero annonce les deux distances, chaque section
+# détaille la sienne. C'est un résumé suivi de son développement, la forme
+# attendue sur une page d'accès. La troisième occurrence, elle, a été retirée
+# le 29/08/2026 : le premier paragraphe de la section « Par le train »
+# répétait son propre titre.
+À 40 minutes de Fianarantsoa et à 2 minutes de la gare
+À 2 minutes de la gare de Sahambavy
+On the shores of Lake Sahambavy, amid rice paddies and tea plantations, 40 minutes from Fianarantsoa and 2 minutes from the station
+2 minutes from Sahambavy station
+A orillas del lago de Sahambavy, entre arrozales y plantaciones de té, a 40 minutos de Fianarantsoa y a 2 minutos de la estación
+A 2 minutos de la estación de Sahambavy
+
+# ---------------------------------------------------------------------------
+# /hotel — le pilier « Circuit court prioritaire » est une vignette de la
+# grille éco-responsable, dans le chapitre « Notre philosophie » ; le
+# paragraphe « Économie circulaire » est deux chapitres plus bas et développe
+# la conséquence (le développement socio-économique du village), que la
+# vignette ne dit pas. Une vignette de synthèse et son développement, séparés
+# par une section entière, ne se lisent pas comme une redite.
+#
+# /notre-equipe — même figure : la liste des engagements RSE dans une section,
+# le paragraphe « Économie circulaire » dans la suivante. La liste énonce,
+# le paragraphe explique ce que cela produit.
+Des achats maximisés auprès des producteurs locaux, notamment les paysans du village.
+Achats maximisés auprès des producteurs locaux, notamment les paysans
+Dans une logique d’économie circulaire, l’établissement maximise ses achats auprès des producteurs locaux, notamment les paysans, favorisant ainsi le développement socio-économique du village.
+Cadre adapté et conditions avantageuses pour certaines ONG (soins dentaires)
+Par ailleurs, en offrant un cadre adapté et des conditions avantageuses à certaines ONG (comme dans le cas d’initiatives de soins dentaires), il participe à l’amélioration de la santé communautaire et de la qualité de vie des habitants.
+As many products as possible sourced from local farmers and producers
+Following the principles of a circular economy, we source as many products as possible from local farmers and producers, helping to stimulate the socio-economic development of the village.
+Suitable facilities and preferential conditions for NGOs (dental care programmes)
+We also support selected NGOs by providing suitable facilities and preferential conditions for community initiatives, such as dental care programmes, thereby directly improving regional public health and quality of life.
+Compras maximizadas a los productores locales, en especial a los campesinos del pueblo.
+Compras maximizadas a los productores locales, en especial a los campesinos
+Con una lógica de economía circular, el establecimiento maximiza sus compras a los productores locales, en especial a los campesinos, favoreciendo así el desarrollo socioeconómico del pueblo.
+Marco adaptado y condiciones ventajosas para determinadas ONG (atención dental)
+Además, al ofrecer un marco adaptado y condiciones ventajosas a determinadas ONG (como en el caso de las iniciativas de atención dental), contribuye a mejorar la salud comunitaria y la calidad de vida de sus habitantes.
+
+# ---------------------------------------------------------------------------
+# /conditions-reservation — le barème d'annulation. Trois lignes bâties sur le
+# même moule, qui ne diffèrent que par les délais et les pourcentages : c'est
+# ce qui les rend lisibles d'un coup d'œil. La détection automatique attrape
+# les deux premières par leur squelette identique ; la troisième s'ouvre par
+# « moins de », d'où ce rattrapage à la main.
+de 15 à 5 jours avant l’arrivée : 70 % du montant total facturé
+moins de 5 jours avant l’arrivée : 100 % du montant total facturé
+de 15 a 5 días antes de la llegada: 70 % del importe total facturado
+menos de 5 días antes de la llegada: 100 % del importe total facturado

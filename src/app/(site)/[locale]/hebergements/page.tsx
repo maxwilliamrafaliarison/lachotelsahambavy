@@ -22,6 +22,10 @@ const basePath = getBasePath();
    pas fusionné dans src/i18n/dictionaries. Après fusion, dict.rooms.* prime. */
 type RoomsPageStrings = {
   nightOnLake: string;
+  /* Chapeau du Bungalow Standard. Il portait `standard.type[loc]`, soit
+     « Double · Twin · Single », le mot pour mot de la ligne « Lits » posée
+     trois centimètres plus bas dans le même bloc. */
+  gardenLabel: string;
   pilotisTagline: string;
   wagonTagline: string;
   comingSoon: string;
@@ -50,6 +54,7 @@ type RoomsPageStrings = {
 const fallbackStrings: Record<Locale, RoomsPageStrings> = {
   fr: {
     nightOnLake: "Nuit sur le lac",
+    gardenLabel: "Au cœur du jardin",
     pilotisTagline: "dormir sur l'eau",
     wagonTagline:
       "Dormir dans un wagon centenaire de la ligne FCE, face au lac. Une expérience introuvable ailleurs.",
@@ -77,10 +82,11 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     craftText:
       "Portes en bois sculpté, linge brodé à la main, vasques et salles de bains façonnées par des artisans de la région. Dans chaque salle de bains, des savons bio saponifiés à froid.",
     tarzanText:
-      "Perchés dans les arbres du jardin tropical, nos deux bungalows « Tarzan » sont réservés aux enfants, en single ou en double, pour une nuit d'aventure à quelques pas du bungalow des parents.",
+      "Perché dans les arbres du jardin tropical, notre bungalow « Tarzan » est réservé aux enfants, en single ou en double, pour une nuit d'aventure à quelques pas du bungalow des parents.",
   },
   en: {
     nightOnLake: "A night on the lake",
+    gardenLabel: "In the garden",
     pilotisTagline: "sleeping on the water",
     wagonTagline:
       "Sleep in a century-old carriage from the FCE railway line, facing the lake. An experience found nowhere else.",
@@ -108,10 +114,11 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     craftText:
       "Carved wooden doors, hand-embroidered linens, basins and bathrooms shaped by artisans from the region. In every bathroom, cold-process organic soaps.",
     tarzanText:
-      "Perched in the trees of the tropical garden, our two “Tarzan” bungalows are reserved for children. Single or double, they offer a night of adventure just steps from their parents' bungalow.",
+      "Perched in the trees of the tropical garden, our “Tarzan” bungalow is reserved for children. Single or double, it offers a night of adventure just steps from their parents' bungalow.",
   },
   es: {
     nightOnLake: "Noche en el lago",
+    gardenLabel: "En el jardín",
     pilotisTagline: "dormir sobre el agua",
     wagonTagline:
       "Dormir en un vagón centenario de la línea FCE, frente al lago. Una experiencia que no existe en ningún otro lugar.",
@@ -139,7 +146,7 @@ const fallbackStrings: Record<Locale, RoomsPageStrings> = {
     craftText:
       "Puertas de madera tallada, ropa de cama bordada a mano, lavabos y baños creados por artesanos de la región. En cada baño, jabones ecológicos de saponificación en frío.",
     tarzanText:
-      "Encaramados en los árboles del jardín tropical, nuestros dos bungalows «Tarzán» están reservados a los niños, en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
+      "Encaramado en los árboles del jardín tropical, nuestro bungalow «Tarzán» está reservado a los niños, en single o doble, para una noche de aventura a pocos pasos del bungalow de los padres.",
   },
 };
 
@@ -218,11 +225,6 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
     (room.longDescription ? room.longDescription[loc] : room.description[loc])
       .split("\n\n")
       .map((p, i) => <p key={i}>{p}</p>);
-
-  const wagonServices = wagon.amenities
-    .filter((a) => ["utensils", "drinks", "flower"].includes(a.icon))
-    .map((a) => a.label[loc])
-    .join(" · ");
 
   const contactHref = `${basePath}/${locale}/contact/`;
 
@@ -306,7 +308,10 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <p className="ge-label mb-3">{dict.rooms.label}</p>
+            {/* PAS DE CHAPEAU ICI. Il portait « Hébergements · Tarifs », que
+                le hero affiche déjà à trois lignes au-dessus : le visiteur
+                lisait deux fois la même mention avant d'atteindre le
+                sommaire. Le titre suffit à ouvrir la section. */}
             <h2 className="mb-4" style={{ textWrap: "balance" }}>
               {dict.rooms.tableTitle}
             </h2>
@@ -415,7 +420,7 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
               },
               loc,
             )}
-            label={standard.type[loc]}
+            label={rx.gardenLabel}
             title={standard.name[loc]}
             rows={[
               { label: rx.rowRate, value: price(standard) },
@@ -498,12 +503,21 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
               },
               loc,
             )}
-            label={rx.nightOnLake}
+            /* « Nuit sur le lac » appartient au Pilotis, qui est bâti SUR
+               l'eau. Le wagon est posé sur ses rails dans le jardin, face au
+               lac : lui donner le même chapeau affichait deux fois la même
+               mention sur la page et promettait ce que la chambre ne tient
+               pas. Son propre type est plus juste, et il est traduit. */
+            label={wagon.type[loc]}
             title={wagon.name[loc]}
             rows={[
               { label: rx.rowRate, value: price(wagon) },
               { label: rx.rowCapacity, value: `${wagon.capacity} ${rx.persons}` },
-              { label: rx.rowServices, value: wagonServices },
+              /* PAS DE LIGNE « PRESTATIONS ». Elle listait « Mini-bar inclus ·
+                 Terrasse privée fleurie · Service en chambre », soit les
+                 trois services que le second paragraphe, juste à gauche,
+                 énumère déjà en toutes lettres. Les trois autres lignes,
+                 elles, disent ce que la prose ne dit pas. */
               { label: rx.rowUnits, value: String(wagon.units) },
             ]}
             cta={{ href: contactHref, label: dict.rooms.book }}
@@ -540,7 +554,12 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
               { label: rx.rowUnits, value: String(arbre.units) },
             ]}
           >
-            <p>{arbre.description[loc]}</p>
+            {/* UN SEUL PARAGRAPHE. `arbre.description` figurait au-dessus :
+                « Bungalow perché pour enfants, single ou double. Une aventure
+                unique dans les arbres du jardin tropical. » Le texte qui suit
+                dit exactement la même chose, en meilleur français. La forme
+                courte reste ce pour quoi elle est écrite : la carte de la
+                page d'accueil et les données structurées. */}
             <p>{rx.tarzanText}</p>
           </EditorialSplit>
         </div>
@@ -573,8 +592,14 @@ export default async function HebergementsPage({ params }: { params: Promise<{ l
             ]}
             cta={{ href: `${basePath}/${locale}/le-repos/`, label: rx.discoverRepos }}
           >
+            {/* LA FORME COURTE A ÉTÉ RETIRÉE (direction, 29/08/2026).
+                `villaRepos.description` disait « 4 maisons en duplex
+                entièrement équipées pour les longs séjours. Kitchenette avec
+                plaque de cuisson, réfrigérateur et vaisselle. » juste sous
+                `familyDesc`, qui dit la même chose en plus long. Deux fois le
+                même inventaire dans le même bloc. La forme courte garde son
+                emploi : la carte de la page d'accueil et le JSON-LD. */}
             <p>{rx.familyDesc}</p>
-            <p>{villaRepos.description[loc]}</p>
           </EditorialSplit>
         </div>
       </section>

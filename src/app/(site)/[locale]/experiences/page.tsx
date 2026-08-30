@@ -171,11 +171,23 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
     { label: ex.conference.rowLayout, value: ex.conference.layoutValue },
   ];
 
+  /**
+   * L'aperçu de la descente : CE QUE LE PROGRAMME NE DIT PAS.
+   *
+   * Il portait six lignes, dont quatre reprenaient une à une les étapes du
+   * programme affiché dans la colonne d'à côté, sur le même écran :
+   *
+   *   Départ     « Lac Hôtel → Mahasoabe (45 km) »  = étape 01
+   *   Navigation « 2 h de pirogue traditionnelle »   = étape 02
+   *   Marche     « 1 h 30 à travers villages… »      = étape 04, mot pour mot
+   *   Déjeuner   « Pique-nique au pied d'une cascade » = étape 03
+   *
+   * Deux colonnes côte à côte disant la même chose, l'une numérotée,
+   * l'autre en tableau. Ne restent que les deux lignes que le programme
+   * n'énonce nulle part : ce qui est compris et ce qui ne l'est pas.
+   * Les libellés retirés restent dans les dictionnaires.
+   */
   const riviereRows = [
-    { label: ex.riviere.rowDeparture, value: ex.riviere.departureValue },
-    { label: ex.riviere.rowNavigation, value: ex.riviere.navigationValue },
-    { label: ex.riviere.rowWalk, value: ex.riviere.walkValue },
-    { label: ex.riviere.rowLunch, value: ex.riviere.lunchValue },
     {
       label: ex.riviere.included,
       value: (

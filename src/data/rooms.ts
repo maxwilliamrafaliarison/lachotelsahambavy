@@ -111,10 +111,16 @@ export const rooms: Room[] = [
       en: "Overwater bungalows on Lake Sahambavy. Spacious 2.20 m × 2.20 m bed, private bathroom with hot water, terrace with lake view.",
       es: "Bungalows sobre pilotes directamente en el lago Sahambavy. Cama amplia de 2,20 m × 2,20 m, baño privado con agua caliente, terraza con vistas al lago.",
     },
+    /* LA PHRASE SUR LA TÉLÉVISION ET LE WI-FI A ÉTÉ RETIRÉE (29/08/2026).
+       Le chapô de /hebergements (dict.rooms.intro) l'énonce déjà pour tout
+       l'hôtel, quelques centimètres plus haut sur la même page : « Chaque
+       chambre est équipée d'une télévision ; l'accès au Wi-Fi est
+       disponible uniquement dans la salle de restauration. » Elle figurait
+       ici une seconde fois, presque mot pour mot. */
     longDescription: {
-      fr: "Nos bungalows nuptiaux sur pilotis sont l'expérience la plus immersive du Lac Hôtel Sahambavy. Construits en bois précieux, ils s'avancent directement sur le lac, vous offrant un panorama époustouflant sur l'eau et les montagnes.\n\nChaque bungalow est décoré avec des matériaux et des sculptures artisanales réalisées par des artisans malgaches locaux. Les chambres sont équipées d'une télévision. L'accès au Wi-Fi est disponible dans la salle de restauration.",
-      en: "Our honeymoon overwater bungalows are the most immersive experience at Lac Hôtel Sahambavy. Built with precious wood, they extend directly over the lake, offering breathtaking panoramic views of the water and mountains.\n\nEach bungalow is decorated with materials and artisan sculptures crafted by local Malagasy artisans. Rooms are equipped with a television. Wi-Fi is available in the restaurant area.",
-      es: "Nuestros bungalows nupciales sobre pilotes son la experiencia más inmersiva del Lac Hôtel Sahambavy. Construidos en madera preciosa, se adentran directamente en el lago, ofreciendo un panorama impresionante del agua y las montañas.\n\nCada bungalow está decorado con materiales y esculturas artesanales de artesanos malgaches locales. Las habitaciones disponen de televisión. El Wi-Fi está disponible en el restaurante.",
+      fr: "Nos bungalows nuptiaux sur pilotis sont l'expérience la plus immersive du Lac Hôtel Sahambavy. Construits en bois précieux, ils s'avancent directement sur le lac, vous offrant un panorama époustouflant sur l'eau et les montagnes.\n\nChaque bungalow est décoré avec des matériaux et des sculptures artisanales réalisées par des artisans malgaches locaux.",
+      en: "Our honeymoon overwater bungalows are the most immersive experience at Lac Hôtel Sahambavy. Built with precious wood, they extend directly over the lake, offering breathtaking panoramic views of the water and mountains.\n\nEach bungalow is decorated with materials and artisan sculptures crafted by local Malagasy artisans.",
+      es: "Nuestros bungalows nupciales sobre pilotes son la experiencia más inmersiva del Lac Hôtel Sahambavy. Construidos en madera preciosa, se adentran directamente en el lago, ofreciendo un panorama impresionante del agua y las montañas.\n\nCada bungalow está decorado con materiales y esculturas artesanales de artesanos malgaches locales.",
     },
     units: 9,
     capacity: "2",
@@ -366,7 +372,10 @@ export const rooms: Room[] = [
       en: "Perched bungalow for kids, single or double. A unique adventure in the tropical garden trees.",
       es: "Bungalow elevado para niños, single o doble. Una aventura única en los árboles del jardín tropical.",
     },
-    units: 2,
+    /* UN SEUL bungalow sur arbre, et non deux (direction, 29/08/2026). Le
+       parc en annonçait deux depuis l'origine ; tous les textes qui en
+       parlaient au pluriel ont été repris avec ce chiffre. */
+    units: 1,
     capacity: "1-2",
     priceEUR: 30,
     priceAR: 150000,
@@ -396,8 +405,8 @@ export const rooms: Room[] = [
     },
     type: {
       fr: "Extension « Le Repos »",
-      en: "\"Le Repos\" Extension",
-      es: "Extensión « Le Repos »",
+      en: "“Le Repos” Extension",
+      es: "Extensión «Le Repos»",
     },
     /* Pas de `badge` ici : il répétait « Extension Le Repos » en français dans
        les trois langues, juste à côté du `type` ci-dessus qui dit la même

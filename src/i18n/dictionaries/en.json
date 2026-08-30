@@ -50,7 +50,7 @@
     "title": "An exceptional eco-lodge facing Lake Sahambavy",
     "subtitle": "Charm & Comfort in the heart of nature and Madagascar's only tea plantation",
     "intro": "If there is a true sanctuary on Earth, this is where it is found… Stretching over 5,000 km of coastline, Madagascar is bordered by the turquoise waters of the Indian Ocean and the Mozambique Channel, where silver-crested waves meet pristine shores. The land of “mora mora” (the Malagasy philosophy of taking life slowly) invites you to embrace a gentler pace and experience the legendary warmth and hospitality of its people. Madagascar, one of the world's greatest natural wonders, opens its heart to you. Its very name evokes a sense of magic, blending exotic fragrances, vibrant colours, and breathtaking landscapes that awaken the senses and inspire the imagination.",
-    "p1": "An essential stop on your journey through Madagascar, Lac Hôtel enjoys an ideal location halfway between the island's north and south along the famous RN7 route. Nestled on the shores of Lake Sahambavy and at the foot of lush green hills, the hotel offers breathtaking views over Madagascar's only tea plantation, which extends across more than 520 hectares.",
+    "p1": "An essential stop on your journey through Madagascar, Lac Hôtel enjoys an ideal location halfway between the island's north and south along the famous RN7 route. Nestled on the shores of Lake Sahambavy and at the foot of lush green hills, the hotel offers breathtaking views over the island's only tea plantation, which extends across more than 520 hectares.",
     "p2": "Set within a luxuriant tropical garden, our charming traditional bungalows on stilts provide a peaceful retreat where nature, comfort, and authentic Malagasy hospitality come together. Captivating guests with beautifully landscaped surroundings and attentive, personalized service, Lac Hôtel is designed for total relaxation. Here, every detail matters. As a family-run hotel, our ambition is to offer you much more than just accommodation: we want you to feel truly at home. From the moment you arrive, you will be welcomed with genuine care, warmth, and hospitality.",
     "p3": "Ideally located for exploring the many attractions of the region, the hotel also offers an authentic introduction to the traditions and rich cultural heritage of the Betsileo people.",
     "stat1": "Charming bungalows",
@@ -97,6 +97,7 @@
     "campingDesc": "1 hectare of private grounds · Security · Shared toilets and showers (camping equipment not provided)",
     "tableTitle": "Choose your stay",
     "nightOnLake": "A night on the lake",
+    "gardenLabel": "In the garden",
     "pilotisTagline": "sleeping on the water",
     "wagonTagline": "Sleep in a century-old carriage from the FCE railway line, facing the lake. An experience found nowhere else.",
     "comingSoon": "Photos coming soon",
@@ -115,7 +116,7 @@
     "familyDesc": "We offer 4 duplex houses (two-story units), fully equipped for long stays. They include a kitchenette with a stovetop, refrigerator, and tableware, providing all the comfort needed for a fully self-sufficient stay.",
     "craftTitle": "Artisan details",
     "craftText": "Carved wooden doors, hand-embroidered linens, basins and bathrooms shaped by artisans from the region. And in every bathroom, cold-process organic soaps.",
-    "tarzanText": "Perched in the trees of the tropical garden, our two “Tarzan” bungalows are reserved for children: single or double, for a night of adventure just steps from their parents' bungalow.",
+    "tarzanText": "Perched in the trees of the tropical garden, our “Tarzan” bungalow is reserved for children: single or double, for a night of adventure just steps from their parents' bungalow.",
     "ecoTitle": "Eco-Conscious Living",
     "ecoP": "As part of our commitment to sustainability, we provide guests with handcrafted organic soaps made right here at the hotel using the traditional cold-process method. Made from 100% natural, plant-based ingredients, our soaps are fully biodegradable and gentle on both your skin and the environment.",
     "pilotisName": "Bridal Suite on Stilts",
@@ -141,6 +142,7 @@
   },
   "restaurantSection": {
     "label": "Gastronomy",
+    "tableLabel": "At the table",
     "title": "Awaken your taste buds",
     "subtitle": "Malagasy & international cuisine, local produce",
     "p1": "For those wishing to discover local flavors, Malagasy cuisine is served alongside a selection of European dishes and grilled specialties. Enjoy your meal in our panoramic dining area or outside on our shaded lakeside terraces.",
@@ -185,7 +187,7 @@
     "sourcingP": "Our aromatic herbs come directly from our garden; the rest comes directly from local village farmers.",
     "signaturesLabel": "Our signatures",
     "signaturesTitle": "Wild duck & lake tilapia",
-    "signaturesP": "Our signature dish remains wild duck, hunted by the owner Kim, as well as the must-try lake tilapia with ginger.",
+    "signaturesP": "The first is hunted by Kim, the owner; the second comes from the lake and is served with fresh ginger.",
     "breakfastTitle": "Mornings by the water",
     "breakfastP": "Breads, yoghurts, cheeses, jams and honey are all made in-house, served at breakfast facing the lake or beside the pool.",
     "barLabel": "The bar",
@@ -204,9 +206,9 @@
     "heroSubtitle": "Nature, relaxation and exploration around Lac Hôtel",
     "introLabel": "Your activities",
     "introTitle": "A wealth of experiences awaits",
-    "introP": "At Lac Hôtel Sahambavy, a rich variety of activities awaits you, blending nature, relaxation, and local culture for an unforgettable short or long stay.",
+    "introP": "The lake, the plantation, the Betsileo villages and the gardens are all within walking distance: enough to fill an afternoon, or a whole week.",
     "circuitsLabel": "Leisure & Activities",
-    "circuitsTitle": "Nature, relaxation and exploration",
+    "circuitsTitle": "Excursions, outdoors and wellbeing",
     "discovery": {
       "title": "Guided Excursions & Cultural Discoveries",
       "items": [
@@ -236,7 +238,7 @@
     },
     "poolLabel": "Swimming Pool",
     "poolTitle": "Saltwater Slate Pool",
-    "poolP": "Enjoy a moment of pure relaxation in our saltwater slate swimming pool. Naturally gentle on the skin, saltwater provides exceptional comfort while reducing the need for harsh chemicals, ensuring a healthier and more enjoyable swimming experience.",
+    "poolP": "Naturally gentle on the skin, saltwater provides exceptional comfort while reducing the need for harsh chemicals, ensuring a healthier and more enjoyable swimming experience.",
     "massageLabel": "Wellness",
     "massageTitle": "Massages & Wellness",
     "massageP": "Indulge in a deeply relaxing massage by one of our well-trained therapists. Using locally sourced, natural essential oils such as Katrafay, our treatments are designed to soothe your body, release tension, and help you completely unwind in a serene environment.",
@@ -297,7 +299,7 @@
     "repos": {
       "label": "Hotel extension",
       "title": "Le Repos, villas with kitchenette",
-      "desc": "4 fully equipped duplex houses for extended stays and families. Kitchenette, terrace and preserved natural setting.",
+      "desc": "800 metres from the main building, unspoilt surroundings and houses built for stays that last.",
       "cta": "Discover Le Repos"
     },
     "sectionLabel": "The destination",
@@ -465,7 +467,7 @@
       },
       {
         "year": "Today",
-        "text": "520 hectares, Madagascar's only tea plantation. Green tea development and organic tea project."
+        "text": "Green tea development and organic tea project."
       }
     ],
     "excursionLabel": "The excursion",
@@ -603,7 +605,7 @@
       "station": "Station",
       "booking": "Booking"
     },
-    "stationCaption": "Lac Hôtel Sahambavy, a two-minute walk from Sahambavy station, the ideal starting point on the FCE line.",
+    "stationCaption": "Lac Hôtel, on the shore of Lake Sahambavy, along the route of the FCE line.",
     "routesLabel": "Available Routes",
     "routesTitle": "Three landmark routes departing from Sahambavy",
     "routeNotes": [
@@ -626,7 +628,7 @@
     "heroSubtitle": "Located just 800 meters from the main property, our hotel extension offers a tranquil alternative where luxury gives way to the essentials.",
     "introLabel": "The spirit of the place",
     "introTitle": "The art of slowing down",
-    "introP": "Here, luxury gives way to the essentials: clean, light-filled spaces designed for meditation, quiet reflection, and deep connection with nature.",
+    "introP": "People come here to meditate, to read, to do nothing at all: it is the corner of the estate where time passes most slowly.",
     "features": [
       {
         "icon": "house",
@@ -662,7 +664,7 @@
     "heroCta": "Discover the spirit of the place",
     "spiritLabel": "Who it is for",
     "spiritTitle": "Eco-travellers, cyclists, lovers of quiet",
-    "spiritP1": "Le Repos is tailored for yoga enthusiasts, eco-conscious travelers, cyclists, couples, and anyone seeking a peaceful, zen retreat.",
+    "spiritP1": "Le Repos is tailored for yoga enthusiasts, for couples, and for anyone seeking a peaceful, zen retreat.",
     "spiritP2": "No programme, no schedule. Meditation replaces the watch, and the forest does the rest.",
     "bungalowsLabel": "The bungalows",
     "bungalowsTitle": "Malagasy simplicity",
@@ -708,7 +710,8 @@
     "metaDescription": "The Lac Hôtel Sahambavy team and its commitments: local employment, nearby sourcing, and the protection of the lake and its shoreline.",
     "introLabel": "The Lac Hôtel team",
     "introTitle": "Committed women and men",
-    "introP": "Lac Hôtel is fully committed to Corporate Social Responsibility (CSR) and sustainable development. Prioritizing local hiring, we actively contribute to strengthening the resilience and well-being of the local community.",
+    "introP": "The hotel commits on three fronts: who it employs, who it buys from, and what it protects. The list below sets out the detail.",
+    "teaserP": "Kitchen, gardens, service, upkeep: behind every stay is a team hired locally. Come and meet them.",
     "rseLabel": "Our CSR commitment",
     "rseTitle": "Corporate Social Responsibility & Sustainable Development",
     "rseItems": [
@@ -1124,7 +1127,7 @@
     "loisirs": {
       "label": "Leisure",
       "title": "The lake as your playground",
-      "p": "The lake loop (8 km of marked trails, about a two-hour walk) sets the tone: here, everything unfolds gently. The TAF tea plantation and factory can be visited in four hours, the surrounding villages on a two-hour stroll, between embroidery and basketry workshops and Mamie Olga's farm and vegetable garden.",
+      "p": "Here, everything unfolds gently, on foot or on the water. Distances are short, the trails are marked, and nothing forces a choice: a full day's programme fits within a few kilometres.",
       "items": [
         "Lake loop: 8 km marked trail, 2 hrs",
         "Tea plantation & TAF factory visit: 4 hrs",
@@ -1190,20 +1193,20 @@
     "train": {
       "label": "By train",
       "title": "2 minutes from Sahambavy station",
-      "p1": "The hotel is located just a 2-minute walk from the Sahambavy Railway Station, directly on the historic Fianarantsoa–Manakara (FCE) line.",
+      "p1": "Sahambavy station sits on the historic Fianarantsoa–Manakara (FCE) line.",
       "p2": "Step off onto the platform: the hotel awaits you on the lakeshore, only a few steps away. An arrival from another era, at the gentle pace of the highland train.",
       "alt": "The blue Micheline railcar at the platform of Sahambavy station"
     },
     "route": {
       "label": "By road",
       "title": "40 minutes from Fianarantsoa",
-      "p1": "From Fianarantsoa: A scenic 40-minute drive from the city center. From Antananarivo (via RN7): Take National Road 7 south and turn left at the village of Ambalakely (marked by the Shell station).",
+      "p1": "From Antananarivo via the RN7: take National Road 7 south and turn left at the village of Ambalakely (marked by the Shell station).",
       "p2": "A paid shuttle service is available for hassle-free transportation. Please contact reception to arrange your pickup. A private 4x4 transfer between Lac Hôtel and Fianarantsoa is also available (Ar 130,000 · €26).",
       "alt": "Aerial view of Lac Hôtel and its lush green setting on the lakeshore",
       "cta": "Arrange my transfer"
     },
     "recap": {
-      "label": "At a glance",
+      "label": "Summary",
       "title": "Access at a glance",
       "rows": [
         {

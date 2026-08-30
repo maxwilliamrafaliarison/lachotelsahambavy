@@ -164,8 +164,16 @@ function RoomCard({ room, dict, locale }: { room: Room; dict: any; locale: Local
             <span className="block text-[10px] uppercase tracking-[0.2em] text-muted">
               {dict.rooms.from}
             </span>
-            {/* Le bungalow Tarzan n'a pas d'équivalent en euros dans la grille
-                officielle : sans cette garde, on affichait « 150 000 Ar ·  € ». */}
+            {/* Garde sur `priceEUR`, que la grille officielle laisse vide pour
+                certains hébergements : sans elle, on afficherait « 150 000 Ar
+                ·  € », l'euro seul après un séparateur.
+
+                AUCUNE FICHE N'EST DANS CE CAS AUJOURD'HUI — les huit ont un
+                tarif en euros, bungalow Tarzan compris (30 €). Ce commentaire
+                désignait ce dernier comme l'exception ; c'était faux, et la
+                carte affiche bien « 150 000 Ar · 30 € / nuit ». Corrigé le
+                29/08/2026. La garde reste : `priceEUR` est déclaré nullable
+                dans `Room`, et la grille 2027 peut rouvrir le cas. */}
             <span className="text-[15px] font-semibold text-ink">
               {formatAr(room.priceAR)}&nbsp;Ar
               <span className="font-normal text-muted">

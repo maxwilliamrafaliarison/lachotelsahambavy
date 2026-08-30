@@ -135,6 +135,12 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
 
   const ecoPillars = dict.hotel.ecoPillars as { icon: string; title: string; desc: string }[];
 
+  /* `equipe.rseItems` N'EST PLUS LU PAR CETTE PAGE. Un premier essai gardait
+     la liste en filtrant les rangs déjà dits par la prose ; il manquait
+     l'essentiel, à savoir que la grille des sept piliers, deux sections plus
+     haut, énonce déjà six des huit engagements. Le détail est consigné à
+     l'endroit d'où la liste a été retirée, dans la section RSE ci-dessous. */
+
   return (
     <>
       <JsonLd schemas={[breadcrumbSchema(buildBreadcrumb(loc, "hotel"))]} />
@@ -256,33 +262,44 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             <p className="ge-measure leading-relaxed text-body">{dict.hotel.ecoP1}</p>
           </ScrollReveal>
 
-          <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-14">
+          {/* LA LISTE « NOTRE ENGAGEMENT RSE » N'EST PLUS ICI (29/08/2026).
+
+              Cette page énonçait ses engagements TROIS FOIS. La grille des
+              sept piliers éco-responsables, deux sections plus haut, les
+              présente avec un titre, une icône et une phrase ; la prose
+              ci-dessous en développe deux ; la liste `equipe.rseItems` les
+              répétait une troisième fois, en abrégé. Six de ses huit lignes
+              avaient déjà leur pilier :
+
+                pilier « Recrutement local privilégié »   = engagement 0
+                pilier « Circuit court prioritaire »      = engagements 1 et 7
+                pilier « Apiculture responsable »         = engagement 3
+                pilier « Savons artisanaux naturels »     = engagement 4
+                pilier « Zéro gaspillage en cuisine »     = engagement 6
+                et l'engagement 2 (ONG) est dans `economyP`, juste à côté.
+
+              Ne restait d'inédit que « Valorisation des espèces floristiques
+              étiquetées ». Une liste d'une ligne n'est pas une liste.
+
+              LA LISTE COMPLÈTE N'EST PAS PERDUE : /notre-equipe la sert
+              intégralement, dans une section qui lui est consacrée et qu'aucune
+              grille de piliers ne double. Ne pas la réintroduire ici sans
+              retirer d'abord la grille des piliers. */}
+          <div className="mt-12 md:mt-16">
             <ScrollReveal>
               <span className="ge-label mb-3">{dict.equipe.economyLabel}</span>
               <h3 className="mb-4" style={{ textWrap: "balance" }}>
                 {dict.equipe.economyTitle}
               </h3>
-              <p className="text-[15px] leading-relaxed text-body">{dict.equipe.economyP}</p>
+              <p className="ge-measure text-[15px] leading-relaxed text-body">
+                {dict.equipe.economyP}
+              </p>
 
               {/* Restauration : trois menus seulement, contre le gaspillage */}
               <div className="mt-9 border-l-2 border-terracotta pl-5 md:pl-6">
                 <span className="ge-label mb-2">{threeMenusLabel}</span>
-                <p className="text-[15px] leading-relaxed text-body">{threeMenus}</p>
+                <p className="ge-measure text-[15px] leading-relaxed text-body">{threeMenus}</p>
               </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={120}>
-              <span className="ge-label mb-4">{dict.equipe.rseLabel}</span>
-              <ul className="border-t border-hairline">
-                {(dict.equipe.rseItems as string[]).map((item, i) => (
-                  <li key={i} className="flex items-baseline gap-4 border-b border-hairline py-3.5">
-                    <span className="text-xs font-semibold tabular-nums text-terracotta">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[15px] leading-relaxed text-body">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </ScrollReveal>
           </div>
         </div>
@@ -305,7 +322,14 @@ export default async function HotelPage({ params }: { params: Promise<{ locale: 
             title={dict.equipe.introTitle}
             cta={{ href: `${basePath}/${loc}/notre-equipe/`, label: equipeCta }}
           >
-            <p>{dict.equipe.introP}</p>
+            {/* PAS `equipe.introP` ICI. Ce paragraphe est, au mot près, le
+                `hotel.ecoP1` affiché plus haut sur cette même page, en tête
+                de la section RSE : le visiteur lisait deux fois la phrase sur
+                la démarche RSE et le recrutement local. `introP` garde son
+                emploi sur /notre-equipe, où il ne paraît qu'une fois ; ici,
+                l'amorce annonce l'équipe, ce que la section est censée
+                faire. */}
+            <p>{dict.equipe.teaserP}</p>
           </EditorialSplit>
 
           <ScrollReveal className="mt-16 md:mt-24">

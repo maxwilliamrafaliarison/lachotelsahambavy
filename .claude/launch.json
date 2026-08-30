@@ -7,6 +7,13 @@
       "runtimeArgs": ["run", "dev"],
       "port": 3000,
       "cwd": "/Users/maxwilliamrafaliarison/Projects/lachotelsahambavy"
+    },
+    {
+      "name": "lachotel-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "port": 3100,
+      "cwd": "/Users/maxwilliamrafaliarison/Projects/lachotelsahambavy"
     }
   ]
 }

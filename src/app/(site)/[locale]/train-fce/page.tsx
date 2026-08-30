@@ -159,7 +159,8 @@ export default async function TrainFCEPage({
           <ScrollReveal>
             <div className="grid gap-8 md:grid-cols-12 md:gap-14">
               <div className="md:col-span-5">
-                <span className="ge-label mb-3">{dict.train.introLabel}</span>
+                {/* Chapeau retiré : « Aventure ferroviaire » est celui du
+                    hero, juste au-dessus. */}
                 <h2 style={{ textWrap: "balance" }}>{dict.train.introTitle}</h2>
               </div>
               <div className="md:col-span-7">
@@ -194,8 +195,13 @@ export default async function TrainFCEPage({
                 />
               </div>
               <figcaption className="mt-3 text-xs text-muted">
+                {/* La légende disait mot pour mot ce que `introP2` dit plus
+                    haut sur la même page — nom de l'hôtel, deux minutes à
+                    pied de la gare, point de départ idéal — et décrivait une
+                    scène absente de la photo, qui montre les bungalows vus du
+                    lac. Elle situe désormais ce qu'on voit. */}
                 {t.stationCaption ??
-                  "Le Lac Hôtel Sahambavy, à deux minutes à pied de la gare de Sahambavy : le point de départ idéal sur la ligne FCE."}
+                  "Le Lac Hôtel, au bord du lac Sahambavy, sur le parcours de la ligne FCE."}
               </figcaption>
             </figure>
           </ScrollReveal>

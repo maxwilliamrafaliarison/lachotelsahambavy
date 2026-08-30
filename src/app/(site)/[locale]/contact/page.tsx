@@ -81,13 +81,17 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
             <ScrollReveal>
-              <span className="ge-label mb-3">{dict.contact.label}</span>
+              {/* NI CHAPEAU NI SOUS-TITRE ICI (29/08/2026). Le hero, juste
+                  au-dessus, porte déjà `contact.label` (« Contact &
+                  Réservation ») et `contact.heroSubtitle`, qui est la même
+                  phrase que `contact.subtitle` au caractère près : « Nous
+                  vous répondons sous 24 h · Zéro commission · Paiement à
+                  l'arrivée ». Le visiteur la lisait deux fois en trois
+                  lignes. `subtitle` reste utile ailleurs — c'est le
+                  sous-titre de la bande de rappel des autres pages. */}
               <h2 className="mb-5" style={{ textWrap: "balance" }}>
                 {dict.contact.title}
               </h2>
-              <p className="ge-measure text-[15px] leading-relaxed text-body md:text-base">
-                {dict.contact.subtitle}
-              </p>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
@@ -171,7 +175,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <section className="bg-mist-bg py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <ScrollReveal>
-            <span className="ge-label mb-3">{dict.contact.address}</span>
+            {/* Chapeau retiré : il portait « Adresse », le libellé même de la
+                ligne d'adresse affichée dans le bloc de coordonnées
+                ci-dessus. « Nous trouver » ouvre la section à lui seul. */}
             <h2 className="mb-8">{dict.contact.mapTitle}</h2>
             <div className="overflow-hidden rounded-[3px] border border-hairline">
               <iframe
